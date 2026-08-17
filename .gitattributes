@@ -1,0 +1,9 @@
+# RandomRooms —— 行尾规范
+# .sh 脚本必须保持 LF（Git Bash 执行 CRLF 脚本会报 $'\r' 错误）
+# .as 源码统一 LF，避免编译器/对比工具换行噪音
+
+* text=auto
+*.sh text eol=lf
+*.as text eol=lf
+*.md text eol=lf
+*.xml text eol=lf

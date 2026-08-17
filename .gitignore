@@ -1,0 +1,15 @@
+# RandomRooms —— git 忽略规则
+#
+# 原则：源码、设计、决策、知识与状态文档全部入库；
+# 可再生的构建产物与运行期文件不入库。
+
+# 构建产物（release/*.swf 可由 build/build-m0.sh 秒级再生）
+release/
+
+# 运行期日志（applicationStorageDirectory 副本不入库）
+*.log
+
+# 操作系统/编辑器垃圾
+.DS_Store
+Thumbs.db
+*.swp
