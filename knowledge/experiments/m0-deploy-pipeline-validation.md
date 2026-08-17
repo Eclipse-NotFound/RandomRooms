@@ -14,17 +14,26 @@ evidence:
 date-updated: 2026-08-17
 ---
 
-# M0 实验记录：pfe.swf 部署流水线验证（干跑）
+# M0 实验记录：pfe.swf 部署流水线验证（干跑 + 实机部署）
 
 ## 背景
 
-RandomRooms M0 实验需要把模组 SWF 挂进游戏启动链。实玩文件确认：
+RandomRooms M0 实验需要把模组 SWF 挂进游戏启动链。
 
-- `1.BAT` / `application.xml` 启动路径 → **`DLC/pfe.swf`**（MainFE 167，
-  仅含 Sandevistan + RConnect 两个 loader），版本字节 0x29=41；
-- 根目录 `pfe.swf`（1.02，4 个 loader）与 `DLC/pfeUI.swf` 不是当前启动路径；
-- `DLC/pfe.swf` 的 `fe.loc.Land.as` 与 1.02 src102 **逐字节一致**（diff 干净），
-  房间系统架构勘察结论对实玩版本成立。
+### 实玩文件（重要修正 2026-08-17）
+
+- 启动链：`1.BAT` → `adl64.exe -runtime runtimes/air/win64 application.xml` →
+  **游戏根目录 `application.xml` 的 content = `pfe.swf`**（根目录 1.02 版，
+  5 个 loader：Sandevistan → RConnect → RealisticVision → MoreSkills&Weapons →
+  TDFC）。
+- **首次部署曾误判目标为 `DLC/pfe.swf`**（依据 `app.xml`——注意 `app.xml`
+  与 `application.xml` 是两个不同文件；前者 content=DLC/pfe.swf，后者才是
+  启动文件且指向根 pfe.swf）。后果：loader 打进 DLC/pfe.swf 但运行中游戏
+  加载根 pfe.swf → 模组未加载（F8 无反应）。**已在当天修正**：重新部署到
+  根目录 pfe.swf（验证 diff 仅 MainFE 差异）。
+- 根目录 pfe.swf 的 `fe.loc.Land.as` 与 1.02 src102 一致，房间系统架构
+  勘察结论成立。
+- TDFC 通过根 pfe.swf 的第 5 个 loader 加载（tdfc.log 在 pfe/Local Store）。
 
 ## 验证的流水线（副本干跑，未触碰真实文件）
 
@@ -42,10 +51,20 @@ RandomRooms M0 实验需要把模组 SWF 挂进游戏启动链。实玩文件确
 
 ## 结论（已验证）
 
-- **单脚本定向替换流水线无损**：tag 数保持 84384。
-- 部署脚本 `build/deploy-pfe.sh` 封装上述流程：备份 → 导出 → 补丁（锚点
-  断言）→ 单脚本导入 → tag 校验 → 原子替换；未命中锚点或 tag 不一致时
-  全程不写原文件。
+- **单脚本定向替换流水线无损**：tag 数保持 84384；
+  diff 全部 1016 脚本：仅 MainFE.as 真实差异（其余脚本逐字节一致）。
+- **反编译导出存在偶发噪音**：连续两次导出同一份文件，fe/AllData.as 一次
+  有 diff、一次无 diff——合并验证以"二次导出交叉确认"为准，
+  diff 结果需先复现再下结论。
+- 部署脚本 `build/deploy-pfe.sh` 封装该流程：备份 → 导出 → 补丁（泛化锚点，
+  自动适配 2~N 个现有 loader）→ 单脚本导入 → tag 校验 → 原子替换；
+  锚点未命中或 tag 不一致时全程不写原文件。
+
+## 部署记录（账号级）
+
+- 目标：游戏根目录 `pfe.swf`（application.xml 指向，5 个加载器）
+- 备份：`pfe_before_rrooms_20260817.swf`（回滚 = 改名恢复）
+- 普丁后 MainFE 含 loadRandomRoomsMod 调用 + 3 个函数
 
 ## 环境事实（部署无关的杂项）
 

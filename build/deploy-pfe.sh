@@ -3,8 +3,9 @@
 # RandomRooms —— pfe.swf 部署脚本（手动执行，等用户决定时机）
 #
 # 用法:
-#   bash build/deploy-pfe.sh                 # 默认打 DLC/pfe.swf（当前实际启动文件）
-#   bash build/deploy-pfe.sh <pfe 路径>       # 打指定文件（如根目录 pfe.swf）
+#   bash build/deploy-pfe.sh                 # 默认打游戏根目录 pfe.swf（实际启动文件
+#                                            #   application.xml content=pfe.swf）
+#   bash build/deploy-pfe.sh <pfe 路径>       # 打指定文件（如 DLC/pfe.swf）
 #
 # 流程:
 #   1. 备份目标文件 -> <同目录>/pfe_before_rrooms_YYYYMMDD.swf
@@ -20,7 +21,7 @@
 # ============================================================================
 set -euo pipefail
 
-DEFAULT_TARGET="C:/Program Files (x86)/Steam/steamapps/common/Remains/DLC/pfe.swf"
+DEFAULT_TARGET="C:/Program Files (x86)/Steam/steamapps/common/Remains/pfe.swf"
 TARGET="${1:-$DEFAULT_TARGET}"
 FFDEC="C:/Users/micha/Documents/_sandevistan_dev/ffdec/ffdec-cli.exe"
 
@@ -52,30 +53,18 @@ echo "导出脚本中（约 80s）..."
 MAINFE="$TMPW/scripts/scripts/MainFE.as"
 [ -f "$MAINFE" ] || { echo "ERROR: 导出后未找到 MainFE.as" >&2; exit 1; }
 
-# 3) 追加 RandomRooms loader（锚点断言方式）
+# 3) 追加 RandomRooms loader（泛化锚点：自动适配 2~N 个现有 loader 的 MainFE）
 python - "$MAINFE" <<'PY'
-import sys
+import re, sys
 path = sys.argv[1]
 src = open(path, encoding="utf-8").read()
 
-call_anchor = "            this.loadSandevistanMod();\n            this.loadRConnectMod();\n"
-assert src.count(call_anchor) == 1, "锚点丢失: onEnterFrameLoader 调用序列未命中"
-src = src.replace(call_anchor, call_anchor + "            this.loadRandomRoomsMod();\n")
-
-tail_anchor = '''         catch(err:*)
-         {
-            trace("RConnectMod load/init error: " + err);
-         }
-      }
-   }
-}'''
-assert src.count(tail_anchor) == 1, "锚点丢失: 类尾部未命中"
-newfuncs = '''         catch(err:*)
-         {
-            trace("RConnectMod load/init error: " + err);
-         }
-      }
-      
+# 先做尾部插入（在最后一个 "load/init error" 的 catch 块结束后追加新函数）
+tail_anchor = 'load/init error: " + err);\n         }\n      }\n   }\n}'
+idx = src.rfind(tail_anchor)
+assert idx != -1, "锚点丢失: 未找到类尾 catch 块"
+insert_at = idx + len('load/init error: " + err);\n         }\n      }\n')
+newfunc = '''      
       internal function loadRandomRoomsMod() : *
       {
          var _loc1_:LoaderContext;
@@ -116,11 +105,17 @@ newfuncs = '''         catch(err:*)
             trace("RandomRoomsMod load/init error: " + err);
          }
       }
-   }
-}'''
-src = src.replace(tail_anchor, newfuncs)
+'''
+src = src[:insert_at] + newfunc + src[insert_at:]
+
+# 再插入调用：最后一个 loadXxxMod(); 之后追加 loadRandomRoomsMod();
+calls = list(re.finditer(r'this\.load([A-Za-z0-9]+)Mod\(\);', src))
+assert calls, "锚点丢失: 未找到任何 loader 调用"
+last_call = calls[-1]
+src = src[:last_call.end()] + "\n            this.loadRandomRoomsMod();" + src[last_call.end():]
+
 open(path, "w", encoding="utf-8").write(src)
-print("MainFE.as 补丁完成")
+print("MainFE.as 补丁完成（适配 " + str(len(calls)) + " 个现有 loader）")
 PY
 
 # 4) 单脚本定向导入

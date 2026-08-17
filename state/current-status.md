@@ -9,15 +9,18 @@
 - 范围：DEC-0001 已确认（P0+P1；种子/联机延后；PipPage 入口；主菜单配置 UI）
 - 设计文档：`design/vision-and-proposals.md`（v0.1）
 
-## 部署记录（2026-08-17）
+## 部署记录（2026-08-17，两次部署后）
 
-- 目标：`DLC/pfe.swf`（application.xml 启动路径）
-- 备份：`DLC/pfe_before_rrooms_20260817.swf`（回滚=改回原名）
-- 补丁：MainFE.as 追加 loadRandomRoomsMod/onRandomRoomsModError/onRandomRoomsModLoaded
-  + onEnterFrameLoader 调用点（模式同现有 loader）
-- **合并验证**：导出 1016 脚本逐文件 diff，仅 MainFE.as 不同，其余 1015 个逐字节一致
+- **实玩文件 = 游戏根目录 `pfe.swf`**（`application.xml` 的 content 字段；
+  5 个 loader：Sandevistan→RConnect→RealisticVision→MoreSkills&Weapons→TDFC）。
+  误判教训：`app.xml` ≠ `application.xml`，启动链以 application.xml 为准。
+- 第一次误部署到 `DLC/pfe.swf`（备份 `DLC/pfe_before_rrooms_20260817.swf`，
+  无害残留，未回滚）；**第二次已正确部署到根目录 pfe.swf**。
+- 根目录备份：`pfe_before_rrooms_20260817.swf`（回滚=改回原名）
+- 补丁：MainFE.as 泛化锚点追加 loadRandomRoomsMod 调用+3 函数（适配 5 loader）
+- **合并验证**：1016 脚本 diff 仅 MainFE.as 差异（AllData 噪音二次导出确认）
 - tag 数：84384 原/新一致
-- 注意：部署时游戏在运行（旧实例内存中仍是旧代码），**需重启游戏才加载新模组
+- 注意：部署时游戏在运行（内存中仍是旧代码），**需再次重启游戏才加载新模组
 
 ## 已完成
 
