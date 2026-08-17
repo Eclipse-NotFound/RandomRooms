@@ -16,6 +16,18 @@ package rr
       private static const MAX_LINES:int = 3000;
       private static const FILE_NAME:String = "RandomRooms_diag.log";
       
+      private static var _inst:RRDiag;
+      
+      /** 全局单例：避免文档类多次实例化时重复打开日志流 */
+      public static function get inst():RRDiag
+      {
+         if (_inst == null)
+         {
+            _inst = new RRDiag();
+         }
+         return _inst;
+      }
+      
       private var _fsOK:Boolean = false;
       private var _stream:FileStream;
       private var _file:File;

@@ -32,7 +32,7 @@ fi
 
 DIRNAME="$(dirname "$TARGET")"
 BASENAME="$(basename "$TARGET" .swf)"
-BAK="$DIRNAME/${BASENAME}_before_rrooms_$(date +%Y%m%d).swf"
+BAK="$DIRNAME/${BASENAME}_before_rrooms_$(date +%Y%m%d_%H%M%S).swf"
 TMPW="$(mktemp -d)"
 
 echo "== RandomRooms deploy =="
@@ -53,40 +53,76 @@ echo "导出脚本中（约 80s）..."
 MAINFE="$TMPW/scripts/scripts/MainFE.as"
 [ -f "$MAINFE" ] || { echo "ERROR: 导出后未找到 MainFE.as" >&2; exit 1; }
 
-# 3) 追加 RandomRooms loader（泛化锚点：自动适配 2~N 个现有 loader 的 MainFE）
+# 3) 追加 RandomRooms loader（泛化锚点：自动适配 2~N 个现有 loader 的 MainFE；
+#    幂等：已存在则只补 SharedObject 落盘诊断，不重复插入）
 python - "$MAINFE" <<'PY'
 import re, sys
 path = sys.argv[1]
 src = open(path, encoding="utf-8").read()
 
-# 先做尾部插入（在最后一个 "load/init error" 的 catch 块结束后追加新函数）
-tail_anchor = 'load/init error: " + err);\n         }\n      }\n   }\n}'
-idx = src.rfind(tail_anchor)
-assert idx != -1, "锚点丢失: 未找到类尾 catch 块"
-insert_at = idx + len('load/init error: " + err);\n         }\n      }\n')
-newfunc = '''      
+# 三条落盘诊断代码（SharedObject 全限定名，免 import；错误可读于
+#   #SharedObjects/.../rr_loader.sol）
+diag_io = '''         try { flash.net.SharedObject.getLocal("rr_loader", "/").data["ioerr"] = param1.text; } catch(e:*) {}
+         trace("RandomRoomsMod: IOError " + param1.text);'''
+diag_load = '''         try { flash.net.SharedObject.getLocal("rr_loader", "/").data["loaderr"] = String(err); } catch(e:*) {}
+         trace("RandomRoomsMod: load threw " + err);'''
+diag_init = '''         try { flash.net.SharedObject.getLocal("rr_loader", "/").data["initerr"] = String(err); } catch(e:*) {}
+         trace("RandomRoomsMod load/init error: " + err);'''
+
+ALREADY = 'internal function loadRandomRoomsMod()'
+if ALREADY in src:
+    # 已部署过：修复 #1056（this.randomRoomsLoader 非 MainFE 字段 → 局部变量）
+    # + 补 SharedObject 落盘诊断（幂等）
+    old_block = '''            this.randomRoomsLoader = new Loader();
+            _loc1_ = new LoaderContext(false);
+            this.randomRoomsLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onRandomRoomsModLoaded);
+            this.randomRoomsLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onRandomRoomsModError);
+            this.randomRoomsLoader.load(new URLRequest("app:/mods/RandomRooms/release/RandomRoomsMod.swf"),_loc1_);'''
+    new_block = '''            var _loc2_:Loader = new Loader();
+            _loc1_ = new LoaderContext(false);
+            _loc2_.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onRandomRoomsModLoaded);
+            _loc2_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onRandomRoomsModError);
+            _loc2_.load(new URLRequest("app:/mods/RandomRooms/release/RandomRoomsMod.swf"),_loc1_);'''
+    if 'this.randomRoomsLoader' in src:
+        assert old_block in src, "修复锚点丢失: 未找到 this.randomRoomsLoader 块"
+        src = src.replace(old_block, new_block, 1)
+        print("MainFE.as: 已修复 #1056（this.randomRoomsLoader -> 局部 _loc2_）")
+    if 'rr_loader' not in src:
+        src = src.replace('trace("RandomRoomsMod: IOError " + param1.text);', diag_io, 1)
+        src = src.replace('trace("RandomRoomsMod: load threw " + err);', diag_load, 1)
+        src = src.replace('trace("RandomRoomsMod load/init error: " + err);', diag_init, 1)
+        print("MainFE.as: 已补 SharedObject 落盘诊断")
+    else:
+        print("MainFE.as: loader 修复/诊断已就绪（幂等跳过）")
+else:
+    # 全新插入（newfunc 自带落盘诊断）
+    tail_anchor = 'load/init error: " + err);\n         }\n      }\n   }\n}'
+    idx = src.rfind(tail_anchor)
+    assert idx != -1, "锚点丢失: 未找到类尾 catch 块"
+    insert_at = idx + len('load/init error: " + err);\n         }\n      }\n')
+    newfunc = '''      
       internal function loadRandomRoomsMod() : *
       {
          var _loc1_:LoaderContext;
          trace("RandomRoomsMod: load start");
          try
          {
-            this.randomRoomsLoader = new Loader();
+            var _loc2_:Loader = new Loader();
             _loc1_ = new LoaderContext(false);
-            this.randomRoomsLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onRandomRoomsModLoaded);
-            this.randomRoomsLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onRandomRoomsModError);
-            this.randomRoomsLoader.load(new URLRequest("app:/mods/RandomRooms/release/RandomRoomsMod.swf"),_loc1_);
+            _loc2_.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onRandomRoomsModLoaded);
+            _loc2_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onRandomRoomsModError);
+            _loc2_.load(new URLRequest("app:/mods/RandomRooms/release/RandomRoomsMod.swf"),_loc1_);
             trace("RandomRoomsMod: load issued");
          }
          catch(err:*)
          {
-            trace("RandomRoomsMod: load threw " + err);
+''' + diag_load + '''
          }
       }
       
       internal function onRandomRoomsModError(param1:IOErrorEvent) : *
       {
-         trace("RandomRoomsMod: IOError " + param1.text);
+''' + diag_io + '''
       }
       
       internal function onRandomRoomsModLoaded(param1:Event) : *
@@ -102,20 +138,19 @@ newfunc = '''
          }
          catch(err:*)
          {
-            trace("RandomRoomsMod load/init error: " + err);
+''' + diag_init + '''
          }
       }
 '''
-src = src[:insert_at] + newfunc + src[insert_at:]
+    src = src[:insert_at] + newfunc + src[insert_at:]
 
-# 再插入调用：最后一个 loadXxxMod(); 之后追加 loadRandomRoomsMod();
-calls = list(re.finditer(r'this\.load([A-Za-z0-9]+)Mod\(\);', src))
-assert calls, "锚点丢失: 未找到任何 loader 调用"
-last_call = calls[-1]
-src = src[:last_call.end()] + "\n            this.loadRandomRoomsMod();" + src[last_call.end():]
+    calls = list(re.finditer(r'this\.load([A-Za-z0-9]+)Mod\(\);', src))
+    assert calls, "锚点丢失: 未找到任何 loader 调用"
+    last_call = calls[-1]
+    src = src[:last_call.end()] + "\n            this.loadRandomRoomsMod();" + src[last_call.end():]
+    print("MainFE.as 补丁完成（适配 " + str(len(calls)) + " 个现有 loader，含落盘诊断）")
 
 open(path, "w", encoding="utf-8").write(src)
-print("MainFE.as 补丁完成（适配 " + str(len(calls)) + " 个现有 loader）")
 PY
 
 # 4) 单脚本定向导入

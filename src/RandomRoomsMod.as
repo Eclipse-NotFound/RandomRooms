@@ -6,17 +6,21 @@ package
    import flash.events.KeyboardEvent;
    import flash.net.URLLoader;
    import flash.net.URLRequest;
+   import flash.utils.getDefinitionByName;
    import rr.RRDiag;
    import rr.RRTestLand;
    
    /**
-    * RandomRoomsMod —— M0 实验文档类（文件名 = 类名 = 默认包）。
+    * RandomRoomsMod —— M0 实验文档类。
     *
     * 加载契约（mod-loader-patch-structure）：loader 用 getDefinition("RandomRoomsMod")
-    * 并调用 init(this)，this = MainFE 实例。
+    * 并调用 **RandomRoomsMod.init(this)**（静态方法；与其他模组一致）。
+    *
+    * 注意：Loader 加载时会自动实例化文档类一次（root），构造必须保持轻量；
+    * 全部运行逻辑在 static init 中启动。
     *
     * M0 流程：
-    *   1. init → 绑定 stage（ENTER_FRAME 晚于游戏 step；KEY_DOWN 早于游戏）；
+    *   1. init(main) → 绑定 stage（ENTER_FRAME 晚于游戏 step；KEY_DOWN 早于游戏）；
     *   2. 等 World.w 就绪 → preflight：
     *      a. 预加载全部磁盘 Rooms/rooms_*.xml 到 World.w.rooms.rooms（保持原版内容）；
     *      b. 全部就绪后：GameData.d 追加 rr_test 土地 + rooms.rooms["rooms_rr_test"]
@@ -28,54 +32,53 @@ package
     */
    public class RandomRoomsMod extends Sprite
    {
-      private var diag:RRDiag;
-      private var test:RRTestLand;
-      private var main:*;
+      private static var diag:RRDiag;
+      private static var test:RRTestLand;
+      private static var main:*;
       
-      private var WCls:*;      // fe.World 类对象
-      private var GDataCls:*;  // fe.GameData 类对象
-      private var ad:*;        // applicationDomain
+      private static var WCls:*;       // fe.World 类对象
+      private static var GDataCls:*;   // fe.GameData 类对象
       
-      private var stageBound:Boolean = false;
-      private var preflightDone:Boolean = false;
-      private var preflightStarted:Boolean = false;
+      private static var stageBound:Boolean = false;
+      private static var preflightDone:Boolean = false;
+      private static var preflightStarted:Boolean = false;
       
-      private var fileList:Array = [];
-      private var fileLoaded:int = 0;
-      private var fileFailed:int = 0;
-      private var fileTotal:int = 0;
+      private static var fileList:Array = [];
+      private static var fileLoaded:int = 0;
+      private static var fileFailed:int = 0;
+      private static var fileTotal:int = 0;
       
-      private var f8Issued:Boolean = false;
-      private var f8Ticks:int = 0;
+      private static var f8Issued:Boolean = false;
+      private static var f8Ticks:int = 0;
       
       private static const F8_KEY:int = 119;
       private static const F9_KEY:int = 120;
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
       
+      /** Loader 会自动实例化文档类；构造保持空，避免日志歧义。 */
       public function RandomRoomsMod()
       {
-         diag = new RRDiag();
-         test = new RRTestLand(diag);
-         diag.log("ctor");
       }
       
-      /** 加载器契约入口 */
-      public function init(main:*):void
+      /** 加载器契约入口（静态，与现有模组一致） */
+      public static function init(main:*):void
       {
-         this.main = main;
-         diag.log("init(main) called, main=" + main + " stage=" + (main ? main.stage : "n/a"));
-         ad = this.loaderInfo.applicationDomain;
+         RandomRoomsMod.main = main;
+         diag = RRDiag.inst;
+         test = new RRTestLand(diag);
+         diag.log("init(main) called (static), main=" + main + " stage=" + (main ? main.stage : "n/a"));
          
-         // 确认关键游戏类可达（DLC 实玩构建验证）
+         // 模组与游戏主 SWF 同 applicationDomain（LoaderContext(false)），
+         // 顶层 getDefinitionByName 在当前域解析游戏类。
          var probes:Array = ["fe.World", "fe.GameData", "fe.loc.Game", "fe.loc.Land"];
          for each (var n:String in probes)
          {
             var ok:Boolean = false;
-            try { ok = ad.hasDefinition(n); } catch (e:*) { ok = false; }
+            try { ok = getDefinitionByName(n) != null; } catch (e:*) { ok = false; }
             diag.log("class probe " + n + " => " + (ok ? "OK" : "MISSING"));
          }
-         try { WCls = ad.getDefinition("fe.World"); } catch (e:*) {}
-         try { GDataCls = ad.getDefinition("fe.GameData"); } catch (e:*) {}
+         try { WCls = getDefinitionByName("fe.World"); } catch (e:*) { diag.log("getDefinition fe.World 失败: " + e); }
+         try { GDataCls = getDefinitionByName("fe.GameData"); } catch (e:*) { diag.log("getDefinition fe.GameData 失败: " + e); }
          
          var st:* = null;
          try { st = main.stage; } catch (e:*) {}
@@ -86,20 +89,19 @@ package
          else
          {
             diag.log("stage 暂不可用，进入轮询");
-            addEventListener(Event.ENTER_FRAME, pollStage);
+            try { st = main["stage"]; if (st) bindStage(st); } catch (e:*) {}
+            try
+            {
+               main.stage.addEventListener(Event.ENTER_FRAME, onFrame);
+            }
+            catch (e:*)
+            {
+               diag.log("绑定轮询失败: " + e);
+            }
          }
       }
       
-      private function pollStage(ev:Event):void
-      {
-         var st:* = null;
-         try { st = main.stage; } catch (e:*) {}
-         if (!st) return;
-         removeEventListener(Event.ENTER_FRAME, pollStage);
-         bindStage(st);
-      }
-      
-      private function bindStage(st:*):void
+      private static function bindStage(st:*):void
       {
          stageBound = true;
          st.addEventListener(Event.ENTER_FRAME, onFrame);
@@ -109,13 +111,12 @@ package
       
       // ---------- 主循环 ----------
       
-      private function onFrame(ev:Event):void
+      private static function onFrame(ev:Event):void
       {
          var world:* = null;
          try { world = WCls["w"]; } catch (e:*) {}
          if (world == null)
          {
-            if (preflightStarted) return;
             return;
          }
          if (!preflightStarted)
@@ -130,11 +131,11 @@ package
          }
       }
       
-      private function onKeyDown(ev:KeyboardEvent):void
+      private static function onKeyDown(ev:KeyboardEvent):void
       {
          if (ev.keyCode == F8_KEY)
          {
-            triggerTravel("rr_test", "F8");
+            triggerTravel(RRTestLand.LAND_ID, "F8");
          }
          else if (ev.keyCode == F9_KEY)
          {
@@ -142,7 +143,7 @@ package
          }
       }
       
-      private function triggerTravel(landId:String, tag:String):void
+      private static function triggerTravel(landId:String, tag:String):void
       {
          var world:* = null;
          try { world = WCls["w"]; } catch (e:*) {}
@@ -181,10 +182,9 @@ package
       
       // ---------- preflight ----------
       
-      private function startPreflight(world:*):void
+      private static function startPreflight(world:*):void
       {
          diag.log("preflight start: World.w 就绪");
-         // 1) 收集磁盘房间文件清单
          try
          {
             var gd:XML = GDataCls["d"] as XML;
@@ -206,7 +206,6 @@ package
          fileTotal = fileList.length;
          diag.log("preflight: 计划加载 " + fileTotal + " 个房间文件: " + fileList.join(","));
          
-         // 2) 判定 rr_test 土地是否已注册（防重复注入）
          var already:Boolean = false;
          try
          {
@@ -216,14 +215,13 @@ package
          catch (e:*) {}
          diag.log("preflight: rr_test 已注册=" + already);
          
-         // 3) 逐个加载磁盘文件
          for each (var file:String in fileList)
          {
             loadRoomFile(world, file);
          }
       }
       
-      private function loadRoomFile(world:*, file:String):void
+      private static function loadRoomFile(world:*, file:String):void
       {
          var rooms:* = world["rooms"];
          if (rooms == null)
@@ -275,14 +273,14 @@ package
          }
       }
       
-      private function maybeFinalize():void
+      private static function maybeFinalize():void
       {
          if (preflightDone) return;
          if (fileLoaded + fileFailed < fileTotal) return;
          finalizePreflight();
       }
       
-      private function finalizePreflight():void
+      private static function finalizePreflight():void
       {
          var world:* = null;
          try { world = WCls["w"]; } catch (e:*) {}
@@ -302,7 +300,6 @@ package
             return;
          }
          
-         // 注册测试土地（若已有则跳过——保单例）
          var already:Boolean = gd.land.(@id == RRTestLand.LAND_ID).length() > 0;
          if (!already)
          {
@@ -314,7 +311,6 @@ package
             diag.log("inject: <land rr_test> 已存在，跳过追加");
          }
          
-         // 源池（预加载后的 rooms_stable 即磁盘真源）→ 构造测试池
          var srcPool:XML = rooms["rooms"][RRTestLand.SOURCE_LAND] as XML;
          if (srcPool == null)
          {
@@ -324,7 +320,6 @@ package
          var poolXml:XML = test.makePoolXML(srcPool);
          rooms["rooms"][RRTestLand.POOL_FILE] = poolXml;
          
-         // 切换加载路径：LandLoader 读数组
          world["roomsLoad"] = 0;
          preflightDone = true;
          diag.log("inject: roomsLoad=0，rr_test 池已就位（房间数=" + poolXml.room.length() + "）" +
@@ -333,7 +328,7 @@ package
       
       // ---------- 进入判定（H3） ----------
       
-      private function verifyEntry(world:*):void
+      private static function verifyEntry(world:*):void
       {
          f8Ticks++;
          if (f8Ticks > ENTRY_TIMEOUT_TICKS)
@@ -352,7 +347,6 @@ package
          var locs:* = land["locs"];
          if (locs == null) return;
          
-         // 采集 locs[x][y][0].room.id
          var ids:Object = {};
          var list:Array = [];
          var n:int = 0;
