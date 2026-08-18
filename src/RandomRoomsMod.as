@@ -373,24 +373,61 @@ package
          if (cur != RRTestLand.LAND_ID) return;
          var land:* = world["land"];
          if (land == null) return;
+         
+         // 硬门控：确认 World.land 实际是 rr_test 的 Land（传送过渡期
+         // curLandId 已改但 World.land 还是旧土地）
+         var actId:String = "";
+         try { actId = String(land["act"]["id"]); } catch (e:*) {}
+         if (actId != RRTestLand.LAND_ID)
+         {
+            if (f8Ticks % 30 == 0)
+            {
+               diag.log("verifyEntry: 等待 Land 切换, World.land.act.id=" + actId + " (tick=" + f8Ticks + ")");
+            }
+            return;
+         }
+         if (f8Ticks < 30)
+         {
+            // 稳定期：等退出流程与 ativateLand 完成
+            return;
+         }
+         
          var locs:* = land["locs"];
          if (locs == null) return;
          
+         // 富采样：网格尺寸 + 每格 Location.id / room.id / room.tip
          var ids:Object = {};
          var list:Array = [];
          var n:int = 0;
-         for (var x:int = 0; x < locs.length; x++)
+         var colLens:Array = [];
+         var gridX:int = locs.length;
+         for (var x:int = 0; x < gridX; x++)
          {
             var col:* = locs[x];
-            if (col == null) continue;
+            if (col == null)
+            {
+               colLens.push(0);
+               continue;
+            }
+            colLens.push(col.length);
             for (var y:int = 0; y < col.length; y++)
             {
                var cell:* = col[y];
-               if (cell == null || cell[0] == null) continue;
+               if (cell == null || cell[0] == null)
+               {
+                  diag.log("verifyEntry: locs[" + x + "][" + y + "] 为空");
+                  continue;
+               }
                n++;
-               var room:* = cell[0]["room"];
+               var locObj:* = cell[0];
+               var room:* = locObj["room"];
                var rid:String = "";
+               var rtip:String = "";
+               var lid:String = "";
+               try { lid = String(locObj["id"]); } catch (e:*) {}
                try { rid = String(room["id"]); } catch (e:*) {}
+               try { rtip = String(room["tip"]); } catch (e:*) {}
+               diag.log("verifyEntry: locs[" + x + "][" + y + "] loc=" + lid + " room=" + rid + " tip=" + rtip);
                if (ids[rid] == null)
                {
                   ids[rid] = 1;
@@ -399,8 +436,8 @@ package
             }
          }
          list.sort();
-         diag.log("verifyEntry: 进入 rr_test 成功！采集 " + n + " 个 loc，房间 id 集合(" + list.length + ")=" +
-                  list.join(","));
+         diag.log("verifyEntry: 进入 rr_test 成功！网格=" + gridX + "x" + colLens.join(",") +
+                  " 采集 " + n + " 个 loc，房间 id 集合(" + list.length + ")=" + list.join(","));
          diag.log("verifyEntry: 预期池房间: " + test.pickedRooms().join(","));
          f8Issued = false;
       }
