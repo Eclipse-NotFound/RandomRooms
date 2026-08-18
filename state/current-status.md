@@ -5,9 +5,20 @@
 
 ## 当前版本
 
-- 阶段：**M0 完成（H1/H2/H3 全验证通过，2026-08-18）→ 下一步 P0**
+- 阶段：**P0 完成（2026-08-18 实机验证）→ 下一步 P1**
 - 范围：DEC-0001 已确认（P0+P1；种子/联机延后；PipPage 入口；主菜单配置 UI）
 - 设计文档：`design/vision-and-proposals.md`（v0.1）
+
+## P0 结论（2026-08-18 实机验证）
+
+- **RRCook 变异器**：瓦片同材质互换 + shelf/rear 后缀互换 + 属性重掷；
+  规则经 15750 次离线不变式验证 + 实机连续 6 次进入无异常
+- **会话级**：preflight 对 tip=rnd 土地池 cook（原池快照 origPools 保留）
+- **进入级**：refreshLandPool——重 cook + 覆写 LandAct.allroom + land=null
+  强制重建；每次进入布局与模板都不同（实机验证：变更格 4~15 每轮不同）
+- 顺带确认原生语义：rnd 土地 visited 首入才有 beg0（enterLand 置位+存档
+  持久化）→ 已贡献 shared-knowledge/world-objects/discoveries/
+  rnd-land-visited-persistence.md
 
 ## M0 结论（2026-08-18 实机验证）
 
@@ -66,10 +77,14 @@
 - 磁盘房间文件 ≠ SWF 内嵌版（rooms_begin 磁盘 20 间 vs 内嵌 22 间）
 - rnd 土地每次进入重建（visited 不置位）；conf=1 原型 beg0 在 (0,0)
 
-## 下一步
+## 下一步（P1，待用户确认开始）
 
-1. （待用户决定时机）部署 → 实机 M0 实验验证 H1/H2/H3
-2. 验证通过后进入 P0（池重掷 + 模板变异器）与 P1（rr 新土地 + 种子 + 主菜单）
+1. **random_rooms 独立新土地**：复用 M0 土地注册链路（GameData.d 追加 +
+   自定义池 + conf 原型），roguelike 深度循环（landStage/upStage 语义）
+2. **种子系统（RRSeed）**：确定性 PRNG 注入 RRCook.rnd——同种子同世界
+   （RConnect 联机镜像前提；联机协议联动仍延后）
+3. **主菜单配置 UI**：开关/难度/种子输入（主菜单集成）
+4. **PipPage 旅行入口**：接管入口后进入级刷新覆盖全部进入路径
 
 ## 权限提醒
 
