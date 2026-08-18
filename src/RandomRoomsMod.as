@@ -71,14 +71,23 @@ package
       private static var travelBtn:RRTravelBtn;
       private static var travelBtnShown:Boolean = false;
       
+      // 深度循环状态
+      private static var exitHintShown:Boolean = false;
+      
       private static const F1_KEY:int = 112;  // F1 -> random_rooms（正式无限废墟）
       private static const F2_KEY:int = 113;  // F2 -> rbl
       private static const F3_KEY:int = 114;  // F3 -> rr_test（开发测试土地）
+      private static const F4_KEY:int = 115;  // F4 -> 本层完成，进入下一层
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
       
       /** P1 正式新土地 */
       public static const LAND_ID_RR:String = "random_rooms";
       public static const POOL_FILE_RR:String = "rooms_random_rooms";
+      /** 深度循环：基础难度 + 每层增量（注入 LandAct.dif） */
+      private static const BASE_DIF_RR:Number = 8;
+      private static const DIF_PER_STAGE:Number = 2;
+      /** 出口房 id（uniq，每层最多 1 个） */
+      public static const EXIT_ROOM_ID:String = "rr_exit";
       
       /** Loader 会自动实例化文档类；构造保持空，避免日志歧义。 */
       public function RandomRoomsMod()
@@ -181,6 +190,25 @@ package
          else if (travelBtnShown)
          {
             detachTravelBtn();
+         }
+         // 深度循环：出口房提示（进入 rr_exit 时提示 F4）
+         if (preflightDone && !f8Issued)
+         {
+            var locRoomId:String = "";
+            try { locRoomId = String(world["loc"]["room"]["id"]); } catch (e:*) {}
+            if (locRoomId == EXIT_ROOM_ID)
+            {
+               if (!exitHintShown)
+               {
+                  exitHintShown = true;
+                  mess(world, "RandomRooms: 找到出口！按 F4 进入下一层");
+                  diag.log("rr_exit: 玩家已到达出口房");
+               }
+            }
+            else
+            {
+               exitHintShown = false;
+            }
          }
          if (!preflightStarted)
          {
@@ -363,6 +391,82 @@ package
             targetLand = RRTestLand.LAND_ID;
             triggerTravel(targetLand, "F3");
          }
+         else if (ev.keyCode == F4_KEY)
+         {
+            upstage();
+         }
+      }
+      
+      // ---------- 深度循环 ----------
+      
+      /** 消息提示（世界消息条） */
+      private static function mess(world:*, text:String):void
+      {
+         try
+         {
+            world["gui"]["messText"]("", text, false, false, 150);
+         }
+         catch (e:*)
+         {
+         }
+      }
+      
+      /**
+       * F4：本层完成 → 层数+1 → 自动重进（新层新布局新难度）。
+       * 走 gotoLand 通道（与 F1 相同），受 dopusk 门控保护。
+       */
+      private static function upstage():void
+      {
+         var world:* = null;
+         try { world = WCls["w"]; } catch (e:*) {}
+         if (world == null || !preflightDone)
+         {
+            diag.log("F4: preflight 未完成，忽略");
+            return;
+         }
+         var game:* = world["game"];
+         if (game == null)
+         {
+            diag.log("F4: game 未创建，忽略");
+            return;
+         }
+         var cur:String = "";
+         try { cur = String(game["curLandId"]); } catch (e:*) {}
+         if (cur != LAND_ID_RR)
+         {
+            diag.log("F4: 当前不在 " + LAND_ID_RR + "（" + cur + "），忽略");
+            return;
+         }
+         // dopusk 门控（gotoLand 同款检查，先探测给出友好提示）
+         var pers:* = null;
+         try { pers = world["pers"]; } catch (e:*) {}
+         var dopusk:Boolean = false;
+         try { dopusk = Boolean(pers["dopusk"]()); } catch (e:*) {}
+         if (!dopusk)
+         {
+            mess(world, "RandomRooms: 伤势过重，无法深入下一层");
+            diag.log("F4: dopusk 不通过（部件伤重），放弃升层");
+            return;
+         }
+         try
+         {
+            game["upLandLevel"]();
+            var act:* = game["lands"][LAND_ID_RR];
+            var st:int = 0;
+            try { st = int(act["landStage"]); } catch (e:*) {}
+            mess(world, "RandomRooms 第 " + (st + 1) + " 层");
+            diag.log("F4 upstage: landStage=" + st + "（下一层显示 " + (st + 1) + "）");
+            // 自动重进新层（refreshLandPool 注入新难度+新变异）
+            targetLand = LAND_ID_RR;
+            f8Issued = true;
+            f8Ticks = 0;
+            refreshLandPool(world, LAND_ID_RR);
+            game["gotoLand"](LAND_ID_RR);
+         }
+         catch (e:*)
+         {
+            diag.log("F4 upstage 异常: " + e);
+         }
       }
       
       private static function triggerTravel(landId:String, tag:String):void
@@ -446,8 +550,15 @@ package
             var n:int = cook.cookPool(fresh, 1);
             act["allroom"] = fresh;                 // Land.prepareRooms 读此
             act["land"] = null;                     // 强制下次进入重建 Land
+            // 深度循环：层数注入难度（LandAct.dif 每层 +DIF_PER_STAGE，
+            // Land 构造时 landDifLevel 抬高 → setLocDif 全线难度提升）
+            var st:int = 0;
+            try { st = int(act["landStage"]); } catch (e:*) {}
+            var newDif:Number = BASE_DIF_RR + st * DIF_PER_STAGE;
+            act["dif"] = newDif;
             diag.log("refreshLandPool: " + landId + " 池已重 cook（+" + n + " 副本，变异变更格=" +
-                     cook.lastChangedTotal + "），并置 land=null 强制重建");
+                     cook.lastChangedTotal + "），并置 land=null 强制重建；dif=" + newDif +
+                     "（层 " + st + "）");
          }
          catch (e:*)
          {
@@ -662,6 +773,25 @@ package
          }
          rooms["rooms"][POOL_FILE_RR] = mix;
          diag.log("inject: 混合池 " + POOL_FILE_RR + " 构建完成（房间数=" + mix.room.length() + "）");
+         
+         // 深度循环：出口房 rr_exit（uniq，每层最多 1 个；tip=uniq 不变异）
+         var exitSrc:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip.length() == 0);
+         if (exitSrc.length() > 0)
+         {
+            var exitRoom:XML = exitSrc[0].copy();
+            exitRoom.@name = EXIT_ROOM_ID;
+            if (exitRoom.options.length() == 0)
+            {
+               exitRoom.appendChild(<options/>);
+            }
+            exitRoom.options.@tip = "uniq";
+            mix.appendChild(exitRoom);
+            diag.log("inject: 出口房 " + EXIT_ROOM_ID + " 已加入混合池（池房间数=" + mix.room.length() + "）");
+         }
+         else
+         {
+            diag.log("inject: WARN 出口房源缺失（rooms_stable 无普通房）");
+         }
          
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");
