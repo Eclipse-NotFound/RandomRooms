@@ -182,9 +182,35 @@ package
       
       // ---------- preflight ----------
       
+      /**
+       * 确保 World.w.rooms 有实例。
+       * 原版从未初始化该字段（LandLoader 的 roomsLoad==0 分支从不执行，
+       * roomsLoad 默认 1）；我们的注入路径需要它，故反射实例化 fe.rooms.Rooms。
+       */
+      private static function ensureRooms(world:*):*
+      {
+         var rooms:* = null;
+         try { rooms = world["rooms"]; } catch (e:*) {}
+         if (rooms != null) return rooms;
+         diag.log("ensureRooms: World.w.rooms 为 null，反射实例化 fe.rooms.Rooms");
+         try
+         {
+            var RoomsCls:* = getDefinitionByName("fe.rooms.Rooms");
+            rooms = new RoomsCls();
+            world["rooms"] = rooms;
+            diag.log("ensureRooms: 已创建并挂接 Rooms 实例（内部池项=" + rooms["rooms"].length + "）");
+         }
+         catch (e:*)
+         {
+            diag.log("ensureRooms 失败: " + e);
+         }
+         return rooms;
+      }
+      
       private static function startPreflight(world:*):void
       {
          diag.log("preflight start: World.w 就绪");
+         ensureRooms(world);
          try
          {
             var gd:XML = GDataCls["d"] as XML;
