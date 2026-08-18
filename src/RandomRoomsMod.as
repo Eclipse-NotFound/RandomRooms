@@ -210,6 +210,11 @@ package
                exitHintShown = false;
             }
          }
+         // 无限模式：进入边缘房间时向该方向扩展网格
+         if (preflightDone && !f8Issued)
+         {
+            maybeExpand(world);
+         }
          if (!preflightStarted)
          {
             preflightStarted = true;
@@ -398,6 +403,96 @@ package
       }
       
       // ---------- 深度循环 ----------
+      
+      // 无限模式：边缘扩展状态
+      private static var expandTick:int = 0;
+      
+      /**
+       * 无限模式：玩家进入 random_rooms 边缘房间 → 向该方向扩展网格。
+       * 用 Land.newRandomLoc（public）生成新列/行，缺口统一保证连通；
+       * 右/下单向无限（左/上为固定起点侧，后续可做双向）。
+       */
+      private static function maybeExpand(world:*):void
+      {
+         var land:* = null;
+         try { land = world["land"]; } catch (e:*) {}
+         if (land == null) return;
+         var actId:String = "";
+         try { actId = String(land["act"]["id"]); } catch (e:*) {}
+         if (actId != LAND_ID_RR) return;
+         
+         var maxX:int = 0;
+         var maxY:int = 0;
+         var lx:int = 0;
+         var ly:int = 0;
+         try
+         {
+            maxX = int(land["maxLocX"]);
+            maxY = int(land["maxLocY"]);
+            lx = int(land["locX"]);
+            ly = int(land["locY"]);
+         }
+         catch (e:*) { return; }
+         
+         var needX:Boolean = lx >= maxX - 1;
+         var needY:Boolean = ly >= maxY - 1;
+         if (!needX && !needY)
+         {
+            expandTick = 0;
+            return;
+         }
+         expandTick++;
+         if (expandTick < 10) return;   // 防抖：进入边缘房间 10 帧后再扩展
+         expandTick = 0;
+         
+         try
+         {
+            var stage:int = 0;
+            try { stage = int(land["act"]["landStage"]); } catch (e:*) {}
+            var opts:Object = {};
+            
+            if (needX)
+            {
+               var col:Array = [];
+               var y:int = 0;
+               while (y < maxY)
+               {
+                  var locX:* = land["newRandomLoc"](stage, maxX, y, opts, null);
+                  col.push(locX != null ? [locX] : null);
+                  y++;
+               }
+               land["locs"][maxX] = col;
+               land["maxLocX"] = maxX + 1;
+               diag.log("expand: 右扩一列 -> maxLocX=" + (maxX + 1) + "（层 " + stage + "）");
+            }
+            if (needY)
+            {
+               var newMaxX:int = int(land["maxLocX"]);
+               var x2:int = 0;
+               while (x2 < newMaxX)
+               {
+                  var col2:* = land["locs"][x2];
+                  if (col2 == null)
+                  {
+                     x2++;
+                     continue;
+                  }
+                  var locY:* = land["newRandomLoc"](stage, x2, maxY, opts, null);
+                  col2[maxY] = locY != null ? [locY] : null;
+                  x2++;
+               }
+               land["maxLocY"] = maxY + 1;
+               diag.log("expand: 下扩一行 -> maxLocY=" + (maxY + 1) + "（层 " + stage + "）");
+            }
+            // 重建地图（尺寸随网格）
+            try { land["createMap"](); } catch (e:*) {}
+            diag.log("expand: 完成（locs 尺寸 " + land["maxLocX"] + "x" + land["maxLocY"] + "）");
+         }
+         catch (e:*)
+         {
+            diag.log("expand 异常: " + e);
+         }
+      }
       
       /** 消息提示（世界消息条） */
       private static function mess(world:*, text:String):void
@@ -732,6 +827,8 @@ package
          }
          var poolXml:XML = test.makePoolXML(srcPool);
          rooms["rooms"][RRTestLand.POOL_FILE] = poolXml;
+         cook.normalizePool(poolXml);
+         diag.log("inject: rr_test 池边界缺口已统一（门 bug 修复）");
          
          // ---- P1：random_rooms 新土地注册 + 混合池（stable+sewer） ----
          var rrLands:XMLList = gd.land.(@id == LAND_ID_RR);
@@ -792,6 +889,9 @@ package
          {
             diag.log("inject: WARN 出口房源缺失（rooms_stable 无普通房）");
          }
+         // 门 bug 修复：统一混合池边界缺口（在快照/cook 之前）
+         var normalized:int = cook.normalizePool(mix);
+         diag.log("inject: 混合池边界缺口已统一（" + normalized + " 房）");
          
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");

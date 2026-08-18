@@ -162,6 +162,84 @@ package rr
          return copy;
       }
       
+      /**
+       * 统一房间四侧边界缺口（门 bug 修复）。
+       *
+       * 通行机制：gotoLoc 只查目标位置碰撞（不查 doors）——随机配对的
+       * 房间边界缺口错配导致"门无法进入"。统一缺口后任意两房相邻必通：
+       *   - 左右缺口：行 12（mirror 水平翻转下行不变，对称安全）
+       *   - 上下缺口：列 23 与 24 双列（mirror 下 23↔24 互换仍对齐）
+       * 同时移除缺口格上的 obj（门/箱可能挡路）。
+       */
+      public function normalizeGaps(room:XML):void
+      {
+         var rows:XMLList = room.a;
+         var h:int = rows.length();
+         if (h == 0) return;
+         var grid:Array = [];
+         var w:int = 0;
+         for (var j:int = 0; j < h; j++)
+         {
+            grid[j] = String(rows[j]).split(".");
+            if (w == 0) w = grid[j].length;
+         }
+         if (w == 0) return;
+         
+         var gy:int = Math.min(12, h - 1);       // 左右缺口行
+         var gx1:int = Math.min(23, w - 1);      // 上下缺口列 A
+         var gx2:int = Math.min(24, w - 1);      // 上下缺口列 B
+         
+         if (gy > 0)
+         {
+            grid[gy][0] = "_";
+            grid[gy][w - 1] = "_";
+         }
+         grid[0][gx1] = "_";
+         grid[0][gx2] = "_";
+         grid[h - 1][gx1] = "_";
+         grid[h - 1][gx2] = "_";
+         
+         // 写回网格
+         for (var j2:int = 0; j2 < h; j2++)
+         {
+            rows[j2] = <a>{grid[j2].join(".")}</a>;
+         }
+         
+         // 移除缺口格上的 obj（门/箱可能挡住缺口路径）
+         var keep:Array = [];
+         for each (var obj:XML in room.obj)
+         {
+            var ox:int = 0;
+            var oy:int = 0;
+            try { ox = int(obj.@x); } catch (e:*) {}
+            try { oy = int(obj.@y); } catch (e:*) {}
+            var blocked:Boolean = false;
+            if (oy == gy && (ox == 0 || ox == w - 1)) blocked = true;
+            if ((ox == gx1 || ox == gx2) && (oy == 0 || oy == h - 1)) blocked = true;
+            if (!blocked) keep.push(obj);
+         }
+         if (keep.length != room.obj.length())
+         {
+            delete room.obj;
+            for each (var k:XML in keep)
+            {
+               room.appendChild(k);
+            }
+         }
+      }
+      
+      /** 池级：全部房间统一边界缺口；返回处理房间数 */
+      public function normalizePool(pool:XML):int
+      {
+         var n:int = 0;
+         for each (var room:XML in pool.room)
+         {
+            normalizeGaps(room);
+            n++;
+         }
+         return n;
+      }
+      
       /** 变异整池：每个普通 rnd 房生成 perRoom 个副本并追加；返回副本数 */
       public function cookPool(pool:XML, perRoom:int = 1):int
       {
