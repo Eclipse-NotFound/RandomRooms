@@ -36,6 +36,7 @@ package rr
       private static const SUFFIX_SWAP_P:Number = 0.3;
       
       public var rnd:Function;   // 注入随机源（P1 种子系统替换）
+      public var lastChangedTotal:int = 0;   // 最近一次 cookPool 的瓦片/属性变更总数（诊断用）
       
       public function RRCook(rndFn:Function = null)
       {
@@ -50,6 +51,7 @@ package rr
          if (h == 0) return null;
          var grid:Array = [];
          var w:int = 0;
+         var changed:int = 0;
          for (var j:int = 0; j < h; j++)
          {
             grid[j] = String(rows[j]).split(".");
@@ -104,6 +106,7 @@ package rr
             if (nf + ns != code)
             {
                grid[jj][ii] = nf + ns;
+               changed++;
             }
          }
          
@@ -142,14 +145,17 @@ package rr
                if (ts2 < 0) ts2 = 0;
                if (ts2 > 1) ts2 = 1;
                copy.options.@tilespawn = ts2.toFixed(2);
+               changed++;
             }
             if (String(room.options.@kolspawn).length > 0 && rnd() < 0.7)
             {
                var ks:int = parseInt(String(room.options.@kolspawn), 10);
                var nks:int = Math.max(0, Math.round(ks * (0.7 + rnd() * 0.6)));
                copy.options.@kolspawn = String(nks);
+               changed++;
             }
          }
+         lastChangedTotal += changed;
          
          // ---- 自检（失败返回 null，不污染池） ----
          if (!selfCheck(copy, room)) return null;
@@ -159,6 +165,7 @@ package rr
       /** 变异整池：每个普通 rnd 房生成 perRoom 个副本并追加；返回副本数 */
       public function cookPool(pool:XML, perRoom:int = 1):int
       {
+         lastChangedTotal = 0;
          var made:int = 0;
          var addList:Array = [];
          for each (var room:XML in pool.room)

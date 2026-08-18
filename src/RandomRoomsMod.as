@@ -52,6 +52,10 @@ package
       private static var f8Issued:Boolean = false;
       private static var f8Ticks:int = 0;
       
+      // P0：原始池快照（进入级刷新用，避免对已变异池二次变异）
+      private static var origPools:Object = {};
+      private static var cook:RRCook = new RRCook();
+      
       private static const F1_KEY:int = 112;  // 原 F8(119) 被其它模组拦截，换 F1
       private static const F2_KEY:int = 113;  // 原 F9(120) 被 Sandevistan 面板占用，换 F2
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
@@ -170,6 +174,8 @@ package
             try { curLandId = String(game["curLandId"]); } catch (e:*) {}
             diag.log(tag + " -> gotoLand(" + landId + "), preflight=OK, lands[" + landId + "]=" + hasLand +
                      ", 当前土地=" + curLandId);
+            // P0 进入级刷新：rnd 土地在进入前重 cook 并强制重建
+            refreshLandPool(world, landId);
             game["gotoLand"](landId);
             if (landId == RRTestLand.LAND_ID)
             {
@@ -180,6 +186,57 @@ package
          catch (e:*)
          {
             diag.log(tag + " 调用 gotoLand 异常: " + e);
+         }
+      }
+      
+      /**
+       * P0 进入级刷新：用原始池快照重新变异，覆写 LandAct.allroom，
+       * 并置 land=null 强制下次进入重建（rnd 土地内容可再生，无损）。
+       */
+      private static function refreshLandPool(world:*, landId:String):void
+      {
+         try
+         {
+            var game:* = world["game"];
+            var act:* = game["lands"][landId];
+            if (act == null)
+            {
+               diag.log("refreshLandPool: lands[" + landId + "] 不存在，跳过");
+               return;
+            }
+            var file:String = "";
+            try { file = String(act["landFile"]); } catch (e:*) {}
+            if (file.length == 0)
+            {
+               // 从 GameData.d 反查
+               var gd:XML = GDataCls["d"] as XML;
+               var ldXml:XMLList = gd.land.(@id == landId);
+               if (ldXml.length() > 0)
+               {
+                  file = String(ldXml[0].@file);
+               }
+            }
+            if (file.length == 0)
+            {
+               diag.log("refreshLandPool: 无法确定 " + landId + " 的房间文件，跳过");
+               return;
+            }
+            var base:XML = origPools[file] as XML;
+            if (base == null)
+            {
+               diag.log("refreshLandPool: " + file + " 无原始池快照（非 tip=rnd 土地？），跳过");
+               return;
+            }
+            var fresh:XML = base.copy();
+            var n:int = cook.cookPool(fresh, 1);
+            act["allroom"] = fresh;                 // Land.prepareRooms 读此
+            act["land"] = null;                     // 强制下次进入重建 Land
+            diag.log("refreshLandPool: " + landId + " 池已重 cook（+" + n + " 副本，变异变更格=" +
+                     cook.lastChangedTotal + "），并置 land=null 强制重建");
+         }
+         catch (e:*)
+         {
+            diag.log("refreshLandPool 异常: " + e);
          }
       }
       
@@ -350,8 +407,7 @@ package
          var poolXml:XML = test.makePoolXML(srcPool);
          rooms["rooms"][RRTestLand.POOL_FILE] = poolXml;
          
-         // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 triggerTravel） ----
-         var cook:RRCook = new RRCook();
+         // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");
          var cookedTotal:int = 0;
          for each (var ld:XML in rndLands)
@@ -363,6 +419,7 @@ package
                diag.log("P0 cook: " + f2 + " 池缺失，跳过");
                continue;
             }
+            origPools[f2] = pool.copy();   // 原始池快照（进入级刷新基座）
             var n2:int = cook.cookPool(pool, 1);
             cookedTotal += n2;
             diag.log("P0 cook: " + f2 + " +" + n2 + " 个变异副本（池房间数=" + pool.room.length() + "）");
