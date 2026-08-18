@@ -51,8 +51,8 @@ package
       private static var f8Issued:Boolean = false;
       private static var f8Ticks:int = 0;
       
-      private static const F8_KEY:int = 119;
-      private static const F9_KEY:int = 120;
+      private static const F1_KEY:int = 112;  // 原 F8(119) 被其它模组拦截，换 F1
+      private static const F2_KEY:int = 113;  // 原 F9(120) 被 Sandevistan 面板占用，换 F2
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
       
       /** Loader 会自动实例化文档类；构造保持空，避免日志歧义。 */
@@ -105,8 +105,10 @@ package
       {
          stageBound = true;
          st.addEventListener(Event.ENTER_FRAME, onFrame);
-         st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-         diag.log("[RR] RandomRoomsMod M0 loaded <preflight=disk-reseed+rr_test-land> stage bound");
+         // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
+         // stopImmediatePropagation 无法阻止已先执行的捕获监听）
+         st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
+         diag.log("[RR] RandomRoomsMod M0 loaded <preflight=disk-reseed+rr_test-land> stage bound (KEY_DOWN capture)");
       }
       
       // ---------- 主循环 ----------
@@ -133,13 +135,13 @@ package
       
       private static function onKeyDown(ev:KeyboardEvent):void
       {
-         if (ev.keyCode == F8_KEY)
+         if (ev.keyCode == F1_KEY)
          {
-            triggerTravel(RRTestLand.LAND_ID, "F8");
+            triggerTravel(RRTestLand.LAND_ID, "F1");
          }
-         else if (ev.keyCode == F9_KEY)
+         else if (ev.keyCode == F2_KEY)
          {
-            triggerTravel("rbl", "F9");
+            triggerTravel("rbl", "F2");
          }
       }
       
@@ -257,7 +259,8 @@ package
             maybeFinalize();
             return;
          }
-         var url:String = "Rooms/" + file + ".xml";
+         // 绝对 app:/ 路径：相对路径会基于 mod SWF 位置（release/ 目录）解析
+         var url:String = "app:/Rooms/" + file + ".xml";
          var loader:URLLoader = new URLLoader();
          loader.addEventListener(Event.COMPLETE, function(ev:Event):void
          {
@@ -349,7 +352,7 @@ package
          world["roomsLoad"] = 0;
          preflightDone = true;
          diag.log("inject: roomsLoad=0，rr_test 池已就位（房间数=" + poolXml.room.length() + "）" +
-                  " | READY: 开新游戏后按 F8 进入 rr_test，F9 回 rbl");
+                  " | READY: 开新游戏后按 F1 进入 rr_test，F2 回 rbl");
       }
       
       // ---------- 进入判定（H3） ----------
