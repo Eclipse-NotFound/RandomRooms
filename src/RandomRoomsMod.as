@@ -7,8 +7,11 @@ package
    import flash.net.URLLoader;
    import flash.net.URLRequest;
    import flash.utils.getDefinitionByName;
+   import rr.RRConfig;
    import rr.RRDiag;
    import rr.RRCook;
+   import rr.RRMenu;
+   import rr.RRSeed;
    import rr.RRTestLand;
    
    /**
@@ -56,9 +59,21 @@ package
       private static var origPools:Object = {};
       private static var cook:RRCook = new RRCook();
       
-      private static const F1_KEY:int = 112;  // 原 F8(119) 被其它模组拦截，换 F1
-      private static const F2_KEY:int = 113;  // 原 F9(120) 被 Sandevistan 面板占用，换 F2
+      // P1：配置 + 种子 + 主菜单 UI
+      private static var config:RRConfig;
+      private static var seedGen:RRSeed;   // cook 用种子序列（会话级）
+      private static var menu:RRMenu;
+      private static var menuShown:Boolean = false;
+      private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
+      
+      private static const F1_KEY:int = 112;  // F1 -> random_rooms（正式无限废墟）
+      private static const F2_KEY:int = 113;  // F2 -> rbl
+      private static const F3_KEY:int = 114;  // F3 -> rr_test（开发测试土地）
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
+      
+      /** P1 正式新土地 */
+      public static const LAND_ID_RR:String = "random_rooms";
+      public static const POOL_FILE_RR:String = "rooms_random_rooms";
       
       /** Loader 会自动实例化文档类；构造保持空，避免日志歧义。 */
       public function RandomRoomsMod()
@@ -72,6 +87,23 @@ package
          diag = RRDiag.inst;
          test = new RRTestLand(diag);
          diag.log("init(main) called (static), main=" + main + " stage=" + (main ? main.stage : "n/a"));
+         
+         // P1：配置 + 种子序列注入 cook
+         config = RRConfig.loadFromDisk();
+         diag.log("config: enabled=" + config.enabled + " seedEnabled=" + config.seedEnabled +
+                  " seed=" + config.seed);
+         if (config.seedEnabled)
+         {
+            seedGen = new RRSeed(config.seed).fork("cook");
+            cook.rnd = function():Number { return seedGen.next(); };
+            diag.log("种子模式: cook PRNG 已注入（seed=" + config.seed + "），preview=" +
+                     seedGen.preview(5).join(","));
+         }
+         else
+         {
+            cook.rnd = Math.random;
+            diag.log("随机模式: cook 使用 Math.random");
+         }
          
          // 模组与游戏主 SWF 同 applicationDomain（LoaderContext(false)），
          // 顶层 getDefinitionByName 在当前域解析游戏类。
@@ -126,6 +158,16 @@ package
          {
             return;
          }
+         // 主菜单 UI 管理
+         var inMenu:Boolean = RRMenu.isMenuTime(world);
+         if (inMenu && !menuShown)
+         {
+            showMenu();
+         }
+         else if (!inMenu && menuShown)
+         {
+            hideMenu();
+         }
          if (!preflightStarted)
          {
             preflightStarted = true;
@@ -138,15 +180,58 @@ package
          }
       }
       
+      private static function showMenu():void
+      {
+         menuShown = true;
+         try
+         {
+            if (menu == null)
+            {
+               menu = new RRMenu(config, diag);
+            }
+            var st:* = main.stage;
+            menu.x = st.stageWidth - 310;
+            menu.y = st.stageHeight - 70;
+            st.addChild(menu);
+            diag.log("RRMenu: 主菜单配置条已显示");
+         }
+         catch (e:*)
+         {
+            diag.log("RRMenu 显示失败: " + e);
+         }
+      }
+      
+      private static function hideMenu():void
+      {
+         if (!menuShown) return;
+         menuShown = false;
+         try
+         {
+            if (menu != null && menu.parent != null)
+            {
+               menu.parent.removeChild(menu);
+            }
+         }
+         catch (e:*)
+         {
+         }
+      }
+      
       private static function onKeyDown(ev:KeyboardEvent):void
       {
          if (ev.keyCode == F1_KEY)
          {
-            triggerTravel(RRTestLand.LAND_ID, "F1");
+            targetLand = LAND_ID_RR;
+            triggerTravel(targetLand, "F1");
          }
          else if (ev.keyCode == F2_KEY)
          {
             triggerTravel("rbl", "F2");
+         }
+         else if (ev.keyCode == F3_KEY)
+         {
+            targetLand = RRTestLand.LAND_ID;
+            triggerTravel(targetLand, "F3");
          }
       }
       
@@ -177,7 +262,7 @@ package
             // P0 进入级刷新：rnd 土地在进入前重 cook 并强制重建
             refreshLandPool(world, landId);
             game["gotoLand"](landId);
-            if (landId == RRTestLand.LAND_ID)
+            if (landId == targetLand)
             {
                f8Issued = true;
                f8Ticks = 0;
@@ -407,6 +492,47 @@ package
          var poolXml:XML = test.makePoolXML(srcPool);
          rooms["rooms"][RRTestLand.POOL_FILE] = poolXml;
          
+         // ---- P1：random_rooms 新土地注册 + 混合池（stable+sewer） ----
+         var rrLands:XMLList = gd.land.(@id == LAND_ID_RR);
+         if (rrLands.length() == 0)
+         {
+            gd.appendChild(<land id="random_rooms" tip="rnd" rnd="1" dif="8" biom="1" conf="1"
+                 file="rooms_random_rooms" mx="5" my="5" locx="0" locy="0" list="0">
+                 <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="150"/></land>);
+            diag.log("inject: GameData.d 已追加 <land random_rooms 5x5 conf=1 dif=8>");
+         }
+         else
+         {
+            diag.log("inject: <land random_rooms> 已存在，跳过追加");
+         }
+         var mix:XML = <all><land serial="1"/></all>;
+         var begXml:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip == "beg0");
+         if (begXml.length() > 0)
+         {
+            mix.appendChild(begXml[0].copy());
+         }
+         for each (var srcName:String in ["rooms_stable", "rooms_sewer"])
+         {
+            var srcPool2:XML = rooms["rooms"][srcName] as XML;
+            if (srcPool2 == null)
+            {
+               diag.log("inject: 混合池源 " + srcName + " 缺失，跳过");
+               continue;
+            }
+            var added:int = 0;
+            for each (var srcRoom:XML in srcPool2.room)
+            {
+               if (cook.isRndRoom(srcRoom))
+               {
+                  mix.appendChild(srcRoom.copy());
+                  added++;
+               }
+            }
+            diag.log("inject: 混合池加入 " + srcName + " 的 " + added + " 个 rnd 房");
+         }
+         rooms["rooms"][POOL_FILE_RR] = mix;
+         diag.log("inject: 混合池 " + POOL_FILE_RR + " 构建完成（房间数=" + mix.room.length() + "）");
+         
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");
          var cookedTotal:int = 0;
@@ -439,7 +565,7 @@ package
          f8Ticks++;
          if (f8Ticks > ENTRY_TIMEOUT_TICKS)
          {
-            diag.log("verifyEntry: 超时未进入 rr_test（" + ENTRY_TIMEOUT_TICKS + " 帧），停止等待");
+            diag.log("verifyEntry: 超时未进入 " + targetLand + "（" + ENTRY_TIMEOUT_TICKS + " 帧），停止等待");
             f8Issued = false;
             return;
          }
@@ -447,15 +573,15 @@ package
          if (game == null) return;
          var cur:String = "";
          try { cur = String(game["curLandId"]); } catch (e:*) {}
-         if (cur != RRTestLand.LAND_ID) return;
+         if (cur != targetLand) return;
          var land:* = world["land"];
          if (land == null) return;
          
-         // 硬门控：确认 World.land 实际是 rr_test 的 Land（传送过渡期
+         // 硬门控：确认 World.land 实际是目标土地的 Land（传送过渡期
          // curLandId 已改但 World.land 还是旧土地）
          var actId:String = "";
          try { actId = String(land["act"]["id"]); } catch (e:*) {}
-         if (actId != RRTestLand.LAND_ID)
+         if (actId != targetLand)
          {
             if (f8Ticks % 30 == 0)
             {

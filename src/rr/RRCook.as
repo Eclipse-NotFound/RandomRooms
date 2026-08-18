@@ -188,6 +188,12 @@ package rr
          return addList.length;
       }
       
+      /** 是否为可变异/可随机选用的普通 rnd 房（与 isTipRoom 相反） */
+      public function isRndRoom(room:XML):Boolean
+      {
+         return !isTipRoom(room);
+      }
+      
       /** tip 固定功能房 / uniq 稀有房不变异 */
       private function isTipRoom(room:XML):Boolean
       {
