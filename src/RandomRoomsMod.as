@@ -769,7 +769,7 @@ package
             }
          }
          list.sort();
-         diag.log("verifyEntry: 进入 rr_test 成功！网格=" + gridX + "x" + colLens.join(",") +
+         diag.log("verifyEntry: 进入 " + targetLand + " 成功！网格=" + gridX + "x" + colLens.join(",") +
                   " 采集 " + n + " 个 loc，房间 id 集合(" + list.length + ")=" + list.join(","));
          diag.log("verifyEntry: 预期池房间(含P0变异副本前缀): " + test.pickedRooms().join(",") + " + *_rr* 副本");
          f8Issued = false;

@@ -5,9 +5,21 @@
 
 ## 当前版本
 
-- 阶段：**P0 完成（2026-08-18 实机验证）→ 下一步 P1**
-- 范围：DEC-0001 已确认（P0+P1；种子/联机延后；PipPage 入口；主菜单配置 UI）
+- 阶段：**P1 完成（2026-08-18 实机验证）→ 下一步：深度循环 / P2 / 发布整理**
+- 范围：DEC-0001 已确认（P0+P1；种子/联机延后；PipPage 入口；主菜单配置 UI）——**全部交付**
 - 设计文档：`design/vision-and-proposals.md`（v0.1）
+
+## P1 结论（2026-08-18 实机验证）
+
+- **RRSeed**：xorshift32 确定性 PRNG + fork 派生；python 跨实现对照
+  逐位一致；种子模式注入 cook.rnd（会话级确定性）
+- **random_rooms 新土地**：5×5 conf=1 dif=8；混合池 stable(32)+sewer(22)
+  +beg0；每次进入 25 格布局与模板都不同（进入级刷新）
+- **RRMenu 主菜单配置条**：开关/种子输入，SharedObject rr_config 持久化
+- **RRTravelBtn PipPage 入口**：PipPageInfo 页横幅带按钮 →
+  checkTravel+loaded 校验 → beginMission（已实机验证）
+- 贡献：shared-knowledge ui-systems/discoveries/pippageinfo-travel-flow.md
+  （旅行流程 + 外部注入点）
 
 ## P0 结论（2026-08-18 实机验证）
 
@@ -77,14 +89,14 @@
 - 磁盘房间文件 ≠ SWF 内嵌版（rooms_begin 磁盘 20 间 vs 内嵌 22 间）
 - rnd 土地每次进入重建（visited 不置位）；conf=1 原型 beg0 在 (0,0)
 
-## 下一步（P1，待用户确认开始）
+## 下一步（待用户选择）
 
-1. **random_rooms 独立新土地**：复用 M0 土地注册链路（GameData.d 追加 +
-   自定义池 + conf 原型），roguelike 深度循环（landStage/upStage 语义）
-2. **种子系统（RRSeed）**：确定性 PRNG 注入 RRCook.rnd——同种子同世界
-   （RConnect 联机镜像前提；联机协议联动仍延后）
-3. **主菜单配置 UI**：开关/难度/种子输入（主菜单集成）
-4. **PipPage 旅行入口**：接管入口后进入级刷新覆盖全部进入路径
+1. **深度循环（random_rooms 无限化）**：landStage/upStage 语义勘察 →
+   "每清一层加深一层"（设计文档 P1 的无限废墟核心）
+2. **发布整理**：v0.2 发布说明（部署/回滚/热键/入口/配置一览）、
+   还原测试土地开关（rr_test 仅开发用）
+3. **P2 远期**：程序化合成就（文法提取 + WFC-lite）、稀有房间、每日挑战
+4. **种子/联机联动**（DEC-0001 延后项）：RConnect 协议对齐时另行授权
 
 ## 权限提醒
 
