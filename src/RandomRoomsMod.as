@@ -13,6 +13,7 @@ package
    import rr.RRMenu;
    import rr.RRSeed;
    import rr.RRTestLand;
+   import rr.RRTravelBtn;
    
    /**
     * RandomRoomsMod —— M0 实验文档类。
@@ -65,6 +66,10 @@ package
       private static var menu:RRMenu;
       private static var menuShown:Boolean = false;
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
+      
+      // P1 收尾：PipPage 旅行入口按钮
+      private static var travelBtn:RRTravelBtn;
+      private static var travelBtnShown:Boolean = false;
       
       private static const F1_KEY:int = 112;  // F1 -> random_rooms（正式无限废墟）
       private static const F2_KEY:int = 113;  // F2 -> rbl
@@ -168,6 +173,15 @@ package
          {
             hideMenu();
          }
+         // PipPage 旅行入口按钮管理（仅 in-game）
+         if (!inMenu)
+         {
+            manageTravelBtn(world);
+         }
+         else if (travelBtnShown)
+         {
+            detachTravelBtn();
+         }
          if (!preflightStarted)
          {
             preflightStarted = true;
@@ -214,6 +228,122 @@ package
          }
          catch (e:*)
          {
+         }
+      }
+      
+      // ---------- PipPage 旅行入口 ----------
+      
+      private static function manageTravelBtn(world:*):void
+      {
+         try
+         {
+            var pip:* = world["pip"];
+            if (pip == null) return;
+            var page:* = pip["currentPage"];
+            var cls:String = "";
+            try { cls = flash.utils.getQualifiedClassName(page); } catch (e:*) {}
+            var pipActive:Boolean = false;
+            try { pipActive = Boolean(pip["active"]); } catch (e:*) {}
+            if (cls == "fe.inter::PipPageInfo" && pipActive)
+            {
+               if (!travelBtnShown)
+               {
+                  attachTravelBtn(world);
+               }
+            }
+            else if (travelBtnShown)
+            {
+               detachTravelBtn();
+            }
+         }
+         catch (e:*)
+         {
+         }
+      }
+      
+      private static function attachTravelBtn(world:*):void
+      {
+         try
+         {
+            var vpip:* = world["vpip"];
+            if (vpip == null) return;
+            if (travelBtn == null)
+            {
+               travelBtn = new RRTravelBtn(diag);
+               travelBtn.travelFn = function():void { doTravelFromPip(world); };
+            }
+            if (travelBtn.parent == null)
+            {
+               vpip.addChild(travelBtn);
+            }
+            travelBtn.x = 360;
+            travelBtn.y = 30;   // 横幅带（PipPageOpt 实测 y<100 空闲）
+            travelBtnShown = true;
+            diag.log("RRTravelBtn: PipPageInfo 旅行按钮已挂载");
+         }
+         catch (e:*)
+         {
+            diag.log("RRTravelBtn 挂载失败: " + e);
+         }
+      }
+      
+      private static function detachTravelBtn():void
+      {
+         if (!travelBtnShown) return;
+         travelBtnShown = false;
+         try
+         {
+            if (travelBtn != null && travelBtn.parent != null)
+            {
+               travelBtn.parent.removeChild(travelBtn);
+            }
+         }
+         catch (e:*)
+         {
+         }
+      }
+      
+      /** PipPage 按钮点击：校验 → 进入级刷新 → beginMission */
+      private static function doTravelFromPip(world:*):void
+      {
+         try
+         {
+            var game:* = world["game"];
+            if (game == null)
+            {
+               diag.log("doTravelFromPip: game 未创建");
+               return;
+            }
+            var can:Boolean = false;
+            try { can = Boolean(game["checkTravel"](LAND_ID_RR)); } catch (e:*) {}
+            var loaded:Boolean = false;
+            try { loaded = Boolean(game["lands"][LAND_ID_RR]["loaded"]); } catch (e:*) {}
+            diag.log("doTravelFromPip: checkTravel=" + can + " lands.loaded=" + loaded);
+            if (!can || !loaded)
+            {
+               diag.log("doTravelFromPip: 旅行校验未通过，忽略");
+               return;
+            }
+            refreshLandPool(world, LAND_ID_RR);
+            game["beginMission"](LAND_ID_RR);
+            try
+            {
+               var pip:* = world["pip"];
+               if (pip != null)
+               {
+                  pip["onoff"](-1);
+               }
+            }
+            catch (e:*) {}
+            diag.log("doTravelFromPip: beginMission(random_rooms) 已发起");
+            // 进入后采样（复用 verifyEntry 通道）
+            targetLand = LAND_ID_RR;
+            f8Issued = true;
+            f8Ticks = 0;
+         }
+         catch (e:*)
+         {
+            diag.log("doTravelFromPip 异常: " + e);
          }
       }
       
