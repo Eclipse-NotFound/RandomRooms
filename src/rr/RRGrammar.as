@@ -4,6 +4,8 @@ package rr
     * RRGrammar —— RRSynth 语料文法（离线产物，build/grammar-extract.py 生成）
     * 墙块词典：真实作者房间 6x4 切片（墙占比 10-55%），出现频率降序前 24；
     * 装饰后缀权重：空地带 suffix 的频率（shelf/rear 物件）。
+    * 注意：块行已 strip（历史教训：前导空格会写入网格 → Tile.dec 解析
+    * 空格后缀 → Form.oForms[空格]=undefined → inForm(null) #1009）。
     */
    public class RRGrammar
    {

@@ -108,6 +108,7 @@ package rr
                for (di = 0; di < BLOCK_W; di++)
                {
                   var code:String = String(brow[di]);
+                  code = code.split(" ").join("");   // 防御：trim 空格（历史 #1009 教训）
                   if (code.length > 0)
                   {
                      grid[by + dj][bx + di] = code;
