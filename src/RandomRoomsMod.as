@@ -8,6 +8,7 @@ package
    import flash.net.URLRequest;
    import flash.utils.getDefinitionByName;
    import rr.RRDiag;
+   import rr.RRCook;
    import rr.RRTestLand;
    
    /**
@@ -349,6 +350,25 @@ package
          var poolXml:XML = test.makePoolXML(srcPool);
          rooms["rooms"][RRTestLand.POOL_FILE] = poolXml;
          
+         // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 triggerTravel） ----
+         var cook:RRCook = new RRCook();
+         var rndLands:XMLList = gd.land.(@tip == "rnd");
+         var cookedTotal:int = 0;
+         for each (var ld:XML in rndLands)
+         {
+            var f2:String = String(ld.@file);
+            var pool:XML = rooms["rooms"][f2] as XML;
+            if (pool == null)
+            {
+               diag.log("P0 cook: " + f2 + " 池缺失，跳过");
+               continue;
+            }
+            var n2:int = cook.cookPool(pool, 1);
+            cookedTotal += n2;
+            diag.log("P0 cook: " + f2 + " +" + n2 + " 个变异副本（池房间数=" + pool.room.length() + "）");
+         }
+         diag.log("P0 cook 完成: 共 " + cookedTotal + " 个变异副本（tip=rnd 土地）");
+         
          world["roomsLoad"] = 0;
          preflightDone = true;
          diag.log("inject: roomsLoad=0，rr_test 池已就位（房间数=" + poolXml.room.length() + "）" +
@@ -438,7 +458,7 @@ package
          list.sort();
          diag.log("verifyEntry: 进入 rr_test 成功！网格=" + gridX + "x" + colLens.join(",") +
                   " 采集 " + n + " 个 loc，房间 id 集合(" + list.length + ")=" + list.join(","));
-         diag.log("verifyEntry: 预期池房间: " + test.pickedRooms().join(","));
+         diag.log("verifyEntry: 预期池房间(含P0变异副本前缀): " + test.pickedRooms().join(",") + " + *_rr* 副本");
          f8Issued = false;
       }
    }
