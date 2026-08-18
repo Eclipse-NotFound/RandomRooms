@@ -12,6 +12,7 @@ package
    import rr.RRCook;
    import rr.RRMenu;
    import rr.RRSeed;
+   import rr.RRSynth;
    import rr.RRTestLand;
    import rr.RRTravelBtn;
    
@@ -67,6 +68,10 @@ package
       private static var menuShown:Boolean = false;
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
       
+      // P2：全新房间合成器（合成房混入池数量）
+      private static var synth:RRSynth;
+      private static const SYNTH_COUNT:int = 6;
+      
       // P1 收尾：PipPage 旅行入口按钮
       private static var travelBtn:RRTravelBtn;
       private static var travelBtnShown:Boolean = false;
@@ -117,6 +122,20 @@ package
          {
             cook.rnd = Math.random;
             diag.log("随机模式: cook 使用 Math.random");
+         }
+         
+         // P2：合成器（独立 synth 种子序列）
+         synth = new RRSynth();
+         if (config.seedEnabled)
+         {
+            var synthGen:RRSeed = new RRSeed(config.seed).fork("synth");
+            synth.rnd = function():Number { return synthGen.next(); };
+            diag.log("合成器: synth PRNG 已注入（fork(synth)）");
+         }
+         else
+         {
+            synth.rnd = Math.random;
+            diag.log("合成器: 使用 Math.random");
          }
          
          // 模组与游戏主 SWF 同 applicationDomain（LoaderContext(false)），
@@ -891,6 +910,13 @@ package
          {
             diag.log("inject: WARN 出口房源缺失（rooms_stable 无普通房）");
          }
+         // P2：全新构造的合成房混入池（普通 rnd 房，参与后续缺口/变异/生态）
+         for (var sn:int = 0; sn < SYNTH_COUNT; sn++)
+         {
+            var sroom:XML = synth.generate(sn);
+            mix.appendChild(sroom);
+         }
+         diag.log("inject: 合成房 " + SYNTH_COUNT + " 个已混入池（syn_0..syn_" + (SYNTH_COUNT - 1) + "）");
          // 门 bug 修复：统一混合池边界缺口（在快照/cook 之前）
          var normalized:int = cook.normalizePool(mix);
          diag.log("inject: 混合池边界缺口已统一（" + normalized + " 房）");
