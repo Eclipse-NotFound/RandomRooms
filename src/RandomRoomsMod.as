@@ -83,6 +83,8 @@ package
       private static const F2_KEY:int = 113;  // F2 -> rbl
       private static const F3_KEY:int = 114;  // F3 -> rr_test（开发测试土地）
       private static const F4_KEY:int = 115;  // F4 -> 本层完成，进入下一层
+      private static const F5_KEY:int = 116;  // F5 -> 合成房展示馆（每次进入重新合成）
+      private static const F7_KEY:int = 118;  // F7 -> 当前层直传一个合成房
       private static const ENTRY_TIMEOUT_TICKS:int = 600; // ~10s @60fps
       
       /** P1 正式新土地 */
@@ -93,6 +95,12 @@ package
       private static const DIF_PER_STAGE:Number = 2;
       /** 出口房 id（uniq，每层最多 1 个） */
       public static const EXIT_ROOM_ID:String = "rr_exit";
+      /** 合成房展示馆（可视化测试通道） */
+      public static const LAND_ID_SHOW:String = "rr_showroom";
+      public static const POOL_FILE_SHOW:String = "rooms_showroom";
+      private static const SHOW_SYNTH_COUNT:int = 8;
+      private static const SHOW_MX:int = 4;
+      private static const SHOW_MY:int = 3;
       
       /** Loader 会自动实例化文档类；构造保持空，避免日志歧义。 */
       public function RandomRoomsMod()
@@ -419,6 +427,78 @@ package
          {
             upstage();
          }
+         else if (ev.keyCode == F5_KEY)
+         {
+            targetLand = LAND_ID_SHOW;
+            triggerTravel(targetLand, "F5");
+         }
+         else if (ev.keyCode == F7_KEY)
+         {
+            jumpToSynth();
+         }
+      }
+      
+      // ---------- 合成房测试通道 ----------
+      
+      /**
+       * F7：当前 random_rooms 层内直传一个合成房。
+       * 扫描 land.locs 找 room.id 以 "syn_" 开头的房间，随机选一个
+       * gotoXY 传送（gotoXY 自带范围钳制，安全）。
+       */
+      private static function jumpToSynth():void
+      {
+         var world:* = null;
+         try { world = WCls["w"]; } catch (e:*) {}
+         if (world == null || !preflightDone)
+         {
+            diag.log("F7: preflight 未完成，忽略");
+            return;
+         }
+         var land:* = null;
+         try { land = world["land"]; } catch (e:*) {}
+         if (land == null) return;
+         var actId:String = "";
+         try { actId = String(land["act"]["id"]); } catch (e:*) {}
+         if (actId != LAND_ID_RR && actId != LAND_ID_SHOW)
+         {
+            diag.log("F7: 不在合成房土地（" + actId + "），忽略");
+            return;
+         }
+         try
+         {
+            var locs:* = land["locs"];
+            var spots:Array = [];
+            for (var x:int = 0; x < locs.length; x++)
+            {
+               var col:* = locs[x];
+               if (col == null) continue;
+               for (var y:int = 0; y < col.length; y++)
+               {
+                  var cell:* = col[y];
+                  if (cell == null || cell[0] == null) continue;
+                  var rid:String = "";
+                  try { rid = String(cell[0]["room"]["id"]); } catch (e:*) {}
+                  if (rid.indexOf("syn_") == 0)
+                  {
+                     spots.push([x, y]);
+                  }
+               }
+            }
+            if (spots.length == 0)
+            {
+               mess(world, "RandomRooms: 本层没有合成房（重新进入一层试试）");
+               diag.log("F7: 未找到 syn_* 房间");
+               return;
+            }
+            var pick:Array = spots[int(Math.random() * spots.length)];
+            land["gotoXY"](pick[0], pick[1]);
+            mess(world, "RandomRooms: 已传送到合成房 syn 房间（" + spots.length + " 个可选）");
+            diag.log("F7: gotoXY(" + pick[0] + "," + pick[1] + ") 传送完成，合成房 " + spots.length + " 个");
+         }
+         catch (e:*)
+         {
+            diag.log("F7 异常: " + e);
+         }
       }
       
       // ---------- 深度循环 ----------
@@ -658,6 +738,47 @@ package
             if (base == null)
             {
                diag.log("refreshLandPool: " + file + " 无原始池快照（非 tip=rnd 土地？），跳过");
+               return;
+            }
+            if (file == POOL_FILE_SHOW)
+            {
+               // 展示馆：每次进入重新合成（beg0 模板 + 全新合成房），纯净无敌人
+               var showFresh:XML = base.copy();
+               for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
+               {
+                  showFresh.appendChild(synth.generate(100 + si));
+               }
+               cook.cookPool(showFresh, 1);   // 变异副本（展示更多变化）
+               // 纯净：删除 en 类 obj + 禁敌（展示结构为主）
+               for each (var r2:XML in showFresh.room)
+               {
+                  var keep2:Array = [];
+                  for each (var o2:XML in r2.obj)
+                  {
+                     if (String(o2.@id).indexOf("en") != 0)
+                     {
+                        keep2.push(o2);
+                     }
+                  }
+                  if (keep2.length != r2.obj.length())
+                  {
+                     delete r2.obj;
+                     for each (var k2:XML in keep2)
+                     {
+                        r2.appendChild(k2);
+                     }
+                  }
+                  if (r2.options.length() == 0)
+                  {
+                     r2.appendChild(<options/>);
+                  }
+                  r2.options.@entip = "0";
+                  r2.options.@kolspawn = "0";
+               }
+               act["allroom"] = showFresh;
+               act["land"] = null;
+               diag.log("refreshLandPool: " + landId + " 展示馆已重合成（+" + SHOW_SYNTH_COUNT +
+                        " 合成房 + 变异副本，无敌人）");
                return;
             }
             var fresh:XML = base.copy();
@@ -920,6 +1041,36 @@ package
          // 门 bug 修复：统一混合池边界缺口（在快照/cook 之前）
          var normalized:int = cook.normalizePool(mix);
          diag.log("inject: 混合池边界缺口已统一（" + normalized + " 房）");
+         
+         // ---- 合成房展示馆（可视化测试通道） ----
+         var showLands:XMLList = gd.land.(@id == LAND_ID_SHOW);
+         if (showLands.length() == 0)
+         {
+            gd.appendChild(<land id="rr_showroom" tip="rnd" rnd="1" dif="0" biom="0" conf="1"
+                 file="rooms_showroom" mx="4" my="3" locx="0" locy="0" list="0">
+                 <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="50"/></land>);
+            diag.log("inject: <land rr_showroom 4x3> 已追加");
+         }
+         var showPool:XML = <all><land serial="1"/></all>;
+         var showBeg:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip == "beg0");
+         if (showBeg.length() > 0)
+         {
+            showPool.appendChild(showBeg[0].copy());
+         }
+         for (var sn2:int = 0; sn2 < SHOW_SYNTH_COUNT; sn2++)
+         {
+            showPool.appendChild(synth.generate(sn2));
+         }
+         rooms["rooms"][POOL_FILE_SHOW] = showPool;
+         cook.normalizePool(showPool);
+         // 快照 = beg0-only（refresh 时重新合成，展示每次不同）
+         var showBase:XML = <all><land serial="1"/></all>;
+         if (showBeg.length() > 0)
+         {
+            showBase.appendChild(showBeg[0].copy());
+         }
+         origPools[POOL_FILE_SHOW] = showBase;
+         diag.log("inject: 展示馆池构建完成（beg0 + " + SHOW_SYNTH_COUNT + " 合成房，缺口已统一）");
          
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");

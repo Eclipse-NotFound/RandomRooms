@@ -70,6 +70,20 @@ package rr
          input.defaultTextFormat = ifmt;
          input.addEventListener(KeyboardEvent.KEY_DOWN, onInputKey);
          addChild(input);
+         // 热键提示行（游戏内测试通道一览）
+         var hint:TextField = new TextField();
+         hint.width = 290;
+         hint.height = 26;
+         hint.x = 6;
+         hint.y = 60;
+         hint.selectable = false;
+         hint.text = "热键: F1废墟 F2回城 F4升层 F5合成房展示馆 F7跳合成房";
+         var hfmt:TextFormat = new TextFormat();
+         hfmt.color = 0xAAAAAA;
+         hfmt.size = 10;
+         hint.setTextFormat(hfmt);
+         hint.defaultTextFormat = hfmt;
+         addChild(hint);
       }
       
       private function onToggle(ev:MouseEvent):void
