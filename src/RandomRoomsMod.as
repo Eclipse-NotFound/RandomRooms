@@ -686,6 +686,14 @@ package
             try { hasLand = lands[landId] != null; } catch (e:*) {}
             var curLandId:String = "";
             try { curLandId = String(game["curLandId"]); } catch (e:*) {}
+            // 防重入：目标 == 当前土地（含传送过渡中 curLandId 已改）→ 忽略。
+            // 重入当前土地会破坏退出流程（游戏已知危险操作）。
+            if (landId == curLandId)
+            {
+               mess(world, "RandomRooms: 已在目标区域或传送中（先 F2 回城再试）");
+               diag.log(tag + " 重入当前土地 " + landId + "，忽略");
+               return;
+            }
             diag.log(tag + " -> gotoLand(" + landId + "), preflight=OK, lands[" + landId + "]=" + hasLand +
                      ", 当前土地=" + curLandId);
             // P0 进入级刷新：rnd 土地在进入前重 cook 并强制重建
