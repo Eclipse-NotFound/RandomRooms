@@ -79,6 +79,9 @@ package
       // 深度循环状态
       private static var exitHintShown:Boolean = false;
       
+      // 诊断：游戏错误对话框文本（showError 写入 World.verror.txt.text）
+      private static var lastVerr:String = "";
+      
       private static const F1_KEY:int = 112;  // F1 -> random_rooms（正式无限废墟）
       private static const F2_KEY:int = 113;  // F2 -> rbl
       private static const F3_KEY:int = 114;  // F3 -> rr_test（开发测试土地）
@@ -286,6 +289,14 @@ package
          if (preflightDone && !f8Issued)
          {
             maybeExpand(world);
+         }
+         // 诊断：游戏错误对话框文本（Land 构建异常被游戏 catch 后显示于此）
+         var vtxt:String = "";
+         try { vtxt = String(world["verror"]["txt"]["text"]); } catch (e:*) {}
+         if (vtxt != null && vtxt.length > 0 && vtxt != lastVerr)
+         {
+            lastVerr = vtxt;
+            diag.log("GAME_ERROR_DIALOG: " + vtxt);
          }
          if (!preflightStarted)
          {
