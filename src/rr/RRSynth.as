@@ -118,6 +118,8 @@ package rr
          }
          
          // 装饰后缀（空地 5%，语料频率加权）
+         // 注意：后缀必须挂在 "_" 之后（如 "_Е"）——俄文字符 charCode>64
+         // 会被 Tile.dec 当作首字符查 fForms（只有拉丁 A-T）→ inForm(null) #1009
          var totalW:int = 0;
          for (var wI:int = 0; wI < RRGrammar.DECOR.length; wI++)
          {
@@ -136,7 +138,7 @@ package rr
                      acc += int(RRGrammar.DECOR[dI][1]);
                      if (r < acc)
                      {
-                        grid[j][i] = String(RRGrammar.DECOR[dI][0]);
+                        grid[j][i] = "_" + String(RRGrammar.DECOR[dI][0]);
                         break;
                      }
                   }

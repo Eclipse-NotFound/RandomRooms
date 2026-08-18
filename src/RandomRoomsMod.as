@@ -461,6 +461,7 @@ package
          try { actId = String(land["act"]["id"]); } catch (e:*) {}
          if (actId != LAND_ID_RR && actId != LAND_ID_SHOW)
          {
+            mess(world, "RandomRooms: F7 需在废墟（F1）或展示馆（F5）内使用");
             diag.log("F7: 不在合成房土地（" + actId + "），忽略");
             return;
          }

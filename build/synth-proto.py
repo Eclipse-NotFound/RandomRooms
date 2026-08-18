@@ -103,7 +103,8 @@ def gen_room(rng, blocks):
                 for ch, w in DECOR_WEIGHTS:
                     acc += w
                     if r < acc:
-                        grid[j][i] = ch
+                        # 后缀必须挂在 "_" 后（俄文字符作首字符会触发 Tile.dec 的 fForms 查找 #1009）
+                        grid[j][i] = "_" + ch
                         break
     # BFS 可达性（从缺口格出发）
     from collections import deque
