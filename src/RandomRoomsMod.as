@@ -115,6 +115,21 @@ package
          test = new RRTestLand(diag);
          diag.log("init(main) called (static), main=" + main + " stage=" + (main ? main.stage : "n/a"));
          
+         // 全局未捕获异常落盘（诊断；游戏内 Land 构建异常会冒泡到这里）
+         try
+         {
+            var uce:* = main.loaderInfo.uncaughtErrorEvents;
+            if (uce != null)
+            {
+               uce.addEventListener("uncaughtError", onUncaught);
+               diag.log("诊断: uncaughtError 监听已挂载");
+            }
+         }
+         catch (e:*)
+         {
+            diag.log("诊断: uncaughtError 挂载失败 " + e);
+         }
+         
          // P1：配置 + 种子序列注入 cook
          config = RRConfig.loadFromDisk();
          diag.log("config: enabled=" + config.enabled + " seedEnabled=" + config.seedEnabled +
@@ -144,6 +159,21 @@ package
          {
             synth.rnd = Math.random;
             diag.log("合成器: 使用 Math.random");
+         }
+         
+         // 全局未捕获异常监听（诊断：游戏内 Land 构建等异常会冒泡到这里）
+         try
+         {
+            var uce:* = main.loaderInfo.uncaughtErrorEvents;
+            if (uce != null)
+            {
+               uce.addEventListener("uncaughtError", onUncaught);
+               diag.log("诊断: uncaughtError 监听已挂载");
+            }
+         }
+         catch (e:*)
+         {
+            diag.log("诊断: uncaughtError 挂载失败 " + e);
          }
          
          // 模组与游戏主 SWF 同 applicationDomain（LoaderContext(false)），
@@ -187,6 +217,21 @@ package
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
          diag.log("[RR] RandomRoomsMod M0 loaded <preflight=disk-reseed+rr_test-land> stage bound (KEY_DOWN capture)");
+      }
+      
+      private static function onUncaught(ev:*):void
+      {
+         try
+         {
+            var err:* = ev["error"];
+            var msg:String = String(err);
+            try { msg = String(err["getStackTrace"]()) + " || " + msg; } catch (e:*) {}
+            diag.log("UNCAUGHT: " + msg);
+         }
+         catch (e:*)
+         {
+            diag.log("UNCAUGHT(解析失败): " + e);
+         }
       }
       
       // ---------- 主循环 ----------
