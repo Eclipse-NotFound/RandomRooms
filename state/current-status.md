@@ -5,9 +5,19 @@
 
 ## 当前版本
 
-- 阶段：**M0 —— 已部署，等待实机测试**（2026-08-17 用户授权部署）
+- 阶段：**M0 完成（H1/H2/H3 全验证通过，2026-08-18）→ 下一步 P0**
 - 范围：DEC-0001 已确认（P0+P1；种子/联机延后；PipPage 入口；主菜单配置 UI）
 - 设计文档：`design/vision-and-proposals.md`（v0.1）
+
+## M0 结论（2026-08-18 实机验证）
+
+- **注入链路成立**：GameData.d 追加 land + rooms.rooms 池替换 + roomsLoad=0
+  + gotoLand —— 全链路真机验证（详见 knowledge/experiments/m0-injection-points-verified.md）
+- 测试土地 rr_test（3×3，conf=1）：9/9 loc 全部来自注入池，beg0 落 (0,0)
+- 热键：**F1 进入 rr_test / F2 回 rbl**（F8/F9 被其它模组占用；KEY_DOWN capture 监听）
+- 已贡献公共知识：shared-knowledge/world-objects/discoveries/world-rooms-field-injection.md
+  （World.w.rooms 原版恒 null + 注入方法，双证据）
+- 模组诊断基础：RRDiag（applicationStorageDirectory 日志）+ loader SharedObject 落盘
 
 ## 部署记录（2026-08-17，两次部署后）
 
