@@ -30,6 +30,17 @@ package rr
       private static const S_SHELF:String = "-ДЕКНР";
       private static const S_REAR:String = "ВГЖЗИЙЛМОПСТ";
       
+      // 敌人分层表（uid 均来自 AllData.d.unit，数字后缀=等级档）
+      public static const ENEMY_TIERS:Array = [
+         ["zombie0","zombie1","bloat0","tarakan","rat","molerat","slime","ant","scorp1"],
+         ["zombie2","zombie3","zombie4","bloat1","bloat2","raider1","raider2","merc1","zebra1","hellhound1","necros"],
+         ["zombie5","zombie6","raider3","raider4","merc2","merc3","zebra2","encl1","bloat4","bloat5"],
+         ["zombie7","zombie8","raider5","raider6","merc4","zebra3","encl2","alicorn1","bloat6","bigrobot"],
+         ["zombie9","raider7","raider8","raider9","merc5","encl3","encl4","alicorn2","alicorn3","phoenix","bloat9","bloat10"]
+      ];
+      // 隐藏敌人类型（entip：0=zombie 1/3=alarm 2=robocell 6=lov）——alarm/robocell 偏机制，少用
+      private static const ENTIP_POOL:Array = [0, 0, 0, 1, 6];
+      
       // 变异强度参数
       private static const TILE_MUT_RATE:Number = 0.02;  // ~2% 格尝试
       private static const FIRST_SWAP_P:Number = 0.6;
@@ -235,6 +246,52 @@ package rr
          for each (var room:XML in pool.room)
          {
             normalizeGaps(room);
+            n++;
+         }
+         return n;
+      }
+      
+      /**
+       * 敌人多样化：按层重掷池房间的敌人表。
+       *   - options.spawn（主敌 uid，enemySpawn→createUnit(tipSpawn)）
+       *   - options.entip（隐藏敌类型：0=zombie 1/3=alarm 2=robocell 6=lov）
+       *   - options.kolspawn（敌人数）
+       * 层 tier = min(stage/2, 4)，20% 概率上探一档；beg0 出生房固定最低档。
+       */
+      public function rollEnemies(pool:XML, stage:int):int
+      {
+         var tier:int = int(stage / 2);
+         if (tier > 4) tier = 4;
+         var n:int = 0;
+         for each (var room:XML in pool.room)
+         {
+            var tip:String = "";
+            if (room.options.@tip.length())
+            {
+               tip = String(room.options.@tip);
+            }
+            var t:int = tier;
+            if (tip == "beg0")
+            {
+               t = 0;   // 出生房永远低危
+            }
+            else if (rnd() < 0.2 && t < 4)
+            {
+               t++;     // 20% 上探一档（渐进威胁）
+            }
+            var list:Array = ENEMY_TIERS[t];
+            var uid:String = list[int(rnd() * list.length)];
+            var entip:int = ENTIP_POOL[int(rnd() * ENTIP_POOL.length)];
+            var kol:int = 1 + int(rnd() * 3) + int(stage / 2);
+            if (kol > 6) kol = 6;
+            
+            if (room.options.length() == 0)
+            {
+               room.appendChild(<options/>);
+            }
+            room.options.@spawn = uid;
+            room.options.@entip = String(entip);
+            room.options.@kolspawn = String(kol);
             n++;
          }
          return n;

@@ -643,17 +643,19 @@ package
             }
             var fresh:XML = base.copy();
             var n:int = cook.cookPool(fresh, 1);
+            // 深度循环：每层敌人表重掷（landStage 驱动分层）
+            var st:int = 0;
+            try { st = int(act["landStage"]); } catch (e:*) {}
+            var en:int = cook.rollEnemies(fresh, st);
             act["allroom"] = fresh;                 // Land.prepareRooms 读此
             act["land"] = null;                     // 强制下次进入重建 Land
             // 深度循环：层数注入难度（LandAct.dif 每层 +DIF_PER_STAGE，
             // Land 构造时 landDifLevel 抬高 → setLocDif 全线难度提升）
-            var st:int = 0;
-            try { st = int(act["landStage"]); } catch (e:*) {}
             var newDif:Number = BASE_DIF_RR + st * DIF_PER_STAGE;
             act["dif"] = newDif;
             diag.log("refreshLandPool: " + landId + " 池已重 cook（+" + n + " 副本，变异变更格=" +
-                     cook.lastChangedTotal + "），并置 land=null 强制重建；dif=" + newDif +
-                     "（层 " + st + "）");
+                     cook.lastChangedTotal + "，敌表重掷 " + en + " 房），并置 land=null 强制重建；dif=" +
+                     newDif + "（层 " + st + "）");
          }
          catch (e:*)
          {
@@ -907,6 +909,7 @@ package
             }
             origPools[f2] = pool.copy();   // 原始池快照（进入级刷新基座）
             var n2:int = cook.cookPool(pool, 1);
+            cook.rollEnemies(pool, 0);   // 会话级兜底：层 0 敌人表
             cookedTotal += n2;
             diag.log("P0 cook: " + f2 + " +" + n2 + " 个变异副本（池房间数=" + pool.room.length() + "）");
          }
