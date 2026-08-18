@@ -38,8 +38,15 @@ package rr
          ["zombie7","zombie8","raider5","raider6","merc4","zebra3","encl2","alicorn1","bloat6","bigrobot"],
          ["zombie9","raider7","raider8","raider9","merc5","encl3","encl4","alicorn2","alicorn3","phoenix","bloat9","bloat10"]
       ];
-      // 隐藏敌人类型（entip：0=zombie 1/3=alarm 2=robocell 6=lov）——alarm/robocell 偏机制，少用
-      private static const ENTIP_POOL:Array = [0, 0, 0, 1, 6];
+      // 生态 entip 分层（randomUnit 生态钥匙；不含 9/11=英克雷）
+      // 0=尸鬼 1/else=掠夺者 3=奴隶主 4=雇佣兵 5=天角兽 6=斑马 7=游骑兵 8=尸鬼+巫妖 10=地狱犬
+      public static const ENTIP_BY_TIER:Array = [
+         [0, 0, 0, 1],                    // 层0：尸鬼+少量掠夺者
+         [0, 0, 1, 3, 4, 8],              // 层1：+奴隶主/雇佣兵/巫妖
+         [0, 1, 3, 4, 7, 8],              // 层2：+游骑兵
+         [1, 3, 4, 5, 6, 7, 8, 10],       // 层3：+天角兽/斑马/地狱犬
+         [1, 3, 4, 5, 6, 7, 8, 10, 10]    // 层4+：凶兽密集
+      ];
       
       // 变异强度参数
       private static const TILE_MUT_RATE:Number = 0.02;  // ~2% 格尝试
@@ -252,15 +259,15 @@ package rr
       }
       
       /**
-       * 敌人多样化：按层重掷池房间的敌人表。
-       *   - options.spawn（主敌 uid，enemySpawn→createUnit(tipSpawn)）
-       *   - options.entip（隐藏敌类型：0=zombie 1/3=alarm 2=robocell 6=lov）
-       *   - options.kolspawn（敌人数）
-       * 层 tier = min(stage/2, 4)，20% 概率上探一档；beg0 出生房固定最低档。
+       * 敌人多样化：按层重掷池房间的生态表（randomUnit 生态钥匙）。
+       *   - options.entip（生态类型：0=尸鬼 1=掠夺者 3/4=奴隶主/雇佣兵
+       *     5=天角兽 6=斑马 7=游骑兵 8=巫妖 10=地狱犬；**不含英克雷 9/11**）
+       *   - options.kolspawn（敌人数，随层增长）
+       * 保留原 spawn（部分房间有特殊主敌，不冲突）。
        */
       public function rollEnemies(pool:XML, stage:int):int
       {
-         var tier:int = int(stage / 2);
+         var tier:int = int(stage / 1.5);   // 每 ~1.5 层升一档
          if (tier > 4) tier = 4;
          var n:int = 0;
          for each (var room:XML in pool.room)
@@ -279,9 +286,8 @@ package rr
             {
                t++;     // 20% 上探一档（渐进威胁）
             }
-            var list:Array = ENEMY_TIERS[t];
-            var uid:String = list[int(rnd() * list.length)];
-            var entip:int = ENTIP_POOL[int(rnd() * ENTIP_POOL.length)];
+            var list:Array = ENTIP_BY_TIER[t];
+            var entip:int = list[int(rnd() * list.length)];
             var kol:int = 1 + int(rnd() * 3) + int(stage / 2);
             if (kol > 6) kol = 6;
             
@@ -289,7 +295,6 @@ package rr
             {
                room.appendChild(<options/>);
             }
-            room.options.@spawn = uid;
             room.options.@entip = String(entip);
             room.options.@kolspawn = String(kol);
             n++;
