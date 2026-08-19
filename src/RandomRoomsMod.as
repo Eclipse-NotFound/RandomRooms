@@ -101,7 +101,7 @@ package
       /** 合成房展示馆（可视化测试通道） */
       public static const LAND_ID_SHOW:String = "rr_showroom";
       public static const POOL_FILE_SHOW:String = "rooms_showroom";
-      private static const SHOW_SYNTH_COUNT:int = 8;
+      private static const SHOW_SYNTH_COUNT:int = 0;   // 二分诊断：0=只 beg0
       private static const SHOW_MX:int = 4;
       private static const SHOW_MY:int = 3;
       
