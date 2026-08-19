@@ -19,6 +19,13 @@ package rr
    {
       public static const GRID_W:int = 48;
       public static const GRID_H:int = 24;
+      
+      // 合法字符集（与 AllData.d.mat 对照）：
+      // 首字符 = fForms 键（拉丁 A-T，均实体）+ "_"（空地）
+      public static const FCHARS:String = "ABCDEFGHIJKLMNOPQRST_";
+      // 后缀 = oForms 键：拉丁 A-Z + 俄文（shelf/rear）+ "-" + 硬编码 "*,;:"
+      public static const OCHARS:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+         "АБВГДЕЖЗИЙКЛМОПСТ-ДЕКНР" + "*,;:";
       private static const BLOCK_W:int = 6;
       private static const BLOCK_H:int = 4;
       private static const WALL:String = "ABCDEFGHIJKLMNOPQRST";
@@ -45,6 +52,49 @@ package rr
          // 与作者房对齐：显式补空 <options>（消除"无 options 元素"的解析差异）
          room.appendChild(<options/>);
          return room;
+      }
+      
+      /**
+       * 合成房预检（进入池前过滤）：
+       *   1. 行数 = GRID_H、每行列数 = GRID_W；
+       *   2. 每格首字符 ∈ FCHARS、后缀 ∈ OCHARS（与 Tile.dec 解析一致）；
+       *   3. 存在 <options>。
+       * 不合格返回 false（由调用方丢弃，避免 buildLoc #1009）。
+       */
+      public static function validateRoom(room:XML):Boolean
+      {
+         try
+         {
+            var rows:XMLList = room.a;
+            if (rows.length() != GRID_H) return false;
+            var j:int = 0;
+            while (j < GRID_H)
+            {
+               var cols:Array = String(rows[j]).split(".");
+               if (cols.length != GRID_W) return false;
+               var i:int = 0;
+               while (i < GRID_W)
+               {
+                  var code:String = String(cols[i]);
+                  if (code.length == 0) return false;
+                  if (FCHARS.indexOf(code.charAt(0)) < 0) return false;
+                  var k:int = 1;
+                  while (k < code.length)
+                  {
+                     if (OCHARS.indexOf(code.charAt(k)) < 0) return false;
+                     k++;
+                  }
+                  i++;
+               }
+               j++;
+            }
+            return room.options.length() > 0;
+         }
+         catch (e:*)
+         {
+            return false;
+         }
+         return false;   // 兜底（满足编译器返回分析）
       }
       
       /** 核心生成：返回字符网格 */

@@ -809,9 +809,26 @@ package
             {
                // 展示馆：每次进入重新合成（beg0 模板 + 全新合成房），纯净无敌人
                var showFresh:XML = base.copy();
+               var kept:int = 0;
+               var dropped:int = 0;
                for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
                {
-                  showFresh.appendChild(synth.generate(100 + si));
+                  var sroom:XML = synth.generate(100 + si);
+                  if (RRSynth.validateRoom(sroom))
+                  {
+                     showFresh.appendChild(sroom);
+                     kept++;
+                  }
+                  else
+                  {
+                     dropped++;
+                     diag.log("合成房预检丢弃 syn_" + (100 + si) + "（首行样本: " +
+                              String(sroom.a[0]).substr(0, 60) + "）");
+                  }
+               }
+               if (dropped > 0)
+               {
+                  diag.log("展示馆: 合成房预检 保留=" + kept + " 丢弃=" + dropped);
                }
                cook.cookPool(showFresh, 1);   // 变异副本（展示更多变化）
                // 纯净：删除 en 类 obj + 禁敌（展示结构为主）
@@ -842,8 +859,8 @@ package
                }
                act["allroom"] = showFresh;
                act["land"] = null;
-               diag.log("refreshLandPool: " + landId + " 展示馆已重合成（+" + SHOW_SYNTH_COUNT +
-                        " 合成房 + 变异副本，无敌人）");
+               diag.log("refreshLandPool: " + landId + " 展示馆已重合成（合成房 " + kept +
+                        "，变异副本，无敌人）");
                return;
             }
             var fresh:XML = base.copy();
