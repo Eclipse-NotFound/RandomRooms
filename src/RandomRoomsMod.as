@@ -496,11 +496,82 @@ package
       
       // ---------- 合成房测试通道 ----------
       
+      /** LocCls 缓存（构造预检用） */
+      private static function getLocCls():*
+      {
+         try { return getDefinitionByName("fe.loc.Location"); } catch (e:*) {}
+         return null;
+      }
+      
       /**
-       * F7：当前 random_rooms 层内直传一个合成房。
-       * 扫描 land.locs 找 room.id 以 "syn_" 开头的房间，随机选一个
-       * gotoXY 传送（gotoXY 自带范围钳制，安全）。
+       * 合成房构造预检：new fe.loc.Location 复现 buildLoc；返回是否可构造。
+       * 崩溃时可选触发格定位（逐格替换为 "_" 重试，找到首个触发格）。
        */
+      private static function precheckSynth(world:*, sroom:XML, locate:Boolean):Boolean
+      {
+         var LocCls:* = getLocCls();
+         var curLandNow:* = null;
+         try { curLandNow = world["land"]; } catch (e:*) {}
+         if (LocCls == null || curLandNow == null)
+         {
+            diag.log("precheck: LocCls/land 不可用，跳过构造预检");
+            return true;
+         }
+         try
+         {
+            new LocCls(curLandNow, sroom, false, {});
+            return true;
+         }
+         catch (e:*)
+         {
+            if (locate)
+            {
+               var found:String = probeTriggerCell(curLandNow, LocCls, sroom);
+               diag.log("合成房构造预检丢弃（触发格定位 " + found + "），异常: " + e);
+            }
+            else
+            {
+               diag.log("合成房构造预检丢弃（未定位），异常: " + e);
+            }
+            return false;
+         }
+      }
+      
+      /** 触发格定位：逐格替换为 "_" 重试构造，返回首个"替换后不崩"的格与代码 */
+      private static function probeTriggerCell(land:*, LocCls:*, sroom:XML):String
+      {
+         var rows:XMLList = sroom.a;
+         var h:int = rows.length();
+         var grid:Array = [];
+         var w:int = 0;
+         for (var j:int = 0; j < h; j++)
+         {
+            grid[j] = String(rows[j]).split(".");
+            if (w == 0) w = grid[j].length;
+         }
+         for (var jj:int = 0; jj < h; jj++)
+         {
+            for (var ii:int = 0; ii < w; ii++)
+            {
+               var orig:String = String(grid[jj][ii]);
+               if (orig == "_") continue;
+               var testRoom:XML = sroom.copy();
+               var rows2:XMLList = testRoom.a;
+               var rowArr:Array = String(rows2[jj]).split(".");
+               rowArr[ii] = "_";
+               rows2[jj] = <a>{rowArr.join(".")}</a>;
+               try
+               {
+                  new LocCls(land, testRoom, false, {});
+                  return "(" + jj + "," + ii + ") 原始码=" + orig;
+               }
+               catch (e2:*)
+               {
+               }
+            }
+         }
+         return "扫描未定位（全格替换后仍崩）";
+      }
       private static function jumpToSynth():void
       {
          var world:* = null;
@@ -811,11 +882,6 @@ package
                var showFresh:XML = base.copy();
                var kept:int = 0;
                var dropped:int = 0;
-               // Location 构造预检：用当前世界 Land 复现 buildLoc，崩溃房丢弃
-               var LocCls:* = null;
-               try { LocCls = getDefinitionByName("fe.loc.Location"); } catch (e:*) {}
-               var curLandNow:* = null;
-               try { curLandNow = world["land"]; } catch (e:*) {}
                for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
                {
                   var sroom:XML = synth.generate(100 + si);
@@ -826,18 +892,10 @@ package
                               String(sroom.a[0]).substr(0, 50) + "）");
                      continue;
                   }
-                  if (LocCls != null && curLandNow != null)
+                  if (!precheckSynth(world, sroom, true))
                   {
-                     try
-                     {
-                        new LocCls(curLandNow, sroom, false, {});
-                     }
-                     catch (e:*)
-                     {
-                        dropped++;
-                        diag.log("合成房构造预检丢弃 syn_" + (100 + si) + " : " + e);
-                        continue;
-                     }
+                     dropped++;
+                     continue;
                   }
                   showFresh.appendChild(sroom);
                   kept++;
@@ -845,6 +903,29 @@ package
                if (dropped > 0)
                {
                   diag.log("展示馆: 合成房预检 保留=" + kept + " 丢弃=" + dropped);
+               }
+               // 降级：全部合成房被过滤时补作者 rnd 房，避免池无 rnd 房（#1010）
+               if (kept == 0)
+               {
+                  var poolRooms:* = null;
+                  try { poolRooms = world["rooms"]["rooms"]; } catch (e:*) {}
+                  if (poolRooms != null)
+                  {
+                     var fbPool:XML = poolRooms["rooms_stable"] as XML;
+                     if (fbPool != null)
+                     {
+                        for each (var fbr:XML in fbPool.room)
+                        {
+                           if (cook.isRndRoom(fbr) && RRSynth.validateRoom(fbr))
+                           {
+                              showFresh.appendChild(fbr.copy());
+                              kept++;
+                              diag.log("展示馆降级: 补作者 rnd 房 " + String(fbr.@name));
+                              break;
+                           }
+                        }
+                     }
+                  }
                }
                cook.cookPool(showFresh, 1);   // 变异副本（展示更多变化）
                // 纯净：删除 en 类 obj + 禁敌（展示结构为主）
@@ -880,6 +961,21 @@ package
                return;
             }
             var fresh:XML = base.copy();
+            // P2：进入级注入合成房（预检过滤：字符 + Location 构造复现）
+            var keptRR:int = 0;
+            for (var sri:int = 0; sri < SYNTH_COUNT; sri++)
+            {
+               var sr:XML = synth.generate(sri);
+               if (RRSynth.validateRoom(sr) && precheckSynth(world, sr, true))
+               {
+                  fresh.appendChild(sr);
+                  keptRR++;
+               }
+            }
+            if (keptRR > 0)
+            {
+               diag.log("refreshLandPool: " + landId + " 注入合成房 " + keptRR + " 个");
+            }
             var n:int = cook.cookPool(fresh, 1);
             // 深度循环：每层敌人表重掷（landStage 驱动分层）
             var st:int = 0;
@@ -1129,13 +1225,9 @@ package
          {
             diag.log("inject: WARN 出口房源缺失（rooms_stable 无普通房）");
          }
-         // P2：全新构造的合成房混入池（普通 rnd 房，参与后续缺口/变异/生态）
-         for (var sn:int = 0; sn < SYNTH_COUNT; sn++)
-         {
-            var sroom:XML = synth.generate(sn);
-            mix.appendChild(sroom);
-         }
-         diag.log("inject: 合成房 " + SYNTH_COUNT + " 个已混入池（syn_0..syn_" + (SYNTH_COUNT - 1) + "）");
+         // P2 合成房：改为进入级（refreshLandPool）生成+预检注入
+         // （finalize 在主菜单无 Land 无法构造预检）。混合池仅作者房。
+         diag.log("inject: 合成房将在进入级刷新时生成并预检注入（本次不预混入池）");
          // 门 bug 修复：统一混合池边界缺口（在快照/cook 之前）
          var normalized:int = cook.normalizePool(mix);
          diag.log("inject: 混合池边界缺口已统一（" + normalized + " 房）");
