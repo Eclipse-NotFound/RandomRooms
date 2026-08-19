@@ -101,7 +101,7 @@ package
       /** 合成房展示馆（可视化测试通道） */
       public static const LAND_ID_SHOW:String = "rr_showroom";
       public static const POOL_FILE_SHOW:String = "rooms_showroom";
-      private static const SHOW_SYNTH_COUNT:int = 0;   // 二分诊断：0=只 beg0
+      private static const SHOW_SYNTH_COUNT:int = 8;
       private static const SHOW_MX:int = 4;
       private static const SHOW_MY:int = 3;
       
@@ -811,20 +811,36 @@ package
                var showFresh:XML = base.copy();
                var kept:int = 0;
                var dropped:int = 0;
+               // Location 构造预检：用当前世界 Land 复现 buildLoc，崩溃房丢弃
+               var LocCls:* = null;
+               try { LocCls = getDefinitionByName("fe.loc.Location"); } catch (e:*) {}
+               var curLandNow:* = null;
+               try { curLandNow = world["land"]; } catch (e:*) {}
                for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
                {
                   var sroom:XML = synth.generate(100 + si);
-                  if (RRSynth.validateRoom(sroom))
-                  {
-                     showFresh.appendChild(sroom);
-                     kept++;
-                  }
-                  else
+                  if (!RRSynth.validateRoom(sroom))
                   {
                      dropped++;
-                     diag.log("合成房预检丢弃 syn_" + (100 + si) + "（首行样本: " +
-                              String(sroom.a[0]).substr(0, 60) + "）");
+                     diag.log("合成房预检丢弃 syn_" + (100 + si) + "（字符非法，首行: " +
+                              String(sroom.a[0]).substr(0, 50) + "）");
+                     continue;
                   }
+                  if (LocCls != null && curLandNow != null)
+                  {
+                     try
+                     {
+                        new LocCls(curLandNow, sroom, false, {});
+                     }
+                     catch (e:*)
+                     {
+                        dropped++;
+                        diag.log("合成房构造预检丢弃 syn_" + (100 + si) + " : " + e);
+                        continue;
+                     }
+                  }
+                  showFresh.appendChild(sroom);
+                  kept++;
                }
                if (dropped > 0)
                {
