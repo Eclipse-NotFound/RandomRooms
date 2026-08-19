@@ -24,7 +24,8 @@ date-updated: 2026-08-17
 ## 已确认（代码层）
 
 ### 1. 房间模板 = `<room>` XML
-- 结构：`<room name=... x/y/z>` + 每行 `<a>` 为 48×24 瓦片字符网格 +
+- 结构：`<room name=... x/y/z>` + 每行 `<a>` 为 **25 行 × 48 列**瓦片字符网格
+  (World.cellsX=48/cellsY=25；24 行会致 buildLoc 越界 #1009)
   `<options>` + `<doors>`（22 值字符串）+ `<obj>`/`<backobj>` 若干。
 - 瓦片解码 `Tile.dec(code, mirror)`：
   - 首字符（charCode>64 且非 `_`）→ 地板形态 `Form.fForms[char]`

@@ -18,7 +18,7 @@ package rr
    public class RRSynth
    {
       public static const GRID_W:int = 48;
-      public static const GRID_H:int = 24;
+      public static const GRID_H:int = 25;   // 作者房均为 25 行（World.cellsY）；24 行会致 buildLoc 越界 #1009
       
       // 合法字符集（与 AllData.d.mat 对照）：
       // 首字符 = fForms 键（拉丁 A-T，均实体）+ "_"（空地）

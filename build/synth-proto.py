@@ -21,7 +21,7 @@ import sys
 from collections import Counter
 
 GRID_W = 48
-GRID_H = 24
+GRID_H = 25
 BLOCK_W = 6
 BLOCK_H = 4
 WALLCHARS = set("ABCDEFGHIJKLMNOPQRST")
