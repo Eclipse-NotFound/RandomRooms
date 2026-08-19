@@ -42,6 +42,8 @@ package rr
          {
             room.appendChild(<a>{grid[j].join(".")}</a>);
          }
+         // 与作者房对齐：显式补空 <options>（消除"无 options 元素"的解析差异）
+         room.appendChild(<options/>);
          return room;
       }
       
