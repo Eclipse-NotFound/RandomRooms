@@ -494,6 +494,12 @@ package
          }
       }
       
+      /** 随机生物群系主题（种子确定性） */
+      private static function randBiome():String
+      {
+         return RRSynth.BIOMES[int(synth.rnd() * RRSynth.BIOMES.length)];
+      }
+      
       // ---------- 合成房测试通道 ----------
       
       /** LocCls 缓存（构造预检用） */
@@ -885,7 +891,7 @@ package
                var dropped:int = 0;
                for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
                {
-                  var sroom:XML = synth.generate(100 + si);
+                  var sroom:XML = synth.generate(100 + si, randBiome());
                   if (!RRSynth.validateRoom(sroom))
                   {
                      dropped++;
@@ -966,7 +972,7 @@ package
             var keptRR:int = 0;
             for (var sri:int = 0; sri < SYNTH_COUNT; sri++)
             {
-               var sr:XML = synth.generate(sri);
+               var sr:XML = synth.generate(sri, randBiome());
                if (RRSynth.validateRoom(sr) && precheckSynth(world, sr, true))
                {
                   fresh.appendChild(sr);
@@ -1250,7 +1256,7 @@ package
          }
          for (var sn2:int = 0; sn2 < SHOW_SYNTH_COUNT; sn2++)
          {
-            showPool.appendChild(synth.generate(sn2));
+            showPool.appendChild(synth.generate(sn2, randBiome()));
          }
          rooms["rooms"][POOL_FILE_SHOW] = showPool;
          cook.normalizePool(showPool);
