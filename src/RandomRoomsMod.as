@@ -513,6 +513,40 @@ package
        * 合成房构造预检：new fe.loc.Location 复现 buildLoc；返回是否可构造。
        * 崩溃时可选触发格定位（逐格替换为 "_" 重试，找到首个触发格）。
        */
+      private static function dumpSynthGrid(sroom:XML):void
+      {
+         try
+         {
+            var rows:XMLList = sroom.a;
+            var wallCnt:int = 0;
+            var total:int = 0;
+            var sample:String = "";
+            for (var j:int = 0; j < rows.length(); j++)
+            {
+               var cells:Array = String(rows[j]).split(".");
+               for (var i:int = 0; i < cells.length; i++)
+               {
+                  total++;
+                  if (RRSynth.WALL_CHARS.indexOf(String(cells[i]).charAt(0)) >= 0)
+                  {
+                     wallCnt++;
+                  }
+                  if (j == 12 && i < 30)
+                  {
+                     sample += String(cells[i]) + " ";
+                  }
+               }
+            }
+            diag.log("合成房网格: " + String(sroom.@name) + " 行=" + rows.length() +
+                     " 墙占比=" + (total > 0 ? (wallCnt / total).toFixed(2) : "?") +
+                     " [行12样本] " + sample);
+         }
+         catch (e:*)
+         {
+            diag.log("dumpSynthGrid 异常: " + e);
+         }
+      }
+      
       private static function precheckSynth(world:*, sroom:XML, locate:Boolean):Boolean
       {
          var LocCls:* = getLocCls();
@@ -523,6 +557,7 @@ package
             diag.log("precheck: LocCls/land 不可用，跳过构造预检");
             return true;
          }
+         dumpSynthGrid(sroom);
          try
          {
             new LocCls(curLandNow, sroom, false, {});
