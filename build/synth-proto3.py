@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-RRSynth v4 —— 行谱结构生成（离线原型）。
+RRSynth v5 —— 房间-走廊骨架生成（离线原型）。
 
-核心思想：原版每个 biome 的**行墙谱**（逐行墙密度）就是它的结构指纹：
-  - mane: 墙只在 0/8/16/24 行（8 行周期，3 个开放分区）
-  - sewer/plant: 每 4 行一个峰（块行结构）
-  - stable: 4 行周期但基线高
-生成时逐行按谱采样墙量（×抖动），横向随机画实心墙带段（1-2 厚、6-22 长、
-两端留边道）→ 垂直结构由谱保证、水平全自由 → 有机重组、无拼贴。
+算法（回应实机反馈：碎片化水/框架地板、墙体拼贴、房间-通道不明显、要算法不要调参）：
+  1. 整图填墙（biome 材质，2x4 材质带 → 墙体区域统一不拼贴）
+  2. 房间（chambers）：3-8 个干净矩形，间距约束互不粘连，挖空
+  3. 走廊网络：每房间 2 宽 L 形连入网络（生成树）+ 6 缺口连入网络 → 房间-通道分明
+  4. 边界：0/24 行、0/47 列整墙 + 6 缺口（干净边框，游戏 ramka 渲染整齐）
+  5. 装饰排：仅安全地板纹理后缀（拉丁 A-Z 排除 K=Сетка 网格地板/框架地板；
+     排除 * 水、- 横梁、台阶、楼梯）→ 无碎片化水/框架
+  6. 水体：仅 sewer/plant 成片池（置于开放区）
+  7. 连通修复（小口袋填墙/大口袋 2 宽 L 连廊）
 
-其余构件（语料实测分布）:
-  竖带 0-2 (锚定列 8/24/40, 低频) / 边缘条 col1/46 (biome 概率)
-  水体成片池 (sewer/plant) / 装饰排 (密度 per biome) / Z 层栅格行 (低频)
-收尾: 6 缺口强制开放 + 连通修复 (小口袋填墙/大口袋 2 宽 L 连廊)
-
-不变式: 25x48 / 缺口 / BFS 连通 / 墙占比≈语料 / 样本 ASCII
+不变式: 25x48 / 缺口 / BFS 连通 / 墙占比 / 样本 ASCII
 用法: python build/synth-proto3.py [数量]
 """
 import random
@@ -26,6 +24,8 @@ W, H = 48, 25
 WALL = set("ABCDEFGHIJKLMNOPQRST")
 GY, GX1, GX2 = 12, 23, 24
 TYPES = ["corridor", "hall", "l", "split"]
+SPECIAL = set("*-,КАБВГЖЗИЙЛМОПСТНР")   # 装饰排排除：水/横梁/台阶/楼梯/网格
+SPECIAL.add("K")                          # K=Сетка 网格地板（框架地板）
 
 BIOME_WALL = {
     "stable": [("J", 43), ("A", 27), ("K", 20), ("G", 6), ("H", 4)],
@@ -33,19 +33,6 @@ BIOME_WALL = {
     "plant": [("C", 56), ("G", 13), ("D", 9), ("B", 9), ("A", 6), ("H", 5)],
     "mane": [("N", 55), ("A", 22), ("B", 16), ("D", 4), ("E", 2)],
 }
-
-# 行墙谱（语料实测，25 行）：P(该行格为墙)
-PROFILE = {
-    "stable": [0.73, 0.25, 0.20, 0.28, 0.33, 0.32, 0.24, 0.27, 0.54, 0.32, 0.22, 0.24, 0.44, 0.28, 0.30, 0.22, 0.45, 0.26, 0.20, 0.30, 0.43, 0.20, 0.16, 0.17, 0.74],
-    "sewer": [0.81, 0.34, 0.21, 0.39, 0.55, 0.30, 0.19, 0.27, 0.53, 0.35, 0.31, 0.29, 0.46, 0.35, 0.29, 0.27, 0.47, 0.35, 0.35, 0.33, 0.59, 0.39, 0.17, 0.20, 0.81],
-    "mane": [0.72, 0.06, 0.07, 0.08, 0.14, 0.07, 0.03, 0.04, 0.74, 0.18, 0.13, 0.09, 0.14, 0.08, 0.04, 0.10, 0.71, 0.07, 0.04, 0.04, 0.10, 0.03, 0.02, 0.04, 0.72],
-    "plant": [0.49, 0.18, 0.14, 0.14, 0.47, 0.15, 0.12, 0.12, 0.45, 0.16, 0.15, 0.22, 0.52, 0.17, 0.12, 0.10, 0.53, 0.20, 0.16, 0.27, 0.49, 0.20, 0.12, 0.13, 0.58],
-}
-
-# 装饰密度区间 / 水池数 / 边缘墙率
-DECOR_R = {"stable": (0.45, 0.60), "sewer": (0.30, 0.40), "plant": (0.28, 0.38), "mane": (0.36, 0.46)}
-POOLS = {"stable": (0, 0), "sewer": (1, 3), "plant": (1, 2), "mane": (0, 0)}
-EDGE_P = {"stable": 0.30, "sewer": 0.40, "plant": 0.25, "mane": 0.18}
 
 def load_biome_decor(path):
     dec = {}
@@ -59,6 +46,9 @@ def load_biome_decor(path):
                     ch, c = p2.split(":", 1); dec[cur].append((ch, int(c)))
     return dec
 
+def safe_decor(tbl):
+    return [(ch, c) for ch, c in tbl if ch not in SPECIAL]
+
 def pick_weighted(rng, table):
     tot = sum(w for _, w in table)
     r = rng.randrange(tot)
@@ -68,126 +58,78 @@ def pick_weighted(rng, table):
         if r < acc:
             return ch
 
-def _draw_band(grid, rng, wall_tbl, y, target):
-    """实心墙带：1-2 段（段间 1-3 格门洞），限长防超调，端留边道"""
-    have = 0
-    guard = 0
-    while have < target and guard < 20:
-        guard += 1
-        runlen = rng.randint(8, 22)
-        runlen = min(runlen, target - have + 6)
-        x0 = rng.randint(2, max(2, W - runlen - 3))
-        for k in range(runlen):
-            xx = x0 + k
-            if xx < W - 2 and grid[y][xx] == "_":
-                grid[y][xx] = pick_weighted(rng, wall_tbl)
-                have += 1
-        if guard < 20 and rng.random() < 0.5:
-            have += rng.randint(1, 3)   # 段间门洞（不画墙，计入目标）
-    # 过冲回剪（保持段实心：只剪段尾）
-    while have > target + 4:
-        # 找最右墙格删掉
-        for xx in range(W - 3, 2, -1):
-            if grid[y][xx][0] in WALL:
-                grid[y][xx] = "_"
-                have -= 1
-                break
-        else:
-            break
-
-def _draw_bits(grid, rng, wall_tbl, y, target):
-    """开放行小段：1-6 格短段/单格"""
-    have = 0
-    guard = 0
-    while have < target and guard < 30:
-        guard += 1
-        runlen = rng.randint(1, 6)
-        runlen = min(runlen, target - have)
-        if runlen <= 0:
-            break
-        x0 = rng.randint(2, max(2, W - runlen - 3))
-        for k in range(runlen):
-            xx = x0 + k
-            if xx < W - 2 and grid[y][xx] == "_":
-                grid[y][xx] = pick_weighted(rng, wall_tbl)
-                have += 1
-
 def gen_room(rng, rtype, biome="stable", decor=None):
     wall_tbl = BIOME_WALL.get(biome, BIOME_WALL["stable"])
-    prof = PROFILE[biome]
-    grid = [["_" for _ in range(W)] for _ in range(H)]
+    grid = [[pick_weighted(rng, wall_tbl) for _ in range(W)] for _ in range(H)]
+    pat = set()
 
-    # 1) 行是二值的：锚点行(4/8/12/16/20)按谱概率成为墙带；0/24 边界带；
-    #    非锚点行只放少量小段（分区内保持开放）
-    tfac = {"corridor": 1.0, "hall": 0.9, "l": 1.0, "split": 1.15}[rtype]
-    anchors = [4, 8, 12, 16, 20]
-    for y in range(H):
-        if y in anchors or y == 0 or y == 24:
-            # 墙带行
-            p = prof[y] * 1.1 if y in anchors else prof[y] * 0.9
-            if y == 0 or y == 24:
-                p = 1.0
-            if rng.random() > min(1.0, p * tfac):
-                continue
-            target = int(48 * (0.55 if (y == 0 or y == 24) else (0.30 + rng.random() * 0.15)) * tfac)
-            _draw_band(grid, rng, wall_tbl, y, target)
-        else:
-            # 开放行：中量短段（原版分区内块残墙，谱值×0.5）
-            target = int(prof[y] * 48 * 0.65 * tfac)
-            _draw_bits(grid, rng, wall_tbl, y, target)
-    # 1b) 竖向房间墙柱 2-4 条（锚定列 8/24/40，1-2 宽，高 6-18，端留通道）
-    cols = [8, 24, 40]
-    for _ in range(rng.randint(2, 4)):
-        x = cols[rng.randrange(3)] + rng.randint(-2, 2)
-        x = max(2, min(W - 3, x))
-        hseg = rng.randint(6, 18)
-        y0 = rng.randint(2, H - hseg - 2)
-        tw = 1 if rng.random() < 0.8 else 2
-        for yy in range(y0 + 1, y0 + hseg - 1):
-            for xx in range(x, min(x + tw, W - 1)):
-                if grid[yy][xx] == "_":
-                    grid[yy][xx] = pick_weighted(rng, wall_tbl)
-
-    # 2) 竖带 0-2（锚定列 8/24/40，低频）
-    for _ in range(2):
-        if rng.random() < 0.6:
+    # 1) 房间：干净矩形，间距约束（外扩1格不得撞已开放），挖空
+    n_lo, n_hi = {"corridor": (6, 8), "hall": (5, 6), "l": (6, 8), "split": (8, 10)}[rtype]
+    cw_lo, cw_hi = (9, 12) if rtype == "hall" else (8, 12)
+    ch_lo, ch_hi = (6, 9) if rtype == "hall" else (6, 9)
+    n = n_lo + rng.randint(0, n_hi - n_lo)
+    rooms = []
+    placed = 0
+    tries = 0
+    bi = 0
+    while placed < n and tries < 160:
+        tries += 1
+        cw = rng.randint(cw_lo, cw_hi)
+        ch = rng.randint(ch_lo, ch_hi)
+        cwx = 2 + rng.randint(0, W - cw - 4)
+        band = [(2, 7), (8, 15), (16, 21)][bi % 3]
+        bi += 1
+        cwy = min(band[0] + rng.randint(0, max(0, band[1] - band[0])), H - ch - 2)
+        ok = True
+        for y in range(cwy - 1, cwy + ch + 1):
+            for x in range(cwx - 1, cwx + cw + 1):
+                if 0 <= y < H and 0 <= x < W and (y, x) in pat:
+                    ok = False
+                    break
+            if not ok:
+                break
+        if not ok:
             continue
-        x = [8, 24, 40][rng.randrange(3)] + rng.randint(-2, 2)
-        x = max(2, min(W - 3, x))
-        hseg = rng.randint(6, 18)
-        y0 = 2 + rng.randint(0, H - hseg - 2)
-        tw = 1 if rng.random() < 0.8 else 2
-        for yy in range(y0 + 1, y0 + hseg - 1):
-            for xx in range(x, min(x + tw, W - 1)):
-                if grid[yy][xx] == "_":
-                    grid[yy][xx] = pick_weighted(rng, wall_tbl)
+        for y in range(cwy, cwy + ch):
+            for x in range(cwx, cwx + cw):
+                if grid[y][x] in WALL:
+                    grid[y][x] = "_"
+                pat.add((y, x))
+        rooms.append((cwx + cw // 2, cwy + ch // 2))
+        placed += 1
 
-    # 3) 边缘条 col1/46（带缺口）
-    for side in (1, W - 2):
-        for y in range(1, H - 1):
-            if rng.random() < EDGE_P[biome] and abs(y - GY) > 2 and grid[y][side] == "_":
-                grid[y][side] = pick_weighted(rng, wall_tbl)
+    # 2) 走廊网络：每房间 2 宽 L 形连入网络（生成树）；随后 6 缺口连入
+    order = rooms[:]
+    rng.shuffle(order)
+    for (cx0, cy0) in order:
+        link_l(grid, pat, cx0, cy0, rng)
+    for (gx, gy) in [(GY, 0), (GY, W - 1), (0, GX1), (0, GX2), (H - 1, GX1), (H - 1, GX2)]:
+        if (gy, gx) not in pat:
+            link_l(grid, pat, gx, gy, rng)
 
-    # 4) 水体：成片池
-    for _ in range(rng.randint(*POOLS[biome])):
-        pw = rng.randint(4, 12)
-        ph = rng.randint(1, 4)
-        px = 2 + rng.randint(0, W - pw - 4)
-        py = 2 + rng.randint(0, H - ph - 3)
-        for yy in range(py, py + ph):
-            for xx in range(px, px + pw):
-                if grid[yy][xx] == "_":
-                    grid[yy][xx] = "_*"
+    # 3) 材质带（2x4 大区主字符 90%）→ 墙体区域统一不拼贴
+    material_bands(grid, rng, wall_tbl)
 
-    # 5) 装饰排（成排 2-8 格，密度 per biome）
-    decor_tbl = decor.get(biome) if decor else None
+    # 4) 边界：0/24 行、0/47 列整墙 + 6 缺口
+    for x in range(W):
+        grid[0][x] = pick_weighted(rng, wall_tbl)
+        grid[H - 1][x] = pick_weighted(rng, wall_tbl)
+    for y in range(H):
+        grid[y][0] = pick_weighted(rng, wall_tbl)
+        grid[y][W - 1] = pick_weighted(rng, wall_tbl)
+    grid[GY][0] = "_"; grid[GY][W - 1] = "_"
+    grid[0][GX1] = "_"; grid[0][GX2] = "_"
+    grid[H - 1][GX1] = "_"; grid[H - 1][GX2] = "_"
+
+    # 5) 装饰排：仅安全地板纹理后缀
+    decor_tbl = safe_decor(decor.get(biome)) if decor and decor.get(biome) else None
     if decor_tbl:
-        dlo, dhi = DECOR_R[biome]
+        den = {"stable": 0.40, "sewer": 0.30, "plant": 0.28, "mane": 0.34}[biome]
         for y in range(1, H - 1):
             x = 1
             while x < W - 1:
-                if grid[y][x] == "_" and rng.random() < dlo + rng.random() * (dhi - dlo):
-                    L = rng.randint(2, 8)
+                if grid[y][x] == "_" and rng.random() < den:
+                    L = rng.randint(2, 6)
                     for k in range(L):
                         xx = x + k
                         if xx < W - 1 and grid[y][xx] == "_":
@@ -196,23 +138,58 @@ def gen_room(rng, rtype, biome="stable", decor=None):
                 else:
                     x += 1
 
-    # 6) Z 层栅格行（低频）
-    for _ in range(2):
-        if rng.random() < 0.5:
-            continue
-        y = rng.randint(2, H - 3)
-        x = rng.randint(1, W - 12)
-        L = rng.randint(4, 12)
-        for k in range(L):
-            if grid[y][x + k] == "_":
-                grid[y][x + k] = "_;"
+    # 6) 水体：成片池（仅 sewer/plant，置于开放区）
+    pools = {"sewer": (1, 3), "plant": (1, 2)}.get(biome, (0, 0))
+    for _ in range(rng.randint(*pools)):
+        pw = rng.randint(5, 11)
+        ph = rng.randint(1, 3)
+        px = 2 + rng.randint(0, W - pw - 4)
+        py = 2 + rng.randint(0, H - ph - 3)
+        for yy in range(py, py + ph):
+            for xx in range(px, px + pw):
+                if grid[yy][xx] == "_":
+                    grid[yy][xx] = "_*"
 
-    # 7) 收尾：6 缺口 + 连通修复
-    grid[GY][0] = "_"; grid[GY][W - 1] = "_"
-    grid[0][GX1] = "_"; grid[0][GX2] = "_"
-    grid[H - 1][GX1] = "_"; grid[H - 1][GX2] = "_"
+    # 7) 连通修复
     repair(grid)
     return grid
+
+def link_l(grid, pat, tx, ty, rng):
+    """2 宽 L 形走廊：最近开放格 -> (tx,ty)（目标=房间中心/缺口）"""
+    if not pat:
+        return
+    best = min(pat, key=lambda p: (p[0] - ty) ** 2 + (p[1] - tx) ** 2)
+    y, x = best
+    st = 0
+    while (y, x) != (ty, tx) and st < 120:
+        st += 1
+        for k in range(2):
+            if 0 <= x + k < W and grid[y][x + k] in WALL:
+                grid[y][x + k] = "_"
+            pat.add((y, x + k))
+        dx = tx - x
+        dy = ty - y
+        if abs(dx) >= abs(dy):
+            x += 1 if dx > 0 else -1
+        else:
+            y += 1 if dy > 0 else -1
+        y = max(1, min(H - 2, y))
+        x = max(1, min(W - 2, x))
+    for k in range(2):
+        if 0 <= x + k < W and grid[y][x + k] in WALL:
+            grid[y][x + k] = "_"
+        pat.add((y, x + k))
+
+def material_bands(grid, rng, police):
+    zone = {}
+    for zy in range(2):
+        for zx in range(4):
+            zone[(zy, zx)] = police[0][0] if rng.random() < 0.6 else pick_weighted(rng, police)
+    for y in range(H):
+        for x in range(W):
+            if grid[y][x] in WALL:
+                main = zone[(min(y // 13, 1), min(x // 12, 3))]
+                grid[y][x] = main if rng.random() < 0.9 else pick_weighted(rng, police)
 
 def repair(grid):
     seen = [[False] * W for _ in range(H)]
@@ -308,7 +285,7 @@ def validate(grid, rtype):
             if grid[y][x][0] not in WALL and (y, x) not in seen:
                 errs.append(f"孤岛({y},{x})"); return errs
     wr = wall_ratio(grid)
-    if not (0.06 <= wr <= 0.60):
+    if not (0.30 <= wr <= 0.70):
         errs.append(f"墙占比 {wr:.2f}")
     return errs
 
@@ -328,12 +305,12 @@ def main():
             fails += 1
             if fails <= 6:
                 print("FAIL", rtype, biome, errs[:2])
-    print(f"=== RRSynth v4 验证: {n} 房 ===")
+    print(f"=== RRSynth v5 验证: {n} 房 ===")
     print("不变式失败:", fails)
     for t, rs in stats.items():
         print(f"  {t}: 墙占比 平均 {sum(rs)/len(rs):.2f}")
     print("✓ 全部通过" if fails == 0 else "✗ 有失败")
-    print("\n=== v4 视觉样本 ===")
+    print("\n=== v5 视觉样本 ===")
     for rtype, biome in [("corridor", "stable"), ("hall", "sewer"), ("l", "plant"), ("split", "mane")]:
         grid = gen_room(rng, rtype, biome, decor)
         print("=" * 62, rtype, biome, "墙%.2f" % wall_ratio(grid))

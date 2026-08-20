@@ -86,10 +86,10 @@ package rr
          var f:Array = null;
          if (rtype == "corridor" || rtype == "hall" || rtype == "l" || rtype == "split")
          {
-            // v4 行谱结构生成：逐行按语料墙谱采样墙量，横向随机实心带段；
-            // 竖带/边缘条/水池/装饰排/Z 栅格行全部程序化（无原版切片）
-            profileGen(grid, Math.min(bIdx, 3), rtype, wallTbl);
-            debugStages.push(["profile", wallCount(grid)]);
+            // v5 房间-走廊骨架生成：显式房间 + 2 宽走廊网络 + 干净边界 +
+            // 安全装饰（排除水/网格/横梁/台阶）+ 成片水池 + 连通修复
+            v5Skeleton(grid, Math.min(bIdx, 3), rtype, wallTbl, decor);
+            debugStages.push(["skeleton", wallCount(grid)]);
             finishStripRoom(grid);
             debugStages.push(["final", wallCount(grid)]);
             return grid;
@@ -146,105 +146,129 @@ package rr
          }
       }
       
-      /** 行墙谱（语料实测 25 行）：P(该行格为墙) —— 每 biome 的垂直结构指纹 */
-      private static const PROFILE_STABLE:Array = [0.73,0.25,0.20,0.28,0.33,0.32,0.24,0.27,0.54,0.32,0.22,0.24,0.44,0.28,0.30,0.22,0.45,0.26,0.20,0.30,0.43,0.20,0.16,0.17,0.74];
-      private static const PROFILE_SEWER:Array = [0.81,0.34,0.21,0.39,0.55,0.30,0.19,0.27,0.53,0.35,0.31,0.29,0.46,0.35,0.29,0.27,0.47,0.35,0.35,0.33,0.59,0.39,0.17,0.20,0.81];
-      private static const PROFILE_PLANT:Array = [0.49,0.18,0.14,0.14,0.47,0.15,0.12,0.12,0.45,0.16,0.15,0.22,0.52,0.17,0.12,0.10,0.53,0.20,0.16,0.27,0.49,0.20,0.12,0.13,0.58];
-      private static const PROFILE_MANE:Array = [0.72,0.06,0.07,0.08,0.14,0.07,0.03,0.04,0.74,0.18,0.13,0.09,0.14,0.08,0.04,0.10,0.71,0.07,0.04,0.04,0.10,0.03,0.02,0.04,0.72];
-
-      /** v4 行谱结构生成：行是二值的 —— 锚点行(4/8/12/16/20)按谱概率成为
-       * 实心墙带（覆盖率 0.30-0.45，段间门洞，端留边道）；非锚点行只放
-       * 少量短段（分区内保持开放）；另加竖向房间墙柱(2-4)围出房间。
-       * 学的是语料分布，画的是原语 —— 无任何原版切片（有机重组）。 */
-      private function profileGen(grid:Array, bIdx:int, rtype:String, wallTbl:Array):void
+      /** v5 房间-走廊骨架生成：
+       * 1) 整图填墙（biome 材质）→ 2) 干净矩形房间(间距约束) 挖空
+       * 3) 2 宽 L 形走廊网络：每房间连入生成树 + 6 缺口连入 → 房间-通道分明
+       * 4) 边界 0/24 行 0/47 列整墙 + 6 缺口（干净边框）
+       * 5) 材质带(2x4 区 90% 主字符) → 墙体区域统一不拼贴
+       * 6) 装饰排仅安全地板纹理（排除 *水/K网格/-横梁/台阶/楼梯）
+       * 7) 水池成片(sewer/plant)；连通修复由 finishStripRoom 完成 */
+      private function v5Skeleton(grid:Array, bIdx:int, rtype:String, wallTbl:Array, decor:Array):void
       {
-         var prof:Array = bIdx == 0 ? PROFILE_STABLE : (bIdx == 1 ? PROFILE_SEWER : (bIdx == 2 ? PROFILE_PLANT : PROFILE_MANE));
-         var tfac:Number = rtype == "hall" ? 0.9 : (rtype == "split" ? 1.15 : 1.0);
-         var y:int, x:int, k:int, xx:int;
-         // 1) 锚点行 = 墙带；0/24 = 边界带；其它行 = 少量短段
-         var anchors:Array = [4, 8, 12, 16, 20];
-         for (y = 0; y < GRID_H; y++)
+         var j:int, i:int, y:int, x:int, k:int;
+         // 1) 填墙
+         for (j = 0; j < GRID_H; j++)
          {
-            var isAnchor:Boolean = y == 0 || y == 24;
-            for (k = 0; k < anchors.length; k++) { if (y == anchors[k]) isAnchor = true; }
-            if (isAnchor)
+            for (i = 0; i < GRID_W; i++)
             {
-               var p:Number = (y == 0 || y == 24) ? 1.0 : Math.min(1.0, prof[y] * 1.1 * tfac);
-               if (rnd() > p) continue;
-               var target:int = int(GRID_W * ((y == 0 || y == 24) ? 0.55 : (0.30 + rnd() * 0.15)) * tfac);
-               drawBand(grid, wallTbl, y, target);
-            }
-            else
-            {
-               var t2:int = int(prof[y] * GRID_W * 0.65 * tfac);
-               drawBits(grid, wallTbl, y, t2);
+               grid[j][i] = wallChar(wallTbl);
             }
          }
-         // 2) 竖向房间墙柱 2-4 条（锚定列 8/24/40，1-2 宽，高 6-18，端留通道）
-         var cols:Array = [8, 24, 40];
-         var nv:int = 2 + int(rnd() * 3);
-         for (k = 0; k < nv; k++)
+         // 2) 房间
+         var nLo:int, nHi:int, cwLo:int, cwHi:int, chLo:int, chHi:int;
+         if (rtype == "hall") { nLo = 5; nHi = 6; cwLo = 9; cwHi = 12; chLo = 6; chHi = 9; }
+         else if (rtype == "split") { nLo = 8; nHi = 10; cwLo = 8; cwHi = 12; chLo = 6; chHi = 9; }
+         else { nLo = 6; nHi = 8; cwLo = 8; cwHi = 12; chLo = 6; chHi = 9; }
+         var n:int = nLo + int(rnd() * (nHi - nLo + 1));
+         var pat:Object = {};
+         var patArr:Array = [];
+         var rooms:Array = [];
+         var placed:int = 0;
+         var tries:int = 0;
+         var bi:int = 0;
+         var bands:Array = [[2, 7], [8, 15], [16, 21]];
+         while (placed < n && tries < 160)
          {
-            var vx:int = int(cols[int(rnd() * 3)]) + int(rnd() * 5) - 2;
-            vx = Math.max(2, Math.min(GRID_W - 3, vx));
-            var vh:int = 6 + int(rnd() * 13);
-            var vy0:int = 2 + int(rnd() * (GRID_H - vh - 2));
-            var vw:int = rnd() < 0.8 ? 1 : 2;
-            for (y = vy0 + 1; y < vy0 + vh - 1; y++)
+            tries++;
+            var cw:int = cwLo + int(rnd() * (cwHi - cwLo + 1));
+            var ch2:int = chLo + int(rnd() * (chHi - chLo + 1));
+            var cwx:int = 2 + int(rnd() * (GRID_W - cw - 4));
+            var band:Array = bands[bi % 3] as Array;
+            bi++;
+            var cwy:int = band[0] + int(rnd() * (band[1] - band[0] + 1));
+            if (cwy > GRID_H - ch2 - 2) cwy = GRID_H - ch2 - 2;
+            var ok:Boolean = true;
+            for (y = cwy - 1; y <= cwy + ch2 + 1; y++)
             {
-               for (x = vx; x < Math.min(vx + vw, GRID_W - 1); x++)
+               for (x = cwx - 1; x <= cwx + cw + 1; x++)
                {
-                  if (grid[y][x] == "_") grid[y][x] = wallChar(wallTbl);
+                  if (y >= 0 && y < GRID_H && x >= 0 && x < GRID_W && pat[y + "," + x] == true)
+                  {
+                     ok = false;
+                     break;
+                  }
+               }
+               if (!ok) break;
+            }
+            if (!ok) continue;
+            for (y = cwy; y < cwy + ch2; y++)
+            {
+               for (x = cwx; x < cwx + cw; x++)
+               {
+                  if (WALL_CHARS.indexOf(grid[y][x].charAt(0)) >= 0) grid[y][x] = "_";
+                  pat[y + "," + x] = true;
+                  patArr.push([y, x]);
                }
             }
+            rooms.push([cwx + int(cw / 2), cwy + int(ch2 / 2)]);
+            placed++;
          }
-         // 3) 边缘条 col1/46（带缺口）
-         var ep:Number = bIdx == 1 ? 0.40 : (bIdx == 3 ? 0.18 : (bIdx == 2 ? 0.25 : 0.30));
-         for (var si:int = 0; si < 2; si++)
+         // 3) 走廊网络：每房间 2 宽 L 形连入网络 + 6 缺口连入
+         var order:Array = rooms.slice();
+         for (k = order.length - 1; k > 0; k--)
          {
-            var side:int = si == 0 ? 1 : GRID_W - 2;
-            for (y = 1; y < GRID_H - 1; y++)
-            {
-               if (rnd() < ep && Math.abs(y - GY) > 2 && grid[y][side] == "_")
-               {
-                  grid[y][side] = wallChar(wallTbl);
-               }
-            }
+            var sw:int = int(rnd() * (k + 1));
+            var tmp:Array = order[k];
+            order[k] = order[sw];
+            order[sw] = tmp;
          }
-         // 4) 水体：成片池（sewer/plant）
-         var pools:int = bIdx == 1 ? (1 + int(rnd() * 3)) : (bIdx == 2 ? (1 + int(rnd() * 2)) : 0);
-         for (k = 0; k < pools; k++)
+         for (k = 0; k < order.length; k++)
          {
-            var pw:int = 4 + int(rnd() * 9);
-            var ph2:int = 1 + int(rnd() * 4);
-            var px:int = 2 + int(rnd() * (GRID_W - pw - 4));
-            var py:int = 2 + int(rnd() * (GRID_H - ph2 - 3));
-            for (y = py; y < py + ph2; y++)
-            {
-               for (x = px; x < px + pw; x++)
-               {
-                  if (grid[y][x] == "_") grid[y][x] = "_*";
-               }
-            }
+            linkL2(grid, pat, patArr, int(order[k][0]), int(order[k][1]));
          }
-         // 5) 装饰排（成排 2-8 格，密度 per biome）
-         var decoT:Array = RRGrammar.BIOME_DECORS[Math.min(bIdx, 3)] as Array;
-         if (decoT != null)
+         var gs:Array = [[GY, 0], [GY, GRID_W - 1], [0, GX1], [0, GX2], [GRID_H - 1, GX1], [GRID_H - 1, GX2]];
+         for (k = 0; k < gs.length; k++)
          {
-            var dlo:Number = bIdx == 0 ? 0.45 : (bIdx == 1 ? 0.30 : (bIdx == 2 ? 0.28 : 0.36));
-            var dhi:Number = bIdx == 0 ? 0.60 : (bIdx == 1 ? 0.40 : (bIdx == 2 ? 0.38 : 0.46));
+            var gy2:int = gs[k][0];
+            var gx2:int = gs[k][1];
+            if (pat[gy2 + "," + gx2] != true) linkL2(grid, pat, patArr, gx2, gy2);
+         }
+         // 4) 材质带（90% 主字符）
+         materialBands(grid, wallTbl);
+         // 5) 边界：0/24 行 0/47 列整墙 + 6 缺口
+         for (i = 0; i < GRID_W; i++)
+         {
+            grid[0][i] = wallChar(wallTbl);
+            grid[GRID_H - 1][i] = wallChar(wallTbl);
+         }
+         for (j = 0; j < GRID_H; j++)
+         {
+            grid[j][0] = wallChar(wallTbl);
+            grid[j][GRID_W - 1] = wallChar(wallTbl);
+         }
+         grid[GY][0] = "_";
+         grid[GY][GRID_W - 1] = "_";
+         grid[0][GX1] = "_";
+         grid[0][GX2] = "_";
+         grid[GRID_H - 1][GX1] = "_";
+         grid[GRID_H - 1][GX2] = "_";
+         // 6) 装饰排：仅安全地板纹理后缀
+         var safeDec:Array = safeDecor(decor);
+         if (safeDec.length > 0)
+         {
+            var den:Number = bIdx == 0 ? 0.40 : (bIdx == 1 ? 0.30 : (bIdx == 2 ? 0.28 : 0.34));
             for (y = 1; y < GRID_H - 1; y++)
             {
                x = 1;
                while (x < GRID_W - 1)
                {
-                  if (grid[y][x] == "_" && rnd() < dlo + rnd() * (dhi - dlo))
+                  if (grid[y][x] == "_" && rnd() < den)
                   {
-                     var L:int = 2 + int(rnd() * 7);
+                     var L:int = 2 + int(rnd() * 5);
                      for (k = 0; k < L; k++)
                      {
                         var dx2:int = x + k;
-                        if (dx2 < GRID_W - 1 && grid[y][dx2] == "_") grid[y][dx2] = "_" + pickWeighted(decoT);
+                        if (dx2 < GRID_W - 1 && grid[y][dx2] == "_") grid[y][dx2] = "_" + pickWeighted(safeDec);
                      }
                      x += L;
                   }
@@ -255,87 +279,91 @@ package rr
                }
             }
          }
-         // 6) Z 层栅格行（低频，s+space 可穿地板成行出现）
-         for (k = 0; k < 2; k++)
+         // 7) 水池成片（sewer/plant）
+         var pools:int = bIdx == 1 ? (1 + int(rnd() * 3)) : (bIdx == 2 ? (1 + int(rnd() * 2)) : 0);
+         for (k = 0; k < pools; k++)
          {
-            if (rnd() < 0.5) continue;
-            var zy:int = 2 + int(rnd() * (GRID_H - 4));
-            var zx:int = 1 + int(rnd() * (GRID_W - 13));
-            var zL:int = 4 + int(rnd() * 9);
-            for (var zk:int = 0; zk < zL; zk++)
+            var pw:int = 5 + int(rnd() * 7);
+            var ph2:int = 1 + int(rnd() * 3);
+            var px:int = 2 + int(rnd() * (GRID_W - pw - 4));
+            var py:int = 2 + int(rnd() * (GRID_H - ph2 - 3));
+            for (y = py; y < py + ph2; y++)
             {
-               if (grid[zy][zx + zk] == "_") grid[zy][zx + zk] = "_;";
+               for (x = px; x < px + pw; x++)
+               {
+                  if (grid[y][x] == "_") grid[y][x] = "_*";
+               }
             }
          }
       }
 
-      /** 实心墙带：1-2 段（段间 1-3 格门洞），限长防超调，端留边道 */
-      private function drawBand(grid:Array, wallTbl:Array, y:int, target:int):void
+      /** 2 宽 L 形走廊：最近开放格 -> (tx,ty)（目标=房间中心/缺口） */
+      private function linkL2(grid:Array, pat:Object, patArr:Array, tx:int, ty:int):void
       {
-         var have:int = 0;
-         var guard:int = 0;
-         while (have < target && guard < 20)
+         if (patArr.length == 0) return;
+         var bi:int = 0;
+         var bd:Number = 1e9;
+         for (var k:int = 0; k < patArr.length; k++)
          {
-            guard++;
-            var runlen:int = 8 + int(rnd() * 15);
-            var cap:int = target - have + 6;
-            if (runlen > cap) runlen = cap;
-            var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
-            for (var k:int = 0; k < runlen; k++)
-            {
-               var xx:int = x0 + k;
-               if (xx < GRID_W - 2 && grid[y][xx] == "_")
-               {
-                  grid[y][xx] = wallChar(wallTbl);
-                  have++;
-               }
-            }
-            if (guard < 20 && rnd() < 0.5) have += 1 + int(rnd() * 3);   // 段间门洞
+            var dy:Number = patArr[k][0] - ty;
+            var dx:Number = patArr[k][1] - tx;
+            var d:Number = dy * dy + dx * dx;
+            if (d < bd) { bd = d; bi = k; }
          }
-         // 过冲回剪（只剪段尾，保持段实心）
-         while (have > target + 4)
+         var y:int = patArr[bi][0];
+         var x:int = patArr[bi][1];
+         var st:int = 0;
+         while ((y != ty || x != tx) && st < 120)
          {
-            var trimmed:Boolean = false;
-            for (var xx2:int = GRID_W - 3; xx2 > 2; xx2--)
+            st++;
+            for (var k2:int = 0; k2 < 2; k2++)
             {
-               if (WALL_CHARS.indexOf(grid[y][xx2].charAt(0)) >= 0)
+               if (x + k2 < GRID_W)
                {
-                  grid[y][xx2] = "_";
-                  have--;
-                  trimmed = true;
-                  break;
+                  if (WALL_CHARS.indexOf(grid[y][x + k2].charAt(0)) >= 0) grid[y][x + k2] = "_";
+                  if (pat[y + "," + (x + k2)] != true)
+                  {
+                     pat[y + "," + (x + k2)] = true;
+                     patArr.push([y, x + k2]);
+                  }
                }
             }
-            if (!trimmed) break;
+            var dx2:int = tx - x;
+            var dy2:int = ty - y;
+            if (Math.abs(dx2) >= Math.abs(dy2)) x += dx2 > 0 ? 1 : -1;
+            else y += dy2 > 0 ? 1 : -1;
+            y = Math.max(1, Math.min(GRID_H - 2, y));
+            x = Math.max(1, Math.min(GRID_W - 2, x));
+         }
+         for (k2 = 0; k2 < 2; k2++)
+         {
+            if (x + k2 < GRID_W)
+            {
+               if (WALL_CHARS.indexOf(grid[y][x + k2].charAt(0)) >= 0) grid[y][x + k2] = "_";
+               if (pat[y + "," + (x + k2)] != true)
+               {
+                  pat[y + "," + (x + k2)] = true;
+                  patArr.push([y, x + k2]);
+               }
+            }
          }
       }
 
-      /** 开放行短段：1-6 格（原版分区内块残墙） */
-      private function drawBits(grid:Array, wallTbl:Array, y:int, target:int):void
+      /** 装饰表过滤：仅保留安全地板纹理（排除 *水 / K网格(框架地板) /
+       *  -横梁 / 西里尔台阶楼梯横梁） */
+      private function safeDecor(decor:Array):Array
       {
-         var have:int = 0;
-         var guard:int = 0;
-         while (have < target && guard < 30)
+         var out:Array = [];
+         if (decor == null) return out;
+         var bad:String = "*-,КАБВГЖЗИЙЛМОПСТНРK";
+         for (var k:int = 0; k < decor.length; k++)
          {
-            guard++;
-            var runlen:int = 1 + int(rnd() * 6);
-            var cap:int = target - have;
-            if (runlen > cap) runlen = cap;
-            if (runlen <= 0) break;
-            var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
-            for (var k:int = 0; k < runlen; k++)
-            {
-               var xx:int = x0 + k;
-               if (xx < GRID_W - 2 && grid[y][xx] == "_")
-               {
-                  grid[y][xx] = wallChar(wallTbl);
-                  have++;
-               }
-            }
+            var ch:String = String(decor[k][0]);
+            if (bad.indexOf(ch) < 0) out.push(decor[k]);
          }
+         return out;
       }
 
-      /** 条带房收尾：6 缺口强制开放 + 连通修复（底行由行谱决定，同原版） */
       private function finishStripRoom(grid:Array):void
       {
          grid[GY][0] = "_";
@@ -748,7 +776,7 @@ package rr
                if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0)
                {
                   var main:String = String(zone[Math.min(int(j / 13), 1)][Math.min(int(i / 12), 3)]);
-                  grid[j][i] = (rnd() < 0.85) ? main : pickWeighted(wallTbl);
+                  grid[j][i] = (rnd() < 0.90) ? main : pickWeighted(wallTbl);
                }
             }
          }
