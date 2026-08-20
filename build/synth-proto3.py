@@ -25,6 +25,36 @@ GY, GX1, GX2 = 12, 23, 24
 WALL_RATIO = {"corridor": 0.25, "hall": 0.18, "quad": 0.30, "l": 0.24, "bunker": 0.28}
 TYPES = ["corridor", "hall", "quad", "l", "bunker"]
 
+# M2a：生物群系墙材质（语料统计权重）——生成时墙格按权重分配
+BIOME_WALL = {
+    "stable": [("J", 43), ("A", 27), ("K", 20), ("G", 6), ("H", 4)],
+    "sewer": [("L", 63), ("A", 23), ("M", 5), ("I", 4), ("H", 3)],
+    "plant": [("C", 56), ("G", 13), ("D", 9), ("B", 9), ("A", 6), ("H", 5)],
+    "mane": [("N", 55), ("A", 22), ("B", 16), ("D", 4), ("E", 2)],
+}
+
+def load_biome_decor(path):
+    dec = {}
+    cur = None
+    for ln in open(path, encoding="utf-8").read().splitlines():
+        if ln.startswith("== BIOME"):
+            cur = ln.split()[-1]; dec[cur] = []; continue
+        if cur is not None and ln.startswith("DECOR"):
+            for p2 in ln.split()[1:]:
+                if ":" in p2:
+                    ch, c = p2.split(":", 1); dec[cur].append((ch, int(c)))
+    return dec
+
+def pick_weighted(rng, table):
+    tot = sum(w for _, w in table)
+    r = rng.randrange(tot)
+    acc = 0
+    for ch, w in table:
+        acc += w
+        if r < acc:
+            return ch
+    return table[0][0]
+
 def value_noise(rng, cw=6, ch=5):
     """低分辨率随机场 → 双线性插值 → HxW 连续场 [0,1]"""
     gw, gh = (W + cw - 1) // cw + 1, (H + ch - 1) // ch + 1
@@ -71,8 +101,9 @@ def thresh_wall(flat, ratio):
             hi = mid
     return (lo + hi) / 2
 
-def gen_room(rng, rtype):
+def gen_room(rng, rtype, biome="stable", decor=None):
     grid = [["_" for _ in range(W)] for _ in range(H)]
+    wall_tbl = BIOME_WALL.get(biome, BIOME_WALL["stable"])
     if rtype == "corridor":
         f = value_noise(rng)
         for y in range(H):
@@ -106,15 +137,8 @@ def gen_room(rng, rtype):
                 d = min(math.hypot(x - cx, y - cy) for cx, cy in cen)
                 d += (rng.random() - 0.5) * 1.2
                 if 3.4 <= d <= 5.6:
-                    grid[y][x] = "C"
-        for x in range(W):
-            grid[0][x] = "A"; grid[H - 1][x] = "A"
-        for y in range(H):
-            grid[y][0] = "A"; grid[y][W - 1] = "A"
-        grid[GY][0] = "_"; grid[GY][W - 1] = "_"
-        grid[0][GX1] = "_"; grid[0][GX2] = "_"
-        grid[H - 1][GX1] = "_"; grid[H - 1][GX2] = "_"
-        bfs_fill(grid)
+                    grid[y][x] = pick_weighted(rng, wall_tbl)
+        _apply_boundary_decor(grid, rng, decor, wall_tbl)
         return grid
     # 除 bunker 外：二分阈值 + 开放掩码(-1)保留
     flat = [v for row in f for v in row if v >= 0]
@@ -123,7 +147,11 @@ def gen_room(rng, rtype):
         for x in range(W):
             v = f[y][x]
             if v >= 0 and v >= th:
-                grid[y][x] = "C"
+                grid[y][x] = pick_weighted(rng, wall_tbl)   # M2a 材质场
+    _apply_boundary_decor(grid, rng, decor, wall_tbl)
+    return grid
+
+def _apply_boundary_decor(grid, rng, decor, wall_tbl):
     for x in range(W):
         grid[0][x] = "A"; grid[H - 1][x] = "A"
     for y in range(H):
@@ -131,8 +159,19 @@ def gen_room(rng, rtype):
     grid[GY][0] = "_"; grid[GY][W - 1] = "_"
     grid[0][GX1] = "_"; grid[0][GX2] = "_"
     grid[H - 1][GX1] = "_"; grid[H - 1][GX2] = "_"
+    # M2b 装饰掩体：开放格按 biome 频率稀疏布置（shelf/rear 后缀 + 少量掩体墙）
+    if decor:
+        tot = sum(w for _, w in decor)
+        for y in range(1, H - 1):
+            for x in range(1, W - 1):
+                if grid[y][x] == "_" and rng.random() < 0.07:
+                    grid[y][x] = "_" + pick_weighted(rng, decor)
+    # 掩体：少数开放格放"桌子/掩体"（坚固后缀使可站/挡视线）
+    for _ in range(6):
+        y, x = rng.randint(2, H - 3), rng.randint(2, W - 3)
+        if grid[y][x] == "_":
+            grid[y][x] = "-"   # shelf 掩体（低位物件，可通行/挡视线）
     bfs_fill(grid)
-    return grid
 
 def bfs_fill(grid):
     seen = set(); dq = deque()
@@ -185,9 +224,11 @@ def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 500
     fails = 0
     ratio_by_type = {}
+    decor = load_biome_decor("build/grammar-data2.txt")
     for k in range(n):
         rtype = rng.choice(TYPES)
-        grid = gen_room(rng, rtype)
+        biome = rng.choice(list(BIOME_WALL.keys()))
+        grid = gen_room(rng, rtype, biome, decor.get(biome))
         errs = validate(grid, rtype)
         ratio_by_type.setdefault(rtype, []).append(wall_ratio(grid))
         if errs:
@@ -203,8 +244,9 @@ def main():
     print("✓ 全部通过" if fails == 0 else "✗ 有失败")
     # 样本
     print("\n=== M1 视觉样本 ===")
-    for rtype in ["corridor", "hall", "quad", "l", "bunker"]:
-        grid = gen_room(rng, rtype)
+    decor = load_biome_decor("build/grammar-data2.txt")
+    for rtype, biome in [("corridor", "stable"), ("hall", "sewer"), ("l", "plant"), ("bunker", "mane")]:
+        grid = gen_room(rng, rtype, biome, decor.get(biome))
         print(f"----- {rtype} (墙 {wall_ratio(grid):.2f}) -----")
         for row in grid:
             print("".join(c.ljust(2) for c in row))
