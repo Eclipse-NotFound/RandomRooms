@@ -149,9 +149,13 @@ package rr
          }
          debugStages.push(["thresh th=" + th.toFixed(4), wallCount(grid)]);
          roadWalls(grid, rtype);
+         debugStages.push(["road", wallCount(grid)]);
          thinWalls(grid);
+         debugStages.push(["thin", wallCount(grid)]);
          materialBands(grid, wallTbl);
+         debugStages.push(["material", wallCount(grid)]);
          applyBoundaryAndDecor(grid, decor, wallTbl, rtype);
+         debugStages.push(["final", wallCount(grid)]);
          return grid;
       }
       
@@ -336,7 +340,7 @@ package rr
             i = 2 + int(rnd() * (GRID_W - 4));
             if (grid[j][i] == "_")
             {
-               grid[j][i] = "-";
+               grid[j][i] = "_-";
             }
          }
          if (rtype == "quad")
@@ -560,7 +564,7 @@ package rr
          {
             var sy:int = starts[sI][0];
             var sx:int = starts[sI][1];
-            if (WALL_CHARS.indexOf(grid[sy][sx].charAt(0)) >= 0)
+            if (WALL_CHARS.indexOf(grid[sy][sx].charAt(0)) < 0)
             {
                seen[sy * GRID_W + sx] = 1;
                qy.push(sy);

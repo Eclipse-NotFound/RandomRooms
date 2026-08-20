@@ -252,7 +252,7 @@ def _apply_boundary_decor(grid, rng, decor, wall_tbl, rtype=None):
     for _ in range(6):
         y, x = rng.randint(2, H - 3), rng.randint(2, W - 3)
         if grid[y][x] == "_":
-            grid[y][x] = "-"
+            grid[y][x] = "_-"
     if rtype == "quad":
         _quad_gates(grid)
     gap_guard(grid)
