@@ -21,6 +21,8 @@ package rr
       public static const FCHARS:String = "ABCDEFGHIJKLMNOPQRST_";
       public static const OCHARS:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
          "АБВГДЕЖЗИЙКЛМОПСТ-ДЕКНР" + "*,;:";
+      /** 实体墙首字符（不含 _ 空地）——判墙必须用此集；FCHARS 含 _ 会误判 */
+      public static const WALL_CHARS:String = "ABCDEFGHIJKLMNOPQRST";
       
       public static const BIOMES:Array = ["stable", "sewer", "plant", "mane"];
       
@@ -376,7 +378,7 @@ package rr
                   if (dy == 0 && dx == 0) continue;
                   var yy:int = y + dy;
                   var xx:int = x + dx;
-                  if (yy >= 0 && yy < GRID_H && xx >= 0 && xx < GRID_W && FCHARS.indexOf(grid[yy][xx].charAt(0)) >= 0)
+                  if (yy >= 0 && yy < GRID_H && xx >= 0 && xx < GRID_W && WALL_CHARS.indexOf(grid[yy][xx].charAt(0)) >= 0)
                   {
                      n++;
                   }
@@ -390,7 +392,7 @@ package rr
             {
                for (var i:int = 3; i < GRID_W - 3; i++)
                {
-                  if (FCHARS.indexOf(grid[j][i].charAt(0)) >= 0 && n8(j, i) >= 13 && rnd() < 0.45)
+                  if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0 && n8(j, i) >= 13 && rnd() < 0.45)
                   {
                      grid[j][i] = "_";
                   }
@@ -415,7 +417,7 @@ package rr
          {
             for (var i:int = 0; i < GRID_W; i++)
             {
-               if (FCHARS.indexOf(grid[j][i].charAt(0)) >= 0)
+               if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0)
                {
                   var main:String = String(zone[Math.min(int(j / 13), 1)][Math.min(int(i / 12), 3)]);
                   grid[j][i] = (rnd() < 0.85) ? main : pickWeighted(wallTbl);
@@ -539,7 +541,7 @@ package rr
          {
             var sy:int = starts[sI][0];
             var sx:int = starts[sI][1];
-            if (FCHARS.indexOf(grid[sy][sx].charAt(0)) >= 0)
+            if (WALL_CHARS.indexOf(grid[sy][sx].charAt(0)) >= 0)
             {
                seen[sy * GRID_W + sx] = 1;
                qy.push(sy);
@@ -560,7 +562,7 @@ package rr
                if (ny < 0 || ny >= GRID_H || nx < 0 || nx >= GRID_W) continue;
                var key:int = ny * GRID_W + nx;
                if (seen[key] != null) continue;
-               if (FCHARS.indexOf(grid[ny][nx].charAt(0)) >= 0) continue;
+               if (WALL_CHARS.indexOf(grid[ny][nx].charAt(0)) >= 0) continue;
                seen[key] = 1;
                qy.push(ny);
                qx.push(nx);
@@ -570,7 +572,7 @@ package rr
          {
             for (var i:int = 0; i < GRID_W; i++)
             {
-               if (FCHARS.indexOf(grid[j][i].charAt(0)) < 0 && seen[j * GRID_W + i] == null)
+               if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) < 0 && seen[j * GRID_W + i] == null)
                {
                   grid[j][i] = "C";
                }
