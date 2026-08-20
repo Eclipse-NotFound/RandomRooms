@@ -33,6 +33,8 @@ package rr
       private static const GX2:int = 24;
       
       public var rnd:Function;
+      /** 分阶段诊断：genGrid 每步墙数（定位全墙 bug） */
+      public var debugStages:Array = [];
       
       public function RRSynth(rndFn:Function = null)
       {
@@ -75,6 +77,8 @@ package rr
                grid[j][i] = "_";
             }
          }
+         debugStages = [];
+         debugStages.push(["init", wallCount(grid)]);
          
          var f:Array = null;
          if (rtype == "corridor" || rtype == "hall" || rtype == "l")
@@ -143,6 +147,7 @@ package rr
                }
             }
          }
+         debugStages.push(["thresh th=" + th.toFixed(4), wallCount(grid)]);
          roadWalls(grid, rtype);
          thinWalls(grid);
          materialBands(grid, wallTbl);

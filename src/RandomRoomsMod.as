@@ -559,6 +559,12 @@ package
                }
                diag.log("对照 genGrid(stable,corridor): 墙=" + w2 + " 开放=" + open2 + " 占比=" +
                         (t2 > 0 ? (w2 / t2).toFixed(2) : "?"));
+               var stages:String = "";
+               for (var si2:int = 0; si2 < rr2.debugStages.length; si2++)
+               {
+                  stages += String(rr2.debugStages[si2][0]) + "=" + String(rr2.debugStages[si2][1]) + " ";
+               }
+               diag.log("genGrid 分阶段: " + stages);
             }
             catch (e2:*)
             {
