@@ -86,8 +86,13 @@ package rr
          var f:Array = null;
          if (rtype == "corridor" || rtype == "hall" || rtype == "l" || rtype == "split")
          {
-            // v3.5 原版分区墙：开放为底（网格已是 _），薄分区墙带+缺口
-            // （原版语料实证：墙占比 0.15-0.36，墙=1-2 格厚部分宽度横/竖带）
+            // v3.6 原版条带马尔可夫合成：48x4 条带链（来自原版语料，装饰/水/
+            // 栅格以原版块状出现）+ 缺口强制 + 连通修复（挖连廊/填小口袋）
+            stripChain(grid, Math.min(bIdx, 3), rtype);
+            debugStages.push(["chain", wallCount(grid)]);
+            finishStripRoom(grid);
+            debugStages.push(["final", wallCount(grid)]);
+            return grid;
          }
          else if (rtype == "quad")
          {
@@ -103,6 +108,10 @@ package rr
                   }
                }
             }
+            carveRooms(grid, rtype, wallTbl);
+            materialBands(grid, wallTbl);
+            applyBoundaryAndDecor(grid, decor, wallTbl, rtype);
+            return grid;
          }
          else
          {
@@ -135,17 +144,319 @@ package rr
             applyBoundaryAndDecor(grid, decor, wallTbl, rtype);
             return grid;
          }
-         
-         pathCells = [];
-         carveRooms(grid, rtype, wallTbl);
-         debugStages.push(["carve", wallCount(grid)]);
-         materialBands(grid, wallTbl);
-         debugStages.push(["material", wallCount(grid)]);
-         applyBoundaryAndDecor(grid, decor, wallTbl, rtype);
-         debugStages.push(["final", wallCount(grid)]);
-         return grid;
       }
       
+      /** v3.6 原版条带马尔可夫合成：6 条 48x4 条带链（RRStripData 来自原版语料）
+       * 类型引导：hall 偏好无墙带条带 / split 偏好有墙带 / corridor 偏好顶行带。
+       * 转移表存在则按转移，否则按全局频率。 */
+      private function stripChain(grid:Array, bIdx:int, rtype:String):void
+      {
+         var D:Object = strips(bIdx);
+         var n:int = int(D.n);
+         var prefer:Function = null;
+         if (rtype == "hall")
+         {
+            prefer = function(m:int):Boolean { return m == 0; };
+         }
+         else if (rtype == "split")
+         {
+            prefer = function(m:int):Boolean { return m != 0; };
+         }
+         else if (rtype == "corridor")
+         {
+            prefer = function(m:int):Boolean { return (m & 3) != 0; };
+         }
+         var prev:int = -1;
+         for (var r:int = 0; r < 6; r++)
+         {
+            var cand:Array = [];
+            var candW:Array = [];
+            if (prev >= 0 && D.trans[prev] != null)
+            {
+               var tl:Array = D.trans[prev] as Array;
+               for (var t:int = 0; t < tl.length; t++)
+               {
+                  cand.push(int(tl[t][0]));
+                  candW.push(int(tl[t][1]));
+               }
+            }
+            else
+            {
+               for (var s:int = 0; s < n; s++)
+               {
+                  cand.push(s);
+                  candW.push(int(D.weights[s]));
+               }
+            }
+            var pick:int = -1;
+            if (prefer != null && rnd() < 0.7)
+            {
+               var sub:Array = [];
+               var subW:Array = [];
+               for (var q:int = 0; q < cand.length; q++)
+               {
+                  if (prefer(int(D.bands[cand[q]])))
+                  {
+                     sub.push(cand[q]);
+                     subW.push(candW[q]);
+                  }
+               }
+               if (sub.length > 0) pick = pickIdx(sub, subW);
+            }
+            if (pick < 0) pick = pickIdx(cand, candW);
+            var cells:Array = D.strips[pick] as Array;
+            for (var dy:int = 0; dy < 4; dy++)
+            {
+               for (var x:int = 0; x < GRID_W; x++)
+               {
+                  grid[r * 4 + dy][x] = cells[dy * GRID_W + x];
+               }
+            }
+            prev = pick;
+         }
+      }
+
+      /** 条带数据解析缓存（首次使用解析 RRStripData 字符串） */
+      private static var _stripCache:Object = {};
+      private function strips(bIdx:int):Object
+      {
+         if (_stripCache[bIdx] == null)
+         {
+            var D:Object = {};
+            var sn:String = bIdx == 0 ? RRStripData.S_STABLE : (bIdx == 1 ? RRStripData.S_SEWER : (bIdx == 2 ? RRStripData.S_PLANT : RRStripData.S_MANE));
+            var wn:String = bIdx == 0 ? RRStripData.W_STABLE : (bIdx == 1 ? RRStripData.W_SEWER : (bIdx == 2 ? RRStripData.W_PLANT : RRStripData.W_MANE));
+            var bn:String = bIdx == 0 ? RRStripData.B_STABLE : (bIdx == 1 ? RRStripData.B_SEWER : (bIdx == 2 ? RRStripData.B_PLANT : RRStripData.B_MANE));
+            var tn:String = bIdx == 0 ? RRStripData.T_STABLE : (bIdx == 1 ? RRStripData.T_SEWER : (bIdx == 2 ? RRStripData.T_PLANT : RRStripData.T_MANE));
+            var raw:Array = sn.split("~");
+            var stripsA:Array = [];
+            for (var k:int = 0; k < raw.length; k++)
+            {
+               stripsA.push(raw[k].split("|"));
+            }
+            D.strips = stripsA;
+            D.n = stripsA.length;
+            var wRaw:Array = wn.split(",");
+            D.weights = wRaw;
+            var bRaw:Array = bn.split(",");
+            D.bands = bRaw;
+            var tRaw:Array = tn.split(";");
+            var tr:Object = {};
+            for (k = 0; k < tRaw.length; k++)
+            {
+               var pair:Array = String(tRaw[k]).split(":");
+               if (pair.length < 2) continue;
+               var from:int = int(pair[0]);
+               var list:Array = String(pair[1]).split(",");
+               if (tr[from] == null) tr[from] = [];
+               tr[from].push([int(list[0]), int(list[1])]);
+            }
+            D.trans = tr;
+            _stripCache[bIdx] = D;
+         }
+         return _stripCache[bIdx];
+      }
+
+      /** 加权随机索引 */
+      private function pickIdx(cand:Array, candW:Array):int
+      {
+         var tot:int = 0;
+         for (var k:int = 0; k < candW.length; k++) tot += int(candW[k]);
+         if (tot <= 0) return int(cand[0]);
+         var r:int = int(rnd() * tot);
+         var acc:int = 0;
+         for (k = 0; k < candW.length; k++)
+         {
+            acc += int(candW[k]);
+            if (r < acc) return int(cand[k]);
+         }
+         return int(cand[candW.length - 1]);
+      }
+
+      /** 条带房收尾：底行边界 + 6 缺口强制开放 + 连通修复 */
+      private function finishStripRoom(grid:Array):void
+      {
+         var j:int;
+         var i:int;
+         for (i = 0; i < GRID_W; i++) grid[GRID_H - 1][i] = "A";
+         grid[GRID_H - 1][GX1] = "_";
+         grid[GRID_H - 1][GX2] = "_";
+         grid[GY][0] = "_";
+         grid[GY][GRID_W - 1] = "_";
+         grid[0][GX1] = "_";
+         grid[0][GX2] = "_";
+         repairConnectivity(grid);
+      }
+
+      /** 连通修复：从 6 缺口 BFS；未连通开放组件 <16 格填墙，否则挖 2 宽 L 连廊 */
+      private function repairConnectivity(grid:Array):void
+      {
+         var j:int;
+         var i:int;
+         var seen:Array = [];
+         for (j = 0; j < GRID_H; j++)
+         {
+            seen[j] = [];
+            for (i = 0; i < GRID_W; i++) seen[j][i] = false;
+         }
+         var mainOpen:Array = [];
+         var qy:Array = [];
+         var qx:Array = [];
+         var starts:Array = [[GY, 0], [GY, GRID_W - 1], [0, GX1], [0, GX2], [GRID_H - 1, GX1], [GRID_H - 1, GX2]];
+         for (var s:int = 0; s < starts.length; s++)
+         {
+            var sy:int = starts[s][0];
+            var sx:int = starts[s][1];
+            if (!seen[sy][sx] && WALL_CHARS.indexOf(grid[sy][sx].charAt(0)) < 0)
+            {
+               seen[sy][sx] = true;
+               qy.push(sy);
+               qx.push(sx);
+               mainOpen.push([sy, sx]);
+            }
+         }
+         var head:int = 0;
+         while (head < qx.length)
+         {
+            var cy:int = qy[head];
+            var cx:int = qx[head];
+            head++;
+            if (cy > 0 && !seen[cy - 1][cx] && WALL_CHARS.indexOf(grid[cy - 1][cx].charAt(0)) < 0)
+            {
+               seen[cy - 1][cx] = true; qy.push(cy - 1); qx.push(cx); mainOpen.push([cy - 1, cx]);
+            }
+            if (cy < GRID_H - 1 && !seen[cy + 1][cx] && WALL_CHARS.indexOf(grid[cy + 1][cx].charAt(0)) < 0)
+            {
+               seen[cy + 1][cx] = true; qy.push(cy + 1); qx.push(cx); mainOpen.push([cy + 1, cx]);
+            }
+            if (cx > 0 && !seen[cy][cx - 1] && WALL_CHARS.indexOf(grid[cy][cx - 1].charAt(0)) < 0)
+            {
+               seen[cy][cx - 1] = true; qy.push(cy); qx.push(cx - 1); mainOpen.push([cy, cx - 1]);
+            }
+            if (cx < GRID_W - 1 && !seen[cy][cx + 1] && WALL_CHARS.indexOf(grid[cy][cx + 1].charAt(0)) < 0)
+            {
+               seen[cy][cx + 1] = true; qy.push(cy); qx.push(cx + 1); mainOpen.push([cy, cx + 1]);
+            }
+         }
+         // 扫描未连通开放组件
+         for (j = 0; j < GRID_H; j++)
+         {
+            for (i = 0; i < GRID_W; i++)
+            {
+               if (seen[j][i] || WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0) continue;
+               var comp:Array = [];
+               var cqy:Array = [j];
+               var cqx:Array = [i];
+               seen[j][i] = true;
+               var ch:int = 0;
+               while (ch < cqx.length)
+               {
+                  var cy2:int = cqy[ch];
+                  var cx2:int = cqx[ch];
+                  ch++;
+                  comp.push([cy2, cx2]);
+                  if (cy2 > 0 && !seen[cy2 - 1][cx2] && WALL_CHARS.indexOf(grid[cy2 - 1][cx2].charAt(0)) < 0)
+                  {
+                     seen[cy2 - 1][cx2] = true; cqy.push(cy2 - 1); cqx.push(cx2);
+                  }
+                  if (cy2 < GRID_H - 1 && !seen[cy2 + 1][cx2] && WALL_CHARS.indexOf(grid[cy2 + 1][cx2].charAt(0)) < 0)
+                  {
+                     seen[cy2 + 1][cx2] = true; cqy.push(cy2 + 1); cqx.push(cx2);
+                  }
+                  if (cx2 > 0 && !seen[cy2][cx2 - 1] && WALL_CHARS.indexOf(grid[cy2][cx2 - 1].charAt(0)) < 0)
+                  {
+                     seen[cy2][cx2 - 1] = true; cqy.push(cy2); cqx.push(cx2 - 1);
+                  }
+                  if (cx2 < GRID_W - 1 && !seen[cy2][cx2 + 1] && WALL_CHARS.indexOf(grid[cy2][cx2 + 1].charAt(0)) < 0)
+                  {
+                     seen[cy2][cx2 + 1] = true; cqy.push(cy2); cqx.push(cx2 + 1);
+                  }
+               }
+               if (comp.length < 16)
+               {
+                  for (var ck:int = 0; ck < comp.length; ck++)
+                  {
+                     grid[comp[ck][0]][comp[ck][1]] = "C";
+                  }
+               }
+               else
+               {
+                  carveConnector(grid, seen, comp, mainOpen);
+               }
+            }
+         }
+      }
+
+      /** 组件最近格 -> 主网最近开放格：L 形 2 宽连廊 */
+      private function carveConnector(grid:Array, seen:Array, comp:Array, mainOpen:Array):void
+      {
+         var bi:int = 0;
+         var bm:int = 0;
+         var bd:Number = 1e9;
+         for (var a:int = 0; a < comp.length; a++)
+         {
+            for (var b:int = 0; b < mainOpen.length; b++)
+            {
+               var dy:Number = comp[a][0] - mainOpen[b][0];
+               var dx:Number = comp[a][1] - mainOpen[b][1];
+               var d:Number = dy * dy + dx * dx;
+               if (d < bd) { bd = d; bi = a; bm = b; }
+            }
+         }
+         var y0:int = comp[bi][0];
+         var x0:int = comp[bi][1];
+         var y1:int = mainOpen[bm][0];
+         var x1:int = mainOpen[bm][1];
+         // L 形：横段 + 竖段（2 宽），挖出的格标记 seen 防重复处理
+         if (rnd() < 0.5)
+         {
+            carveH(grid, seen, x0, x1, y0, 2);
+            carveV(grid, seen, y0, y1, x1, 2);
+         }
+         else
+         {
+            carveV(grid, seen, y0, y1, x0, 2);
+            carveH(grid, seen, x0, x1, y1, 2);
+         }
+      }
+
+      /** 横扫 w 宽（挖开放 + 标记 seen） */
+      private function carveH(grid:Array, seen:Array, xa:int, xb:int, y:int, w:int):void
+      {
+         var lo:int = Math.min(xa, xb);
+         var hi:int = Math.max(xa, xb);
+         for (var x:int = lo; x <= hi; x++)
+         {
+            for (var dy:int = 0; dy < w; dy++)
+            {
+               var yy:int = y + dy;
+               if (yy >= 0 && yy < GRID_H)
+               {
+                  grid[yy][x] = "_";
+                  if (seen[yy] != null) seen[yy][x] = true;
+               }
+            }
+         }
+      }
+
+      /** 竖扫 w 宽（挖开放 + 标记 seen） */
+      private function carveV(grid:Array, seen:Array, ya:int, yb:int, x:int, w:int):void
+      {
+         var lo:int = Math.min(ya, yb);
+         var hi:int = Math.max(ya, yb);
+         for (var y:int = lo; y <= hi; y++)
+         {
+            for (var dx:int = 0; dx < w; dx++)
+            {
+               var xx:int = x + dx;
+               if (xx >= 0 && xx < GRID_W)
+               {
+                  grid[y][xx] = "_";
+                  if (seen[y] != null) seen[y][xx] = true;
+               }
+            }
+         }
+      }
+
       /** Voronoi 四区场（近区心低->开放，区界高->墙） */
       private function quadField():Array
       {
