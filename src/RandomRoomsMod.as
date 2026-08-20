@@ -540,6 +540,30 @@ package
             diag.log("合成房网格: " + String(sroom.@name) + " 行=" + rows.length() +
                      " 墙占比=" + (total > 0 ? (wallCnt / total).toFixed(2) : "?") +
                      " [行12样本] " + sample);
+            // 对照：独立 genGrid（固定参数、同 rnd 闭包）——若也全墙则 genGrid 本体 bug
+            try
+            {
+               var rr2:RRSynth = new RRSynth(synth.rnd);
+               var g2:Array = rr2.genGrid("stable", "corridor");
+               var w2:int = 0;
+               var t2:int = 0;
+               var open2:int = 0;
+               for (var a:int = 0; a < g2.length; a++)
+               {
+                  for (var b:int = 0; b < g2[a].length; b++)
+                  {
+                     t2++;
+                     if (RRSynth.WALL_CHARS.indexOf(String(g2[a][b]).charAt(0)) >= 0) w2++;
+                     else open2++;
+                  }
+               }
+               diag.log("对照 genGrid(stable,corridor): 墙=" + w2 + " 开放=" + open2 + " 占比=" +
+                        (t2 > 0 ? (w2 / t2).toFixed(2) : "?"));
+            }
+            catch (e2:*)
+            {
+               diag.log("对照 genGrid 异常: " + e2);
+            }
          }
          catch (e:*)
          {
@@ -1003,9 +1027,9 @@ package
                return;
             }
             var fresh:XML = base.copy();
-            // P2：进入级注入合成房（预检过滤：字符 + Location 构造复现）
+            // P2：进入级注入合成房（仅 random_rooms；rr_test 等测试土地不混入）
             var keptRR:int = 0;
-            for (var sri:int = 0; sri < SYNTH_COUNT; sri++)
+            for (var sri:int = 0; sri < SYNTH_COUNT && landId == LAND_ID_RR; sri++)
             {
                var sr:XML = synth.generate(sri, randBiome());
                if (RRSynth.validateRoom(sr) && precheckSynth(world, sr, true))
