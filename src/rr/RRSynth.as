@@ -86,10 +86,10 @@ package rr
          var f:Array = null;
          if (rtype == "corridor" || rtype == "hall" || rtype == "l" || rtype == "split")
          {
-            // v3.6 原版条带马尔可夫合成：48x4 条带链（来自原版语料，装饰/水/
-            // 栅格以原版块状出现）+ 缺口强制 + 连通修复（挖连廊/填小口袋）
-            stripChain(grid, Math.min(bIdx, 3), rtype);
-            debugStages.push(["chain", wallCount(grid)]);
+            // v4 行谱结构生成：逐行按语料墙谱采样墙量，横向随机实心带段；
+            // 竖带/边缘条/水池/装饰排/Z 栅格行全部程序化（无原版切片）
+            profileGen(grid, Math.min(bIdx, 3), rtype, wallTbl);
+            debugStages.push(["profile", wallCount(grid)]);
             finishStripRoom(grid);
             debugStages.push(["final", wallCount(grid)]);
             return grid;
@@ -146,144 +146,151 @@ package rr
          }
       }
       
-      /** v3.6 原版条带马尔可夫合成：6 条 48x4 条带链（RRStripData 来自原版语料）
-       * 类型引导：hall 偏好无墙带条带 / split 偏好有墙带 / corridor 偏好顶行带。
-       * 转移表存在则按转移，否则按全局频率。 */
-      private function stripChain(grid:Array, bIdx:int, rtype:String):void
+      /** 行墙谱（语料实测 25 行）：P(该行格为墙) —— 每 biome 的垂直结构指纹 */
+      private static const PROFILE_STABLE:Array = [0.73,0.25,0.20,0.28,0.33,0.32,0.24,0.27,0.54,0.32,0.22,0.24,0.44,0.28,0.30,0.22,0.45,0.26,0.20,0.30,0.43,0.20,0.16,0.17,0.74];
+      private static const PROFILE_SEWER:Array = [0.81,0.34,0.21,0.39,0.55,0.30,0.19,0.27,0.53,0.35,0.31,0.29,0.46,0.35,0.29,0.27,0.47,0.35,0.35,0.33,0.59,0.39,0.17,0.20,0.81];
+      private static const PROFILE_PLANT:Array = [0.49,0.18,0.14,0.14,0.47,0.15,0.12,0.12,0.45,0.16,0.15,0.22,0.52,0.17,0.12,0.10,0.53,0.20,0.16,0.27,0.49,0.20,0.12,0.13,0.58];
+      private static const PROFILE_MANE:Array = [0.72,0.06,0.07,0.08,0.14,0.07,0.03,0.04,0.74,0.18,0.13,0.09,0.14,0.08,0.04,0.10,0.71,0.07,0.04,0.04,0.10,0.03,0.02,0.04,0.72];
+
+      /** v4 行谱结构生成：逐行按谱采样墙量 -> 横向随机实心带段（1 格厚，
+       * 垂直结构由谱承载）；竖带/边缘条/水池/装饰排/Z 栅格行全部程序化。
+       * 学的是语料分布，画的是原语 —— 无任何原版切片（有机重组）。 */
+      private function profileGen(grid:Array, bIdx:int, rtype:String, wallTbl:Array):void
       {
-         var D:Object = strips(bIdx);
-         var n:int = int(D.n);
-         var prefer:Function = null;
-         if (rtype == "hall")
+         var prof:Array = bIdx == 0 ? PROFILE_STABLE : (bIdx == 1 ? PROFILE_SEWER : (bIdx == 2 ? PROFILE_PLANT : PROFILE_MANE));
+         var tfac:Number = rtype == "hall" ? 0.85 : (rtype == "split" ? 1.15 : 1.0);
+         var y:int, x:int, k:int, xx:int, guard:int;
+         // 1) 逐行按谱采样墙量
+         for (y = 0; y < GRID_H; y++)
          {
-            prefer = function(m:int):Boolean { return m == 0; };
-         }
-         else if (rtype == "split")
-         {
-            prefer = function(m:int):Boolean { return m != 0; };
-         }
-         else if (rtype == "corridor")
-         {
-            prefer = function(m:int):Boolean { return (m & 3) != 0; };
-         }
-         var prev:int = -1;
-         for (var r:int = 0; r < 6; r++)
-         {
-            var cand:Array = [];
-            var candW:Array = [];
-            if (prev >= 0 && D.trans[prev] != null)
+            var target:int = int(prof[y] * GRID_W * (0.85 + rnd() * 0.3) * tfac);
+            guard = 0;
+            while (guard < 40)
             {
-               var tl:Array = D.trans[prev] as Array;
-               for (var t:int = 0; t < tl.length; t++)
+               guard++;
+               var have:int = rowWall(grid, y);
+               if (have >= target) break;
+               var runlen:int = 6 + int(rnd() * 17);
+               if (rnd() < 0.15) runlen = 1 + int(rnd() * 5);   // 少量短段/单格
+               var cap:int = target - have + 6;
+               if (runlen > cap) runlen = cap;                  // 限长防超调，段保持实心
+               var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
+               for (k = 0; k < runlen; k++)
                {
-                  cand.push(int(tl[t][0]));
-                  candW.push(int(tl[t][1]));
+                  xx = x0 + k;
+                  if (xx < GRID_W - 2 && grid[y][xx] == "_") grid[y][xx] = wallChar(wallTbl);
                }
             }
-            else
+         }
+         // 2) 竖带 0-2（锚定列 8/24/40，低频）
+         var cols:Array = [8, 24, 40];
+         for (k = 0; k < 2; k++)
+         {
+            if (rnd() < 0.6) continue;
+            var vx:int = int(cols[int(rnd() * 3)]) + int(rnd() * 5) - 2;
+            vx = Math.max(2, Math.min(GRID_W - 3, vx));
+            var vh:int = 6 + int(rnd() * 13);
+            var vy0:int = 2 + int(rnd() * (GRID_H - vh - 2));
+            var vw:int = rnd() < 0.8 ? 1 : 2;
+            for (y = vy0 + 1; y < vy0 + vh - 1; y++)
             {
-               for (var s:int = 0; s < n; s++)
+               for (x = vx; x < Math.min(vx + vw, GRID_W - 1); x++)
                {
-                  cand.push(s);
-                  candW.push(int(D.weights[s]));
+                  if (grid[y][x] == "_") grid[y][x] = wallChar(wallTbl);
                }
             }
-            var pick:int = -1;
-            if (prefer != null && rnd() < 0.7)
+         }
+         // 3) 边缘条 col1/46（带缺口）
+         var ep:Number = bIdx == 1 ? 0.40 : (bIdx == 3 ? 0.18 : (bIdx == 2 ? 0.25 : 0.30));
+         for (var si:int = 0; si < 2; si++)
+         {
+            var side:int = si == 0 ? 1 : GRID_W - 2;
+            for (y = 1; y < GRID_H - 1; y++)
             {
-               var sub:Array = [];
-               var subW:Array = [];
-               for (var q:int = 0; q < cand.length; q++)
+               if (rnd() < ep && Math.abs(y - GY) > 2 && grid[y][side] == "_")
                {
-                  if (prefer(int(D.bands[cand[q]])))
+                  grid[y][side] = wallChar(wallTbl);
+               }
+            }
+         }
+         // 4) 水体：成片池（sewer/plant）
+         var pools:int = bIdx == 1 ? (1 + int(rnd() * 3)) : (bIdx == 2 ? (1 + int(rnd() * 2)) : 0);
+         for (k = 0; k < pools; k++)
+         {
+            var pw:int = 4 + int(rnd() * 9);
+            var ph2:int = 1 + int(rnd() * 4);
+            var px:int = 2 + int(rnd() * (GRID_W - pw - 4));
+            var py:int = 2 + int(rnd() * (GRID_H - ph2 - 3));
+            for (y = py; y < py + ph2; y++)
+            {
+               for (x = px; x < px + pw; x++)
+               {
+                  if (grid[y][x] == "_") grid[y][x] = "_*";
+               }
+            }
+         }
+         // 5) 装饰排（成排 2-8 格，密度 per biome）
+         var decoT:Array = RRGrammar.BIOME_DECORS[Math.min(bIdx, 3)] as Array;
+         if (decoT != null)
+         {
+            var dlo:Number = bIdx == 0 ? 0.45 : (bIdx == 1 ? 0.30 : (bIdx == 2 ? 0.28 : 0.36));
+            var dhi:Number = bIdx == 0 ? 0.60 : (bIdx == 1 ? 0.40 : (bIdx == 2 ? 0.38 : 0.46));
+            for (y = 1; y < GRID_H - 1; y++)
+            {
+               x = 1;
+               while (x < GRID_W - 1)
+               {
+                  if (grid[y][x] == "_" && rnd() < dlo + rnd() * (dhi - dlo))
                   {
-                     sub.push(cand[q]);
-                     subW.push(candW[q]);
+                     var L:int = 2 + int(rnd() * 7);
+                     for (k = 0; k < L; k++)
+                     {
+                        var dx2:int = x + k;
+                        if (dx2 < GRID_W - 1 && grid[y][dx2] == "_") grid[y][dx2] = "_" + pickWeighted(decoT);
+                     }
+                     x += L;
+                  }
+                  else
+                  {
+                     x++;
                   }
                }
-               if (sub.length > 0) pick = pickIdx(sub, subW);
             }
-            if (pick < 0) pick = pickIdx(cand, candW);
-            var cells:Array = D.strips[pick] as Array;
-            for (var dy:int = 0; dy < 4; dy++)
-            {
-               for (var x:int = 0; x < GRID_W; x++)
-               {
-                  grid[r * 4 + dy][x] = cells[dy * GRID_W + x];
-               }
-            }
-            prev = pick;
          }
-      }
-
-      /** 条带数据解析缓存（首次使用解析 RRStripData 字符串） */
-      private static var _stripCache:Object = {};
-      private function strips(bIdx:int):Object
-      {
-         if (_stripCache[bIdx] == null)
+         // 6) Z 层栅格行（低频，s+space 可穿地板成行出现）
+         for (k = 0; k < 2; k++)
          {
-            var D:Object = {};
-            var sn:String = bIdx == 0 ? RRStripData.S_STABLE : (bIdx == 1 ? RRStripData.S_SEWER : (bIdx == 2 ? RRStripData.S_PLANT : RRStripData.S_MANE));
-            var wn:String = bIdx == 0 ? RRStripData.W_STABLE : (bIdx == 1 ? RRStripData.W_SEWER : (bIdx == 2 ? RRStripData.W_PLANT : RRStripData.W_MANE));
-            var bn:String = bIdx == 0 ? RRStripData.B_STABLE : (bIdx == 1 ? RRStripData.B_SEWER : (bIdx == 2 ? RRStripData.B_PLANT : RRStripData.B_MANE));
-            var tn:String = bIdx == 0 ? RRStripData.T_STABLE : (bIdx == 1 ? RRStripData.T_SEWER : (bIdx == 2 ? RRStripData.T_PLANT : RRStripData.T_MANE));
-            var raw:Array = sn.split("~");
-            var stripsA:Array = [];
-            for (var k:int = 0; k < raw.length; k++)
+            if (rnd() < 0.5) continue;
+            var zy:int = 2 + int(rnd() * (GRID_H - 4));
+            var zx:int = 1 + int(rnd() * (GRID_W - 13));
+            var zL:int = 4 + int(rnd() * 9);
+            for (var zk:int = 0; zk < zL; zk++)
             {
-               stripsA.push(raw[k].split("|"));
+               if (grid[zy][zx + zk] == "_") grid[zy][zx + zk] = "_;";
             }
-            D.strips = stripsA;
-            D.n = stripsA.length;
-            var wRaw:Array = wn.split(",");
-            D.weights = wRaw;
-            var bRaw:Array = bn.split(",");
-            D.bands = bRaw;
-            var tRaw:Array = tn.split(";");
-            var tr:Object = {};
-            for (k = 0; k < tRaw.length; k++)
-            {
-               var pair:Array = String(tRaw[k]).split(":");
-               if (pair.length < 2) continue;
-               var from:int = int(pair[0]);
-               var list:Array = String(pair[1]).split(",");
-               if (tr[from] == null) tr[from] = [];
-               tr[from].push([int(list[0]), int(list[1])]);
-            }
-            D.trans = tr;
-            _stripCache[bIdx] = D;
          }
-         return _stripCache[bIdx];
       }
 
-      /** 加权随机索引 */
-      private function pickIdx(cand:Array, candW:Array):int
+      /** 行墙计数 */
+      private function rowWall(grid:Array, y:int):int
       {
-         var tot:int = 0;
-         for (var k:int = 0; k < candW.length; k++) tot += int(candW[k]);
-         if (tot <= 0) return int(cand[0]);
-         var r:int = int(rnd() * tot);
-         var acc:int = 0;
-         for (k = 0; k < candW.length; k++)
+         var n:int = 0;
+         for (var x:int = 0; x < GRID_W; x++)
          {
-            acc += int(candW[k]);
-            if (r < acc) return int(cand[k]);
+            if (WALL_CHARS.indexOf(grid[y][x].charAt(0)) >= 0) n++;
          }
-         return int(cand[candW.length - 1]);
+         return n;
       }
 
-      /** 条带房收尾：底行边界 + 6 缺口强制开放 + 连通修复 */
+      /** 条带房收尾：6 缺口强制开放 + 连通修复（底行由行谱决定，同原版） */
       private function finishStripRoom(grid:Array):void
       {
-         var j:int;
-         var i:int;
-         for (i = 0; i < GRID_W; i++) grid[GRID_H - 1][i] = "A";
-         grid[GRID_H - 1][GX1] = "_";
-         grid[GRID_H - 1][GX2] = "_";
          grid[GY][0] = "_";
          grid[GY][GRID_W - 1] = "_";
          grid[0][GX1] = "_";
          grid[0][GX2] = "_";
+         grid[GRID_H - 1][GX1] = "_";
+         grid[GRID_H - 1][GX2] = "_";
          repairConnectivity(grid);
       }
 
