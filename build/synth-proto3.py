@@ -22,7 +22,7 @@ from collections import deque
 W, H = 48, 25
 WALL = set("ABCDEFGHIJKLMNOPQRST")
 GY, GX1, GX2 = 12, 23, 24
-WALL_RATIO = {"corridor": 0.25, "hall": 0.18, "quad": 0.30, "l": 0.24, "bunker": 0.28}
+WALL_RATIO = {"corridor": 0.17, "hall": 0.12, "quad": 0.22, "l": 0.14, "bunker": 0.20}
 TYPES = ["corridor", "hall", "quad", "l", "bunker"]
 
 # M2a：生物群系墙材质（语料统计权重）——生成时墙格按权重分配
@@ -138,7 +138,7 @@ def gen_room(rng, rtype, biome="stable", decor=None):
                 d += (rng.random() - 0.5) * 1.2
                 if 3.4 <= d <= 5.6:
                     grid[y][x] = pick_weighted(rng, wall_tbl)
-        _apply_boundary_decor(grid, rng, decor, wall_tbl)
+        _apply_boundary_decor(grid, rng, decor, wall_tbl, rtype)
         return grid
     # 除 bunker 外：二分阈值 + 开放掩码(-1)保留
     flat = [v for row in f for v in row if v >= 0]
@@ -148,10 +148,92 @@ def gen_room(rng, rtype, biome="stable", decor=None):
             v = f[y][x]
             if v >= 0 and v >= th:
                 grid[y][x] = pick_weighted(rng, wall_tbl)   # M2a 材质场
-    _apply_boundary_decor(grid, rng, decor, wall_tbl)
+    road_walls(grid, rtype, rng)     # v3.1 道路边墙线
+    thin_walls(grid, rng)            # v3.1 墙瘦化（防山）
+    material_bands(grid, rng, wall_tbl)  # v3.1 材质带
+    _apply_boundary_decor(grid, rng, decor, wall_tbl, rtype)
     return grid
 
-def _apply_boundary_decor(grid, rng, decor, wall_tbl):
+def _quad_gates(grid):
+    """四区门洞：在区界中心线挖 2 格门洞（上下/左右十字）"""
+    for y in (11, 12, 13):
+        for x in (22, 23, 24, 25):
+            if grid[y][x] == "C": grid[y][x] = "_"
+    for x in (21, 22, 23, 24, 25, 26):
+        for y in (11, 13):
+            if grid[y][x] == "C": grid[y][x] = "_"
+    # 四区对角连通：区界 45 度线挖门洞（简化：中央十字已足够）
+
+def thin_walls(grid, rng):
+    """墙瘦化：厚块核心挖空（3x3 8 邻墙>=13 挖 45%）×2 遍 → 墙缩成轮廓线"""
+    h, w = len(grid), len(grid[0])
+    def n8(y, x):
+        return sum(1 for dy in (-1,0,1) for dx in (-1,0,1)
+                   if (dy or dx) and 0 <= y+dy < h and 0 <= x+dx < w and grid[y+dy][x+dx] in WALL)
+    for _ in range(2):
+        for y in range(3, h-3):
+            for x in range(3, w-3):
+                if grid[y][x] in WALL and n8(y, x) >= 13 and rng.random() < 0.45:
+                    grid[y][x] = "_"
+
+def material_bands(grid, rng, police):
+    """材质带：低频区域主字符（2x2 大区各取一个主字符，区内 85% 同色）"""
+    h, w = len(grid), len(grid[0])
+    zone = {}
+    for zy in range(2):
+        for zx in range(4):
+            zone[(zy,zx)] = police[0][0] if rng.random()<0.6 else pick_weighted(rng, police)
+    for y in range(h):
+        for x in range(w):
+            if grid[y][x] in WALL:
+                main = zone[(min(y//13,1), min(x//12,3))]
+                grid[y][x] = main if rng.random() < 0.85 else pick_weighted(rng, police)
+
+def road_walls(grid, rtype, rng=None):
+    """道路边墙线：沿开放带两侧播 1 格实墙（限播，防墙占比失控）"""
+    if rtype == "corridor":
+        for y in range(3, 22):
+            for x in (18, 29):
+                if grid[y][x] == "_":
+                    grid[y][x] = "C"
+    elif rtype == "hall":
+        for x in range(8, 40):
+            for y in (3, 21):
+                if grid[y][x] == "_":
+                    grid[y][x] = "C"
+    elif rtype == "l":
+        # 仅开放带内侧一行、隔格播（限播）
+        for x in range(31, 41, 2):
+            for y in range(3, 21):
+                if grid[y][x] == "_":
+                    grid[y][x] = "C"
+
+def gap_guard(grid):
+    """缺口保护：缺口 3x3 邻域与向心隧道强制开放 → 通道不被堵"""
+    for j in range(max(0,GY-1), min(H,GY+2)):
+        for i in range(0, 3):
+            if grid[j][i] == "C": grid[j][i] = "_"
+        for i in range(W-3, W):
+            if grid[j][i] == "C": grid[j][i] = "_"
+    for i in range(max(0,GX1-1), min(W,GX2+2)):
+        for j in range(0, 2):
+            if grid[j][i] == "C": grid[j][i] = "_"
+        for j in range(H-2, H):
+            if grid[j][i] == "C": grid[j][i] = "_"
+    # 向心隧道：从缺口往内探 3 格挖通（左右水平 / 上下垂直）
+    for j in range(max(0,GY-1), min(H,GY+2)):
+        for i in range(3, 8):
+            if grid[j][i] == "C": grid[j][i] = "_"
+        for i in range(W-8, W-3):
+            if grid[j][i] == "C": grid[j][i] = "_"
+    for i in range(max(0,GX1-1), min(W,GX2+2)):
+        for j in range(2, 7):
+            if grid[j][i] == "C": grid[j][i] = "_"
+        for j in range(H-7, H-2):
+            if grid[j][i] == "C": grid[j][i] = "_"
+
+
+def _apply_boundary_decor(grid, rng, decor, wall_tbl, rtype=None):
     for x in range(W):
         grid[0][x] = "A"; grid[H - 1][x] = "A"
     for y in range(H):
@@ -166,12 +248,15 @@ def _apply_boundary_decor(grid, rng, decor, wall_tbl):
             for x in range(1, W - 1):
                 if grid[y][x] == "_" and rng.random() < 0.07:
                     grid[y][x] = "_" + pick_weighted(rng, decor)
-    # 掩体：少数开放格放"桌子/掩体"（坚固后缀使可站/挡视线）
+    # 掩体：少数开放格放"桌子/掩体"
     for _ in range(6):
         y, x = rng.randint(2, H - 3), rng.randint(2, W - 3)
         if grid[y][x] == "_":
-            grid[y][x] = "-"   # shelf 掩体（低位物件，可通行/挡视线）
-    bfs_fill(grid)
+            grid[y][x] = "-"
+    if rtype == "quad":
+        _quad_gates(grid)
+    gap_guard(grid)
+    bfs_fill(grid)   # 最后 BFS：确保上面所有挖洞都纳入连通性
 
 def bfs_fill(grid):
     seen = set(); dq = deque()
