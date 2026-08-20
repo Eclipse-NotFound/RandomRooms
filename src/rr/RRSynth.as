@@ -86,15 +86,8 @@ package rr
          var f:Array = null;
          if (rtype == "corridor" || rtype == "hall" || rtype == "l" || rtype == "split")
          {
-            // v3.3 墙为底：整图填墙（材质场），再挖房间/走廊
-            for (j = 0; j < GRID_H; j++)
-            {
-               for (i = 0; i < GRID_W; i++)
-               {
-                  grid[j][i] = wallChar(wallTbl);
-               }
-            }
-            debugStages.push(["fill", wallCount(grid)]);
+            // v3.5 原版分区墙：开放为底（网格已是 _），薄分区墙带+缺口
+            // （原版语料实证：墙占比 0.15-0.36，墙=1-2 格厚部分宽度横/竖带）
          }
          else if (rtype == "quad")
          {
@@ -144,7 +137,7 @@ package rr
          }
          
          pathCells = [];
-         carveRooms(grid, rtype);
+         carveRooms(grid, rtype, wallTbl);
          debugStages.push(["carve", wallCount(grid)]);
          materialBands(grid, wallTbl);
          debugStages.push(["material", wallCount(grid)]);
@@ -270,7 +263,7 @@ package rr
             {
                for (i = 1; i < GRID_W - 1; i++)
                {
-                  if (grid[j][i] == "_" && rnd() < 0.07)
+                  if (grid[j][i] == "_" && rnd() < 0.16)
                   {
                      grid[j][i] = "_" + pickWeighted(decor);
                   }
@@ -294,141 +287,74 @@ package rr
          bfsFill(grid);
       }
       
-      /** v3.4 直角规整房间（原版风格）
-       * 整图填墙后：主廊 2 宽折线(横平竖直) + 上下缺口纵连
-       * + 大矩形房间(8-12 x 6-9) + L 形 2 宽走廊(穿墙自动开 2 宽门洞，不堵)。
-       * 墙=连续背景整块；房间规整矩形；全会连通（bfsFill 兜底）。 */
-      private function carveRooms(grid:Array, rtype:String):void
+      /** v3.5 原版分区墙（语料实证：原版墙占比 0.15-0.36，墙=1-2 格厚的
+       * 部分宽度横/竖分区带，带缺口；开放为底 + 边缘墙条 + 高密度装饰）。
+       * 分区带锚定层高 {4,12,20} / 列 {8,24,40}（原版块层结构），
+       * 缺口+两端边道保证区块连通 → 出口不会被堵。 */
+      private function carveRooms(grid:Array, rtype:String, wallTbl:Array):void
       {
-         var x:int, y:int, k:int;
-         var pair:Array = RRGrammar_ROOMCOUNT[rtype] as Array;
-         if (pair == null) pair = [5, 8];
-         var nLo:int = int(pair[0]);
-         var nHi:int = int(pair[1]);
-
-         // 1) 主廊：左缺口 -> 右缺口 2 宽折线（行12 基线 + 可选折角上行）
-         hRun(grid, 1, GRID_W - 2, GY, 2);
-         if (rnd() < 0.8)
+         var k:int, g:int, xx:int, yy:int, x:int, y:int;
+         var nH:int = rtype == "hall" ? 2 : (rtype == "split" ? 5 : 3);
+         var levels:Array = [4, 12, 20];
+         for (k = 0; k < nH; k++)
          {
-            var bendX:int = 18 + int(rnd() * 9);
-            var bendY:int = 6 + int(rnd() * 13);
-            vRun(grid, GY, bendY, bendX, 2);
-            hRun(grid, bendX, GRID_W - 2, bendY, 2);
-            vRun(grid, bendY, GY, 42, 2);
-            hRun(grid, 42, GRID_W - 2, GY, 2);
-         }
-
-         // 2) 上/下缺口纵连（列 23/24 直连主廊，2 宽）
-         for (k = 0; k < 2; k++)
-         {
-            var c:int = k == 0 ? 23 : 24;
-            vRun(grid, 2, GY, c, 2);
-            vRun(grid, GRID_H - 3, GY, c, 2);
-         }
-
-         // 3) 大矩形房间（允许贴廊/互接=大房）+ L 形 2 宽走廊开门洞
-         var n:int = nLo + int(rnd() * (nHi - nLo + 1));
-         var placed:int = 0;
-         var tries:int = 0;
-         while (placed < n && tries < 120)
-         {
-            tries++;
-            var cw:int = 8 + int(rnd() * 5);          // 8-12
-            var ch3:int = 6 + int(rnd() * 4);         // 6-9
-            var cwx:int = 2 + int(rnd() * (GRID_W - cw - 4));
-            var cwy:int = 2 + int(rnd() * (GRID_H - ch3 - 4));
-            var emptier:int = 0;
-            for (y = cwy; y < cwy + ch3 && y < GRID_H - 1; y++)
+            y = int(levels[int(rnd() * 3)]) + int(rnd() * 3) - 1;
+            y = Math.max(2, Math.min(GRID_H - 3, y));
+            var wseg:int = 24 + int(rnd() * 21);          // 24-44
+            var x0:int = 2 + int(rnd() * (GRID_W - wseg - 2));
+            var thick:int = rnd() < 0.7 ? 1 : 2;
+            var ng:int = 2 + int(rnd() * 3);              // 2-4 缺口
+            var gaps:Object = {};
+            for (g = 0; g < ng; g++) gaps[x0 + int(rnd() * wseg)] = true;
+            for (xx = x0 + 2; xx < x0 + wseg - 2; xx++)   // 两端留 2 格边道
             {
-               for (x = cwx; x < cwx + cw && x < GRID_W - 1; x++)
+               if (gaps[xx] != null) continue;
+               for (yy = y; yy < Math.min(y + thick, GRID_H - 1); yy++)
                {
-                  if (grid[y][x] == "_") emptier++;
+                  if (grid[yy][xx] == "_") grid[yy][xx] = wallChar(wallTbl);
                }
             }
-            if (emptier > 0.8 * cw * ch3) continue;   // 纯浪费房间跳过
-            for (y = cwy; y < cwy + ch3 && y < GRID_H; y++)
+         }
+         var nV:int = rtype == "hall" ? 0 : (rtype == "split" ? 3 : (rtype == "l" ? 2 : 1));
+         var cols:Array = [8, 24, 40];
+         for (k = 0; k < nV; k++)
+         {
+            x = int(cols[int(rnd() * 3)]) + int(rnd() * 3) - 1;
+            x = Math.max(2, Math.min(GRID_W - 3, x));
+            var hseg:int = 6 + int(rnd() * 13);           // 6-18
+            var y0:int = 2 + int(rnd() * (GRID_H - hseg - 2));
+            var thick2:int = rnd() < 0.8 ? 1 : 2;
+            var ng2:int = 1 + int(rnd() * 2);             // 1-2 缺口
+            var gaps2:Object = {};
+            for (g = 0; g < ng2; g++) gaps2[y0 + int(rnd() * hseg)] = true;
+            for (yy = y0 + 1; yy < y0 + hseg - 1; yy++)   // 两端留 1 格通道
             {
-               for (x = cwx; x < cwx + cw && x < GRID_W; x++)
+               if (gaps2[yy] != null) continue;
+               for (xx = x; xx < Math.min(x + thick2, GRID_W - 1); xx++)
                {
-                  carveCell(grid, y, x);
+                  if (grid[yy][xx] == "_") grid[yy][xx] = wallChar(wallTbl);
                }
             }
-            linkL(grid, cwx + int(cw / 2), cwy + int(ch3 / 2));
-            placed++;
          }
-      }
-
-      private static const RRGrammar_ROOMCOUNT:Object =
-      {
-         corridor: [5, 8],
-         hall: [4, 6],
-         l: [4, 7],
-         split: [7, 10],
-         quad: [2, 4]
-      };
-
-      /** 挖一格（_ 开放）并入连通细胞表 */
-      private function carveCell(grid:Array, y:int, x:int):void
-      {
-         if (y < 0 || y >= GRID_H || x < 0 || x >= GRID_W) return;
-         if (grid[y][x] != "_") grid[y][x] = "_";
-         pathCells.push([y, x]);
-      }
-
-      /** 横扫 w 宽（row y，cols xa..xb，横平竖直） */
-      private function hRun(grid:Array, xa:int, xb:int, y:int, w:int):void
-      {
-         var lo:int = Math.min(xa, xb);
-         var hi:int = Math.max(xa, xb);
-         for (var x:int = lo; x <= hi; x++)
+         // 左右边缘墙条（带缺口，非整高）
+         for (var si:int = 0; si < 2; si++)
          {
-            for (var dy:int = 0; dy < w; dy++)
+            var side:int = si == 0 ? 1 : GRID_W - 2;
+            for (y = 2; y < GRID_H - 2; y++)
             {
-               var yy:int = y + dy;
-               if (yy >= 0 && yy < GRID_H) carveCell(grid, yy, x);
+               if (rnd() < 0.75 && Math.abs(y - GY) > 2 && grid[y][side] == "_")
+               {
+                  grid[y][side] = wallChar(wallTbl);
+               }
             }
          }
-      }
-
-      /** 竖扫 w 宽（col x，rows ya..yb，横平竖直） */
-      private function vRun(grid:Array, ya:int, yb:int, x:int, w:int):void
-      {
-         var lo:int = Math.min(ya, yb);
-         var hi:int = Math.max(ya, yb);
-         for (var y:int = lo; y <= hi; y++)
+         // 掩体墩 2-5 个（实心块，射击掩体）
+         var nubN:int = 2 + int(rnd() * 4);
+         for (k = 0; k < nubN; k++)
          {
-            for (var dx:int = 0; dx < w; dx++)
-            {
-               var xx:int = x + dx;
-               if (xx >= 0 && xx < GRID_W) carveCell(grid, y, xx);
-            }
-         }
-      }
-
-      /** 房间中心 -> 最近网络细胞：L 形 2 宽走廊（先横后竖/先竖后横随机） */
-      private function linkL(grid:Array, tx:int, ty:int):void
-      {
-         if (pathCells.length == 0) return;
-         var bi:int = 0;
-         var bd:Number = 1e9;
-         for (var k:int = 0; k < pathCells.length; k++)
-         {
-            var dy:Number = pathCells[k][0] - ty;
-            var dx:Number = pathCells[k][1] - tx;
-            var d:Number = dy * dy + dx * dx;
-            if (d < bd) { bd = d; bi = k; }
-         }
-         var sy:int = pathCells[bi][0];
-         var sx:int = pathCells[bi][1];
-         if (rnd() < 0.5)
-         {
-            hRun(grid, sx, tx, sy, 2);
-            vRun(grid, sy, ty, tx, 2);
-         }
-         else
-         {
-            vRun(grid, sy, ty, sx, 2);
-            hRun(grid, sx, tx, ty, 2);
+            var ny:int = 2 + int(rnd() * (GRID_H - 4));
+            var nx:int = 2 + int(rnd() * (GRID_W - 4));
+            if (grid[ny][nx] == "_") grid[ny][nx] = wallChar(wallTbl);
          }
       }
       
