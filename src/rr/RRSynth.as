@@ -279,6 +279,20 @@ package rr
          return String(tbl[0][0]);
       }
       
+      /** 统计墙格数 */
+      public function wallCount(grid:Array):int
+      {
+         var n:int = 0;
+         for (var j:int = 0; j < grid.length; j++)
+         {
+            for (var i:int = 0; i < grid[j].length; i++)
+            {
+               if (WALL_CHARS.indexOf(String(grid[j][i]).charAt(0)) >= 0) n++;
+            }
+         }
+         return n;
+      }
+      
       private function wallChar(wallTbl:Array):String
       {
          return pickWeighted(wallTbl);
