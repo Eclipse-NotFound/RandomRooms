@@ -22,7 +22,7 @@ from collections import deque
 W, H = 48, 25
 WALL = set("ABCDEFGHIJKLMNOPQRST")
 GY, GX1, GX2 = 12, 23, 24
-WALL_RATIO = {"corridor": 0.17, "hall": 0.12, "quad": 0.22, "l": 0.14, "bunker": 0.20}
+WALL_RATIO = {"corridor": 0.26, "hall": 0.23, "quad": 0.22, "l": 0.25, "split": 0.30, "bunker": 0.20}
 TYPES = ["corridor", "hall", "quad", "l", "bunker"]
 
 # M2a：生物群系墙材质（语料统计权重）——生成时墙格按权重分配
@@ -104,16 +104,8 @@ def thresh_wall(flat, ratio):
 def gen_room(rng, rtype, biome="stable", decor=None):
     grid = [["_" for _ in range(W)] for _ in range(H)]
     wall_tbl = BIOME_WALL.get(biome, BIOME_WALL["stable"])
-    if rtype == "corridor":
+    if rtype in ("corridor", "hall", "l", "split"):
         f = value_noise(rng)
-        for y in range(H):
-            for x in range(18, 30):
-                f[y][x] = -1.0
-    elif rtype == "hall":
-        f = value_noise(rng)
-        for y in range(5, 20):
-            for x in range(8, 40):
-                f[y][x] = -1.0
     elif rtype == "quad":
         # 四区心：固定四个象限中心（避免挤在一起）
         centers = [(7, 7), (41, 7), (7, 18), (41, 18)]
@@ -122,14 +114,6 @@ def gen_room(rng, rtype, biome="stable", decor=None):
             for x in range(W):
                 ds = sorted(math.hypot(x - cx, y - cy) for cx, cy in centers)
                 f[y][x] = ds[0] + 0.7 * ds[1]
-    elif rtype == "l":
-        f = value_noise(rng)
-        for y in range(18, 23):
-            for x in range(W):
-                f[y][x] = -1.0
-        for x in range(32, 41):
-            for y in range(H):
-                f[y][x] = -1.0
     else:  # bunker：SDF 环带独立画墙
         cen = [(rng.randint(8, W - 9), rng.randint(5, H - 6)) for _ in range(rng.randint(2, 3))]
         for y in range(H):
@@ -148,7 +132,7 @@ def gen_room(rng, rtype, biome="stable", decor=None):
             v = f[y][x]
             if v >= 0 and v >= th:
                 grid[y][x] = pick_weighted(rng, wall_tbl)   # M2a 材质场
-    road_walls(grid, rtype, rng)     # v3.1 道路边墙线
+    carve_rooms(grid, rtype, rng)  # v3.2 有机房间-走廊
     thin_walls(grid, rng)            # v3.1 墙瘦化（防山）
     material_bands(grid, rng, wall_tbl)  # v3.1 材质带
     _apply_boundary_decor(grid, rng, decor, wall_tbl, rtype)
@@ -165,7 +149,7 @@ def _quad_gates(grid):
     # 四区对角连通：区界 45 度线挖门洞（简化：中央十字已足够）
 
 def thin_walls(grid, rng):
-    """墙瘦化：厚块核心挖空（3x3 8 邻墙>=13 挖 45%）×2 遍 → 墙缩成轮廓线"""
+    """墙瘦化：8 邻墙>=7 挖 40% ×2 遍 → 厚块蚀成蜿蜒连续墙带（旧>=13 为死条件从不触发）"""
     h, w = len(grid), len(grid[0])
     def n8(y, x):
         return sum(1 for dy in (-1,0,1) for dx in (-1,0,1)
@@ -173,7 +157,7 @@ def thin_walls(grid, rng):
     for _ in range(2):
         for y in range(3, h-3):
             for x in range(3, w-3):
-                if grid[y][x] in WALL and n8(y, x) >= 13 and rng.random() < 0.45:
+                if grid[y][x] in WALL and n8(y, x) >= 7 and rng.random() < 0.40:
                     grid[y][x] = "_"
 
 def material_bands(grid, rng, police):
@@ -189,24 +173,109 @@ def material_bands(grid, rng, police):
                 main = zone[(min(y//13,1), min(x//12,3))]
                 grid[y][x] = main if rng.random() < 0.85 else pick_weighted(rng, police)
 
-def road_walls(grid, rtype, rng=None):
-    """道路边墙线：沿开放带两侧播 1 格实墙（限播，防墙占比失控）"""
-    if rtype == "corridor":
-        for y in range(3, 22):
-            for x in (18, 29):
-                if grid[y][x] == "_":
-                    grid[y][x] = "C"
-    elif rtype == "hall":
-        for x in range(8, 40):
-            for y in (3, 21):
-                if grid[y][x] == "_":
-                    grid[y][x] = "C"
-    elif rtype == "l":
-        # 仅开放带内侧一行、隔格播（限播）
-        for x in range(31, 41, 2):
-            for y in range(3, 21):
-                if grid[y][x] == "_":
-                    grid[y][x] = "C"
+def carve_rooms(grid, rtype, rng):
+    """v3.2 有机房间-走廊：波浪主廊 + 缺口纵连 + 随机腔室（无固定直线模板）"""
+    global PATHDIR
+    PATHDIR = []
+    params = {
+        "corridor": (1, 2, False, 4),
+        "hall":     (2, 4, True,  4),
+        "l":        (2, 4, False, 9),
+        "split":    (3, 6, False, 4),
+        "quad":     (1, 2, False, 4),
+    }
+    n_lo, n_hi, plaza_v, wander = params[rtype]
+
+    # 1) 主波浪走廊（左<->右，两端 sin 包络归零接缺口，行间缓变）
+    cy = float(GY)
+    A = 1.0 + rng.random() * 2.4
+    kk = 0.18 + rng.random() * 0.4
+    ph = rng.random() * 6.283
+    for x in range(1, W - 1):
+        env = math.sin(math.pi * x / (W - 1))
+        t = GY + A * env * math.sin(kk * x + ph) + (rng.random() - 0.5) * 1.2
+        if t - cy > 1.2:
+            t = cy + 1.2
+        elif t - cy < -1.2:
+            t = cy - 1.2
+        t = max(4.0, min(H - 5.0, t))
+        cy = t
+        yy0 = int(round(t)) - 1
+        for yy in range(yy0, yy0 + 3):
+            if 1 <= yy < H - 1:
+                carve_cell(grid, yy, x)
+
+    # 2) 上/下缺口纵连（列 23/24，轻微横漂）
+    for c in (23, 24):
+        for y in range(2, 12):
+            vcx = max(3, min(W - 4, c + int(round((rng.random() - 0.5) * wander))))
+            carve_cell(grid, y, vcx)
+            carve_cell(grid, y, min(vcx + 1, W - 2))
+        for y in range(22, 11, -1):
+            vcx = max(3, min(W - 4, c + int(round((rng.random() - 0.5) * wander))))
+            carve_cell(grid, y, vcx)
+            carve_cell(grid, y, min(vcx + 1, W - 2))
+
+    # 3) 中央广场（hall）
+    if plaza_v:
+        px0 = 9 + rng.randint(0, 8)
+        py0 = 5 + rng.randint(0, 5)
+        pw = 18 + rng.randint(0, 8)
+        ph = 8 + rng.randint(0, 4)
+        y = py0
+        while y < py0 + ph and y < H - 2:
+            x = px0
+            while x < px0 + pw and x < W - 2:
+                carve_cell(grid, y, x)
+                x += 1
+            y += 1
+
+    # 4) 随机腔室 + 就近连廊
+    n = n_lo + rng.randint(0, n_hi - n_lo)
+    for _ in range(n):
+        cw = 5 + rng.randint(0, 5)
+        ch = 5 + rng.randint(0, 4)
+        cwx = 2 + rng.randint(0, W - cw - 4)
+        cwy = 2 + rng.randint(0, H - ch - 4)
+        for y in range(cwy, cwy + ch):
+            for x in range(cwx, cwx + cw):
+                carve_cell(grid, y, x)
+        connect_chamber(grid, cwy + ch // 2, cwx + cw // 2)
+
+
+PATHDIR = []
+
+
+def carve_cell(grid, y, x):
+    if y < 0 or y >= H or x < 0 or x >= W:
+        return
+    if grid[y][x] != "_":
+        grid[y][x] = "_"
+    if PATHDIR is not None:
+        PATHDIR.append((y, x))
+
+
+def connect_chamber(grid, cy0, cx0):
+    if not PATHDIR:
+        return
+    best = min(PATHDIR, key=lambda p: (p[0] - cy0) ** 2 + (p[1] - cx0) ** 2)
+    ty, tx = best
+    st = 0
+    while (ty != cy0 or tx != cx0) and st < 90:
+        st += 1
+        carve_cell(grid, ty, tx)
+        carve_cell(grid, ty, min(tx + 1, W - 2))
+        px = 1 if cx0 > tx else (-1 if cx0 < tx else 0)
+        py = 1 if cy0 > ty else (-1 if cy0 < ty else 0)
+        if px == 0:
+            ty += py
+        elif py == 0:
+            tx += px
+        elif rng.random() < 0.55:
+            tx += px
+        else:
+            ty += py
+
 
 def gap_guard(grid):
     """缺口保护：缺口 3x3 邻域与向心隧道强制开放 → 通道不被堵"""
@@ -330,7 +399,7 @@ def main():
     # 样本
     print("\n=== M1 视觉样本 ===")
     decor = load_biome_decor("build/grammar-data2.txt")
-    for rtype, biome in [("corridor", "stable"), ("hall", "sewer"), ("l", "plant"), ("bunker", "mane")]:
+    for rtype, biome in [("corridor", "stable"), ("hall", "sewer"), ("l", "plant"), ("split", "mane"), ("bunker", "mane")]:
         grid = gen_room(rng, rtype, biome, decor.get(biome))
         print(f"----- {rtype} (墙 {wall_ratio(grid):.2f}) -----")
         for row in grid:

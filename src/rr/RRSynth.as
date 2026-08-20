@@ -35,6 +35,8 @@ package rr
       public var rnd:Function;
       /** 分阶段诊断：genGrid 每步墙数（定位全墙 bug） */
       public var debugStages:Array = [];
+      /** v3.2 连通细胞表：主廊/纵连/腔室连廊落盘格（供腔室就近连廊） */
+      private var pathCells:Array = [];
       
       public function RRSynth(rndFn:Function = null)
       {
@@ -63,7 +65,8 @@ package rr
          var decor:Array = RRGrammar.BIOME_DECORS[bIdx] as Array;
          if (rtype == null || rtype.length == 0)
          {
-            rtype = rnd() < 0.5 ? "corridor" : "hall";
+            var rt:int = int(rnd() * 4);
+            rtype = rt == 0 ? "corridor" : (rt == 1 ? "hall" : (rt == 2 ? "l" : "split"));
          }
          
          var grid:Array = [];
@@ -81,22 +84,9 @@ package rr
          debugStages.push(["init", wallCount(grid)]);
          
          var f:Array = null;
-         if (rtype == "corridor" || rtype == "hall" || rtype == "l")
+         if (rtype == "corridor" || rtype == "hall" || rtype == "l" || rtype == "split")
          {
             f = valueNoise();
-            if (rtype == "corridor")
-            {
-               for (j = 0; j < GRID_H; j++) { for (i = 20; i <= 27; i++) { f[j][i] = -1; } }
-            }
-            else if (rtype == "hall")
-            {
-               for (j = 5; j <= 19; j++) { for (i = 8; i <= 39; i++) { f[j][i] = -1; } }
-            }
-            else
-            {
-               for (j = 18; j <= 22; j++) { for (i = 0; i < GRID_W; i++) { f[j][i] = -1; } }
-               for (i = 32; i <= 40; i++) { for (j = 0; j < GRID_H; j++) { f[j][i] = -1; } }
-            }
          }
          else if (rtype == "quad")
          {
@@ -148,8 +138,9 @@ package rr
             }
          }
          debugStages.push(["thresh th=" + th.toFixed(4), wallCount(grid)]);
-         roadWalls(grid, rtype);
-         debugStages.push(["road", wallCount(grid)]);
+         pathCells = [];
+         carveRooms(grid, rtype);
+         debugStages.push(["carve", wallCount(grid)]);
          thinWalls(grid);
          debugStages.push(["thin", wallCount(grid)]);
          materialBands(grid, wallTbl);
@@ -259,10 +250,11 @@ package rr
       {
          switch (rtype)
          {
-            case "hall": return 0.12;
+            case "hall": return 0.23;
             case "quad": return 0.22;
-            case "l": return 0.14;
-            default: return 0.17;
+            case "l": return 0.25;
+            case "split": return 0.30;
+            default: return 0.26;
          }
       }
       
@@ -351,44 +343,143 @@ package rr
          bfsFill(grid);
       }
       
-      /** v3.1 道路边墙线（限播，防墙占比失控） */
-      private function roadWalls(grid:Array, rtype:String):void
+      /** v3.2 有机房间-走廊：波浪主廊 + 缺口纵连 + 随机腔室（无固定直线模板）
+       * 取代 v3.1 固定直线 roadWalls（旧模板：corridor=双竖墙分三区 / hall=上下双横墙） */
+      private function carveRooms(grid:Array, rtype:String):void
       {
-         var j:int;
-         var i:int;
-         if (rtype == "corridor")
+         var x:int, y:int, yy:int, k:int;
+         // 参数集（每次掷随机 -> 每次形态不同）
+         var nCham:int;
+         var plaza:Boolean = false;
+         var vWander:Number = 4;          // 缺口纵连的横漂幅度
+         switch (rtype)
          {
-            for (j = 3; j < 22; j++)
+            case "hall":
+               nCham = 2 + int(rnd() * 2); plaza = true; break;
+            case "l":
+               nCham = 2 + int(rnd() * 2); vWander = 9; break;
+            case "split":
+               nCham = 3 + int(rnd() * 3); break;
+            default: // corridor
+               nCham = 1 + int(rnd() * 2); break;
+         }
+
+         // 1) 主波浪走廊：左<->右，两端 sin 包络归零稳住缺口 GY，行间缓变保连续
+         var A:Number = 1.0 + rnd() * 2.4;
+         var kk:Number = 0.18 + rnd() * 0.4;
+         var ph:Number = rnd() * 6.283;
+         var cyPrev:Number = GY;
+         for (x = 1; x < GRID_W - 1; x++)
+         {
+            var env:Number = Math.sin(Math.PI * x / (GRID_W - 1));
+            var target:Number = GY + A * env * Math.sin(kk * x + ph) + (rnd() - 0.5) * 1.2;
+            if (target - cyPrev > 1.2) target = cyPrev + 1.2;
+            else if (target - cyPrev < -1.2) target = cyPrev - 1.2;
+            target = Math.max(4, Math.min(GRID_H - 5, target));
+            cyPrev = target;
+            for (yy = int(target) - 1; yy <= int(target) + 1; yy++)
             {
-               for each (var cx:int in [18, 29])
+               if (yy >= 1 && yy < GRID_H - 1) carveCell(grid, yy, x);
+            }
+         }
+
+         // 2) 上/下缺口纵连（列 23/24，轻微横漂）
+         var cArr:Array = [23, 24];
+         for (k = 0; k < cArr.length; k++)
+         {
+            var c:int = cArr[k];
+            for (y = 2; y <= 11; y++)
+            {
+               var vcx:int = c + Math.round((rnd() - 0.5) * vWander);
+               vcx = Math.max(3, Math.min(GRID_W - 4, vcx));
+               carveCell(grid, y, vcx);
+               carveCell(grid, y, Math.min(vcx + 1, GRID_W - 2));
+            }
+            for (y = 22; y >= 12; y--)
+            {
+               var vcx2:int = c + Math.round((rnd() - 0.5) * vWander);
+               vcx2 = Math.max(3, Math.min(GRID_W - 4, vcx2));
+               carveCell(grid, y, vcx2);
+               carveCell(grid, y, Math.min(vcx2 + 1, GRID_W - 2));
+            }
+         }
+
+         // 3) 中央广场（hall 专属大房间）
+         if (plaza)
+         {
+            var px0:int = 9 + int(rnd() * 9);
+            var py0:int = 5 + int(rnd() * 6);
+            var pw:int = 18 + int(rnd() * 9);
+            var ph2:int = 8 + int(rnd() * 5);
+            for (y = py0; y < py0 + ph2 && y < GRID_H - 2; y++)
+            {
+               for (x = px0; x < px0 + pw && x < GRID_W - 2; x++)
                {
-                  if (grid[j][cx] == "_") grid[j][cx] = "C";
+                  carveCell(grid, y, x);
                }
             }
          }
-         else if (rtype == "hall")
+
+         // 4) 随机腔室（房间）+ 就近连廊
+         for (k = 0; k < nCham; k++)
          {
-            for (i = 8; i < 40; i++)
+            var cw:int = 5 + int(rnd() * 6);         // 5-10
+            var ch3:int = 5 + int(rnd() * 5);        // 5-9
+            var cwx:int = 2 + int(rnd() * (GRID_W - cw - 4));
+            var cwy:int = 2 + int(rnd() * (GRID_H - ch3 - 4));
+            for (y = cwy; y < cwy + ch3; y++)
             {
-               for each (var cy:int in [3, 21])
+               for (x = cwx; x < cwx + cw; x++)
                {
-                  if (grid[cy][i] == "_") grid[cy][i] = "C";
+                  carveCell(grid, y, x);
                }
             }
+            connectChamber(grid, cwy + int(ch3 / 2), cwx + int(cw / 2));
          }
-         else if (rtype == "l")
+
+         // 通道宽度保护：确保任何 2 宽通道不被稀疏墙体残留堵死（留待 bfsFill 兜底）
+      }
+
+      /** 挖一格（_ 开放）并入连通细胞表 */
+      private function carveCell(grid:Array, y:int, x:int):void
+      {
+         if (y < 0 || y >= GRID_H || x < 0 || x >= GRID_W) return;
+         if (grid[y][x] != "_") grid[y][x] = "_";
+         pathCells.push([y, x]);
+      }
+
+      /** 腔室中心 -> 最近走廊/连通细胞（曼哈顿逼近 2 宽） */
+      private function connectChamber(grid:Array, cy0:int, cx0:int):void
+      {
+         if (pathCells.length == 0) return;
+         var bi:int = 0;
+         var bd:Number = 1e9;
+         for (var k:int = 0; k < pathCells.length; k++)
          {
-            for (i = 31; i < 41; i += 2)
-            {
-               for (j = 3; j < 21; j++)
-               {
-                  if (grid[j][i] == "_") grid[j][i] = "C";
-               }
-            }
+            var dy:Number = pathCells[k][0] - cy0;
+            var dx:Number = pathCells[k][1] - cx0;
+            var d:Number = dy * dy + dx * dx;
+            if (d < bd) { bd = d; bi = k; }
+         }
+         var ty:int = pathCells[bi][0];
+         var tx:int = pathCells[bi][1];
+         var st:int = 0;
+         while ((ty != cy0 || tx != cx0) && st < 90)
+         {
+            st++;
+            carveCell(grid, ty, tx);
+            carveCell(grid, ty, Math.min(tx + 1, GRID_W - 2));
+            var px:int = cx0 > tx ? 1 : (cx0 < tx ? -1 : 0);
+            var py:int = cy0 > ty ? 1 : (cy0 < ty ? -1 : 0);
+            if (px == 0) ty += py;
+            else if (py == 0) tx += px;
+            else if (rnd() < 0.55) tx += px;
+            else ty += py;
          }
       }
       
-      /** v3.1 墙瘦化：3x3 8 邻墙>=13 挖 45%，两遍 → 墙缩成轮廓线 */
+      /** v3.2 墙瘦化：8 邻墙>=7 挖 40% ×2 遍 → 厚块蚀成蜿蜒连续墙带
+       * （旧 n8>=13 是死条件——8 邻最多 8，从不触发，墙一直维持厚块） */
       private function thinWalls(grid:Array):void
       {
          function n8(y:int, x:int):int
@@ -415,7 +506,7 @@ package rr
             {
                for (var i:int = 3; i < GRID_W - 3; i++)
                {
-                  if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0 && n8(j, i) >= 13 && rnd() < 0.45)
+                  if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0 && n8(j, i) >= 7 && rnd() < 0.40)
                   {
                      grid[j][i] = "_";
                   }
