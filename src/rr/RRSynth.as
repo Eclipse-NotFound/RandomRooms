@@ -152,41 +152,39 @@ package rr
       private static const PROFILE_PLANT:Array = [0.49,0.18,0.14,0.14,0.47,0.15,0.12,0.12,0.45,0.16,0.15,0.22,0.52,0.17,0.12,0.10,0.53,0.20,0.16,0.27,0.49,0.20,0.12,0.13,0.58];
       private static const PROFILE_MANE:Array = [0.72,0.06,0.07,0.08,0.14,0.07,0.03,0.04,0.74,0.18,0.13,0.09,0.14,0.08,0.04,0.10,0.71,0.07,0.04,0.04,0.10,0.03,0.02,0.04,0.72];
 
-      /** v4 行谱结构生成：逐行按谱采样墙量 -> 横向随机实心带段（1 格厚，
-       * 垂直结构由谱承载）；竖带/边缘条/水池/装饰排/Z 栅格行全部程序化。
+      /** v4 行谱结构生成：行是二值的 —— 锚点行(4/8/12/16/20)按谱概率成为
+       * 实心墙带（覆盖率 0.30-0.45，段间门洞，端留边道）；非锚点行只放
+       * 少量短段（分区内保持开放）；另加竖向房间墙柱(2-4)围出房间。
        * 学的是语料分布，画的是原语 —— 无任何原版切片（有机重组）。 */
       private function profileGen(grid:Array, bIdx:int, rtype:String, wallTbl:Array):void
       {
          var prof:Array = bIdx == 0 ? PROFILE_STABLE : (bIdx == 1 ? PROFILE_SEWER : (bIdx == 2 ? PROFILE_PLANT : PROFILE_MANE));
-         var tfac:Number = rtype == "hall" ? 0.85 : (rtype == "split" ? 1.15 : 1.0);
-         var y:int, x:int, k:int, xx:int, guard:int;
-         // 1) 逐行按谱采样墙量
+         var tfac:Number = rtype == "hall" ? 0.9 : (rtype == "split" ? 1.15 : 1.0);
+         var y:int, x:int, k:int, xx:int;
+         // 1) 锚点行 = 墙带；0/24 = 边界带；其它行 = 少量短段
+         var anchors:Array = [4, 8, 12, 16, 20];
          for (y = 0; y < GRID_H; y++)
          {
-            var target:int = int(prof[y] * GRID_W * (0.85 + rnd() * 0.3) * tfac);
-            guard = 0;
-            while (guard < 40)
+            var isAnchor:Boolean = y == 0 || y == 24;
+            for (k = 0; k < anchors.length; k++) { if (y == anchors[k]) isAnchor = true; }
+            if (isAnchor)
             {
-               guard++;
-               var have:int = rowWall(grid, y);
-               if (have >= target) break;
-               var runlen:int = 6 + int(rnd() * 17);
-               if (rnd() < 0.15) runlen = 1 + int(rnd() * 5);   // 少量短段/单格
-               var cap:int = target - have + 6;
-               if (runlen > cap) runlen = cap;                  // 限长防超调，段保持实心
-               var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
-               for (k = 0; k < runlen; k++)
-               {
-                  xx = x0 + k;
-                  if (xx < GRID_W - 2 && grid[y][xx] == "_") grid[y][xx] = wallChar(wallTbl);
-               }
+               var p:Number = (y == 0 || y == 24) ? 1.0 : Math.min(1.0, prof[y] * 1.1 * tfac);
+               if (rnd() > p) continue;
+               var target:int = int(GRID_W * ((y == 0 || y == 24) ? 0.55 : (0.30 + rnd() * 0.15)) * tfac);
+               drawBand(grid, wallTbl, y, target);
+            }
+            else
+            {
+               var t2:int = int(prof[y] * GRID_W * 0.65 * tfac);
+               drawBits(grid, wallTbl, y, t2);
             }
          }
-         // 2) 竖带 0-2（锚定列 8/24/40，低频）
+         // 2) 竖向房间墙柱 2-4 条（锚定列 8/24/40，1-2 宽，高 6-18，端留通道）
          var cols:Array = [8, 24, 40];
-         for (k = 0; k < 2; k++)
+         var nv:int = 2 + int(rnd() * 3);
+         for (k = 0; k < nv; k++)
          {
-            if (rnd() < 0.6) continue;
             var vx:int = int(cols[int(rnd() * 3)]) + int(rnd() * 5) - 2;
             vx = Math.max(2, Math.min(GRID_W - 3, vx));
             var vh:int = 6 + int(rnd() * 13);
@@ -271,15 +269,70 @@ package rr
          }
       }
 
-      /** 行墙计数 */
-      private function rowWall(grid:Array, y:int):int
+      /** 实心墙带：1-2 段（段间 1-3 格门洞），限长防超调，端留边道 */
+      private function drawBand(grid:Array, wallTbl:Array, y:int, target:int):void
       {
-         var n:int = 0;
-         for (var x:int = 0; x < GRID_W; x++)
+         var have:int = 0;
+         var guard:int = 0;
+         while (have < target && guard < 20)
          {
-            if (WALL_CHARS.indexOf(grid[y][x].charAt(0)) >= 0) n++;
+            guard++;
+            var runlen:int = 8 + int(rnd() * 15);
+            var cap:int = target - have + 6;
+            if (runlen > cap) runlen = cap;
+            var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
+            for (var k:int = 0; k < runlen; k++)
+            {
+               var xx:int = x0 + k;
+               if (xx < GRID_W - 2 && grid[y][xx] == "_")
+               {
+                  grid[y][xx] = wallChar(wallTbl);
+                  have++;
+               }
+            }
+            if (guard < 20 && rnd() < 0.5) have += 1 + int(rnd() * 3);   // 段间门洞
          }
-         return n;
+         // 过冲回剪（只剪段尾，保持段实心）
+         while (have > target + 4)
+         {
+            var trimmed:Boolean = false;
+            for (var xx2:int = GRID_W - 3; xx2 > 2; xx2--)
+            {
+               if (WALL_CHARS.indexOf(grid[y][xx2].charAt(0)) >= 0)
+               {
+                  grid[y][xx2] = "_";
+                  have--;
+                  trimmed = true;
+                  break;
+               }
+            }
+            if (!trimmed) break;
+         }
+      }
+
+      /** 开放行短段：1-6 格（原版分区内块残墙） */
+      private function drawBits(grid:Array, wallTbl:Array, y:int, target:int):void
+      {
+         var have:int = 0;
+         var guard:int = 0;
+         while (have < target && guard < 30)
+         {
+            guard++;
+            var runlen:int = 1 + int(rnd() * 6);
+            var cap:int = target - have;
+            if (runlen > cap) runlen = cap;
+            if (runlen <= 0) break;
+            var x0:int = 2 + int(rnd() * Math.max(1, GRID_W - runlen - 3));
+            for (var k:int = 0; k < runlen; k++)
+            {
+               var xx:int = x0 + k;
+               if (xx < GRID_W - 2 && grid[y][xx] == "_")
+               {
+                  grid[y][xx] = wallChar(wallTbl);
+                  have++;
+               }
+            }
+         }
       }
 
       /** 条带房收尾：6 缺口强制开放 + 连通修复（底行由行谱决定，同原版） */

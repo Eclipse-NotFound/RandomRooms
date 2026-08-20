@@ -68,30 +68,85 @@ def pick_weighted(rng, table):
         if r < acc:
             return ch
 
+def _draw_band(grid, rng, wall_tbl, y, target):
+    """实心墙带：1-2 段（段间 1-3 格门洞），限长防超调，端留边道"""
+    have = 0
+    guard = 0
+    while have < target and guard < 20:
+        guard += 1
+        runlen = rng.randint(8, 22)
+        runlen = min(runlen, target - have + 6)
+        x0 = rng.randint(2, max(2, W - runlen - 3))
+        for k in range(runlen):
+            xx = x0 + k
+            if xx < W - 2 and grid[y][xx] == "_":
+                grid[y][xx] = pick_weighted(rng, wall_tbl)
+                have += 1
+        if guard < 20 and rng.random() < 0.5:
+            have += rng.randint(1, 3)   # 段间门洞（不画墙，计入目标）
+    # 过冲回剪（保持段实心：只剪段尾）
+    while have > target + 4:
+        # 找最右墙格删掉
+        for xx in range(W - 3, 2, -1):
+            if grid[y][xx][0] in WALL:
+                grid[y][xx] = "_"
+                have -= 1
+                break
+        else:
+            break
+
+def _draw_bits(grid, rng, wall_tbl, y, target):
+    """开放行小段：1-6 格短段/单格"""
+    have = 0
+    guard = 0
+    while have < target and guard < 30:
+        guard += 1
+        runlen = rng.randint(1, 6)
+        runlen = min(runlen, target - have)
+        if runlen <= 0:
+            break
+        x0 = rng.randint(2, max(2, W - runlen - 3))
+        for k in range(runlen):
+            xx = x0 + k
+            if xx < W - 2 and grid[y][xx] == "_":
+                grid[y][xx] = pick_weighted(rng, wall_tbl)
+                have += 1
+
 def gen_room(rng, rtype, biome="stable", decor=None):
     wall_tbl = BIOME_WALL.get(biome, BIOME_WALL["stable"])
     prof = PROFILE[biome]
     grid = [["_" for _ in range(W)] for _ in range(H)]
 
-    # 1) 逐行按谱采样墙量 -> 横向随机画实心带段（1 格厚：垂直结构已由谱承载）
-    tfac = {"corridor": 1.0, "hall": 0.85, "l": 1.0, "split": 1.15}[rtype]
+    # 1) 行是二值的：锚点行(4/8/12/16/20)按谱概率成为墙带；0/24 边界带；
+    #    非锚点行只放少量小段（分区内保持开放）
+    tfac = {"corridor": 1.0, "hall": 0.9, "l": 1.0, "split": 1.15}[rtype]
+    anchors = [4, 8, 12, 16, 20]
     for y in range(H):
-        target = int(prof[y] * W * (0.85 + rng.random() * 0.3) * tfac)
-        guard = 0
-        while guard < 40:
-            guard += 1
-            have = sum(1 for c in grid[y] if c and c[0] in WALL)
-            if have >= target:
-                break
-            runlen = rng.randint(6, 22)
-            if rng.random() < 0.15:
-                runlen = rng.randint(1, 5)      # 少量短段/单格
-            runlen = min(runlen, target - have + 6)   # 限长防超调，段保持实心
-            x0 = rng.randint(2, max(2, W - runlen - 3))
-            for k in range(runlen):
-                xx = x0 + k
-                if xx < W - 2 and grid[y][xx] == "_":
-                    grid[y][xx] = pick_weighted(rng, wall_tbl)
+        if y in anchors or y == 0 or y == 24:
+            # 墙带行
+            p = prof[y] * 1.1 if y in anchors else prof[y] * 0.9
+            if y == 0 or y == 24:
+                p = 1.0
+            if rng.random() > min(1.0, p * tfac):
+                continue
+            target = int(48 * (0.55 if (y == 0 or y == 24) else (0.30 + rng.random() * 0.15)) * tfac)
+            _draw_band(grid, rng, wall_tbl, y, target)
+        else:
+            # 开放行：中量短段（原版分区内块残墙，谱值×0.5）
+            target = int(prof[y] * 48 * 0.65 * tfac)
+            _draw_bits(grid, rng, wall_tbl, y, target)
+    # 1b) 竖向房间墙柱 2-4 条（锚定列 8/24/40，1-2 宽，高 6-18，端留通道）
+    cols = [8, 24, 40]
+    for _ in range(rng.randint(2, 4)):
+        x = cols[rng.randrange(3)] + rng.randint(-2, 2)
+        x = max(2, min(W - 3, x))
+        hseg = rng.randint(6, 18)
+        y0 = rng.randint(2, H - hseg - 2)
+        tw = 1 if rng.random() < 0.8 else 2
+        for yy in range(y0 + 1, y0 + hseg - 1):
+            for xx in range(x, min(x + tw, W - 1)):
+                if grid[yy][xx] == "_":
+                    grid[yy][xx] = pick_weighted(rng, wall_tbl)
 
     # 2) 竖带 0-2（锚定列 8/24/40，低频）
     for _ in range(2):
@@ -253,7 +308,7 @@ def validate(grid, rtype):
             if grid[y][x][0] not in WALL and (y, x) not in seen:
                 errs.append(f"孤岛({y},{x})"); return errs
     wr = wall_ratio(grid)
-    if not (0.08 <= wr <= 0.60):
+    if not (0.06 <= wr <= 0.60):
         errs.append(f"墙占比 {wr:.2f}")
     return errs
 
