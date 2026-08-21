@@ -13,3 +13,4 @@ release/
 .DS_Store
 Thumbs.db
 *.swp
+build/__pycache__/
