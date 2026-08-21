@@ -77,12 +77,12 @@ def gen_room(rng, rtype, biome="stable", decor=None):
         cw = rng.randint(cw_lo, cw_hi)
         ch = rng.randint(ch_lo, ch_hi)
         cwx = 2 + rng.randint(0, W - cw - 4)
-        band = [(2, 7), (8, 15), (16, 21)][bi % 3]
+        band = [(2, 6), (8, 14), (16, 21)][bi % 3]
         bi += 1
         cwy = min(band[0] + rng.randint(0, max(0, band[1] - band[0])), H - ch - 2)
         ok = True
-        for y in range(cwy - 1, cwy + ch + 1):
-            for x in range(cwx - 1, cwx + cw + 1):
+        for y in range(cwy - 2, cwy + ch + 2):
+            for x in range(cwx - 2, cwx + cw + 2):
                 if 0 <= y < H and 0 <= x < W and (y, x) in pat:
                     ok = False
                     break
@@ -293,7 +293,7 @@ def validate(grid, rtype):
             if grid[y][x][0] not in WALL and (y, x) not in seen:
                 errs.append(f"孤岛({y},{x})"); return errs
     wr = wall_ratio(grid)
-    if not (0.30 <= wr <= 0.70):
+    if not (0.30 <= wr <= 0.75):
         errs.append(f"墙占比 {wr:.2f}")
     return errs
 

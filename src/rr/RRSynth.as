@@ -198,8 +198,8 @@ package rr
          var placed:int = 0;
          var tries:int = 0;
          var bi:int = 0;
-         var bands:Array = [[2, 7], [8, 15], [16, 21]];
-         while (placed < n && tries < 160)
+         var bands:Array = [[2, 6], [8, 14], [16, 21]];
+         while (placed < n && tries < 200)
          {
             tries++;
             var cw:int = cwLo + int(rnd() * (cwHi - cwLo + 1));
@@ -210,9 +210,10 @@ package rr
             var cwy:int = band[0] + int(rnd() * (band[1] - band[0] + 1));
             if (cwy > GRID_H - ch2 - 2) cwy = GRID_H - ch2 - 2;
             var ok:Boolean = true;
-            for (y = cwy - 1; y <= cwy + ch2 + 1; y++)
+            // 间距 2：房间之间至少 2 格墙 → 走廊有可见长度、通道可用
+            for (y = cwy - 2; y <= cwy + ch2 + 2; y++)
             {
-               for (x = cwx - 1; x <= cwx + cw + 1; x++)
+               for (x = cwx - 2; x <= cwx + cw + 2; x++)
                {
                   if (y >= 0 && y < GRID_H && x >= 0 && x < GRID_W && pat[y + "," + x] == true)
                   {
@@ -334,7 +335,8 @@ package rr
          placeRoomObjects(grid, bIdx, roomRects);
       }
 
-      /** 房间物件放置：每房间 门+2-4箱子+沙发/桌/书架/出生点；外围背景装饰 */
+      /** 房间物件放置：每房间 门+2-4箱子+沙发/桌/书架/出生点；外围背景装饰。
+       * 全部按占地格(size×wid)校验开放 → 无悬空/穿墙 */
       private function placeRoomObjects(grid:Array, bIdx:int, rects:Array):void
       {
          var doorId:String = bIdx == 2 ? "door1" : "stdoor";
@@ -354,46 +356,63 @@ package rr
             var cw:int = rect[2];
             var ch2:int = rect[3];
             var used:Object = {};
-            // 门：走廊交汇边界格（房间-通道身份锚点）
+            // 门：走廊交汇边界格（占地 1x3/1x2 校验，放不下则留空门洞）
             var doorCell:Array = findJunction(grid, cwx, cwy, cw, ch2);
+            if (doorCell != null && rnd() < 0.75)
+            {
+               var dFoot:Array = objFoot(doorId);
+               if (!footOk(grid, doorCell[0], doorCell[1], dFoot[0], dFoot[1]))
+               {
+                  // 试门洞上下偏移
+                  if (footOk(grid, doorCell[0], doorCell[1] - 1, dFoot[0], dFoot[1])) doorCell[1] -= 1;
+                  else if (footOk(grid, doorCell[0], doorCell[1] + 1, dFoot[0], dFoot[1])) doorCell[1] += 1;
+                  else doorCell = null;
+               }
+            }
+            else
+            {
+               doorCell = null;
+            }
             if (doorCell != null)
             {
                lastObjs.push([doorId, genCode(), doorCell[0], doorCell[1]]);
                used[doorCell[1] + "," + doorCell[0]] = true;
             }
-            // 箱子 2-4 个（贴墙）
+            // 箱子 2-4 个（贴墙，占地校验）
             var nCrate:int = 2 + int(rnd() * 3);
             tries = 0;
             placed = 0;
-            while (placed < nCrate && tries < 40)
+            while (placed < nCrate && tries < 60)
             {
                tries++;
-               var c:Array = wallSpot(grid, cwx, cwy, cw, ch2, used);
+               var cid:String = crates[int(rnd() * crates.length)];
+               var c:Array = wallSpot(grid, cwx, cwy, cw, ch2, used, cid);
                if (c == null) break;
-               lastObjs.push([crates[int(rnd() * crates.length)], genCode(), c[0], c[1]]);
+               lastObjs.push([cid, genCode(), c[0], c[1]]);
                used[c[1] + "," + c[0]] = true;
                placed++;
             }
-            // 沙发/桌子/书架/出生点（室内）
-            var in1:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            // 沙发/桌子/书架/出生点（室内，占地校验）
+            var sofaId:String = sofas[int(rnd() * sofas.length)];
+            var in1:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, sofaId);
             if (in1 != null && rnd() < 0.7)
             {
-               lastObjs.push([sofas[int(rnd() * sofas.length)], genCode(), in1[0], in1[1]]);
+               lastObjs.push([sofaId, genCode(), in1[0], in1[1]]);
                used[in1[1] + "," + in1[0]] = true;
             }
-            var in2:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            var in2:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, tableId);
             if (in2 != null && rnd() < 0.6)
             {
                lastObjs.push([tableId, genCode(), in2[0], in2[1]]);
                used[in2[1] + "," + in2[0]] = true;
             }
-            var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bookcase");
             if (in3 != null && rnd() < 0.5)
             {
                lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
                used[in3[1] + "," + in3[0]] = true;
             }
-            var in4:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            var in4:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "player");
             if (in4 != null)
             {
                lastObjs.push(["player", genCode(), in4[0], in4[1]]);
@@ -414,6 +433,37 @@ package rr
                placed++;
             }
          }
+      }
+
+      /** 物件占地格 [size(宽), wid(高)]（AllData 实测） */
+      private function objFoot(id:String):Array
+      {
+         switch (id)
+         {
+            case "case": case "ammobox": case "explbox": case "lov": case "enl1": return [1, 1];
+            case "couch": case "table2": case "table": case "chest": return [2, 1];
+            case "mcrate2": case "box": case "woodbox": case "player": case "enl2": case "hatch2": return [2, 2];
+            case "radbarrel": case "filecab": case "door1": return [1, 2];
+            case "locker": case "bookcase": return [2, 3];
+            case "stdoor": return [1, 3];
+            default: return [1, 1];
+         }
+      }
+
+      /** 占地格全开放校验（防悬空/穿墙） */
+      private function footOk(grid:Array, x:int, y:int, size:int, wid:int):Boolean
+      {
+         for (var dy:int = 0; dy < wid; dy++)
+         {
+            for (var dx:int = 0; dx < size; dx++)
+            {
+               var xx:int = x + dx;
+               var yy:int = y + dy;
+               if (xx < 0 || yy < 0 || xx >= GRID_W || yy >= GRID_H) return false;
+               if (grid[yy][xx] != "_") return false;
+            }
+         }
+         return true;
       }
 
       /** 找房间边界上与走廊相邻的开放格（门洞位） */
@@ -454,33 +504,38 @@ package rr
          return false;
       }
 
-      /** 贴墙位：房间边内 1 格、开放、未占用 */
-      private function wallSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object):Array
+      /** 贴墙位：房间边内 1 格、占地格全开放、未占用 */
+      private function wallSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object, id:String):Array
       {
-         for (var t:int = 0; t < 20; t++)
+         var foot:Array = objFoot(id);
+         var fs:int = foot[0];
+         var fw:int = foot[1];
+         for (var t:int = 0; t < 25; t++)
          {
             var side:int = int(rnd() * 4);
             var x:int, y:int;
-            if (side == 0) { y = cwy + 1; x = cwx + 1 + int(rnd() * (cw - 2)); }
-            else if (side == 1) { y = cwy + ch2 - 2; x = cwx + 1 + int(rnd() * (cw - 2)); }
-            else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * (ch2 - 2)); }
-            else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * (ch2 - 2)); }
-            if (cw < 3 || ch2 < 3) return null;
-            if (y < 0 || y >= GRID_H || x < 0 || x >= GRID_W) continue;
-            if (grid[y][x] == "_" && used[y + "," + x] != true) return [x, y];
+            if (side == 0) { y = cwy + 1; x = cwx + 1 + int(rnd() * Math.max(1, cw - 2 - fs)); }
+            else if (side == 1) { y = cwy + ch2 - 2; x = cwx + 1 + int(rnd() * Math.max(1, cw - 2 - fs)); }
+            else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
+            else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
+            if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
+            if (grid[y][x] == "_" && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
       }
 
-      /** 室内位：离房间边 >=2、开放、未占用 */
-      private function interiorSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object):Array
+      /** 室内位：离房间边 >=2、占地格全开放、未占用 */
+      private function interiorSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object, id:String):Array
       {
-         for (var t:int = 0; t < 30; t++)
+         var foot:Array = objFoot(id);
+         var fs:int = foot[0];
+         var fw:int = foot[1];
+         for (var t:int = 0; t < 40; t++)
          {
-            var x:int = cwx + 2 + int(rnd() * Math.max(1, cw - 4));
-            var y:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - 4));
+            var x:int = cwx + 2 + int(rnd() * Math.max(1, cw - 4 - fs));
+            var y:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - 4 - fw));
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
-            if (grid[y][x] == "_" && used[y + "," + x] != true) return [x, y];
+            if (grid[y][x] == "_" && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
       }
