@@ -238,24 +238,28 @@ package rr
             placed++;
          }
          // 3) 走廊网络：每房间 2 宽 L 形连入网络 + 6 缺口连入 + 额外环连接
-         var order:Array = rooms.slice();
+         var order:Array = [];
+         for (k = 0; k < rooms.length; k++) order.push(k);
          for (k = order.length - 1; k > 0; k--)
          {
             var sw:int = int(rnd() * (k + 1));
-            var tmp:Array = order[k];
+            var tmp:int = order[k];
             order[k] = order[sw];
             order[sw] = tmp;
          }
          for (k = 0; k < order.length; k++)
          {
-            linkL2(grid, pat, patArr, int(order[k][0]), int(order[k][1]));
+            // 排除本房间矩形（用下标同步房间与矩形，防误排除他房 → 房间孤立）
+            var oi:int = order[k];
+            var rr:Array = roomRects[oi] as Array;
+            linkL2(grid, pat, patArr, int(rooms[oi][0]), int(rooms[oi][1]), int(rr[0]), int(rr[1]), int(rr[0]) + int(rr[2]) - 1, int(rr[1]) + int(rr[3]) - 1);
          }
          var gs:Array = [[GY, 0], [GY, GRID_W - 1], [0, GX1], [0, GX2], [GRID_H - 1, GX1], [GRID_H - 1, GX2]];
          for (k = 0; k < gs.length; k++)
          {
             var gy2:int = gs[k][0];
             var gx2:int = gs[k][1];
-            if (pat[gy2 + "," + gx2] != true) linkL2(grid, pat, patArr, gx2, gy2);
+            if (pat[gy2 + "," + gx2] != true) linkL2(grid, pat, patArr, gx2, gy2, -1, -1, -1, -1);
          }
          // 额外环连接 2-4 条：随机房间对（走廊网络更密、通道更明显）
          var extra:int = 2 + int(rnd() * 3);
@@ -265,7 +269,8 @@ package rr
             var ra:int = int(rnd() * rooms.length);
             var rb:int = int(rnd() * rooms.length);
             if (ra == rb) continue;
-            linkL2(grid, pat, patArr, int(rooms[rb][0]), int(rooms[rb][1]));
+            var rr2:Array = roomRects[rb] as Array;
+            linkL2(grid, pat, patArr, int(rooms[rb][0]), int(rooms[rb][1]), int(rr2[0]), int(rr2[1]), int(rr2[0]) + int(rr2[2]) - 1, int(rr2[1]) + int(rr2[3]) - 1);
          }
          // 4) 材质带（90% 主字符）
          materialBands(grid, wallTbl);
@@ -356,18 +361,25 @@ package rr
             var cw:int = rect[2];
             var ch2:int = rect[3];
             var used:Object = {};
-            // 门：走廊交汇边界格（占地 1x3/1x2 校验，放不下则留空门洞）
+            // 门：走廊交汇边界格；占地朝房间内放置（走廊保持畅通）
             var doorCell:Array = findJunction(grid, cwx, cwy, cw, ch2);
-            if (doorCell != null && rnd() < 0.75)
+            if (doorCell != null && rnd() < 0.6)
             {
                var dFoot:Array = objFoot(doorId);
-               if (!footOk(grid, doorCell[0], doorCell[1], dFoot[0], dFoot[1]))
+               var placedDoor:Boolean = false;
+               // 门洞锚点向房间内偏移尝试（门不占走廊格）
+               for (var off:int = 0; off < 3; off++)
                {
-                  // 试门洞上下偏移
-                  if (footOk(grid, doorCell[0], doorCell[1] - 1, dFoot[0], dFoot[1])) doorCell[1] -= 1;
-                  else if (footOk(grid, doorCell[0], doorCell[1] + 1, dFoot[0], dFoot[1])) doorCell[1] += 1;
-                  else doorCell = null;
+                  var ay:int = doorCell[1] - off;
+                  if (ay >= cwy && ay < cwy + ch2 && footOk(grid, doorCell[0], ay, dFoot[0], dFoot[1]))
+                  {
+                     lastObjs.push([doorId, genCode(), doorCell[0], ay]);
+                     used[ay + "," + doorCell[0]] = true;
+                     placedDoor = true;
+                     break;
+                  }
                }
+               if (!placedDoor) doorCell = null;
             }
             else
             {
@@ -418,17 +430,17 @@ package rr
                lastObjs.push(["player", genCode(), in4[0], in4[1]]);
                used[in4[1] + "," + in4[0]] = true;
             }
-            // 背景装饰 3-6（房间外围墙格）
+            // 背景装饰 3-6（开放格上，同原版 back 摆放规律 —— 原版 85%+ 在开放格）
             var nBack:int = 3 + int(rnd() * 4);
             tries = 0;
             placed = 0;
-            while (placed < nBack && tries < 30)
+            while (placed < nBack && tries < 40)
             {
                tries++;
-               var bx:int = cwx - 1 + int(rnd() * (cw + 2));
-               var by:int = cwy - 1 + int(rnd() * (ch2 + 2));
+               var bx:int = cwx + int(rnd() * cw);
+               var by:int = cwy + int(rnd() * ch2);
                if (bx < 0 || by < 0 || bx >= GRID_W || by >= GRID_H) continue;
-               if (WALL_CHARS.indexOf(grid[by][bx].charAt(0)) < 0) continue;
+               if (grid[by][bx] != "_") continue;
                lastBacks.push([backs[int(rnd() * backs.length)], bx, by]);
                placed++;
             }
@@ -552,16 +564,20 @@ package rr
          return s;
       }
 
-      /** 2 宽 L 形走廊：最近开放格 -> (tx,ty)（目标=房间中心/缺口） */
-      private function linkL2(grid:Array, pat:Object, patArr:Array, tx:int, ty:int):void
+      /** 2 宽 L 形走廊：最近开放格（排除 ex 矩形）-> (tx,ty)（目标=房间中心/缺口）
+       * 排除自身矩形是必须的：否则最近格=目标自身，走廊不挖 → 房间孤立 */
+      private function linkL2(grid:Array, pat:Object, patArr:Array, tx:int, ty:int, exX0:int, exY0:int, exX1:int, exY1:int):void
       {
          if (patArr.length == 0) return;
          var bi:int = 0;
          var bd:Number = 1e9;
          for (var k:int = 0; k < patArr.length; k++)
          {
-            var dy:Number = patArr[k][0] - ty;
-            var dx:Number = patArr[k][1] - tx;
+            var cy0:int = patArr[k][0];
+            var cx0:int = patArr[k][1];
+            if (cx0 >= exX0 && cx0 <= exX1 && cy0 >= exY0 && cy0 <= exY1) continue;
+            var dy:Number = cy0 - ty;
+            var dx:Number = cx0 - tx;
             var d:Number = dy * dy + dx * dx;
             if (d < bd) { bd = d; bi = k; }
          }

@@ -147,6 +147,7 @@ def run(n):
     fails = 0
     placed = 0
     decor = p3.load_biome_decor("build/grammar-data2.txt")
+    from collections import deque
     for k in range(n):
         rng = random.Random(k)
         rtype = ["corridor", "hall", "l", "split"][k % 4]
@@ -154,6 +155,23 @@ def run(n):
         grid, rects = gen_with_rects(rng, rtype, biome, decor)
         objs = place_objects(grid, rng, biome, rects)
         placed += len(objs)
+        # 房间可达性：每房间至少 1 个开放格从缺口 BFS 可达
+        seen = set()
+        dq = deque([(12, 0), (12, 47), (0, 23), (0, 24), (24, 23), (24, 24)])
+        seen.update(dq)
+        while dq:
+            (y, x) = dq.popleft()
+            for (dy, dx) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < 25 and 0 <= nx < 48 and (ny, nx) not in seen and grid[ny][nx][0] not in p3.WALL:
+                    seen.add((ny, nx))
+                    dq.append((ny, nx))
+        for (cwx, cwy, cw, ch) in rects:
+            reach = any((y, x) in seen for y in range(cwy, cwy + ch) for x in range(cwx, cwx + cw))
+            if not reach:
+                fails += 1
+                print("FAIL 孤立房间", biome, rtype, (cwx, cwy, cw, ch))
+                break
         # 校验
         for (oid, x, y) in objs:
             fs, fw = FOOT.get(oid, (1, 1))
@@ -206,11 +224,18 @@ def gen_with_rects(rng, rtype, biome, decor):
         rects.append((cwx, cwy, cw, ch))
         placed += 1
     # 走廊（近似 AS3 linkL2：L 形 2 宽连网）
-    def link(tx, ty):
+    def link(tx, ty, ex=None):
         nonlocal pat
         if not pat:
             return
-        best = min(pat, key=lambda p: (p[0] - ty) ** 2 + (p[1] - tx) ** 2)
+        if ex is None:
+            best = min(pat, key=lambda p: (p[0] - ty) ** 2 + (p[1] - tx) ** 2)
+        else:
+            ex0, ey0, ex1, ey1 = ex
+            cand = [p for p in pat if not (ex0 <= p[1] <= ex1 and ey0 <= p[0] <= ey1)]
+            if not cand:
+                return
+            best = min(cand, key=lambda p: (p[0] - ty) ** 2 + (p[1] - tx) ** 2)
         y, x = best
         st = 0
         while (y, x) != (ty, tx) and st < 120:
@@ -232,13 +257,96 @@ def gen_with_rects(rng, rtype, biome, decor):
                 if grid[y][x + kk] in p3.WALL:
                     grid[y][x + kk] = "_"
     centers = [(cwx + cw // 2, cwy + ch // 2) for (cwx, cwy, cw, ch) in rects]
-    rng.shuffle(centers)
-    for (cx0, cy0) in centers:
-        link(cx0, cy0)
+    idxs = list(range(len(centers)))
+    rng.shuffle(idxs)
+    for oi in idxs:
+        (cx0, cy0) = centers[oi]
+        (cwx, cwy, cw, ch) = rects[oi]
+        link(cx0, cy0, (cwx, cwy, cwx + cw - 1, cwy + ch - 1))
     for (gx, gy) in [(12, 0), (12, 47), (0, 23), (0, 24), (24, 23), (24, 24)]:
         if (gy, gx) not in pat:
             link(gx, gy)
+    # 强制 6 缺口开放 + 连通修复（镜像 AS3 finishStripRoom + repairConnectivity）
+    for (gy, gx) in [(12, 0), (12, 47), (0, 23), (0, 24), (24, 23), (24, 24)]:
+        grid[gy][gx] = "_"
+    repair_mirror(grid)
     return grid, rects
+
+
+def repair_mirror(grid):
+    """镜像 AS3 repairConnectivity：小口袋(<16)填墙，大口袋挖 2 宽 L 连廊"""
+    seen = [[False] * 48 for _ in range(25)]
+    qy, qx, main_open = [], [], []
+    for (sy, sx) in [(12, 0), (12, 47), (0, 23), (0, 24), (24, 23), (24, 24)]:
+        if not seen[sy][sx] and grid[sy][sx][0] not in p3.WALL:
+            seen[sy][sx] = True
+            qy.append(sy); qx.append(sx); main_open.append((sy, sx))
+    h = 0
+    while h < len(qx):
+        cy, cx = qy[h], qx[h]; h += 1
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            ny, nx = cy + dy, cx + dx
+            if 0 <= ny < 25 and 0 <= nx < 48 and not seen[ny][nx] and grid[ny][nx][0] not in p3.WALL:
+                seen[ny][nx] = True
+                qy.append(ny); qx.append(nx); main_open.append((ny, nx))
+    for j in range(25):
+        for i in range(48):
+            if seen[j][i] or grid[j][i][0] in p3.WALL:
+                continue
+            comp = []
+            cqy, cqx = [j], [i]
+            seen[j][i] = True
+            ch = 0
+            while ch < len(cqx):
+                cy2, cx2 = cqy[ch], cqx[ch]; ch += 1
+                comp.append((cy2, cx2))
+                for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    ny, nx = cy2 + dy, cx2 + dx
+                    if 0 <= ny < 25 and 0 <= nx < 48 and not seen[ny][nx] and grid[ny][nx][0] not in p3.WALL:
+                        seen[ny][nx] = True
+                        cqy.append(ny); cqx.append(nx)
+            if len(comp) < 16:
+                for (y, x) in comp:
+                    grid[y][x] = "C"
+            else:
+                conn_mirror(grid, seen, comp, main_open)
+
+
+def conn_mirror(grid, seen, comp, main_open):
+    import random as _r
+    bi = bm = 0
+    bd = 1e9
+    for a in range(len(comp)):
+        for b in range(len(main_open)):
+            d = (comp[a][0] - main_open[b][0]) ** 2 + (comp[a][1] - main_open[b][1]) ** 2
+            if d < bd:
+                bd = d; bi = a; bm = b
+    y0, x0 = comp[bi]
+    y1, x1 = main_open[bm]
+    if _r.random() < 0.5:
+        h_run_m(grid, seen, x0, x1, y0)
+        v_run_m(grid, seen, y0, y1, x1)
+    else:
+        v_run_m(grid, seen, y0, y1, x0)
+        h_run_m(grid, seen, x0, x1, y1)
+
+
+def h_run_m(grid, seen, xa, xb, y):
+    for x in range(min(xa, xb), max(xa, xb) + 1):
+        for dy in range(2):
+            yy = y + dy
+            if 0 <= yy < 25:
+                grid[yy][x] = "_"
+                seen[yy][x] = True
+
+
+def v_run_m(grid, seen, ya, yb, x):
+    for y in range(min(ya, yb), max(ya, yb) + 1):
+        for dx in range(2):
+            xx = x + dx
+            if 0 <= xx < 48:
+                grid[y][xx] = "_"
+                seen[y][xx] = True
 
 if __name__ == "__main__":
     main()
