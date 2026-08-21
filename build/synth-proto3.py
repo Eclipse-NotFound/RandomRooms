@@ -64,9 +64,9 @@ def gen_room(rng, rtype, biome="stable", decor=None):
     pat = set()
 
     # 1) 房间：干净矩形，间距约束（外扩1格不得撞已开放），挖空
-    n_lo, n_hi = {"corridor": (6, 8), "hall": (5, 6), "l": (6, 8), "split": (8, 10)}[rtype]
-    cw_lo, cw_hi = (9, 12) if rtype == "hall" else (8, 12)
-    ch_lo, ch_hi = (6, 9) if rtype == "hall" else (6, 9)
+    n_lo, n_hi = {"corridor": (6, 8), "hall": (5, 7), "l": (6, 8), "split": (8, 11)}[rtype]
+    cw_lo, cw_hi = (9, 13) if rtype == "hall" else (8, 13)
+    ch_lo, ch_hi = (7, 10) if rtype == "hall" else (6, 10)
     n = n_lo + rng.randint(0, n_hi - n_lo)
     rooms = []
     placed = 0
@@ -106,6 +106,14 @@ def gen_room(rng, rtype, biome="stable", decor=None):
     for (gx, gy) in [(GY, 0), (GY, W - 1), (0, GX1), (0, GX2), (H - 1, GX1), (H - 1, GX2)]:
         if (gy, gx) not in pat:
             link_l(grid, pat, gx, gy, rng)
+    for _ in range(rng.randint(2, 4)):
+        if len(rooms) < 2:
+            break
+        ra = rng.randrange(len(rooms))
+        rb = rng.randrange(len(rooms))
+        if ra == rb:
+            continue
+        link_l(grid, pat, rooms[rb][0], rooms[rb][1], rng)
 
     # 3) 材质带（2x4 大区主字符 90%）→ 墙体区域统一不拼贴
     material_bands(grid, rng, wall_tbl)

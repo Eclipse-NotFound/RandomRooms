@@ -37,6 +37,9 @@ package rr
       public var debugStages:Array = [];
       /** v3.2 连通细胞表：主廊/纵连/腔室连廊落盘格（供腔室就近连廊） */
       private var pathCells:Array = [];
+      /** v5.1 物件表：generate() 输出 <obj>/<back> 元素 */
+      public var lastObjs:Array = [];
+      public var lastBacks:Array = [];
       
       public function RRSynth(rndFn:Function = null)
       {
@@ -52,6 +55,24 @@ package rr
          {
             room.appendChild(<a>{grid[j].join(".")}</a>);
          }
+         // v5.1 物件：门/箱子/家具/出生点/敌人标记
+         if (lastObjs != null)
+         {
+            for (var k:int = 0; k < lastObjs.length; k++)
+            {
+               var o:Array = lastObjs[k] as Array;
+               room.appendChild(<obj id={o[0]} code={o[1]} x={o[2]} y={o[3]}/>);
+            }
+         }
+         if (lastBacks != null)
+         {
+            for (k = 0; k < lastBacks.length; k++)
+            {
+               var b:Array = lastBacks[k] as Array;
+               room.appendChild(<back id={b[0]} x={b[1]} y={b[2]}/>);
+            }
+         }
+         room.appendChild(<doors/>);
          room.appendChild(<options/>);
          return room;
       }
@@ -166,13 +187,14 @@ package rr
          }
          // 2) 房间
          var nLo:int, nHi:int, cwLo:int, cwHi:int, chLo:int, chHi:int;
-         if (rtype == "hall") { nLo = 5; nHi = 6; cwLo = 9; cwHi = 12; chLo = 6; chHi = 9; }
-         else if (rtype == "split") { nLo = 8; nHi = 10; cwLo = 8; cwHi = 12; chLo = 6; chHi = 9; }
-         else { nLo = 6; nHi = 8; cwLo = 8; cwHi = 12; chLo = 6; chHi = 9; }
+         if (rtype == "hall") { nLo = 5; nHi = 7; cwLo = 9; cwHi = 13; chLo = 7; chHi = 10; }
+         else if (rtype == "split") { nLo = 8; nHi = 11; cwLo = 8; cwHi = 12; chLo = 6; chHi = 9; }
+         else { nLo = 6; nHi = 8; cwLo = 8; cwHi = 13; chLo = 6; chHi = 10; }
          var n:int = nLo + int(rnd() * (nHi - nLo + 1));
          var pat:Object = {};
          var patArr:Array = [];
          var rooms:Array = [];
+         var roomRects:Array = [];
          var placed:int = 0;
          var tries:int = 0;
          var bi:int = 0;
@@ -211,9 +233,10 @@ package rr
                }
             }
             rooms.push([cwx + int(cw / 2), cwy + int(ch2 / 2)]);
+            roomRects.push([cwx, cwy, cw, ch2]);
             placed++;
          }
-         // 3) 走廊网络：每房间 2 宽 L 形连入网络 + 6 缺口连入
+         // 3) 走廊网络：每房间 2 宽 L 形连入网络 + 6 缺口连入 + 额外环连接
          var order:Array = rooms.slice();
          for (k = order.length - 1; k > 0; k--)
          {
@@ -232,6 +255,16 @@ package rr
             var gy2:int = gs[k][0];
             var gx2:int = gs[k][1];
             if (pat[gy2 + "," + gx2] != true) linkL2(grid, pat, patArr, gx2, gy2);
+         }
+         // 额外环连接 2-4 条：随机房间对（走廊网络更密、通道更明显）
+         var extra:int = 2 + int(rnd() * 3);
+         for (k = 0; k < extra; k++)
+         {
+            if (rooms.length < 2) break;
+            var ra:int = int(rnd() * rooms.length);
+            var rb:int = int(rnd() * rooms.length);
+            if (ra == rb) continue;
+            linkL2(grid, pat, patArr, int(rooms[rb][0]), int(rooms[rb][1]));
          }
          // 4) 材质带（90% 主字符）
          materialBands(grid, wallTbl);
@@ -295,6 +328,173 @@ package rr
                }
             }
          }
+         // 8) 房间物件：门(走廊交汇处)/贴墙箱子/室内家具/书架/出生点/背景装饰
+         lastObjs = [];
+         lastBacks = [];
+         placeRoomObjects(grid, bIdx, roomRects);
+      }
+
+      /** 房间物件放置：每房间 门+2-4箱子+沙发/桌/书架/出生点；外围背景装饰 */
+      private function placeRoomObjects(grid:Array, bIdx:int, rects:Array):void
+      {
+         var doorId:String = bIdx == 2 ? "door1" : "stdoor";
+         var crates:Array = bIdx == 0 ? ["ammobox", "explbox", "case", "mcrate2", "chest", "locker"] :
+                           (bIdx == 1 ? ["case", "ammobox", "explbox", "box", "woodbox", "chest", "locker", "radbarrel"] :
+                           (bIdx == 2 ? ["ammobox", "case", "box", "explbox", "chest", "radbarrel", "woodbox"] :
+                                        ["case", "ammobox", "explbox", "mcrate2", "filecab", "locker"]));
+         var sofas:Array = bIdx == 0 ? ["couch", "lov"] : ["lov"];
+         var tableId:String = bIdx == 0 ? "table2" : "table";
+         var backs:Array = ["konstr", "vkonstr", "hkonstr", "stlight1", "vents", "pipe4"];
+         var r:int, k:int, tries:int, placed:int;
+         for (r = 0; r < rects.length; r++)
+         {
+            var rect:Array = rects[r] as Array;
+            var cwx:int = rect[0];
+            var cwy:int = rect[1];
+            var cw:int = rect[2];
+            var ch2:int = rect[3];
+            var used:Object = {};
+            // 门：走廊交汇边界格（房间-通道身份锚点）
+            var doorCell:Array = findJunction(grid, cwx, cwy, cw, ch2);
+            if (doorCell != null)
+            {
+               lastObjs.push([doorId, genCode(), doorCell[0], doorCell[1]]);
+               used[doorCell[1] + "," + doorCell[0]] = true;
+            }
+            // 箱子 2-4 个（贴墙）
+            var nCrate:int = 2 + int(rnd() * 3);
+            tries = 0;
+            placed = 0;
+            while (placed < nCrate && tries < 40)
+            {
+               tries++;
+               var c:Array = wallSpot(grid, cwx, cwy, cw, ch2, used);
+               if (c == null) break;
+               lastObjs.push([crates[int(rnd() * crates.length)], genCode(), c[0], c[1]]);
+               used[c[1] + "," + c[0]] = true;
+               placed++;
+            }
+            // 沙发/桌子/书架/出生点（室内）
+            var in1:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            if (in1 != null && rnd() < 0.7)
+            {
+               lastObjs.push([sofas[int(rnd() * sofas.length)], genCode(), in1[0], in1[1]]);
+               used[in1[1] + "," + in1[0]] = true;
+            }
+            var in2:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            if (in2 != null && rnd() < 0.6)
+            {
+               lastObjs.push([tableId, genCode(), in2[0], in2[1]]);
+               used[in2[1] + "," + in2[0]] = true;
+            }
+            var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            if (in3 != null && rnd() < 0.5)
+            {
+               lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
+               used[in3[1] + "," + in3[0]] = true;
+            }
+            var in4:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used);
+            if (in4 != null)
+            {
+               lastObjs.push(["player", genCode(), in4[0], in4[1]]);
+               used[in4[1] + "," + in4[0]] = true;
+            }
+            // 背景装饰 3-6（房间外围墙格）
+            var nBack:int = 3 + int(rnd() * 4);
+            tries = 0;
+            placed = 0;
+            while (placed < nBack && tries < 30)
+            {
+               tries++;
+               var bx:int = cwx - 1 + int(rnd() * (cw + 2));
+               var by:int = cwy - 1 + int(rnd() * (ch2 + 2));
+               if (bx < 0 || by < 0 || bx >= GRID_W || by >= GRID_H) continue;
+               if (WALL_CHARS.indexOf(grid[by][bx].charAt(0)) < 0) continue;
+               lastBacks.push([backs[int(rnd() * backs.length)], bx, by]);
+               placed++;
+            }
+         }
+      }
+
+      /** 找房间边界上与走廊相邻的开放格（门洞位） */
+      private function findJunction(grid:Array, cwx:int, cwy:int, cw:int, ch2:int):Array
+      {
+         var y:int, x:int;
+         // 上/下边
+         for (x = cwx; x < cwx + cw; x++)
+         {
+            if (cellJunction(grid, cwy, x, cwx, cwy, cw, ch2)) return [x, cwy];
+            if (cellJunction(grid, cwy + ch2 - 1, x, cwx, cwy, cw, ch2)) return [x, cwy + ch2 - 1];
+         }
+         // 左/右边
+         for (y = cwy; y < cwy + ch2; y++)
+         {
+            if (cellJunction(grid, y, cwx, cwx, cwy, cw, ch2)) return [cwx, y];
+            if (cellJunction(grid, y, cwx + cw - 1, cwx, cwy, cw, ch2)) return [cwx + cw - 1, y];
+         }
+         return null;
+      }
+
+      private function cellJunction(grid:Array, y:int, x:int, cwx:int, cwy:int, cw:int, ch2:int):Boolean
+      {
+         if (y < 1 || y >= GRID_H - 1 || x < 1 || x >= GRID_W - 1) return false;
+         if (grid[y][x] != "_") return false;
+         var inside:Boolean = (y > cwy && y < cwy + ch2 - 1 && x > cwx && x < cwx + cw - 1);
+         if (inside) return false;
+         // 邻格在房间外且开放 → 门洞
+         var nb:Array = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
+         for (var k:int = 0; k < 4; k++)
+         {
+            var ny:int = nb[k][0];
+            var nx:int = nb[k][1];
+            if (ny < 0 || ny >= GRID_H || nx < 0 || nx >= GRID_W) continue;
+            var out:Boolean = !(ny >= cwy && ny < cwy + ch2 && nx >= cwx && nx < cwx + cw);
+            if (out && grid[ny][nx] == "_") return true;
+         }
+         return false;
+      }
+
+      /** 贴墙位：房间边内 1 格、开放、未占用 */
+      private function wallSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object):Array
+      {
+         for (var t:int = 0; t < 20; t++)
+         {
+            var side:int = int(rnd() * 4);
+            var x:int, y:int;
+            if (side == 0) { y = cwy + 1; x = cwx + 1 + int(rnd() * (cw - 2)); }
+            else if (side == 1) { y = cwy + ch2 - 2; x = cwx + 1 + int(rnd() * (cw - 2)); }
+            else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * (ch2 - 2)); }
+            else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * (ch2 - 2)); }
+            if (cw < 3 || ch2 < 3) return null;
+            if (y < 0 || y >= GRID_H || x < 0 || x >= GRID_W) continue;
+            if (grid[y][x] == "_" && used[y + "," + x] != true) return [x, y];
+         }
+         return null;
+      }
+
+      /** 室内位：离房间边 >=2、开放、未占用 */
+      private function interiorSpot(grid:Array, cwx:int, cwy:int, cw:int, ch2:int, used:Object):Array
+      {
+         for (var t:int = 0; t < 30; t++)
+         {
+            var x:int = cwx + 2 + int(rnd() * Math.max(1, cw - 4));
+            var y:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - 4));
+            if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
+            if (grid[y][x] == "_" && used[y + "," + x] != true) return [x, y];
+         }
+         return null;
+      }
+
+      /** 随机 16 位物件码（同原版 code 格式） */
+      private function genCode():String
+      {
+         var chars:String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+         var s:String = "";
+         for (var i:int = 0; i < 16; i++)
+         {
+            s += chars.charAt(int(rnd() * chars.length));
+         }
+         return s;
       }
 
       /** 2 宽 L 形走廊：最近开放格 -> (tx,ty)（目标=房间中心/缺口） */
