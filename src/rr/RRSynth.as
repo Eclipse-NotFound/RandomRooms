@@ -32,6 +32,19 @@ package rr
       public static const EN_RATE:Array = [[28,49,23],[21,36,43],[35,50,15],[31,52,17]];
       public static const EN_IDS:Array = ["enl1", "enl2", "enf1"];
 
+      /** v5.7 墙面叙事：back 分组（结构/设施/照明），每房抽主导组 */
+      public static const BACK_GROUPS:Array = [
+         ["konstr", "vkonstr", "hkonstr"],
+         ["vents", "pipe4"],
+         ["stlight1"],
+      ];
+      /** v5.7 视觉锚池（卡2 MVP）：[id, 数量]——同 id 大件群横排 */
+      public static const ANCHOR_POOL:Array = [["locker", 3], ["mcrate2", 4], ["table", 2]];
+
+      /** 房间个性向量（v5Skeleton 每房抽取，placeRoomObjects 消费） */
+      private var emptyRoom:Boolean = false;
+      private var density:Number = 1.0;
+
       
       private static const BLOCK_W:int = 6;
       private static const BLOCK_H:int = 4;
@@ -200,6 +213,10 @@ package rr
          //    原版 64-86%——实机"通道窄/被堵"的结构性根因）
          // 2a) 挖开放层（corridor/split 偏 3 层，hall 偏 2 层）
          var roomRects:Array = [];
+         // 房间个性向量（DEC-0004 反均匀；语料校准：10/658 房全空 → 空房率 ~5%；
+         // 密度系数驱动物件/装饰/back 数量，制造房与房的方差）
+         emptyRoom = rnd() < 0.06;
+         density = emptyRoom ? 0.0 : (0.5 + rnd() * 0.9);
          var nLayer:int;
          if (rtype == "hall") nLayer = rnd() < 0.75 ? 2 : 3;
          else nLayer = rnd() < 0.7 ? 3 : 2;
@@ -296,8 +313,8 @@ package rr
                x0 = x1 + 1;
             }
          }
-         // 4) 材质带（90% 主字符）
-         materialBands(grid, wallTbl);
+         // 4) 材质带（90% 主字符；v5.7 按层分区 + 对比补丁区）
+         materialBands(grid, wallTbl, layers);
          // 5) 边界：0/24 行 0/47 列整墙 + 6 缺口
          for (i = 0; i < GRID_W; i++)
          {
@@ -315,11 +332,13 @@ package rr
          grid[0][GX2] = "_";
          grid[GRID_H - 1][GX1] = "_";
          grid[GRID_H - 1][GX2] = "_";
-         // 6) 装饰排：仅安全地板纹理后缀
+         // 6) 装饰排：仅安全地板纹理后缀；密度联动房间个性，60% 用主导纹理
+         //    （墙面叙事——纹理也讲分区，不再每格均匀抽）
          var safeDec:Array = safeDecor(decor);
-         if (safeDec.length > 0)
+         if (safeDec.length > 0 && !emptyRoom)
          {
-            var den:Number = bIdx == 0 ? 0.40 : (bIdx == 1 ? 0.30 : (bIdx == 2 ? 0.28 : 0.34));
+            var den:Number = (bIdx == 0 ? 0.40 : (bIdx == 1 ? 0.30 : (bIdx == 2 ? 0.28 : 0.34))) * density;
+            var mainDec:String = pickWeighted(safeDec);
             for (y = 1; y < GRID_H - 1; y++)
             {
                x = 1;
@@ -331,7 +350,10 @@ package rr
                      for (k = 0; k < L; k++)
                      {
                         var dx2:int = x + k;
-                        if (dx2 < GRID_W - 1 && grid[y][dx2] == "_") grid[y][dx2] = "_" + pickWeighted(safeDec);
+                        if (dx2 < GRID_W - 1 && grid[y][dx2] == "_")
+                        {
+                           grid[y][dx2] = "_" + (rnd() < 0.6 ? mainDec : pickWeighted(safeDec));
+                        }
                      }
                      x += L;
                   }
@@ -396,6 +418,8 @@ package rr
          var r:int, k:int, tries:int, placed:int;
          var rectUsed:Array = [];    // 各 rect 的占用表（平行 rects；player/敌标记房间级放置用）
          var playerPos:Array = null; // 房间级唯一出生点（原版 0.99 player/房）
+         // 房间个性（DEC-0004）：空房只留出生点与结构；密度系数缩放物件量
+         var mainBacks:Array = BACK_GROUPS[int(rnd() * BACK_GROUPS.length)] as Array;
          for (r = 0; r < rects.length; r++)
          {
             var rect:Array = rects[r] as Array;
@@ -404,6 +428,49 @@ package rr
             var cw:int = rect[2];
             var ch2:int = rect[3];
             var used:Object = {};
+            if (emptyRoom) 
+            {
+               rectUsed.push(used);
+               continue;
+            }
+            // 视觉锚（卡2 MVP）：50% 房间，锚池大件群横排放 rect 中带，
+            // 先占位——后续物件围绕退让（主角先行）
+            if (cw >= 8 && ch2 >= 5 && rnd() < 0.5)
+            {
+               var apool:Array = ANCHOR_POOL[int(rnd() * ANCHOR_POOL.length)] as Array;
+               var aid:String = String(apool[0]);
+               var acount:int = int(apool[1]);
+               var afoot:Array = objFoot(aid);
+               var aw:int = acount * afoot[0];
+               if (cw >= aw + 2 && ch2 >= afoot[1] + 2)
+               {
+                  var ax0:int = cwx + 2 + int(rnd() * Math.max(1, cw - aw - 3));
+                  var ay0:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - afoot[1] - 3));
+                  var allOK:Boolean = true;
+                  for (var ai:int = 0; ai < acount; ai++)
+                  {
+                     if (!footOk(grid, ax0 + ai * afoot[0], ay0, afoot[0], afoot[1]))
+                     {
+                        allOK = false;
+                        break;
+                     }
+                  }
+                  if (allOK)
+                  {
+                     for (ai = 0; ai < acount; ai++)
+                     {
+                        lastObjs.push([aid, genCode(), ax0 + ai * afoot[0], ay0]);
+                        for (var ady:int = 0; ady < afoot[1]; ady++)
+                        {
+                           for (var adx:int = 0; adx < afoot[0]; adx++)
+                           {
+                              used[(ay0 + ady) + "," + (ax0 + ai * afoot[0] + adx)] = true;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
             // 门（v5.6）：放竖隔断门口（lastDoorSpots 命中本 rect 的位），
             // 门口高 3 与 stdoor/door1 占地吻合；每门口 70% 放门
             var dFoot:Array = objFoot(doorId);
@@ -422,8 +489,8 @@ package rr
                   used[(dsy + dfy) + "," + dsx] = true;
                }
             }
-            // 箱子 2-4 个（贴墙，占地校验）
-            var nCrate:int = 2 + int(rnd() * 3);
+            // 箱子（贴墙，占地校验；数量随房间个性密度缩放）
+            var nCrate:int = int((2 + int(rnd() * 3)) * density + 0.5);
             tries = 0;
             placed = 0;
             while (placed < nCrate && tries < 60)
@@ -436,28 +503,29 @@ package rr
                used[c[1] + "," + c[0]] = true;
                placed++;
             }
-            // 沙发/桌子/书架/出生点（室内，占地校验）
+            // 沙发/桌子/书架（室内，占地校验；出现概率随密度缩放）
             var sofaId:String = sofas[int(rnd() * sofas.length)];
             var in1:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, sofaId);
-            if (in1 != null && rnd() < 0.7)
+            if (in1 != null && rnd() < 0.7 * density)
             {
                lastObjs.push([sofaId, genCode(), in1[0], in1[1]]);
                used[in1[1] + "," + in1[0]] = true;
             }
             var in2:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, tableId);
-            if (in2 != null && rnd() < 0.6)
+            if (in2 != null && rnd() < 0.6 * density)
             {
                lastObjs.push([tableId, genCode(), in2[0], in2[1]]);
                used[in2[1] + "," + in2[0]] = true;
             }
             var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bookcase");
-            if (in3 != null && rnd() < 0.5)
+            if (in3 != null && rnd() < 0.5 * density)
             {
                lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
                used[in3[1] + "," + in3[0]] = true;
             }
-            // 背景装饰 3-6（开放格上，同原版 back 摆放规律 —— 原版 85%+ 在开放格）
-            var nBack:int = 3 + int(rnd() * 4);
+            // 背景装饰（开放格上，原版 85%+ 在开放格）；数量随密度，
+            // 60% 出自主导组（墙面叙事：结构/设施/照明分组）
+            var nBack:int = int((3 + int(rnd() * 4)) * density + 0.5);
             tries = 0;
             placed = 0;
             while (placed < nBack && tries < 40)
@@ -466,8 +534,11 @@ package rr
                var bx:int = cwx + int(rnd() * cw);
                var by:int = cwy + int(rnd() * ch2);
                if (bx < 0 || by < 0 || bx >= GRID_W || by >= GRID_H) continue;
-               if (grid[by][bx] != "_") continue;
-               lastBacks.push([backs[int(rnd() * backs.length)], bx, by]);
+               if (!isOpenCell(grid[by][bx])) continue;
+               var bid:String = (rnd() < 0.6)
+                  ? String(mainBacks[int(rnd() * mainBacks.length)])
+                  : String(backs[int(rnd() * backs.length)]);
+               lastBacks.push([bid, bx, by]);
                placed++;
             }
             rectUsed.push(used);
@@ -492,7 +563,9 @@ package rr
          // 敌人出生标记：enl1/enl2/enf1 走原版 ups 桶（AllData tip=up, tipn=1/2/3），
          // 实际生成数量由 Location.kolEn、敌人类型由 Land.tipEnemy（land biom）决定；
          // 按语料配比分层名额（随机舍入），距 player >=3 格防开局即战
-         var nEn:int = 3 + int(rnd() * 2);   // 3-4 基准；quota 随机舍入后实际 2-5，均值≈3.5（原版 3.48）
+         // 3-4 基准随个性密度缩放（空房 0 个——原版 204/658 房无敌标记，
+         // 安静房也是设计）；quota 随机舍入后实际 2-5
+         var nEn:int = emptyRoom ? 0 : int((3 + int(rnd() * 2)) * density + 0.5);
          var enR:Array = EN_RATE[Math.min(bIdx, 3)] as Array;
          var enTot:int = 0;
          for (k = 0; k < 3; k++) enTot += int(enR[k]);
@@ -525,7 +598,7 @@ package rr
                      for (var edx:int = 0; edx < ef[0]; edx++)
                      {
                         if (ey + edy >= GRID_H || ex + edx >= GRID_W ||
-                            grid[ey + edy][ex + edx] != "_" || eused[(ey + edy) + "," + (ex + edx)] == true)
+                            !isOpenCell(grid[ey + edy][ex + edx]) || eused[(ey + edy) + "," + (ex + edx)] == true)
                         {
                            clash = true;
                            break;
@@ -566,6 +639,15 @@ package rr
          }
       }
 
+      /** 开放格判定（Tile.dec 语义）：首字符 '_' 即开放；`_X` 地板纹理可放
+       *  物件（原版如此），`_*` 水面除外 */
+      private static function isOpenCell(cell:String):Boolean
+      {
+         if (cell == null || cell.charAt(0) != "_") return false;
+         if (cell.length > 1 && cell.charAt(1) == "*") return false;
+         return true;
+      }
+
       /** 占地格全开放校验（防悬空/穿墙） */
       private function footOk(grid:Array, x:int, y:int, size:int, wid:int):Boolean
       {
@@ -576,7 +658,7 @@ package rr
                var xx:int = x + dx;
                var yy:int = y + dy;
                if (xx < 0 || yy < 0 || xx >= GRID_W || yy >= GRID_H) return false;
-               if (grid[yy][xx] != "_") return false;
+               if (!isOpenCell(grid[yy][xx])) return false;
             }
          }
          return true;
@@ -604,7 +686,7 @@ package rr
       private function cellJunction(grid:Array, y:int, x:int, cwx:int, cwy:int, cw:int, ch2:int):Boolean
       {
          if (y < 1 || y >= GRID_H - 1 || x < 1 || x >= GRID_W - 1) return false;
-         if (grid[y][x] != "_") return false;
+         if (!isOpenCell(grid[y][x])) return false;
          var inside:Boolean = (y > cwy && y < cwy + ch2 - 1 && x > cwx && x < cwx + cw - 1);
          if (inside) return false;
          // 邻格在房间外且开放 → 门洞
@@ -615,7 +697,7 @@ package rr
             var nx:int = nb[k][1];
             if (ny < 0 || ny >= GRID_H || nx < 0 || nx >= GRID_W) continue;
             var out:Boolean = !(ny >= cwy && ny < cwy + ch2 && nx >= cwx && nx < cwx + cw);
-            if (out && grid[ny][nx] == "_") return true;
+            if (out && isOpenCell(grid[ny][nx])) return true;
          }
          return false;
       }
@@ -635,7 +717,7 @@ package rr
             else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
             else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
-            if (grid[y][x] == "_" && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
+            if (isOpenCell(grid[y][x]) && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
       }
@@ -651,7 +733,7 @@ package rr
             var x:int = cwx + 2 + int(rnd() * Math.max(1, cw - 4 - fs));
             var y:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - 4 - fw));
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
-            if (grid[y][x] == "_" && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
+            if (isOpenCell(grid[y][x]) && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
       }
@@ -1135,8 +1217,53 @@ package rr
       }
       
       /** v3.1 材质带：2x4 大区主字符（区内 85% 同色） → 墙整体统一 */
-      private function materialBands(grid:Array, wallTbl:Array):void
+      /** 材质带。v5.7 反均匀：传 layers 时按层取主材质（层间对比），每层
+       *  60% 概率出 1 个对比材质补丁区（矩形）；null 则走旧 2×4 均匀 zone */
+      private function materialBands(grid:Array, wallTbl:Array, layers:Array = null):void
       {
+         if (layers != null)
+         {
+            var layerMain:Array = [];
+            var li:int;
+            for (li = 0; li < layers.length; li++) layerMain.push(pickWeighted(wallTbl));
+            var patches:Array = [];
+            for (li = 0; li < layers.length; li++)
+            {
+               if (rnd() >= 0.6) continue;
+               var lt:int = layers[li][0];
+               var lb:int = layers[li][1];
+               var pw2:int = 6 + int(rnd() * 8);
+               var px2:int = 2 + int(rnd() * Math.max(1, GRID_W - pw2 - 4));
+               var ph3:int = Math.min(lb - lt + 1, 3 + int(rnd() * 3));
+               var py3:int = lt + int(rnd() * Math.max(1, lb - lt - ph3 + 1));
+               patches.push([px2, py3, pw2, ph3, pickWeighted(wallTbl)]);
+            }
+            for (var j:int = 0; j < GRID_H; j++)
+            {
+               var main:String = String(layerMain[0]);
+               for (li = 0; li < layers.length; li++)
+               {
+                  if (j >= layers[li][0] && j <= layers[li][1]) main = String(layerMain[li]);
+               }
+               for (var i:int = 0; i < GRID_W; i++)
+               {
+                  if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0)
+                  {
+                     var ch2:String = (rnd() < 0.90) ? main : pickWeighted(wallTbl);
+                     for (var pk:int = 0; pk < patches.length; pk++)
+                     {
+                        if (j >= patches[pk][1] && j < patches[pk][1] + patches[pk][3] &&
+                            i >= patches[pk][0] && i < patches[pk][0] + patches[pk][2])
+                        {
+                           ch2 = (rnd() < 0.85) ? String(patches[pk][4]) : ch2;
+                        }
+                     }
+                     grid[j][i] = ch2;
+                  }
+               }
+            }
+            return;
+         }
          var zone:Array = [];
          for (var zy:int = 0; zy < 2; zy++)
          {
@@ -1146,14 +1273,14 @@ package rr
                zone[zy][zx] = (rnd() < 0.6 ? wallTbl[0][0] : pickWeighted(wallTbl));
             }
          }
-         for (var j:int = 0; j < GRID_H; j++)
+         for (j = 0; j < GRID_H; j++)
          {
-            for (var i:int = 0; i < GRID_W; i++)
+            for (i = 0; i < GRID_W; i++)
             {
                if (WALL_CHARS.indexOf(grid[j][i].charAt(0)) >= 0)
                {
-                  var main:String = String(zone[Math.min(int(j / 13), 1)][Math.min(int(i / 12), 3)]);
-                  grid[j][i] = (rnd() < 0.90) ? main : pickWeighted(wallTbl);
+                  var main2:String = String(zone[Math.min(int(j / 13), 1)][Math.min(int(i / 12), 3)]);
+                  grid[j][i] = (rnd() < 0.90) ? main2 : pickWeighted(wallTbl);
                }
             }
          }

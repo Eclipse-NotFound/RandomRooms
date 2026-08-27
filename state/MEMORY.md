@@ -15,36 +15,43 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v5.6**——release/RandomRoomsMod.swf 已更新（v5.3 备份在同目录 _v53_backup.swf），**待实机（F5）复评**。
-- v5.6 = **合成范式更换**：分层大厅（2-3 开放层 × 1 行墙带 × 层内竖隔断+门口）替换"独立矩形房+走廊网"——v5.4 实测墙占比 57-66%（原版 15-36%），且装箱数学上该范式天花板 ~45%，是"通道窄/被堵"的结构性根因。Python 量化：墙数 748→216（18%），全连通，rects 均 6.3/房。
-- 水池改为房间矩形内完整放置（v5.4 全图随机被墙切碎、可能压走廊）；连通修复口袋阈值 16→6。
-- 测试实例冒烟通过：init 正常、无 UNCAUGHT、展示馆 8 合成房构建完成。
-- pfe.swf 里的 loader（8/21 部署）实测健康，无需重打。
+- 部署版本 **v5.7**——release/RandomRoomsMod.swf 已更新，**待实机（F5）复评**。
+- v5.6 = 分层大厅范式（结构达标：墙占比 18%，全连通，DEC-0003）。
+- v5.7 = 灵性工程第一轮（DEC-0004 反均匀）：房间个性向量（6% 空房 + 密度 0.5-1.4）、
+  视觉锚（50% 房间大件群先行）、分区纹理（按层主材质+补丁区）、墙面叙事（back 3 组
+  主导）、装饰排/敌标记联动密度、isOpenCell 语义修复（`_X` 纹理格可放物件）。
+- 冒烟通过（展示馆 8 房生成无异常）。
 
 ## 4. 正在进行与卡点
 
-- 等 v5.6 实机复评（F5）：通道应明显变宽变直（层间墙带洞 + 竖隔断门口），水体应为房间内完整片状。若房间感不足（隔断太少/太厚）或仍有异常，看日志与 build/diag-skeleton.py 量化。
+- 等 v5.7 实机复评（F5）：①房与房方差是否可感知（空 vs 密对比）；②锚点是否
+  "记得住"；③back 主导组与分区纹理观感。V5.6 的通道/水体一并看。
 
 ## 5. 已知问题
 
 - back 装饰仍是每 rect 3-6 个；新范式 rect 是横向长条，back 密度可能偏高，待实机看。
 - 竖隔断门口的"门"物件（stdoor/door1）70% 概率放置，视觉密度待实机调。
-- 既有物件 used 只标锚点格（v5.2 行为）：1×1 物件可能视觉叠上多格物件覆盖格；en 标记段已全格标记，旧物件未动。
+- 既有物件 used 只标锚点格（v5.2 行为）：1×1 物件可能视觉叠上多格物件覆盖格；en/锚段已全格标记，旧物件未动。
+- v54 镜像脚本未同步锚阶段与个性密度（不变式由 footOk/used 机制 + 冒烟覆盖）。
+- 空房率/密度区间是首版参数（6%、0.5-1.4），待实机体感调。
 - 8/21 22:32 有一次游戏运行未产生模组日志（原因不明）；链路本身已实测健康。
 
 ## 6. 下一步（优先级排序）
 
-1. v5.6 实机复评收尾（F5；关注：通道宽度/连通、水体形态、门与隔断观感、敌标记）；
-2. 按实机体感调分层参数（层数 2/3 配比、隔断数、门口密度、墙带洞数）；
-3. 远期：构件级 WFC 混合；种子/联机仍延后（DEC-0001）；
-4. 共享知识待办：ups/kolEn/tipEnemy 敌人生成机制、AllData 物件体系、**Tile.dec 字符位置语义**（首字符=fForms 墙表、后续字符=oForms/水/Z 层——`_X` 才是地板纹理，裸大写=墙）→ 沉淀 shared-knowledge。
+1. v5.7 实机复评（F5）——房间方差可感性（空 vs 密）、锚点记忆点、back 主导组观感，与 v5.6 通道/水体一起看；
+2. 按体感调个性参数（空房率/密度区间/锚概率/主导组占比）与分层参数（层数/隔断/门口）；
+3. 灵性工程后续刀：进深序列（入口→深处梯度）、遭遇编排（enspawn 伏击位）、稀有地标；
+4. 种子/联机仍延后（DEC-0001）；构件级 WFC 远期；
+5. 共享知识待办：ups/kolEn/tipEnemy 敌人生成机制、AllData 物件体系、**Tile.dec 字符位置语义**（首字符=fForms 墙表、后续=oForms/水/Z 层——`_X` 才是地板纹理，裸大写=墙）、房间内容统计（room-content-statistics.md 可直接升格）。
 
 ## 7. 深入了解
 
-- **开发历程**：state/journal.md（v3.1→v5.6，每条=一个实机反馈闭环）
-- **当前生成器 v5.6**：src/rr/RRSynth.as v5Skeleton（分层大厅）+ design/generator-v5.md（v5 旧范式记录，待更新）
-- **决策**：decisions/DEC-0001-scope-confirmed.md（范围）、DEC-0002-enspawn-channel.md（敌标记）、DEC-0003-layered-halls.md（范式更换）
-- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md（AllData 材质/占地格/enl 标记）
+- **开发历程**：state/journal.md（v3.1→v5.7，每条=一个实机反馈闭环）
+- **当前生成器 v5.7**：src/rr/RRSynth.as（分层大厅 v5Skeleton + 个性向量 + 视觉锚）
+- **设计**：design/room-soul-plan.md（灵性工程三步走+两张设计卡）；design/generator-v5.md（v5 旧范式，待更新）
+- **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
+- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md（材质/占地格/enl 标记）、
+  knowledge/discoveries/room-content-statistics.md（物件组合近随机、方差才是灵性来源）
 - **工具链（2026-08-27 打通，全部实测）**：
   - 编译：`bash build/build-m0.sh`（mxmlc=flexsdk 4.16.1，Java=Animate 2024 JRE，配置=build/rr-config.xml；**勿用 amxmlc 直编**，air-config 的 {airHome} 令牌已失效）
   - SDK 全套：`D:\RemainsMod\mods\Sandevistan\build\tools\`（flexsdk+airsdk+ffdec）
