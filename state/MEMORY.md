@@ -15,38 +15,40 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v5.4**（本会话编译）——release/RandomRoomsMod.swf 已更新（旧 v5.3 备份在 release/RandomRoomsMod_v53_backup.swf），**待实机（F5）评估**。
-- 测试实例冒烟通过：加载链完整、无 UNCAUGHT、展示馆 8 合成房生成无异常（enspawn 代码已执行）。
+- 部署版本 **v5.6**——release/RandomRoomsMod.swf 已更新（v5.3 备份在同目录 _v53_backup.swf），**待实机（F5）复评**。
+- v5.6 = **合成范式更换**：分层大厅（2-3 开放层 × 1 行墙带 × 层内竖隔断+门口）替换"独立矩形房+走廊网"——v5.4 实测墙占比 57-66%（原版 15-36%），且装箱数学上该范式天花板 ~45%，是"通道窄/被堵"的结构性根因。Python 量化：墙数 748→216（18%），全连通，rects 均 6.3/房。
+- 水池改为房间矩形内完整放置（v5.4 全图随机被墙切碎、可能压走廊）；连通修复口袋阈值 16→6。
+- 测试实例冒烟通过：init 正常、无 UNCAUGHT、展示馆 8 合成房构建完成。
 - pfe.swf 里的 loader（8/21 部署）实测健康，无需重打。
 
 ## 4. 正在进行与卡点
 
-- 等 v5.4 实机反馈：v5.3 三修复（通道/悬空/孤立房间）+ v5.4 敌人标记与 player 修复**一起看**（F5 展示馆；敌标记本身不可见，看的是房间内敌人是否按 biome 出现、开局不贴脸）。
+- 等 v5.6 实机复评（F5）：通道应明显变宽变直（层间墙带洞 + 竖隔断门口），水体应为房间内完整片状。若房间感不足（隔断太少/太厚）或仍有异常，看日志与 build/diag-skeleton.py 量化。
 
 ## 5. 已知问题
 
-- back 装饰仍是每 rect 3-6 个（原版每房口径未查；纯视觉、风险低，未动）。
-- 既有物件 used 只标锚点格（v5.2 行为）：1×1 物件可能视觉叠上 2×2 物件的覆盖格；en 标记段已做全格标记，旧物件未动。
-- 8/21 22:32 有一次游戏运行未产生模组日志（原因不明，疑日志被清或未走正常启动链）；链路本身已实测健康。
+- back 装饰仍是每 rect 3-6 个；新范式 rect 是横向长条，back 密度可能偏高，待实机看。
+- 竖隔断门口的"门"物件（stdoor/door1）70% 概率放置，视觉密度待实机调。
+- 既有物件 used 只标锚点格（v5.2 行为）：1×1 物件可能视觉叠上多格物件覆盖格；en 标记段已全格标记，旧物件未动。
+- 8/21 22:32 有一次游戏运行未产生模组日志（原因不明）；链路本身已实测健康。
 
 ## 6. 下一步（优先级排序）
 
-1. v5.4 实机评估收尾（F5；若异常先看日志与 dumpSynthGrid 分阶段输出）；
-2. 按实机体感调结构参数（房间数/间距/额外环数）；
-3. 远期：v4 规划中的构件级 WFC 混合；种子/联机仍延后（DEC-0001）；
-4. 共享知识待办：ups/kolEn/tipEnemy 敌人生成机制、AllData 物件体系、ed=2 拉丁 oForms 语义修订 → 沉淀 shared-knowledge。
+1. v5.6 实机复评收尾（F5；关注：通道宽度/连通、水体形态、门与隔断观感、敌标记）；
+2. 按实机体感调分层参数（层数 2/3 配比、隔断数、门口密度、墙带洞数）；
+3. 远期：构件级 WFC 混合；种子/联机仍延后（DEC-0001）；
+4. 共享知识待办：ups/kolEn/tipEnemy 敌人生成机制、AllData 物件体系、**Tile.dec 字符位置语义**（首字符=fForms 墙表、后续字符=oForms/水/Z 层——`_X` 才是地板纹理，裸大写=墙）→ 沉淀 shared-knowledge。
 
 ## 7. 深入了解
 
-- **开发历程**：state/journal.md（v3.1→v5.4，每条=一个实机反馈闭环）
-- **当前生成器 v5.4**：design/generator-v5.md + src/rr/RRSynth.as en 段（房间级放置）
-- **决策**：decisions/DEC-0001-scope-confirmed.md（范围）、DEC-0002-enspawn-channel.md（敌标记通道与配比）
-- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md（AllData 材质/占地格/enl 标记 4931-4933 行）
-- **实验**：knowledge/experiments/（M0 部署管线 / P0 注入点 / P1 种子）
+- **开发历程**：state/journal.md（v3.1→v5.6，每条=一个实机反馈闭环）
+- **当前生成器 v5.6**：src/rr/RRSynth.as v5Skeleton（分层大厅）+ design/generator-v5.md（v5 旧范式记录，待更新）
+- **决策**：decisions/DEC-0001-scope-confirmed.md（范围）、DEC-0002-enspawn-channel.md（敌标记）、DEC-0003-layered-halls.md（范式更换）
+- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md（AllData 材质/占地格/enl 标记）
 - **工具链（2026-08-27 打通，全部实测）**：
   - 编译：`bash build/build-m0.sh`（mxmlc=flexsdk 4.16.1，Java=Animate 2024 JRE，配置=build/rr-config.xml；**勿用 amxmlc 直编**，air-config 的 {airHome} 令牌已失效）
   - SDK 全套：`D:\RemainsMod\mods\Sandevistan\build\tools\`（flexsdk+airsdk+ffdec）
   - Python（离线验证）：`C:\Users\hello\Documents\_sandevistan_dev\python3\python.exe`
-  - 离线验证：`build/synth-v54-verify.py`（400 房不变式；用前 rm -rf build/__pycache__）
-  - 语料 `Rooms/rooms_*.xml`（658 房，player 0.99/房、敌标记 3.48/房）
+  - 结构诊断：`build/diag-skeleton.py`（开放率/连通/rects 量化）；物件验证 `build/synth-v54-verify.py`（用前 rm -rf build/__pycache__）
+  - 语料 `Rooms/rooms_*.xml`（658 房，player 0.99/房、敌标记 3.48/房、墙占比 15-36%）
 - **构建/部署/测试技能**：remains-mod-build、remains-swf-patching、remains-auto-testing
