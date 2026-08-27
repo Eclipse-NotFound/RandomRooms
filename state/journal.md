@@ -2,6 +2,22 @@
 
 > 协议见 GOVERNANCE.md §8：只追加不改写，**新条目插在最上面**。
 
+## 2026-08-27 v5.4 敌人出生标记 + player 房间级修复；本机工具链打通
+
+- 做了什么：
+  - 排查"v5.3 部署后无日志"疑团：测试实例（appId=pferrtest）实测**加载链健康**——loader/8.26 release SWF 均正常，疑当时日志被清或未走正常启动链；pfe.swf 无需重打。
+  - v5.4 功能：合成房 XML 放 enl1/enl2/enf1 敌人出生标记，走原版 ups 通道；比例按语料配比 quota 分层；距 player>=3 格；同时修复 v5.1 遗留的 player 每-rect 重复（改为房间级 1 个）。
+  - 离线验证 `build/synth-v54-verify.py` 400 房全过：每房 2-5 个（原版均值 3.48）、占地/重叠/距离零违规、桶比例与语料最大偏差 2.4%。
+  - 编译部署 release/RandomRoomsMod.swf（v5.3 备份在同目录 _v53_backup.swf）；测试实例冒烟通过（展示馆 8 合成房生成无异常）。
+  - **本机工具链打通**：SDK 全套在 `D:\RemainsMod\mods\Sandevistan\build\tools\`（flexsdk+airsdk+ffdec），Java 用 Animate 2024 JRE；`build/rr-config.xml` 显式 SWC 路径绕过 air-config {airHome} 令牌失效；build-m0.sh / deploy-pfe.sh 已更新为新路径；便携 Python 在 `C:\Users\hello\Documents\_sandevistan_dev\python3`。
+- 关键决定/发现：（DEC-0002）
+  - enl 标记走 **ups 通道**而非 enspawn 通道：Location.as tip=up 进 ups[tipn]（4931-4933：enl1/enl2/enf1=桶1/2/3，占地 1×1/2×2/1×1），消费在 1060-1084（kolEn 配额 + place 过滤 + createUnit(tipEn[i])）——生成数量与敌人类型由 kolEn/Land.tipEnemy 按 land biom **自动**决定，模组只放标记。
+  - 采样权重法会比例失真（2×2 找位失败率约 40%），改 **quota 分层分配**（失败名额不跨桶转移）。
+  - 语料实测：每房 player 0.99（v5.1 每 rect 放是 bug）、敌标记 3.48。
+- 遗留/下一步：v5.4 实机评估（F5，与 v5.3 三修复一起看）；back 每-rect 口径未查；ups/kolEn/tipEnemy 机制待沉淀 shared-knowledge（并入既有 AllData 待办）。
+
+---
+
 ## 2026-08-27 外置记忆迁移
 
 - 由 current-status.md（交接快照，原文在 git 历史）拆分迁移：现行状态 → state\MEMORY.md；AllData 实证 → knowledge/discoveries/alldata-materials-room-xml.md；生成器流程 → design/generator-v5.md；演进史留在本文件下方历史块。

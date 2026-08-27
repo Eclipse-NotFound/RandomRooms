@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<flex-config xmlns="http://www.adobe.com/2006/flex-config">
+  <!-- RandomRooms 编译配置：显式指向本地 playerglobal 与 airglobal。
+       本机工具链（2026-08-27 探测，同 TDFC 路线）：完整 SDK 在
+       D:\RemainsMod\mods\Sandevistan\build\tools\（flexsdk + airsdk + ffdec），
+       mxmlc 需 Java：用 Adobe Animate 2024 自带 JRE。
+       编译（游戏根 mods/RandomRooms 下）:
+         PATH 含 Animate jre 后:
+         cmd //c "D:\RemainsMod\mods\Sandevistan\build\tools\flexsdk\bin\mxmlc.bat
+                  -load-config build\rr-config.xml -swf-version 32
+                  -use-network=false -static-link-runtime-shared-libraries=true" -->
+  <target-player>32.0</target-player>
+
+  <compiler>
+    <external-library-path>
+      <path-element>D:/RemainsMod/mods/Sandevistan/build/tools/airsdk/frameworks/libs/player/32.0/playerglobal.swc</path-element>
+      <path-element>D:/RemainsMod/mods/Sandevistan/build/tools/airsdk/frameworks/libs/air/airglobal.swc</path-element>
+    </external-library-path>
+
+    <library-path>
+      <path-element>D:/RemainsMod/mods/Sandevistan/build/tools/airsdk/frameworks/libs/player/32.0/playerglobal.swc</path-element>
+      <path-element>D:/RemainsMod/mods/Sandevistan/build/tools/airsdk/frameworks/libs/air/airglobal.swc</path-element>
+    </library-path>
+
+    <source-path>
+      <path-element>D:/Program Files/Steam/steamapps/common/Remains/mods/RandomRooms/src</path-element>
+    </source-path>
+  </compiler>
+
+  <output>D:/Program Files/Steam/steamapps/common/Remains/mods/RandomRooms/release/RandomRoomsMod.swf</output>
+</flex-config>

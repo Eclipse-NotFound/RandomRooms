@@ -25,6 +25,13 @@ package rr
       public static const WALL_CHARS:String = "ABCDEFGHIJKLMNOPQRST";
       
       public static const BIOMES:Array = ["stable", "sewer", "plant", "mane"];
+
+      /** 敌人出生标记配比 [enl1,enl2,enf1]，BIOMES 序（原版语料 rooms_*.xml
+       *  实测: stable=28/49/23、sewer=21/36/43、plant=35/50/15、mane=31/52/17）。
+       *  按名额分层分配（随机舍入），放置失败的名额不作桶间转移。 */
+      public static const EN_RATE:Array = [[28,49,23],[21,36,43],[35,50,15],[31,52,17]];
+      public static const EN_IDS:Array = ["enl1", "enl2", "enf1"];
+
       
       private static const BLOCK_W:int = 6;
       private static const BLOCK_H:int = 4;
@@ -353,6 +360,8 @@ package rr
          var tableId:String = bIdx == 0 ? "table2" : "table";
          var backs:Array = ["konstr", "vkonstr", "hkonstr", "stlight1", "vents", "pipe4"];
          var r:int, k:int, tries:int, placed:int;
+         var rectUsed:Array = [];    // 各 rect 的占用表（平行 rects；player/敌标记房间级放置用）
+         var playerPos:Array = null; // 房间级唯一出生点（原版 0.99 player/房）
          for (r = 0; r < rects.length; r++)
          {
             var rect:Array = rects[r] as Array;
@@ -424,12 +433,6 @@ package rr
                lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
                used[in3[1] + "," + in3[0]] = true;
             }
-            var in4:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "player");
-            if (in4 != null)
-            {
-               lastObjs.push(["player", genCode(), in4[0], in4[1]]);
-               used[in4[1] + "," + in4[0]] = true;
-            }
             // 背景装饰 3-6（开放格上，同原版 back 摆放规律 —— 原版 85%+ 在开放格）
             var nBack:int = 3 + int(rnd() * 4);
             tries = 0;
@@ -444,6 +447,84 @@ package rr
                lastBacks.push([backs[int(rnd() * backs.length)], bx, by]);
                placed++;
             }
+            rectUsed.push(used);
+         }
+
+         // ---- 房间级放置（v5.4 修正：原版 0.99 player/房、3.48 敌标记/房，
+         //      均为每房一份，不随 rect 重复） ----
+         // player 出生点：随机挑一个 rect
+         if (rects.length > 0)
+         {
+            var pr:int = int(rnd() * rects.length);
+            var prect:Array = rects[pr] as Array;
+            var pspot:Array = interiorSpot(grid, prect[0], prect[1], prect[2], prect[3],
+                                           rectUsed[pr], "player");
+            if (pspot != null)
+            {
+               lastObjs.push(["player", genCode(), pspot[0], pspot[1]]);
+               rectUsed[pr][pspot[1] + "," + pspot[0]] = true;
+               playerPos = pspot;
+            }
+         }
+         // 敌人出生标记：enl1/enl2/enf1 走原版 ups 桶（AllData tip=up, tipn=1/2/3），
+         // 实际生成数量由 Location.kolEn、敌人类型由 Land.tipEnemy（land biom）决定；
+         // 按语料配比分层名额（随机舍入），距 player >=3 格防开局即战
+         var nEn:int = 3 + int(rnd() * 2);   // 3-4 基准；quota 随机舍入后实际 2-5，均值≈3.5（原版 3.48）
+         var enR:Array = EN_RATE[Math.min(bIdx, 3)] as Array;
+         var enTot:int = 0;
+         for (k = 0; k < 3; k++) enTot += int(enR[k]);
+         var q1:int = int(nEn * enR[0] / enTot + rnd());
+         var q2:int = int(nEn * enR[1] / enTot + rnd());
+         var q3:int = nEn - q1 - q2;
+         if (q3 < 0) q3 = 0;
+         var enQuota:Array = [q1, q2, q3];
+         for (k = 0; k < 3; k++)
+         {
+            var enId:String = EN_IDS[k];
+            tries = 0;
+            placed = 0;
+            while (placed < int(enQuota[k]) && tries < 40 && rects.length > 0)
+            {
+               tries++;
+               var er:int = int(rnd() * rects.length);
+               var erect:Array = rects[er] as Array;
+               var ef:Array = objFoot(enId);
+               var ep:Array = null;
+               for (var et:int = 0; et < 30 && ep == null; et++)
+               {
+                  var ex:int = erect[0] + 2 + int(rnd() * Math.max(1, erect[2] - 4 - ef[0]));
+                  var ey:int = erect[1] + 2 + int(rnd() * Math.max(1, erect[3] - 4 - ef[1]));
+                  if (ex < 0 || ey < 0 || ex >= GRID_W || ey >= GRID_H) continue;
+                  var eused:Object = rectUsed[er];
+                  var clash:Boolean = false;
+                  for (var edy:int = 0; edy < ef[1]; edy++)
+                  {
+                     for (var edx:int = 0; edx < ef[0]; edx++)
+                     {
+                        if (ey + edy >= GRID_H || ex + edx >= GRID_W ||
+                            grid[ey + edy][ex + edx] != "_" || eused[(ey + edy) + "," + (ex + edx)] == true)
+                        {
+                           clash = true;
+                           break;
+                        }
+                     }
+                     if (clash) break;
+                  }
+                  if (clash) continue;
+                  if (playerPos != null && Math.abs(ex - playerPos[0]) + Math.abs(ey - playerPos[1]) < 3) continue;
+                  ep = [ex, ey];
+               }
+               if (ep == null) continue;
+               lastObjs.push([enId, genCode(), ep[0], ep[1]]);
+               for (edy = 0; edy < ef[1]; edy++)
+               {
+                  for (edx = 0; edx < ef[0]; edx++)
+                  {
+                     rectUsed[er][(ep[1] + edy) + "," + (ep[0] + edx)] = true;
+                  }
+               }
+               placed++;
+            }
          }
       }
 
@@ -452,7 +533,7 @@ package rr
       {
          switch (id)
          {
-            case "case": case "ammobox": case "explbox": case "lov": case "enl1": return [1, 1];
+            case "case": case "ammobox": case "explbox": case "lov": case "enl1": case "enf1": return [1, 1];
             case "couch": case "table2": case "table": case "chest": return [2, 1];
             case "mcrate2": case "box": case "woodbox": case "player": case "enl2": case "hatch2": return [2, 2];
             case "radbarrel": case "filecab": case "door1": return [1, 2];

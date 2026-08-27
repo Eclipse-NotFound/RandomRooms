@@ -21,9 +21,11 @@
 # ============================================================================
 set -euo pipefail
 
-DEFAULT_TARGET="C:/Program Files (x86)/Steam/steamapps/common/Remains/pfe.swf"
+DEFAULT_TARGET="D:/Program Files/Steam/steamapps/common/Remains/pfe.swf"
 TARGET="${1:-$DEFAULT_TARGET}"
-FFDEC="C:/Users/micha/Documents/_sandevistan_dev/ffdec/ffdec-cli.exe"
+# 2026-08-27 探测：ffdec 与 flexsdk/airsdk 同在 Sandevistan 源仓库 tools 下；
+# 需要 Java 时用 Adobe Animate 2024 自带 JRE（PATH 前置，见 build-m0.sh）
+FFDEC="D:/RemainsMod/mods/Sandevistan/build/tools/ffdec/ffdec-cli.exe"
 
 if [ ! -f "$TARGET" ]; then
   echo "ERROR: 目标文件不存在: $TARGET" >&2
