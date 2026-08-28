@@ -254,35 +254,62 @@ package rr
             var zx0:int = zoneBounds[zi][0];
             var zx1:int = zoneBounds[zi][1];
             var zw2:int = zx1 - zx0 + 1;
-            // v6.1 层界 profile 库：加权抽一条原版真实组合（含通高/浮中层/
-            // 蜂窝全谱形态）；带厚 = 层间 gap（天然来自 profile）
-            var totalW:int = 0;
-            for (b3 = 0; b3 < LAYER_PROFILES.length; b3++) totalW += LAYER_PROFILES[b3][1];
-            var pv:Number = rnd() * totalW;
-            var pi:int = 0;
-            for (b3 = 0; b3 < LAYER_PROFILES.length; b3++)
+            // v6.2 层界算法生成（用户偏好：算法产生更多样的组合，不抽样原版；
+            // 层数分布仍以 658 房语料为规律校准）。变数来源：
+            //   a) 主层模式——一层拿 35-70% 行数（大堂 vs 蜂窝对比）
+            //   b) 带厚 1-2 随机、小层 3-6 行、余量随机撒
+            // 层数按原版分布（规律校准）：1 层 31%/2 层 26%/3 层 26%/4 层 10%/5 层 3%
+            var roll:Number = rnd();
+            var nLayer:int = roll < 0.31 ? 1 : (roll < 0.57 ? 2 : (roll < 0.83 ? 3 : (roll < 0.93 ? 4 : 5)));
+            while (nLayer * 3 + (nLayer - 1) > 23) nLayer--;
+            var nBand:int = nLayer - 1;
+            var bts:Array = [];
+            var bandTotal:int = 0;
+            for (b3 = 0; b3 < nBand; b3++)
             {
-               pv -= int(LAYER_PROFILES[b3][1]);
-               if (pv < 0)
+               var bt3:int = 1 + int(rnd() * 2);
+               bts.push(bt3);
+               bandTotal += bt3;
+            }
+            var rem:int = 23 - bandTotal;
+            var heights:Array = [];
+            var mainIdx:int = int(rnd() * nLayer);
+            if (nLayer == 1)
+            {
+               heights.push(rem);
+            }
+            else
+            {
+               var minOthers:int = 3 * (nLayer - 1);
+               var mainH:int = 3 + int(rnd() * Math.max(1, rem - minOthers + 1));
+               // 55% 概率强化主层（拿走剩余的 40-70%），制造大小悬殊
+               if (rnd() < 0.55)
                {
-                  pi = b3;
-                  break;
+                  mainH = Math.min(rem - minOthers, Math.max(mainH, int(rem * (0.35 + rnd() * 0.35))));
+               }
+               mainH = Math.max(3, Math.min(rem - minOthers, mainH));
+               for (l3 = 0; l3 < nLayer; l3++) heights.push(3);
+               heights[mainIdx] += mainH - 3;
+               var restExtra:int = rem - mainH - 3 * (nLayer - 1);
+               for (l3 = 0; l3 < restExtra; l3++)
+               {
+                  var hi:int = int(rnd() * nLayer);
+                  if (hi == mainIdx) hi = (mainIdx + 1 + int(rnd() * (nLayer - 1))) % nLayer;
+                  heights[hi]++;
                }
             }
-            var prof:Array = LAYER_PROFILES[pi][0];
             var zLayers:Array = [];
             var zBands:Array = [];
-            for (l3 = 0; l3 < prof.length; l3++)
+            var cur:int = 1;
+            for (l3 = 0; l3 < nLayer; l3++)
             {
-               var pt:int = int(prof[l3][0]);
-               var pb:int = int(prof[l3][1]);
-               if (l3 > 0)
+               zLayers.push([cur, cur + heights[l3] - 1]);
+               cur += heights[l3];
+               if (l3 < nBand)
                {
-                  var prevB:int = int(prof[l3 - 1][1]);
-                  var gapRows:int = pt - prevB - 1;
-                  if (gapRows >= 1) zBands.push([prevB + 1, gapRows]);
+                  zBands.push([cur, bts[l3]]);
+                  cur += bts[l3];
                }
-               zLayers.push([pt, pb]);
             }
             zones.push({x0: zx0, x1: zx1, layers: zLayers, bands: zBands, walls: []});
          }
@@ -309,9 +336,10 @@ package rr
             {
                bandTop = int(zb0[li][0]);
                bandRows = int(zb0[li][1]);
+               var bandCh:String = wallChar(wallTbl);   // v6.2 带级单材质（原版一堵墙一个材质）
                for (r2 = 0; r2 < bandRows; r2++)
                {
-                  for (x2 = zones[zi].x0; x2 <= zones[zi].x1; x2++) grid[bandTop + r2][x2] = wallChar(wallTbl);
+                  for (x2 = zones[zi].x0; x2 <= zones[zi].x1; x2++) grid[bandTop + r2][x2] = bandCh;
                }
                holeLast = zones[zi].x0;
                for (holeK = 0; holeK < 2 + int(rnd() * 2); holeK++)
@@ -349,9 +377,10 @@ package rr
          {
             var zwx:int = zoneWalls[zi][0];
             var zww:int = zoneWalls[zi][1];
+            var zwCh:String = wallChar(wallTbl);   // v6.2 区界墙单材质
             for (y2 = 1; y2 <= GRID_H - 2; y2++)
             {
-               for (w2 = 0; w2 < zww; w2++) grid[y2][zwx + w2] = wallChar(wallTbl);
+               for (w2 = 0; w2 < zww; w2++) grid[y2][zwx + w2] = zwCh;
             }
             for (doorK = 0; doorK < 2 + int(rnd() * 2); doorK++)
             {
@@ -396,20 +425,27 @@ package rr
                         }
                      }
                      if (!dOK) continue;
+                     var wallCh2:String = wallChar(wallTbl);   // v6.2 道级单材质
                      for (y2 = ltop; y2 <= lbot; y2++)
                      {
-                        for (w2 = 0; w2 < wallW; w2++) grid[y2][wallX + w2] = wallChar(wallTbl);
+                        for (w2 = 0; w2 < wallW; w2++) grid[y2][wallX + w2] = wallCh2;
                      }
-                     var nDoor:int = 1 + int(rnd() * 2);
-                     for (doorK = 0; doorK < nDoor; doorK++)
+                     // v6.2 门洞语义：1 格宽洞（stdoor 1×3 恰好填满→门真阻隔，
+                     // 原版门洞宽=门宽）+ 60% 概率一个 2-3 宽敞开口（无门敞通道）
+                     doorY = ltop + 1 + int(rnd() * Math.max(1, lbot - ltop - 3));
+                     for (var dz:int = 0; dz < 3 && doorY + dz <= lbot; dz++)
                      {
-                        doorY = ltop + 1 + int(rnd() * Math.max(1, lbot - ltop - 3));
-                        var doorW:int = doorK == 0 ? 3 : 2;
-                        for (var dz:int = 0; dz < 3 && doorY + dz <= lbot; dz++)
+                        grid[doorY + dz][wallX] = "_";
+                     }
+                     lastDoorSpots.push([wallX, doorY]);
+                     if (rnd() < 0.6)
+                     {
+                        var openY:int = ltop + 1 + int(rnd() * Math.max(1, lbot - ltop - 2));
+                        var openW:int = 2 + int(rnd() * 2);
+                        for (var oz:int = 0; oz < 3 && openY + oz <= lbot; oz++)
                         {
-                           for (w2 = 0; w2 < Math.min(doorW, wallW); w2++) grid[doorY + dz][wallX + w2] = "_";
+                           for (w2 = 1; w2 < Math.min(openW, wallW); w2++) grid[openY + oz][wallX + w2] = "_";
                         }
-                        lastDoorSpots.push([wallX, doorY]);
                      }
                      (zones[zi].walls as Array).push([wallX, wallW, ltop, lbot]);
                      placedW = true;
@@ -916,6 +952,17 @@ package rr
             else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
             else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
+            // v6.2 背墙校验：物件背后紧邻必须部分是墙（原版 98% 距墙 1 格；
+            // 无校验时物件可立在墙带的洞口背后——"悬空"观感）
+            var backWall:Boolean = false;
+            for (var bc:int = 0; bc < fs && !backWall; bc++)
+            {
+               if (side == 0 && y - 1 >= 0 && WALL_CHARS.indexOf(grid[y - 1][x + bc].charAt(0)) >= 0) backWall = true;
+               if (side == 1 && y + fw < GRID_H && WALL_CHARS.indexOf(grid[y + fw][x + bc].charAt(0)) >= 0) backWall = true;
+               if (side == 2 && x - 1 >= 0 && WALL_CHARS.indexOf(grid[y][x - 1].charAt(0)) >= 0) backWall = true;
+               if (side == 3 && x + fs - 1 + 1 < GRID_W && WALL_CHARS.indexOf(grid[y][x + fs].charAt(0)) >= 0) backWall = true;
+            }
+            if (!backWall) continue;
             if (isOpenCell(grid[y][x]) && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
@@ -1466,7 +1513,7 @@ package rr
                         }
                      }
                      if (ziHit < 0) continue;
-                     var ch2:String = (rnd() < 0.90) ? String(layerMain[liHit]) : pickWeighted(wallTbl);
+                     var ch2:String = (rnd() < 0.97) ? String(layerMain[liHit]) : pickWeighted(wallTbl);
                      for (var pk:int = 0; pk < patches.length; pk++)
                      {
                         if (j >= patches[pk][1] && j < patches[pk][1] + patches[pk][3] &&
