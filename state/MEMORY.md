@@ -23,10 +23,7 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v6.2**——release/RandomRoomsMod.swf 已更新，**待实机（F5/F1）复评**。
-- v6.2：wallSpot 背墙校验（原版 98% 竖高家具距墙 1 格）、门洞收窄到门宽
-  （stdoor 真阻隔）+敞开口、墙材质带级/道级单材质（主材质 97%）、层界算法化
-  （主层模式，用户偏好不抽样原版）、缺口检查路径修复（Error #1069）。
+- 部署版本 **v6.1**——release/RandomRoomsMod.swf 已更新，**待实机（F5/F1）复评**。
 - v6.1：**修门/活板门从未生成的 bug**（per-rect 过滤跳过隔断列/墙带行上的全部
   门口洞位，自 v5.6 起）；back 距墙收紧 ≤2；**LAYER_PROFILES 层界库**（原版 23 条
   真实组合加权抽样，含通高/浮中层/蜂窝）；checkpoint 记录点入词表；列区边界多样化。
@@ -72,7 +69,7 @@
 ## 7. 深入了解
 
 - **开发历程**：state/journal.md（v3.1→v5.9，每条=一个实机反馈闭环）
-- **当前生成器 v6.2**：src/rr/RRSynth.as（分层算法化 zones + 主层模式 + 背墙校验 + 真门阻隔）
+- **当前生成器 v6.1**：src/rr/RRSynth.as（分层语法 zones+LAYER_PROFILES + 个性向量 + 视觉锚）
 - **设计**：design/room-soul-plan.md；design/generator-v5.md（v5 旧范式，待更新）
 - **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
 - **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md、
