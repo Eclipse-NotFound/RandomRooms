@@ -47,6 +47,9 @@ package rr
        *  横梁/台阶/楼梯（西里尔）、水 —— 这些上面放物件=悬空 */
       public static const SAFE_FLOOR:String = "BCFHLMNQTW";
 
+      /** v5.9 物件谱系补充（AllData 实证占地）：hatch2 活板门 2×1、
+       *  wallcab 墙柜 1×1、medbox 药箱 1×1、trash 垃圾 1×1、bed 床 4×1 */
+
       /** 房间个性向量（v5Skeleton 每房抽取，placeRoomObjects 消费） */
       private var emptyRoom:Boolean = false;
       private var density:Number = 1.0;
@@ -260,9 +263,9 @@ package rr
                }
             }
          }
-         // 2b) 层间墙带（1-2 行厚）+ 主次洞（首个主洞 3-4 宽，其余 2 宽——
-         //     通道分化：主洞=明显通道，次洞=缝隙）
-         var bandTop:int, bandRows:int, holeK:int, holeX:int, holeW:int, holeLast:int, r2:int;
+         // 2b) 层间墙带（1-2 行厚）+ 主次洞（v5.9：主洞 4-5 宽、次洞 3 宽——
+         //     玩家 2×2 通行净宽 ≥3 才从容；GX 列对齐洞形成十字动线）
+         var bandTop:int, bandRows:int, holeK:int, holeX:int, holeW:int, holeLast:int, r2:int, holeCx:int, gx:int;
          for (li = 0; li < bands.length; li++)
          {
             bandTop = int(bands[li][0]);
@@ -272,16 +275,27 @@ package rr
                for (x2 = 1; x2 <= GRID_W - 2; x2++) grid[bandTop + r2][x2] = wallChar(wallTbl);
             }
             holeLast = 1;
+            holeCx = -1;
             for (holeK = 0; holeK < 2 + int(rnd() * 2); holeK++)
             {
-               holeW = holeK == 0 ? 3 + int(rnd() * 2) : 2;
+               holeW = holeK == 0 ? 4 + int(rnd() * 2) : 3;
                holeX = holeLast + 4 + int(rnd() * Math.max(1, GRID_W - 8 - holeLast));
-               if (holeX > GRID_W - 5) holeX = GRID_W - 5;
+               if (holeX > GRID_W - 6) holeX = GRID_W - 6;
                for (x2 = holeX; x2 < holeX + holeW && x2 <= GRID_W - 2; x2++)
                {
                   for (r2 = 0; r2 < bandRows; r2++) grid[bandTop + r2][x2] = "_";
                }
+               if (holeCx < 0 || Math.abs(holeX - GX1) < Math.abs(holeCx - GX1)) holeCx = holeX;
                holeLast = holeX + holeW;
+            }
+            // 十字动线：60% 概率在上下中缺口列（GX1/GX2）再开一个 3 宽对齐洞
+            if (rnd() < 0.6)
+            {
+               gx = rnd() < 0.5 ? GX1 - 1 : GX2 - 1;
+               for (x2 = gx; x2 < gx + 3 && x2 <= GRID_W - 2; x2++)
+               {
+                  for (r2 = 0; r2 < bandRows; r2++) grid[bandTop + r2][x2] = "_";
+               }
             }
             // 墙带恰在 GY（2 层制）时，两端对齐左右缺口打洞（打穿厚度）
             if (bandTop <= GY && GY < bandTop + bandRows)
@@ -464,15 +478,15 @@ package rr
          placeRoomObjects(grid, bIdx, roomRects);
       }
 
-      /** 房间物件放置：每房间 门+2-4箱子+沙发/桌/书架/出生点；外围背景装饰。
+      /** 房间物件放置：每房间 门+锚+箱子+家具/床+出生点；贴墙背景装饰。
        * 全部按占地格(size×wid)校验开放 → 无悬空/穿墙 */
       private function placeRoomObjects(grid:Array, bIdx:int, rects:Array):void
       {
          var doorId:String = bIdx == 2 ? "door1" : "stdoor";
-         var crates:Array = bIdx == 0 ? ["ammobox", "explbox", "case", "mcrate2", "chest", "locker"] :
-                           (bIdx == 1 ? ["case", "ammobox", "explbox", "box", "woodbox", "chest", "locker", "radbarrel"] :
-                           (bIdx == 2 ? ["ammobox", "case", "box", "explbox", "chest", "radbarrel", "woodbox"] :
-                                        ["case", "ammobox", "explbox", "mcrate2", "filecab", "locker"]));
+         var crates:Array = bIdx == 0 ? ["ammobox", "explbox", "case", "mcrate2", "chest", "locker", "wallcab", "medbox", "trash"] :
+                           (bIdx == 1 ? ["case", "ammobox", "explbox", "box", "woodbox", "chest", "locker", "radbarrel", "wallcab", "trash", "hatch2"] :
+                           (bIdx == 2 ? ["ammobox", "case", "box", "explbox", "chest", "radbarrel", "woodbox", "medbox", "hatch2"] :
+                                        ["case", "ammobox", "explbox", "mcrate2", "filecab", "locker", "wallcab", "medbox", "trash"]));
          var sofas:Array = bIdx == 0 ? ["couch", "lov"] : ["lov"];
          var tableId:String = bIdx == 0 ? "table2" : "table";
          var backs:Array = ["konstr", "vkonstr", "hkonstr", "stlight1", "vents", "pipe4"];
@@ -550,7 +564,7 @@ package rr
                   used[(dsy + dfy) + "," + dsx] = true;
                }
             }
-            // 箱子（贴墙，占地校验；数量随房间个性密度缩放）
+            // 箱子（贴墙，占地校验；数量随房间个性密度缩放；全格占用防叠放）
             var nCrate:int = int((2 + int(rnd() * 3)) * density + 0.5);
             tries = 0;
             placed = 0;
@@ -561,45 +575,71 @@ package rr
                var c:Array = wallSpot(grid, cwx, cwy, cw, ch2, used, cid);
                if (c == null) break;
                lastObjs.push([cid, genCode(), c[0], c[1]]);
-               used[c[1] + "," + c[0]] = true;
+               markUsed(used, c[0], c[1], cid);
                placed++;
             }
-            // 沙发/桌子/书架（室内，占地校验；出现概率随密度缩放）
+            // 沙发/桌子/书架/床（室内，占地校验；出现概率随密度缩放）
             var sofaId:String = sofas[int(rnd() * sofas.length)];
             var in1:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, sofaId);
             if (in1 != null && rnd() < 0.7 * density)
             {
                lastObjs.push([sofaId, genCode(), in1[0], in1[1]]);
-               used[in1[1] + "," + in1[0]] = true;
+               markUsed(used, in1[0], in1[1], sofaId);
             }
             var in2:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, tableId);
             if (in2 != null && rnd() < 0.6 * density)
             {
                lastObjs.push([tableId, genCode(), in2[0], in2[1]]);
-               used[in2[1] + "," + in2[0]] = true;
+               markUsed(used, in2[0], in2[1], tableId);
             }
             var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bookcase");
             if (in3 != null && rnd() < 0.5 * density)
             {
                lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
-               used[in3[1] + "," + in3[0]] = true;
+               markUsed(used, in3[0], in3[1], "bookcase");
             }
-            // 背景装饰（开放格上，原版 85%+ 在开放格）；数量随密度，
-            // 60% 出自主导组（墙面叙事：结构/设施/照明分组）
+            var in5:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bed");
+            if (in5 != null && rnd() < 0.3 * density)
+            {
+               lastObjs.push(["bed", genCode(), in5[0], in5[1]]);
+               markUsed(used, in5[0], in5[1], "bed");
+            }
+            // 背景装饰（v5.9 贴墙采样：原版 84% back 距墙≤3 格——撒在大厅中央
+            // 的灯/管道视觉上悬空）；数量随密度，60% 出主导组
             var nBack:int = int((3 + int(rnd() * 4)) * density + 0.5);
+            var backSpots:Array = [];
+            var yy2:int, xx2:int, dd:int, dHit:Boolean;
+            for (yy2 = cwy; yy2 < cwy + ch2; yy2++)
+            {
+               for (xx2 = cwx; xx2 < cwx + cw; xx2++)
+               {
+                  if (yy2 < 0 || yy2 >= GRID_H || xx2 < 0 || xx2 >= GRID_W) continue;
+                  if (!isOpenCell(grid[yy2][xx2])) continue;
+                  dHit = false;
+                  for (dd = 1; dd <= 3 && !dHit; dd++)
+                  {
+                     if ((yy2 - dd >= 0 && WALL_CHARS.indexOf(grid[yy2 - dd][xx2].charAt(0)) >= 0) ||
+                         (yy2 + dd < GRID_H && WALL_CHARS.indexOf(grid[yy2 + dd][xx2].charAt(0)) >= 0) ||
+                         (xx2 - dd >= 0 && WALL_CHARS.indexOf(grid[yy2][xx2 - dd].charAt(0)) >= 0) ||
+                         (xx2 + dd < GRID_W && WALL_CHARS.indexOf(grid[yy2][xx2 + dd].charAt(0)) >= 0))
+                     {
+                        dHit = true;
+                     }
+                  }
+                  if (dHit) backSpots.push([xx2, yy2]);
+               }
+            }
             tries = 0;
             placed = 0;
-            while (placed < nBack && tries < 40)
+            while (placed < nBack && tries < 40 && backSpots.length > 0)
             {
                tries++;
-               var bx:int = cwx + int(rnd() * cw);
-               var by:int = cwy + int(rnd() * ch2);
-               if (bx < 0 || by < 0 || bx >= GRID_W || by >= GRID_H) continue;
-               if (!isOpenCell(grid[by][bx])) continue;
+               var bsi:int = int(rnd() * backSpots.length);
+               var bspot:Array = backSpots.splice(bsi, 1)[0] as Array;
                var bid:String = (rnd() < 0.6)
                   ? String(mainBacks[int(rnd() * mainBacks.length)])
                   : String(backs[int(rnd() * backs.length)]);
-               lastBacks.push([bid, bx, by]);
+               lastBacks.push([bid, int(bspot[0]), int(bspot[1])]);
                placed++;
             }
             rectUsed.push(used);
@@ -686,13 +726,16 @@ package rr
       }
 
       /** 物件占地格 [size(宽), wid(高)]（AllData 实测） */
-      private function objFoot(id:String):Array
+      private static function objFoot(id:String):Array
       {
          switch (id)
          {
-            case "case": case "ammobox": case "explbox": case "lov": case "enl1": case "enf1": return [1, 1];
+            case "case": case "ammobox": case "explbox": case "lov": case "enl1": case "enf1":
+            case "wallcab": case "medbox": case "trash": return [1, 1];
             case "couch": case "table2": case "table": case "chest": return [2, 1];
-            case "mcrate2": case "box": case "woodbox": case "player": case "enl2": case "hatch2": return [2, 2];
+            case "hatch2": return [2, 1];
+            case "bed": return [4, 1];
+            case "mcrate2": case "box": case "woodbox": case "player": case "enl2": return [2, 2];
             case "radbarrel": case "filecab": case "door1": return [1, 2];
             case "locker": case "bookcase": return [2, 3];
             case "stdoor": return [1, 3];
@@ -712,6 +755,19 @@ package rr
             if (SAFE_FLOOR.indexOf(c2) < 0) return false;
          }
          return true;
+      }
+
+      /** 全格占用标记（v5.9：防 1×1 物件叠上多格物件的覆盖格——视觉穿模） */
+      private static function markUsed(used:Object, x:int, y:int, id:String):void
+      {
+         var foot:Array = objFoot(id);
+         for (var dy:int = 0; dy < foot[1]; dy++)
+         {
+            for (var dx:int = 0; dx < foot[0]; dx++)
+            {
+               used[(y + dy) + "," + (x + dx)] = true;
+            }
+         }
       }
 
       /** 占地格全开放校验（防悬空/穿墙） */

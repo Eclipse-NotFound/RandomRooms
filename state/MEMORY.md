@@ -15,21 +15,21 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v5.8**——release/RandomRoomsMod.swf 已更新，**待实机（F5）复评**。
-- v5.6 分层大厅范式（DEC-0003）→ v5.7 灵性工程第一轮（DEC-0004 反均匀：
-  房间个性向量/视觉锚/分区纹理/墙面叙事）→ **v5.8 修复**：
-  - **悬空根因修复**：safeDecor 黑名单漏西里尔 Е（横梁）→ `_Е` 格放物件悬空。
-    改 SAFE_FLOOR 白名单（B C F H L M N Q T W，oForms 实证纯地板）+ isOpenCell
-    白名单制 + safeDecor 白名单制。
-  - 墙体形态：墙带 1-2 行随机厚、隔断 1-2 格厚、层型三档每层独立
-    （大厅 0 隔断/普通 1-2/蜂窝 3-4）——修"永远一堵薄墙"的机械感。
-  - 通道分化：墙带主洞 3-4 宽/次洞 2 宽；主门口 3 宽/次门口 2 宽。
-- 冒烟通过（展示馆 8 房生成无异常）。
+- 部署版本 **v5.9**——release/RandomRoomsMod.swf 已更新，**待实机（F5/F1）复评**。
+- 演进：v5.6 分层大厅（DEC-0003）→ v5.7 反均匀（DEC-0004）→ v5.8 SAFE_FLOOR
+  白名单+墙体形态 → **v5.9**：
+  - **back 贴墙采样**（原版 84% back 距墙≤3 格实证；大厅中央撒 back=悬空主源）；
+  - markUsed 全格占用（消物件视觉穿模）；
+  - 通道强化：主洞 4-5 宽/次洞 3 宽 + GX 列对齐十字洞（60%）；
+  - 物件谱系：+hatch2(2×1)/wallcab/medbox/trash/bed(4×1)。
+- 冒烟通过。**卡点：loc 间通行机制未定案**——verifyEntry 已加缺口贯通检查日志
+  （`缺口贯通: L=3 R=2 T1=X ...` 格式，数字=向房内开放深度，X=被堵），
+  下次实机日志可定位。
 
 ## 4. 正在进行与卡点
 
-- 等 v5.8 实机复评（F5）：①悬空是否绝迹；②墙体厚度/大厅/蜂窝形态观感；
-  ③主通道可感性；④v5.7 的方差/锚点一并看。
+- 等 v5.9 实机复评（F5/F1）：①悬空是否绝迹（back 贴墙后）；②loc 间能否走通
+  ——**务必看日志"缺口贯通"行**；③新物件观感；④墙体形态/方差/锚点。
 
 ## 5. 已知问题
 
@@ -42,22 +42,25 @@
 
 ## 6. 下一步（优先级排序）
 
-1. v5.8 实机复评（F5）——悬空/墙体形态/通道分化/v5.7 方差锚点一起看；
-2. 按体感调参数（墙带厚度概率、层型配比、主次洞宽、个性密度区间）；
-3. 灵性工程后续：进深序列（入口→深处梯度）、遭遇编排（enspawn 伏击位）、稀有地标；
+1. v5.9 实机复评（F5/F1）——**缺口贯通日志一锤定音 loc 通行问题**；悬空（back）；
+   新物件观感；
+2. 视缺口贯通结果：若 X（被堵）→ 查哪个步骤堵缺口；若全通但玩家走不动 →
+   深挖 gotoLoc 碰撞判定（可能需 mirror/玩家宽 2×2 语义）；
+3. 灵性工程后续：进深序列、遭遇编排、稀有地标；
 4. 种子/联机仍延后（DEC-0001）；构件级 WFC 远期；
-5. 共享知识待办：Tile.dec 字符位置语义 + **SAFE_FLOOR 白名单实证**（本次新增）、
-   ups/kolEn/tipEnemy、AllData 物件体系、房间内容统计 → 沉淀 shared-knowledge。
+5. 共享知识待办：Tile.dec 语义 + SAFE_FLOOR 白名单、ups/kolEn/tipEnemy、
+   AllData 物件体系、房间内容统计、**back 贴墙 84% 实证**。
 
 ## 7. 深入了解
 
-- **开发历程**：state/journal.md（v3.1→v5.8，每条=一个实机反馈闭环）
-- **当前生成器 v5.8**：src/rr/RRSynth.as（分层大厅 + 个性向量 + 视觉锚 + SAFE_FLOOR）
-- **设计**：design/room-soul-plan.md（灵性工程三步走+两张设计卡）；design/generator-v5.md（v5 旧范式，待更新）
+- **开发历程**：state/journal.md（v3.1→v5.9，每条=一个实机反馈闭环）
+- **当前生成器 v5.9**：src/rr/RRSynth.as（分层大厅 + 个性向量 + 视觉锚 + SAFE_FLOOR + back 贴墙）
+- **设计**：design/room-soul-plan.md；design/generator-v5.md（v5 旧范式，待更新）
 - **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
-- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md（材质/占地格/enl 标记）、
-  knowledge/discoveries/room-content-statistics.md（物件组合近随机、方差才是灵性来源）；
-  SAFE_FLOOR 白名单依据 = AllData oForms ed=2 逐字符 phis/语义（见 journal v5.8 条目）
+- **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md、
+  knowledge/discoveries/room-content-statistics.md；
+  SAFE_FLOOR 白名单 = AllData oForms ed=2 逐字符实证（journal v5.8 条目）；
+  back 距墙分布 = 84% ≤3 格（journal v5.9 条目）
 - **工具链（2026-08-27 打通，全部实测）**：
   - 编译：`bash build/build-m0.sh`（mxmlc=flexsdk 4.16.1，Java=Animate 2024 JRE，配置=build/rr-config.xml；**勿用 amxmlc 直编**，air-config 的 {airHome} 令牌已失效）
   - SDK 全套：`D:\RemainsMod\mods\Sandevistan\build\tools\`（flexsdk+airsdk+ffdec）
