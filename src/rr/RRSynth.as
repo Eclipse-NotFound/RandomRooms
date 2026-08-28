@@ -41,6 +41,12 @@ package rr
       /** v5.7 视觉锚池（卡2 MVP）：[id, 数量]——同 id 大件群横排 */
       public static const ANCHOR_POOL:Array = [["locker", 3], ["mcrate2", 4], ["table", 2]];
 
+      /** v5.8 可站立地板纹理白名单（oForms ed=2 实证）：
+       *  B瓷砖 C混凝土板 F金属板 H锈金属 L土地 M木板 N板铺 Q暗板 T锈板 W小马镇瓷砖。
+       *  排除：墙背类(A D E G I J P R U V X Y Z)、网格框架 K、地面设施 O S、
+       *  横梁/台阶/楼梯（西里尔）、水 —— 这些上面放物件=悬空 */
+      public static const SAFE_FLOOR:String = "BCFHLMNQTW";
+
       /** 房间个性向量（v5Skeleton 每房抽取，placeRoomObjects 消费） */
       private var emptyRoom:Boolean = false;
       private var density:Number = 1.0;
@@ -211,7 +217,7 @@ package rr
          // 2) 分层大厅（v5.6 范式，对齐原版语料结构：整层开放 × 1 行薄墙带 ×
          //    层内竖隔断。v5"独立房+走廊"范式的开放率天花板 ~45%（装箱数学限制），
          //    原版 64-86%——实机"通道窄/被堵"的结构性根因）
-         // 2a) 挖开放层（corridor/split 偏 3 层，hall 偏 2 层）
+         // 2a) 动态层界（v5.8：层间墙带 1-2 行随机厚——"永远一堵薄墙"的机械感修复）
          var roomRects:Array = [];
          // 房间个性向量（DEC-0004 反均匀；语料校准：10/658 房全空 → 空房率 ~5%；
          // 密度系数驱动物件/装饰/back 数量，制造房与房的方差）
@@ -220,9 +226,30 @@ package rr
          var nLayer:int;
          if (rtype == "hall") nLayer = rnd() < 0.75 ? 2 : 3;
          else nLayer = rnd() < 0.7 ? 3 : 2;
-         var layers:Array = nLayer == 3 ? [[1, 7], [9, 15], [17, 23]] : [[1, 11], [13, 23]];
-         var bandRows:Array = nLayer == 3 ? [8, 16] : [12];
+         var layers:Array = [];
+         var bands:Array = [];   // [topRow, rows]
+         var cursor:int = 1;
          var li:int, y2:int, x2:int;
+         if (nLayer == 3)
+         {
+            var t1:int = rnd() < 0.4 ? 2 : 1;
+            var t2:int = rnd() < 0.4 ? 2 : 1;
+            var h3:int = int((23 - t1 - t2) / 3);
+            layers.push([cursor, cursor + h3 - 1]); cursor += h3;
+            bands.push([cursor, t1]); cursor += t1;
+            layers.push([cursor, cursor + h3 - 1]); cursor += h3;
+            bands.push([cursor, t2]); cursor += t2;
+            layers.push([cursor, 23]);
+         }
+         else
+         {
+            var t12:int = rnd() < 0.4 ? 2 : 1;
+            var h2:int = int((23 - t12) / 2);
+            layers.push([cursor, cursor + h2 - 1]); cursor += h2;
+            bands.push([cursor, t12]); cursor += t12;
+            layers.push([cursor, 23]);
+         }
+         // 2a') 挖开放层
          for (li = 0; li < layers.length; li++)
          {
             for (y2 = layers[li][0]; y2 <= layers[li][1]; y2++)
@@ -233,75 +260,97 @@ package rr
                }
             }
          }
-         // 2b) 层间墙带（1 行厚）+ 2-3 个 2-3 宽洞（层间通道，洞距 ≥4）
-         var bandRow:int, holeK:int, holeX:int, holeW:int, holeLast:int;
-         for (li = 0; li < bandRows.length; li++)
+         // 2b) 层间墙带（1-2 行厚）+ 主次洞（首个主洞 3-4 宽，其余 2 宽——
+         //     通道分化：主洞=明显通道，次洞=缝隙）
+         var bandTop:int, bandRows:int, holeK:int, holeX:int, holeW:int, holeLast:int, r2:int;
+         for (li = 0; li < bands.length; li++)
          {
-            bandRow = int(bandRows[li]);
-            for (x2 = 1; x2 <= GRID_W - 2; x2++) grid[bandRow][x2] = wallChar(wallTbl);
+            bandTop = int(bands[li][0]);
+            bandRows = int(bands[li][1]);
+            for (r2 = 0; r2 < bandRows; r2++)
+            {
+               for (x2 = 1; x2 <= GRID_W - 2; x2++) grid[bandTop + r2][x2] = wallChar(wallTbl);
+            }
             holeLast = 1;
             for (holeK = 0; holeK < 2 + int(rnd() * 2); holeK++)
             {
+               holeW = holeK == 0 ? 3 + int(rnd() * 2) : 2;
                holeX = holeLast + 4 + int(rnd() * Math.max(1, GRID_W - 8 - holeLast));
                if (holeX > GRID_W - 5) holeX = GRID_W - 5;
-               holeW = 2 + int(rnd() * 2);
-               for (x2 = holeX; x2 < holeX + holeW && x2 <= GRID_W - 2; x2++) grid[bandRow][x2] = "_";
+               for (x2 = holeX; x2 < holeX + holeW && x2 <= GRID_W - 2; x2++)
+               {
+                  for (r2 = 0; r2 < bandRows; r2++) grid[bandTop + r2][x2] = "_";
+               }
                holeLast = holeX + holeW;
             }
-            // 墙带恰在 GY（2 层制 y=12）时，两端对齐左右缺口打洞
-            if (bandRow == GY)
+            // 墙带恰在 GY（2 层制）时，两端对齐左右缺口打洞（打穿厚度）
+            if (bandTop <= GY && GY < bandTop + bandRows)
             {
-               for (x2 = 1; x2 <= 3; x2++) grid[bandRow][x2] = "_";
-               for (x2 = GRID_W - 4; x2 <= GRID_W - 2; x2++) grid[bandRow][x2] = "_";
+               for (x2 = 1; x2 <= 3; x2++)
+               {
+                  for (r2 = 0; r2 < bandRows; r2++) grid[bandTop + r2][x2] = "_";
+               }
+               for (x2 = GRID_W - 4; x2 <= GRID_W - 2; x2++)
+               {
+                  for (r2 = 0; r2 < bandRows; r2++) grid[bandTop + r2][x2] = "_";
+               }
             }
          }
-         // 2c) 层内竖隔断（1 格厚全层高，每道留 1-2 个 2 宽门口）→ 房间感；
-         //     隔断间距 ≥5
+         // 2c) 层内竖隔断（v5.8 层型三档：大厅 0 隔断 / 普通 1-2 / 蜂窝 3-4，
+         //     每层独立抽 → 房间大小分化出"显著大厅"与"蜂窝小间"）；
+         //     隔断厚 1-2 格；主门口宽 3、次门口宽 2，高 3
          var wallsX:Array = [];
-         var segIdx:int, wallX:int, doorK:int, doorY:int, dOK:Boolean;
+         var segIdx:int, wallX:int, wallW:int, doorK:int, doorY:int, dOK:Boolean, w2:int;
          for (li = 0; li < layers.length; li++)
          {
             wallsX.push([]);
             var ltop:int = layers[li][0];
             var lbot:int = layers[li][1];
-            var segs:int = 1 + int(rnd() * 2);
+            var styleRoll:Number = rnd();
+            var segs:int = styleRoll < 0.25 ? 0 : (styleRoll < 0.75 ? 1 + int(rnd() * 2) : 3 + int(rnd() * 2));
             for (segIdx = 0; segIdx < segs; segIdx++)
             {
                var placedW:Boolean = false;
                for (tries = 0; tries < 20 && !placedW; tries++)
                {
-                  wallX = 6 + int(rnd() * (GRID_W - 14));
+                  wallX = 5 + int(rnd() * (GRID_W - 12));
+                  wallW = rnd() < 0.3 ? 2 : 1;
                   dOK = true;
                   for (k = 0; k < wallsX[li].length; k++)
                   {
-                     if (Math.abs(int(wallsX[li][k]) - wallX) < 5)
+                     if (Math.abs(int((wallsX[li][k] as Array)[0]) - wallX) < 6)
                      {
                         dOK = false;
                         break;
                      }
                   }
                   if (!dOK) continue;
-                  for (y2 = ltop; y2 <= lbot; y2++) grid[y2][wallX] = wallChar(wallTbl);
-                  // 门口（高 3，容 stdoor/door1；1-2 个，避开层顶底层底各 1 行）
+                  for (y2 = ltop; y2 <= lbot; y2++)
+                  {
+                     for (w2 = 0; w2 < wallW; w2++) grid[y2][wallX + w2] = wallChar(wallTbl);
+                  }
+                  // 门口（贯穿隔断厚度；高 3 容 stdoor/door1；首个宽 3）
                   var nDoor:int = 1 + int(rnd() * 2);
                   for (doorK = 0; doorK < nDoor; doorK++)
                   {
                      doorY = ltop + 1 + int(rnd() * Math.max(1, lbot - ltop - 3));
+                     var doorW:int = doorK == 0 ? 3 : 2;
                      for (var dz:int = 0; dz < 3 && doorY + dz <= lbot; dz++)
                      {
-                        grid[doorY + dz][wallX] = "_";
+                        for (w2 = 0; w2 < Math.min(doorW, wallW); w2++) grid[doorY + dz][wallX + w2] = "_";
                      }
                      lastDoorSpots.push([wallX, doorY]);
                   }
-                  wallsX[li].push(wallX);
+                  (wallsX[li] as Array).push([wallX, wallW]);
                   placedW = true;
                }
             }
          }
-         // 2d) roomRects 估算：按隔断 x 把每层切段（段宽 ≥4 才算房间）
+         // 2d) roomRects 估算：按隔断（含厚度）把每层切段（段宽 ≥4 才算房间）
          for (li = 0; li < layers.length; li++)
          {
-            var xs:Array = (wallsX[li] as Array).slice();
+            var xs:Array = [];
+            for (k = 0; k < (wallsX[li] as Array).length; k++) xs.push(int((wallsX[li][k] as Array)[0]));
             xs.sort(Array.NUMERIC);
             var x0:int = 1;
             var ltop2:int = layers[li][0];
@@ -311,6 +360,18 @@ package rr
                var x1:int = k < xs.length ? int(xs[k]) : GRID_W - 1;
                if (x1 - x0 >= 4) roomRects.push([x0, ltop2, x1 - x0, lbot2 - ltop2 + 1]);
                x0 = x1 + 1;
+               if (k < xs.length)
+               {
+                  // 跳过隔断厚度（wallsX 里查厚度）
+                  for (var wk:int = 0; wk < (wallsX[li] as Array).length; wk++)
+                  {
+                     if (int((wallsX[li][wk] as Array)[0]) == x1)
+                     {
+                        x0 += int((wallsX[li][wk] as Array)[1]) - 1;
+                        break;
+                     }
+                  }
+               }
             }
          }
          // 4) 材质带（90% 主字符；v5.7 按层分区 + 对比补丁区）
@@ -639,12 +700,17 @@ package rr
          }
       }
 
-      /** 开放格判定（Tile.dec 语义）：首字符 '_' 即开放；`_X` 地板纹理可放
-       *  物件（原版如此），`_*` 水面除外 */
+      /** 开放格判定（Tile.dec 语义）：首字符 '_' 即开放；`_X` 仅当 X ∈ SAFE_FLOOR
+       *  （纯地板）可放物件——横梁/台阶/墙背/网格格上放物件=悬空（v5.8 收紧） */
       private static function isOpenCell(cell:String):Boolean
       {
          if (cell == null || cell.charAt(0) != "_") return false;
-         if (cell.length > 1 && cell.charAt(1) == "*") return false;
+         if (cell.length > 1)
+         {
+            var c2:String = cell.charAt(1);
+            if (c2 == "*") return false;
+            if (SAFE_FLOOR.indexOf(c2) < 0) return false;
+         }
          return true;
       }
 
@@ -810,13 +876,14 @@ package rr
        *  -横梁 / 西里尔台阶楼梯横梁） */
       private function safeDecor(decor:Array):Array
       {
+         // v5.8 白名单制：只留 SAFE_FLOOR 纯地板纹理（黑名单曾漏西里尔 Е=横梁
+         // → `_Е` 格放物件悬空）。横梁/台阶/墙背/网格一律不进装饰排。
          var out:Array = [];
          if (decor == null) return out;
-         var bad:String = "*-,КАБВГЖЗИЙЛМОПСТНРK";
          for (var k:int = 0; k < decor.length; k++)
          {
             var ch:String = String(decor[k][0]);
-            if (bad.indexOf(ch) < 0) out.push(decor[k]);
+            if (SAFE_FLOOR.indexOf(ch) >= 0) out.push(decor[k]);
          }
          return out;
       }
