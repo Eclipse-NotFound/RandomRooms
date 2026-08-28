@@ -41,6 +41,21 @@ package rr
       /** v5.7 视觉锚池（卡2 MVP）：[id, 数量]——同 id 大件群横排 */
       public static const ANCHOR_POOL:Array = [["mcrate2", 4], ["table", 2], ["woodbox", 2]];
 
+      /** v6.1 层界 profile 库：原版 658 房行剖面提取的真实层界组合（频次≥4，
+       *  23 条覆盖 320 房）。[层1顶,层1底],[层2顶,层2底],... 层间 gap 即墙带。
+       *  含通高大堂(1,23)、浮中层(8,19)、蜂窝(1,3)(5,7)... 全谱形态 */
+      public static const LAYER_PROFILES:Array = [
+         [[[1, 23]], 43], [[[1, 7], [9, 15], [17, 23]], 42], [[[1, 21]], 31],
+         [[[1, 15], [17, 23]], 25], [[[1, 11], [13, 23]], 24], [[[1, 19]], 17],
+         [[[1, 22]], 15], [[[1, 7], [9, 23]], 14], [[[1, 19], [21, 23]], 12],
+         [[[1, 15]], 10], [[[1, 20]], 10], [[[8, 19]], 9], [[[8, 15]], 8],
+         [[[9, 15]], 8], [[[1, 3], [5, 7], [9, 15], [17, 19], [21, 23]], 6],
+         [[[1, 9], [11, 23]], 5], [[[1, 10], [12, 15], [17, 23]], 5],
+         [[[1, 7], [9, 11], [13, 23]], 5], [[[1, 3], [5, 7], [9, 15], [17, 23]], 5],
+         [[[1, 11], [13, 15], [17, 23]], 5], [[[1, 4], [8, 11], [16, 19]], 4],
+         [[[4, 7], [12, 15], [20, 23]], 4], [[[1, 3], [5, 19], [21, 23]], 4],
+      ];
+
       /** v6.0 物件脚下实证（原版 20198 obj）：全部拉丁 `_X` 都可站立（各字符
        *  200-800 个 obj），仅 `_-` 横梁（5 个）与 `_*` 水（139，特例）基本不放。
        *  isOpenCell 据此放宽；装饰排同样放宽到拉丁（原版地面纹理全系使用）。 */
@@ -228,7 +243,7 @@ package rr
          // 2a) 列区划分：单区=整宽统一分层；双区=左右各自分层（区界通高墙）
          var zones:Array = [];   // 每区 {x0,x1,layers,bands,walls}
          var nZone:int = rnd() < 0.4 ? 2 : 1;
-         var zx:int = 14 + int(rnd() * 17);
+         var zx:int = 10 + int(rnd() * 27);   // 10..36：双区宽度可悬殊
          var zw:int = rnd() < 0.3 ? 2 : 1;
          var zoneBounds:Array = nZone == 2 ? [[1, zx - 1], [zx + zw, GRID_W - 2]] : [[1, GRID_W - 2]];
          var zoneWalls:Array = nZone == 2 ? [[zx, zw]] : [];
@@ -239,37 +254,35 @@ package rr
             var zx0:int = zoneBounds[zi][0];
             var zx1:int = zoneBounds[zi][1];
             var zw2:int = zx1 - zx0 + 1;
-            // 层数按原版分布；受区宽约束（每层至少容得下隔断与洞）
-            var roll:Number = rnd();
-            var nLayer:int = roll < 0.31 ? 1 : (roll < 0.57 ? 2 : (roll < 0.83 ? 3 : (roll < 0.93 ? 4 : 5)));
-            while (nLayer > 1 && zw2 < nLayer * 6) nLayer--;
-            while (nLayer * 3 + (nLayer - 1) > 23) nLayer--;
-            // 非均分切层：每层 3 行保底，余量随机撒
-            var nBand:int = nLayer - 1;
-            var bts:Array = [];
-            var bandTotal:int = 0;
-            for (b3 = 0; b3 < nBand; b3++)
+            // v6.1 层界 profile 库：加权抽一条原版真实组合（含通高/浮中层/
+            // 蜂窝全谱形态）；带厚 = 层间 gap（天然来自 profile）
+            var totalW:int = 0;
+            for (b3 = 0; b3 < LAYER_PROFILES.length; b3++) totalW += LAYER_PROFILES[b3][1];
+            var pv:Number = rnd() * totalW;
+            var pi:int = 0;
+            for (b3 = 0; b3 < LAYER_PROFILES.length; b3++)
             {
-               var bt3:int = 1 + int(rnd() * 2);
-               bts.push(bt3);
-               bandTotal += bt3;
+               pv -= int(LAYER_PROFILES[b3][1]);
+               if (pv < 0)
+               {
+                  pi = b3;
+                  break;
+               }
             }
-            var extra:int = 23 - bandTotal - 3 * nLayer;
-            var heights:Array = [];
-            for (l3 = 0; l3 < nLayer; l3++) heights.push(3);
-            for (l3 = 0; l3 < extra; l3++) heights[int(rnd() * nLayer)]++;
+            var prof:Array = LAYER_PROFILES[pi][0];
             var zLayers:Array = [];
             var zBands:Array = [];
-            var cur:int = 1;
-            for (l3 = 0; l3 < nLayer; l3++)
+            for (l3 = 0; l3 < prof.length; l3++)
             {
-               zLayers.push([cur, cur + heights[l3] - 1]);
-               cur += heights[l3];
-               if (l3 < nBand)
+               var pt:int = int(prof[l3][0]);
+               var pb:int = int(prof[l3][1]);
+               if (l3 > 0)
                {
-                  zBands.push([cur, bts[l3]]);
-                  cur += bts[l3];
+                  var prevB:int = int(prof[l3 - 1][1]);
+                  var gapRows:int = pt - prevB - 1;
+                  if (gapRows >= 1) zBands.push([prevB + 1, gapRows]);
                }
+               zLayers.push([pt, pb]);
             }
             zones.push({x0: zx0, x1: zx1, layers: zLayers, bands: zBands, walls: []});
          }
@@ -536,15 +549,43 @@ package rr
       {
          var doorId:String = bIdx == 2 ? "door1" : "stdoor";
          var crates:Array = bIdx == 0 ? ["ammobox", "explbox", "case", "mcrate2", "chest", "locker", "wallcab", "medbox", "trash"] :
-                           (bIdx == 1 ? ["case", "ammobox", "explbox", "box", "woodbox", "chest", "locker", "radbarrel", "wallcab", "trash", "bookcase"] :
-                           (bIdx == 2 ? ["ammobox", "case", "box", "explbox", "chest", "radbarrel", "woodbox", "medbox", "bookcase", "hatch2"] :
+                           (bIdx == 1 ? ["case", "ammobox", "explbox", "box", "woodbox", "chest", "locker", "radbarrel", "wallcab", "trash", "bookcase", "checkpoint"] :
+                           (bIdx == 2 ? ["ammobox", "case", "box", "explbox", "chest", "radbarrel", "woodbox", "medbox", "bookcase", "hatch2", "checkpoint"] :
                                         ["case", "ammobox", "explbox", "mcrate2", "filecab", "locker", "wallcab", "medbox", "trash", "bookcase"]));
          var sofas:Array = bIdx == 0 ? ["couch", "lov"] : ["lov"];
          var tableId:String = bIdx == 0 ? "table2" : "table";
          var backs:Array = ["konstr", "vkonstr", "hkonstr", "stlight1", "vents", "pipe4"];
          var r:int, k:int, tries:int, placed:int;
+         var usedGlobal:Object = {};  // 全局占用（门/活板门等跨 rect 结构物）
          var rectUsed:Array = [];    // 各 rect 的占用表（平行 rects；player/敌标记房间级放置用）
          var playerPos:Array = null; // 房间级唯一出生点（原版 0.99 player/房）
+         // 门与活板门（v6.1 全局放置修复：门口/洞位在隔断列与墙带行上，
+         // 不属于任何 rect——旧 per-rect 过滤把它们全部跳过，导致门/活板门
+         // 自 v5.6 起从未实际生成）
+         var dFoot2:Array = objFoot(doorId);
+         for (k = 0; k < lastDoorSpots.length; k++)
+         {
+            var dsp:Array = lastDoorSpots[k] as Array;
+            var dsx:int = int(dsp[0]);
+            var dsy:int = int(dsp[1]);
+            if (usedGlobal[dsy + "," + dsx] == true) continue;
+            if (rnd() >= 0.7) continue;
+            if (!footOk(grid, dsx, dsy, dFoot2[0], dFoot2[1])) continue;
+            lastObjs.push([doorId, genCode(), dsx, dsy]);
+            for (var dfy:int = 0; dfy < dFoot2[1]; dfy++) usedGlobal[(dsy + dfy) + "," + dsx] = true;
+         }
+         for (k = 0; k < lastHatchSpots.length; k++)
+         {
+            var hsp:Array = lastHatchSpots[k] as Array;
+            var hfx:int = int(hsp[0]);
+            var hfy:int = int(hsp[1]);
+            if (usedGlobal[hfy + "," + hfx] == true || usedGlobal[hfy + "," + (hfx + 1)] == true) continue;
+            if (rnd() >= 0.85) continue;
+            if (!footOk(grid, hfx, hfy, 2, 1)) continue;
+            lastObjs.push(["hatch2", genCode(), hfx, hfy]);
+            usedGlobal[hfy + "," + hfx] = true;
+            usedGlobal[hfy + "," + (hfx + 1)] = true;
+         }
          // 房间个性（DEC-0004）：空房只留出生点与结构；密度系数缩放物件量
          var mainBacks:Array = BACK_GROUPS[int(rnd() * BACK_GROUPS.length)] as Array;
          for (r = 0; r < rects.length; r++)
@@ -598,39 +639,6 @@ package rr
                   }
                }
             }
-            // 门（v5.6）：放竖隔断门口（lastDoorSpots 命中本 rect 的位），
-            // 门口高 3 与 stdoor/door1 占地吻合；每门口 70% 放门
-            var dFoot:Array = objFoot(doorId);
-            for (k = 0; k < lastDoorSpots.length; k++)
-            {
-               var dsp:Array = lastDoorSpots[k] as Array;
-               var dsx:int = int(dsp[0]);
-               var dsy:int = int(dsp[1]);
-               if (dsx < cwx || dsx >= cwx + cw || dsy < cwy || dsy >= cwy + ch2) continue;
-               if (used[dsy + "," + dsx] == true) continue;
-               if (rnd() >= 0.7) continue;
-               if (!footOk(grid, dsx, dsy, dFoot[0], dFoot[1])) continue;
-               lastObjs.push([doorId, genCode(), dsx, dsy]);
-               for (var dfy:int = 0; dfy < dFoot[1]; dfy++)
-               {
-                  used[(dsy + dfy) + "," + dsx] = true;
-               }
-            }
-            // 活板门（v6.0 结构化）：层间主洞 40% 出 hatch2（洞=通道口，
-            // 活板门=其盖口；原版 0.40/房）
-            for (k = 0; k < lastHatchSpots.length; k++)
-            {
-               var hsp:Array = lastHatchSpots[k] as Array;
-               var hfx:int = int(hsp[0]);
-               var hfy:int = int(hsp[1]);
-               if (hfx < cwx || hfx >= cwx + cw || hfy < cwy || hfy >= cwy + ch2) continue;
-               if (used[hfy + "," + hfx] == true) continue;
-               if (rnd() >= 0.85) continue;
-               if (!footOk(grid, hfx, hfy, 2, 1)) continue;
-               lastObjs.push(["hatch2", genCode(), hfx, hfy]);
-               used[hfy + "," + hfx] = true;
-               used[hfy + "," + (hfx + 1)] = true;
-            }
             // 箱子（贴墙，占地校验；数量随房间个性密度缩放；全格占用防叠放）
             var nCrate:int = int((2 + int(rnd() * 3)) * density + 0.5);
             tries = 0;
@@ -683,7 +691,7 @@ package rr
                   if (yy2 < 0 || yy2 >= GRID_H || xx2 < 0 || xx2 >= GRID_W) continue;
                   if (!isOpenCell(grid[yy2][xx2])) continue;
                   dHit = false;
-                  for (dd = 1; dd <= 3 && !dHit; dd++)
+                  for (dd = 1; dd <= 2 && !dHit; dd++)
                   {
                      if ((yy2 - dd >= 0 && WALL_CHARS.indexOf(grid[yy2 - dd][xx2].charAt(0)) >= 0) ||
                          (yy2 + dd < GRID_H && WALL_CHARS.indexOf(grid[yy2 + dd][xx2].charAt(0)) >= 0) ||
@@ -799,6 +807,7 @@ package rr
          {
             case "case": case "ammobox": case "explbox": case "lov": case "enl1": case "enf1":
             case "wallcab": case "medbox": case "trash": return [1, 1];
+            case "checkpoint": return [2, 3];
             case "couch": case "table2": case "table": case "chest": return [2, 1];
             case "hatch2": return [2, 1];
             case "bed": return [4, 1];
