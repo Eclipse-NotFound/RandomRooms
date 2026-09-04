@@ -23,7 +23,12 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v6.3**——SWF 已部署，待实机复评。
+- 部署版本 **v6.4**——SWF 已部署，待实机复评。
+- v6.4 = 通道问题最终根因修复：**跨合成房是"像素撞边→目标房同高度进入，
+  collisionUnit 碰撞即弹回"**（Unit.outLoc→Land.gotoLoc 反编译实证）；合成房
+  整墙边界（左右开放率 4% vs 原版 35%）=几乎处处弹回+无可见缺口。边界改原版式
+  开放段（L/R 2 段、T 2 段、B 保守 1 段）+逐位贯通隧道；离线断言开放位 8.6/25
+  ≈原版 8.7。
 - v6.3：门重做为原版墙顶模式（语料实证门 100% 站墙带顶部非嵌竖墙——修"孤立
   栅栏"）、wallSpot 背墙校验（修浮空）、**缺口贯通隧道**（6 缺口向内 2 宽×≤7，
   修合成房之间无通道）、缺口检查日志路径修复。离线三最坏结构断言+冒烟通过。
@@ -75,7 +80,7 @@
 ## 7. 深入了解
 
 - **开发历程**：state/journal.md（v3.1→v5.9，每条=一个实机反馈闭环）
-- **当前生成器 v6.3**：src/rr/RRSynth.as（zones+LAYER_PROFILES + 墙顶门 + 背墙校验 + 缺口隧道）
+- **当前生成器 v6.4**：src/rr/RRSynth.as（zones+LAYER_PROFILES + 墙顶门 + 背墙校验 + 边界开放段）
 - **设计**：design/room-soul-plan.md；design/generator-v5.md（v5 旧范式，待更新）
 - **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
 - **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md、

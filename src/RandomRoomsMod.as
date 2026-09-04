@@ -1444,40 +1444,33 @@ package
          diag.log("verifyEntry: 进入 " + targetLand + " 成功！网格=" + gridX + "x" + colLens.join(",") +
                   " 采集 " + n + " 个 loc，房间 id 集合(" + list.length + ")=" + list.join(","));
          diag.log("verifyEntry: 预期池房间(含P0变异副本前缀): " + test.pickedRooms().join(",") + " + *_rr* 副本");
-         // 缺口贯通检查（v5.9）：对首个 loc 的 room，验证 6 缺口的
-         // "缺口格 → 房内侧 1..3 格"开放链（跨房通行依赖此链）
+         // 边界通行检查（v6.4）：读运行时 Location.space 的四边 phis，
+         // 输出每边开放格数——对应 gotoLoc 的同高度碰撞判定
          try
          {
-            var vroom:XML = world.land.locs[0][0][0].room;
-            var vrows:Array = [];
-            for each (var vrow:XML in vroom.a) vrows.push(String(vrow).split("."));
-            var VW:int = 48, VH:int = 25;
-            function vopen(x:int, yy:int):Boolean
+            var vloc:* = world.land.locs[0][0][0];
+            var vsp:* = vloc.space;
+            var openL:int = 0, openR:int = 0, openT:int = 0, openB:int = 0;
+            var vi:int;
+            for (vi = 0; vi < vloc.spaceY; vi++)
             {
-               if (x < 0 || x >= VW || yy < 0 || yy >= VH) return false;
-               var c:String = String(vrows[yy][x]);
-               return c.charAt(0) == "_" && !(c.length > 1 && c.charAt(1) == "*");
+               if (vsp[vi][0].phis <= 0) openL++;
+               if (vsp[vi][vloc.spaceX - 1].phis <= 0) openR++;
             }
-            var vg:String = "缺口贯通:";
-            var vspots:Array = [[12,0,"L"],[12,47,"R"],[0,23,"T1"],[0,24,"T2"],[24,23,"B1"],[24,24,"B2"]];
-            for (var vi:int = 0; vi < vspots.length; vi++)
+            for (vi = 0; vi < vloc.spaceX; vi++)
             {
-               var vx:int = vspots[vi][0], vy:int = vspots[vi][1];
-               var chain:int = 0;
-               var dx2:int = vx == 0 ? 1 : (vx == VW - 1 ? -1 : 0);
-               var dy2:int = vy == 0 ? 1 : (vy == VH - 1 ? -1 : 0);
-               for (var vstep:int = 1; vstep <= 3; vstep++)
-               {
-                  if (vopen(vx + dx2 * vstep, vy + dy2 * vstep)) chain++;
-                  else break;
-               }
-               vg += " " + vspots[vi][2] + "=" + (vopen(vx, vy) ? String(chain) : "X");
+               if (vsp[0][vi].phis <= 0) openT++;
+               if (vsp[vloc.spaceY - 1][vi].phis <= 0) openB++;
             }
-            diag.log("verifyEntry: " + vg + "（数字=缺口向房内开放深度，X=缺口格被堵）");
+            diag.log("verifyEntry: 边界通行 L=" + openL + "/" + vloc.spaceY +
+                     " R=" + openR + "/" + vloc.spaceY +
+                     " T=" + openT + "/" + vloc.spaceX +
+                     " B=" + openB + "/" + vloc.spaceX +
+                     "（开放格数；gotoLoc 同高度进入，开放位=可通行）");
          }
          catch (e:*)
          {
-            diag.log("verifyEntry: 缺口检查异常 " + e);
+            diag.log("verifyEntry: 边界检查异常 " + e);
          }
          f8Issued = false;
       }
