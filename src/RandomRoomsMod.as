@@ -1448,7 +1448,7 @@ package
          // "缺口格 → 房内侧 1..3 格"开放链（跨房通行依赖此链）
          try
          {
-            var vroom:XML = world.loc[0][0].room;
+            var vroom:XML = world.land.locs[0][0][0].room;
             var vrows:Array = [];
             for each (var vrow:XML in vroom.a) vrows.push(String(vrow).split("."));
             var VW:int = 48, VH:int = 25;
