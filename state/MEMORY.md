@@ -23,7 +23,13 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v6.4**——SWF 已部署，待实机复评。
+- 部署版本 **v6.5**——SWF 已部署，待实机复评。
+- **视觉自检闭环已建**（v6.5）：测试实例 auto_enter.txt 标记→自动进展示馆；
+  refreshLandPool dump 全部 32 合成房 XML 到日志；build/render_dump.py 离线
+  渲染+合规分析。**32 房实测：物件悬空 0、hatch2 0.63/房、结构合规**——
+  bookcase 室内撒点漏网段已删（悬空主源）。
+- v6.2/v6.3 教训固化：通行结构改动先过玩家 2×2 通行断言；"加新路径"与
+  "删旧路径"必须同 commit 成对。
 - v6.4 = 通道问题最终根因修复：**跨合成房是"像素撞边→目标房同高度进入，
   collisionUnit 碰撞即弹回"**（Unit.outLoc→Land.gotoLoc 反编译实证）；合成房
   整墙边界（左右开放率 4% vs 原版 35%）=几乎处处弹回+无可见缺口。边界改原版式
@@ -80,7 +86,7 @@
 ## 7. 深入了解
 
 - **开发历程**：state/journal.md（v3.1→v5.9，每条=一个实机反馈闭环）
-- **当前生成器 v6.4**：src/rr/RRSynth.as（zones+LAYER_PROFILES + 墙顶门 + 背墙校验 + 边界开放段）
+- **当前生成器 v6.5**：src/rr/RRSynth.as（zones+LAYER_PROFILES + 墙顶门 + 背墙校验 + 边界开放段，bookcase 单路径）
 - **设计**：design/room-soul-plan.md；design/generator-v5.md（v5 旧范式，待更新）
 - **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
 - **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md、

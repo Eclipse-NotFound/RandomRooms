@@ -709,12 +709,6 @@ package rr
                lastObjs.push([tableId, genCode(), in2[0], in2[1]]);
                markUsed(used, in2[0], in2[1], tableId);
             }
-            var in3:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bookcase");
-            if (in3 != null && rnd() < 0.5 * density)
-            {
-               lastObjs.push(["bookcase", genCode(), in3[0], in3[1]]);
-               markUsed(used, in3[0], in3[1], "bookcase");
-            }
             var in5:Array = interiorSpot(grid, cwx, cwy, cw, ch2, used, "bed");
             if (in5 != null && rnd() < 0.3 * density)
             {

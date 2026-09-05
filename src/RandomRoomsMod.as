@@ -212,6 +212,185 @@ package
          }
       }
       
+      /** 自动试驾（v6.5，仅测试实例）：applicationStorage 下存在 auto_enter.txt
+       *  时自动 newGame + 进展示馆——供 agent 截图自检视觉，真实游戏无此文件
+       *  永不触发。 */
+      private static var autoState:int = -1;
+      private static var autoTick:int = 0;
+      private static var autoShotAt:int = -1;
+      /** 合成按键事件发给 stage（模组 KEY_DOWN capture 可收；用于试驾关菜单） */
+      private static function autoKey(code:int):void
+      {
+         try
+         {
+            var KECls:* = getDefinitionByName("flash.events.KeyboardEvent");
+            main["stage"]["dispatchEvent"](new KECls("keyDown", true, false, code, code));
+         }
+         catch (e:*) {}
+      }
+      
+      private static function autoShot(name:String):void
+      {
+         try
+         {
+            var BDcls:* = getDefinitionByName("flash.display.BitmapData");
+            var bd:* = new BDcls(main["stage"]["stageWidth"], main["stage"]["stageHeight"]);
+            bd["draw"](main["stage"]);
+            var encCls:* = getDefinitionByName("flash.display.PNGEncoderOptions");
+            var png:* = bd["encode"](bd["rect"], new encCls());
+            var fo:* = getDefinitionByName("flash.filesystem.File")["applicationStorageDirectory"]["resolvePath"](name);
+            var fs:* = new (getDefinitionByName("flash.filesystem.FileStream"))();
+            fs["open"](fo, "write");
+            fs["writeBytes"](png);
+            fs["close"]();
+            diag.log("AUTOPILOT: 截图 " + name);
+         }
+         catch (e:*)
+         {
+            diag.log("AUTOPILOT: 截图失败 " + name + " " + e);
+         }
+      }
+      
+      private static function autoPilot():void
+      {
+         if (autoState >= 12 || autoState == 0) return;
+         autoTick++;
+         var w:* = null;
+         try { w = WCls["w"]; } catch (e:*) {}
+         if (autoState == -1)
+         {
+            if (autoTick < 40) return;
+            var f:* = null;
+            try
+            {
+               var FCls:* = getDefinitionByName("flash.filesystem.File");
+               f = FCls["applicationStorageDirectory"]["resolvePath"]("auto_enter.txt");
+            }
+            catch (e:*) {}
+            autoState = (f != null && f.exists) ? 1 : 0;
+            diag.log("AUTOPILOT: " + (autoState == 1 ? "标记存在，启动自动试驾" : "无标记，关闭"));
+            return;
+         }
+         if (w == null) return;
+         if (autoState == 1)
+         {
+            try
+            {
+               w["mm"]["active"] = false;
+               w["newGame"](0, "LP", null);
+               autoState = 2;
+               diag.log("AUTOPILOT: newGame 已发出");
+            }
+            catch (e:*)
+            {
+               if (autoTick % 60 == 0) diag.log("AUTOPILOT: 等待可开档 " + e);
+            }
+            return;
+         }
+         if (autoState == 2)
+         {
+            var gg:* = null;
+            try { gg = w["gg"]; } catch (e:*) {}
+            if (gg != null)
+            {
+               autoState = 3;
+               diag.log("AUTOPILOT: gg 就绪，发展示馆旅行");
+            }
+            else if (autoTick % 60 == 0) diag.log("AUTOPILOT: 等待 gg");
+            return;
+         }
+         if (autoState == 3)
+         {
+            var landsOK:Boolean = false;
+            try { landsOK = w["lands"] != null && w["lands"][LAND_ID_SHOW] == true; } catch (e:*) {}
+            if (landsOK || autoTick % 120 == 0)
+            {
+               triggerTravel(LAND_ID_SHOW, "F5");
+               autoState = 5;
+               autoShotAt = -1;
+               diag.log("AUTOPILOT: 旅行已发（landsOK=" + landsOK + "），切观察");
+            }
+            return;
+         }
+         if (autoState == 5)
+         {
+            // 进入后等 ~2.5s 土地渲染稳定，stage 截图落盘（不抢前台）
+            if (autoShotAt < 0) autoShotAt = autoTick;
+            if (autoTick - autoShotAt >= 150)
+            {
+               try
+               {
+                  var BDcls:* = getDefinitionByName("flash.display.BitmapData");
+                  var bd:* = new BDcls(main["stage"]["stageWidth"], main["stage"]["stageHeight"]);
+                  bd["draw"](main["stage"]);
+                  var encCls:* = getDefinitionByName("flash.display.PNGEncoderOptions");
+                  var png:* = bd["encode"](bd["rect"], new encCls());
+                  var fo:* = getDefinitionByName("flash.filesystem.File")["applicationStorageDirectory"]["resolvePath"]("showroom_shot.png");
+                  var fs:* = new (getDefinitionByName("flash.filesystem.FileStream"))();
+                  fs["open"](fo, "write");
+                  fs["writeBytes"](png);
+                  fs["close"]();
+                  diag.log("AUTOPILOT: 截图已存 showroom_shot.png");
+               }
+               catch (e:*)
+               {
+                  diag.log("AUTOPILOT: 截图失败 " + e);
+               }
+               autoState = 6;
+            }
+            return;
+         }
+         if (autoState == 6)
+         {
+            if (autoShotAt < 0) autoShotAt = autoTick;
+            if (autoTick - autoShotAt >= 150)
+            {
+               autoKey(27);   // ESC 关可能弹出的菜单
+               autoKey(9);    // TAB 关模组面板
+               var px0:* = null, lx0:* = null;
+               try { px0 = w["gg"]["X"]; lx0 = w["land"]["locX"]; } catch (e:*) {}
+               diag.log("AUTOPILOT: 出发点 X=" + px0 + " locX=" + lx0);
+               try { w["land"]["gotoXY"](0, 1); diag.log("AUTOPILOT: gotoXY(0,1) 切相邻合成房"); } catch (e:*) { diag.log("AUTOPILOT: gotoXY 异常 " + e); }
+               autoShot("syn_view.png");
+            }
+            if (autoTick - autoShotAt >= 300)
+            {
+               autoKey(27);
+               autoShot("syn_view2.png");
+               var lx1:* = null;
+               try { lx1 = w["land"]["locX"]; } catch (e:*) {}
+               diag.log("AUTOPILOT: 合成房内 locX=" + lx1);
+            }
+            if (autoTick - autoShotAt >= 370)
+            {
+               autoKey(27);
+               // 站位到 GY 行右缘内侧（GY 左右锚点洞+normalizeGaps 保证目标房同高开放）
+               try
+               {
+                  var limX:* = w["land"]["loc"] != null ? null : null;
+               } catch (e:*) {}
+               try
+               {
+                  w["gg"]["X"] = 47 * 36 - 40;
+                  w["gg"]["Y"] = 12 * 36 + 18;
+                  diag.log("AUTOPILOT: 已站位 GY 行右缘 (X,Y 设置)");
+               }
+               catch (e:*) { diag.log("AUTOPILOT: 站位异常 " + e); }
+               var res:* = "无";
+               try { res = w["gg"]["outLoc"](2); } catch (e:*) { res = "异常" + e; }
+               diag.log("AUTOPILOT: outLoc(2) 撞右边界 → " + (res == null ? "null=被弹回(通道不通)" : "Object=切格成功"));
+               autoShot("cross_test.png");
+            }
+            if (autoTick - autoShotAt >= 440)
+            {
+               var lx2:* = null;
+               try { lx2 = w["land"]["locX"]; } catch (e:*) {}
+               diag.log("AUTOPILOT: 撞边测试后 locX=" + lx2 + "（0=锁原格失败，1=横向通行成功）");
+               autoState = 9;
+            }
+         }
+      }
+      
       private static function bindStage(st:*):void
       {
          stageBound = true;
@@ -241,6 +420,7 @@ package
       
       private static function onFrame(ev:Event):void
       {
+         autoPilot();
          var world:* = null;
          try { world = WCls["w"]; } catch (e:*) {}
          if (world == null)
@@ -1030,6 +1210,24 @@ package
                act["land"] = null;
                diag.log("refreshLandPool: " + landId + " 展示馆已重合成（合成房 " + kept +
                         "，变异副本，无敌人）");
+               // v6.5 完整 dump 首个合成房（网格+obj+back）——离线渲染定位悬空/门
+               try
+               {
+                  var dpool:XMLList = act["allroom"].room;
+                  for each (var dxm:XML in dpool)
+                  {
+                     if (String(dxm.@name).indexOf("syn_") != 0) continue;
+                     diag.log("DUMP-BEGIN " + dxm.@name);
+                     for each (var drow:XML in dxm.a) diag.log("DUMP-ROW " + drow.toString());
+                     for each (var dobj:XML in dxm.obj) diag.log("DUMP-OBJ " + dobj.@id + " " + dobj.@x + " " + dobj.@y);
+                     for each (var dback:XML in dxm.back) diag.log("DUMP-BACK " + dback.@id + " " + dback.@x + " " + dback.@y);
+                     diag.log("DUMP-END");
+                  }
+               }
+               catch (de:*)
+               {
+                  diag.log("DUMP 异常 " + de);
+               }
                return;
             }
             var fresh:XML = base.copy();
@@ -1450,17 +1648,19 @@ package
          {
             var vloc:* = world.land.locs[0][0][0];
             var vsp:* = vloc.space;
+            if (vsp == null) throw new Error("space 未构建");
             var openL:int = 0, openR:int = 0, openT:int = 0, openB:int = 0;
             var vi:int;
+            // space[x][y]（Location 内部 space[i][j] i=x）
             for (vi = 0; vi < vloc.spaceY; vi++)
             {
-               if (vsp[vi][0].phis <= 0) openL++;
-               if (vsp[vi][vloc.spaceX - 1].phis <= 0) openR++;
+               if (vsp[0][vi].phis <= 0) openL++;
+               if (vsp[vloc.spaceX - 1][vi].phis <= 0) openR++;
             }
             for (vi = 0; vi < vloc.spaceX; vi++)
             {
-               if (vsp[0][vi].phis <= 0) openT++;
-               if (vsp[vloc.spaceY - 1][vi].phis <= 0) openB++;
+               if (vsp[vi][0].phis <= 0) openT++;
+               if (vsp[vi][vloc.spaceY - 1].phis <= 0) openB++;
             }
             diag.log("verifyEntry: 边界通行 L=" + openL + "/" + vloc.spaceY +
                      " R=" + openR + "/" + vloc.spaceY +
