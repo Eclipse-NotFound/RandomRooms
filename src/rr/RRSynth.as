@@ -87,6 +87,8 @@ package rr
       public var lastDoorSpots:Array = [];
       /** v6.0 层间主洞位（[x, bandTopRow]）：hatch2 活板门放置候选 */
       public var lastHatchSpots:Array = [];
+      /** v6.6 房间段（结构期末存档：物件放置延后到连通修复后，防 L 廊挖掉地板） */
+      public var lastRects:Array = [];
       
       public function RRSynth(rndFn:Function = null)
       {
@@ -121,6 +123,13 @@ package rr
          }
          room.appendChild(<doors/>);
          room.appendChild(<options/>);
+         // v6.6 二分诊断：生成器出口的底行开放位
+         var b24:String = "";
+         for (var bx3:int = 0; bx3 < GRID_W; bx3++)
+         {
+            if (grid[GRID_H - 1][bx3].charAt(0) == "_".charAt(0)) b24 += bx3 + ",";
+         }
+         if (b24.length > 0) room.@b24 = b24;   // 二分诊断：出口底行开放位
          return room;
       }
       
@@ -159,6 +168,10 @@ package rr
             v5Skeleton(grid, Math.min(bIdx, 3), rtype, wallTbl, decor);
             debugStages.push(["skeleton", wallCount(grid)]);
             finishStripRoom(grid);
+            // v6.6：连通修复后放物件（最终结构）
+            lastObjs = [];
+            lastBacks = [];
+            placeRoomObjects(grid, Math.min(bIdx, 3), lastRects);
             debugStages.push(["final", wallCount(grid)]);
             return grid;
          }
@@ -331,7 +344,7 @@ package rr
                }
                // v6.3 墙顶门（原版实证：stdoor/door1 100% 站水平墙带顶部，
                // 下方紧邻墙列，非嵌竖墙）：每条墙带 65% 在顶部放 1 扇门
-               if (rnd() < 0.65)
+               if (rnd() < 0.85)
                {
                   var doorCx:int = zones[zi].x0 + 2 + int(rnd() * Math.max(1, zones[zi].x1 - zones[zi].x0 - 4));
                   if (WALL_CHARS.indexOf(grid[bandTop][doorCx].charAt(0)) >= 0 &&
@@ -464,10 +477,12 @@ package rr
          }
          // 4) 材质带（90% 主字符；v5.7 按层分区 + 对比补丁区）
          materialBands(grid, wallTbl, zones);
-         // 5) 边界（v6.4 原版式开放段）：原版作者房边界开放率 L/R 35%、T 30%、
-         //    B 16%——玩家跨房靠"撞边→目标房同高度边缘进入（collisionUnit
-         //    过碰撞才放行）"，整墙边界=几乎处处弹回=合成房之间无通道的
-         //    最终根因。每边开 1-2 段（下边界走出=坠落死亡，保守单段）。
+         // 5) 边界（v6.6 横版语义重做）：
+         //    - 左右边界列：除地板行（墙带，伸出到边界=可见的楼层边缘）外
+         //      全部开放——玩家沿地板走到边界上方即可越界；相邻房层内高度
+         //      无碰撞可进入（弹回仅当目标高度恰是对方的地板行）；
+         //    - 上下边界：全实体（下边界开放=坠死陷阱，v6.4 的随机段撤销）；
+         //    - GY/GX 锚点开放保留（normalizeGaps 规范兼容）。
          for (i = 0; i < GRID_W; i++)
          {
             grid[0][i] = wallChar(wallTbl);
@@ -475,44 +490,46 @@ package rr
          }
          for (j = 0; j < GRID_H; j++)
          {
-            grid[j][0] = wallChar(wallTbl);
-            grid[j][GRID_W - 1] = wallChar(wallTbl);
+            grid[j][0] = "_";
+            grid[j][GRID_W - 1] = "_";
          }
-         var segY:int, segLen:int, segPos:int;
-         // 左右边：2 段 × 3-6 格（含 GY 锚点段）
+         // 地板行（所有墙带 + 区界墙跨行）伸出到左右边界
+         var bw:int, br:int;
+         for (zi = 0; zi < zones.length; zi++)
+         {
+            var zb2:Array = zones[zi].bands;
+            for (bw = 0; bw < zb2.length; bw++)
+            {
+               for (br = 0; br < int(zb2[bw][1]); br++)
+               {
+                  grid[int(zb2[bw][0]) + br][0] = wallChar(wallTbl);
+                  grid[int(zb2[bw][0]) + br][GRID_W - 1] = wallChar(wallTbl);
+               }
+            }
+         }
+         for (zi = 0; zi < zoneWalls.length; zi++)
+         {
+            for (j = 1; j <= GRID_H - 2; j++)
+            {
+               for (br = 0; br < int(zoneWalls[zi][1]); br++)
+               {
+                  grid[j][0] = "_";
+                  grid[j][GRID_W - 1] = "_";
+               }
+            }
+         }
+         // 顶底行覆盖回实体（j 循环可能重开）
+         for (i = 0; i < GRID_W; i++)
+         {
+            grid[0][i] = wallChar(wallTbl);
+            grid[GRID_H - 1][i] = wallChar(wallTbl);
+         }
          grid[GY][0] = "_";
          grid[GY][GRID_W - 1] = "_";
-         for (var sideLR:int = 0; sideLR < 2; sideLR++)
-         {
-            segPos = 2 + int(rnd() * (GRID_H - 8));
-            segLen = 3 + int(rnd() * 4);
-            for (segY = segPos; segY < segPos + segLen && segY < GRID_H - 1; segY++)
-            {
-               grid[segY][0] = "_";
-               grid[segY][GRID_W - 1] = "_";
-            }
-         }
-         // 上边：2 段 × 4-7 格（含 GX 双列锚点）
          grid[0][GX1] = "_";
          grid[0][GX2] = "_";
-         for (var sideT:int = 0; sideT < 2; sideT++)
-         {
-            segPos = 3 + int(rnd() * (GRID_W - 12));
-            segLen = 4 + int(rnd() * 4);
-            for (var segX:int = segPos; segX < segPos + segLen && segX < GRID_W - 1; segX++)
-            {
-               grid[0][segX] = "_";
-            }
-         }
-         // 下边：保守 1 段 3-4 格 + GX 双列（走出下边界=坠落死亡，段少且避开）
          grid[GRID_H - 1][GX1] = "_";
          grid[GRID_H - 1][GX2] = "_";
-         segPos = 4 + int(rnd() * (GRID_W - 12));
-         segLen = 3 + int(rnd() * 2);
-         for (segX = segPos; segX < segPos + segLen && segX < GRID_W - 1; segX++)
-         {
-            grid[GRID_H - 1][segX] = "_";
-         }
          // 6) 装饰排：仅安全地板纹理后缀；密度联动房间个性，60% 用主导纹理
          //    （墙面叙事——纹理也讲分区，不再每格均匀抽）
          var safeDec:Array = safeDecor(decor);
@@ -578,10 +595,9 @@ package rr
                }
             }
          }
-         // 8) 房间物件：门(竖隔断门口)/贴墙箱子/室内家具/书架/出生点/背景装饰
-         lastObjs = [];
-         lastBacks = [];
-         placeRoomObjects(grid, bIdx, roomRects);
+         // 8) v6.6：物件放置延后到 finishStripRoom（连通修复 L 廊可能挖地板，
+         // 物件必须基于最终结构放置——否则脚下地板被挖=悬空）
+         lastRects = roomRects;
       }
 
       /** 房间物件放置：每房间 门+锚+箱子+家具/床+出生点；贴墙背景装饰。
@@ -659,7 +675,8 @@ package rr
                   var allOK:Boolean = true;
                   for (var ai:int = 0; ai < acount; ai++)
                   {
-                     if (!footOk(grid, ax0 + ai * afoot[0], ay0, afoot[0], afoot[1]))
+                     if (!footOk(grid, ax0 + ai * afoot[0], ay0, afoot[0], afoot[1]) ||
+                         !hasGround(grid, ax0 + ai * afoot[0], ay0, afoot[0]))
                      {
                         allOK = false;
                         break;
@@ -715,28 +732,21 @@ package rr
                lastObjs.push(["bed", genCode(), in5[0], in5[1]]);
                markUsed(used, in5[0], in5[1], "bed");
             }
-            // 背景装饰（v5.9 贴墙采样：原版 84% back 距墙≤3 格——撒在大厅中央
-            // 的灯/管道视觉上悬空）；数量随密度，60% 出主导组
+            // 背景装饰（v6.6 横版语义：立地装饰需脚下地板；或贴竖墙——
+            // 原版 84% back 距墙≤3 格的真实含义）；数量随密度，60% 出主导组
             var nBack:int = int((3 + int(rnd() * 4)) * density + 0.5);
             var backSpots:Array = [];
-            var yy2:int, xx2:int, dd:int, dHit:Boolean;
+            var yy2:int, xx2:int, dHit:Boolean;
             for (yy2 = cwy; yy2 < cwy + ch2; yy2++)
             {
                for (xx2 = cwx; xx2 < cwx + cw; xx2++)
                {
                   if (yy2 < 0 || yy2 >= GRID_H || xx2 < 0 || xx2 >= GRID_W) continue;
                   if (!isOpenCell(grid[yy2][xx2])) continue;
-                  dHit = false;
-                  for (dd = 1; dd <= 2 && !dHit; dd++)
-                  {
-                     if ((yy2 - dd >= 0 && WALL_CHARS.indexOf(grid[yy2 - dd][xx2].charAt(0)) >= 0) ||
-                         (yy2 + dd < GRID_H && WALL_CHARS.indexOf(grid[yy2 + dd][xx2].charAt(0)) >= 0) ||
-                         (xx2 - dd >= 0 && WALL_CHARS.indexOf(grid[yy2][xx2 - dd].charAt(0)) >= 0) ||
-                         (xx2 + dd < GRID_W && WALL_CHARS.indexOf(grid[yy2][xx2 + dd].charAt(0)) >= 0))
-                     {
-                        dHit = true;
-                     }
-                  }
+                  // 脚下地板 或 紧邻竖墙（左右 1 格）
+                  dHit = hasGround(grid, xx2, yy2, 1) ||
+                         (xx2 - 1 >= 0 && WALL_CHARS.indexOf(grid[yy2][xx2 - 1].charAt(0)) >= 0) ||
+                         (xx2 + 1 < GRID_W && WALL_CHARS.indexOf(grid[yy2][xx2 + 1].charAt(0)) >= 0);
                   if (dHit) backSpots.push([xx2, yy2]);
                }
             }
@@ -870,31 +880,51 @@ package rr
          return true;
       }
 
-      /** 全格占用标记（v5.9：防 1×1 物件叠上多格物件的覆盖格——视觉穿模） */
+      /** 占用标记（v6.6：同 footOk 单行语义——wid 是渲染高度，占用只在锚点行） */
       private static function markUsed(used:Object, x:int, y:int, id:String):void
       {
          var foot:Array = objFoot(id);
-         for (var dy:int = 0; dy < foot[1]; dy++)
+         for (var dx:int = 0; dx < foot[0]; dx++)
          {
-            for (var dx:int = 0; dx < foot[0]; dx++)
-            {
-               used[(y + dy) + "," + (x + dx)] = true;
-            }
+            used[y + "," + (x + dx)] = true;
          }
       }
 
-      /** 占地格全开放校验（防悬空/穿墙） */
+      /** 脚下支撑校验（横版语义 v6.6）：锚点 y 行的物件需要 y+1 行在其
+       *  宽度范围内存在实体格（地板），或 y 行本身是 `_-` 站台（横梁） */
+      private static function hasGround(grid:Array, x:int, y:int, w:int):Boolean
+      {
+         if (y >= 0 && y < GRID_H && x >= 0 && x + w - 1 < GRID_W)
+         {
+            var beamOK:Boolean = true;
+            for (var bx2:int = 0; bx2 < w; bx2++)
+            {
+               var c2:String = grid[y][x + bx2];
+               if (c2 == null || c2.length < 2 || c2.charAt(1) != "-") { beamOK = false; break; }
+            }
+            if (beamOK) return true;
+         }
+         if (y + 1 >= GRID_H) return false;
+         for (var gx2:int = 0; gx2 < w; gx2++)
+         {
+            var xx:int = x + gx2;
+            if (xx < 0 || xx >= GRID_W) continue;
+            if (WALL_CHARS.indexOf(grid[y + 1][xx].charAt(0)) >= 0) return true;
+         }
+         return false;
+      }
+
+      /** 占地校验（v6.6 语义修正）：wid 是向上渲染高度非占地深度（原版
+       *  XML 实证：player y=23 贴底放置，wid=2 若算占地则必然非法）——
+       *  碰撞/占位只在锚点行 y × size 宽；支撑由 hasGround(y+1) 保证 */
       private function footOk(grid:Array, x:int, y:int, size:int, wid:int):Boolean
       {
-         for (var dy:int = 0; dy < wid; dy++)
+         if (y < 0 || y >= GRID_H) return false;
+         for (var dx:int = 0; dx < size; dx++)
          {
-            for (var dx:int = 0; dx < size; dx++)
-            {
-               var xx:int = x + dx;
-               var yy:int = y + dy;
-               if (xx < 0 || yy < 0 || xx >= GRID_W || yy >= GRID_H) return false;
-               if (!isOpenCell(grid[yy][xx])) return false;
-            }
+            var xx:int = x + dx;
+            if (xx < 0 || xx >= GRID_W) return false;
+            if (!isOpenCell(grid[y][xx])) return false;
          }
          return true;
       }
@@ -945,24 +975,18 @@ package rr
          var fw:int = foot[1];
          for (var t:int = 0; t < 25; t++)
          {
-            var side:int = int(rnd() * 4);
+            // v6.6 横版：side 仅作 x 偏好；y 全层范围采样，靠 hasGround 落地
+            var side:int = int(rnd() * 2);
             var x:int, y:int;
-            if (side == 0) { y = cwy + 1; x = cwx + 1 + int(rnd() * Math.max(1, cw - 2 - fs)); }
-            else if (side == 1) { y = cwy + ch2 - 2; x = cwx + 1 + int(rnd() * Math.max(1, cw - 2 - fs)); }
-            else if (side == 2) { x = cwx + 1; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
-            else { x = cwx + cw - 2; y = cwy + 1 + int(rnd() * Math.max(1, ch2 - 2 - fw)); }
+            x = cwx + 1 + int(rnd() * Math.max(1, cw - 2 - fs));
+            if (side == 0) { x = cwx + 2 + int(rnd() * Math.max(1, cw - 4 - fs)); }
+            else { x = cwx + cw - 2 - fs - int(rnd() * Math.max(1, cw - 4 - fs)); }
+            if (x < cwx + 1) x = cwx + 1;
+            y = cwy + int(rnd() * ch2);   // v6.6 单行占地语义：y 可达层底行（支撑位）
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
-            // 背墙校验（原版 98% 竖高家具距墙 1 格；采样边背后必须部分是墙，
-            // 否则物件立在洞口/开放区边缘=悬空观感）
-            var backWall:Boolean = false;
-            for (var bc:int = 0; bc < fs && !backWall; bc++)
-            {
-               if (side == 0 && y - 1 >= 0 && WALL_CHARS.indexOf(grid[y - 1][x + bc].charAt(0)) >= 0) backWall = true;
-               if (side == 1 && y + fw < GRID_H && WALL_CHARS.indexOf(grid[y + fw][x + bc].charAt(0)) >= 0) backWall = true;
-               if (side == 2 && x - 1 >= 0 && WALL_CHARS.indexOf(grid[y - 0][x - 1].charAt(0)) >= 0) backWall = true;
-               if (side == 3 && x + fs < GRID_W && WALL_CHARS.indexOf(grid[y][x + fs].charAt(0)) >= 0) backWall = true;
-            }
-            if (!backWall) continue;
+            // v6.6 横版语义：物件必须脚下有地板（y+1 实体或 `_-` 站台）——
+            // 背墙校验方向错误（横版里上方是墙无支撑意义），已替换
+            if (!hasGround(grid, x, y, fs)) continue;
             if (isOpenCell(grid[y][x]) && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
@@ -977,8 +1001,9 @@ package rr
          for (var t:int = 0; t < 40; t++)
          {
             var x:int = cwx + 2 + int(rnd() * Math.max(1, cw - 4 - fs));
-            var y:int = cwy + 2 + int(rnd() * Math.max(1, ch2 - 4 - fw));
+            var y:int = cwy + int(rnd() * ch2);   // v6.6 单行占地语义：含层底支撑行
             if (x < 0 || y < 0 || x >= GRID_W || y >= GRID_H) continue;
+            if (!hasGround(grid, x, y, fs)) continue;
             if (isOpenCell(grid[y][x]) && used[y + "," + x] != true && footOk(grid, x, y, fs, fw)) return [x, y];
          }
          return null;
@@ -1102,14 +1127,10 @@ package rr
             cy += dy;
             cx += dx;
             if (cy < 1 || cy > GRID_H - 2 || cx < 1 || cx > GRID_W - 2) return;
-            // 前方 2 格（垂直于前进方向排开）都开放 → 已接上开放区，停
-            var aOpen:Boolean = isOpenCell(grid[cy][cx]);
-            var bcy:int = dy != 0 ? cy : cy + 1;
-            var bcx:int = dy != 0 ? cx + 1 : cx;
-            var bOpen:Boolean = bcy < GRID_H && bcx < GRID_W && isOpenCell(grid[bcy][bcx]);
-            if (aOpen && bOpen) return;
+            // 前方格开放 → 已接上开放区，停（v6.6 修：旁格只探测不写——
+            // 层底行横向隧道曾把旁行=底边界行整段打穿=坠死陷阱+地板丢失）
+            if (isOpenCell(grid[cy][cx])) return;
             grid[cy][cx] = "_";
-            if (bcy < GRID_H && bcx < GRID_W) grid[bcy][bcx] = "_";
          }
       }
 
@@ -1257,7 +1278,8 @@ package rr
             for (var dy:int = 0; dy < w; dy++)
             {
                var yy:int = y + dy;
-               if (yy >= 0 && yy < GRID_H)
+               // v6.6 边界保护：连廊不挖边界行（穿透底边=坠死陷阱+地板丢失）
+               if (yy >= 1 && yy < GRID_H - 1)
                {
                   grid[yy][x] = "_";
                   if (seen[yy] != null) seen[yy][x] = true;
@@ -1276,7 +1298,8 @@ package rr
             for (var dx:int = 0; dx < w; dx++)
             {
                var xx:int = x + dx;
-               if (xx >= 0 && xx < GRID_W)
+               // v6.6 边界保护：连廊不挖边界列
+               if (xx >= 1 && xx < GRID_W - 1)
                {
                   grid[y][xx] = "_";
                   if (seen[y] != null) seen[y][xx] = true;

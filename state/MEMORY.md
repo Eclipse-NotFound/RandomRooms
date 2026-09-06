@@ -23,7 +23,12 @@
 
 ## 3. 当前状态
 
-- 部署版本 **v6.5**——SWF 已部署，待实机复评。
+- 部署版本 **v6.6**——SWF 已部署，待实机复评。
+- **v6.6 = 横版认知革命**（六证据确认本作是横版平台游戏，结构语义全面反转：
+  墙带=地板、左右边=唯一通道、"悬空"=脚下无实体）。四连锁 bug 修复（隧道旁格
+  打穿底边/footOk wid 语义/物件先于修复放置/采样 off-by-one）+ hasGround 脚下
+  校验 + 左右边界重做 + T/B 全实体。**32 房终检全绿**：悬空 0、player 恢复、
+  门 0.88/房、弹回率 7%、底边穿透 0。日志 TAG 已版本化 [RR:v6.6]。
 - **视觉自检闭环已建**（v6.5）：测试实例 auto_enter.txt 标记→自动进展示馆；
   refreshLandPool dump 全部 32 合成房 XML 到日志；build/render_dump.py 离线
   渲染+合规分析。**32 房实测：物件悬空 0、hatch2 0.63/房、结构合规**——
@@ -86,7 +91,7 @@
 ## 7. 深入了解
 
 - **开发历程**：state/journal.md（v3.1→v5.9，每条=一个实机反馈闭环）
-- **当前生成器 v6.5**：src/rr/RRSynth.as（zones+LAYER_PROFILES + 墙顶门 + 背墙校验 + 边界开放段，bookcase 单路径）
+- **当前生成器 v6.6**：src/rr/RRSynth.as（横版语义：hasGround 脚下校验 + 单行占地 + 边界地板伸出 + 修复后放置）
 - **设计**：design/room-soul-plan.md；design/generator-v5.md（v5 旧范式，待更新）
 - **决策**：decisions/DEC-0001（范围）、DEC-0002（敌标记）、DEC-0003（分层大厅）、DEC-0004（反均匀路线）
 - **关键实证**：knowledge/discoveries/alldata-materials-room-xml.md、

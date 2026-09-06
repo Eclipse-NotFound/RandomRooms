@@ -1217,7 +1217,7 @@ package
                   for each (var dxm:XML in dpool)
                   {
                      if (String(dxm.@name).indexOf("syn_") != 0) continue;
-                     diag.log("DUMP-BEGIN " + dxm.@name);
+                     diag.log("DUMP-BEGIN " + dxm.@name + (dxm.@b24.length() > 0 ? " b24=" + dxm.@b24 : ""));
                      for each (var drow:XML in dxm.a) diag.log("DUMP-ROW " + drow.toString());
                      for each (var dobj:XML in dxm.obj) diag.log("DUMP-OBJ " + dobj.@id + " " + dobj.@x + " " + dobj.@y);
                      for each (var dback:XML in dxm.back) diag.log("DUMP-BACK " + dback.@id + " " + dback.@x + " " + dback.@y);

@@ -11,7 +11,7 @@ package rr
     */
    public class RRDiag
    {
-      public static const TAG:String = "[RR:0.0.1-M0]";
+      public static const TAG:String = "[RR:v6.6]";
       
       private static const MAX_LINES:int = 3000;
       private static const FILE_NAME:String = "RandomRooms_diag.log";
