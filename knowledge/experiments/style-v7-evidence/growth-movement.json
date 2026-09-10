@@ -1,0 +1,1 @@
+[{"locX":5,"width":7,"room":"syn_100000","locY":0,"height":5,"success":true,"phase":"grow-right"},{"caseId":"rrstyle-growth","phase":"grow-down","room":"syn_100019","frames":1764,"reason":"naturally entered new right column and new bottom row","success":true,"fromX":81.8,"toX":965.8999999999997,"locX":4,"stay":false,"toY":86.66666666666667,"locY":5,"fromY":960,"isLaz":0}]

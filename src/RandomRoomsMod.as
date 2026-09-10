@@ -1,6 +1,7 @@
 package
 {
    import flash.display.Sprite;
+   import flash.desktop.NativeApplication;
    import flash.events.Event;
    import flash.events.IOErrorEvent;
    import flash.events.KeyboardEvent;
@@ -13,28 +14,15 @@ package
    import rr.RRMenu;
    import rr.RRSeed;
    import rr.RRSynth;
+   import rr.RRGrowth;
    import rr.RRTestLand;
    import rr.RRTravelBtn;
    
    /**
-    * RandomRoomsMod —— M0 实验文档类。
-    *
-    * 加载契约（mod-loader-patch-structure）：loader 用 getDefinition("RandomRoomsMod")
-    * 并调用 **RandomRoomsMod.init(this)**（静态方法；与其他模组一致）。
-    *
-    * 注意：Loader 加载时会自动实例化文档类一次（root），构造必须保持轻量；
-    * 全部运行逻辑在 static init 中启动。
-    *
-    * M0 流程：
-    *   1. init(main) → 绑定 stage（ENTER_FRAME 晚于游戏 step；KEY_DOWN 早于游戏）；
-    *   2. 等 World.w 就绪 → preflight：
-    *      a. 预加载全部磁盘 Rooms/rooms_*.xml 到 World.w.rooms.rooms（保持原版内容）；
-    *      b. 全部就绪后：GameData.d 追加 rr_test 土地 + rooms.rooms["rooms_rr_test"]
-    *         注入测试池 + roomsLoad=0（LandLoader 将读取数组而非磁盘）；
-    *   3. F8 → gotoLand("rr_test")；F9 → gotoLand("rbl")；
-    *   4. 进入后采集 land.locs 的房间 id 集合写入日志（H3 判定）。
-    *
-    * 只读/写内存对象，不触碰游戏文件。
+    * RandomRooms v7: architectural rooms, fresh maps and connected growth.
+    * The existing host loader calls static init(main). Runtime changes are
+    * confined to room pools and the two mod-owned lands; host SWFs stay intact.
+    * F1 enters a fresh themed adventure; F5 provides a four-theme showroom.
     */
    public class RandomRoomsMod extends Sprite
    {
@@ -68,9 +56,10 @@ package
       private static var menuShown:Boolean = false;
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
       
-      // P2：全新房间合成器（合成房混入池数量）
+      // Complete generated pools, with distinct vertical and endpoint rooms.
       private static var synth:RRSynth;
-      private static const SYNTH_COUNT:int = 6;
+      private static var growth:RRGrowth;
+      private static const SYNTH_COUNT:int = 48;
       
       // P1 收尾：PipPage 旅行入口按钮
       private static var travelBtn:RRTravelBtn;
@@ -101,7 +90,7 @@ package
       /** 合成房展示馆（可视化测试通道） */
       public static const LAND_ID_SHOW:String = "rr_showroom";
       public static const POOL_FILE_SHOW:String = "rooms_showroom";
-      private static const SHOW_SYNTH_COUNT:int = 8;
+      private static const SHOW_SYNTH_COUNT:int = 24;
       private static const SHOW_MX:int = 4;
       private static const SHOW_MY:int = 3;
       
@@ -164,21 +153,8 @@ package
             diag.log("合成器: 使用 Math.random");
          }
          
-         // 全局未捕获异常监听（诊断：游戏内 Land 构建等异常会冒泡到这里）
-         try
-         {
-            var uce:* = main.loaderInfo.uncaughtErrorEvents;
-            if (uce != null)
-            {
-               uce.addEventListener("uncaughtError", onUncaught);
-               diag.log("诊断: uncaughtError 监听已挂载");
-            }
-         }
-         catch (e:*)
-         {
-            diag.log("诊断: uncaughtError 挂载失败 " + e);
-         }
-         
+         growth=new RRGrowth(synth,cook,diag);
+
          // 模组与游戏主 SWF 同 applicationDomain（LoaderContext(false)），
          // 顶层 getDefinitionByName 在当前域解析游戏类。
          var probes:Array = ["fe.World", "fe.GameData", "fe.loc.Game", "fe.loc.Land"];
@@ -212,185 +188,6 @@ package
          }
       }
       
-      /** 自动试驾（v6.5，仅测试实例）：applicationStorage 下存在 auto_enter.txt
-       *  时自动 newGame + 进展示馆——供 agent 截图自检视觉，真实游戏无此文件
-       *  永不触发。 */
-      private static var autoState:int = -1;
-      private static var autoTick:int = 0;
-      private static var autoShotAt:int = -1;
-      /** 合成按键事件发给 stage（模组 KEY_DOWN capture 可收；用于试驾关菜单） */
-      private static function autoKey(code:int):void
-      {
-         try
-         {
-            var KECls:* = getDefinitionByName("flash.events.KeyboardEvent");
-            main["stage"]["dispatchEvent"](new KECls("keyDown", true, false, code, code));
-         }
-         catch (e:*) {}
-      }
-      
-      private static function autoShot(name:String):void
-      {
-         try
-         {
-            var BDcls:* = getDefinitionByName("flash.display.BitmapData");
-            var bd:* = new BDcls(main["stage"]["stageWidth"], main["stage"]["stageHeight"]);
-            bd["draw"](main["stage"]);
-            var encCls:* = getDefinitionByName("flash.display.PNGEncoderOptions");
-            var png:* = bd["encode"](bd["rect"], new encCls());
-            var fo:* = getDefinitionByName("flash.filesystem.File")["applicationStorageDirectory"]["resolvePath"](name);
-            var fs:* = new (getDefinitionByName("flash.filesystem.FileStream"))();
-            fs["open"](fo, "write");
-            fs["writeBytes"](png);
-            fs["close"]();
-            diag.log("AUTOPILOT: 截图 " + name);
-         }
-         catch (e:*)
-         {
-            diag.log("AUTOPILOT: 截图失败 " + name + " " + e);
-         }
-      }
-      
-      private static function autoPilot():void
-      {
-         if (autoState >= 12 || autoState == 0) return;
-         autoTick++;
-         var w:* = null;
-         try { w = WCls["w"]; } catch (e:*) {}
-         if (autoState == -1)
-         {
-            if (autoTick < 40) return;
-            var f:* = null;
-            try
-            {
-               var FCls:* = getDefinitionByName("flash.filesystem.File");
-               f = FCls["applicationStorageDirectory"]["resolvePath"]("auto_enter.txt");
-            }
-            catch (e:*) {}
-            autoState = (f != null && f.exists) ? 1 : 0;
-            diag.log("AUTOPILOT: " + (autoState == 1 ? "标记存在，启动自动试驾" : "无标记，关闭"));
-            return;
-         }
-         if (w == null) return;
-         if (autoState == 1)
-         {
-            try
-            {
-               w["mm"]["active"] = false;
-               w["newGame"](0, "LP", null);
-               autoState = 2;
-               diag.log("AUTOPILOT: newGame 已发出");
-            }
-            catch (e:*)
-            {
-               if (autoTick % 60 == 0) diag.log("AUTOPILOT: 等待可开档 " + e);
-            }
-            return;
-         }
-         if (autoState == 2)
-         {
-            var gg:* = null;
-            try { gg = w["gg"]; } catch (e:*) {}
-            if (gg != null)
-            {
-               autoState = 3;
-               diag.log("AUTOPILOT: gg 就绪，发展示馆旅行");
-            }
-            else if (autoTick % 60 == 0) diag.log("AUTOPILOT: 等待 gg");
-            return;
-         }
-         if (autoState == 3)
-         {
-            var landsOK:Boolean = false;
-            try { landsOK = w["lands"] != null && w["lands"][LAND_ID_SHOW] == true; } catch (e:*) {}
-            if (landsOK || autoTick % 120 == 0)
-            {
-               triggerTravel(LAND_ID_SHOW, "F5");
-               autoState = 5;
-               autoShotAt = -1;
-               diag.log("AUTOPILOT: 旅行已发（landsOK=" + landsOK + "），切观察");
-            }
-            return;
-         }
-         if (autoState == 5)
-         {
-            // 进入后等 ~2.5s 土地渲染稳定，stage 截图落盘（不抢前台）
-            if (autoShotAt < 0) autoShotAt = autoTick;
-            if (autoTick - autoShotAt >= 150)
-            {
-               try
-               {
-                  var BDcls:* = getDefinitionByName("flash.display.BitmapData");
-                  var bd:* = new BDcls(main["stage"]["stageWidth"], main["stage"]["stageHeight"]);
-                  bd["draw"](main["stage"]);
-                  var encCls:* = getDefinitionByName("flash.display.PNGEncoderOptions");
-                  var png:* = bd["encode"](bd["rect"], new encCls());
-                  var fo:* = getDefinitionByName("flash.filesystem.File")["applicationStorageDirectory"]["resolvePath"]("showroom_shot.png");
-                  var fs:* = new (getDefinitionByName("flash.filesystem.FileStream"))();
-                  fs["open"](fo, "write");
-                  fs["writeBytes"](png);
-                  fs["close"]();
-                  diag.log("AUTOPILOT: 截图已存 showroom_shot.png");
-               }
-               catch (e:*)
-               {
-                  diag.log("AUTOPILOT: 截图失败 " + e);
-               }
-               autoState = 6;
-            }
-            return;
-         }
-         if (autoState == 6)
-         {
-            if (autoShotAt < 0) autoShotAt = autoTick;
-            if (autoTick - autoShotAt >= 150)
-            {
-               autoKey(27);   // ESC 关可能弹出的菜单
-               autoKey(9);    // TAB 关模组面板
-               var px0:* = null, lx0:* = null;
-               try { px0 = w["gg"]["X"]; lx0 = w["land"]["locX"]; } catch (e:*) {}
-               diag.log("AUTOPILOT: 出发点 X=" + px0 + " locX=" + lx0);
-               try { w["land"]["gotoXY"](0, 1); diag.log("AUTOPILOT: gotoXY(0,1) 切相邻合成房"); } catch (e:*) { diag.log("AUTOPILOT: gotoXY 异常 " + e); }
-               autoShot("syn_view.png");
-            }
-            if (autoTick - autoShotAt >= 300)
-            {
-               autoKey(27);
-               autoShot("syn_view2.png");
-               var lx1:* = null;
-               try { lx1 = w["land"]["locX"]; } catch (e:*) {}
-               diag.log("AUTOPILOT: 合成房内 locX=" + lx1);
-            }
-            if (autoTick - autoShotAt >= 370)
-            {
-               autoKey(27);
-               // 站位到 GY 行右缘内侧（GY 左右锚点洞+normalizeGaps 保证目标房同高开放）
-               try
-               {
-                  var limX:* = w["land"]["loc"] != null ? null : null;
-               } catch (e:*) {}
-               try
-               {
-                  w["gg"]["X"] = 47 * 36 - 40;
-                  w["gg"]["Y"] = 12 * 36 + 18;
-                  diag.log("AUTOPILOT: 已站位 GY 行右缘 (X,Y 设置)");
-               }
-               catch (e:*) { diag.log("AUTOPILOT: 站位异常 " + e); }
-               var res:* = "无";
-               try { res = w["gg"]["outLoc"](2); } catch (e:*) { res = "异常" + e; }
-               diag.log("AUTOPILOT: outLoc(2) 撞右边界 → " + (res == null ? "null=被弹回(通道不通)" : "Object=切格成功"));
-               autoShot("cross_test.png");
-            }
-            if (autoTick - autoShotAt >= 440)
-            {
-               var lx2:* = null;
-               try { lx2 = w["land"]["locX"]; } catch (e:*) {}
-               diag.log("AUTOPILOT: 撞边测试后 locX=" + lx2 + "（0=锁原格失败，1=横向通行成功）");
-               autoState = 9;
-            }
-         }
-      }
-      
       private static function bindStage(st:*):void
       {
          stageBound = true;
@@ -398,7 +195,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod M0 loaded <preflight=disk-reseed+rr_test-land> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v7.0 loaded <generator=space-v7, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -420,7 +217,6 @@ package
       
       private static function onFrame(ev:Event):void
       {
-         autoPilot();
          var world:* = null;
          try { world = WCls["w"]; } catch (e:*) {}
          if (world == null)
@@ -468,7 +264,7 @@ package
          // 无限模式：进入边缘房间时向该方向扩展网格
          if (preflightDone && !f8Issued)
          {
-            maybeExpand(world);
+            if (growth != null) growth.update(world);
          }
          // 诊断：游戏错误对话框文本（Land 构建异常被游戏 catch 后显示于此）
          var vtxt:String = "";
@@ -484,6 +280,7 @@ package
             startPreflight(world);
             return;
          }
+         if (!preflightDone) maybeFinalize();
          if (preflightDone && f8Issued)
          {
             verifyEntry(world);
@@ -720,36 +517,6 @@ package
             diag.log("合成房网格: " + String(sroom.@name) + " 行=" + rows.length() +
                      " 墙占比=" + (total > 0 ? (wallCnt / total).toFixed(2) : "?") +
                      " [行12样本] " + sample);
-            // 对照：独立 genGrid（固定参数、同 rnd 闭包）——若也全墙则 genGrid 本体 bug
-            try
-            {
-               var rr2:RRSynth = new RRSynth(synth.rnd);
-               var g2:Array = rr2.genGrid("stable", "corridor");
-               var w2:int = 0;
-               var t2:int = 0;
-               var open2:int = 0;
-               for (var a:int = 0; a < g2.length; a++)
-               {
-                  for (var b:int = 0; b < g2[a].length; b++)
-                  {
-                     t2++;
-                     if (RRSynth.WALL_CHARS.indexOf(String(g2[a][b]).charAt(0)) >= 0) w2++;
-                     else open2++;
-                  }
-               }
-               diag.log("对照 genGrid(stable,corridor): 墙=" + w2 + " 开放=" + open2 + " 占比=" +
-                        (t2 > 0 ? (w2 / t2).toFixed(2) : "?"));
-               var stages:String = "";
-               for (var si2:int = 0; si2 < rr2.debugStages.length; si2++)
-               {
-                  stages += String(rr2.debugStages[si2][0]) + "=" + String(rr2.debugStages[si2][1]) + " ";
-               }
-               diag.log("genGrid 分阶段: " + stages);
-            }
-            catch (e2:*)
-            {
-               diag.log("对照 genGrid 异常: " + e2);
-            }
          }
          catch (e:*)
          {
@@ -883,96 +650,6 @@ package
       
       // ---------- 深度循环 ----------
       
-      // 无限模式：边缘扩展状态
-      private static var expandTick:int = 0;
-      
-      /**
-       * 无限模式：玩家进入 random_rooms 边缘房间 → 向该方向扩展网格。
-       * 用 Land.newRandomLoc（public）生成新列/行，缺口统一保证连通；
-       * 右/下单向无限（左/上为固定起点侧，后续可做双向）。
-       */
-      private static function maybeExpand(world:*):void
-      {
-         var land:* = null;
-         try { land = world["land"]; } catch (e:*) {}
-         if (land == null) return;
-         var actId:String = "";
-         try { actId = String(land["act"]["id"]); } catch (e:*) {}
-         if (actId != LAND_ID_RR) return;
-         
-         var maxX:int = 0;
-         var maxY:int = 0;
-         var lx:int = 0;
-         var ly:int = 0;
-         try
-         {
-            maxX = int(land["maxLocX"]);
-            maxY = int(land["maxLocY"]);
-            lx = int(land["locX"]);
-            ly = int(land["locY"]);
-         }
-         catch (e:*) { return; }
-         
-         var needX:Boolean = lx >= maxX - 1;
-         var needY:Boolean = ly >= maxY - 1;
-         if (!needX && !needY)
-         {
-            expandTick = 0;
-            return;
-         }
-         expandTick++;
-         if (expandTick < 10) return;   // 防抖：进入边缘房间 10 帧后再扩展
-         expandTick = 0;
-         
-         try
-         {
-            var stage:int = 0;
-            try { stage = int(land["act"]["landStage"]); } catch (e:*) {}
-            var opts:Object = {};
-            
-            if (needX)
-            {
-               var col:Array = [];
-               var y:int = 0;
-               while (y < maxY)
-               {
-                  var locX:* = land["newRandomLoc"](stage, maxX, y, opts, null);
-                  col.push(locX != null ? [locX] : null);
-                  y++;
-               }
-               land["locs"][maxX] = col;
-               land["maxLocX"] = maxX + 1;
-               diag.log("expand: 右扩一列 -> maxLocX=" + (maxX + 1) + "（层 " + stage + "）");
-            }
-            if (needY)
-            {
-               var newMaxX:int = int(land["maxLocX"]);
-               var x2:int = 0;
-               while (x2 < newMaxX)
-               {
-                  var col2:* = land["locs"][x2];
-                  if (col2 == null)
-                  {
-                     x2++;
-                     continue;
-                  }
-                  var locY:* = land["newRandomLoc"](stage, x2, maxY, opts, null);
-                  col2[maxY] = locY != null ? [locY] : null;
-                  x2++;
-               }
-               land["maxLocY"] = maxY + 1;
-               diag.log("expand: 下扩一行 -> maxLocY=" + (maxY + 1) + "（层 " + stage + "）");
-            }
-            // 重建地图（尺寸随网格）
-            try { land["createMap"](); } catch (e:*) {}
-            diag.log("expand: 完成（locs 尺寸 " + land["maxLocX"] + "x" + land["maxLocY"] + "）");
-         }
-         catch (e:*)
-         {
-            diag.log("expand 异常: " + e);
-         }
-      }
-      
       /** 消息提示（世界消息条） */
       private static function mess(world:*, text:String):void
       {
@@ -1043,6 +720,67 @@ package
          }
       }
       
+      /** Test driver entry uses the exact public travel path, only in isolated apps. */
+      public static function debugReady():Boolean { return preflightDone; }
+      public static function debugTravel(landId:String):Boolean
+      {
+         if (NativeApplication.nativeApplication.applicationID.indexOf("pferr-style-") != 0) return false;
+         if (!preflightDone || [LAND_ID_RR,LAND_ID_SHOW,"rbl"].indexOf(landId)<0) return false;
+         targetLand=landId;
+         triggerTravel(landId,"isolated-test");
+         return true;
+      }
+
+      private static function refreshArchitecturePool(world:*, landId:String):void
+      {
+         var show:Boolean=landId==LAND_ID_SHOW;
+         var act:*=world["game"]["lands"][landId];
+         if (act==null) throw new Error("C map LandAct is missing: "+landId);
+         var fresh:XML=<all><land serial="1"/></all>;
+         var count:int=show?SHOW_SYNTH_COUNT:SYNTH_COUNT;
+         var height:int=show?SHOW_MY:5;
+         var biome:String=randBiome();
+         var sr:XML;
+         var total:int=count+2*height+4;
+         for (var i:int=0;i<total;i++)
+         {
+            var theme:String=show?String(RRSynth.BIOMES[i%4]):biome;
+            sr=synth.generate(i,theme,i<count?"":"connector");
+            if (i==total-2) { sr.@name="rr_begin"; sr.options.@tip="beg0"; }
+            if (i==total-1) { sr.@name=show?"rr_show_end":EXIT_ROOM_ID; sr.options.@tip="end"; sr.options.@nornd="1"; }
+            if (!RRSynth.validateRoom(sr) || !precheckSynth(world,sr,false))
+               throw new Error("C pool rejected "+sr.@name+"; travel cancelled");
+            fresh.appendChild(sr);
+         }
+         var st:int=int(act["landStage"]);
+         if (!show) cook.rollEnemies(fresh,st);
+         else for each (sr in fresh.room)
+         {
+            for (var j:int=sr.obj.length()-1;j>=0;j--)
+               if (String(sr.obj[j].@id).indexOf("en")==0) delete sr.obj[j];
+            sr.options.@entip="0"; sr.options.@kolspawn="0";
+         }
+         act["conf"]=4;
+         act["mLocX"]=show?SHOW_MX:5; act["mLocY"]=height;
+         act["lastCpCode"]="";
+         if (!show) growth.reset(biome);
+         act["allroom"]=fresh;
+         act["land"]=null;
+         act["dif"]=show?0:BASE_DIF_RR+st*DIF_PER_STAGE;
+         diag.log("C-POOL "+landId+" ordinary="+count+" vertical="+(2*height+2)+
+            " endpoints=2 total="+fresh.room.length()+" theme="+(show?"all":biome));
+         // Bounded diagnostics: full XML lives in the isolated test output.
+         for (i=0;i<Math.min(4,count);i++)
+         {
+            sr=fresh.room[i];
+            diag.log("DUMP-BEGIN "+sr.@name+" theme="+sr.@rrTheme+" kind="+sr.@rrKind);
+            for each (var row:XML in sr.a) diag.log("DUMP-ROW "+row.toString());
+            for each (var o:XML in sr.obj) diag.log("DUMP-OBJ "+o.@id+" "+o.@x+" "+o.@y);
+            for each (var b:XML in sr.back) diag.log("DUMP-BACK "+b.@id+" "+b.@x+" "+b.@y);
+            diag.log("DUMP-END");
+         }
+      }
+
       private static function triggerTravel(landId:String, tag:String):void
       {
          var world:* = null;
@@ -1096,6 +834,11 @@ package
        */
       private static function refreshLandPool(world:*, landId:String):void
       {
+         if (landId == LAND_ID_SHOW || landId == LAND_ID_RR)
+         {
+            refreshArchitecturePool(world, landId);
+            return;
+         }
          try
          {
             var game:* = world["game"];
@@ -1128,124 +871,7 @@ package
                diag.log("refreshLandPool: " + file + " 无原始池快照（非 tip=rnd 土地？），跳过");
                return;
             }
-            if (file == POOL_FILE_SHOW)
-            {
-               // 展示馆：每次进入重新合成（beg0 模板 + 全新合成房），纯净无敌人
-               var showFresh:XML = base.copy();
-               var kept:int = 0;
-               var dropped:int = 0;
-               for (var si:int = 0; si < SHOW_SYNTH_COUNT; si++)
-               {
-                  var sroom:XML = synth.generate(100 + si, randBiome());
-                  if (!RRSynth.validateRoom(sroom))
-                  {
-                     dropped++;
-                     diag.log("合成房预检丢弃 syn_" + (100 + si) + "（字符非法，首行: " +
-                              String(sroom.a[0]).substr(0, 50) + "）");
-                     continue;
-                  }
-                  if (!precheckSynth(world, sroom, true))
-                  {
-                     dropped++;
-                     continue;
-                  }
-                  showFresh.appendChild(sroom);
-                  kept++;
-               }
-               if (dropped > 0)
-               {
-                  diag.log("展示馆: 合成房预检 保留=" + kept + " 丢弃=" + dropped);
-               }
-               // 降级：全部合成房被过滤时补作者 rnd 房，避免池无 rnd 房（#1010）
-               if (kept == 0)
-               {
-                  var poolRooms:* = null;
-                  try { poolRooms = world["rooms"]["rooms"]; } catch (e:*) {}
-                  if (poolRooms != null)
-                  {
-                     var fbPool:XML = poolRooms["rooms_stable"] as XML;
-                     if (fbPool != null)
-                     {
-                        for each (var fbr:XML in fbPool.room)
-                        {
-                           if (cook.isRndRoom(fbr) && RRSynth.validateRoom(fbr))
-                           {
-                              showFresh.appendChild(fbr.copy());
-                              kept++;
-                              diag.log("展示馆降级: 补作者 rnd 房 " + String(fbr.@name));
-                              break;
-                           }
-                        }
-                     }
-                  }
-               }
-               cook.cookPool(showFresh, 1);   // 变异副本（展示更多变化）
-               // 纯净：删除 en 类 obj + 禁敌（展示结构为主）
-               for each (var r2:XML in showFresh.room)
-               {
-                  var keep2:Array = [];
-                  for each (var o2:XML in r2.obj)
-                  {
-                     if (String(o2.@id).indexOf("en") != 0)
-                     {
-                        keep2.push(o2);
-                     }
-                  }
-                  if (keep2.length != r2.obj.length())
-                  {
-                     delete r2.obj;
-                     for each (var k2:XML in keep2)
-                     {
-                        r2.appendChild(k2);
-                     }
-                  }
-                  if (r2.options.length() == 0)
-                  {
-                     r2.appendChild(<options/>);
-                  }
-                  r2.options.@entip = "0";
-                  r2.options.@kolspawn = "0";
-               }
-               act["allroom"] = showFresh;
-               act["land"] = null;
-               diag.log("refreshLandPool: " + landId + " 展示馆已重合成（合成房 " + kept +
-                        "，变异副本，无敌人）");
-               // v6.5 完整 dump 首个合成房（网格+obj+back）——离线渲染定位悬空/门
-               try
-               {
-                  var dpool:XMLList = act["allroom"].room;
-                  for each (var dxm:XML in dpool)
-                  {
-                     if (String(dxm.@name).indexOf("syn_") != 0) continue;
-                     diag.log("DUMP-BEGIN " + dxm.@name + (dxm.@b24.length() > 0 ? " b24=" + dxm.@b24 : ""));
-                     for each (var drow:XML in dxm.a) diag.log("DUMP-ROW " + drow.toString());
-                     for each (var dobj:XML in dxm.obj) diag.log("DUMP-OBJ " + dobj.@id + " " + dobj.@x + " " + dobj.@y);
-                     for each (var dback:XML in dxm.back) diag.log("DUMP-BACK " + dback.@id + " " + dback.@x + " " + dback.@y);
-                     diag.log("DUMP-END");
-                  }
-               }
-               catch (de:*)
-               {
-                  diag.log("DUMP 异常 " + de);
-               }
-               return;
-            }
             var fresh:XML = base.copy();
-            // P2：进入级注入合成房（仅 random_rooms；rr_test 等测试土地不混入）
-            var keptRR:int = 0;
-            for (var sri:int = 0; sri < SYNTH_COUNT && landId == LAND_ID_RR; sri++)
-            {
-               var sr:XML = synth.generate(sri, randBiome());
-               if (RRSynth.validateRoom(sr) && precheckSynth(world, sr, true))
-               {
-                  fresh.appendChild(sr);
-                  keptRR++;
-               }
-            }
-            if (keptRR > 0)
-            {
-               diag.log("refreshLandPool: " + landId + " 注入合成房 " + keptRR + " 个");
-            }
             var n:int = cook.cookPool(fresh, 1);
             // 深度循环：每层敌人表重掷（landStage 驱动分层）
             var st:int = 0;
@@ -1391,6 +1017,15 @@ package
       {
          if (preflightDone) return;
          if (fileLoaded + fileFailed < fileTotal) return;
+         // roomsLoad=0 changes World.roomsLoadOk from a counted barrier into
+         // "any callback means ready". Do not switch while vanilla LandLoaders
+         // are pending, or Game can capture a null probation pool at startup.
+         var world:*=WCls!=null?WCls["w"]:null;
+         if (world==null || world["landData"]==null || !world["allLandsLoaded"]) return;
+         for each (var hostLoader:* in world["landData"])
+         {
+            if (hostLoader!=null && (!hostLoader["loaded"] || hostLoader["allroom"]==null)) return;
+         }
          finalizePreflight();
       }
       
@@ -1436,108 +1071,33 @@ package
          cook.normalizePool(poolXml);
          diag.log("inject: rr_test 池边界缺口已统一（门 bug 修复）");
          
-         // ---- P1：random_rooms 新土地注册 + 混合池（stable+sewer） ----
-         var rrLands:XMLList = gd.land.(@id == LAND_ID_RR);
-         if (rrLands.length() == 0)
+         // C maps use the engine's paired vertical columns (conf=4). Pools
+         // are freshly generated at travel time, once a host Land exists.
+         if (gd.land.(@id == LAND_ID_RR).length() == 0)
+            gd.appendChild(<land id="random_rooms" tip="rnd" rnd="1" dif="8" biom="1" conf="4"
+               file="rooms_random_rooms" mx="5" my="5" locx="0" locy="0" list="0">
+               <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="150"/></land>);
+         if (gd.land.(@id == LAND_ID_SHOW).length() == 0)
+            gd.appendChild(<land id="rr_showroom" tip="rnd" rnd="1" dif="0" biom="0" conf="4"
+               file="rooms_showroom" mx={SHOW_MX} my={SHOW_MY} locx="0" locy="0" list="0">
+               <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="50"/></land>);
+         // Only placeholders until the first travel; never snapshot generated
+         // rooms then append another generation to that snapshot.
+         for each (var ownFile:String in [POOL_FILE_RR,POOL_FILE_SHOW])
          {
-            gd.appendChild(<land id="random_rooms" tip="rnd" rnd="1" dif="8" biom="1" conf="1"
-                 file="rooms_random_rooms" mx="5" my="5" locx="0" locy="0" list="0">
-                 <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="150"/></land>);
-            diag.log("inject: GameData.d 已追加 <land random_rooms 5x5 conf=1 dif=8>");
+            var emptyPool:XML=<all><land serial="1"/></all>;
+            rooms["rooms"][ownFile]=emptyPool;
+            origPools[ownFile]=emptyPool.copy();
          }
-         else
-         {
-            diag.log("inject: <land random_rooms> 已存在，跳过追加");
-         }
-         var mix:XML = <all><land serial="1"/></all>;
-         var begXml:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip == "beg0");
-         if (begXml.length() > 0)
-         {
-            mix.appendChild(begXml[0].copy());
-         }
-         for each (var srcName:String in ["rooms_stable", "rooms_sewer"])
-         {
-            var srcPool2:XML = rooms["rooms"][srcName] as XML;
-            if (srcPool2 == null)
-            {
-               diag.log("inject: 混合池源 " + srcName + " 缺失，跳过");
-               continue;
-            }
-            var added:int = 0;
-            for each (var srcRoom:XML in srcPool2.room)
-            {
-               if (cook.isRndRoom(srcRoom))
-               {
-                  mix.appendChild(srcRoom.copy());
-                  added++;
-               }
-            }
-            diag.log("inject: 混合池加入 " + srcName + " 的 " + added + " 个 rnd 房");
-         }
-         rooms["rooms"][POOL_FILE_RR] = mix;
-         diag.log("inject: 混合池 " + POOL_FILE_RR + " 构建完成（房间数=" + mix.room.length() + "）");
-         
-         // 深度循环：出口房 rr_exit（uniq，每层最多 1 个；tip=uniq 不变异）
-         var exitSrc:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip.length() == 0);
-         if (exitSrc.length() > 0)
-         {
-            var exitRoom:XML = exitSrc[0].copy();
-            exitRoom.@name = EXIT_ROOM_ID;
-            if (exitRoom.options.length() == 0)
-            {
-               exitRoom.appendChild(<options/>);
-            }
-            exitRoom.options.@tip = "uniq";
-            mix.appendChild(exitRoom);
-            diag.log("inject: 出口房 " + EXIT_ROOM_ID + " 已加入混合池（池房间数=" + mix.room.length() + "）");
-         }
-         else
-         {
-            diag.log("inject: WARN 出口房源缺失（rooms_stable 无普通房）");
-         }
-         // P2 合成房：改为进入级（refreshLandPool）生成+预检注入
-         // （finalize 在主菜单无 Land 无法构造预检）。混合池仅作者房。
-         diag.log("inject: 合成房将在进入级刷新时生成并预检注入（本次不预混入池）");
-         // 门 bug 修复：统一混合池边界缺口（在快照/cook 之前）
-         var normalized:int = cook.normalizePool(mix);
-         diag.log("inject: 混合池边界缺口已统一（" + normalized + " 房）");
-         
-         // ---- 合成房展示馆（可视化测试通道） ----
-         var showLands:XMLList = gd.land.(@id == LAND_ID_SHOW);
-         if (showLands.length() == 0)
-         {
-            gd.appendChild(<land id="rr_showroom" tip="rnd" rnd="1" dif="0" biom="0" conf="1"
-                 file="rooms_showroom" mx="4" my="3" locx="0" locy="0" list="0">
-                 <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="50"/></land>);
-            diag.log("inject: <land rr_showroom 4x3> 已追加");
-         }
-         var showPool:XML = <all><land serial="1"/></all>;
-         var showBeg:XMLList = (rooms["rooms"]["rooms_stable"] as XML).room.(options.@tip == "beg0");
-         if (showBeg.length() > 0)
-         {
-            showPool.appendChild(showBeg[0].copy());
-         }
-         for (var sn2:int = 0; sn2 < SHOW_SYNTH_COUNT; sn2++)
-         {
-            showPool.appendChild(synth.generate(sn2, randBiome()));
-         }
-         rooms["rooms"][POOL_FILE_SHOW] = showPool;
-         cook.normalizePool(showPool);
-         // 快照 = beg0-only（refresh 时重新合成，展示每次不同）
-         var showBase:XML = <all><land serial="1"/></all>;
-         if (showBeg.length() > 0)
-         {
-            showBase.appendChild(showBeg[0].copy());
-         }
-         origPools[POOL_FILE_SHOW] = showBase;
-         diag.log("inject: 展示馆池构建完成（beg0 + " + SHOW_SYNTH_COUNT + " 合成房，缺口已统一）");
-         
+         diag.log("C maps registered: conf=4, fresh architecture pools on travel");
+
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");
          var cookedTotal:int = 0;
          for each (var ld:XML in rndLands)
          {
             var f2:String = String(ld.@file);
+            if (f2 == POOL_FILE_RR || f2 == POOL_FILE_SHOW) continue;
             var pool:XML = rooms["rooms"][f2] as XML;
             if (pool == null)
             {
@@ -1555,7 +1115,7 @@ package
          world["roomsLoad"] = 0;
          preflightDone = true;
          diag.log("inject: roomsLoad=0，rr_test 池已就位（房间数=" + poolXml.room.length() + "）" +
-                  " | READY: 开新游戏后按 F1 进入 rr_test，F2 回 rbl");
+                  " | READY: F1 随机冒险，F5 展示馆，F2 回城");
       }
       
       // ---------- 进入判定（H3） ----------

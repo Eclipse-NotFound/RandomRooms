@@ -14,3 +14,21 @@ release/
 Thumbs.db
 *.swp
 build/__pycache__/
+
+# 2026-09 风格原型：保留脚本，忽略可再生成样本和隔离游戏副本
+build/style-review/**/__pycache__/
+build/style-review/__pycache__/
+build/style-review/*.png
+build/style-review/*.xml
+build/style-review/*.json
+build/style-review/composite/
+build/style-review/horizontal/
+build/style-review/local/
+build/style-review/harness/*.swf
+build/style-review/harness/adl-*.txt
+build/style-review/game-harness/app/
+build/style-review/game-harness/*.swf
+build/RandomRooms-v7-*.swf
+build/release-backups/
+build/style-review/*-progress.txt
+build/style-review/*-error.txt

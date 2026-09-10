@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\generated-v7-final.xml",
+      "sha256": "1829d54a178aee61859422b31ebeb28ac6e867c4a12b8ba3b7a6c2d7719d2139",
+      "rooms": 1024,
+      "kinds": {
+        "service": 170,
+        "workshop": 179,
+        "warehouse": 161,
+        "atrium": 192,
+        "offices": 189,
+        "damaged": 133
+      },
+      "themes": {
+        "stable": 256,
+        "sewer": 256,
+        "plant": 256,
+        "mane": 256
+      },
+      "object_mean": 18.431640625,
+      "back_mean": 14.18359375
+    },
+    {
+      "file": "build\\style-review\\generated-v7-final-cooked.xml",
+      "sha256": "d71fc102c2c4788cceb7560446a66567c79a3dbac84a71cb8112c1c09d661a9f",
+      "rooms": 1024,
+      "kinds": {
+        "service": 170,
+        "workshop": 179,
+        "warehouse": 161,
+        "atrium": 192,
+        "offices": 189,
+        "damaged": 133
+      },
+      "themes": {
+        "stable": 256,
+        "sewer": 256,
+        "plant": 256,
+        "mane": 256
+      },
+      "object_mean": 18.431640625,
+      "back_mean": 14.18359375
+    },
+    {
+      "file": "build\\style-review\\game-harness\\app\\history\\pferr-style-033d8c43c8fe40d7bf27ad16dce0fb0d-8406c8e3\\rrstyle-growth-expanded-pool.xml",
+      "sha256": "5967a424698e0419ff78a7e58f7574c84babd7f617062bb1dc84e274620ffae9",
+      "rooms": 93,
+      "kinds": {
+        "warehouse": 16,
+        "service": 10,
+        "atrium": 13,
+        "offices": 24,
+        "workshop": 12,
+        "connector": 18
+      },
+      "themes": {
+        "stable": 93
+      },
+      "object_mean": 20.333333333333332,
+      "back_mean": 16.0752688172043
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

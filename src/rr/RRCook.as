@@ -64,6 +64,7 @@ package rr
       /** 变异单个普通 rnd 房，返回副本（name 追加 _rrN）；自检失败返回 null */
       public function cookRoom(room:XML, suffixNum:int):XML
       {
+         if (RRSynth.isGenerated(room)) return null;
          var rows:XMLList = room.a;
          var h:int = rows.length();
          if (h == 0) return null;
@@ -191,6 +192,7 @@ package rr
        */
       public function normalizeGaps(room:XML):void
       {
+         if (RRSynth.isGenerated(room)) return;
          var rows:XMLList = room.a;
          var h:int = rows.length();
          if (h == 0) return;
@@ -310,7 +312,7 @@ package rr
          var addList:Array = [];
          for each (var room:XML in pool.room)
          {
-            if (isTipRoom(room)) continue;
+            if (isTipRoom(room) || RRSynth.isGenerated(room)) continue;
             for (var n:int = 0; n < perRoom; n++)
             {
                made++;
@@ -344,7 +346,7 @@ package rr
          }
          switch (tip)
          {
-            case "beg0": case "beg": case "beg1":
+            case "beg0": case "beg": case "beg1": case "beg2": case "beg3":
             case "end": case "end1":
             case "pass": case "passroof": case "roofpass": case "vert":
             case "surf": case "roof": case "back": case "uniq":

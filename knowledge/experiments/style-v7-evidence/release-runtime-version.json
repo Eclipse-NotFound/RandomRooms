@@ -1,0 +1,11 @@
+{
+  "appId": "pferr-style-81a0848eed1344ad8dbbc4c5509bc6e2",
+  "sourceSwfSha256": "9B547CF23C239DEBCCF1872D00F63CF50D138AF2AE172867C06C2458515E3583",
+  "originalLogSha256": "b3720881fb591452ee32ca34640e570bdd15679d07500dc070fdf6e722ca9543",
+  "excerpts": [
+    "[RR:v7.0] RRDiag init, fileStream=C:\\Users\\hello\\AppData\\Roaming\\pferr-style-81a0848eed1344ad8dbbc4c5509bc6e2\\Local Store\\RandomRooms_diag.log",
+    "[RR:v7.0] [RR] RandomRoomsMod v7.0 loaded <generator=space-v7, growth=right+down> stage bound (KEY_DOWN capture)",
+    "[RR:v7.0] C-POOL rr_showroom ordinary=24 vertical=8 endpoints=2 total=34 theme=all",
+    "[RR:v7.0] C-POOL random_rooms ordinary=48 vertical=12 endpoints=2 total=62 theme=plant"
+  ]
+}

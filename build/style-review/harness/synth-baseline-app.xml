@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/30.0">
+  <id>pferr-synth-baseline</id>
+  <versionNumber>1.0.0</versionNumber>
+  <filename>RandomRoomsSynthBaseline</filename>
+  <initialWindow>
+    <content>SynthBaseline.swf</content>
+    <visible>false</visible>
+    <width>320</width>
+    <height>240</height>
+    <renderMode>cpu</renderMode>
+  </initialWindow>
+  <supportedProfiles>extendedDesktop</supportedProfiles>
+</application>

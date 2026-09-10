@@ -1,0 +1,95 @@
+{
+  "appId": "pferr-style-033d8c43c8fe40d7bf27ad16dce0fb0d",
+  "status": "complete",
+  "startedUtc": "2026-09-10T02:21:49.8876426Z",
+  "completedUtc": "2026-09-10T02:23:17.5386422Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-growth"
+  ],
+  "roomIds": [
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "DC7D207B3F537A298E17CC74BDF6DD01C7CE7D65C0AE3AC724E2DD13D3683F75"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": true,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "./mods/RandomRooms/build/RandomRooms-v7-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-growth-pool.xml": "37DBA60BD66A843F7D42254F273491C05DF3AE9594F09039A900D67B116E1EFD",
+    "rrstyle-growth-layout.xml": "38EBE00061C578AEECD7CB4BEC9F67DC1DF97D2AD322B7DC762AC5F3EC4BEED3",
+    "rrstyle-growth-topology.json": "57D51D9E0DDBC505818018BC6836492F8C0349501DD25D56E27C413C352BE4F6",
+    "movement.json": "41FD55BA54EF072F85D4B56A1F4C0A65FF6DAF20A61571D809031DF96F751646",
+    "rrstyle-growth-expanded-layout.xml": "8238EC46DFB85D7CFA8B576CC8B552A6FAA71D81DE09CBC41098619CEA97071E",
+    "rrstyle-growth-expanded-pool.xml": "5967A424698E0419FF78A7E58F7574C84BABD7F617062BB1DC84E274620FFAE9",
+    "rrstyle-growth-expanded-topology.json": "277D6E7B14DE518390BDAA13B4B6028A264801EB1152F874218F8D0462B01E8A"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-growth",
+      "poolRooms": 62,
+      "generatedPoolRooms": 62,
+      "themeCounts": {
+        "stable": 62
+      },
+      "issues": []
+    }
+  ],
+  "movement": [
+    {
+      "locX": 5,
+      "width": 7,
+      "room": "syn_100000",
+      "locY": 0,
+      "height": 5,
+      "success": true,
+      "phase": "grow-right"
+    },
+    {
+      "caseId": "rrstyle-growth",
+      "phase": "grow-down",
+      "room": "syn_100019",
+      "frames": 1764,
+      "reason": "naturally entered new right column and new bottom row",
+      "success": true,
+      "fromX": 81.8,
+      "toX": 965.8999999999997,
+      "locX": 4,
+      "stay": false,
+      "toY": 86.66666666666667,
+      "locY": 5,
+      "fromY": 960,
+      "isLaz": 0
+    }
+  ],
+  "casesSha256": "5A3704E828B4C58D16194D902BE9969CFD3996A029A5429D2D86842014AD06EB",
+  "driverSha256": "3ADD96A54A1B67B942C92E7CFB22AD4D04B333DC79A62B0691ADB4F8E0B883E6",
+  "runnerLogSha256": "DFF245D4AF50D96D92F32E3D5F431B22C2D8656ADA9AA9DB7FD99D2A0991EACC",
+  "captured": {
+    "rrstyle-growth-stage.png": "4E0F24894D79069EB5EFA9A83194DE46A3E0411570A44529B5234D23CA623113",
+    "rrstyle-growth-room.png": "3DFD216E4E15AEC2CAF8318180502F953763B3B2A7A693CA5F2A279004A16FAE",
+    "rrstyle-growth-down-stage.png": "ACF3CD5C71221F907260B1063111ED3BEFED706E4B29C758988283285AF1E470",
+    "rrstyle-growth-right-stage.png": "34675C34F80647234BB0A14537C43265C6DA6215C0F0DA0C0A3EDAB1DE87F72F"
+  }
+}

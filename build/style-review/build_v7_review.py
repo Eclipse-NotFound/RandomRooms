@@ -1,0 +1,60 @@
+"""Build the review from frozen, hash-verified engine captures; no drawn mockups."""
+import json
+from pathlib import Path
+
+MOD = Path(__file__).resolve().parents[2]
+ASSETS = MOD / 'design/assets/v7-final'
+
+def main():
+    kinds = [
+        ('atrium', '主厅与附室', '避难所', 'syn_120', '两侧附室围绕主厅，平台连接上下用途区。'),
+        ('workshop', '工坊与斜坡', '下水道', 'syn_401', '高厅、斜坡和低层仓储连在一起，工作台与工具柜成组放置。'),
+        ('offices', '分层办公室', '工厂', 'syn_513', '中央梯井连接三层，办公、休息和仓储各有自己的空间。'),
+        ('damaged', '损毁大厅', '城市', 'syn_832', '连续墙体中留下破损空间，以平台和斜坡保留通行路线。'),
+        ('service', '维修与控制室', '避难所', 'syn_0', '两侧梯子连接维修层，中间控制设施位于完整的工作间内。'),
+        ('warehouse', '仓库与夹层', '下水道', 'syn_257', '货架成列放置，上层仓储与侧边管理间由梯子连接。'),
+    ]
+    data = [dict(kind=k, title=t, theme=b, room=r, text=s) for k,t,b,r,s in kinds]
+    for row in data:
+        for mode in ('room','stage'):
+            path = ASSETS / f'rrstyle-crossing-{row["kind"]}-{mode}.png'
+            if not path.is_file(): raise FileNotFoundError(path)
+    page = r'''<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RandomRooms v7 · 正式生成器实景</title>
+<style>
+:root{color-scheme:dark;font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif;background:#111713;color:#e0e9df}
+*{box-sizing:border-box}body{margin:0}main{max-width:1480px;margin:auto;padding:36px 24px 60px}
+h1{font-size:clamp(27px,4vw,44px);line-height:1.2;margin:12px 0}h2{font-size:23px;margin:28px 0 8px}
+p{max-width:960px;margin:8px 0 18px}.muted,figcaption{color:#a8b8a6;font-size:14px}.eyebrow{color:#b6d59a;letter-spacing:2px}
+nav,.modes{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}button{font:inherit;padding:8px 16px;border:1px solid #42513d;border-radius:6px;background:#1c261f;color:inherit;cursor:pointer}
+button[aria-pressed=true]{background:#c0d6a5;color:#152012;border-color:#c0d6a5}button:focus-visible,a:focus-visible{outline:3px solid #ebbd6e;outline-offset:3px}
+figure{margin:0;padding:10px;border:1px solid #3a4938;border-radius:9px;background:#080d09}figure img{width:100%;display:block;border-radius:3px}figure.stage img{max-width:1008px;margin:auto}
+figcaption{padding:10px 4px 2px}a{color:#c6dea9}.facts{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}.fact{flex:1;min-width:190px;background:#1a251d;padding:14px 18px;border-left:3px solid #94b179}
+.fact strong{display:block;font-size:26px;color:#d3e5bb}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px}.comparison img{width:100%}details{margin-top:28px;border-top:1px solid #3a4938;padding-top:12px}summary{cursor:pointer}
+@media(max-width:720px){main{padding:20px 12px}.comparison{grid-template-columns:1fr}}
+</style>
+<main><div class="eyebrow">RANDOMROOMS / SPACE v7 / 2026.09.10</div>
+<h1>让随机房间先成为一栋建筑</h1>
+<p>采用你批准的 C 方向：先生成主厅、附室、梯井和平台之间的关系，再按用途放入家具。以下六间均来自正式 AS3 生成器，在原版游戏中装配、渲染并实际横穿。</p>
+<nav id="kinds" aria-label="选择房型"></nav><h2 id="title"></h2><p id="description"></p>
+<div class="modes" aria-label="选择查看方式"><button id="room" aria-pressed="true">查看整间建筑</button><button id="stage" aria-pressed="false">查看游戏屏幕</button></div>
+<figure id="figure"><a id="full" target="_blank" rel="noopener"><img id="capture" alt=""></a><figcaption id="caption"></figcaption></figure>
+<div class="facts"><div class="fact"><strong>1,024 间</strong>四主题各 256 间，通过结构与家具占位检查。</div><div class="fact"><strong>6 / 6 房型</strong>真实行走、跳跃及开门，成功进入相邻合成房。</div><div class="fact"><strong>5×5 → 8×7</strong>实测进入新增列和新增行，保留向右、向下继续扩张。</div></div>
+<h2>扩张也遵循同一套建筑连接</h2><p>靠近边缘时提前生成下一列或下一行；竖井定期出现并向下延续。原来封住的地图边缘会恢复梯子和开口，新增房间拥有完整物件与地图记录。F4 仍可进入新的深度层。</p>
+<h2>与原版、旧版放在一起看</h2><div class="comparison"><figure><img loading="lazy" src="assets/prototypes-2026-09-10/rrstyle-original-room.png" alt="原版13号房"><figcaption>原版 13 号房 · 整房诊断视图</figcaption></figure><figure><img loading="lazy" src="assets/prototypes-2026-09-10/rrstyle-baseline-room.png" alt="旧v6.6随机房样本"><figcaption>旧 v6.6 样本 · 整房诊断视图</figcaption></figure></div>
+<p class="muted">当前仍只有六类普通布局，部分结构会反复出现。材质与用途已经连贯；更多独特空间和更细的破损、生活痕迹仍可继续扩充。</p>
+<details><summary>画面来源与验证范围</summary><p>原版 1.02 游戏渲染；固定案例移除了敌人，用正常出生和旅行建立房间。整房图暂时关闭玩家视野遮罩以统一曝光，游戏屏幕图保留正常光照与界面。图片本身不代替物理测试。</p><p>六房来自同一批正式输出，挑选规则是覆盖六房型与四主题。扩张测试使用受击保护隔离战斗消耗，未改玩家坐标；目前未验证极长时间扩张的资源上限或联机。</p><p><a href="assets/v7-final/manifest.json">六型原始清单</a> · <a href="../knowledge/experiments/style-generator-validation-2026-09-10.md">完整测试与发布记录</a> · <a href="style-review-2026-09-10.html">先前 A/B/C 原型对照</a></p></details></main>
+<script>
+const data=__DATA__;let selected=0,mode='room';
+const byId=id=>document.getElementById(id);
+data.forEach((row,i)=>{const b=document.createElement('button');b.textContent=row.title;b.onclick=()=>{selected=i;render()};byId('kinds').appendChild(b)});
+['room','stage'].forEach(m=>byId(m).onclick=()=>{mode=m;render()});
+function render(){const row=data[selected];Array.from(byId('kinds').children).forEach((b,i)=>b.setAttribute('aria-pressed',i===selected));['room','stage'].forEach(m=>byId(m).setAttribute('aria-pressed',m===mode));byId('title').textContent=row.title+' · '+row.theme;byId('description').textContent=row.text;const src='assets/v7-final/rrstyle-crossing-'+row.kind+'-'+mode+'.png';byId('capture').src=src;byId('capture').alt=row.title+'，'+(mode==='room'?'整房诊断图':'真实游戏屏幕');byId('full').href=src;byId('figure').className=mode;byId('caption').textContent=row.room+' · '+(mode==='room'?'1920×1000，统一曝光的整房诊断视图。点击查看原尺寸。':'1008×729，保留原版光照和界面。');}
+render();
+</script></html>'''
+    output = MOD / 'design/generator-v7-review.html'
+    output.write_text(page.replace('__DATA__',json.dumps(data,ensure_ascii=False)),encoding='utf-8')
+    print(output)
+
+if __name__ == '__main__': main()

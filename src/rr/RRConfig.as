@@ -9,6 +9,7 @@ package rr
    public class RRConfig
    {
       public static const SO_NAME:String = "rr_config";
+      public function RRConfig() {}
       
       public var enabled:Boolean = true;        // 变异总开关
       public var seedEnabled:Boolean = true;    // 种子模式（false=Math.random）

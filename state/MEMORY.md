@@ -1,67 +1,61 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-10 接手校正。权限见 ../AGENT_SCOPE.md 与工作区 GOVERNANCE.md；历史过程见 journal.md。
+> 2026-09-10 v7.0 已部署并完成隔离重启验证；本轮实现已完成。
 
-## 1. 这个模组是什么
+## 1. 模组与当前版本
 
-给原版随机土地增加模板变异，提供随机冒险土地及程序生成的合成房。
-当前生成器采用横版平台结构：分层地板、竖隔断、内部通道、材质分区和物件摆放。
-AS3 入口为 RandomRoomsMod.init(main)，通过运行时房池和土地定义接入游戏。
-种子系统、深度循环、展示馆已实现；完整世界确定性和联机同步尚未验证。
+入口 release/RandomRoomsMod.swf，public static init(main)。C/v7 从零生成建筑空间，再按用途布置家具；不复用原版整房或地形片段。
+F1 是全生成冒险土地，初始5×5并向右/下扩张；F5 是4×3四主题展示馆。F4进入新深度层。
+正式release 26595B，SHA256 9B547CF23C239DEBCCF1872D00F63CF50D138AF2AE172867C06C2458515E3583。
 
-## 2. 用户偏好与协作约定
+## 2. 用户已确定的方向
 
-- 中文交流。土地 = 一次 gotoLand 进入的完整世界；合成房 = 25 行 × 48 列的 Room XML 土地格；房间 = 合成房内部被隔断切出的空间；通道 = 内部连接结构。
-- 历史“房间之间没有通道”指 **合成房之间无法跨土地格**，不要误改内部隔断。
-- 实机复评：重启游戏 → F2 回城 → F5 展示馆；F1 观察混有作者房的随机冒险土地。
-- 热键：F1 随机冒险、F2 回 rbl、F3 rr_test、F4 下一层、F5 展示馆、F7 跳合成房；F8/F9 留给其他模组。
-- 正式日志 %APPDATA%/pfe/Local Store/RandomRooms_diag.log；当前前缀 [RR:v6.6]，追加写入，单实例最多 3000 行。
-- 自动测试用独立 appId pferrtest（不得含下划线），按测试技能隔离实例、存档和产物，结束只清理自己的实例。
-- auto_enter.txt 只放测试实例 storage；代码只检查标记存在，没有 appId 白名单；当前自动试驾依赖 0 号存档。
-- 发布走 release 门禁；游戏 SWF 补丁须明确授权。build/build-m0.sh 直接写 release，普通编译检查必须覆盖输出到临时路径。
+- 中文。土地=一次旅行完整地图；合成房=25×48土地格；房间=内部功能空间；通道=内部连接。
+- 用户看A/B/C原型后明确批准C正式实现；随后明确要求保留右/下无限扩张。不能用有限5×5+F4替代。
+- 热键F1冒险/F2回城/F3旧测试/F4进深/F5展示/F7跳合成房；F8/F9留给其他模组。
+- 实际游戏须重启后回城再进入，获得新生成土地。真实存档、根/DLC游戏SWF本轮未动。
 
-## 3. 当前状态
+## 3. 已完成实现
 
-- 源码 **v6.6**，接手基线提交 2187622；本模组实际分支 main，接手工作树干净。
-- release 文件时间为 2026-09-07；本轮未部署、未启动游戏，不能把文件时间或编译通过当作实机通过。
-- **2026-09-10 编译通过**：临时 SWF 34380 字节，4 条已有警告（3 处重复变量、RRConfig 缺显式构造函数）。
-- 临时产物与 release 同大小、哈希不同，尚未确认二者内容差异；release 哈希与接手前一致。
-- v6.6 已有代码：地板行伸至左右边界、顶部/底部封实；先修连通再放物件；脚下支撑检查；占位按锚点行横向宽度，wid 不向下延伸。
-- 最新历史验证记录为 journal 的 2026-09-07 条目：悬空 0/366、player 14/32、门 0.88/房、hatch2 0.94/房、模拟弹回率 7%、底边穿透 0。**本轮未复跑这些指标，仍待实机复评。**
-- 核验依据：../knowledge/discoveries/v66-validation-boundaries.md。
+- RRSynth仅负责XML与检查；RRArchitecture六种普通布局+全高连接竖井；RRFurnish按用途放原版物件组。梯顶、落脚、地板材料、门口净空预先保留。
+- F1池62房/初始25格，每次一个主题；F5池34房/实际12格，四主题。自有C池不接受旧cook变异和重复扩池；其他原版土地保留旧P0路线。
+- RRGrowth提前一房生成新行/列，每4列竖井延续。完整newLoc→配对→mainFrame→setObjects→preStep→XP→map流程，旧边界恢复stair与opac后重绘。
+- 初始化等待原版landData所有加载器loaded且allroom就绪再切roomsLoad=0，修复偶发基地buildProb空引用。日志标签与启动文字v7.0。
+- 删除旧合成器主体和自动试驾、重复异常监听、消耗随机数的诊断生成。
 
-## 4. 正在进行与卡点
+## 4. 实测证据
 
-- 接手阅读、流程核对、隔离编译和记忆校正已完成；主线仍是 v6.6 通行与观感复评。
-- render_dump.py 无法读取当前版本前缀，本轮最小数据复现失败；只处理最后一房，不能承担整批统计。
-- 自动试驾、房池数量和旧离线脚本均有描述与实现不一致之处，不能直接沿用“自动闭环已全绿”。
+- 最终1024普通房（四主题各256）与cook后均通过尺寸、22口、家具整块占位/支撑、梯顶净空、2×2几何清隙检查；同种子逐room XML完全复现。464种不同地形；75/75 sewer/service都有管线组。
+- 六种布局真实横穿6/6，正常开门；固定1×2竖井下行/返回2/2。几何检查本身不代表真实物理，移动另行验证。
+- 26498B同几何候选自然从5×5进入新列和新行，导出8×7/56格；独立反爬轮继续至8×12，实际沿梯井返回原区域，3/3阶段通过。
+- 最终26595B四次旅行F5/回城/F5、F1/回城/F1通过，31个原版加载器全就绪；启动延迟正对照42帧持续未ready、恢复后成功，旧候选同夹具提前ready被断言截停。
+- 正式release路径重新启动隔离实例，F5/F1入口、两份连接检查、延迟启动均通过，appId pferr-style-81a0848eed1344ad8dbbc4c5509bc6e2，manifest complete。
+- 最终图片六型/四主题均人工看过，冻结于design/assets/v7-final；正式页design/generator-v7-review.html。room图关闭玩家视野罩统一曝光；stage图保留正常光照，不能混称原样屏幕。
 
-## 5. 已知问题
+## 5. 已知边界与机制要点
 
-- 日志脚本“脚下格”统计实际读锚点行 y，不是支撑行 y+1；物件近似画成 2×1，PNG 只有 48×25 像素。
-- diag-skeleton.py 镜像 v5.8，synth-v54-verify.py 依赖 v5.2 结构；不能验证 v6.6。
-- 展示馆 beg0-only 快照被后续公共循环覆盖：正常情况下保留 8 个启动合成房，再加入 8 个新房及一轮变异。旧“8 原始 + 24 变异”说明不准确。
-- autoPilot 调用 newGame(0) 是读档；空白隔离实例启动未验证。源码仍有合成按键步骤，历史“弃用”不代表已删除。
-- hasGround 对宽度内任一实体支撑即通过；放置函数的 used 候选检查只查起点。是否存在局部悬空/横向重叠需实测。
-- 物件密度、背饰、门观感和玩家实际跨房成功率待复评；字符预检不等于玩家可达。
-- 同种子只控制模组随机序列；诊断可能消耗序列，原版抽样/镜像未全部接管。
+- 当前六类普通布局仍有重复规律，破损/生活痕迹和独特空间还可增加。未承诺全部随机种子物理遍历、极长扩张资源上限、联机、旧存档完整矩阵或六模组集成验证。
+- 测试全部在本模组build独立pferr-style-GUID app、新游戏newGame(-1)。整模组测试借隔离副本的空TDFC loader槽放自写薄壳载入原封release，真实TDFC未访问；装载调用方差异见报告。
+- 扩张移动用受击保护/每房回血隔离战斗，未改坐标或开启godMode；向下沿梯井落下，上爬另有isLaz实证。
+- 空<doors/>不等于原版22口默认值；普通房5/16=3，connector另8/19=2，只有connector中心x23/24上下开孔。
+- mainFrame封边会清stair并设opac=1；Tile.dec不清opac。扩张须按xml+mirror恢复两格厚接口、清opac再setDoor，仅hole无效。
+- stdDoor默认可能锁/雷；生成通路门lock=0 mine=0，正常关闭可开。lov是陷阱，沙发用couch。
+- conf4需足量不重复vert，end需nornd；左上beg0受mbase_visited影响可抽普通房，右侧竖井仍保全图连通。
 
-## 6. 下一步（优先级排序）
+## 6. 构建、部署与回滚
 
-1. 修复日志工具：版本前缀、可选属性、整批完整块统计、锚点与支撑区分；先验证小样本。
-2. 核实隔离实例读档前提与试驾步骤，再按测试技能复跑；分别检查生成器、变异后房池及实际游戏。
-3. 复评 F5 纯合成房与 F1 混合地图的通行、出生点、门/活板门、悬空及观感。通行修改须覆盖玩家 2×2 碰撞空间。
-4. 按证据修复确认的问题；新方案沿用 DEC-0003/0004 方向。新增路径与删除旧路径必须同次完成。
-5. 后续候选：进深序列、遭遇编排、稀有地标；完整世界种子复现/联机不是本轮承诺功能。
+- build/build-v7.ps1默认只输出build，Java/Flex可传参；旧build-m0.sh直接写release，普通验证不用。
+- 源码继续修改前按实际需求验证，不需重复全部无关实验。正式部署遵循release-gate。
+- 回滚备份：build/release-backups/RandomRoomsMod_before_v7_20260910.swf；旧SHA256 5E3D611C9C38F19FEB30D0DB535BFDC6D1040FE8CF3A5B6F8EC39131E2DA4A00。复制回release后重启。
+- 根pfe仍SHA256 5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7；本轮未改游戏SWF或正式描述符。
+- 本轮提交在main，精确提交见git log；release/隔离副本/可再生大输出不入Git。
 
-## 7. 深入了解
+## 7. 后续接手入口
 
-- 入口/旅行：src/RandomRoomsMod.as；变异/敌表：src/rr/RRCook.as；生成器：src/rr/RRSynth.as。
-- 结构顺序：v5Skeleton → finishStripRoom → placeRoomObjects → XML → 预检 → cookPool → Land 构造。
-- DEC-0001 初始范围、0002 敌标记、0003 分层大厅、0004 反均匀；种子与 P2 后续实现已超出初始状态。
-- design/room-soul-plan.md；design/generator-v5.md 为旧范式，不能替代当前源码。
-- 原版参考：game-reference/decompiled/1.02/src102/scripts/；优先参照 shared-knowledge 的 2026-09-09 生成机制审计与冲突限定，旧 room-system-architecture.md 的“rnd 每次自动重建”不成立。
-- 构建：Flex SDK mxmlc + build/rr-config.xml（显式引用 playerglobal/airglobal）；本机不能照搬 amxmlc 默认配置。
-- 编译工具：D:\RemainsMod\mods\Sandevistan\build\tools\flexsdk\lib\mxmlc.jar；Java：D:\Program Files\Adobe Animate 2024\jre\bin\java.exe。
-- Python：C:\Users\hello\Documents\_sandevistan_dev\python3\python.exe；隔离编译方法见核验详情。
-- 技能：remains-mod-memory / remains-mod-build / remains-auto-testing / remains-release-gate；修改宿主另用 remains-swf-patching。
+1. 决策 decisions/DEC-0005-architectural-generation.md；旧DEC-0004局部语义推断已被限定。
+2. 完整报告 knowledge/experiments/style-generator-validation-2026-09-10.md；轻量可核对清单style-v7-evidence/。
+3. 调查 build/style-review/VANILLA_FINDINGS.md、furnishing-reference.md、v7-space-audit.md。
+4. 真实AS3导出 harness/run-baseline.ps1；实机 game-harness/run-game-captures.ps1，六型/扩张/启动延迟参数见README。
+5. 独立检查 build/verify_architecture.py 读原版AllData尺寸；build/render_dump.py支持当前日志和完整多房，5个辅助测试通过。
+
+没有待用户批准的设计分支。下一轮若继续丰富观感，先对照已冻结实景与原版局部用途关系，扩充空间规则/内容；不要退回逐格随机撒材料或整房换名。
