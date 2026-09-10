@@ -24,8 +24,12 @@ def verify(room):
     g = [(a.text or '').strip().split('.') for a in room.findall('a')]
     if len(g) != 25 or set(map(len,g)) != {48}:
         return ['dimensions'], {}
-    def solid(x,y):
+    def terrain_solid(x,y):
         return not (0<=x<48 and 0<=y<25) or g[y][x][0] in WALL
+    glass={(int(o.get('x')),yy) for o in room.findall('obj') if o.get('rrFixture')=='window'
+           for yy in (int(o.get('y'))-1,int(o.get('y')))}
+    def solid(x,y):
+        return terrain_solid(x,y) or (x,y) in glass
     def support(x,y):
         return solid(x,y+1) or '-' in g[y+1][x]
     connector = room.get('rrKind') == 'connector'
@@ -57,9 +61,6 @@ def verify(room):
         oid=o.get('id'); x=int(o.get('x')); y=int(o.get('y'))
         if oid.startswith('en'): continue
         if oid=='player': w,h,d=2,2,{}
-        elif oid=='stdoor':
-            w,h,d=1,3,{}
-            check(o.get('lock')=='0' and o.get('mine')=='0',f'route door lock/trap {x},{y}')
         else:
             d=DEFS['object_defs'].get(oid)
             check(d is not None,f'unknown furniture {oid}')
@@ -67,9 +68,21 @@ def verify(room):
             w=int(d.get('size',1)); h=max(int(d.get('wid',1)),(int(d.get('scy',0))+39)//40)
             check(not d.get('allact'),f'script dependency {oid}')
         cells={(xx,yy) for xx in range(x,x+w) for yy in range(y-h+1,y+1)}
-        check(all(not solid(xx,yy) and '-' not in g[yy][xx] for xx,yy in cells),f'object wall/platform {oid}@{x},{y}')
+        check(all(not terrain_solid(xx,yy) and '-' not in g[yy][xx] for xx,yy in cells),f'object wall/platform {oid}@{x},{y}')
         check(not (cells&used),f'object overlap {oid}@{x},{y}')
-        check(not(cells&shafts),f'object blocks shaft {oid}@{x},{y}')
+        fixture=o.get('rrFixture')
+        if fixture=='hatch':
+            check(w==2 and h==1 and 3<=y<=20,f'hatch dimensions/boundary {x},{y}')
+            check(cells<=shafts,f'hatch must cover ladder {x},{y}')
+            check(all(solid(xx,y) or '-' in g[y][xx] for xx in (x-1,x+2)),f'hatch frame {x},{y}')
+        else: check(not(cells&shafts),f'object blocks shaft {oid}@{x},{y}')
+        if fixture in ('door','hatch') or oid=='stdoor':
+            check(o.get('lock')=='0' and o.get('mine')=='0',f'route door lock/trap {x},{y}')
+        if fixture=='door':
+            check(solid(x,y-h) and support(x,y),f'door frame {x},{y}')
+        if fixture=='window':
+            check(w==1 and h==2 and solid(x,y-2) and solid(x,y+1),f'window frame {x},{y}')
+            check(all(not terrain_solid(xx,yy) for xx in (x-1,x+1) for yy in (y-1,y)),f'window sides {x},{y}')
         used.update(cells)
         if not int(d.get('wall',0)):
             check(all(support(xx,y) for xx in range(x,x+w)),f'object support {oid}@{x},{y}')
@@ -84,7 +97,10 @@ def verify(room):
     floors={p for p in clear if support(p[0],p[1]) and support(p[0]+1,p[1])}
     isolated=floors-visited
     check(not isolated,f'isolated floor clearances: {len(isolated)}, e.g. {sorted(isolated)[:4]}')
-    return failures,dict(objects=len(objs),backs=len(room.findall('back')),isolated_floor_cells=len(isolated),
+    fixture_counts=Counter(o.get('rrFixture') for o in objs if o.get('rrFixture'))
+    if room.get('rrRevision')=='7.1':
+        check(all(fixture_counts[k]>=1 for k in ('door','hatch','window')),'missing architectural fixture')
+    return failures,dict(objects=len(objs),backs=len(room.findall('back')),isolated_floor_cells=len(isolated),fixtures=dict(fixture_counts),
                          kind=room.get('rrKind'),theme=room.get('rrTheme'))
 
 
@@ -101,6 +117,7 @@ def main():
             if fail: errors.append(dict(file=str(path),room=r.get('name'),errors=fail))
         results.append(dict(file=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),rooms=len(generated),
                             kinds=dict(Counter(s.get('kind') for s in stats)),themes=dict(Counter(s.get('theme') for s in stats)),
+                            fixtures=dict(sum((Counter(s.get('fixtures',{})) for s in stats),Counter())),
                             object_mean=sum(s.get('objects',0) for s in stats)/max(1,len(stats)),
                             back_mean=sum(s.get('backs',0) for s in stats)/max(1,len(stats))))
     report=dict(passed=not errors,inputs=results,failed_rooms=len(errors),errors=errors)

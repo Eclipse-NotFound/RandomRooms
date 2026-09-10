@@ -1,61 +1,64 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-10 v7.0 已部署并完成隔离重启验证；本轮实现已完成。
+> 2026-09-10 v7.1 门、活板门与玻璃窗已部署，正式路径隔离重启验证通过。
 
 ## 1. 模组与当前版本
 
-入口 release/RandomRoomsMod.swf，public static init(main)。C/v7 从零生成建筑空间，再按用途布置家具；不复用原版整房或地形片段。
-F1 是全生成冒险土地，初始5×5并向右/下扩张；F5 是4×3四主题展示馆。F4进入新深度层。
-正式release 26595B，SHA256 9B547CF23C239DEBCCF1872D00F63CF50D138AF2AE172867C06C2458515E3583。
+入口 release/RandomRoomsMod.swf，public static init(main)。C/v7 从零生成建筑空间，再按用途布置家具，不复用原版整房/地形片段。
+正式 release 27326B，SHA256 F4C1E36E4E9038EBCF86AFB433EDAA0854F9A8F588B5850723DA13781D3250C8。日志 [RR:v7.1]，XML rrGen=space-v7、rrRevision=7.1。
+F1全生成冒险土地，初始5×5并向右/下扩张；F5为4×3四主题展示馆。F4进入新深度层。
 
 ## 2. 用户已确定的方向
 
 - 中文。土地=一次旅行完整地图；合成房=25×48土地格；房间=内部功能空间；通道=内部连接。
-- 用户看A/B/C原型后明确批准C正式实现；随后明确要求保留右/下无限扩张。不能用有限5×5+F4替代。
-- 热键F1冒险/F2回城/F3旧测试/F4进深/F5展示/F7跳合成房；F8/F9留给其他模组。
-- 实际游戏须重启后回城再进入，获得新生成土地。真实存档、根/DLC游戏SWF本轮未动。
+- 用户比较A/B/C后批准C正式生成器，随后明确要求保留右/下无限扩张，不能改为有限5×5+F4。
+- 本轮用户指出缺门/活板门，并要求检查窗户；已补齐原版交互物件及玻璃窗。
+- F1冒险/F2回城/F3旧测试/F4进深/F5展示/F7跳合成房；F8/F9留给其他模组。
+- 需重启游戏，再回城进入新随机土地以生成新内容。真实存档、根/DLC游戏SWF未动。
 
 ## 3. 已完成实现
 
-- RRSynth仅负责XML与检查；RRArchitecture六种普通布局+全高连接竖井；RRFurnish按用途放原版物件组。梯顶、落脚、地板材料、门口净空预先保留。
-- F1池62房/初始25格，每次一个主题；F5池34房/实际12格，四主题。自有C池不接受旧cook变异和重复扩池；其他原版土地保留旧P0路线。
-- RRGrowth提前一房生成新行/列，每4列竖井延续。完整newLoc→配对→mainFrame→setObjects→preStep→XP→map流程，旧边界恢复stair与opac后重绘。
-- 初始化等待原版landData所有加载器loaded且allroom就绪再切roomsLoad=0，修复偶发基地buildProb空引用。日志标签与启动文字v7.0。
-- 删除旧合成器主体和自动试驾、重复异常监听、消耗随机数的诊断生成。
+- RRArchitecture六普通布局+全高connector，RRFurnish按空间用途摆设；RRSynth负责XML与检查。梯顶、落脚、门窗周围先预留。
+- v7.1每房附室入口有主题门（stable stdoor / plant door2 / sewer door1b / mane door1），真实尺寸建门洞；门与活板门初始关闭、lock=0 mine=0。
+- 每房一处两侧有楼板支撑的2×1梯口活板门，hatch1或hatch2；保留Tile.stair，避开地图外连接口。
+- 内部隔墙加入真实window1/window2，窗楣/窗台/双侧净空完整；避难所用装甲玻璃，下水道目标1扇、其他2扇。背景窗继续保留，玻璃不承担必经通路。
+- F1池62/初始25格，每次一主题；F5池34/实际12格四主题。C池不接受旧cook变异/重复扩池；原版其他土地保留旧P0。
+- RRGrowth提前一房生成行列，每4列竖井延续。完整newLoc/配对/mainFrame/setObjects/preStep/XP/map；旧边界按XML+mirror恢复两格接口stair与opac再重绘。
+- 初始化等待31原版加载器loaded且allroom非空后切roomsLoad=0，v7.0已修复基地buildProb偶发#1009；本轮保持。
 
-## 4. 实测证据
+## 4. 本轮验证
 
-- 最终1024普通房（四主题各256）与cook后均通过尺寸、22口、家具整块占位/支撑、梯顶净空、2×2几何清隙检查；同种子逐room XML完全复现。464种不同地形；75/75 sewer/service都有管线组。
-- 六种布局真实横穿6/6，正常开门；固定1×2竖井下行/返回2/2。几何检查本身不代表真实物理，移动另行验证。
-- 26498B同几何候选自然从5×5进入新列和新行，导出8×7/56格；独立反爬轮继续至8×12，实际沿梯井返回原区域，3/3阶段通过。
-- 最终26595B四次旅行F5/回城/F5、F1/回城/F1通过，31个原版加载器全就绪；启动延迟正对照42帧持续未ready、恢复后成功，旧候选同夹具提前ready被断言截停。
-- 正式release路径重新启动隔离实例，F5/F1入口、两份连接检查、延迟启动均通过，appId pferr-style-81a0848eed1344ad8dbbc4c5509bc6e2，manifest complete。
-- 最终图片六型/四主题均人工看过，冻结于design/assets/v7-final；正式页design/generator-v7-review.html。room图关闭玩家视野罩统一曝光；stage图保留正常光照，不能混称原样屏幕。
+- 真实AS3普通1024房+connector64房，cook前后均过尺寸/端口/对象占位支撑/门窗框/梯口/锁雷/2×2几何净空。总2567门、1088活板门、1904玻璃窗。玻璃按闭合阻挡检查，不假定破窗才能走。
+- 六型固定实机：所有门盖原版开关碰撞、玻璃原版damage破碎清障通过；随后从自然出生点正常走至梯子、行动键开盖、爬至上方，6/6成功，最终isLaz=1。玻璃伤害测试不是逐武器射击。
+- 独立六型横穿6/6，正常开门后进入邻房。对应图片及记录冻结design/assets/v7-1-fixtures，六张整房均已目检，并检查了开盖后的游戏屏幕。
+- 最终候选整图自然5×5→8×8，进(5,0)新列、沿第4列逐个开活板门下到(4,5)新行、上爬回(4,4)，1909帧成功，(975,984.75)/isLaz=1。101房池、64实际格、接口零问题；新增池门窗检查也通过。
+- 正式release路径隔离重启，appId pferr-style-bea52955a6fc40ffa8054811e91d81fe；F5/F1完成，34/62池全新门窗、连接零问题；实际原始日志出现v7.1，退出0，manifest complete。
+- v7.0先前1024房同种子复现、固定竖井往返、扩张至8×12、四次旅行和启动屏障正反对照仍见旧报告，不冒充本轮重复测试。
 
-## 5. 已知边界与机制要点
+## 5. 已知边界与机制
 
-- 当前六类普通布局仍有重复规律，破损/生活痕迹和独特空间还可增加。未承诺全部随机种子物理遍历、极长扩张资源上限、联机、旧存档完整矩阵或六模组集成验证。
-- 测试全部在本模组build独立pferr-style-GUID app、新游戏newGame(-1)。整模组测试借隔离副本的空TDFC loader槽放自写薄壳载入原封release，真实TDFC未访问；装载调用方差异见报告。
-- 扩张移动用受击保护/每房回血隔离战斗，未改坐标或开启godMode；向下沿梯井落下，上爬另有isLaz实证。
-- 空<doors/>不等于原版22口默认值；普通房5/16=3，connector另8/19=2，只有connector中心x23/24上下开孔。
-- mainFrame封边会清stair并设opac=1；Tile.dec不清opac。扩张须按xml+mirror恢复两格厚接口、清opac再setDoor，仅hole无效。
-- stdDoor默认可能锁/雷；生成通路门lock=0 mine=0，正常关闭可开。lov是陷阱，沙发用couch。
-- conf4需足量不重复vert，end需nornd；左上beg0受mbase_visited影响可抽普通房，右侧竖井仍保全图连通。
+- 六种普通布局仍有重复规律，可继续增加用途关系、破损/生活细节。未穷尽随机种子、长时间扩张资源、联机、真实旧存档或六模组集成。
+- 隔离测试newGame(-1)，独立pferr-style-GUID；整模组模式由隔离根自写TDFC薄壳载入原封RR，装载调用方与正式RR loader不同。真实其他模组未访问。
+- AIR测试需独立AppData存储；默认沙箱下整模组首跑在applicationStorageDirectory创建时#3003，尚未载模组。经工具权限审查后同夹具运行通过，不能改真实pfe存档路径。
+- 原版Location.getDist按round(celX/40)对应visi格决定是否清celObj。活板门测试瞄中心可能在暗格；应瞄真实可见表面并沿梯接近，保留原版距离/视线检查。
+- hatch2图像高48px而碰撞格高40px。测试上爬成功高度取Tile楼层，不取图像凸缘；不能因此改生产碰撞尺寸。
+- mainFrame封边清stair并设opac=1，Tile.dec不清opac；扩张恢复需同时处理。空doors不是22口默认值；普通5/16=3，connector另8/19=2，中心x23/24上下开孔。
+- 装甲玻璃window2 hp1000/thre100，不能用小伤害未打碎推断失效。lov是陷阱，沙发用couch。
 
-## 6. 构建、部署与回滚
+## 6. 构建、发布与回滚
 
-- build/build-v7.ps1默认只输出build，Java/Flex可传参；旧build-m0.sh直接写release，普通验证不用。
-- 源码继续修改前按实际需求验证，不需重复全部无关实验。正式部署遵循release-gate。
-- 回滚备份：build/release-backups/RandomRoomsMod_before_v7_20260910.swf；旧SHA256 5E3D611C9C38F19FEB30D0DB535BFDC6D1040FE8CF3A5B6F8EC39131E2DA4A00。复制回release后重启。
-- 根pfe仍SHA256 5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7；本轮未改游戏SWF或正式描述符。
-- 本轮提交在main，精确提交见git log；release/隔离副本/可再生大输出不入Git。
+- build/build-v7.ps1只输出build；当前候选RandomRooms-v7-fixtures-candidate.swf与release同哈希。旧build-m0.sh直接写release，普通验证不用。
+- v7.1回滚备份：build/release-backups/RandomRoomsMod_before_v7_1_20260910.swf，26595B、SHA256 9B547CF23C239DEBCCF1872D00F63CF50D138AF2AE172867C06C2458515E3583。复制回release并重启。
+- v6.6历史备份仍在build/release-backups/RandomRoomsMod_before_v7_20260910.swf。
+- 根pfe SHA256仍5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7。
+- 发布按release-gate；当前仓库main，准确提交见git log；release与大规模可再生输出不入Git，固定截图和精简证据入Git。
 
-## 7. 后续接手入口
+## 7. 后续入口
 
-1. 决策 decisions/DEC-0005-architectural-generation.md；旧DEC-0004局部语义推断已被限定。
-2. 完整报告 knowledge/experiments/style-generator-validation-2026-09-10.md；轻量可核对清单style-v7-evidence/。
-3. 调查 build/style-review/VANILLA_FINDINGS.md、furnishing-reference.md、v7-space-audit.md。
-4. 真实AS3导出 harness/run-baseline.ps1；实机 game-harness/run-game-captures.ps1，六型/扩张/启动延迟参数见README。
-5. 独立检查 build/verify_architecture.py 读原版AllData尺寸；build/render_dump.py支持当前日志和完整多房，5个辅助测试通过。
+1. 最新报告 knowledge/experiments/fixtures-v71-validation-2026-09-10.md；精简清单fixtures-v71-evidence。
+2. design/generator-v7-review.html已更新v7.1，可标出门/活板门/玻璃窗并切换开盖屏幕；原PNG不加标记。浏览器工具file策略阻止自动交互，本地脚本语法与资源检查通过。
+3. 决策DEC-0005；v7.0建筑与扩张报告style-generator-validation-2026-09-10.md，调查build/style-review/VANILLA_FINDINGS.md、furnishing-reference.md、v7-space-audit.md。
+4. 实际AS3输出harness/run-baseline.ps1，-RoomKind connector可强制竖井；build/verify_architecture.py独立读取AllData尺寸。
+5. 游戏夹具game-harness/run-game-captures.ps1：-FixtureProbe -ArchitectureKinds六型门窗，-CrossingProbe横穿，-DevelopmentSwf结合-GrowthProbe或-SmokeOnly。详情见README。
 
-没有待用户批准的设计分支。下一轮若继续丰富观感，先对照已冻结实景与原版局部用途关系，扩充空间规则/内容；不要退回逐格随机撒材料或整房换名。
+没有待用户决定的分支。本轮门窗请求已完成，下一轮继续按用户实景反馈改进，不退回逐格撒材料或整房换名。

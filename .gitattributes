@@ -7,3 +7,7 @@
 *.as text eol=lf
 *.md text eol=lf
 *.xml text eol=lf
+
+# Frozen runtime evidence must retain exact bytes for manifest SHA256 checks.
+design/assets/v7-1-fixtures/* -text -whitespace
+knowledge/experiments/fixtures-v71-evidence/* -text -whitespace

@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\game-harness\\app\\captures\\rrstyle-smoke-f5-pool.xml",
+      "sha256": "cdd94d2dd0b837068d19e660af6c6349419bd044eeee38f05a8e5a0780dd6712",
+      "rooms": 34,
+      "kinds": {
+        "warehouse": 5,
+        "service": 7,
+        "workshop": 2,
+        "atrium": 5,
+        "damaged": 3,
+        "offices": 2,
+        "connector": 10
+      },
+      "themes": {
+        "stable": 9,
+        "sewer": 9,
+        "plant": 8,
+        "mane": 8
+      },
+      "fixtures": {
+        "door": 75,
+        "hatch": 34,
+        "window": 59
+      },
+      "object_mean": 16.88235294117647,
+      "back_mean": 16.794117647058822
+    },
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\game-harness\\app\\captures\\rrstyle-smoke-f1-pool.xml",
+      "sha256": "01a8b1a8f0afa5e9f8c2823c48fc1fe446bcdb4fd63b945f2ba3f46df78d89f6",
+      "rooms": 62,
+      "kinds": {
+        "offices": 12,
+        "service": 13,
+        "atrium": 5,
+        "workshop": 14,
+        "warehouse": 4,
+        "connector": 14
+      },
+      "themes": {
+        "plant": 62
+      },
+      "fixtures": {
+        "door": 139,
+        "hatch": 62,
+        "window": 124
+      },
+      "object_mean": 23.580645161290324,
+      "back_mean": 15.516129032258064
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

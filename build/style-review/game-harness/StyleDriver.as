@@ -50,6 +50,7 @@ package
       private static var crossingJump:int = 0;
       private static var shaftEnabled:Boolean = false;
       private static var growthEnabled:Boolean = false;
+      private static var fixtureEnabled:Boolean = false;
       private static var probeRoom:String = "";
       private static var initialWidth:int = 5;
       private static var initialHeight:int = 5;
@@ -86,6 +87,7 @@ package
             crossingEnabled = String(input.@crossing) == "true";
             shaftEnabled = String(input.@shaft) == "true";
             growthEnabled = String(input.@growth) == "true";
+            fixtureEnabled = String(input.@fixtures) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
             SoundMixer.soundTransform = new SoundTransform(0);
@@ -145,7 +147,7 @@ package
          try
          {
             if (state == 4) return;
-            if (getTimer() - started > (developmentMode || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
+            if (getTimer() - started > (developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
             var w:* = W.w;
             if (w == null) return;
             if (w.verror != null && w.verror.visible) { fail("game error: " + w.verror.txt.text); return; }
@@ -258,6 +260,15 @@ package
                screenshot(w, captureName + "-stage", false);
                screenshot(w, captureName + "-room", true);
                if (developmentMode) dumpRuntimePool(w, captureName);
+               if (fixtureEnabled)
+               {
+                  FixtureProbe.begin(w,rootDir,captureName);
+                  moveStartX=w.gg.X; moveStartY=w.gg.Y; moveFrame=0;
+                  crossingLastX=w.gg.X; crossingStuck=crossingJump=0;
+                  movePhase="approach-hatch"; state=10;
+                  log("FIXTURE-PLAN hatch="+FixtureProbe.hatch.id+" x="+FixtureProbe.hatch.X+" y="+FixtureProbe.hatch.Y);
+                  return;
+               }
                if (growthEnabled)
                {
                   initialWidth=w.land.maxLocX; initialHeight=w.land.maxLocY;
@@ -300,6 +311,7 @@ package
             if (state == 6) stepCrossing(w);
             if (state == 8) stepShaft(w);
             if (state == 9) stepGrowth(w);
+            if (state == 10) stepFixture(w);
             if (state == 7)
             {
                if (w.game.curLandId != "rbl" || w.land == null || w.land.act.id != "rbl") return;
@@ -350,8 +362,7 @@ package
                 (obj.X-w.gg.X)*direction >= -10 && Math.abs(obj.X-w.gg.X)<100 && Math.abs(obj.Y-w.gg.Y)<100)
             {
                if (obj !== doorTarget) { doorTarget=obj; log("DOOR target="+obj.id+" x="+obj.X+" lock="+obj.inter.lock+" mine="+obj.inter.mine); }
-               w.cam.celX = obj.X*w.cam.scaleV+w.cam.vx;
-               w.cam.celY = (obj.Y-obj.scY/2)*w.cam.scaleV+w.cam.vy;
+               aimObject(w,obj);
                if (w.loc.celObj === obj && obj.onCursor>0) w.ctr.keyAction=true;
                if (moveFrame%30==1) log("DOOR-SAMPLE cursor="+obj.onCursor+" selected="+(w.loc.celObj===obj)+" action="+w.ctr.keyAction+" remaining="+w.gg.t_action+" open="+obj.inter.open);
                return true;
@@ -359,6 +370,55 @@ package
             obj=obj.nobj;
          }
          return false;
+      }
+
+      private static function aimObject(w:*,obj:*):void
+      {
+         var px:Number=obj.X,py:Number=obj.Y-obj.scY/2;
+         var best:Number=-1;
+         // Location.getDist discards targets on dark tiles. Aim at the visible
+         // edge of a hatch, just as a player does from below an opaque floor.
+         for each (var xx:Number in [obj.X,obj.X1+3,obj.X2-3])
+            for each (var yy:Number in [obj.Y-obj.scY/2,obj.Y1+3,obj.Y2-3])
+            {
+               var visibility:Number=w.loc.getTile(Math.round(xx/40),Math.round(yy/40)).visi;
+               if (visibility>best) { best=visibility; px=xx; py=yy; }
+            }
+         w.cam.celX=px*w.cam.scaleV+w.cam.vx;
+         w.cam.celY=py*w.cam.scaleV+w.cam.vy;
+      }
+
+      private static function stepFixture(w:*):void
+      {
+         moveFrame++; w.ctr.clearAll(); w.ctr.keyAction=false;
+         var hatch:*=FixtureProbe.hatch;
+         if (moveFrame%30==1) log("FIXTURE-SAMPLE "+JSON.stringify({phase:movePhase,x:w.gg.X,y:w.gg.Y,isLaz:w.gg.isLaz,open:hatch.inter.open,frame:moveFrame}));
+         if (moveFrame>1500) { finishSegment(w,false,"hatch approach/open/climb timeout"); return; }
+         if (movePhase=="approach-hatch")
+         {
+            if (Math.abs(w.gg.X-hatch.X)<12) { movePhase="open-and-climb-hatch"; return; }
+            driveHorizontal(w,w.gg.X<hatch.X?1:-1);
+            return;
+         }
+         if (hatch.inter.open) FixtureProbe.openedByInput=true;
+         // hatch2 artwork is 48 px tall, but its collision occupies one 40 px tile.
+         // Judge arrival at the supporting floor, not the protruding sprite lip.
+         if (FixtureProbe.openedByInput && w.gg.Y<=Math.floor(hatch.Y/40)*40+4)
+         {
+            screenshot(w,String(cases[index].@id)+"-hatch-open-stage",false);
+            finishSegment(w,true,"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it");
+            return;
+         }
+         var distance:Number=(hatch.Y-w.gg.Y)*(hatch.Y-w.gg.Y)+(hatch.X-w.gg.X)*(hatch.X-w.gg.X);
+         if (!hatch.inter.open && distance<=w.actionDist)
+         {
+            aimObject(w,hatch);
+            if (w.loc.celObj===hatch && hatch.onCursor>0) w.ctr.keyAction=true;
+            else w.ctr.keyBeUp=true;
+            if (moveFrame%30==1) log("HATCH-ACTION selected="+(w.loc.celObj===hatch)+" cursor="+hatch.onCursor+" distance="+distance+" limit="+w.actionDist+" action="+w.ctr.keyAction);
+            return;
+         }
+         w.ctr.keyBeUp=true;
       }
 
       private static function driveHorizontal(w:*,direction:int):void
@@ -420,6 +480,7 @@ package
          }
          else if (movePhase=="grow-down")
          {
+            if (useNearbyDoor(w,0)) return;
             if (w.land.locY>=initialHeight && w.land.maxLocY>initialHeight)
             {
                movements.push({phase:movePhase,success:true,locX:w.land.locX,locY:w.land.locY,width:w.land.maxLocX,height:w.land.maxLocY,room:String(w.loc.room.id)});
@@ -444,6 +505,7 @@ package
          }
          else
          {
+            if (useNearbyDoor(w,0)) return;
             if (w.land.locY<initialHeight && w.gg.isLaz)
             {
                finishSegment(w,true,"entered expanded right column and bottom row, then climbed back across restored join");
@@ -473,6 +535,7 @@ package
          }
          else if (movePhase == "descend-shaft")
          {
+            if (useNearbyDoor(w,0)) return;
             if (w.land.locY == 1 && w.gg.Y > 180)
             {
                movements.push({caseId:String(cases[index].@id),phase:movePhase,success:true,room:String(w.loc.room.id),locX:w.land.locX,locY:w.land.locY,x:w.gg.X,y:w.gg.Y,frames:moveFrame});
@@ -486,6 +549,7 @@ package
          }
          else
          {
+            if (useNearbyDoor(w,0)) return;
             if (w.land.locY == 0)
             {
                finishSegment(w,true,"descended to locY1 then climbed back to locY0 through actual shaft");
@@ -707,7 +771,7 @@ package
          stream.open(rootDir.resolvePath("captures/movement.json"), FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(movements));
          stream.close();
-         if (!success || movePhase == "exit-ladder" || movePhase == "cross-adjacent-room" || state == 8 || state == 9)
+         if (!success || movePhase == "exit-ladder" || movePhase == "cross-adjacent-room" || state == 8 || state == 9 || state == 10)
          {
             index++;
             state = 2;

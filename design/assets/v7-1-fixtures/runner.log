@@ -1,0 +1,124 @@
+appId=pferr-style-7f0fc9cb4fcc41939aaca946663d739f
+3953 ready cases=6
+4455 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+9123 newGame(-1) issued, intro skipped
+10841 initial world ready land=rbl
+10933 beginMission rrstyle-generated-v71-0
+14036 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14037 arrived rrstyle-generated-v71-0 room=syn_120
+16718 capture rrstyle-generated-v71-0-stage 1008x729 room=syn_120 lightOverlay=true
+19390 capture rrstyle-generated-v71-0-room 1920x1000 room=syn_120 lightOverlay=false
+19397 FIXTURE-PLAN hatch=hatch2 x=1440 y=359
+19414 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":81.8,"isLaz":0,"open":false}
+20391 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":288.3,"isLaz":0,"open":false}
+20758 DOOR target=stdoor x=460 lock=0 mine=0
+21398 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":61,"x":384.8,"isLaz":0,"open":false}
+22391 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":91,"x":594.8,"isLaz":0,"open":false}
+23391 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":121,"x":804.8,"isLaz":0,"open":false}
+23961 heartbeat state=10 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+24386 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":151,"x":1014.8,"isLaz":0,"open":false}
+25392 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":181,"x":1224.8,"isLaz":0,"open":false}
+26394 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":211,"x":1434.8,"isLaz":0,"open":false}
+27395 FIXTURE-SAMPLE {"y":807.75,"phase":"open-and-climb-hatch","frame":241,"x":1455,"isLaz":1,"open":false}
+28394 FIXTURE-SAMPLE {"y":650.25,"phase":"open-and-climb-hatch","frame":271,"x":1455,"isLaz":1,"open":false}
+29392 FIXTURE-SAMPLE {"y":498,"phase":"open-and-climb-hatch","frame":301,"x":1455,"isLaz":1,"open":true}
+30393 FIXTURE-SAMPLE {"y":340.5,"phase":"open-and-climb-hatch","frame":331,"x":1455,"isLaz":1,"open":true}
+31255 capture rrstyle-generated-v71-0-hatch-open-stage 1008x729 room=syn_120 lightOverlay=true
+31256 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":1455,"success":true,"room":"syn_120","toY":319.5,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-0","stay":false,"locY":0,"frames":335,"fromX":81.8}
+31264 beginMission rrstyle-generated-v71-1
+33950 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+34265 arrived rrstyle-generated-v71-1 room=syn_401
+37094 capture rrstyle-generated-v71-1-stage 1008x729 room=syn_401 lightOverlay=true
+38134 capture rrstyle-generated-v71-1-room 1920x1000 room=syn_401 lightOverlay=false
+38138 FIXTURE-PLAN hatch=hatch1 x=1720 y=679
+38153 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":85.99999999999999,"isLaz":0,"open":false}
+39122 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":292.5,"isLaz":0,"open":false}
+40125 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":61,"x":502.5,"isLaz":0,"open":false}
+41121 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":91,"x":712.5,"isLaz":0,"open":false}
+42123 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":121,"x":922.5,"isLaz":0,"open":false}
+42124 DOOR target=door1b x=1020 lock=0 mine=0
+42124 DOOR-SAMPLE cursor=0 selected=false action=false remaining=0 open=false
+43128 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":151,"x":1124,"isLaz":0,"open":false}
+43926 heartbeat state=10 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44124 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":181,"x":1334,"isLaz":0,"open":false}
+45124 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":211,"x":1544,"isLaz":0,"open":false}
+46135 FIXTURE-SAMPLE {"y":939,"phase":"open-and-climb-hatch","frame":241,"x":1735,"isLaz":1,"open":false}
+47123 FIXTURE-SAMPLE {"y":786.75,"phase":"open-and-climb-hatch","frame":271,"x":1735,"isLaz":1,"open":true}
+48349 capture rrstyle-generated-v71-1-hatch-open-stage 1008x729 room=syn_401 lightOverlay=true
+48349 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":1735,"success":true,"room":"syn_401","toY":639.75,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-1","stay":false,"locY":0,"frames":299,"fromX":85.99999999999999}
+48357 beginMission rrstyle-generated-v71-2
+51403 arrived rrstyle-generated-v71-2 room=syn_513
+54033 capture rrstyle-generated-v71-2-stage 1008x729 room=syn_513 lightOverlay=true
+55098 capture rrstyle-generated-v71-2-room 1920x1000 room=syn_513 lightOverlay=false
+55104 FIXTURE-PLAN hatch=hatch2 x=880 y=679
+55117 heartbeat state=10 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+55119 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":85.99999999999999,"isLaz":0,"open":false}
+56094 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":292.5,"isLaz":0,"open":false}
+57090 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":61,"x":502.5,"isLaz":0,"open":false}
+57758 DOOR target=door2 x=740 lock=0 mine=0
+58092 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":91,"x":704,"isLaz":0,"open":false}
+59099 FIXTURE-SAMPLE {"y":939,"phase":"open-and-climb-hatch","frame":121,"x":895,"isLaz":1,"open":false}
+60093 FIXTURE-SAMPLE {"y":786.75,"phase":"open-and-climb-hatch","frame":151,"x":895,"isLaz":1,"open":true}
+61187 capture rrstyle-generated-v71-2-hatch-open-stage 1008x729 room=syn_513 lightOverlay=true
+61188 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":895,"success":true,"room":"syn_513","toY":639.75,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-2","stay":false,"locY":0,"frames":179,"fromX":85.99999999999999}
+61199 beginMission rrstyle-generated-v71-3
+64148 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+64148 arrived rrstyle-generated-v71-3 room=syn_832
+66766 capture rrstyle-generated-v71-3-stage 1008x729 room=syn_832 lightOverlay=true
+68278 capture rrstyle-generated-v71-3-room 1920x1000 room=syn_832 lightOverlay=false
+68286 FIXTURE-PLAN hatch=hatch1 x=320 y=359
+68300 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":85.99999999999999,"isLaz":0,"open":false}
+69287 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":292.5,"isLaz":0,"open":false}
+70291 FIXTURE-SAMPLE {"y":823.5,"phase":"open-and-climb-hatch","frame":61,"x":335,"isLaz":1,"open":false}
+71303 FIXTURE-SAMPLE {"y":666,"phase":"open-and-climb-hatch","frame":91,"x":335,"isLaz":1,"open":false}
+72294 FIXTURE-SAMPLE {"y":513.75,"phase":"open-and-climb-hatch","frame":121,"x":335,"isLaz":1,"open":true}
+73296 FIXTURE-SAMPLE {"y":356.25,"phase":"open-and-climb-hatch","frame":151,"x":335,"isLaz":1,"open":true}
+73895 capture rrstyle-generated-v71-3-hatch-open-stage 1008x729 room=syn_832 lightOverlay=true
+73895 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":335,"success":true,"room":"syn_832","toY":319.5,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-3","stay":false,"locY":0,"frames":158,"fromX":85.99999999999999}
+73902 beginMission rrstyle-generated-v71-4
+73925 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+76917 arrived rrstyle-generated-v71-4 room=syn_0
+79713 capture rrstyle-generated-v71-4-stage 1008x729 room=syn_0 lightOverlay=true
+82670 capture rrstyle-generated-v71-4-room 1920x1000 room=syn_0 lightOverlay=false
+82674 FIXTURE-PLAN hatch=hatch2 x=1720 y=359
+82688 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":85.99999999999999,"isLaz":0,"open":false}
+83657 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":292.5,"isLaz":0,"open":false}
+83957 heartbeat state=10 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+83989 DOOR target=stdoor x=460 lock=0 mine=0
+84656 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":61,"x":389,"isLaz":0,"open":false}
+85656 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":91,"x":599,"isLaz":0,"open":false}
+86657 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":121,"x":809,"isLaz":0,"open":false}
+87661 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":151,"x":1019,"isLaz":0,"open":false}
+88658 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":181,"x":1229,"isLaz":0,"open":false}
+89289 DOOR target=stdoor x=1460 lock=0 mine=0
+89661 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":211,"x":1378,"isLaz":0,"open":false}
+89661 DOOR-SAMPLE cursor=2.000208333333333 selected=true action=true remaining=6 open=false
+90657 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":241,"x":1535.5,"isLaz":0,"open":false}
+91665 FIXTURE-SAMPLE {"y":944.25,"phase":"open-and-climb-hatch","frame":271,"x":1735,"isLaz":1,"open":false}
+92660 FIXTURE-SAMPLE {"y":786.75,"phase":"open-and-climb-hatch","frame":301,"x":1735,"isLaz":1,"open":false}
+93663 FIXTURE-SAMPLE {"y":629.25,"phase":"open-and-climb-hatch","frame":331,"x":1735,"isLaz":1,"open":false}
+93928 heartbeat state=10 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+94661 FIXTURE-SAMPLE {"y":477,"phase":"open-and-climb-hatch","frame":361,"x":1735,"isLaz":1,"open":true}
+95665 FIXTURE-SAMPLE {"y":319.5,"phase":"open-and-climb-hatch","frame":391,"x":1735,"isLaz":1,"open":true}
+96582 capture rrstyle-generated-v71-4-hatch-open-stage 1008x729 room=syn_0 lightOverlay=true
+96583 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":1735,"success":true,"room":"syn_0","toY":319.5,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-4","stay":false,"locY":0,"frames":391,"fromX":85.99999999999999}
+96591 beginMission rrstyle-generated-v71-5
+99616 arrived rrstyle-generated-v71-5 room=syn_257
+102377 capture rrstyle-generated-v71-5-stage 1008x729 room=syn_257 lightOverlay=true
+103667 capture rrstyle-generated-v71-5-room 1920x1000 room=syn_257 lightOverlay=false
+103671 FIXTURE-PLAN hatch=hatch1 x=1680 y=679
+103691 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":1,"x":85.99999999999999,"isLaz":0,"open":false}
+103931 heartbeat state=10 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+104667 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":31,"x":292.5,"isLaz":0,"open":false}
+105662 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":61,"x":502.5,"isLaz":0,"open":false}
+106655 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":91,"x":712.5,"isLaz":0,"open":false}
+107659 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":121,"x":922.5,"isLaz":0,"open":false}
+108658 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":151,"x":1132.5,"isLaz":0,"open":false}
+109193 DOOR target=door1b x=1340 lock=0 mine=0
+109660 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":181,"x":1334,"isLaz":0,"open":false}
+110660 FIXTURE-SAMPLE {"y":960,"phase":"approach-hatch","frame":211,"x":1544,"isLaz":0,"open":false}
+111657 FIXTURE-SAMPLE {"y":907.5,"phase":"open-and-climb-hatch","frame":241,"x":1695,"isLaz":1,"open":false}
+112660 FIXTURE-SAMPLE {"y":755.25,"phase":"open-and-climb-hatch","frame":271,"x":1695,"isLaz":1,"open":true}
+113863 capture rrstyle-generated-v71-5-hatch-open-stage 1008x729 room=syn_257 lightOverlay=true
+113864 MOVE-RESULT {"phase":"open-and-climb-hatch","fromY":960,"isLaz":1,"toX":1695,"success":true,"room":"syn_257","toY":639.75,"reason":"native fixture cycles and glass breakage checked; naturally approached, opened hatch with action key and climbed above it","locX":0,"caseId":"rrstyle-generated-v71-5","stay":false,"locY":0,"frames":293,"fromX":85.99999999999999}
+113873 DONE 6 cases

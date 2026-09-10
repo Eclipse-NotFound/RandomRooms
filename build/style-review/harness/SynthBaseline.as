@@ -61,7 +61,7 @@ package
                   var seed:uint = uint(baseSeed + b * 1000 + n);
                   var rng:RRSeed = new RRSeed(seed).fork("synth");
                   var synth:RRSynth = new RRSynth(function():Number { return rng.next(); });
-                  var room:XML = synth.generate(count, String(biomes[b]));
+                  var room:XML = synth.generate(count, String(biomes[b]),settings.roomKind==null?"":String(settings.roomKind));
                   room.@harnessBiome = String(biomes[b]);
                   room.@harnessSeed = seed;
                   room.@harnessValid = RRSynth.validateRoom(room);

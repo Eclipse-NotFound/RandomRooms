@@ -12,6 +12,7 @@ param(
     [switch]$GrowthProbe,
     [switch]$SmokeOnly,
     [switch]$StartupDelay,
+    [switch]$FixtureProbe,
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
 )
 $ErrorActionPreference = 'Stop'
@@ -70,6 +71,7 @@ $caseDoc.DocumentElement.SetAttribute('crossing', $CrossingProbe.IsPresent.ToStr
 $caseDoc.DocumentElement.SetAttribute('shaft', ($DevelopmentShaftProbe.IsPresent -or $VerticalProbe.IsPresent).ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('growth', $GrowthProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('startupDelay', $StartupDelay.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('fixtures', $FixtureProbe.IsPresent.ToString().ToLowerInvariant())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
     'baseline-v66.xml' = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot '../baseline-v66.xml') -Algorithm SHA256).Hash
@@ -109,7 +111,7 @@ foreach ($prototypeFile in $PrototypeFiles) {
         }
     }
 }
-if ($MovementOnly) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
+if ($MovementOnly -or $FixtureProbe) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
 if ($CrossingProbe -or $VerticalProbe) {
     if ($MovementProbe -or $DevelopmentSwf) { throw 'Run crossing as a separate probe.' }
     $crossSources = @($caseSources | Where-Object { $_.prototype })
@@ -252,7 +254,7 @@ try {
         elseif ($fresh.Name -ne 'runner.log') { $runtimeArtifacts[$fresh.Name] = (Get-FileHash -LiteralPath $fresh.FullName -Algorithm SHA256).Hash }
     }
     $movementResults = @()
-    if ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe) {
+    if ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe -or $FixtureProbe) {
         $movementResults = @(Get-Content -LiteralPath (Join-Path $captureRoot 'movement.json') -Raw | ConvertFrom-Json)
     }
     [ordered]@{
@@ -265,6 +267,7 @@ try {
         crossingProbe=$CrossingProbe.IsPresent
         verticalProbe=$VerticalProbe.IsPresent
         growthProbe=$GrowthProbe.IsPresent
+        fixtureProbe=$FixtureProbe.IsPresent
         startupDelay=$StartupDelay.IsPresent
         hitProtection=$GrowthProbe.IsPresent
         physicalPass= if ($movementResults.Count -gt 0) { @($movementResults | Where-Object { -not $_.success }).Count -eq 0 } else { $null }

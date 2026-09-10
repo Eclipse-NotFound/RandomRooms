@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\game-harness\\app\\captures\\rrstyle-growth-expanded-pool.xml",
+      "sha256": "2d8af748de6a778c29cc1fabffb50d4a0b348eeaa2fd5d050d0fa482c6a0db40",
+      "rooms": 101,
+      "kinds": {
+        "warehouse": 19,
+        "offices": 28,
+        "atrium": 9,
+        "workshop": 9,
+        "service": 16,
+        "connector": 20
+      },
+      "themes": {
+        "stable": 101
+      },
+      "fixtures": {
+        "door": 258,
+        "hatch": 101,
+        "window": 202
+      },
+      "object_mean": 24.762376237623762,
+      "back_mean": 15.94059405940594
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

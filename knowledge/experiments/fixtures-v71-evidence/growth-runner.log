@@ -1,0 +1,131 @@
+appId=pferr-style-233c1c7ee73243fe9f749460bf5b85c4
+3573 ready cases=1
+3575 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-233c1c7ee73243fe9f749460bf5b85c4\Local Store existsBefore=true
+3577 STORAGE existsAfter=true
+3824 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3827 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3834 development init returned
+7743 STARTUP-READY all 31 host loaders loaded with nonempty pools
+9423 newGame(-1) issued, intro skipped
+11407 initial world ready land=rbl
+13184 development debugTravel random_rooms case=rrstyle-growth
+13593 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+18111 arrived random_rooms room=syn_14
+21035 capture rrstyle-growth-stage 1008x729 room=syn_14 lightOverlay=true
+23913 capture rrstyle-growth-room 1920x1000 room=syn_14 lightOverlay=false
+23949 development pool rrstyle-growth total=62 generated=62 assembled=25 issues=0 themes={"stable":62}
+23951 GROWTH-PLAN normal spawn, initial=5x5; invulner=true and healAll on each room entry for geometry isolation; no godMode
+23969 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+23971 GROWTH enter 0,0 room=syn_14 healAll
+23972 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":1,"phase":"grow-right","x":81.8,"hp":100,"isLaz":0}
+24970 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":31,"phase":"grow-right","x":288.3,"hp":100,"isLaz":0}
+25970 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":61,"phase":"grow-right","x":498.3,"hp":100,"isLaz":0}
+26971 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":91,"phase":"grow-right","x":708.3,"hp":100,"isLaz":0}
+27972 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":121,"phase":"grow-right","x":918.3,"hp":100,"isLaz":0}
+28971 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":151,"phase":"grow-right","x":1128.3,"hp":100,"isLaz":0}
+29506 DOOR target=stdoor x=1340 lock=0 mine=0
+29973 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":181,"phase":"grow-right","x":1256.3,"hp":100,"isLaz":0}
+29974 DOOR-SAMPLE cursor=2.000208333333333 selected=true action=true remaining=3 open=false
+31045 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":211,"phase":"grow-right","x":1434.8,"hp":100,"isLaz":0}
+31972 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":241,"phase":"grow-right","x":1644.8,"hp":100,"isLaz":0}
+32972 GROWTH-SAMPLE {"y":960,"locX":0,"width":5,"sost":1,"locY":0,"height":5,"frame":271,"phase":"grow-right","x":1854.8,"hp":100,"isLaz":0}
+32973 BOUNDARY target=syn_33 collision=false tiles=[{"y":21,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":2,"door":""}]
+33561 GROWTH enter 1,0 room=syn_33 healAll
+33581 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+34336 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":301,"phase":"grow-right","x":202,"hp":98.296,"isLaz":0}
+34904 DOOR target=stdoor x=420 lock=0 mine=0
+35338 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":331,"phase":"grow-right","x":337,"hp":98.296,"isLaz":0}
+35338 DOOR-SAMPLE cursor=2.000208333333333 selected=true action=true remaining=4 open=false
+36339 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":361,"phase":"grow-right","x":508.5,"hp":98.296,"isLaz":0}
+37337 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":391,"phase":"grow-right","x":718.5,"hp":98.296,"isLaz":0}
+38343 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":421,"phase":"grow-right","x":928.5,"hp":98.296,"isLaz":0}
+39339 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":451,"phase":"grow-right","x":1138.5,"hp":98.296,"isLaz":0}
+40207 DOOR target=stdoor x=1420 lock=0 mine=0
+40338 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":481,"phase":"grow-right","x":1336.5,"hp":98.296,"isLaz":0}
+40338 DOOR-SAMPLE cursor=2.000208333333333 selected=true action=true remaining=13 open=false
+41337 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":511,"phase":"grow-right","x":1445,"hp":98.296,"isLaz":0}
+42333 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":541,"phase":"grow-right","x":1655,"hp":98.296,"isLaz":0}
+43335 GROWTH-SAMPLE {"y":960,"locX":1,"width":5,"sost":1,"locY":0,"height":5,"frame":571,"phase":"grow-right","x":1865,"hp":98.296,"isLaz":0}
+43336 BOUNDARY target=syn_10 collision=false tiles=[{"y":21,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":2,"door":""}]
+43846 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+43846 GROWTH enter 2,0 room=syn_10 healAll
+44635 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":601,"phase":"grow-right","x":209,"hp":98.296,"isLaz":0}
+45635 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":631,"phase":"grow-right","x":419,"hp":98.296,"isLaz":0}
+45935 DOOR target=stdoor x=580 lock=0 mine=0
+46635 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":661,"phase":"grow-right","x":515.5,"hp":98.296,"isLaz":0}
+47638 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":691,"phase":"grow-right","x":725.5,"hp":98.296,"isLaz":0}
+48635 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":721,"phase":"grow-right","x":935.5,"hp":98.296,"isLaz":0}
+49637 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":751,"phase":"grow-right","x":1145.5,"hp":98.296,"isLaz":0}
+50636 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":781,"phase":"grow-right","x":1355.5,"hp":98.296,"isLaz":0}
+51637 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":811,"phase":"grow-right","x":1565.5,"hp":98.296,"isLaz":0}
+52636 GROWTH-SAMPLE {"y":960,"locX":2,"width":5,"sost":1,"locY":0,"height":5,"frame":841,"phase":"grow-right","x":1775.5,"hp":98.296,"isLaz":0}
+53552 GROWTH enter 3,0 room=syn_44 healAll
+53827 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+54169 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":871,"phase":"grow-right","x":118,"hp":98.296,"isLaz":0}
+55168 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":901,"phase":"grow-right","x":328,"hp":98.296,"isLaz":0}
+56171 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":931,"phase":"grow-right","x":538,"hp":98.296,"isLaz":0}
+57171 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":961,"phase":"grow-right","x":748,"hp":98.296,"isLaz":0}
+58171 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":991,"phase":"grow-right","x":958,"hp":98.296,"isLaz":0}
+58205 DOOR target=stdoor x=1060 lock=0 mine=0
+59170 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":1021,"phase":"grow-right","x":1054.5,"hp":98.296,"isLaz":0}
+60168 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":1051,"phase":"grow-right","x":1264.5,"hp":98.296,"isLaz":0}
+61168 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":1081,"phase":"grow-right","x":1474.5,"hp":98.296,"isLaz":0}
+62171 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":1111,"phase":"grow-right","x":1684.5,"hp":98.296,"isLaz":0}
+63174 GROWTH-SAMPLE {"y":960,"locX":3,"width":6,"sost":1,"locY":0,"height":5,"frame":1141,"phase":"grow-right","x":1894.5,"hp":98.296,"isLaz":0}
+63175 BOUNDARY target=syn_56 collision=false tiles=[{"y":21,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":21,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":22,"shelf":false,"stair":0,"phis":0,"x":2,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":0,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":1,"door":""},{"y":23,"shelf":false,"stair":0,"phis":0,"x":2,"door":""}]
+63530 GROWTH enter 4,0 room=syn_56 healAll
+63814 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+64736 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1171,"phase":"grow-right","x":237,"hp":98.296,"isLaz":0}
+65735 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1201,"phase":"grow-right","x":447,"hp":98.296,"isLaz":0}
+66737 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1231,"phase":"grow-right","x":657,"hp":98.296,"isLaz":0}
+67071 DOOR target=stdoor x=820 lock=0 mine=0
+67736 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1261,"phase":"grow-right","x":753.5,"hp":98.296,"isLaz":0}
+68171 SHAFT-JUMP across central floor opening x=844.5 direction=1
+68736 GROWTH-SAMPLE {"y":801,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1291,"phase":"grow-right","x":963.5,"hp":98.296,"isLaz":0}
+69736 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1321,"phase":"grow-right","x":1117.6499999999994,"hp":98.296,"isLaz":0}
+70735 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1351,"phase":"grow-right","x":1327.6499999999994,"hp":98.296,"isLaz":0}
+71737 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1381,"phase":"grow-right","x":1537.6499999999994,"hp":98.296,"isLaz":0}
+72737 GROWTH-SAMPLE {"y":960,"locX":4,"width":7,"sost":1,"locY":0,"height":5,"frame":1411,"phase":"grow-right","x":1747.6499999999994,"hp":98.296,"isLaz":0}
+73801 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+73801 GROWTH enter 5,0 room=syn_100000 healAll
+73801 GROWTH right success, settle capture then return to column 4
+74306 GROWTH-SAMPLE {"y":960,"locX":5,"width":8,"sost":1,"locY":0,"height":5,"frame":1441,"phase":"pause-right","x":50,"hp":98.296,"isLaz":0}
+75014 capture rrstyle-growth-right-stage 1008x729 room=syn_100000 lightOverlay=true
+78641 capture rrstyle-growth-right-room 1920x1000 room=syn_100000 lightOverlay=false
+79151 GROWTH enter 4,0 room=syn_56 healAll
+79406 GROWTH-SAMPLE {"y":960,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1471,"phase":"return-to-spine","x":1833.15,"hp":98.296,"isLaz":0}
+80408 GROWTH-SAMPLE {"y":960,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1501,"phase":"return-to-spine","x":1623.15,"hp":98.296,"isLaz":0}
+81411 GROWTH-SAMPLE {"y":960,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1531,"phase":"return-to-spine","x":1413.15,"hp":98.296,"isLaz":0}
+82406 GROWTH-SAMPLE {"y":960,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1561,"phase":"return-to-spine","x":1203.15,"hp":98.296,"isLaz":0}
+83008 SHAFT-JUMP across central floor opening x=1077.15 direction=-1
+83405 GROWTH-SAMPLE {"y":826,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1591,"phase":"return-to-spine","x":993.1500000000001,"hp":98.296,"isLaz":0}
+83504 GROWTH begin descent column4
+83573 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+84404 GROWTH-SAMPLE {"y":960,"locX":4,"width":8,"sost":1,"locY":0,"height":5,"frame":1621,"phase":"grow-down","x":919.0000000000001,"hp":98.296,"isLaz":0}
+85142 GROWTH enter 4,1 room=syn_48 healAll
+85503 DOOR target=hatch2 x=960 lock=0 mine=0
+85704 GROWTH-SAMPLE {"y":326,"locX":4,"width":8,"sost":1,"locY":1,"height":5,"frame":1651,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+86706 GROWTH-SAMPLE {"y":789.9999999999984,"locX":4,"width":8,"sost":1,"locY":1,"height":5,"frame":1681,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+87422 GROWTH enter 4,2 room=syn_51 healAll
+88043 GROWTH-SAMPLE {"y":466.66666666666714,"locX":4,"width":8,"sost":1,"locY":2,"height":5,"frame":1711,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+88238 DOOR target=hatch2 x=960 lock=0 mine=0
+89037 GROWTH-SAMPLE {"y":869.9999999999999,"locX":4,"width":8,"sost":1,"locY":2,"height":5,"frame":1741,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+89584 GROWTH enter 4,3 room=syn_57 healAll
+90271 DOOR target=hatch2 x=960 lock=0 mine=0
+90736 GROWTH-SAMPLE {"y":386,"locX":4,"width":8,"sost":1,"locY":3,"height":6,"frame":1771,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+91742 GROWTH-SAMPLE {"y":949.9999999999975,"locX":4,"width":8,"sost":1,"locY":3,"height":6,"frame":1801,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+92181 GROWTH enter 4,4 room=rr_exit healAll
+93474 DOOR target=hatch2 x=960 lock=0 mine=0
+93536 GROWTH-SAMPLE {"y":626.6666666666666,"locX":4,"width":8,"sost":1,"locY":4,"height":7,"frame":1831,"phase":"grow-down","x":965.8999999999997,"hp":98.296,"isLaz":0}
+93536 DOOR-SAMPLE cursor=2.000260416666667 selected=true action=true remaining=0 open=false
+93573 heartbeat state=9 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+94542 GROWTH-SAMPLE {"y":865.75,"locX":4,"width":8,"sost":1,"locY":4,"height":7,"frame":1861,"phase":"grow-down","x":975,"hp":98.296,"isLaz":1}
+95397 GROWTH enter 4,5 room=syn_100019 healAll
+96170 capture rrstyle-growth-down-stage 1008x729 room=syn_100019 lightOverlay=true
+99678 capture rrstyle-growth-down-room 1920x1000 room=syn_100019 lightOverlay=false
+99720 development pool rrstyle-growth-expanded total=101 generated=101 assembled=64 issues=0 themes={"stable":101}
+99803 GROWTH-SAMPLE {"y":69.5,"locX":4,"width":8,"sost":1,"locY":5,"height":8,"frame":1891,"phase":"climb-expanded-join","x":975,"hp":98.296,"isLaz":1}
+100644 GROWTH enter 4,4 room=rr_exit healAll
+100645 MOVE-RESULT {"phase":"climb-expanded-join","room":"rr_exit","fromY":960,"isLaz":1,"success":true,"fromX":81.8,"reason":"entered expanded right column and bottom row, then climbed back across restored join","locX":4,"caseId":"rrstyle-growth","stay":false,"frames":1909,"toY":984.75,"toX":975,"locY":4}
+100798 DEVELOPMENT-VERSION runtimeTag=[RR:v7.1] copiedOriginalLog=true
+100799 DONE 1 cases

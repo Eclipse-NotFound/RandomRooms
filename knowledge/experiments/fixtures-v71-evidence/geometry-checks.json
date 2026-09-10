@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\generated-v71.xml",
+      "sha256": "0c3c026ed5ce480d8b6e2688063c65068f794e01117235f8baa538a510b7523e",
+      "rooms": 1024,
+      "kinds": {
+        "service": 170,
+        "workshop": 179,
+        "warehouse": 161,
+        "atrium": 192,
+        "offices": 189,
+        "damaged": 133
+      },
+      "themes": {
+        "stable": 256,
+        "sewer": 256,
+        "plant": 256,
+        "mane": 256
+      },
+      "fixtures": {
+        "door": 2439,
+        "hatch": 1024,
+        "window": 1792
+      },
+      "object_mean": 22.0107421875,
+      "back_mean": 13.7109375
+    },
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\generated-v71-cooked.xml",
+      "sha256": "18281b21736a028d53c4af4857002187ce7da08ea07dec7eccee2fa2d3ab31e8",
+      "rooms": 1024,
+      "kinds": {
+        "service": 170,
+        "workshop": 179,
+        "warehouse": 161,
+        "atrium": 192,
+        "offices": 189,
+        "damaged": 133
+      },
+      "themes": {
+        "stable": 256,
+        "sewer": 256,
+        "plant": 256,
+        "mane": 256
+      },
+      "fixtures": {
+        "door": 2439,
+        "hatch": 1024,
+        "window": 1792
+      },
+      "object_mean": 22.0107421875,
+      "back_mean": 13.7109375
+    },
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\generated-v71-connectors.xml",
+      "sha256": "d9468ca298a23d36cf1a8676ebf5c255b1bb8b0a3052c7b4771f006d9c5847ab",
+      "rooms": 64,
+      "kinds": {
+        "connector": 64
+      },
+      "themes": {
+        "stable": 16,
+        "sewer": 16,
+        "plant": 16,
+        "mane": 16
+      },
+      "fixtures": {
+        "door": 128,
+        "hatch": 64,
+        "window": 112
+      },
+      "object_mean": 25.984375,
+      "back_mean": 21.84375
+    },
+    {
+      "file": "mods\\RandomRooms\\build\\style-review\\generated-v71-connectors-cooked.xml",
+      "sha256": "463d0512164159ef2732a01f9b7cf74fab9d7937731b5075f24e6141b1532dc4",
+      "rooms": 64,
+      "kinds": {
+        "connector": 64
+      },
+      "themes": {
+        "stable": 16,
+        "sewer": 16,
+        "plant": 16,
+        "mane": 16
+      },
+      "fixtures": {
+        "door": 128,
+        "hatch": 64,
+        "window": 112
+      },
+      "object_mean": 25.984375,
+      "back_mean": 21.84375
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

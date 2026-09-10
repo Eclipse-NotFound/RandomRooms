@@ -1,0 +1,696 @@
+[RR:v7.1] RRDiag init, fileStream=C:\Users\hello\AppData\Roaming\pferr-style-bea52955a6fc40ffa8054811e91d81fe\Local Store\RandomRooms_diag.log
+[RR:v7.1] init(main) called (static), main=[object MainFE] stage=[object Stage]
+[RR:v7.1] 诊断: uncaughtError 监听已挂载
+[RR:v7.1] config: enabled=true seedEnabled=true seed=20260818
+[RR:v7.1] 种子模式: cook PRNG 已注入（seed=20260818），preview=0.46089801378548145,0.7550768959335983,0.6226073675788939,0.8610204008873552,0.497080652276054
+[RR:v7.1] 合成器: synth PRNG 已注入（fork(synth)）
+[RR:v7.1] class probe fe.World => OK
+[RR:v7.1] class probe fe.GameData => OK
+[RR:v7.1] class probe fe.loc.Game => OK
+[RR:v7.1] class probe fe.loc.Land => OK
+[RR:v7.1] [RR] RandomRoomsMod v7.1 loaded <generator=space-v7, growth=right+down> stage bound (KEY_DOWN capture)
+[RR:v7.1] RRMenu: 主菜单配置条已显示
+[RR:v7.1] preflight start: World.w 就绪
+[RR:v7.1] ensureRooms: World.w.rooms 为 null，反射实例化 fe.rooms.Rooms
+[RR:v7.1] ensureRooms: 已创建并挂接 Rooms 实例（内部池项=0）
+[RR:v7.1] preflight: 计划加载 29 个房间文件: rooms_begin,rooms_surf,rooms_rbl,rooms_plant,rooms_nio,rooms_sewer,rooms_raiders,rooms_stable,rooms_core,rooms_garages,rooms_mane,rooms_mtn,rooms_way,rooms_covert,rooms_src,rooms_canter,rooms_minst,rooms_mbase,rooms_workshop,rooms_hql,rooms_post,rooms_encl,rooms_comm,rooms_art,rooms_pi,rooms_pis,rooms_thunder,rooms_grave,rooms_prob
+[RR:v7.1] preflight: rr_test 已注册=false
+[RR:v7.1] 房间文件已载入数组: rooms_rbl（房间数=4）
+[RR:v7.1] 房间文件已载入数组: rooms_core（房间数=9）
+[RR:v7.1] 房间文件已载入数组: rooms_garages（房间数=2）
+[RR:v7.1] 房间文件已载入数组: rooms_mtn（房间数=12）
+[RR:v7.1] 房间文件已载入数组: rooms_way（房间数=1）
+[RR:v7.1] 房间文件已载入数组: rooms_covert（房间数=4）
+[RR:v7.1] 房间文件已载入数组: rooms_src（房间数=1）
+[RR:v7.1] 房间文件已载入数组: rooms_post（房间数=3）
+[RR:v7.1] 房间文件已载入数组: rooms_comm（房间数=5）
+[RR:v7.1] 房间文件已载入数组: rooms_thunder（房间数=7）
+[RR:v7.1] 房间文件已载入数组: rooms_grave（房间数=3）
+[RR:v7.1] 房间文件已载入数组: rooms_begin（房间数=20）
+[RR:v7.1] 房间文件已载入数组: rooms_surf（房间数=20）
+[RR:v7.1] 房间文件已载入数组: rooms_nio（房间数=17）
+[RR:v7.1] 房间文件已载入数组: rooms_sewer（房间数=23）
+[RR:v7.1] 房间文件已载入数组: rooms_raiders（房间数=23）
+[RR:v7.1] 房间文件已载入数组: rooms_minst（房间数=15）
+[RR:v7.1] 房间文件已载入数组: rooms_workshop（房间数=17）
+[RR:v7.1] 房间文件已载入数组: rooms_hql（房间数=14）
+[RR:v7.1] 房间文件已载入数组: rooms_encl（房间数=23）
+[RR:v7.1] 房间文件已载入数组: rooms_art（房间数=29）
+[RR:v7.1] 房间文件已载入数组: rooms_pis（房间数=20）
+[RR:v7.1] 房间文件已载入数组: rooms_plant（房间数=55）
+[RR:v7.1] 房间文件已载入数组: rooms_stable（房间数=49）
+[RR:v7.1] 房间文件已载入数组: rooms_mane（房间数=65）
+[RR:v7.1] 房间文件已载入数组: rooms_canter（房间数=59）
+[RR:v7.1] 房间文件已载入数组: rooms_mbase（房间数=31）
+[RR:v7.1] 房间文件已载入数组: rooms_pi（房间数=46）
+[RR:v7.1] 房间文件已载入数组: rooms_prob（房间数=81）
+[RR:v7.1] preflight finalize: 文件加载完成 成功=29 失败=0 / 共29
+[RR:v7.1] inject: GameData.d 已追加 <land id=rr_test conf=1 3x3>
+[RR:v7.1] makePoolXML: 池构造完成，选中 4 个房间: вход(beg0),13,служ. пом.,пещера2
+[RR:v7.1] inject: rr_test 池边界缺口已统一（门 bug 修复）
+[RR:v7.1] C maps registered: conf=4, fresh architecture pools on travel
+[RR:v7.1] P0 cook: rooms_plant +40 个变异副本（池房间数=95）
+[RR:v7.1] P0 cook: rooms_sewer +22 个变异副本（池房间数=45）
+[RR:v7.1] P0 cook: rooms_stable +32 个变异副本（池房间数=81）
+[RR:v7.1] P0 cook: rooms_mane +26 个变异副本（池房间数=91）
+[RR:v7.1] P0 cook: rooms_canter +34 个变异副本（池房间数=93）
+[RR:v7.1] P0 cook: rooms_encl +20 个变异副本（池房间数=43）
+[RR:v7.1] P0 cook: rooms_pi +25 个变异副本（池房间数=71）
+[RR:v7.1] P0 cook: rooms_rr_test +3 个变异副本（池房间数=7）
+[RR:v7.1] P0 cook 完成: 共 202 个变异副本（tip=rnd 土地）
+[RR:v7.1] inject: roomsLoad=0，rr_test 池已就位（房间数=7） | READY: F1 随机冒险，F5 展示馆，F2 回城
+[RR:v7.1] isolated-test -> gotoLand(rr_showroom), preflight=OK, lands[rr_showroom]=true, 当前土地=rbl
+[RR:v7.1] 合成房网格: syn_0 行=25 墙占比=0.15 [行12样本] K K K K K _P _PА K K K K K K K K K K K K K _R- _R- _R- _R- _R- _R- _R- _R- _R- _R- 
+[RR:v7.1] 合成房网格: syn_1 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ L L L _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E 
+[RR:v7.1] 合成房网格: syn_2 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_3 行=25 墙占比=0.21 [行12样本] _C _C _C _C _C _C _C _C _C N _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _- _- 
+[RR:v7.1] 合成房网格: syn_4 行=25 墙占比=0.18 [行12样本] _R _R _R _R _R _RА _R _R _R _R _R _R J J J _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P 
+[RR:v7.1] 合成房网格: syn_5 行=25 墙占比=0.19 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ L L L _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E 
+[RR:v7.1] 合成房网格: syn_6 行=25 墙占比=0.16 [行12样本] C C C C C _J _JА C C C C C C C C C C C C C C C C C _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_7 行=25 墙占比=0.16 [行12样本] _ _ _ _ _ _ _ _C _CА _ _ N _- _- _- _- _- _- _- _- _- _- _- _- _- _- _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_8 行=25 墙占比=0.19 [行12样本] _R _R _R _R _R _RА _R _R _R _R J J J _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P 
+[RR:v7.1] 合成房网格: syn_9 行=25 墙占比=0.16 [行12样本] L L L L L _E _EА L L L L L L L L L L L L _ _ _ _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_10 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_11 行=25 墙占比=0.17 [行12样本] _ _ _ _ _ _ _ _C _CА _ _ _ _ _ N _- _- _- _- _- _- _- _- _- _- _- _- _ _ _ 
+[RR:v7.1] 合成房网格: syn_12 行=25 墙占比=0.21 [行12样本] _P _P _P _P _P _P _P _P K _R _R _R _RА _R _R _R _R _R _R _R _R _R _R _R _R _R _R _R _R _R 
+[RR:v7.1] 合成房网格: syn_13 行=25 墙占比=0.21 [行12样本] _E _E _E _E _E _E _E _E _E _E L _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_14 行=25 墙占比=0.16 [行12样本] C C C C C _J _JА C C C C C C C C C C C C _- _- _- _- _- _- _- _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_15 行=25 墙占比=0.16 [行12样本] _ _ _ _ _ _ _ _C _CА _ _ _ _ N _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_16 行=25 墙占比=0.17 [行12样本] _P _P _P _P _P _P _R _R _R _R _R _R _R _R _R _P J _F _F _F _FА _F _F _F J _F _F _F _F _F 
+[RR:v7.1] 合成房网格: syn_17 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ L L L _E _E _E _E _E _E _E _E _E _E _E _E _E _E 
+[RR:v7.1] 合成房网格: syn_18 行=25 墙占比=0.23 [行12样本] _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _- 
+[RR:v7.1] 合成房网格: syn_19 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _C _C _C _C _C 
+[RR:v7.1] 合成房网格: syn_20 行=25 墙占比=0.17 [行12样本] _P _P _P _P _P _P _R _R _R _R _R _R _R _R _R _P _P _P _P J _F _F _F _FА _F _F _F J _F _F 
+[RR:v7.1] 合成房网格: syn_21 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ L L L _E _E _E _E _E _E _E _E _E _E _E _E _E _E 
+[RR:v7.1] 合成房网格: syn_22 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _- 
+[RR:v7.1] 合成房网格: syn_23 行=25 墙占比=0.16 [行12样本] N N N N N _C _CА N N N N N N N N N N N N N _- _- _- _- _- _- _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_24 行=25 墙占比=0.17 [行12样本] _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P J _R _R _R _RА _R _R K _F _F 
+[RR:v7.1] 合成房网格: syn_25 行=25 墙占比=0.17 [行12样本] _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E L _ _ _ _А _ _ L _T _T 
+[RR:v7.1] 合成房网格: syn_26 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_27 行=25 墙占比=0.17 [行12样本] _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C N _ _ _ _А _ _ N _D _D 
+[RR:v7.1] 合成房网格: syn_28 行=25 墙占比=0.17 [行12样本] _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P J _R _R _R _RА _R _R J _F _F 
+[RR:v7.1] 合成房网格: syn_29 行=25 墙占比=0.17 [行12样本] _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E L _ _ _ _А _ _ L _T _T 
+[RR:v7.1] 合成房网格: syn_30 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_31 行=25 墙占比=0.17 [行12样本] _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C _C N _ _ _ _А _ _ N _D _D 
+[RR:v7.1] 合成房网格: rr_begin 行=25 墙占比=0.17 [行12样本] _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P _P J _R _R _R _RА _R _R K _F _F 
+[RR:v7.1] 合成房网格: rr_show_end 行=25 墙占比=0.17 [行12样本] _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E _E L _ _ _ _А _ _ L _T _T 
+[RR:v7.1] C-POOL rr_showroom ordinary=24 vertical=8 endpoints=2 total=34 theme=all
+[RR:v7.1] DUMP-BEGIN syn_0 theme=stable kind=warehouse
+[RR:v7.1] DUMP-ROW J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J
+[RR:v7.1] DUMP-ROW J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.K._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._R._R._R._R._R._R._R._R._R._R._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW K.K.K.K.K._P._PА.K.K.K.K.K.K.K.K.K.K.K.K.K._R-._R-._R-._R-._R-._R-._R-._R-._R-._R-._R-._R._R.J._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._F._F._F._F._F._F._F._F._F._F._F._F._F._F
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.K.K.K.K.K.K.K.K._F._FА.K.K.K.K.K
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.J._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.K._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW _R._R._R._R._R._P._PА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._F._R._R._R._R._R._R._R._F._FА._R._R._R._R._R
+[RR:v7.1] DUMP-ROW K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ stdoor 33 15
+[RR:v7.1] DUMP-OBJ stdoor 33 23
+[RR:v7.1] DUMP-OBJ hatch2 41 16
+[RR:v7.1] DUMP-OBJ window2 33 19
+[RR:v7.1] DUMP-OBJ window2 33 3
+[RR:v7.1] DUMP-OBJ mcrate1 10 23
+[RR:v7.1] DUMP-OBJ mcrate1 13 23
+[RR:v7.1] DUMP-OBJ mcrate1 16 23
+[RR:v7.1] DUMP-OBJ mcrate1 20 23
+[RR:v7.1] DUMP-OBJ mcrate1 23 23
+[RR:v7.1] DUMP-OBJ mcrate1 26 23
+[RR:v7.1] DUMP-OBJ mcrate1 8 11
+[RR:v7.1] DUMP-OBJ mcrate1 11 11
+[RR:v7.1] DUMP-OBJ mcrate1 14 11
+[RR:v7.1] DUMP-OBJ table1 35 15
+[RR:v7.1] DUMP-BACK zavod2 10 22
+[RR:v7.1] DUMP-BACK zavod2 13 22
+[RR:v7.1] DUMP-BACK zavod2 16 22
+[RR:v7.1] DUMP-BACK stlight3 11 19
+[RR:v7.1] DUMP-BACK zavod2 20 22
+[RR:v7.1] DUMP-BACK zavod2 23 22
+[RR:v7.1] DUMP-BACK zavod2 26 22
+[RR:v7.1] DUMP-BACK stlight3 21 19
+[RR:v7.1] DUMP-BACK zavod2 8 10
+[RR:v7.1] DUMP-BACK zavod2 11 10
+[RR:v7.1] DUMP-BACK zavod2 14 10
+[RR:v7.1] DUMP-BACK stlight3 9 7
+[RR:v7.1] DUMP-BACK stlight3 36 12
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_1 theme=sewer kind=service
+[RR:v7.1] DUMP-ROW L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.L._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T.L._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.L._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.L._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.L._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T.L._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._T._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW L.L.L.L._._А.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._._А.L.L.L.L
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _-._-._-._-._._А._-._-._-._-._-._-.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._-._-._-._-._-._-._-._._А._-._-._-._-
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E.L._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door1b 12 23
+[RR:v7.1] DUMP-OBJ door1b 34 23
+[RR:v7.1] DUMP-OBJ hatch1 4 8
+[RR:v7.1] DUMP-OBJ window1 34 3
+[RR:v7.1] DUMP-OBJ table1 23 23
+[RR:v7.1] DUMP-OBJ instr1 27 23
+[RR:v7.1] DUMP-OBJ box 14 7
+[RR:v7.1] DUMP-OBJ box 17 7
+[RR:v7.1] DUMP-OBJ box 20 7
+[RR:v7.1] DUMP-BACK pipe4 39 20
+[RR:v7.1] DUMP-BACK pipe4 39 22
+[RR:v7.1] DUMP-BACK vent 41 21
+[RR:v7.1] DUMP-BACK vent 24 20
+[RR:v7.1] DUMP-BACK pipe4 29 20
+[RR:v7.1] DUMP-BACK pipe4 29 22
+[RR:v7.1] DUMP-BACK light3 25 19
+[RR:v7.1] DUMP-BACK depot 14 5
+[RR:v7.1] DUMP-BACK depot 17 5
+[RR:v7.1] DUMP-BACK depot 20 5
+[RR:v7.1] DUMP-BACK light3 15 3
+[RR:v7.1] DUMP-BACK pipe3 17 14
+[RR:v7.1] DUMP-BACK pipe3 17 13
+[RR:v7.1] DUMP-BACK pipe3 19 14
+[RR:v7.1] DUMP-BACK pipe3 19 13
+[RR:v7.1] DUMP-BACK pipe3 21 14
+[RR:v7.1] DUMP-BACK pipe3 21 13
+[RR:v7.1] DUMP-BACK pipe3 23 14
+[RR:v7.1] DUMP-BACK pipe3 23 13
+[RR:v7.1] DUMP-BACK light3 20 11
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_2 theme=plant kind=workshop
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._-._-._-._-._-._-._-._-._-._-._-._-._-._-._-._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._-._._А._-._-._-._-._-._-._-._-._-._-._Г._-._-._-._-._-._-._-._-._-.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._JА.C.C.C.C
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._Г._._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._Г._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._Г._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._Г._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._Г._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._Г._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._Г._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door2 26 23
+[RR:v7.1] DUMP-OBJ hatch2 42 16
+[RR:v7.1] DUMP-OBJ window1 26 18
+[RR:v7.1] DUMP-OBJ window1 26 8
+[RR:v7.1] DUMP-OBJ table 10 23
+[RR:v7.1] DUMP-OBJ table2 32 15
+[RR:v7.1] DUMP-OBJ filecab 35 15
+[RR:v7.1] DUMP-OBJ filecab 36 15
+[RR:v7.1] DUMP-OBJ box 28 23
+[RR:v7.1] DUMP-OBJ box 31 23
+[RR:v7.1] DUMP-OBJ box 34 23
+[RR:v7.1] DUMP-BACK light3 11 20
+[RR:v7.1] DUMP-BACK bwindow 31 12
+[RR:v7.1] DUMP-BACK clock 36 12
+[RR:v7.1] DUMP-BACK light4 33 11
+[RR:v7.1] DUMP-BACK depot 28 21
+[RR:v7.1] DUMP-BACK depot 31 21
+[RR:v7.1] DUMP-BACK depot 34 21
+[RR:v7.1] DUMP-BACK light3 29 19
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_3 theme=mane kind=atrium
+[RR:v7.1] DUMP-ROW N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._._._._._._._._._._._._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._._._._._._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._._._._._._._._._._._._._._._._._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._._._._._._._._._._._._._._._._._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW N.N.N.N.N.N.N.N.N.N._-._-._._А._._._._._._-._-._-._-._-._-._-._-._-._-._-._-._-._-._._А._-._-.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._-._-._-._-._-._._А._-._-._-.N.N.N.N.N.N.N.N.N.N
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C._C._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C._C._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW N.N.N.N.N.N.N.N.N.N._-._-._._А._-._-._-._-._-._-._-._-._-._-._-._-._-._-._-._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _C._C._C._C._C._C._C._C._C.N._._._._А._._._._._._._._._._._._._._._._._._._._._А._._.N._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._C._C._C._C._C._C.N._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._D._D.N._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW _._._._C._C._C._C._C._C._C._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW _._._._C._C._C._C._C._C._C._C._C._._А._._._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door1 9 15
+[RR:v7.1] DUMP-OBJ door1 9 23
+[RR:v7.1] DUMP-OBJ door1 37 23
+[RR:v7.1] DUMP-OBJ hatch1 33 12
+[RR:v7.1] DUMP-OBJ window1 37 5
+[RR:v7.1] DUMP-OBJ window1 37 15
+[RR:v7.1] DUMP-OBJ table2 15 23
+[RR:v7.1] DUMP-OBJ filecab 18 23
+[RR:v7.1] DUMP-OBJ filecab 19 23
+[RR:v7.1] DUMP-OBJ table2 26 23
+[RR:v7.1] DUMP-OBJ filecab 29 23
+[RR:v7.1] DUMP-OBJ filecab 30 23
+[RR:v7.1] DUMP-OBJ box 2 7
+[RR:v7.1] DUMP-OBJ box 5 7
+[RR:v7.1] DUMP-OBJ bookcase 1 15
+[RR:v7.1] DUMP-OBJ table 4 15
+[RR:v7.1] DUMP-OBJ trash 7 15
+[RR:v7.1] DUMP-OBJ table 4 23
+[RR:v7.1] DUMP-OBJ table 40 11
+[RR:v7.1] DUMP-OBJ bigmed 44 11
+[RR:v7.1] DUMP-OBJ medbox 42 9
+[RR:v7.1] DUMP-OBJ couch 41 23
+[RR:v7.1] DUMP-BACK bwindow 14 20
+[RR:v7.1] DUMP-BACK clock 19 20
+[RR:v7.1] DUMP-BACK light4 16 19
+[RR:v7.1] DUMP-BACK bwindow 25 20
+[RR:v7.1] DUMP-BACK clock 30 20
+[RR:v7.1] DUMP-BACK light4 27 19
+[RR:v7.1] DUMP-BACK stillage 2 5
+[RR:v7.1] DUMP-BACK stillage 5 5
+[RR:v7.1] DUMP-BACK light3 3 3
+[RR:v7.1] DUMP-BACK poster 4 12
+[RR:v7.1] DUMP-BACK light3 5 11
+[RR:v7.1] DUMP-BACK light3 5 20
+[RR:v7.1] DUMP-BACK vent 40 8
+[RR:v7.1] DUMP-BACK pipe4 46 8
+[RR:v7.1] DUMP-BACK pipe4 46 10
+[RR:v7.1] DUMP-BACK light3 42 7
+[RR:v7.1] DUMP-BACK light3 42 20
+[RR:v7.1] DUMP-END
+[RR:v7.1] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=30)
+[RR:v7.1] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=60)
+[RR:v7.1] verifyEntry: locs[0][0] loc=loc0_0 room=syn_12 tip=null
+[RR:v7.1] verifyEntry: locs[0][1] loc=loc0_1 room=syn_24 tip=vert
+[RR:v7.1] verifyEntry: locs[0][2] loc=loc0_2 room=syn_28 tip=vert
+[RR:v7.1] verifyEntry: locs[1][0] loc=loc1_0 room=syn_22 tip=null
+[RR:v7.1] verifyEntry: locs[1][1] loc=loc1_1 room=syn_11 tip=null
+[RR:v7.1] verifyEntry: locs[1][2] loc=loc1_2 room=syn_4 tip=null
+[RR:v7.1] verifyEntry: locs[2][0] loc=loc2_0 room=syn_1 tip=null
+[RR:v7.1] verifyEntry: locs[2][1] loc=loc2_1 room=syn_16 tip=null
+[RR:v7.1] verifyEntry: locs[2][2] loc=loc2_2 room=syn_20 tip=null
+[RR:v7.1] verifyEntry: locs[3][0] loc=loc3_0 room=syn_27 tip=vert
+[RR:v7.1] verifyEntry: locs[3][1] loc=loc3_1 room=syn_25 tip=vert
+[RR:v7.1] verifyEntry: locs[3][2] loc=loc3_2 room=rr_show_end tip=end
+[RR:v7.1] verifyEntry: 进入 rr_showroom 成功！网格=4x3,3,3,3 采集 12 个 loc，房间 id 集合(12)=rr_show_end,syn_1,syn_11,syn_12,syn_16,syn_20,syn_22,syn_24,syn_25,syn_27,syn_28,syn_4
+[RR:v7.1] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v7.1] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=0/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v7.1] isolated-test -> gotoLand(random_rooms), preflight=OK, lands[random_rooms]=true, 当前土地=rr_showroom
+[RR:v7.1] 合成房网格: syn_0 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ C _D _D _D _DА _D _D _D C _D _D _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_1 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_2 行=25 墙占比=0.21 [行12样本] _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _- _- 
+[RR:v7.1] 合成房网格: syn_3 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_4 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J C _D _D _D _DА _D _D _D C _D _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_5 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J _J _J C _D _D _D _DА _D _D _D C _D _D _D 
+[RR:v7.1] 合成房网格: syn_6 行=25 墙占比=0.22 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_7 行=25 墙占比=0.16 [行12样本] C C C C C _J _JА C C C C C C C C C C C C C C C _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_8 行=25 墙占比=0.22 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_9 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_10 行=25 墙占比=0.21 [行12样本] _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_11 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_12 行=25 墙占比=0.22 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_13 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_14 行=25 墙占比=0.21 [行12样本] _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _- _- 
+[RR:v7.1] 合成房网格: syn_15 行=25 墙占比=0.18 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _D _D _D _DА _D _D _D C _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_16 行=25 墙占比=0.18 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _D _D _D _DА _D _D _D C _D _D _D 
+[RR:v7.1] 合成房网格: syn_17 行=25 墙占比=0.18 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _D _D _D _DА _D _D _D C _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_18 行=25 墙占比=0.16 [行12样本] C C C C C _J _JА C C C C C C C C C C C C C _- _- _- _- _- _- _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_19 行=25 墙占比=0.19 [行12样本] _ _ _ _ _ _А _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_20 行=25 墙占比=0.19 [行12样本] _ _ _ _ _ _А _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_21 行=25 墙占比=0.16 [行12样本] C C C C C _J _JА C C C C C C C C C C C C _- _- _- _- _- _- _- _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_22 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_23 行=25 墙占比=0.19 [行12样本] _ _ _ _ _ _А _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_24 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J _J _J _J C _D _D _D _DА _D _D _D C _D _D 
+[RR:v7.1] 合成房网格: syn_25 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_26 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_27 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_28 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_29 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_30 行=25 墙占比=0.15 [行12样本] C C C C C _J _JА C C C C C C C C C C C _- _- _- _- _- _- _- _- _- _- _- _- 
+[RR:v7.1] 合成房网格: syn_31 行=25 墙占比=0.24 [行12样本] _J _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_32 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J 
+[RR:v7.1] 合成房网格: syn_33 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_34 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J C _D _D _D _DА _D _D _D C 
+[RR:v7.1] 合成房网格: syn_35 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_36 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_37 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J C _D _D _D _DА _D _D _D C 
+[RR:v7.1] 合成房网格: syn_38 行=25 墙占比=0.16 [行12样本] _J _J _J _J _J _J _J C _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[RR:v7.1] 合成房网格: syn_39 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_40 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J 
+[RR:v7.1] 合成房网格: syn_41 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J C _D _D _D _DА _D _D _D C _D _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_42 行=25 墙占比=0.18 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _D _D _D _DА _D _D _D C _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_43 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_44 行=25 墙占比=0.18 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_45 行=25 墙占比=0.19 [行12样本] _ _ _ _ _ _А _ _ _ _ C C C _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_46 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _ _ _ _ _ _ _ _ _ _J C _D _D _D _DА _D _D _D C _D _D _D _D _D 
+[RR:v7.1] 合成房网格: syn_47 行=25 墙占比=0.23 [行12样本] _ _ _ _ _ _А _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _J _J _J _J _J _J 
+[RR:v7.1] 合成房网格: syn_48 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_49 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_50 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_51 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_52 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_53 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_54 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_55 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_56 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_57 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_58 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: syn_59 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: rr_begin 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] 合成房网格: rr_exit 行=25 墙占比=0.17 [行12样本] _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J _J C _ _ _ _А _ _ C _D _D 
+[RR:v7.1] C-POOL random_rooms ordinary=48 vertical=12 endpoints=2 total=62 theme=plant
+[RR:v7.1] DUMP-BEGIN syn_0 theme=plant kind=offices
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C._._._._._._._._._.C.C.C._D._DА.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._._._D._D._D._DА._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._._._D._D._D._DА._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._.C._D._D._D._DА._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._.C._D._D._D._DА._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._._D._D._D._D._DА._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._._._._._._._._._._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._D._DА.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._D._D._D._DА._D._D._D._._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._D._D._D._DА._D._D._D._._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._D._D._D._DА._D._D._D.C._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._D._D._D._DА._D._D._D.C._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._D._D._D._D._D._D._D._D._D._D._D._D.C._D._D._D._DА._D._D._D.C._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._._._._._._._._._._._._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door2 15 7
+[RR:v7.1] DUMP-OBJ door2 23 15
+[RR:v7.1] DUMP-OBJ door2 15 23
+[RR:v7.1] DUMP-OBJ door2 23 23
+[RR:v7.1] DUMP-OBJ hatch2 18 16
+[RR:v7.1] DUMP-OBJ window1 15 10
+[RR:v7.1] DUMP-OBJ window1 23 18
+[RR:v7.1] DUMP-OBJ table 4 7
+[RR:v7.1] DUMP-OBJ table 33 7
+[RR:v7.1] DUMP-OBJ bigmed 37 7
+[RR:v7.1] DUMP-OBJ medbox 35 5
+[RR:v7.1] DUMP-OBJ box 3 15
+[RR:v7.1] DUMP-OBJ box 6 15
+[RR:v7.1] DUMP-OBJ box 9 15
+[RR:v7.1] DUMP-OBJ table1 28 15
+[RR:v7.1] DUMP-OBJ ccup 30 15
+[RR:v7.1] DUMP-OBJ tap 31 15
+[RR:v7.1] DUMP-OBJ fridge 33 15
+[RR:v7.1] DUMP-OBJ wcup 30 12
+[RR:v7.1] DUMP-OBJ wcup 31 12
+[RR:v7.1] DUMP-OBJ table2 9 23
+[RR:v7.1] DUMP-OBJ filecab 12 23
+[RR:v7.1] DUMP-OBJ filecab 13 23
+[RR:v7.1] DUMP-OBJ table 28 23
+[RR:v7.1] DUMP-OBJ bigmed 32 23
+[RR:v7.1] DUMP-OBJ medbox 30 21
+[RR:v7.1] DUMP-OBJ enl2 27 23
+[RR:v7.1] DUMP-OBJ enl2 36 23
+[RR:v7.1] DUMP-OBJ enl1 14 15
+[RR:v7.1] DUMP-OBJ enl2 13 15
+[RR:v7.1] DUMP-OBJ enl1 35 7
+[RR:v7.1] DUMP-OBJ enl1 40 23
+[RR:v7.1] DUMP-BACK light3 5 4
+[RR:v7.1] DUMP-BACK vent 33 4
+[RR:v7.1] DUMP-BACK pipe4 39 4
+[RR:v7.1] DUMP-BACK pipe4 39 6
+[RR:v7.1] DUMP-BACK light3 35 3
+[RR:v7.1] DUMP-BACK depot 3 13
+[RR:v7.1] DUMP-BACK depot 6 13
+[RR:v7.1] DUMP-BACK depot 9 13
+[RR:v7.1] DUMP-BACK light3 4 11
+[RR:v7.1] DUMP-BACK light2 28 11
+[RR:v7.1] DUMP-BACK bwindow 8 20
+[RR:v7.1] DUMP-BACK clock 13 20
+[RR:v7.1] DUMP-BACK light4 10 19
+[RR:v7.1] DUMP-BACK vent 28 20
+[RR:v7.1] DUMP-BACK pipe4 34 20
+[RR:v7.1] DUMP-BACK pipe4 34 22
+[RR:v7.1] DUMP-BACK light3 30 19
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_1 theme=plant kind=service
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._._._._._._._._._._._._
+[RR:v7.1] DUMP-ROW C.C.C.C._._А.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._._А.C.C.C.C
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C.C.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C.C.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C.C.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _-._-._-._-._._А._-._-._-._-._-._-.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._-._-._-._-._-._-._._А._-._-._-._-
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._А._._._._
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door2 12 23
+[RR:v7.1] DUMP-OBJ door2 35 23
+[RR:v7.1] DUMP-OBJ hatch2 42 16
+[RR:v7.1] DUMP-OBJ window1 12 18
+[RR:v7.1] DUMP-OBJ window1 35 3
+[RR:v7.1] DUMP-OBJ table1 7 23
+[RR:v7.1] DUMP-OBJ table1 37 23
+[RR:v7.1] DUMP-OBJ table1 18 23
+[RR:v7.1] DUMP-OBJ instr1 22 23
+[RR:v7.1] DUMP-OBJ box 21 7
+[RR:v7.1] DUMP-OBJ box 24 7
+[RR:v7.1] DUMP-OBJ bigbox 18 15
+[RR:v7.1] DUMP-OBJ enl2 12 15
+[RR:v7.1] DUMP-OBJ enl1 28 23
+[RR:v7.1] DUMP-OBJ enl2 26 7
+[RR:v7.1] DUMP-OBJ enl2 34 7
+[RR:v7.1] DUMP-OBJ enl2 32 7
+[RR:v7.1] DUMP-OBJ enl2 31 23
+[RR:v7.1] DUMP-OBJ enl2 7 7
+[RR:v7.1] DUMP-BACK light3 8 20
+[RR:v7.1] DUMP-BACK light3 38 20
+[RR:v7.1] DUMP-BACK vent 19 20
+[RR:v7.1] DUMP-BACK pipe4 24 20
+[RR:v7.1] DUMP-BACK pipe4 24 22
+[RR:v7.1] DUMP-BACK light3 20 19
+[RR:v7.1] DUMP-BACK depot 21 5
+[RR:v7.1] DUMP-BACK depot 24 5
+[RR:v7.1] DUMP-BACK light3 22 3
+[RR:v7.1] DUMP-BACK electro 18 12
+[RR:v7.1] DUMP-BACK pult 21 14
+[RR:v7.1] DUMP-BACK monitor 21 13
+[RR:v7.1] DUMP-BACK monitor 21 12
+[RR:v7.1] DUMP-BACK electro 23 12
+[RR:v7.1] DUMP-BACK light3 21 11
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_2 theme=plant kind=atrium
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._._._._._._._._._._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._._._._._._._._._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C._-._-._._А._._._._._._-._-._-._-._-._-._-._-._-._-._-._-._._А._-._-.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._._._._._А._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._._._._._А._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._-._-._-._-._-._._А._-._-._-.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._J._J._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._J._J._J._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J._J._J._J._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C._-._-._._А._-._-._-._-._-._-._-._-._-._-._-._-._-._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _J._J._J._J._J._J._J._J._J._J._J.C._._._._А._._._._._._._._._._._._._._._._._._._А._._.C._D._D._D._D._D._D._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._J._J._J._J._J._J._J._J.C._J._J._._А._._._._._._._._._._._._._._._._._._._А._D._D.C._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW _._._._J._J._J._J._J._J._J._J._J._J._J._._А._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW _._._._J._J._J._J._J._J._J._J._J._J._J._._А._._._._._._._._._._._._._._._._._._._А._D._D._D._D._D._D._D._D._D._D._._._
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door2 11 15
+[RR:v7.1] DUMP-OBJ door2 11 23
+[RR:v7.1] DUMP-OBJ door2 37 23
+[RR:v7.1] DUMP-OBJ hatch2 33 8
+[RR:v7.1] DUMP-OBJ window1 37 5
+[RR:v7.1] DUMP-OBJ window1 11 10
+[RR:v7.1] DUMP-OBJ table1 17 23
+[RR:v7.1] DUMP-OBJ instr1 21 23
+[RR:v7.1] DUMP-OBJ box 2 7
+[RR:v7.1] DUMP-OBJ box 5 7
+[RR:v7.1] DUMP-OBJ table2 4 15
+[RR:v7.1] DUMP-OBJ filecab 7 15
+[RR:v7.1] DUMP-OBJ filecab 8 15
+[RR:v7.1] DUMP-OBJ box 5 23
+[RR:v7.1] DUMP-OBJ box 8 23
+[RR:v7.1] DUMP-OBJ table 38 11
+[RR:v7.1] DUMP-OBJ bigmed 42 11
+[RR:v7.1] DUMP-OBJ medbox 40 9
+[RR:v7.1] DUMP-OBJ table 40 23
+[RR:v7.1] DUMP-OBJ enl2 16 15
+[RR:v7.1] DUMP-OBJ enl2 26 15
+[RR:v7.1] DUMP-OBJ enl2 18 15
+[RR:v7.1] DUMP-OBJ enl2 24 23
+[RR:v7.1] DUMP-OBJ enl2 32 11
+[RR:v7.1] DUMP-BACK vent 18 20
+[RR:v7.1] DUMP-BACK pipe4 23 20
+[RR:v7.1] DUMP-BACK pipe4 23 22
+[RR:v7.1] DUMP-BACK light3 19 19
+[RR:v7.1] DUMP-BACK depot 2 5
+[RR:v7.1] DUMP-BACK depot 5 5
+[RR:v7.1] DUMP-BACK light3 3 3
+[RR:v7.1] DUMP-BACK bwindow 3 12
+[RR:v7.1] DUMP-BACK clock 8 12
+[RR:v7.1] DUMP-BACK light4 5 11
+[RR:v7.1] DUMP-BACK depot 5 21
+[RR:v7.1] DUMP-BACK depot 8 21
+[RR:v7.1] DUMP-BACK light3 6 19
+[RR:v7.1] DUMP-BACK vent 38 8
+[RR:v7.1] DUMP-BACK pipe4 44 8
+[RR:v7.1] DUMP-BACK pipe4 44 10
+[RR:v7.1] DUMP-BACK light3 40 7
+[RR:v7.1] DUMP-BACK light3 41 20
+[RR:v7.1] DUMP-END
+[RR:v7.1] DUMP-BEGIN syn_3 theme=plant kind=workshop
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._-._-._-._-._-._-._-._-._-._-._-._-._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._.C._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._._._._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J._J
+[RR:v7.1] DUMP-ROW _._._._-._._А._-._-._-._-._-._-._-._Г._-._-._-._-._-._-._-._-._-.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._J._JА.C.C.C.C
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._Г._._._._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._Г._._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._Г._._._._._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._Г._._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._D._D._D
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._Г._._._._.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._Г._._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW _._._._._._А._._._._._._._._._._._._._._._Г._._._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._J._JА._D._._._
+[RR:v7.1] DUMP-ROW C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C
+[RR:v7.1] DUMP-OBJ player 1 23
+[RR:v7.1] DUMP-OBJ door2 23 23
+[RR:v7.1] DUMP-OBJ hatch2 4 16
+[RR:v7.1] DUMP-OBJ window1 23 19
+[RR:v7.1] DUMP-OBJ window1 23 10
+[RR:v7.1] DUMP-OBJ table 9 23
+[RR:v7.1] DUMP-OBJ table2 34 15
+[RR:v7.1] DUMP-OBJ filecab 37 15
+[RR:v7.1] DUMP-OBJ filecab 38 15
+[RR:v7.1] DUMP-OBJ box 29 23
+[RR:v7.1] DUMP-OBJ box 32 23
+[RR:v7.1] DUMP-OBJ box 35 23
+[RR:v7.1] DUMP-OBJ enl2 17 8
+[RR:v7.1] DUMP-OBJ enl1 28 15
+[RR:v7.1] DUMP-OBJ enl1 8 23
+[RR:v7.1] DUMP-OBJ enl2 16 8
+[RR:v7.1] DUMP-OBJ enl1 22 15
+[RR:v7.1] DUMP-BACK light3 10 20
+[RR:v7.1] DUMP-BACK bwindow 33 12
+[RR:v7.1] DUMP-BACK clock 38 12
+[RR:v7.1] DUMP-BACK light4 35 11
+[RR:v7.1] DUMP-BACK depot 29 21
+[RR:v7.1] DUMP-BACK depot 32 21
+[RR:v7.1] DUMP-BACK depot 35 21
+[RR:v7.1] DUMP-BACK light3 30 19
+[RR:v7.1] DUMP-END
+[RR:v7.1] verifyEntry: 等待 Land 切换, World.land.act.id=rr_showroom (tick=30)
+[RR:v7.1] verifyEntry: 等待 Land 切换, World.land.act.id=rr_showroom (tick=60)
+[RR:v7.1] verifyEntry: locs[0][0] loc=loc0_0 room=syn_14 tip=null
+[RR:v7.1] verifyEntry: locs[0][1] loc=loc0_1 room=syn_52 tip=vert
+[RR:v7.1] verifyEntry: locs[0][2] loc=loc0_2 room=syn_59 tip=vert
+[RR:v7.1] verifyEntry: locs[0][3] loc=loc0_3 room=syn_50 tip=vert
+[RR:v7.1] verifyEntry: locs[0][4] loc=loc0_4 room=syn_55 tip=vert
+[RR:v7.1] verifyEntry: locs[1][0] loc=loc1_0 room=syn_33 tip=null
+[RR:v7.1] verifyEntry: locs[1][1] loc=loc1_1 room=syn_24 tip=null
+[RR:v7.1] verifyEntry: locs[1][2] loc=loc1_2 room=syn_12 tip=null
+[RR:v7.1] verifyEntry: locs[1][3] loc=loc1_3 room=syn_18 tip=null
+[RR:v7.1] verifyEntry: locs[1][4] loc=loc1_4 room=syn_40 tip=null
+[RR:v7.1] verifyEntry: locs[2][0] loc=loc2_0 room=syn_10 tip=null
+[RR:v7.1] verifyEntry: locs[2][1] loc=loc2_1 room=syn_4 tip=null
+[RR:v7.1] verifyEntry: locs[2][2] loc=loc2_2 room=syn_8 tip=null
+[RR:v7.1] verifyEntry: locs[2][3] loc=loc2_3 room=syn_6 tip=null
+[RR:v7.1] verifyEntry: locs[2][4] loc=loc2_4 room=syn_9 tip=null
+[RR:v7.1] verifyEntry: locs[3][0] loc=loc3_0 room=syn_44 tip=null
+[RR:v7.1] verifyEntry: locs[3][1] loc=loc3_1 room=syn_7 tip=null
+[RR:v7.1] verifyEntry: locs[3][2] loc=loc3_2 room=syn_0 tip=null
+[RR:v7.1] verifyEntry: locs[3][3] loc=loc3_3 room=syn_42 tip=null
+[RR:v7.1] verifyEntry: locs[3][4] loc=loc3_4 room=syn_19 tip=null
+[RR:v7.1] verifyEntry: locs[4][0] loc=loc4_0 room=syn_56 tip=vert
+[RR:v7.1] verifyEntry: locs[4][1] loc=loc4_1 room=syn_48 tip=vert
+[RR:v7.1] verifyEntry: locs[4][2] loc=loc4_2 room=syn_51 tip=vert
+[RR:v7.1] verifyEntry: locs[4][3] loc=loc4_3 room=syn_57 tip=vert
+[RR:v7.1] verifyEntry: locs[4][4] loc=loc4_4 room=rr_exit tip=end
+[RR:v7.1] verifyEntry: 进入 random_rooms 成功！网格=5x5,5,5,5,5 采集 25 个 loc，房间 id 集合(25)=rr_exit,syn_0,syn_10,syn_12,syn_14,syn_18,syn_19,syn_24,syn_33,syn_4,syn_40,syn_42,syn_44,syn_48,syn_50,syn_51,syn_52,syn_55,syn_56,syn_57,syn_59,syn_6,syn_7,syn_8,syn_9
+[RR:v7.1] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v7.1] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=0/48（开放格数；gotoLoc 同高度进入，开放位=可通行）

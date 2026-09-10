@@ -1,0 +1,178 @@
+appId=pferr-style-a009022e4e6b47a5834a9e7cf65d030c
+3674 ready cases=6
+3933 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+8813 newGame(-1) issued, intro skipped
+11366 initial world ready land=rbl
+11505 beginMission rrstyle-crossing-atrium
+13670 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14600 arrived rrstyle-crossing-atrium room=syn_120
+17241 capture rrstyle-crossing-atrium-stage 1008x729 room=syn_120 lightOverlay=true
+20974 capture rrstyle-crossing-atrium-room 1920x1000 room=syn_120 lightOverlay=false
+20976 CROSS-PLAN from=syn_120 target=syn_401
+21002 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_120","stay":true,"x":81.8}
+21475 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_120","stay":true,"x":183.3}
+21972 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_120","stay":true,"x":288.3}
+22337 DOOR target=stdoor x=460 lock=0 mine=0
+22477 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_120","stay":true,"x":381.3}
+22981 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_120","stay":true,"x":384.8}
+23472 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_120","stay":true,"x":489.8}
+23670 heartbeat state=6 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+23975 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_120","stay":true,"x":594.8}
+24508 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_120","stay":true,"x":699.8}
+24972 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_120","stay":true,"x":804.8}
+25471 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_120","stay":true,"x":909.8}
+25972 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_120","stay":true,"x":1014.8}
+26473 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_120","stay":true,"x":1119.8}
+26972 CROSS-SAMPLE {"y":960,"frame":181,"locX":0,"room":"syn_120","stay":true,"x":1224.8}
+27473 CROSS-SAMPLE {"y":960,"frame":196,"locX":0,"room":"syn_120","stay":true,"x":1329.8}
+27971 CROSS-SAMPLE {"y":960,"frame":211,"locX":0,"room":"syn_120","stay":true,"x":1434.8}
+28204 DOOR target=stdoor x=1580 lock=0 mine=0
+28470 CROSS-SAMPLE {"y":960,"frame":226,"locX":0,"room":"syn_120","stay":true,"x":1499.8}
+28971 CROSS-SAMPLE {"y":960,"frame":241,"locX":0,"room":"syn_120","stay":true,"x":1531.3}
+29469 CROSS-SAMPLE {"y":960,"frame":256,"locX":0,"room":"syn_120","stay":true,"x":1636.3}
+29973 CROSS-SAMPLE {"y":960,"frame":271,"locX":0,"room":"syn_120","stay":true,"x":1741.3}
+30470 CROSS-SAMPLE {"y":960,"frame":286,"locX":0,"room":"syn_120","stay":true,"x":1846.3}
+31051 MOVE-RESULT {"frames":293,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_401","caseId":"rrstyle-crossing-atrium","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+31070 beginMission rrstyle-crossing-workshop
+33671 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+34120 arrived rrstyle-crossing-workshop room=syn_401
+36924 capture rrstyle-crossing-workshop-stage 1008x729 room=syn_401 lightOverlay=true
+38295 capture rrstyle-crossing-workshop-room 1920x1000 room=syn_401 lightOverlay=false
+38295 CROSS-PLAN from=syn_401 target=syn_513
+38310 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_401","stay":true,"x":81.8}
+38807 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_401","stay":true,"x":183.3}
+39307 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_401","stay":true,"x":288.3}
+39806 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_401","stay":true,"x":393.3}
+40304 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_401","stay":true,"x":498.3}
+40817 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_401","stay":true,"x":603.3}
+41307 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_401","stay":true,"x":708.3}
+41806 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_401","stay":true,"x":813.3}
+42304 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_401","stay":true,"x":918.3}
+42337 DOOR target=door1b x=1020 lock=0 mine=0
+42804 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_401","stay":true,"x":1014.8}
+43305 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_401","stay":true,"x":1119.8}
+43671 heartbeat state=6 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+43805 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_401","stay":true,"x":1224.8}
+44306 CROSS-SAMPLE {"y":960,"frame":181,"locX":0,"room":"syn_401","stay":true,"x":1329.8}
+44805 CROSS-SAMPLE {"y":960,"frame":196,"locX":0,"room":"syn_401","stay":true,"x":1434.8}
+45331 CROSS-SAMPLE {"y":960,"frame":211,"locX":0,"room":"syn_401","stay":true,"x":1539.8}
+45808 CROSS-SAMPLE {"y":960,"frame":226,"locX":0,"room":"syn_401","stay":true,"x":1644.8}
+46304 CROSS-SAMPLE {"y":960,"frame":241,"locX":0,"room":"syn_401","stay":true,"x":1749.8}
+46803 CROSS-SAMPLE {"y":960,"frame":256,"locX":0,"room":"syn_401","stay":true,"x":1854.8}
+47394 MOVE-RESULT {"frames":262,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_513","caseId":"rrstyle-crossing-workshop","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+47414 beginMission rrstyle-crossing-offices
+50527 arrived rrstyle-crossing-offices room=syn_513
+53144 capture rrstyle-crossing-offices-stage 1008x729 room=syn_513 lightOverlay=true
+54238 capture rrstyle-crossing-offices-room 1920x1000 room=syn_513 lightOverlay=false
+54239 CROSS-PLAN from=syn_513 target=syn_832
+54261 heartbeat state=6 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54261 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_513","stay":true,"x":81.8}
+54739 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_513","stay":true,"x":183.3}
+55239 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_513","stay":true,"x":288.3}
+55738 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_513","stay":true,"x":393.3}
+56238 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_513","stay":true,"x":498.3}
+56737 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_513","stay":true,"x":603.3}
+56937 DOOR target=door2 x=740 lock=0 mine=0
+57238 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_513","stay":true,"x":699.8}
+57739 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_513","stay":true,"x":804.8}
+58238 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_513","stay":true,"x":909.8}
+58503 DOOR target=door2 x=1060 lock=0 mine=0
+58737 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_513","stay":true,"x":1006.3}
+59235 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_513","stay":true,"x":1111.3}
+59742 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_513","stay":true,"x":1216.3}
+60238 CROSS-SAMPLE {"y":960,"frame":181,"locX":0,"room":"syn_513","stay":true,"x":1321.3}
+60737 CROSS-SAMPLE {"y":960,"frame":196,"locX":0,"room":"syn_513","stay":true,"x":1426.3}
+61237 CROSS-SAMPLE {"y":960,"frame":211,"locX":0,"room":"syn_513","stay":true,"x":1531.3}
+61739 CROSS-SAMPLE {"y":960,"frame":226,"locX":0,"room":"syn_513","stay":true,"x":1636.3}
+62235 CROSS-SAMPLE {"y":960,"frame":241,"locX":0,"room":"syn_513","stay":true,"x":1741.3}
+62738 CROSS-SAMPLE {"y":960,"frame":256,"locX":0,"room":"syn_513","stay":true,"x":1846.3}
+63267 MOVE-RESULT {"frames":263,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_832","caseId":"rrstyle-crossing-offices","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+63284 beginMission rrstyle-crossing-damaged
+63667 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+66272 arrived rrstyle-crossing-damaged room=syn_832
+68900 capture rrstyle-crossing-damaged-stage 1008x729 room=syn_832 lightOverlay=true
+70261 capture rrstyle-crossing-damaged-room 1920x1000 room=syn_832 lightOverlay=false
+70263 CROSS-PLAN from=syn_832 target=syn_0
+70283 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_832","stay":true,"x":81.8}
+70776 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_832","stay":true,"x":183.3}
+71274 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_832","stay":true,"x":288.3}
+71771 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_832","stay":true,"x":393.3}
+72004 DOOR target=door1 x=540 lock=0 mine=0
+72270 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_832","stay":true,"x":489.8}
+72772 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_832","stay":true,"x":594.8}
+73269 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_832","stay":true,"x":699.8}
+73670 heartbeat state=6 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+73771 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_832","stay":true,"x":804.8}
+74271 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_832","stay":true,"x":909.8}
+74774 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_832","stay":true,"x":1014.8}
+75273 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_832","stay":true,"x":1119.8}
+75772 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_832","stay":true,"x":1135}
+76041 CROSS-JUMP obstacle at x=1135 y=960
+76313 CROSS-SAMPLE {"y":876,"frame":181,"locX":0,"room":"syn_832","stay":false,"x":1135}
+76783 CROSS-SAMPLE {"y":800,"frame":196,"locX":0,"room":"syn_832","stay":true,"x":1177}
+77271 CROSS-SAMPLE {"y":800,"frame":211,"locX":0,"room":"syn_832","stay":true,"x":1282}
+77776 CROSS-SAMPLE {"y":800,"frame":226,"locX":0,"room":"syn_832","stay":true,"x":1387}
+78269 CROSS-SAMPLE {"y":800,"frame":241,"locX":0,"room":"syn_832","stay":true,"x":1492}
+78774 CROSS-SAMPLE {"y":905,"frame":256,"locX":0,"room":"syn_832","stay":false,"x":1597}
+79277 CROSS-SAMPLE {"y":960,"frame":271,"locX":0,"room":"syn_832","stay":true,"x":1701.9999999999998}
+79774 CROSS-SAMPLE {"y":960,"frame":286,"locX":0,"room":"syn_832","stay":true,"x":1806.9999999999998}
+80446 MOVE-RESULT {"frames":299,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_0","caseId":"rrstyle-crossing-damaged","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+80462 beginMission rrstyle-crossing-service
+83532 arrived rrstyle-crossing-service room=syn_0
+83672 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+86279 capture rrstyle-crossing-service-stage 1008x729 room=syn_0 lightOverlay=true
+89229 capture rrstyle-crossing-service-room 1920x1000 room=syn_0 lightOverlay=false
+89230 CROSS-PLAN from=syn_0 target=syn_257
+89244 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_0","stay":true,"x":81.8}
+89740 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_0","stay":true,"x":183.3}
+90239 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_0","stay":true,"x":288.3}
+90606 DOOR target=stdoor x=460 lock=0 mine=0
+90742 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_0","stay":true,"x":381.3}
+91245 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_0","stay":true,"x":384.8}
+91736 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_0","stay":true,"x":489.8}
+92238 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_0","stay":true,"x":594.8}
+92737 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_0","stay":true,"x":699.8}
+93241 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_0","stay":true,"x":804.8}
+93671 heartbeat state=6 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+93744 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_0","stay":true,"x":909.8}
+94242 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_0","stay":true,"x":1014.8}
+94736 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_0","stay":true,"x":1119.8}
+95240 CROSS-SAMPLE {"y":960,"frame":181,"locX":0,"room":"syn_0","stay":true,"x":1224.8}
+95738 CROSS-SAMPLE {"y":960,"frame":196,"locX":0,"room":"syn_0","stay":true,"x":1329.8}
+95903 DOOR target=stdoor x=1460 lock=0 mine=0
+96241 CROSS-SAMPLE {"y":960,"frame":211,"locX":0,"room":"syn_0","stay":true,"x":1380.8}
+96241 DOOR-SAMPLE cursor=2.000208333333333 selected=true action=true remaining=7 open=false
+96739 CROSS-SAMPLE {"y":960,"frame":226,"locX":0,"room":"syn_0","stay":true,"x":1426.3}
+97236 CROSS-SAMPLE {"y":960,"frame":241,"locX":0,"room":"syn_0","stay":true,"x":1531.3}
+97743 CROSS-SAMPLE {"y":960,"frame":256,"locX":0,"room":"syn_0","stay":true,"x":1636.3}
+98233 CROSS-SAMPLE {"y":960,"frame":271,"locX":0,"room":"syn_0","stay":true,"x":1741.3}
+98736 CROSS-SAMPLE {"y":960,"frame":286,"locX":0,"room":"syn_0","stay":true,"x":1846.3}
+99322 MOVE-RESULT {"frames":293,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_257","caseId":"rrstyle-crossing-service","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+99339 beginMission rrstyle-crossing-warehouse
+102405 arrived rrstyle-crossing-warehouse room=syn_257
+103670 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+105163 capture rrstyle-crossing-warehouse-stage 1008x729 room=syn_257 lightOverlay=true
+106571 capture rrstyle-crossing-warehouse-room 1920x1000 room=syn_257 lightOverlay=false
+106571 CROSS-PLAN from=syn_257 target=syn_120
+106587 CROSS-SAMPLE {"y":960,"frame":1,"locX":0,"room":"syn_257","stay":true,"x":81.8}
+107071 CROSS-SAMPLE {"y":960,"frame":16,"locX":0,"room":"syn_257","stay":true,"x":183.3}
+107570 CROSS-SAMPLE {"y":960,"frame":31,"locX":0,"room":"syn_257","stay":true,"x":288.3}
+108073 CROSS-SAMPLE {"y":960,"frame":46,"locX":0,"room":"syn_257","stay":true,"x":393.3}
+108569 CROSS-SAMPLE {"y":960,"frame":61,"locX":0,"room":"syn_257","stay":true,"x":498.3}
+109071 CROSS-SAMPLE {"y":960,"frame":76,"locX":0,"room":"syn_257","stay":true,"x":603.3}
+109571 CROSS-SAMPLE {"y":960,"frame":91,"locX":0,"room":"syn_257","stay":true,"x":708.3}
+110070 CROSS-SAMPLE {"y":960,"frame":106,"locX":0,"room":"syn_257","stay":true,"x":813.3}
+110570 CROSS-SAMPLE {"y":960,"frame":121,"locX":0,"room":"syn_257","stay":true,"x":918.3}
+111069 CROSS-SAMPLE {"y":960,"frame":136,"locX":0,"room":"syn_257","stay":true,"x":1023.3}
+111569 CROSS-SAMPLE {"y":960,"frame":151,"locX":0,"room":"syn_257","stay":true,"x":1128.3}
+112069 CROSS-SAMPLE {"y":960,"frame":166,"locX":0,"room":"syn_257","stay":true,"x":1233.3}
+112103 DOOR target=door1b x=1340 lock=0 mine=0
+112571 CROSS-SAMPLE {"y":960,"frame":181,"locX":0,"room":"syn_257","stay":true,"x":1329.8}
+113070 CROSS-SAMPLE {"y":960,"frame":196,"locX":0,"room":"syn_257","stay":true,"x":1434.8}
+113569 CROSS-SAMPLE {"y":960,"frame":211,"locX":0,"room":"syn_257","stay":true,"x":1539.8}
+113669 heartbeat state=6 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+114070 CROSS-SAMPLE {"y":960,"frame":226,"locX":0,"room":"syn_257","stay":true,"x":1644.8}
+114569 CROSS-SAMPLE {"y":960,"frame":241,"locX":0,"room":"syn_257","stay":true,"x":1749.8}
+115072 CROSS-SAMPLE {"y":960,"frame":256,"locX":0,"room":"syn_257","stay":true,"x":1854.8}
+115626 MOVE-RESULT {"frames":262,"phase":"cross-adjacent-room","toX":34,"isLaz":0,"fromY":960,"success":true,"fromX":81.8,"room":"syn_120","caseId":"rrstyle-crossing-warehouse","locX":1,"stay":false,"locY":0,"toY":960,"reason":"entered adjacent room through normal movement"}
+115644 DONE 6 cases

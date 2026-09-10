@@ -5,7 +5,8 @@ param(
     [string]$VersionTag = 'RRSynth-current',
     [ValidateRange(1,256)][int]$SamplesPerBiome = 8,
     [uint32]$BaseSeed = 20260910,
-    [ValidateRange(0,8)][int]$CookCopies = 0
+    [ValidateRange(0,8)][int]$CookCopies = 0,
+    [ValidateSet('','atrium','workshop','offices','damaged','service','warehouse','connector')][string]$RoomKind = ''
 )
 $ErrorActionPreference = 'Stop'
 $modRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../../..')).Path
@@ -17,7 +18,7 @@ $descriptor = Join-Path $PSScriptRoot 'synth-baseline-app.xml'
 $output = Join-Path $PSScriptRoot 'SynthBaseline.swf'
 if ([IO.Path]::GetFileName($OutputName) -ne $OutputName -or -not $OutputName.EndsWith('.xml')) { throw 'OutputName must be an XML leaf filename.' }
 $outputStem = [IO.Path]::GetFileNameWithoutExtension($OutputName)
-[ordered]@{outputName=$OutputName;versionTag=$VersionTag;samplesPerBiome=$SamplesPerBiome;baseSeed=$BaseSeed;cookCopies=$CookCopies} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'harness-settings.json') -Encoding utf8
+[ordered]@{outputName=$OutputName;versionTag=$VersionTag;samplesPerBiome=$SamplesPerBiome;baseSeed=$BaseSeed;cookCopies=$CookCopies;roomKind=$RoomKind} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'harness-settings.json') -Encoding utf8
 foreach ($required in @($Java, $compiler, $adl, $runtime, $descriptor)) {
     if (-not (Test-Path -LiteralPath $required)) { throw "Missing: $required" }
 }

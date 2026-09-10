@@ -143,7 +143,9 @@ package rr
       public function build():void
       {
          objects.push(["player",1,23]);
-         for each (var d:Object in plan.doors) objects.push(["stdoor",d.x,d.y]);
+         for each (var d:Object in plan.doors) objects.push([d.id,d.x,d.y,"door"]);
+         for each (d in plan.hatches) objects.push([d.id,d.x,d.y,"hatch"]);
+         for each (d in plan.windows) objects.push([d.id,d.x,d.y,"window"]);
          for each (var r:Object in plan.regions)
          {
             if (r.role=="shaft") continue;

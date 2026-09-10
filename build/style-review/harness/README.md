@@ -45,3 +45,12 @@ cookPool(...,1)新增0，真实验证生成房保护。输出SHA256为
 new File(File.applicationDirectory.nativePath) 后，才能取到真实文件目录的父级。
 所有显式输出均在本工作区；harness 没有 applicationStorageDirectory 写入。
 生成的 SWF、XML、PNG、JSON、临时日志均为可再生产物，提交时排除。
+
+`-RoomKind connector` 可强制生成连接竖井；也接受 atrium、workshop、offices、
+damaged、service、warehouse。省略时保留各主题的正常权重，不强制类型。
+v7.1 常规批次为 `-OutputName generated-v71.xml -VersionTag space-v7.1
+-SamplesPerBiome 256 -BaseSeed 9301000 -CookCopies 1`；连接竖井批次为
+`-OutputName generated-v71-connectors.xml -VersionTag space-v7.1
+-SamplesPerBiome 16 -BaseSeed 9310000 -CookCopies 1 -RoomKind connector`。
+两批共1088间，包含门/活板门/玻璃窗；独立检查用 build/verify_architecture.py，
+把未破坏的玻璃计入阻挡，不假定打碎玻璃才能通行。

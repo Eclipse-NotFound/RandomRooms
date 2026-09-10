@@ -33,7 +33,7 @@ package rr
       public function generate(n:int, biome:String="stable", rtype:String=""):XML
       {
          var grid:Array=genGrid(biome,rtype);
-         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrTheme={plan.theme} rrKind={plan.archetype}/>;
+         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="7.1" rrTheme={plan.theme} rrKind={plan.archetype}/>;
          for (var y:int=0;y<GRID_H;y++) room.appendChild(<a>{grid[y].join(".")}</a>);
          for (var i:int=0;i<furnishing.objects.length;i++)
          {
@@ -41,7 +41,8 @@ package rr
             var objectXML:XML=<obj id={o[0]} code={"syn_"+n+"_o"+i} x={o[1]} y={o[2]}/>;
             // These doors divide a route, so they must not inherit the asset's
             // random locks/mines. They remain normal operable, closed doors.
-            if (o[0]=="stdoor") { objectXML.@lock="0"; objectXML.@mine="0"; }
+            if (o.length>3) objectXML.@rrFixture=o[3];
+            if (o[3]=="door" || o[3]=="hatch") { objectXML.@lock="0"; objectXML.@mine="0"; }
             room.appendChild(objectXML);
          }
          for each (var b:Array in furnishing.backs) room.appendChild(<back id={b[0]} x={b[1]} y={b[2]}/>);

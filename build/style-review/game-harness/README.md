@@ -226,3 +226,26 @@ F1进入syn_14，两份接口检查均零问题，共4张真实截图，退出0�
 和扩张反爬证据仍为上文相应批次，不把两入口冒烟扩大为重复全物理测试。
 
 生成的 app/ 全部为可再生产物，不应提交到 git。
+
+## v7.1 门、活板门与玻璃窗
+
+`-ArchitectureKinds -FixtureProbe -PrototypeFiles @('../generated-v71.xml')`
+运行六个固定单房。先截图，再按 XML code 找到实际 Box：核对占用 Tile、
+关闭碰撞、门锁/地雷均为零；使用原版 Interact.setAct 开/关并检查碰撞及
+梯子保留。窗户使用原版 Box.damage(100000) 验证破碎清除碰撞；这不是武器
+射击测试。结果逐房写入 `*-fixtures.json`，包含运行中物件的坐标/尺寸。
+
+随后从自然出生点用 Ctr 行走至梯子，用 Camera 光标和 keyAction 打开已
+关闭的活板门，再用 keyBeUp 爬至楼板上方。成功要求实际打开及真实高度
+均满足；没有直接设置玩家位置或门状态来完成这一阶段。`movement.json`
+记录每案实际帧数和落点；`*-hatch-open-stage.png` 保留原版光照与提示。
+
+原版 getDist 会清掉不可见光标格的 celObj，所以光标应落在门的可见表面，
+不一定是几何中心。测试 aimObject 扫描可见边缘，保持原版距离/视线检查；
+不可见时继续沿梯接近。hatch2 图像高48px、碰撞格高40px，爬升终点按
+Tile 楼层高度而非图像凸缘判断。早期夹具的误判记录保留于 app/history。
+
+最终固定六型 appId `pferr-style-7f0fc9cb4fcc41939aaca946663d739f`，开门并
+上爬6/6成功；原图与开关记录冻结于 `design/assets/v7-1-fixtures/`。
+生成/横穿/无限扩张/正式部署的完整结果见
+`knowledge/experiments/fixtures-v71-validation-2026-09-10.md`。

@@ -11,6 +11,8 @@ package rr
       public var regions:Array;
       public var ladders:Array;
       public var doors:Array;
+      public var hatches:Array;
+      public var windows:Array;
       public var reserved:Object;
       public var wall:String;
       public var trim:String;
@@ -34,7 +36,7 @@ package rr
          if (palettes[theme] == null) theme = "stable";
          var palette:Array = palettes[theme];
          wall = palette[0]; trim = palette[1]; backgrounds = palette[2];
-         grid = []; regions = []; ladders = []; doors = []; reserved = {};
+         grid = []; regions = []; ladders = []; doors = []; hatches = []; windows = []; reserved = {};
          var x:int, y:int;
          for (y = 0; y < 25; y++)
          {
@@ -70,6 +72,8 @@ package rr
             for (x = 45; x < 48; x++) grid[y][x] = "_" + backgrounds[0];
          }
          reserve(0,20,3,23); reserve(44,20,47,23);
+         addHatch();
+         addWindows();
          // Match floor edges as continuous bands, not random material pixels.
          for (y = 1; y < 25; y++)
          {
@@ -109,10 +113,62 @@ package rr
       }
       private function door(x:int, floor:int, bg:String):void
       {
+         var id:String=theme=="stable"?"stdoor":(theme=="plant"?"door2":(theme=="sewer"?"door1b":"door1"));
+         var height:int=id=="stdoor"?3:2;
          for (var y:int = floor-3; y <= floor; y++) grid[y][x] = wall;
-         open(x,floor-2,x,floor,bg);
-         doors.push({x:x,y:floor});
+         open(x,floor-height+1,x,floor,bg);
+         doors.push({id:id,x:x,y:floor});
          reserve(x-1,floor-3,x+1,floor);
+      }
+
+      private function landing(x:int,y:int):Boolean
+      {
+         return solid(x,y) || String(grid[y][x]).indexOf("-")>=0;
+      }
+      private function addHatch():void
+      {
+         // Native hatches occupy two tiles in a floor. Keep the ladder suffix:
+         // Box.initDoor/setDoor changes collision without erasing Tile.stair.
+         var candidates:Array=[];
+         for each (var l:Object in ladders)
+            for (var y:int=Math.max(4,l.top);y<=Math.min(20,l.bottom-2);y++)
+            {
+               var x:int=l.x;
+               if (!landing(x-1,y) || !landing(x+2,y)) continue;
+               var clear:Boolean=true;
+               for (var yy:int=y-2;yy<=y+2;yy++)
+                  if (solid(x,yy) || solid(x+1,yy)) clear=false;
+               if (clear) candidates.push({x:x,y:y});
+            }
+         if (candidates.length==0) throw new Error("No framed hatch landing: "+archetype);
+         var chosen:Object=candidates[int(rnd()*candidates.length)];
+         chosen.id=(theme=="mane" || theme=="sewer")?"hatch1":"hatch2";
+         hatches.push(chosen);
+         reserve(chosen.x-1,chosen.y-2,chosen.x+2,chosen.y+2);
+      }
+      private function addWindows():void
+      {
+         // Real glass in an interior partition, with a solid lintel and sill.
+         // It is never substituted for a doorway or an open ladder route.
+         var candidates:Array=[];
+         for (var x:int=6;x<=41;x++) for (var y:int=3;y<=20;y++)
+         {
+            if (!solid(x,y-2) || !solid(x,y-1) || !solid(x,y) || !solid(x,y+1)) continue;
+            if (reserved[(y-1)+","+x] || reserved[y+","+x]) continue;
+            if (solid(x-1,y-1) || solid(x-1,y) || solid(x+1,y-1) || solid(x+1,y)) continue;
+            candidates.push({x:x,y:y});
+         }
+         var target:int=theme=="sewer"?1:2;
+         while (candidates.length && windows.length<target)
+         {
+            var n:int=int(rnd()*candidates.length);
+            var p:Object=candidates.splice(n,1)[0];
+            if (reserved[(p.y-1)+","+p.x] || reserved[p.y+","+p.x]) continue;
+            p.id=theme=="stable"?"window2":"window1";
+            open(p.x,p.y-1,p.x,p.y,backgrounds[0]);
+            windows.push(p);
+            reserve(p.x-1,p.y-2,p.x+1,p.y+1);
+         }
       }
       public function reserve(x0:int, top:int, x1:int, bottom:int):void
       {
@@ -147,6 +203,7 @@ package rr
          platform(l,r-8,16,b0); platform(l+9,r,8,b0);
          platform(r-8,r+1,12,b0); platform(l,l+3,8,b0);
          ladder(l+2,8,23,b0); ladder(r-3,8,23,b0);
+         door(l-1,15,b1); door(l-1,23,b1); door(r+1,23,b2);
       }
 
       private function workshop():void
@@ -173,7 +230,8 @@ package rr
             room(0,1+i*8,s-5,f,backgrounds[i%3],i == 1 ? "store" : "office");
             room(s+5,1+i*8,47,f,backgrounds[(i+1)%3],i == 1 ? "living" : "service");
             open(s-4,f-2,s-4,f,b2); open(s+4,f-2,s+4,f,b2);
-            if (i == 2) { door(s-4,f,b2); door(s+4,f,b2); }
+            if (i != 1) door(s-4,f,b2);
+            if (i != 0) door(s+4,f,b2);
             platform(s-3,s+3,f+1,b2,true);
          }
          ladder(s-1,8,23,b2);
@@ -203,6 +261,9 @@ package rr
             var h:int = Math.max(1,4-Math.abs(x-rubble-2));
             for (y = 24-h; y < 24; y++) grid[y][x] = wall;
          }
+         // Enclose the surviving ground-floor annex under its existing slab.
+         for (y=17;y<=23;y++) grid[y][edge]=wall;
+         door(edge,23,b1); door(start,7,b1);
       }
 
       private function service():void
@@ -236,6 +297,9 @@ package rr
          platform(33,47,16,b0,true);
          for (var y:int = 2; y <= 15; y++) grid[y][33] = wall;
          open(33,13,33,15,b2);
+         door(33,15,b2);
+         for (y=17;y<=23;y++) grid[y][33]=wall;
+         door(33,23,b2);
          ladder(5,12,23,b1); ladder(41,16,23,b2);
          if (rnd() < 0.6) platform(split-1,30,12,b0);
       }
@@ -253,7 +317,8 @@ package rr
             open(20,f-2,21,f,bg); open(26,f-2,27,f,bg);
             platform(20,27,f+1,bg,true);
          }
-         reserve(20,0,27,24);
+         reserve(21,0,26,24);
+         door(20,23,bg); door(27,15,bg);
       }
    }
 }
