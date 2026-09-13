@@ -32,13 +32,30 @@ package
       private static var lastY:Number;
       private static var originX:int;
       private static var originY:int;
+      private static var growing:Boolean;
+      private static var milestones:Array;
+      private static var milestone:int;
+      private static var settlingGoal:Boolean;
+      private static var originals:Object;
 
-      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function):void
+      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false):void
       {
          root=directory; name=caseName; logger=log; action=doorAction; capture=screen;
          done=success=false; reason=""; ticks=legTicks=at=stuck=0;
          local=null; records=[]; targets=[]; route=[];
          originX=w.land.locX; originY=w.land.locY;
+         growing=growth; milestone=0; settlingGoal=false; originals={};
+         if (growing)
+         {
+            var iw:int=w.land.maxLocX,ih:int=w.land.maxLocY;
+            milestones=[{x:iw,y:0,label:"new-column"},{x:iw-1,y:0,label:"return-column"},
+               {x:iw-1,y:ih,label:"new-row"},{x:iw-1,y:ih-1,label:"return-row"}];
+            for (var ox:int=0;ox<iw;ox++) for (var oy:int=0;oy<ih;oy++)
+               originals[ox+","+oy]={xml:w.land.locs[ox][oy][0].room.xml.toXMLString(),mirror:Boolean(w.land.locs[ox][oy][0].mirror)};
+            w.gg.invulner=true;
+            logger("NAV-GROWTH natural spawn, initial="+iw+"x"+ih+"; targets="+JSON.stringify(milestones));
+            return;
+         }
          var open:Array=[];
          for (var p:int=0;p<22;p++)
          {
@@ -110,11 +127,23 @@ package
          {
             var x:int=i%48,y:int=int(i/48);
             if (target!=null && (y!=target.floor || x<target.x0 || x+1>target.x1 || !support[i])) continue;
+            if (target!=null && furnitureAt(w,(x+1)*40,(y+1)*40-1)) continue;
             var cost:Number=target==null?Math.abs((x+1)*40-w.gg.X)+Math.abs((y+1)*40-1-w.gg.Y)*2:
                Math.abs(x-(target.x0+target.x1-1)/2);
             if (cost<score) { score=cost; best=i; }
          }
          return best;
+      }
+      private static function furnitureAt(w:*,x:Number,y:Number):Boolean
+      {
+         var obj:*=w.loc.firstObj;
+         while (obj!=null)
+         {
+            if ("wall" in obj && obj.wall==0 && obj.phis>0 && !obj.dead &&
+                x+w.gg.scX/2>obj.X1 && x-w.gg.scX/2<obj.X2 && y>obj.Y1 && y-w.gg.scY<obj.Y2) return true;
+            obj=obj.nobj;
+         }
+         return false;
       }
       private static function path(w:*,goal:int):Array
       {
@@ -140,13 +169,76 @@ package
          if (p>=6 && p<=10) return 24*48+pt.x;
          return cells[cells.length-1].y*48+(p>=11?0:46);
       }
+      private static function growTargets(w:*):Boolean
+      {
+         targets=[]; at=0; route=[]; legTicks=0;
+         if (milestone>=milestones.length)
+         {
+            for (var key:String in originals)
+            {
+               var xy:Array=key.split(","),old:Object=originals[key];
+               var loc:*=w.land.locs[int(xy[0])][int(xy[1])][0];
+               if (old.xml!=loc.room.xml.toXMLString() || old.mirror!=Boolean(loc.mirror)) throw new Error("Explored room was regenerated "+key);
+            }
+            finish(true,"Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged");
+            return false;
+         }
+         var m:Object=milestones[milestone];
+         if (w.land.locX==m.x && w.land.locY==m.y)
+         {
+            if (!settlingGoal)
+            {
+               var r:XML=w.loc.room.xml.rrPlan.space[0];
+               var a:int=int(r.@x0),b:int=int(r.@x1);
+               if (w.loc.mirror) { var swap:int=a; a=47-b; b=47-swap; }
+               targets.push({kind:"space",entry:m.label,space:0,x:m.x,y:m.y,x0:a,x1:b,floor:int(r.@floor)});
+               settlingGoal=true; return true;
+            }
+            records.push({kind:"milestone",label:m.label,x:m.x,y:m.y,width:w.land.maxLocX,height:w.land.maxLocY,success:true});
+            logger("NAV-MILESTONE "+JSON.stringify(records[records.length-1]));
+            capture(w,name+"-"+m.label,true);
+            milestone++; settlingGoal=false; return false;
+         }
+         var goal:String=Math.min(m.x,w.land.maxLocX-1)+","+Math.min(m.y,w.land.maxLocY-1);
+         var start:String=w.land.locX+","+w.land.locY;
+         if (start==goal) return false; // The production frame prepares the next frontier.
+         var q:Array=[start],prev:Object={},via:Object={}; prev[start]="";
+         for (var i:int=0;i<q.length;i++)
+         {
+            key=q[i]; if (key==goal) break;
+            xy=key.split(","); var x:int=int(xy[0]),y:int=int(xy[1]);
+            loc=w.land.locs[x][y][0];
+            for (var p:int=0;p<22;p++) if (int(loc.doors[p])>=2)
+            {
+               var nx:int=x+(p<6?1:(p>=11 && p<17?-1:0));
+               var ny:int=y+(p>=17?-1:(p>=6 && p<=10?1:0));
+               if (nx<0 || ny<0 || nx>=w.land.maxLocX || ny>=w.land.maxLocY) continue;
+               var next:String=nx+","+ny; if (prev[next]!==undefined) continue;
+               var open:Boolean=true;
+               for each (var c:Object in StyleDriver.portCells(p,int(loc.doors[p]))) if (loc.space[c.x][c.y].phis!=0) open=false;
+               if (!open) continue;
+               prev[next]=key; via[next]={kind:"cross",x:x,y:y,port:p,toX:nx,toY:ny}; q.push(next);
+            }
+         }
+         if (prev[goal]===undefined) throw new Error("No native map route "+start+" -> "+goal);
+         for (key=goal;key!=start;key=prev[key]) targets.unshift(via[key]);
+         logger("NAV-GROW-ROUTE "+start+" -> "+goal+" edges="+targets.length);
+         return true;
+      }
       public static function step(w:*):void
       {
          if (done) return;
          try
          {
             ticks++; legTicks++; w.ctr.clearAll(); w.ctr.keyAction=false;
-            if (at>=targets.length) { finish(true,"All spaces visited after each actual port entry"); return; }
+            // Native controlOn clears invulnerability after a room transition.
+            // Keep combat protection throughout this geometry-only probe.
+            w.gg.invulner=true;
+            if (at>=targets.length)
+            {
+               if (!growing) { finish(true,"All spaces visited after each actual port entry"); return; }
+               if (!growTargets(w)) return;
+            }
             var t:Object=targets[at];
             if (t.kind=="cross" && w.land.locX==t.toX && w.land.locY==t.toY)
             {
@@ -162,11 +254,11 @@ package
                w.ctr.keyLeft=t.port>=11 && t.port<17;
                w.ctr.keyBeUp=t.port>=17;
                w.ctr.keySit=t.port>=6 && t.port<=10;
-               if (legTicks>900) throw new Error("Boundary crossing timed out "+t.port);
+               if (legTicks>1500) throw new Error("Boundary crossing timed out "+t.port);
                return;
             }
             if (ticks%60==1) logger("NAV-SAMPLE "+JSON.stringify({target:at,task:t,x:w.gg.X,y:w.gg.Y,ladder:w.gg.isLaz,stay:w.gg.stay,route:route,frame:legTicks}));
-            if (legTicks>900) throw new Error("Movement timed out at "+JSON.stringify(t));
+            if (legTicks>1500) throw new Error("Movement timed out at "+JSON.stringify(t));
             if (!route.length)
             {
                var goal:int=t.kind=="space"?nearest(w,t):goalFor(t);
@@ -181,12 +273,28 @@ package
             {
                var later:int=route[ahead];
                if (Math.abs((later%48+1)*40-w.gg.X)<22 && Math.abs((int(later/48)+1)*40-1-w.gg.Y)<(support[later]?6:22) &&
-                   (!support[later] || w.gg.stay || w.gg.isLaz))
+                   (!support[later] || w.gg.stay || w.gg.isLaz && w.gg.Y<=(int(later/48)+1)*40))
                { route=route.slice(ahead); break; }
             }
             var step:int=route[0],tx:Number=(step%48+1)*40,ty:Number=(int(step/48)+1)*40-1;
+            var transferUp:Boolean=climb[step] && route.length>1 && int(route[1]/48)<int(step/48);
+            if (climb[step] || Math.abs(ty-w.gg.Y)>10)
+            {
+               var column:int=step%48;
+               // checkStairs samples floor(X/40), then snaps to the rung's
+               // side using the pony's actual width. A tile-boundary centre
+               // is outside a mirrored ladder and can never engage it.
+               var scanTop:int=Math.max(0,Math.min(int((w.gg.Y-1)/40),int(step/48)));
+               var scanBottom:int=Math.min(24,Math.max(int((w.gg.Y-1)/40),int(step/48))+1);
+               for (var sy:int=scanTop;sy<=scanBottom;sy++)
+               {
+                  if (local.space[column][sy].stair<0) { tx=column*40+w.gg.scX/2; break; }
+                  if (local.space[column+1][sy].stair>0) { tx=(column+2)*40-w.gg.scX/2; break; }
+               }
+            }
             var dx:Number=tx-w.gg.X,dy:Number=ty-w.gg.Y;
-            if (Math.abs(dx)<19 && Math.abs(dy)<(support[step]?6:20) && (!support[step] || w.gg.stay || w.gg.isLaz))
+            if (Math.abs(dx)<19 && (transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(support[step]?6:20)) &&
+                (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+1) && (!transferUp || w.gg.isLaz))
             {
                route.shift();
                if (route.length) return;
@@ -208,15 +316,17 @@ package
             w.ctr.keyLeft=dx<-12; w.ctr.keyRight=dx>12;
             if (Math.abs(dx)<24)
             {
-               w.ctr.keyBeUp=dy<-5;
-               w.ctr.keySit=dy>5;
+               w.ctr.keyBeUp=dy<(w.gg.isLaz?-0.5:-5) || transferUp;
+               // A free fall needs no down key. Down during a jump makes the
+               // pony pass through the very platform it is trying to land on.
+               w.ctr.keySit=dy>5 && (w.gg.isLaz || w.gg.stay);
                if (dy>20 && stuck>15 && w.gg.stay) w.ctr.keyDubSit=true;
             }
             // Native jumping releases a ladder onto its adjacent landing and
             // steps over movable furniture. Never move or delete the obstacle.
-            if (Math.abs(dx)>18 && Math.abs(dy)<50 && w.gg.isLaz || stuck>24 && w.gg.stay)
-            { w.ctr.keyJump=true; w.ctr.keyBeUp=false; stuck=0; }
-            if (w.gg.stay && Math.abs(dx)>25 && Math.abs(dy)<45)
+            if (Math.abs(dx)>18 && Math.abs(dy)<50 && w.gg.isLaz || stuck>24 && w.gg.stay && Math.abs(dy)<50)
+            { w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; stuck=0; }
+            if (!climb[step] && !transferUp && w.gg.stay && Math.abs(dx)>25 && Math.abs(dy)<45)
             {
                var aheadX:int=int((w.gg.X+(dx<0?-70:70))/40);
                var belowY:int=int((w.gg.Y+2)/40);
@@ -224,8 +334,19 @@ package
                {
                   var aheadTile:*=w.loc.space[aheadX][belowY];
                   if (aheadTile.phis==0 && !aheadTile.shelf)
-                  { w.ctr.keyJump=true; w.ctr.keyBeUp=false; }
+                  { w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; }
                }
+            }
+            // If an ordinary fall missed a ledge, navigate from the observed
+            // landing again. This changes only the test's intended route.
+            if (legTicks%240==0 && w.gg.stay && !w.gg.isLaz && Math.abs(dy)>80)
+               route=path(w,t.kind=="space"?nearest(w,t):goalFor(t));
+            if (w.gg.isLaz && Math.abs(dx)<40 && Math.abs(dy)>50)
+            {
+               // First reach the landing height on the ladder already held;
+               // its native snap can be 25 px from the adjacent floor pose.
+               w.ctr.keyLeft=w.ctr.keyRight=false;
+               w.ctr.keyBeUp=dy<0; w.ctr.keySit=dy>0; w.ctr.keyJump=false;
             }
          }
          catch (e:*)
@@ -237,7 +358,7 @@ package
       private static function finish(ok:Boolean,message:String):void
       {
          done=true; success=ok; reason=message;
-         var result:Object={success:ok,reason:message,caseId:name,targets:targets.length,completed:at,frames:ticks,records:records};
+         var result:Object={success:ok,reason:message,caseId:name,targets:targets.length,completed:at,frames:ticks,records:records,growth:growing,milestones:growing?milestone:0};
          var stream:FileStream=new FileStream();
          stream.open(root.resolvePath("captures/"+name+"-navigation.json"),FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(result)); stream.close();

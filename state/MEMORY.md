@@ -5,15 +5,15 @@
 
 ## v8 实施中（2026-09-13，不能当作已发布）
 
-- RRArchitecture改为不等宽/不等高空间分割，先选无向连接图再开门/梯口；局部平台、错位短梯、随机数量的环与有用途的尽头。不再六套固定坐标布局。RRSynth rrGen=space-v8、rrRevision=8.0；旧space-v7仍受cook保护。
-- RRPorts统一22个原版边口；RRMapPlan逐边提前定口，向原点的父连接保证地图连通，额外连接产生回环；普通上下口错位，约4%的连续纵向边允许同槽，非每4列竖井。
-- RRGrowth统一初始/扩张：短暂用空池/非随机模式初始化空原版Land后同步恢复LandAct，再以原版newLoc/setDoor/mainFrame/setObjects/preStep/XP/map组装；正式rnd语义仍保留。每房生成时先反向变换镜像端口，再交原版镜像，前沿接口保持已探房XML不改。RandomRoomsMod在正常gotoLand前完成整图，并拦截原版crea重建请求。
-- RRTraversal按两格净空、脚下梯格、落脚面检查有向步行/爬升/下落的双向可达，玻璃闭合。不能把下落当成返回证明；无可落脚梯顶或不可达的候选整房作废后重生，48次上限。
-- 初版1024房/cook通过，但随后又改了短梯、地图哈希、窄室家具和脚下梯格判断，最终仍须重跑。最新64房generated-v8-c.xml与b同内容，SHA256 1913AF65991BB75D16402DD9D36184B6958DFBF7F203CA59CB2450215CAC3F50；c执行了最新脚下梯格检查。
-- 候选build/RandomRooms-v8-candidate.swf，31789B，SHA256 6E638D2894AB940DC5158B4D89A26833D975C6834D869D5D277AD52B8E0992F4。独立实机已进入F5/F1（12/25房），升级后的全槽接口/镜像/地图连通检查零问题；不等于多入口物理往返通过。
-- 新NavigationProbe.as按原版Tile读路径，正常行动键/爬梯/跳跃逐入口往返并访问各space，不写坐标/碰撞/地形；测试起点由原版旅行curCoord选择房间后正常spawn。驾驶器仍在调整：早期会在平台边缘漏掉落地转折或未落稳就横移，造成超时/意外跨房；均如实失败记录。
-- 最新实机查到真正的恢复缺陷：RRGrowth.restoreOpening只Tile.dec不重做Location.buildLoc的梯顶shelf/vid，底部新短梯头失去自动落脚面。候选已补回，并重新实测中。原版Unit.checkStairs仅按脚下格，正梯X=tile.phX2-scX/2，负梯X=tile.phX1+scX/2；测试图不能把相邻两列/头部梯格都当作可爬。
-- 当前持续工作：新多入口正常操作验证→扩張实机往返→结构分布/多种子→原生截图评审页→release门禁与部署→更新记忆。未通过前不替换release，不声称v8完成。
+- 用户已授权实现；正式 release 仍是 v7.1。候选 build/RandomRooms-v8-candidate.swf：32035 B，SHA256 5F340D05EDDFD14488D7330D6D499849F76DE9C1B0CBFEA1E818224204C46E8F。
+- RRArchitecture 不等尺寸空间 + 无向连接图（4–9 空间、可变回环）；RRPorts 管理22槽；RRMapPlan提前确定共享边，普通上下错位；RRGrowth统一初始和右下扩张，原房XML/mirror保持。原版 rnd 生命周期通过空 Land 引导保留，crea重建转回新生成器。
+- 正式修复：恢复边口时补原版梯首 shelf/vid；限制平台到空间及房内，新增边缘漏口审计；普通内部下降梯避开底口。RRTraversal按脚下格、两格净空、玻璃阻挡做有向双向可达检查，不用单向下落冒充返回。
+- 最终主样本1024房 + 第二组256房，分别cook保护及12×12地图：地形、物件、全槽接口、镜像和地图连接均零错误。主组308种以上无标号连接关系、1007种尺寸组合；第16格长楼层从旧100%降至25.2%。证据压缩包 knowledge/experiments/generator-v8-evidence/generated-samples.zip。
+- 六样本原版渲染与门/活板门开关、玻璃碰撞测试通过，覆盖四主题。原始证据 design/assets/v8-spaces；评审 design/generator-v8-review.html。单房展示外边框封闭，彩点是预留接口；正常地图实际开放口另由实机检查。
+- NavigationProbe只读Tile并使用正常控制键，不写坐标/地形/物理；起点通过正常旅行坐标选择。持续受击保护隔离战斗（原版跨房controlOn会清除它）。F1四个边口都已跨越并返回，但旧驾驶器在上方返回后的内部空间遍历停住，整轮如实FAIL。当前在复测完整33目标。
+- 扩张实测已经自然走到第6列、返回旧列内部空间，并向下到达原地图底部；旧驾驶器漏选脚下活板门，已修正，正在重跑新行往返。未拿地图尺寸变大冒充物理通过。
+- 测试驾驶器多次修正：镜像梯子的脚下吸附坐标、相机整数光标导致选中暗格、落脚高度和错位梯转折、跳跃误按下键穿台、目标避开家具、脚下活板门选择；失败运行保留在app/history，不能作通过证据。
+- 完整记录 knowledge/experiments/generator-v8-validation-2026-09-13.md（进行中）。后续：当前多入口/增长跑完→必要的F5复核→release备份与部署/重启冒烟→最终报告、MEMORY/journal与提交。禁止声称v8已发布。
 
 ## 1. 模组与当前版本
 

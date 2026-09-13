@@ -5,6 +5,7 @@ param(
     [switch]$MovementProbe,
     [switch]$MovementOnly,
     [string]$DevelopmentSwf = '',
+    [ValidateSet('app','visual-app')][string]$SessionDirectory = 'app',
     [switch]$CrossingProbe,
     [switch]$ArchitectureKinds,
     [switch]$DevelopmentShaftProbe,
@@ -13,14 +14,16 @@ param(
     [switch]$SmokeOnly,
     [switch]$StartupDelay,
     [switch]$FixtureProbe,
+    [switch]$FixtureCyclesOnly,
     [switch]$NavigationProbe,
+    [ValidateSet('both','random_rooms','rr_showroom')][string]$NavigationLand = 'both',
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
 )
 $ErrorActionPreference = 'Stop'
 if ($StartupDelay -and -not $DevelopmentSwf) { throw 'StartupDelay requires DevelopmentSwf.' }
 $modRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../../..')).Path
 $gameRoot = (Resolve-Path -LiteralPath (Join-Path $modRoot '../..')).Path
-$appRoot = Join-Path $PSScriptRoot 'app'
+$appRoot = Join-Path $PSScriptRoot $SessionDirectory
 $assetFiles = @('pfe.swf','texture.swf','texture1.swf','sprite.swf','sprite1.swf',
     'sound.swf','sound_unit.swf','sound_weapon.swf','lang.xml','text_en.xml',
     'Music/mainmenu.mp3','Music/music_base.mp3','Music/music_plant_1.mp3','Music/music_begin.mp3')
@@ -72,7 +75,8 @@ $caseDoc.DocumentElement.SetAttribute('crossing', $CrossingProbe.IsPresent.ToStr
 $caseDoc.DocumentElement.SetAttribute('shaft', ($DevelopmentShaftProbe.IsPresent -or $VerticalProbe.IsPresent).ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('growth', $GrowthProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('startupDelay', $StartupDelay.IsPresent.ToString().ToLowerInvariant())
-$caseDoc.DocumentElement.SetAttribute('fixtures', $FixtureProbe.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('fixtures', ($FixtureProbe.IsPresent -or $FixtureCyclesOnly.IsPresent).ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('fixtureCyclesOnly', $FixtureCyclesOnly.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('navigation', $NavigationProbe.IsPresent.ToString().ToLowerInvariant())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
@@ -92,10 +96,10 @@ foreach ($prototypeFile in $PrototypeFiles) {
         if ($ArchitectureKinds) {
             $selectedRooms = @()
             $wantedKinds = @('atrium','workshop','offices','damaged','service','warehouse')
-            $wantedThemes = @('stable','sewer','plant','mane')
+            $wantedThemes = @('stable','plant','mane','sewer','stable','sewer')
             for ($kindIndex = 0; $kindIndex -lt $wantedKinds.Count; $kindIndex++) {
                 $kindMatches = @($prototypeRooms | Where-Object { $_.rrKind -eq $wantedKinds[$kindIndex] })
-                $themeMatches = @($kindMatches | Where-Object { $_.rrTheme -eq $wantedThemes[$kindIndex % 4] })
+                $themeMatches = @($kindMatches | Where-Object { $_.rrTheme -eq $wantedThemes[$kindIndex] })
                 if ($kindMatches.Count -eq 0) { throw ('Missing architecture kind: ' + $wantedKinds[$kindIndex]) }
                 $selectedRooms += if ($themeMatches.Count -gt 0) { $themeMatches[0] } else { $kindMatches[0] }
             }
@@ -113,7 +117,7 @@ foreach ($prototypeFile in $PrototypeFiles) {
         }
     }
 }
-if ($MovementOnly -or $FixtureProbe) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
+if ($MovementOnly -or $FixtureProbe -or $FixtureCyclesOnly) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
 if ($CrossingProbe -or $VerticalProbe) {
     if ($MovementProbe -or $DevelopmentSwf) { throw 'Run crossing as a separate probe.' }
     $crossSources = @($caseSources | Where-Object { $_.prototype })
@@ -136,6 +140,7 @@ if ($DevelopmentSwf) {
     if ($SmokeOnly) { $caseSources = @(@{id='rrstyle-smoke-f5';landId='rr_showroom'},@{id='rrstyle-smoke-f1';landId='random_rooms'}) }
     if ($DevelopmentShaftProbe) { $caseSources = @(@{id='rrstyle-f5-shaft';landId='rr_showroom'}) }
     if ($GrowthProbe) { $caseSources = @(@{id='rrstyle-growth';landId='random_rooms'}) }
+    if ($NavigationProbe -and $NavigationLand -ne 'both') { $caseSources = @($caseSources | Where-Object { $_.landId -eq $NavigationLand }) }
 }
 foreach ($caseSource in $caseSources) {
     $case = $caseDoc.CreateElement('case')
@@ -256,7 +261,15 @@ try {
         elseif ($fresh.Name -ne 'runner.log') { $runtimeArtifacts[$fresh.Name] = (Get-FileHash -LiteralPath $fresh.FullName -Algorithm SHA256).Hash }
     }
     $movementResults = @()
-    if ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe -or $FixtureProbe) {
+    $navigationResults = @()
+    if ($NavigationProbe) {
+        foreach ($caseSource in $caseSources) {
+            $nav = Get-Content -LiteralPath (Join-Path $captureRoot ($caseSource.id + '-navigation.json')) -Raw | ConvertFrom-Json
+            if (-not $nav.success) { throw ('Native navigation failed: ' + $caseSource.id) }
+            $navigationResults += [ordered]@{case=$caseSource.id;success=$nav.success;completed=$nav.completed;targets=$nav.targets;frames=$nav.frames;milestones=$nav.milestones}
+        }
+    }
+    if (-not $NavigationProbe -and ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe -or $FixtureProbe)) {
         $movementResults = @(Get-Content -LiteralPath (Join-Path $captureRoot 'movement.json') -Raw | ConvertFrom-Json)
     }
     [ordered]@{
@@ -265,18 +278,21 @@ try {
         cases=@($caseSources | ForEach-Object { $_.id }); roomIds=@($caseSources | ForEach-Object { $_.room.name })
         stageSize=@(1008,729); roomSize=@(1920,1000); fullRoomLightOverlay=$false
         sourceSha256=$sourceHashes; hostSha256=$hostHash
+        navigationProbe=$NavigationProbe.IsPresent
         movementProbe=$MovementProbe.IsPresent
         crossingProbe=$CrossingProbe.IsPresent
         verticalProbe=$VerticalProbe.IsPresent
         growthProbe=$GrowthProbe.IsPresent
         fixtureProbe=$FixtureProbe.IsPresent
+        fixtureCyclesOnly=$FixtureCyclesOnly.IsPresent
         startupDelay=$StartupDelay.IsPresent
-        hitProtection=$GrowthProbe.IsPresent
-        physicalPass= if ($movementResults.Count -gt 0) { @($movementResults | Where-Object { -not $_.success }).Count -eq 0 } else { $null }
+        hitProtection=($GrowthProbe.IsPresent -or $NavigationProbe.IsPresent)
+        physicalPass= if ($NavigationProbe) { $true } elseif ($movementResults.Count -gt 0) { @($movementResults | Where-Object { -not $_.success }).Count -eq 0 } else { $null }
         developmentSwf=$DevelopmentSwf
         runtimeArtifacts=$runtimeArtifacts
         topology=$topologySummaries
         movement=$movementResults
+        navigation=$navigationResults
         casesSha256=(Get-FileHash -LiteralPath (Join-Path $appRoot 'cases.xml') -Algorithm SHA256).Hash
         driverSha256=(Get-FileHash -LiteralPath $testOutput -Algorithm SHA256).Hash
         runnerLogSha256=(Get-FileHash -LiteralPath (Join-Path $captureRoot 'runner.log') -Algorithm SHA256).Hash

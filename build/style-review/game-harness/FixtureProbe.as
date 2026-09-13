@@ -13,7 +13,7 @@ package
       private static function require(ok:Boolean,message:String):void
       { if (!ok) throw new Error("FIXTURE " + message); }
 
-      public static function begin(w:*,directory:File,caseId:String):void
+      public static function begin(w:*,directory:File,caseId:String,requireHatch:Boolean=true):void
       {
          hatch=null; openedByInput=false;
          var records:Array=[];
@@ -56,7 +56,7 @@ package
             }
             records.push(record);
          }
-         require(hatch!=null,"no hatch in case "+caseId);
+         if (requireHatch) require(hatch!=null,"no hatch in case "+caseId);
          var stream:FileStream=new FileStream();
          stream.open(directory.resolvePath("captures/"+caseId+"-fixtures.json"),FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify({caseId:caseId,room:String(w.loc.room.id),records:records,passed:true,

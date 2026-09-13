@@ -760,7 +760,6 @@ package
          diag.log("C-POOL "+landId+" total="+act["allroom"].room.length()+
             " theme="+(show?"all":biome)+" ports=coordinated");
       }
-      
       private static function triggerTravel(landId:String, tag:String):void
       {
          var world:* = null;

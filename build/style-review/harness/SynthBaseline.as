@@ -8,6 +8,8 @@ package
    import rr.RRSeed;
    import rr.RRSynth;
    import rr.RRCook;
+   import rr.RRMapPlan;
+   import rr.RRPorts;
 
    /** Executes the real generator, without game classes, saves, or mod init. */
    public class SynthBaseline extends Sprite
@@ -72,6 +74,31 @@ package
             }
             result.@count = count;
             writeText(outputName, result.toXMLString() + "\n");
+            if (int(settings.mapSize)>0)
+            {
+               var mapSize:int=int(settings.mapSize);
+               var mapRng:RRSeed=new RRSeed(baseSeed).fork("map");
+               var planner:RRMapPlan=new RRMapPlan(function():Number { return mapRng.next(); });
+               var mapSynth:RRSynth=new RRSynth(function():Number { return mapRng.next(); });
+               var map:XML=<baseline generator="space-v8-map" width={mapSize} height={mapSize} seed={baseSeed}/>;
+               var contracts:Object={};
+               for (var mx:int=0;mx<mapSize;mx++) for (var my:int=0;my<mapSize;my++)
+               {
+                  var ports:Array=planner.ports(mx,my);
+                  contracts[mx+","+my]=ports.join(".");
+                  var mirror:Boolean=mapRng.next()<0.5;
+                  var mapRoom:XML=mapSynth.generate(mx*mapSize+my,biomes[(mx+my)%4],"",mirror?RRPorts.mirror(ports):ports);
+                  mapRoom.@x=mx; mapRoom.@y=my; mapRoom.@rrMirror=mirror?"1":"0";
+                  map.appendChild(mapRoom);
+               }
+               // Re-query in reverse order after deeper edge requests. Existing
+               // contracts must not depend on generation/exploration order.
+               planner.ports(mapSize+2,mapSize+3);
+               for (mx=mapSize-1;mx>=0;mx--) for (my=mapSize-1;my>=0;my--)
+                  if (contracts[mx+","+my]!=planner.ports(mx,my).join(".")) throw new Error("Mutable shared edge "+mx+","+my);
+               map.@orderIndependent="true";
+               writeText(outputStem+"-map.xml",map.toXMLString()+"\n");
+            }
             if (int(settings.cookCopies) > 0)
             {
                var pool:XML = <all generator={String(settings.versionTag)} phase="post-cook" originalCount={count}/>;

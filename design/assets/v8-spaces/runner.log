@@ -1,0 +1,35 @@
+appId=pferr-style-6a3ffdecb1974d519928f19be946761a
+3360 ready cases=6
+3714 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+10411 newGame(-1) issued, intro skipped
+12766 initial world ready land=rbl
+12893 beginMission rrstyle-generated-v8-final-0
+13376 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+16109 arrived rrstyle-generated-v8-final-0 room=syn_5
+19294 capture rrstyle-generated-v8-final-0-stage 1008x729 room=syn_5 lightOverlay=true
+22645 capture rrstyle-generated-v8-final-0-room 1920x1000 room=syn_5 lightOverlay=false
+22671 beginMission rrstyle-generated-v8-final-1
+23374 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25682 arrived rrstyle-generated-v8-final-1 room=syn_514
+28362 capture rrstyle-generated-v8-final-1-stage 1008x729 room=syn_514 lightOverlay=true
+29172 capture rrstyle-generated-v8-final-1-room 1920x1000 room=syn_514 lightOverlay=false
+29200 beginMission rrstyle-generated-v8-final-2
+32287 arrived rrstyle-generated-v8-final-2 room=syn_772
+33376 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+34942 capture rrstyle-generated-v8-final-2-stage 1008x729 room=syn_772 lightOverlay=true
+36339 capture rrstyle-generated-v8-final-2-room 1920x1000 room=syn_772 lightOverlay=false
+36369 beginMission rrstyle-generated-v8-final-3
+39414 arrived rrstyle-generated-v8-final-3 room=syn_256
+42103 capture rrstyle-generated-v8-final-3-stage 1008x729 room=syn_256 lightOverlay=true
+43959 capture rrstyle-generated-v8-final-3-room 1920x1000 room=syn_256 lightOverlay=false
+43984 heartbeat state=2 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+43984 beginMission rrstyle-generated-v8-final-4
+47077 arrived rrstyle-generated-v8-final-4 room=syn_0
+50167 capture rrstyle-generated-v8-final-4-stage 1008x729 room=syn_0 lightOverlay=true
+52905 capture rrstyle-generated-v8-final-4-room 1920x1000 room=syn_0 lightOverlay=false
+52946 beginMission rrstyle-generated-v8-final-5
+53378 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+55863 arrived rrstyle-generated-v8-final-5 room=syn_262
+58487 capture rrstyle-generated-v8-final-5-stage 1008x729 room=syn_262 lightOverlay=true
+60202 capture rrstyle-generated-v8-final-5-room 1920x1000 room=syn_262 lightOverlay=false
+60231 DONE 6 cases

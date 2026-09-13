@@ -75,6 +75,7 @@ package rr
          addWindows();
          chooseSpawn();
          auditLadders();
+         auditBoundary();
          RRTraversal.check(this);
          for (y=1;y<25;y++) for (x=0;x<48;x++)
             if (solid(x,y) && !solid(x,y-1)) grid[y][x]=trim;
@@ -223,7 +224,7 @@ package rr
          var left:Boolean=edgeX<=r.x0;
          var lx:int=left?ladderPosition(r.x0,Math.min(r.x0+6,r.x1-1),f+1,r.floor):
             ladderPosition(Math.max(r.x1-7,r.x0),r.x1-1,f+1,r.floor);
-         var x0:int=left?r.x0:lx-1, x1:int=left?lx+2:r.x1;
+         var x0:int=left?r.x0:Math.max(r.x0,lx-1), x1:int=left?Math.min(r.x1,lx+2):r.x1;
          platform(x0,x1,f+1,r.bg);
          ladderRoute(lx,f+1,r.floor,r);
          reserve(x0,f-2,x1,f);
@@ -248,7 +249,7 @@ package rr
       }
       private function platform(x0:int,x1:int,y:int,bg:String):void
       {
-         for (var x:int=x0;x<=x1;x++)
+         for (var x:int=Math.max(1,x0);x<=Math.min(46,x1);x++)
             if (!reserved[y+","+x]) grid[y][x]="_"+bg+"-";
       }
       private function ladder(x:int,top:int,bottom:int,bg:String):void
@@ -278,6 +279,8 @@ package rr
                var px:int=5+9*(p-17);
                if (x!=px && Math.abs(x-px)<3) ok=false;
             }
+            if (archetype!="connector" && bottom>=21)
+               for (p=6;p<11;p++) if (ports[p]>=2 && Math.abs(x-(5+9*(p-6)))<3) ok=false;
             if (ok) choices.push(x);
          }
          if (!choices.length) throw new Error("No separate ladder landing "+lo+".."+hi);
@@ -297,6 +300,8 @@ package rr
                   if (solid(xx,yy) || reserved[yy+","+xx]) ok=false;
                for each (var l:Object in ladders)
                   if (mid<=l.bottom+1 && bottom>=l.top-1 && nx!=l.x && Math.abs(nx-l.x)<3) ok=false;
+               if (bottom>=21)
+                  for (var p:int=6;p<11;p++) if (ports[p]>=2 && Math.abs(nx-(5+9*(p-6)))<3) ok=false;
                if (ok) choices.push({x:nx,a:a,b:b});
             }
             if (choices.length)
@@ -333,6 +338,22 @@ package rr
                throw new Error("Ladder head "+x+","+y);
             if (!landing(x-2,y) && !landing(x+1,y)) throw new Error("Ladder landing "+x+","+y);
          }
+      }
+      private function auditBoundary():void
+      {
+         var expected:Object={};
+         for (var p:int=0;p<22;p++) if (ports[p]>=2)
+         {
+            var b:Object=RRPorts.rect(p,ports[p]);
+            for (var y:int=b.y0;y<=b.y1;y++) for (var x:int=b.x0;x<=b.x1;x++)
+            {
+               if (solid(x,y)) throw new Error("Blocked declared port "+p);
+               expected[y+","+x]=true;
+            }
+         }
+         for (y=0;y<25;y++) for (x=0;x<48;x++)
+            if ((x==0 || x==47 || y==0 || y==24) && !solid(x,y) && !expected[y+","+x])
+               throw new Error("Undeclared edge hole "+x+","+y);
       }
       private function addHatches():void
       {

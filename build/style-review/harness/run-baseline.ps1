@@ -6,6 +6,7 @@ param(
     [ValidateRange(1,256)][int]$SamplesPerBiome = 8,
     [uint32]$BaseSeed = 20260910,
     [ValidateRange(0,8)][int]$CookCopies = 0,
+    [ValidateRange(0,12)][int]$MapSize = 0,
     [ValidateSet('','atrium','workshop','offices','damaged','service','warehouse','connector')][string]$RoomKind = ''
 )
 $ErrorActionPreference = 'Stop'
@@ -18,7 +19,7 @@ $descriptor = Join-Path $PSScriptRoot 'synth-baseline-app.xml'
 $output = Join-Path $PSScriptRoot 'SynthBaseline.swf'
 if ([IO.Path]::GetFileName($OutputName) -ne $OutputName -or -not $OutputName.EndsWith('.xml')) { throw 'OutputName must be an XML leaf filename.' }
 $outputStem = [IO.Path]::GetFileNameWithoutExtension($OutputName)
-[ordered]@{outputName=$OutputName;versionTag=$VersionTag;samplesPerBiome=$SamplesPerBiome;baseSeed=$BaseSeed;cookCopies=$CookCopies;roomKind=$RoomKind} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'harness-settings.json') -Encoding utf8
+[ordered]@{outputName=$OutputName;versionTag=$VersionTag;samplesPerBiome=$SamplesPerBiome;baseSeed=$BaseSeed;cookCopies=$CookCopies;roomKind=$RoomKind;mapSize=$MapSize} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'harness-settings.json') -Encoding utf8
 foreach ($required in @($Java, $compiler, $adl, $runtime, $descriptor)) {
     if (-not (Test-Path -LiteralPath $required)) { throw "Missing: $required" }
 }
@@ -80,6 +81,12 @@ try {
     foreach ($source in @('rr/RRSynth.as', 'rr/RRGrammar.as', 'rr/RRSeed.as','rr/RRCook.as','rr/RRArchitecture.as','rr/RRFurnish.as','rr/RRPorts.as','rr/RRTraversal.as','rr/RRMapPlan.as')) {
         if (-not (Test-Path -LiteralPath (Join-Path $modRoot ('src/' + $source)))) { continue }
         $manifest.sources[$source] = (Get-FileHash -LiteralPath (Join-Path $modRoot ('src/' + $source)) -Algorithm SHA256).Hash
+    }
+    if ($MapSize -gt 0) {
+        $mapPath = Join-Path $PSScriptRoot ('../' + $outputStem + '-map.xml')
+        if ((Get-Item -LiteralPath $mapPath).LastWriteTimeUtc -lt $runStarted.AddSeconds(-2)) { throw 'Map XML predates this run.' }
+        $manifest.map = [ordered]@{path=(Resolve-Path -LiteralPath $mapPath).Path; size=$MapSize;
+            sha256=(Get-FileHash -LiteralPath $mapPath -Algorithm SHA256).Hash}
     }
     if ($CookCopies -gt 0) {
         $cookedPath = Join-Path $PSScriptRoot ('../' + $outputStem + '-cooked.xml')

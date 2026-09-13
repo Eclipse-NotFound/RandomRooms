@@ -1,0 +1,79 @@
+{
+  "appId": "pferr-style-6a3ffdecb1974d519928f19be946761a",
+  "status": "complete",
+  "startedUtc": "2026-09-13T10:02:25.8743074Z",
+  "completedUtc": "2026-09-13T10:03:27.5247961Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-generated-v8-final-0",
+    "rrstyle-generated-v8-final-1",
+    "rrstyle-generated-v8-final-2",
+    "rrstyle-generated-v8-final-3",
+    "rrstyle-generated-v8-final-4",
+    "rrstyle-generated-v8-final-5"
+  ],
+  "roomIds": [
+    "syn_5",
+    "syn_514",
+    "syn_772",
+    "syn_256",
+    "syn_0",
+    "syn_262"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "generated-v8-final.xml": "6C2D6D856A71AC1AC44BA8ABEE36401DA914D483656EAD5F197EAE374F2B5F70"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": true,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-generated-v8-final-0-fixtures.json": "45E1174F6F95E696A8096E62379E1107CA0377366590B2C9B1BE1CD0A685DCC9",
+    "rrstyle-generated-v8-final-1-fixtures.json": "4F1D0F85E0E4366C5E40649943B3604AF91FE1685811EA725051BBD52AA9A5ED",
+    "rrstyle-generated-v8-final-2-fixtures.json": "694EEF71BEC7E91323B117769C96E870BBB2D167361AB7926055DD8F331942A5",
+    "rrstyle-generated-v8-final-3-fixtures.json": "420837FBA27B13D39C6E1AEBFB274A47357B13A173B72E66D5AF41E36C9CFB48",
+    "rrstyle-generated-v8-final-4-fixtures.json": "BD0F0DEE509F595AC06E2D6A9B386203EA539EAB56BAC11BA06C6F2E39484982",
+    "rrstyle-generated-v8-final-5-fixtures.json": "E95662BAE7A2811C2FD74F5EB7ABFF6FFE1B1662680839558C8F06239F79B30D"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "416F72073EAA5E833992DD8E6F6573F8BD98964CB1DAAD1AC47FA14347FE8755",
+  "driverSha256": "2370E0869EFF1C70AC6ADAAF986E49D2C4E0535797E2B30046023A887D0E2B7D",
+  "runnerLogSha256": "26C3603D961059AA1DA8AF51886DE514FEB2A08B3CBCC9FAB70FD19885E2D467",
+  "captured": {
+    "rrstyle-generated-v8-final-0-stage.png": "C5AB77B508086CF438EBA9506570D352B8F5D841A2871826BAB7C66924927B1F",
+    "rrstyle-generated-v8-final-0-room.png": "3377EC41010837E74EA5E7BDDEAA4F9B24BC89B39CAD193CFA11F3794D1B9566",
+    "rrstyle-generated-v8-final-1-stage.png": "4526977CA1183799253D7BA55E03A117CC189D5FE4A9315875F037436AF47414",
+    "rrstyle-generated-v8-final-1-room.png": "8297988F794D7DB39A9FA8563B35B7B4A596099BBC48EE064B6C37389E9B700F",
+    "rrstyle-generated-v8-final-2-stage.png": "9A74C676B57A4E13618148FC7981F124D2C9D9F4E9B6B2E97F26EFB948C294CE",
+    "rrstyle-generated-v8-final-2-room.png": "8849E20566E89ECEFCF6AE5DD57FD07B567DD9E4FFA5CA3BE957A6D7516D4B0C",
+    "rrstyle-generated-v8-final-3-stage.png": "F66009B3006D95B647C351873A4F65AD360F304774FE3DE6F1F568E86EF17251",
+    "rrstyle-generated-v8-final-3-room.png": "773ECD44B6F5C69437B22DE920C3E68DF7E7A29873B879A68F748CC37D00539E",
+    "rrstyle-generated-v8-final-4-stage.png": "B3992F813AD834FFC3F3F995FCC9276A6DA5A03EE6A38C5D539256A377588AD6",
+    "rrstyle-generated-v8-final-4-room.png": "C7BACC5261BD421D2C8BFC59E15C9D0150C784D7B63C70F52D101DDC2D82F497",
+    "rrstyle-generated-v8-final-5-stage.png": "78BA6C7B83FE8661D8545831CC7876A0FD62CFC80D1BC64CDB3EA1EC9F79A7B7",
+    "rrstyle-generated-v8-final-5-room.png": "84925CD16C131DC582A739978BA45121C5BA9100E2218A4C37F7E06A8DE52D54"
+  }
+}

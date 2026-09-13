@@ -30,6 +30,7 @@ build/style-review/game-harness/app/
 build/style-review/game-harness/*.swf
 build/RandomRooms-v7-*.swf
 build/RandomRooms-v8-*.swf
+build/style-review/game-harness/visual-app/
 build/release-backups/
 build/style-review/*-progress.txt
 build/style-review/*-error.txt

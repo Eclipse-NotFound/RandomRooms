@@ -51,6 +51,7 @@ package
       private static var shaftEnabled:Boolean = false;
       private static var growthEnabled:Boolean = false;
       private static var fixtureEnabled:Boolean = false;
+      private static var fixtureCyclesOnly:Boolean = false;
       private static var navigationEnabled:Boolean = false;
       private static var probeRoom:String = "";
       private static var initialWidth:int = 5;
@@ -89,6 +90,7 @@ package
             shaftEnabled = String(input.@shaft) == "true";
             growthEnabled = String(input.@growth) == "true";
             fixtureEnabled = String(input.@fixtures) == "true";
+            fixtureCyclesOnly = String(input.@fixtureCyclesOnly) == "true";
             navigationEnabled = String(input.@navigation) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
@@ -225,7 +227,7 @@ package
                      return;
                   }
                   if (!developmentClass.debugTravel(target)) { fail("debugTravel rejected " + target); return; }
-                  if (navigationEnabled)
+                  if (navigationEnabled && !growthEnabled)
                   {
                      var testLand:*=w.game.lands[target].land;
                      var chosenX:int=1,chosenY:int=1,bestPorts:int=-1;
@@ -279,12 +281,13 @@ package
                if (developmentMode) dumpRuntimePool(w, captureName);
                if (navigationEnabled)
                {
-                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot);
+                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled);
                   state=11; moveFrame=0; return;
                }
                if (fixtureEnabled)
                {
-                  FixtureProbe.begin(w,rootDir,captureName);
+                  FixtureProbe.begin(w,rootDir,captureName,!fixtureCyclesOnly);
+                  if (fixtureCyclesOnly) { index++; state=2; return; }
                   moveStartX=w.gg.X; moveStartY=w.gg.Y; moveFrame=0;
                   crossingLastX=w.gg.X; crossingStuck=crossingJump=0;
                   movePhase="approach-hatch"; state=10;
@@ -341,6 +344,7 @@ package
                if (NavigationProbe.done)
                {
                   if (!NavigationProbe.success) { exportDevelopmentLog(); fail(NavigationProbe.reason); return; }
+                  if (growthEnabled) dumpRuntimePool(w,String(cases[index].@id)+"-after-growth");
                   index++; state=2;
                }
             }
@@ -391,12 +395,24 @@ package
          while (obj != null)
          {
             if ("door" in obj && obj.door > 0 && obj.inter != null && !obj.inter.open && obj.inter.active &&
-                (obj.X-w.gg.X)*direction >= -10 && Math.abs(obj.X-w.gg.X)<100 && Math.abs(obj.Y-w.gg.Y)<100)
+                ((obj.X-w.gg.X)*direction>=-10 || Math.abs(obj.X-w.gg.X)<(obj.scX+w.gg.scX)/2) &&
+                Math.abs(obj.X-w.gg.X)<100 && Math.abs(obj.Y-w.gg.Y)<100)
             {
                if (obj !== doorTarget) { doorTarget=obj; log("DOOR target="+obj.id+" x="+obj.X+" lock="+obj.inter.lock+" mine="+obj.inter.mine); }
                aimObject(w,obj);
                if (w.loc.celObj === obj && obj.onCursor>0) w.ctr.keyAction=true;
-               if (moveFrame%30==1) log("DOOR-SAMPLE cursor="+obj.onCursor+" selected="+(w.loc.celObj===obj)+" action="+w.ctr.keyAction+" remaining="+w.gg.t_action+" open="+obj.inter.open);
+               else
+               {
+                  // Turn and approach normally before waiting for selection.
+                  // Freezing as soon as a door enters the 100 px search range
+                  // can leave it behind the pony's field of view indefinitely.
+                  w.ctr.keyLeft=obj.X<w.gg.X-15;
+                  w.ctr.keyRight=obj.X>w.gg.X+15;
+               }
+               if (moveFrame%30==1) log("DOOR-SAMPLE "+JSON.stringify({cursor:obj.onCursor,selected:w.loc.celObj===obj,
+                  selectedId:w.loc.celObj==null?null:String(w.loc.celObj.id),action:w.ctr.keyAction,remaining:w.gg.t_action,
+                  open:obj.inter.open,cx:w.celX,cy:w.celY,visi:w.loc.getTile(Math.round(w.celX/40),Math.round(w.celY/40)).visi,
+                  x1:obj.X1,x2:obj.X2,y1:obj.Y1,y2:obj.Y2,face:w.gg.storona}));
                return true;
             }
             obj=obj.nobj;
@@ -413,7 +429,13 @@ package
          for each (var xx:Number in [obj.X,obj.X1+3,obj.X2-3])
             for each (var yy:Number in [obj.Y-obj.scY/2,obj.Y1+3,obj.Y2-3])
             {
-               var visibility:Number=w.loc.getTile(Math.round(xx/40),Math.round(yy/40)).visi;
+               // Camera cursor fields are integers. Evaluate the world point
+               // after that screen-pixel rounding, otherwise the centre of a
+               // one-tile door can round onto its unseen neighbour forever.
+               var actualX:Number=(int(xx*w.cam.scaleV+w.cam.vx)-w.cam.vx)/w.cam.scaleV;
+               var actualY:Number=(int(yy*w.cam.scaleV+w.cam.vy)-w.cam.vy)/w.cam.scaleV;
+               if (actualX<=obj.X1 || actualX>=obj.X2 || actualY<=obj.Y1 || actualY>=obj.Y2) continue;
+               var visibility:Number=w.loc.getTile(Math.round(actualX/40),Math.round(actualY/40)).visi;
                if (visibility>best) { best=visibility; px=xx; py=yy; }
             }
          w.cam.celX=px*w.cam.scaleV+w.cam.vx;
