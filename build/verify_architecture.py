@@ -32,16 +32,26 @@ def verify(room):
         return terrain_solid(x,y) or (x,y) in glass
     def support(x,y):
         return solid(x,y+1) or '-' in g[y+1][x]
-    connector = room.get('rrKind') == 'connector'
-    expected = [0]*22
-    expected[5]=expected[16]=3
-    if connector: expected[8]=expected[19]=2
-    check((room.findtext('doors') or '').split('.') == list(map(str,expected)), '22 boundary ports')
-    for y in (0,24):
-        holes = [x for x in range(48) if not solid(x,y)]
-        check(holes == ([23,24] if connector else []), f'boundary {y}: {holes}')
-    for x in (0,1,2,45,46,47):
-        check(all(not solid(x,y) for y in (21,22,23)), f'horizontal opening {x}')
+    ports=list(map(int,(room.findtext('doors') or '').split('.')))
+    check(len(ports)==22,'22 boundary slots')
+    holes=set()
+    for p,n in enumerate(ports):
+        if n<2: continue
+        if 6<=p<=10 or p>=17:
+            x=5+9*(p-17 if p>=17 else p-6)
+            ys=(0,1) if p>=17 else (23,24)
+            xs=(x,x+1)
+        else:
+            y=3+4*(p-11 if p>=11 else p)
+            xs=(0,1) if p>=11 else (46,47)
+            ys=tuple(range(y-n+1,y+1))
+        for x in xs:
+            for y in ys:
+                check(not solid(x,y),f'blocked port {p}@{x},{y}')
+                if x in (0,47) or y in (0,24): holes.add((x,y))
+    actual={(x,y) for y in range(25) for x in range(48)
+            if (x in (0,47) or y in (0,24)) and not solid(x,y)}
+    check(actual==holes,f'undeclared boundary holes: {sorted(actual^holes)}')
     shafts = set()
     for y in range(25):
         for x in range(48):
@@ -50,9 +60,8 @@ def verify(room):
             if y and 'А' not in g[y-1][x]:
                 check(y>=2 and all(not solid(xx,yy) for xx in (x-1,x) for yy in (y-1,y-2)),f'ladder head {x},{y}')
                 check(any(solid(xx,y) or '-' in g[y][xx] for xx in (x-2,x+1) if 0<=xx<48),f'ladder landing {x},{y}')
-            if 'А' in g[y][x] and connector and x==24:
-                check(not solid(23,y),f'shaft width at {y}')
-    check(bool(shafts),'no ladder')
+            check(not solid(x-1,y),f'shaft width at {x},{y}')
+
     used=set()
     objs=room.findall('obj')
     check(len({o.get('code') for o in objs})==len(objs),'duplicate object code')
@@ -89,7 +98,10 @@ def verify(room):
     # A player's two-cell clearance must connect every usable floor to spawn.
     clear={(x,y) for x in range(47) for y in range(1,24)
            if all(not solid(xx,yy) for xx in (x,x+1) for yy in (y-1,y))}
-    visited={(1,23)}; q=deque(visited)
+    player=next(o for o in objs if o.get('id')=='player')
+    spawn=(int(player.get('x')),int(player.get('y')))
+    check(spawn in clear,'spawn clearance')
+    visited={spawn}; q=deque(visited)
     while q:
         x,y=q.popleft()
         for p in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
@@ -109,7 +121,7 @@ def main():
     args=ap.parse_args();results=[];errors=[]
     for path in args.files:
         rooms=ET.parse(path).getroot().findall('room')
-        generated=[r for r in rooms if r.get('rrGen')=='space-v7']
+        generated=[r for r in rooms if r.get('rrGen') in ('space-v7','space-v8')]
         if not generated: errors.append(dict(file=str(path),room=None,errors=['No generated rooms; empty evidence cannot pass']))
         stats=[]
         for r in generated:

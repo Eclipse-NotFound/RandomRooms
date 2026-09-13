@@ -3,156 +3,194 @@ package rr
    import flash.geom.Point;
    import flash.utils.getDefinitionByName;
 
-   /** Grow a complete connected grid, one row/column ahead of the player.
-    * Uses the same construction order as Land.buildRandomLand. A periodic
-    * vertical spine preserves access between rows as the grid grows right. */
+   /** Initial construction and expansion share one native Location pipeline.
+    * No random pool matching: paired edges are negotiated before architecture.
+    * An explored room keeps its geometry, mirror and future border sockets. */
    public class RRGrowth
    {
       private var synth:RRSynth;
       private var cook:RRCook;
       private var diag:RRDiag;
-      private var serial:int=100000;
+      private var serial:int=0;
       private var theme:String="stable";
+      private var mapPlan:RRMapPlan;
       private var busy:Boolean=false;
       private var failedLand:*=null;
 
       public function RRGrowth(s:RRSynth,c:RRCook,d:RRDiag) { synth=s; cook=c; diag=d; }
-      public function reset(biome:String):void { theme=biome; failedLand=null; }
+
+      public function build(world:*,act:*,width:int,height:int,biome:String,show:Boolean):*
+      {
+         var planner:RRMapPlan=new RRMapPlan(synth.rnd);
+         // Bootstrap an empty native Land, without constructing or discarding
+         // any live rooms. Restore the LandAct synchronously, even on failure.
+         var LandClass:*=getDefinitionByName("fe.loc.Land");
+         var oldPool:XML=act["allroom"], wasRandom:Boolean=Boolean(act["rnd"]);
+         var land:*;
+         try
+         {
+            act["allroom"]=<all/>; act["rnd"]=false;
+            land=new LandClass(world["gg"],act,Math.max(0,int(world["pers"]["level"])-1));
+         }
+         finally { act["allroom"]=oldPool; act["rnd"]=wasRandom; }
+         land["rnd"]=true;
+         land["landDifLevel"]=Math.max(Number(act["dif"]),show?0:int(world["pers"]["level"])-1);
+         land["locs"]=[];
+         land["maxLocX"]=0; land["maxLocY"]=0;
+         act["allroom"]=<all><land serial="1"/></all>;
+         serial=0;
+         append(land,world,0,0,width,height,planner,biome,show);
+         if (!show) { mapPlan=planner; theme=biome; failedLand=null; }
+         diag.log("C-BUILD "+act["id"]+" grid="+width+"x"+height+" coordinated=1");
+         return land;
+      }
 
       public function update(world:*):void
       {
-         if (busy || world==null || world["land"]==null) return;
+         if (busy || world==null || world["land"]==null || mapPlan==null) return;
          var land:*=world["land"];
          if (String(land["act"]["id"])!="random_rooms" || land===failedLand ||
              world["loc"]!==land["loc"] || String(land["prob"])!="") return;
          var w:int=int(land["maxLocX"]),h:int=int(land["maxLocY"]);
-         // Build before a fast fall/knockback can cross the old bottom edge.
          var right:Boolean=int(land["locX"])>=w-2;
          var down:Boolean=int(land["locY"])>=h-2;
          if (!right && !down) return;
          busy=true;
-         try { extend(land,world,w,h,right,down); }
+         try { append(land,world,w,h,w+(right?1:0),h+(down?1:0),mapPlan,theme,false); }
          catch (e:*)
          {
-            failedLand=land;
-            diag.log("C-GROW-FAIL "+e);
-            // Report the actual failure once; do not mutate/retry each frame.
+            failedLand=land; diag.log("C-GROW-FAIL "+e);
             try { world["gui"]["messText"]("","RandomRooms: 扩张失败，请保留日志并回城重进",false,false,240); } catch (ignored:*) {}
          }
          finally { busy=false; }
       }
-
       private function link(a:*,b:*,vertical:Boolean):void
       {
-         var port:int=vertical?8:5;
-         var amount:int=Math.min(int(a["doors"][port]),int(b["doors"][port+11]));
-         a[vertical?"pass_d":"pass_r"]=[];
-         if (amount<2) return;
-         a[vertical?"pass_d":"pass_r"].push({n:port,fak:amount});
-         restoreOpening(a,port);
-         restoreOpening(b,port+11);
-         a["setDoor"](port,amount);
-         b["setDoor"](port+11,amount);
+         var field:String=vertical?"pass_d":"pass_r";
+         a[field]=[];
+         for (var p:int=vertical?6:0;p<=(vertical?10:5);p++)
+         {
+            var amount:int=Math.min(int(a["doors"][p]),int(b["doors"][p+11]));
+            if (amount<2) continue;
+            a[field].push({n:p,fak:amount});
+            // Opening before decode retains the engine's signposts and spawn
+            // exclusion. Decode restores ladders erased at the former border.
+            a["setDoor"](p,amount); b["setDoor"](p+11,amount);
+            restoreOpening(a,p,amount); restoreOpening(b,p+11,amount);
+         }
       }
-
-      private function restoreOpening(loc:*,port:int):void
+      private function restoreOpening(loc:*,port:int,amount:int):void
       {
-         // mainFrame erased stair/visuals while this was the world edge. hole()
-         // alone cannot restore them. Decode the original, mirrored interface.
          var xml:XML=loc["room"]["xml"];
          var mirror:Boolean=Boolean(loc["mirror"]);
-         var x0:int=port==5?46:(port==16?0:23);
-         var y0:int=port==8?23:(port==19?0:21);
-         var x1:int=x0+1;
-         var y1:int=(port==5 || port==16)?23:y0+1;
-         for (var y:int=y0;y<=y1;y++)
+         var b:Object=RRPorts.rect(port,amount);
+         for (var y:int=b.y0;y<=b.y1;y++)
          {
             var row:Array=String(xml.a[y]).split(".");
-            for (var x:int=x0;x<=x1;x++)
+            for (var x:int=b.x0;x<=b.x1;x++)
             {
                var tile:*=loc["space"][x][y];
-               // Tile.dec resets geometry but not the opaque wall flag left by
-               // mainFrame. A reopened doorway must also transmit sight/light.
                tile["opac"]=0;
                tile["dec"](row[mirror?47-x:x],mirror);
             }
          }
+         // Location.buildLoc adds a shelf at the first tile of every ladder.
+         // Tile.dec alone does not repeat that step after a framed border was
+         // reopened. In particular a bottom socket starts its ladder at row 24.
+         for (y=b.y0;y<=b.y1;y++) for (x=b.x0;x<=b.x1;x++)
+         {
+            tile=loc["space"][x][y];
+            if (y>0 && tile["stair"]!=0 && tile["phis"]==0 && !tile["shelf"] &&
+                tile["stair"]!=loc["space"][x][y-1]["stair"])
+            { tile["shelf"]=true; tile["vid"]++; }
+         }
       }
-
-      private function extend(land:*,world:*,w:int,h:int,right:Boolean,down:Boolean):void
+      private function append(land:*,world:*,w:int,h:int,nw:int,nh:int,planner:RRMapPlan,biome:String,show:Boolean):void
       {
-         var nw:int=w+(right?1:0),nh:int=h+(down?1:0);
-         var staged:Array=[];
+         var staged:Array=[],pool:XML=<all/>;
          var RoomClass:*=getDefinitionByName("fe.loc.Room");
-         var pool:XML=<all/>;
          var x:int,y:int;
-         // Prepare all XML and Location instances before publishing new bounds.
          for (x=0;x<nw;x++) for (y=0;y<nh;y++)
          {
             if (x<w && y<h) continue;
-            var shaft:Boolean=x%4==0;
-            var xml:XML=synth.generate(serial++,theme,shaft?"connector":"");
-            xml.@rrGrowth="1";
-            if (!RRSynth.validateRoom(xml)) throw new Error("Invalid growth room "+xml.@name);
+            var ports:Array=planner.ports(x,y);
+            // A mirror transforms both terrain and the port contract. Native
+            // Location then mirrors them back into the agreed world positions.
+            var mirror:Boolean=synth.rnd()<0.5;
+            var kind:String="";
+            for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
+            var xml:XML=synth.generate(serial++,show?String(RRSynth.BIOMES[(x*nh+y)%4]):biome,kind,mirror?RRPorts.mirror(ports):ports);
+            xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
+            if (w>0 || h>0) xml.@rrGrowth="1";
+            if (x==0 && y==0) xml.@name="rr_begin";
+            if (w==0 && h==0 && x==nw-1 && y==nh-1) xml.@name=show?"rr_show_end":"rr_exit";
+            if (!RRSynth.validateRoom(xml)) throw new Error("Invalid architecture "+xml.@name);
             pool.appendChild(xml);
-            staged.push({x:x,y:y,xml:xml});
+            staged.push({x:x,y:y,mirror:mirror});
          }
-         cook.rollEnemies(pool,int(land["act"]["landStage"]));
+         if (!show) cook.rollEnemies(pool,int(land["act"]["landStage"]));
+         else for each (xml in pool.room)
+         {
+            for (var j:int=xml.obj.length()-1;j>=0;j--)
+               if (String(xml.obj[j].@id).indexOf("en")==0) delete xml.obj[j];
+            xml.options.@entip="0"; xml.options.@kolspawn="0";
+         }
          for (var i:int=0;i<staged.length;i++)
          {
-            var p:Object=staged[i];
-            // Consume the copy in the pool after encounter settings are applied.
-            p.xml=pool.room[i];
-            var room:*=new RoomClass(p.xml);
-            p.loc=land["newLoc"](room,p.x,p.y,0,{mirror:synth.rnd()<0.5,water:null,ramka:null,backform:0,transpFon:false});
-            p.loc["pass_r"]=[]; p.loc["pass_d"]=[];
+            var cell:Object=staged[i];
+            cell.xml=pool.room[i];
+            cell.loc=land["newLoc"](new RoomClass(cell.xml),cell.x,cell.y,0,
+               {mirror:cell.mirror,water:null,ramka:null,backform:0,transpFon:false});
+            cell.loc["pass_r"]=[]; cell.loc["pass_d"]=[];
          }
-         for each (p in staged)
+         // Publish only after every XML and Location was constructed.
+         for each (cell in staged)
          {
-            if (land["locs"][p.x]==null) land["locs"][p.x]=[];
-            land["locs"][p.x][p.y]=[p.loc];
+            if (land["locs"][cell.x]==null) land["locs"][cell.x]=[];
+            land["locs"][cell.x][cell.y]=[cell.loc];
          }
          land["maxLocX"]=nw; land["maxLocY"]=nh;
          land["act"]["mLocX"]=nw; land["act"]["mLocY"]=nh;
          var touched:Array=[];
-         for each (p in staged)
+         for each (cell in staged)
          {
-            if (p.x>0)
+            if (cell.x>0)
             {
-               var left:*=land["locs"][p.x-1][p.y][0];
-               link(left,p.loc,false);
+               var left:*=land["locs"][cell.x-1][cell.y][0];
+               link(left,cell.loc,false);
                if (touched.indexOf(left)<0) touched.push(left);
             }
-            if (p.y>0)
+            if (cell.y>0)
             {
-               var above:*=land["locs"][p.x][p.y-1][0];
-               link(above,p.loc,true);
+               var above:*=land["locs"][cell.x][cell.y-1][0];
+               link(above,cell.loc,true);
                if (touched.indexOf(above)<0) touched.push(above);
             }
-            if (touched.indexOf(p.loc)<0) touched.push(p.loc);
+            if (touched.indexOf(cell.loc)<0) touched.push(cell.loc);
          }
          for each (var loc:* in touched) loc["mainFrame"]();
-         // Objects and XP must exist before the location becomes enterable.
-         for each (p in staged)
+         for each (cell in staged)
          {
-            p.loc["setObjects"]();
-            if (p.x%4==3 && p.y%2==0) p.loc["createCheck"](false);
-            p.loc["preStep"]();
-            p.loc["createXpBonuses"](5);
-            land["allXp"]+=int(p.loc["summXp"]);
-            land["act"]["allroom"].appendChild(p.xml);
+            cell.loc["setObjects"]();
+            if ((cell.x==0 && cell.y==0) || (!show && synth.rnd()<0.22))
+               cell.loc["createCheck"](cell.x==0 && cell.y==0);
+            cell.loc["preStep"]();
+            cell.loc["createXpBonuses"](5);
+            land["allXp"]+=int(cell.loc["summXp"]);
+            land["act"]["allroom"].appendChild(cell.xml);
          }
          var oldMap:*=land["map"];
          land["createMap"]();
          if (oldMap!=null)
          {
-            land["map"]["copyPixels"](oldMap,oldMap["rect"],new Point());
-            oldMap["dispose"]();
+            land["map"]["copyPixels"](oldMap,oldMap["rect"],new Point()); oldMap["dispose"]();
          }
-         // The current border may already have been drawn before it was joined.
-         if (touched.indexOf(world["loc"])>=0) world["redrawLoc"]();
-         diag.log("C-GROW "+w+"x"+h+" -> "+nw+"x"+nh+" rooms="+staged.length+
-            " player="+land["locX"]+","+land["locY"]+" objects=ready links=ready");
+         if (w>0 && h>0)
+         {
+            if (touched.indexOf(world["loc"])>=0) world["redrawLoc"]();
+            diag.log("C-GROW "+w+"x"+h+" -> "+nw+"x"+nh+" rooms="+staged.length+
+               " player="+land["locX"]+","+land["locY"]+" objects=ready links=ready");
+         }
       }
    }
 }

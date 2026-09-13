@@ -1,6 +1,19 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-13 已按用户要求修正为任意入口进入、各房连通关系多样；正式版本仍为已验证的v7.1，设计提案未实施。
+> 2026-09-13 用户明确“开始生成器改进”。v8已在重写与实机验证中，尚未发布；正式release仍为已验证的v7.1。
+
+
+## v8 实施中（2026-09-13，不能当作已发布）
+
+- RRArchitecture改为不等宽/不等高空间分割，先选无向连接图再开门/梯口；局部平台、错位短梯、随机数量的环与有用途的尽头。不再六套固定坐标布局。RRSynth rrGen=space-v8、rrRevision=8.0；旧space-v7仍受cook保护。
+- RRPorts统一22个原版边口；RRMapPlan逐边提前定口，向原点的父连接保证地图连通，额外连接产生回环；普通上下口错位，约4%的连续纵向边允许同槽，非每4列竖井。
+- RRGrowth统一初始/扩张：短暂用空池/非随机模式初始化空原版Land后同步恢复LandAct，再以原版newLoc/setDoor/mainFrame/setObjects/preStep/XP/map组装；正式rnd语义仍保留。每房生成时先反向变换镜像端口，再交原版镜像，前沿接口保持已探房XML不改。RandomRoomsMod在正常gotoLand前完成整图，并拦截原版crea重建请求。
+- RRTraversal按两格净空、脚下梯格、落脚面检查有向步行/爬升/下落的双向可达，玻璃闭合。不能把下落当成返回证明；无可落脚梯顶或不可达的候选整房作废后重生，48次上限。
+- 初版1024房/cook通过，但随后又改了短梯、地图哈希、窄室家具和脚下梯格判断，最终仍须重跑。最新64房generated-v8-c.xml与b同内容，SHA256 1913AF65991BB75D16402DD9D36184B6958DFBF7F203CA59CB2450215CAC3F50；c执行了最新脚下梯格检查。
+- 候选build/RandomRooms-v8-candidate.swf，31789B，SHA256 6E638D2894AB940DC5158B4D89A26833D975C6834D869D5D277AD52B8E0992F4。独立实机已进入F5/F1（12/25房），升级后的全槽接口/镜像/地图连通检查零问题；不等于多入口物理往返通过。
+- 新NavigationProbe.as按原版Tile读路径，正常行动键/爬梯/跳跃逐入口往返并访问各space，不写坐标/碰撞/地形；测试起点由原版旅行curCoord选择房间后正常spawn。驾驶器仍在调整：早期会在平台边缘漏掉落地转折或未落稳就横移，造成超时/意外跨房；均如实失败记录。
+- 最新实机查到真正的恢复缺陷：RRGrowth.restoreOpening只Tile.dec不重做Location.buildLoc的梯顶shelf/vid，底部新短梯头失去自动落脚面。候选已补回，并重新实测中。原版Unit.checkStairs仅按脚下格，正梯X=tile.phX2-scX/2，负梯X=tile.phX1+scX/2；测试图不能把相邻两列/头部梯格都当作可爬。
+- 当前持续工作：新多入口正常操作验证→扩張实机往返→结构分布/多种子→原生截图评审页→release门禁与部署→更新记忆。未通过前不替换release，不声称v8完成。
 
 ## 1. 模组与当前版本
 
@@ -57,7 +70,7 @@ F1全生成冒险土地，初始5×5并向右/下扩张；F5为4×3四主题展�
 
 ## 7. 后续入口
 
-0. 最新设计草案 design/structure-diversity-brainstorm-2026-09-12.md（9月13日修订）。建筑空间和连通关系共同生成、协调邻房共享开口，取消固定入口到终点的逐房路线假设；形态例子只作变化参考。验证从每个实际开放口分别进入，覆盖其余边口与可探索区的双向可达、镜像及扩张，不要求每间四面全开。此次仅修订设计，未制作原型或改正式生成器。
+0. 最新设计草案 design/structure-diversity-brainstorm-2026-09-12.md（9月13日修订）。建筑空间和连通关系共同生成、协调邻房共享开口，取消固定入口到终点的逐房路线假设；形态例子只作变化参考。验证从每个实际开放口分别进入，覆盖其余边口与可探索区的双向可达、镜像及扩张，不要求每间四面全开。本轮用户已授权并已开始实现；当前实现/验证状态见文首v8实施中。
 1. 最新报告 knowledge/experiments/fixtures-v71-validation-2026-09-10.md；精简清单fixtures-v71-evidence。
 2. design/generator-v7-review.html已更新v7.1，可标出门/活板门/玻璃窗并切换开盖屏幕；原PNG不加标记。浏览器工具file策略阻止自动交互，本地脚本语法与资源检查通过。
 3. 决策DEC-0005；v7.0建筑与扩张报告style-generator-validation-2026-09-10.md，调查build/style-review/VANILLA_FINDINGS.md、furnishing-reference.md、v7-space-audit.md。

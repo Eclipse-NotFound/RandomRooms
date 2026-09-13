@@ -51,6 +51,7 @@ package
       private static var shaftEnabled:Boolean = false;
       private static var growthEnabled:Boolean = false;
       private static var fixtureEnabled:Boolean = false;
+      private static var navigationEnabled:Boolean = false;
       private static var probeRoom:String = "";
       private static var initialWidth:int = 5;
       private static var initialHeight:int = 5;
@@ -88,6 +89,7 @@ package
             shaftEnabled = String(input.@shaft) == "true";
             growthEnabled = String(input.@growth) == "true";
             fixtureEnabled = String(input.@fixtures) == "true";
+            navigationEnabled = String(input.@navigation) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
             SoundMixer.soundTransform = new SoundTransform(0);
@@ -147,7 +149,7 @@ package
          try
          {
             if (state == 4) return;
-            if (getTimer() - started > (developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
+            if (getTimer() - started > (navigationEnabled ? 900000 : developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
             var w:* = W.w;
             if (w == null) return;
             if (w.verror != null && w.verror.visible) { fail("game error: " + w.verror.txt.text); return; }
@@ -223,6 +225,21 @@ package
                      return;
                   }
                   if (!developmentClass.debugTravel(target)) { fail("debugTravel rejected " + target); return; }
+                  if (navigationEnabled)
+                  {
+                     var testLand:*=w.game.lands[target].land;
+                     var chosenX:int=1,chosenY:int=1,bestPorts:int=-1;
+                     for (var nx:int=1;nx<testLand.maxLocX-1;nx++) for (var ny:int=1;ny<testLand.maxLocY-1;ny++)
+                     {
+                        var nloc:*=testLand.locs[nx][ny][0],count:int=0;
+                        for each (var amount:int in nloc.doors) if (amount>=2) count++;
+                        if (count>bestPorts) { bestPorts=count; chosenX=nx; chosenY=ny; }
+                     }
+                     // Native travel coordinates select a test room before
+                     // spawning. All subsequent movement is normal controls.
+                     w.game.curCoord=chosenX+":"+chosenY;
+                     log("NAV-SETUP native travel spawn room="+w.game.curCoord+" declaredPorts="+bestPorts);
+                  }
                   settled = -1;
                   state = 3;
                   log("development debugTravel " + target + " case=" + id);
@@ -260,6 +277,11 @@ package
                screenshot(w, captureName + "-stage", false);
                screenshot(w, captureName + "-room", true);
                if (developmentMode) dumpRuntimePool(w, captureName);
+               if (navigationEnabled)
+               {
+                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot);
+                  state=11; moveFrame=0; return;
+               }
                if (fixtureEnabled)
                {
                   FixtureProbe.begin(w,rootDir,captureName);
@@ -312,6 +334,16 @@ package
             if (state == 8) stepShaft(w);
             if (state == 9) stepGrowth(w);
             if (state == 10) stepFixture(w);
+            if (state == 11)
+            {
+               moveFrame++;
+               NavigationProbe.step(w);
+               if (NavigationProbe.done)
+               {
+                  if (!NavigationProbe.success) { exportDevelopmentLog(); fail(NavigationProbe.reason); return; }
+                  index++; state=2;
+               }
+            }
             if (state == 7)
             {
                if (w.game.curLandId != "rbl" || w.land == null || w.land.act.id != "rbl") return;
@@ -651,42 +683,63 @@ package
             tips[tip] = int(tips[tip]) + 1;
          }
          var layout:XML = <layout land={w.land.act.id} poolRooms={pool.room.length()} generatedPoolRooms={generated}/>;
-         var nodes:Array = [], links:Array = [], issues:Array = [], nodeByXY:Object = {};
-         for (var x:int = w.land.minLocX; x < w.land.maxLocX; x++)
+         var nodes:Array=[],links:Array=[],issues:Array=[],nodeByXY:Object={};
+         for (var x:int=w.land.minLocX;x<w.land.maxLocX;x++) for (var y:int=w.land.minLocY;y<w.land.maxLocY;y++)
          {
-            for (var y:int = w.land.minLocY; y < w.land.maxLocY; y++)
+            var loc:*=w.land.locs[x][y][0];
+            var source:XML=loc.room.xml;
+            var node:Object={x:x,y:y,room:String(loc.room.id),mirror:Boolean(loc.mirror),generator:String(source.@rrGen),
+               theme:String(source.@rrTheme),kind:String(source.@rrKind),doors:loc.doors.concat(),openPorts:[]};
+            nodes.push(node); nodeByXY[x+","+y]=node;
+            if (loc.doors.length!=22) issues.push("doors count "+x+","+y);
+            for (var p:int=0;p<22;p++) if (loc.doors[p]>=2)
             {
-               var loc:* = w.land.locs[x][y][0];
-               var source:XML = loc.room.xml;
-               var node:Object = {x:x,y:y,room:String(loc.room.id),mirror:Boolean(loc.mirror),generator:String(source.@rrGen),theme:String(source.@rrTheme),kind:String(source.@rrKind),tip:String(loc.room.tip),doors:loc.doors.concat(),left:sideOpen(loc,false),right:sideOpen(loc,true),top:centerOpen(loc,false),bottom:centerOpen(loc,true),stairRows:0,topOpacity:loc.space[23][0].opac+loc.space[24][0].opac,bottomOpacity:loc.space[23][24].opac+loc.space[24][24].opac};
-               for (var row:int = 0; row < loc.spaceY; row++) if (loc.space[23][row].stair || loc.space[24][row].stair) node.stairRows++;
-               nodes.push(node); nodeByXY[x+","+y] = node;
-               layout.appendChild(<loc x={x} y={y} room={loc.room.id} mirror={loc.mirror} rrGen={node.generator} rrTheme={node.theme} rrKind={node.kind} tip={node.tip} stairRows={node.stairRows} left={node.left} right={node.right} top={node.top} bottom={node.bottom}/>);
-               if (node.doors.length != 22) issues.push("doors count " + x + "," + y + "=" + node.doors.length);
-               var expectedStairRows:int = 23 + (node.top ? 1 : 0) + (node.bottom ? 1 : 0);
-               if (node.kind == "connector" && node.stairRows != expectedStairRows) issues.push("connector stair rows " + x + "," + y + "=" + node.stairRows + " expected=" + expectedStairRows);
-               if (node.top && node.topOpacity>0 || node.bottom && node.bottomOpacity>0) issues.push("open vertical port remains opaque " + x + "," + y);
-               if (!growthEnabled && x == w.land.maxLocX - 1 && y == w.land.maxLocY - 1 && node.tip != "end") issues.push("bottom-right lacks end tip");
-               if (!growthEnabled && (x == 0 && y > 0 || x == w.land.maxLocX - 1 && y < w.land.maxLocY - 1) && node.tip != "vert") issues.push("edge shaft lacks vert tip " + x + "," + y);
+               var points:Array=portCells(p,int(loc.doors[p]));
+               var isOpen:Boolean=true;
+               for each (var point:Object in points) if (loc.space[point.x][point.y].phis!=0) isOpen=false;
+               if (isOpen)
+               {
+                  node.openPorts.push(p);
+                  for each (point in points)
+                  {
+                     var tile:*=loc.space[point.x][point.y];
+                     if (tile.opac!=0) issues.push("opaque port "+x+","+y+":"+p);
+                  }
+                  if (p>=17 || p>=6 && p<=10)
+                  {
+                     var rightTile:*=loc.space[points[points.length-1].x][points[points.length-1].y];
+                     var leftTile:*=loc.space[points[0].x][points[points.length-1].y];
+                     if (!rightTile.stair && !leftTile.stair) issues.push("vertical port lacks ladder "+x+","+y+":"+p);
+                  }
+               }
             }
+            layout.appendChild(<loc x={x} y={y} room={loc.room.id} mirror={loc.mirror} rrGen={node.generator} rrTheme={node.theme} rrKind={node.kind} openPorts={node.openPorts.join(",")}/>);
          }
+         var neighbors:Object={};
          for each (node in nodes)
          {
-            var neighbor:Object = nodeByXY[(node.x+1)+","+node.y];
-            if (neighbor != null)
+            var key:String=node.x+","+node.y; neighbors[key]=[];
+            for (p=0;p<11;p++)
             {
-               var horizontal:Boolean = node.right && neighbor.left;
-               links.push({from:node.x+","+node.y,to:neighbor.x+","+neighbor.y,axis:"x",open:horizontal});
-               if (!horizontal) issues.push("horizontal edge closed " + node.x + "," + node.y);
-            }
-            neighbor = nodeByXY[node.x+","+(node.y+1)];
-            if (neighbor != null)
-            {
-               var vertical:Boolean = node.bottom && neighbor.top;
-               links.push({from:node.x+","+node.y,to:neighbor.x+","+neighbor.y,axis:"y",open:vertical});
-               if (node.kind == "connector" && neighbor.kind == "connector" && !vertical) issues.push("shaft edge closed " + node.x + "," + node.y);
+               var nextKey:String=p<6?(node.x+1)+","+node.y:node.x+","+(node.y+1);
+               var neighbor:Object=nodeByXY[nextKey];
+               if (neighbor==null)
+               {
+                  if (node.openPorts.indexOf(p)>=0) issues.push("unbuilt boundary open "+key+":"+p);
+                  continue;
+               }
+               if (node.doors[p]!=neighbor.doors[p+11]) issues.push("mismatched port contract "+key+":"+p);
+               var expected:Boolean=node.doors[p]>=2;
+               var actual:Boolean=node.openPorts.indexOf(p)>=0 && neighbor.openPorts.indexOf(p+11)>=0;
+               if (expected!=actual) issues.push("closed/misaligned shared edge "+key+":"+p);
+               if (actual) links.push({from:key,to:nextKey,port:p,axis:p<6?"x":"y",open:true});
             }
          }
+         for each (var edge:Object in links) { neighbors[edge.from].push(edge.to); neighbors[edge.to].push(edge.from); }
+         var queue:Array=["0,0"],seen:Object={"0,0":true};
+         for (var qi:int=0;qi<queue.length;qi++) for each (nextKey in neighbors[queue[qi]])
+            if (!seen[nextKey]) { seen[nextKey]=true; queue.push(nextKey); }
+         if (queue.length!=nodes.length) issues.push("disconnected map "+queue.length+"/"+nodes.length);
          var stream:FileStream = new FileStream();
          stream.open(rootDir.resolvePath("captures/" + name + "-pool.xml"), FileMode.WRITE);
          stream.writeUTFBytes(pool.toXMLString());
@@ -698,6 +751,20 @@ package
          stream.writeUTFBytes(JSON.stringify({land:String(w.land.act.id),conf:w.land.act.conf,poolRooms:pool.room.length(),generatedPoolRooms:generated,themeCounts:themeCounts,kindCounts:kindCounts,tipCounts:tips,mbaseVisited:w.game.triggers["mbase_visited"],nodes:nodes,links:links,issues:issues,boundary:"Tile port checks only; interior reachability needs movement probes"}));
          stream.close();
          log("development pool " + name + " total=" + pool.room.length() + " generated=" + generated + " assembled=" + layout.loc.length() + " issues=" + issues.length + " themes=" + JSON.stringify(themeCounts));
+      }
+
+      public static function portCells(p:int,n:int):Array
+      {
+         var out:Array=[],x0:int,x1:int,y0:int,y1:int;
+         if (p>=17 || p>=6 && p<=10)
+         {
+            x0=5+9*(p>=17?p-17:p-6); x1=x0+1;
+            if (n>2) { x0--; x1++; }
+            y0=p>=17?0:23; y1=y0+1;
+         }
+         else { x0=p>=11?0:46; x1=x0+1; y1=3+4*(p>=11?p-11:p); y0=y1-(n>2?2:1); }
+         for (var y:int=y0;y<=y1;y++) for (var x:int=x0;x<=x1;x++) out.push({x:x,y:y});
+         return out;
       }
 
       private static function sideOpen(loc:*, right:Boolean):Boolean

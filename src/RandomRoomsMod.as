@@ -195,7 +195,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v7.1 loaded <generator=space-v7, growth=right+down> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v8.0 loaded <generator=space-v8, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -259,6 +259,17 @@ package
             else
             {
                exitHintShown = false;
+            }
+         }
+         // Rebuild requests (including native death/retry) must use the same
+         // coordinated pipeline, rather than falling back to random pool picks.
+         if (preflightDone && world["game"]!=null && world["game"]["crea"])
+         {
+            var pendingId:String=String(world["game"]["curLandId"]);
+            if (pendingId==LAND_ID_RR || pendingId==LAND_ID_SHOW)
+            {
+               try { refreshArchitecturePool(world,pendingId); }
+               catch (buildError:*) { diag.log("C-REBUILD-FAIL "+buildError); }
             }
          }
          // 无限模式：进入边缘房间时向该方向扩展网格
@@ -736,51 +747,20 @@ package
          var show:Boolean=landId==LAND_ID_SHOW;
          var act:*=world["game"]["lands"][landId];
          if (act==null) throw new Error("C map LandAct is missing: "+landId);
-         var fresh:XML=<all><land serial="1"/></all>;
-         var count:int=show?SHOW_SYNTH_COUNT:SYNTH_COUNT;
-         var height:int=show?SHOW_MY:5;
          var biome:String=randBiome();
-         var sr:XML;
-         var total:int=count+2*height+4;
-         for (var i:int=0;i<total;i++)
-         {
-            var theme:String=show?String(RRSynth.BIOMES[i%4]):biome;
-            sr=synth.generate(i,theme,i<count?"":"connector");
-            if (i==total-2) { sr.@name="rr_begin"; sr.options.@tip="beg0"; }
-            if (i==total-1) { sr.@name=show?"rr_show_end":EXIT_ROOM_ID; sr.options.@tip="end"; sr.options.@nornd="1"; }
-            if (!RRSynth.validateRoom(sr) || !precheckSynth(world,sr,false))
-               throw new Error("C pool rejected "+sr.@name+"; travel cancelled");
-            fresh.appendChild(sr);
-         }
          var st:int=int(act["landStage"]);
-         if (!show) cook.rollEnemies(fresh,st);
-         else for each (sr in fresh.room)
-         {
-            for (var j:int=sr.obj.length()-1;j>=0;j--)
-               if (String(sr.obj[j].@id).indexOf("en")==0) delete sr.obj[j];
-            sr.options.@entip="0"; sr.options.@kolspawn="0";
-         }
-         act["conf"]=4;
-         act["mLocX"]=show?SHOW_MX:5; act["mLocY"]=height;
+         act["conf"]=9;
+         act["mLocX"]=show?SHOW_MX:5; act["mLocY"]=show?SHOW_MY:5;
          act["lastCpCode"]="";
-         if (!show) growth.reset(biome);
-         act["allroom"]=fresh;
-         act["land"]=null;
          act["dif"]=show?0:BASE_DIF_RR+st*DIF_PER_STAGE;
-         diag.log("C-POOL "+landId+" ordinary="+count+" vertical="+(2*height+2)+
-            " endpoints=2 total="+fresh.room.length()+" theme="+(show?"all":biome));
-         // Bounded diagnostics: full XML lives in the isolated test output.
-         for (i=0;i<Math.min(4,count);i++)
-         {
-            sr=fresh.room[i];
-            diag.log("DUMP-BEGIN "+sr.@name+" theme="+sr.@rrTheme+" kind="+sr.@rrKind);
-            for each (var row:XML in sr.a) diag.log("DUMP-ROW "+row.toString());
-            for each (var o:XML in sr.obj) diag.log("DUMP-OBJ "+o.@id+" "+o.@x+" "+o.@y);
-            for each (var b:XML in sr.back) diag.log("DUMP-BACK "+b.@id+" "+b.@x+" "+b.@y);
-            diag.log("DUMP-END");
-         }
+         var built:*=growth.build(world,act,int(act["mLocX"]),int(act["mLocY"]),biome,show);
+         act["land"]=built;
+         // The complete map is ready before normal travel activates it.
+         world["game"]["crea"]=false;
+         diag.log("C-POOL "+landId+" total="+act["allroom"].room.length()+
+            " theme="+(show?"all":biome)+" ports=coordinated");
       }
-
+      
       private static function triggerTravel(landId:String, tag:String):void
       {
          var world:* = null;
@@ -1071,14 +1051,14 @@ package
          cook.normalizePool(poolXml);
          diag.log("inject: rr_test 池边界缺口已统一（门 bug 修复）");
          
-         // C maps use the engine's paired vertical columns (conf=4). Pools
-         // are freshly generated at travel time, once a host Land exists.
+         // Mod-owned lands keep native random-land lifecycle semantics. Their
+         // complete coordinated maps are prepared before normal travel.
          if (gd.land.(@id == LAND_ID_RR).length() == 0)
-            gd.appendChild(<land id="random_rooms" tip="rnd" rnd="1" dif="8" biom="1" conf="4"
+            gd.appendChild(<land id="random_rooms" tip="rnd" rnd="1" dif="8" biom="1" conf="9"
                file="rooms_random_rooms" mx="5" my="5" locx="0" locy="0" list="0">
                <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="150"/></land>);
          if (gd.land.(@id == LAND_ID_SHOW).length() == 0)
-            gd.appendChild(<land id="rr_showroom" tip="rnd" rnd="1" dif="0" biom="0" conf="4"
+            gd.appendChild(<land id="rr_showroom" tip="rnd" rnd="1" dif="0" biom="0" conf="9"
                file="rooms_showroom" mx={SHOW_MX} my={SHOW_MY} locx="0" locy="0" list="0">
                <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="50"/></land>);
          // Only placeholders until the first travel; never snapshot generated
@@ -1089,7 +1069,7 @@ package
             rooms["rooms"][ownFile]=emptyPool;
             origPools[ownFile]=emptyPool.copy();
          }
-         diag.log("C maps registered: conf=4, fresh architecture pools on travel");
+         diag.log("C maps registered: coordinated architecture on travel");
 
          // ---- P0：变异 tip=rnd 土地的池（会话级；进入级刷新见 refreshLandPool） ----
          var rndLands:XMLList = gd.land.(@tip == "rnd");

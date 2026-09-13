@@ -142,7 +142,7 @@ package rr
 
       public function build():void
       {
-         objects.push(["player",1,23]);
+         objects.push(["player",plan.spawn.x,plan.spawn.y]);
          for each (var d:Object in plan.doors) objects.push([d.id,d.x,d.y,"door"]);
          for each (d in plan.hatches) objects.push([d.id,d.x,d.y,"hatch"]);
          for each (d in plan.windows) objects.push([d.id,d.x,d.y,"window"]);
@@ -170,6 +170,17 @@ package rr
                      [[plan.theme=="stable"?"stlight3":"light3",1,-3]]);
                   for (trial=0;trial<8 && !placed;trial++)
                      placed=place(g,r.x0+int(rnd()*(width-3)),r.floor);
+               }
+               if (!placed && width>=3 && r.floor-r.top>=4)
+               {
+                  // Furnish narrow useful ends as well as large bays. These
+                  // compact groups have a purpose and a light, without needing
+                  // the seven-cell strip of a full office/workshop group.
+                  var small:String=r.role=="office"?"bookcase":(r.role=="service"?"instr1":
+                     (r.role=="living"?"cup":(plan.theme=="stable"?"mcrate1":"box")));
+                  g=group(3,4,[[small,0,0]],[[plan.theme=="stable"?"stlight3":"light3",0,-4]]);
+                  for (trial=0;trial<width && !placed;trial++)
+                     placed=place(g,r.x0+int(rnd()*(width-2)),r.floor);
                }
             }
          }

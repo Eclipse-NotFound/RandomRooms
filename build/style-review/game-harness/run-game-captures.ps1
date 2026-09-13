@@ -13,6 +13,7 @@ param(
     [switch]$SmokeOnly,
     [switch]$StartupDelay,
     [switch]$FixtureProbe,
+    [switch]$NavigationProbe,
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
 )
 $ErrorActionPreference = 'Stop'
@@ -72,6 +73,7 @@ $caseDoc.DocumentElement.SetAttribute('shaft', ($DevelopmentShaftProbe.IsPresent
 $caseDoc.DocumentElement.SetAttribute('growth', $GrowthProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('startupDelay', $StartupDelay.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('fixtures', $FixtureProbe.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('navigation', $NavigationProbe.IsPresent.ToString().ToLowerInvariant())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
     'baseline-v66.xml' = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot '../baseline-v66.xml') -Algorithm SHA256).Hash
@@ -215,7 +217,7 @@ try {
     while (-not $instance.WaitForExit(1000)) {
         $elapsed++
         if ($elapsed % 10 -eq 0) { Write-Output ('Capture process running: ' + $elapsed + 's; PID ' + $instance.Id) }
-        $timeout = if ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { 120 }
+        $timeout = if ($NavigationProbe) { 960 } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { 120 }
         if ($elapsed -ge $timeout) { throw ('Capture process exceeded ' + $timeout + ' second timeout.') }
     }
     $instance.Refresh()
