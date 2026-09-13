@@ -1,0 +1,27 @@
+<layout land="random_rooms" poolRooms="25" generatedPoolRooms="25">
+  <loc x="0" y="0" room="rr_begin" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="4,7"/>
+  <loc x="0" y="1" room="syn_1" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="9,18"/>
+  <loc x="0" y="2" room="syn_2" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="2,8,20"/>
+  <loc x="0" y="3" room="syn_3" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="3,9,19"/>
+  <loc x="0" y="4" room="syn_4" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="3,20"/>
+  <loc x="1" y="0" room="syn_5" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="2,7,15"/>
+  <loc x="1" y="1" room="syn_6" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="18"/>
+  <loc x="1" y="2" room="syn_7" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="4,7,13"/>
+  <loc x="1" y="3" room="syn_8" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="4,8,14,18"/>
+  <loc x="1" y="4" room="syn_9" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="3,14,19"/>
+  <loc x="2" y="0" room="syn_10" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="5,7,13"/>
+  <loc x="2" y="1" room="syn_11" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="service" openPorts="4,6,18"/>
+  <loc x="2" y="2" room="syn_12" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="5,9,15,17"/>
+  <loc x="2" y="3" room="syn_13" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="2,15,20"/>
+  <loc x="2" y="4" room="syn_14" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="service" openPorts="2,14"/>
+  <loc x="3" y="0" room="syn_15" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="4,6,16"/>
+  <loc x="3" y="1" room="syn_16" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="10,15,17"/>
+  <loc x="3" y="2" room="syn_17" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="1,7,16,21"/>
+  <loc x="3" y="3" room="syn_18" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="service" openPorts="6,13,18"/>
+  <loc x="3" y="4" room="syn_19" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="13,17"/>
+  <loc x="4" y="0" room="syn_20" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="7,15"/>
+  <loc x="4" y="1" room="syn_21" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="atrium" openPorts="6,18"/>
+  <loc x="4" y="2" room="syn_22" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="8,12,17"/>
+  <loc x="4" y="3" room="syn_23" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="service" openPorts="7,19"/>
+  <loc x="4" y="4" room="rr_exit" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="service" openPorts="18"/>
+</layout>

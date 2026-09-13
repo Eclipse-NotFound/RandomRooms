@@ -1,0 +1,14 @@
+<layout land="rr_showroom" poolRooms="12" generatedPoolRooms="12">
+  <loc x="0" y="0" room="rr_begin" mirror="true" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="4,7"/>
+  <loc x="0" y="1" room="syn_1" mirror="false" rrGen="space-v8" rrTheme="sewer" rrKind="service" openPorts="9,18"/>
+  <loc x="0" y="2" room="syn_2" mirror="true" rrGen="space-v8" rrTheme="plant" rrKind="workshop" openPorts="2,20"/>
+  <loc x="1" y="0" room="syn_3" mirror="true" rrGen="space-v8" rrTheme="mane" rrKind="damaged" openPorts="2,7,15"/>
+  <loc x="1" y="1" room="syn_4" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="warehouse" openPorts="18"/>
+  <loc x="1" y="2" room="syn_5" mirror="false" rrGen="space-v8" rrTheme="sewer" rrKind="damaged" openPorts="4,13"/>
+  <loc x="2" y="0" room="syn_6" mirror="true" rrGen="space-v8" rrTheme="plant" rrKind="warehouse" openPorts="5,7,13"/>
+  <loc x="2" y="1" room="syn_7" mirror="false" rrGen="space-v8" rrTheme="mane" rrKind="damaged" openPorts="4,6,18"/>
+  <loc x="2" y="2" room="syn_8" mirror="false" rrGen="space-v8" rrTheme="stable" rrKind="offices" openPorts="5,15,17"/>
+  <loc x="3" y="0" room="syn_9" mirror="false" rrGen="space-v8" rrTheme="sewer" rrKind="service" openPorts="6,16"/>
+  <loc x="3" y="1" room="syn_10" mirror="true" rrGen="space-v8" rrTheme="plant" rrKind="warehouse" openPorts="10,15,17"/>
+  <loc x="3" y="2" room="rr_show_end" mirror="true" rrGen="space-v8" rrTheme="mane" rrKind="warehouse" openPorts="16,21"/>
+</layout>

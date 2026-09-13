@@ -1,0 +1,24 @@
+appId=pferr-style-c85b877cd7244f54a716299abb795d1d
+3717 ready cases=2
+3718 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-c85b877cd7244f54a716299abb795d1d\Local Store existsBefore=true
+3719 STORAGE existsAfter=true
+4167 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+4173 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+4189 development init returned
+9024 STARTUP-READY all 31 host loaders loaded with nonempty pools
+10827 newGame(-1) issued, intro skipped
+13069 initial world ready land=rbl
+13781 development debugTravel rr_showroom case=rrstyle-smoke-f5
+13802 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+16941 arrived rr_showroom room=rr_begin
+19724 capture rrstyle-smoke-f5-stage 1008x729 room=rr_begin lightOverlay=true
+23824 capture rrstyle-smoke-f5-room 1920x1000 room=rr_begin lightOverlay=false
+23834 development pool rrstyle-smoke-f5 total=12 generated=12 assembled=12 issues=0 themes={"plant":3,"sewer":3,"stable":3,"mane":3}
+23855 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+25729 development debugTravel random_rooms case=rrstyle-smoke-f1
+28713 arrived random_rooms room=rr_begin
+31485 capture rrstyle-smoke-f1-stage 1008x729 room=rr_begin lightOverlay=true
+32814 capture rrstyle-smoke-f1-room 1920x1000 room=rr_begin lightOverlay=false
+32831 development pool rrstyle-smoke-f1 total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+33021 DEVELOPMENT-VERSION runtimeTag=[RR:v8.0] copiedOriginalLog=true
+33022 DONE 2 cases

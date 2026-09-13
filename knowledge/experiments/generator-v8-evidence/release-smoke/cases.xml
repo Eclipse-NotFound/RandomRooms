@@ -1,0 +1,4 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" development="true">
+  <case id="rrstyle-smoke-f5" landId="rr_showroom" />
+  <case id="rrstyle-smoke-f1" landId="random_rooms" />
+</cases>

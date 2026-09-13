@@ -54,6 +54,12 @@ function render(){const r=data[selected];[...el('samples').children].forEach((b,
     output=MOD/'design/generator-v8-review.html'
     page=page.replace('处开放边口','处预留边口').replace('彩框来自同一次生成的空间记录，可以关闭，不代表规定路线。',
         '单房展示暂时封闭外边缘；金色点表示生成时预留的接口。彩框来自同一次生成的空间记录，可以关闭，不代表规定路线。')
+    page=page.replace('<h2>向右、向下继续扩张</h2>',
+        '<h2>从四边进入同一间房</h2><p>这间 F1 实机样本有四个实际开放边口，上下错开，左右位于不同高度。角色从四边逐一离开、返回，并在每次进入后走遍内部空间；33 个目标全部通过。</p>'
+        '<figure><div class="frame"><img loading="lazy" src="../knowledge/experiments/generator-v8-evidence/multi-entry-f1/rrstyle-smoke-f1-room.png" alt="四方向边口实际开放的 F1 房间"></div><figcaption>原版游戏中的实际 F1 房间；绿色箭头为游戏自己的跨房标记。</figcaption></figure>'
+        '<h2>向右、向下继续扩张</h2>')
+    page=page.replace('已生成房间保留原来的布局与镜像，新邻居接上预留接口。',
+        '已生成房间保留原来的布局与镜像，新邻居接上预留接口。实测从 5×5 扩张到 8×8，实际走进新列、新行并返回，原来 25 间房保持不变；64 间房的接口检查零问题。')
     output.write_text(page.replace('__DATA__',json.dumps(data,ensure_ascii=False)).replace('__GRAPHS__',str(stats['new']['connectivity_types_lower_bound'])),encoding='utf-8')
     print(output)
 
