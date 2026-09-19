@@ -1,0 +1,27 @@
+<layout land="random_rooms" poolRooms="25" generatedPoolRooms="25">
+  <loc x="0" y="0" room="rr_begin" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="5,7"/>
+  <loc x="0" y="1" room="syn_1" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="5,10,18"/>
+  <loc x="0" y="2" room="syn_2" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="workshop" openPorts="4,7,21"/>
+  <loc x="0" y="3" room="syn_3" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="workshop" openPorts="6,18"/>
+  <loc x="0" y="4" room="syn_4" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="workshop" openPorts="3,17"/>
+  <loc x="1" y="0" room="syn_5" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="4,6,16"/>
+  <loc x="1" y="1" room="syn_6" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="5,10,16,17"/>
+  <loc x="1" y="2" room="syn_7" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="3,6,15,21"/>
+  <loc x="1" y="3" room="syn_8" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="2,17"/>
+  <loc x="1" y="4" room="syn_9" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="5,14"/>
+  <loc x="2" y="0" room="syn_10" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="2,15"/>
+  <loc x="2" y="1" room="syn_11" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="16"/>
+  <loc x="2" y="2" room="syn_12" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="4,8,14"/>
+  <loc x="2" y="3" room="syn_13" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="1,10,13,19"/>
+  <loc x="2" y="4" room="syn_14" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="1,16,21"/>
+  <loc x="3" y="0" room="syn_15" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="3,10,13"/>
+  <loc x="3" y="1" room="syn_16" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="2,7,21"/>
+  <loc x="3" y="2" room="syn_17" mirror="false" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="5,8,15,18"/>
+  <loc x="3" y="3" room="syn_18" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="3,9,12,19"/>
+  <loc x="3" y="4" room="syn_19" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="service" openPorts="12,20"/>
+  <loc x="4" y="0" room="syn_20" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="9,14"/>
+  <loc x="4" y="1" room="syn_21" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="connector" openPorts="9,13,20"/>
+  <loc x="4" y="2" room="syn_22" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="damaged" openPorts="16,20"/>
+  <loc x="4" y="3" room="syn_23" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="10,14"/>
+  <loc x="4" y="4" room="rr_exit" mirror="true" rrGen="space-v9" rrTheme="sewer" rrKind="warehouse" openPorts="21"/>
+</layout>

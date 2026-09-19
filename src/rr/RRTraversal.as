@@ -6,7 +6,7 @@ package rr
     * gate, not an imitation of the game's complete physics. */
    public class RRTraversal
    {
-      public static function check(plan:RRArchitecture):void
+      public static function check(plan:RRArchitecture,dry:Boolean=false):void
       {
          var clear:Array=[],climb:Array=[],stand:Array=[],hard:Array=[];
          var forward:Array=[],reverse:Array=[];
@@ -20,6 +20,8 @@ package rr
          {
             i=y*48+x;
             clear[i]=!hard[i] && !hard[i+1] && !hard[i-48] && !hard[i-47];
+            if (dry && (String(plan.grid[y][x]).indexOf("*")>=0 || String(plan.grid[y][x+1]).indexOf("*")>=0 ||
+               String(plan.grid[y-1][x]).indexOf("*")>=0 || String(plan.grid[y-1][x+1]).indexOf("*")>=0)) clear[i]=false;
             if (!clear[i]) continue;
             forward[i]=[]; reverse[i]=[];
             climb[i]=false;
@@ -48,7 +50,7 @@ package rr
          var reached:Object=flood(forward,start), returned:Object=flood(reverse,start);
          for (i=0;i<clear.length;i++)
             if (clear[i] && stand[i] && (!reached[i] || !returned[i]))
-               throw new Error("Floor lacks a walking/climbing return "+(i%48)+","+int(i/48));
+               throw new Error((dry?"Dry ":"")+"floor lacks a walking/climbing return "+(i%48)+","+int(i/48));
          for (var p:int=0;p<22;p++) if (plan.ports[p]>=2)
          {
             var b:Object=RRPorts.rect(p,plan.ports[p]);

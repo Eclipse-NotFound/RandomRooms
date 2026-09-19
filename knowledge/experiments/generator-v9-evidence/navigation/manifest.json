@@ -1,0 +1,156 @@
+{
+  "appId": "pferr-style-e86aa199c041465fa1a39588c8e7de71",
+  "status": "complete",
+  "startedUtc": "2026-09-19T15:27:33.2527400Z",
+  "completedUtc": "2026-09-19T15:36:20.7047548Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-navigation-plant",
+    "rrstyle-navigation-stable",
+    "rrstyle-navigation-sewer",
+    "rrstyle-navigation-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "build/RandomRooms-v9-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-navigation-plant-pool.xml": "EFBA83AF7EF647ED82D9A775AE73B2D01A796EE827FD1652BD636CC33EFAC2F5",
+    "rrstyle-navigation-plant-layout.xml": "FDFB4C176A0CF55EE7C73629325C1ADABE61929D1153D2BA2F9D134BD3FBA375",
+    "rrstyle-navigation-plant-topology.json": "E404A70BA1A1DCE3C29A1D05C39ABFA5F2C6D2EFDF275E9D33003CC92B2B772D",
+    "rrstyle-navigation-stable-pool.xml": "129AC87A4E02E2DA6DDDC14A22FE97E2647B281251FDDB047D89BF588BB53A6F",
+    "rrstyle-navigation-stable-layout.xml": "10530D902937FD31F1F043301CB09C9A221CB284B2081FF370AE6A1CE7A281D7",
+    "rrstyle-navigation-stable-topology.json": "9234A20CBA1F2CE16F059C548B1AE4CDC5F6F759EB860622EA6F58C031EA1761",
+    "rrstyle-navigation-sewer-pool.xml": "BAFBAD878E7368907453622063A7FB1134571D55F3093022929EE28CC7DBC305",
+    "rrstyle-navigation-sewer-layout.xml": "4745AB596F0C4E722235763428B6DA26131D64DD66A268D82B15872EAD5DC2BA",
+    "rrstyle-navigation-sewer-topology.json": "DA07A78DC7678243FE8433D62304E02C9422B4500AE5BD74AB42C5E0D12738FC",
+    "rrstyle-navigation-mane-pool.xml": "D885C90AFBA3EFD0D14A5EA055925B0D3A832F0E0B4FDE98C4D73BD193A327DC",
+    "rrstyle-navigation-mane-layout.xml": "0575BD5FEB41B5129386EFBD2316719A3AF10AF0E7368CC3048A42BFCC9F80FB",
+    "rrstyle-navigation-mane-topology.json": "89066C08284E48CC690C7276B367DA79C1A945FC5F0E25F27C23D3935674DFCC",
+    "production-diag.log": "8A887BFC00F3216FECDCE008AEDA66C026BD776DBE2E146CD1025D0E0BDA2F0D",
+    "production-version.json": "8B45A610E87355D15FAB593A7DB032891071EA703B0B47A06384FD81F7A53D0F",
+    "rrstyle-navigation-mane-navigation.json": "0CBDE729E547966E730278B1DE834F227E22DED608E5B5E37DDE3533A9066789",
+    "rrstyle-navigation-plant-navigation.json": "5B2B7CDF59E1D5B9E6492CC760D31140939C88A904A70DAE74F6496C6DD6313C",
+    "rrstyle-navigation-sewer-navigation.json": "2CC52E283D6BFDBE45FBF9450ACEC837EDB1020E380D53C0332070C74DCF2DCA",
+    "rrstyle-navigation-stable-navigation.json": "EC5309C6C8C0D069CE871C96DFA05535ED45AC43AA66E8D5F417986FB0FCA463",
+    "startup-readiness.json": "7E2CFC80FACD2FDAD7450AB8F7FAEF8B265BE66E24737F43BE5CC25DF9F6FEB7"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-navigation-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-stable",
+      "poolRooms": 30,
+      "generatedPoolRooms": 30,
+      "themeCounts": {
+        "stable": 30
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-navigation-plant",
+      "success": true,
+      "completed": 17,
+      "targets": 17,
+      "frames": 2583,
+      "milestones": 0
+    },
+    {
+      "case": "rrstyle-navigation-stable",
+      "success": true,
+      "completed": 22,
+      "targets": 22,
+      "frames": 3602,
+      "milestones": 0
+    },
+    {
+      "case": "rrstyle-navigation-sewer",
+      "success": true,
+      "completed": 17,
+      "targets": 17,
+      "frames": 2622,
+      "milestones": 0
+    },
+    {
+      "case": "rrstyle-navigation-mane",
+      "success": true,
+      "completed": 20,
+      "targets": 20,
+      "frames": 4421,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "AE1680C5FD31505086342FD765645DC0B70DEDD7275F9B8A99F65A0F591397D2",
+  "driverSha256": "8DE353BFF7DADD661FAF0C8E44887377CB35848E3AA8462454DFF9390317B704",
+  "runnerLogSha256": "321CE213C1EF6A7076166032301AD23263470A6B21C2F777EEC9882AC1C2E204",
+  "captured": {
+    "rrstyle-navigation-plant-stage.png": "49E0C8658614BE03A1EE273AFF8D16CE32B4147C07E8914524E467A644A1585A",
+    "rrstyle-navigation-plant-room.png": "8DC42E2CB457D2E14D856F585E6A7046B7275A8AF87A00489718E03AB321A328",
+    "rrstyle-navigation-stable-stage.png": "902FAFD16FF1854710CBE9E3672EE4F8019DED62688F17113C52A5469C0629C5",
+    "rrstyle-navigation-stable-room.png": "4742CEEEF14DF7BD9904CF1191256F8EA30B9CA4883CC6E2AEA2ABBBA6D43FE4",
+    "rrstyle-navigation-sewer-stage.png": "84F45A949634052CDD02BC1D6608552BCCAF0D08B58337B0E709123850842C9A",
+    "rrstyle-navigation-sewer-room.png": "239BB52D5E5CE7649CE08C310A9D5D515797703FA8F72CAD952C671B7021B510",
+    "rrstyle-navigation-mane-stage.png": "5773FD16E6CD87C78815D05A6FF842EAB02383DED594AFF51BE7E41687305610",
+    "rrstyle-navigation-mane-room.png": "62D8A8166E9E9217EE8C0707D19D6D32C425C373E6E19CA9177DF212DE6D9427"
+  }
+}

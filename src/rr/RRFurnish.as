@@ -23,7 +23,12 @@ package rr
          light2:[2,1],light3:[2,1],light4:[2,1],wires1:[1,2],wires2:[1,2],
          pult:[2,1],monitor:[2,1],zavod2:[3,2],pipe3:[2,1],pipe4:[1,2],
          potek:[10,2],vent:[1,1],bvent:[4,2],depot:[2,3],storage:[4,3],
-         electro:[3,4],clock:[1,1],poster:[2,2],stillage:[3,3]
+         electro:[3,4],clock:[1,1],poster:[2,2],stillage:[3,3],
+         fwindow:[6,6],stabledoor:[3,3],stlight1:[1,1],light1:[1,1],
+         konstr:[1,4],vkonstr:[2,3],hkonstr:[6,2],railing:[4,1],
+         pipe1:[10,2],pipe2:[12,3],pipes:[3,3],stok:[3,3],stok2:[2,2],
+         plesen:[10,2],moss:[10,2],zavod1:[4,3],fuse:[4,3],
+         heap1:[6,3],heap2:[6,2],heap3:[3,1],swindow:[2,1],hole:[10,10]
       };
 
       public function RRFurnish(p:RRArchitecture, random:Function) { plan=p; rnd=random; }
@@ -33,56 +38,75 @@ package rr
 
       // These are semantic relationships learned from the corpus, not terrain
       // chunks. Counts, spacing, position and the containing space are generated.
-      private function kit(role:String):Object
+      private function kit(role:String,compact:Boolean=false):Object
       {
-         var industrial:Boolean = plan.theme == "plant" || plan.theme == "sewer";
+         var theme:String=plan.theme,light:String=plan.scene.light;
+         if (role=="street" || role=="roof")
+            return compact?group(3,2,[],[["heap3",0,0]]):group(7,3,[],[["heap3",0,0],["railing",3,0]]);
+         if (theme=="sewer")
+         {
+            if (role=="canal" || role=="canal_walk")
+               return group(3,3,[],[["light1",0,-3],["pipe4",2,-2]]);
+            if (compact)
+               return group(3,3,[["instr1",0,0]],[["light1",0,-3],["vent",2,-2]]);
+            if (role=="control")
+               return group(7,4,[["instr1",0,0],["table1",3,0]],[["pult",3,-2],["pipe4",6,-3],["pipe4",6,-1],["light1",2,-4]]);
+            if (role=="store")
+               return group(6,4,[["locker",0,0],["instr1",4,0]],[["storage",2,-2],["light1",3,-4]]);
+            return group(6,4,[["table1",0,0],["instr1",4,0]],[["pipe4",3,-3],["pipe4",3,-1],["vent",0,-3],["light1",5,-4]]);
+         }
+         if (compact)
+         {
+            var small:String=role=="office"?"filecab":(role=="living"?"cup":
+               (role=="service" || role=="workshop"?"instr1":(theme=="stable"?"mcrate1":"box")));
+            return group(3,4,[[small,0,0]],[[light,0,-4]]);
+         }
          if (role == "office")
          {
+            if (theme=="stable")
+               return group(7,4,[["table2",1,0],["filecab",4,0],["filecab",5,0]],
+                  [["stwindow",0,-3],["wires1",6,-3],["wires1",6,-1],["stlight4",1,-4]]);
             if (rnd() < 0.5)
                return group(7,4,[["table2",1,0],["filecab",4,0],["filecab",5,0]],
-                  [[plan.theme=="stable"?"stwindow":"bwindow",0,-3],["clock",5,-3],["light4",2,-4]]);
+                  [["bwindow",0,-3],["clock",5,-3],[light,2,-4]]);
             return group(7,4,[["bookcase",0,0],["table",3,0],["trash",6,0]],
-               [["poster",3,-3],["light3",4,-4]]);
+               [["poster",3,-3],[light,4,-4]]);
          }
          if (role == "living")
          {
+            if (theme=="stable" && rnd()<0.6)
+               return group(7,4,[["bed",0,0],["cup",5,0]],[["stwindow",1,-3],["stlight3",4,-4]]);
             if (rnd() < 0.55)
                return group(8,3,[["couch",0,0],["table1",3,0],["cup",6,0]],
-                  [["poster",0,-3],["light2",4,-3]]);
+                  [["poster",0,-3],[light,4,-3]]);
             return group(6,4,[["table1",0,0],["ccup",2,0],["tap",3,0],["fridge",5,0],
-                  ["wcup",2,-3],["wcup",3,-3]],[["light2",0,-4]]);
+                  ["wcup",2,-3],["wcup",3,-3]],[[light,0,-4]]);
          }
          if (role == "workshop" || role == "control")
          {
+            if (theme=="plant" && role=="workshop")
+               return group(9,5,[["instr1",5,0],["box",7,0]],[["zavod1",0,-2],["pult",5,-2],["light4",3,-5],["konstr",8,-4]]);
             if (rnd() < 0.65)
                return group(8,4,[["bigbox",0,0]],[["electro",0,-3],["pult",3,-1],
-                  ["monitor",3,-2],["monitor",3,-3],["electro",5,-3],["light3",3,-4]]);
+                  ["monitor",3,-2],["monitor",3,-3],["electro",5,-3],[light,3,-4]]);
             return group(7,4,[["table1",0,0],["instr1",4,0]],
-               [["vent",1,-3],["pipe4",6,-3],["pipe4",6,-1],["light3",2,-4]]);
+               [["vent",1,-3],["pipe4",6,-3],["pipe4",6,-1],[light,2,-4]]);
          }
          if (role == "service")
          {
-            if (plan.theme == "sewer")
-            {
-               var pb:Array = [];
-               var pipes:int=2+int(rnd()*3);
-               for (var k:int=0;k<pipes;k++) { pb.push(["pipe3",k*2,-1]); pb.push(["pipe3",k*2,-2]); }
-               pb.push(["light3",pipes-1,-4]);
-               return group(pipes*2,4,[],pb);
-            }
             return group(7,4,[["table",0,0],["bigmed",4,0],["medbox",2,-2]],
-               [["vent",0,-3],["pipe4",6,-3],["pipe4",6,-1],["light3",2,-4]]);
+               [["vent",0,-3],["pipe4",6,-3],["pipe4",6,-1],[light,2,-4]]);
          }
-         if (role == "hall") return kit(industrial ? "workshop" : choose(["living","office","control"]));
+         if (role == "hall") return kit(choose(["living","office","control"]));
          // Storage bays use back-layer shelves for density, leaving front space.
          var count:int = 2 + int(rnd()*2);
          var o:Array=[], b:Array=[];
          for (var i:int=0;i<count;i++)
          {
-            o.push([plan.theme=="stable"?"mcrate1":"box",i*3,0]);
-            b.push([industrial?"depot":(plan.theme=="stable"?"zavod2":"stillage"),i*3,plan.theme=="stable"?-1:-2]);
+            o.push([theme=="stable"?"mcrate1":"box",i*3,0]);
+            b.push([theme=="mane"?"stillage":"depot",i*3,-2]);
          }
-         b.push([plan.theme=="stable"?"stlight3":"light3",1,-4]);
+         b.push([light,1,-4]);
          return group(count*3,4,o,b);
       }
 
@@ -114,8 +138,82 @@ package rr
          if (!d) return false;
          for (var yy:int=y;yy<y+int(d[1]);yy++)
             for (var xx:int=x;xx<x+int(d[0]);xx++)
-               if (plan.solid(xx,yy) || plan.reserved[yy+","+xx]) return false;
+               if (plan.solid(xx,yy)) return false;
          return true;
+      }
+      private function facility(id:String,x:int,y:int,r:Object):Boolean
+      {
+         var d:Array=BACKS[id];
+         if (!d || x<r.x0 || y<r.top || x+d[0]-1>r.x1 || y+d[1]-1>r.floor) return false;
+         for (var yy:int=y;yy<y+d[1];yy++) for (var xx:int=x;xx<x+d[0];xx++)
+            if (plan.solid(xx,yy)) return false;
+         // Background installations can continue behind dry catwalks and
+         // ladders. They do not consume collision space or cancel path reserves.
+         backs.push([id,x,y]); return true;
+      }
+      private function facilities():void
+      {
+         for each (var r:Object in plan.regions)
+         {
+            if (!r.hasOwnProperty("id")) continue;
+            var h:int=r.floor-r.top+1,w:int=r.x1-r.x0+1,x:int,y:int;
+            if (plan.theme=="sewer")
+            {
+               if (r.role=="canal" || r.role=="service")
+               {
+                  for (x=r.x0;x<r.x1;x+=2)
+                  {
+                     facility("pipe3",x,r.top+1,r);
+                     if (h>=8) facility("pipe3",x,r.top+2,r);
+                  }
+                  for (y=r.top+3;y<r.floor;y+=2) facility("pipe4",r.x0+1,y,r);
+                  for (x=r.x0;x+9<=r.x1;x+=10) facility(rnd()<0.5?"potek":"plesen",x,r.floor-3,r);
+                  if (w>=12 && h>=9) facility("pipe1",r.x0+1,r.top+4,r);
+               }
+               facility("light1",r.x0+int(w/2),r.top,r);
+            }
+            else if (plan.theme=="plant")
+            {
+               if (r.role=="workshop" || r.role=="warehouse")
+               {
+                  if (h>=9) for (x=r.x0+2;x+5<=r.x1;x+=9) facility("fwindow",x,r.top+1,r);
+                  for (x=r.x0;x<=r.x1;x+=Math.max(12,w-1))
+                     for (y=r.top;y+3<=r.floor;y+=4) facility("konstr",x,y,r);
+                  for (x=r.x0;x+5<=r.x1;x+=6) facility("hkonstr",x,r.top,r);
+                  // Fixed equipment belongs behind the accessible work floor;
+                  // traffic clearance must not erase the whole machine line.
+                  for (x=r.x0+2;x+3<=r.x1;x+=7)
+                     facility(r.role=="warehouse"?"storage":"zavod1",x,r.floor-2,r);
+               }
+               facility("light4",r.x0+int(w/2)-1,r.top,r);
+            }
+            else if (plan.theme=="stable")
+            {
+               for (y=r.top;y+3<=r.floor;y+=4) facility("konstr",r.x0,y,r);
+               if (h>=5 && w>=7 && r.role!="control") facility("stabledoor",r.x1-3,r.floor-2,r);
+               if (r.role=="hall")
+               {
+                  for (x=r.x0+2;x+3<=r.x1;x+=7) facility("stwindow",x,r.top+2,r);
+                  for (x=r.x0+2;x+2<=r.x1;x+=8) facility("stabledoor",x,r.floor-2,r);
+               }
+               facility("stlight4",r.x0+int(w/2)-1,r.top,r);
+            }
+            else
+            {
+               if (r.role=="street" || r.role=="roof")
+               {
+                  for (x=r.x0+1;x+3<=r.x1;x+=7) facility("railing",x,r.floor,r);
+                  if (w>=8) facility("heap2",r.x0+1,r.floor-1,r);
+               }
+               else
+               {
+                  for (x=r.x0+2;x+1<=r.x1;x+=5) facility("swindow",x,r.top+2,r);
+                  if (w>=10 && h>=10) facility("hole",r.x0,r.top,r);
+                  facility("heap3",r.x1-2,r.floor,r);
+                  facility("light3",r.x0+int(w/2)-1,r.top,r);
+               }
+            }
+         }
       }
       private function place(g:Object,x:int,f:int):Boolean
       {
@@ -150,40 +248,27 @@ package rr
          {
             if (r.role=="shaft") continue;
             var width:int=r.x1-r.x0+1;
-            var groups:int=width>26 ? 2 : 1;
+            var groups:int=width>26 ? 3 : (width>17?2:1);
             for (var n:int=0;n<groups;n++)
             {
                var placed:Boolean=false;
-               for (var trial:int=0;trial<12 && !placed;trial++)
+               for (var trial:int=0;trial<24 && !placed;trial++)
                {
                   var g:Object=kit(r.role);
                   if (g.w>width || g.h>r.floor-r.top) continue;
                   var x:int=r.x0+int(rnd()*(width-g.w+1));
                   placed=place(g,x,r.floor);
                }
-               // Small utility nook: choose a complete smaller relationship.
-               if (!placed && width>=4)
+               // The smaller alternative belongs to the same scene and role.
+               if (!placed && width>=3)
                {
-                  if (r.role=="service" && plan.theme=="sewer")
-                     g=group(4,3,[],[["pipe4",0,-3],["pipe4",0,-1],["vent",2,-2]]);
-                  else g=group(4,3,[[choose(["table","table1","couch"]),0,0]],
-                     [[plan.theme=="stable"?"stlight3":"light3",1,-3]]);
-                  for (trial=0;trial<8 && !placed;trial++)
-                     placed=place(g,r.x0+int(rnd()*(width-3)),r.floor);
-               }
-               if (!placed && width>=3 && r.floor-r.top>=4)
-               {
-                  // Furnish narrow useful ends as well as large bays. These
-                  // compact groups have a purpose and a light, without needing
-                  // the seven-cell strip of a full office/workshop group.
-                  var small:String=r.role=="office"?"bookcase":(r.role=="service"?"instr1":
-                     (r.role=="living"?"cup":(plan.theme=="stable"?"mcrate1":"box")));
-                  g=group(3,4,[[small,0,0]],[[plan.theme=="stable"?"stlight3":"light3",0,-4]]);
-                  for (trial=0;trial<width && !placed;trial++)
-                     placed=place(g,r.x0+int(rnd()*(width-2)),r.floor);
+                  g=kit(r.role,true);
+                  for (trial=0;trial<8 && !placed && g.h<=r.floor-r.top;trial++)
+                     placed=place(g,r.x0+int(rnd()*(width-g.w+1)),r.floor);
                }
             }
          }
+         facilities();
          // Spawn markers use open, supported positions after furnishing. They
          // are gameplay markers, not members of the furniture density budget.
          var targets:int=4+int(rnd()*4), made:int=0;

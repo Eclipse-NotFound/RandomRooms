@@ -1,0 +1,248 @@
+{
+  "appId": "pferr-style-379ec62be13a4a5f91a763e5645f1e2f",
+  "status": "complete",
+  "startedUtc": "2026-09-19T15:47:37.2487365Z",
+  "completedUtc": "2026-09-19T15:50:15.6928820Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-scene-plant",
+    "rrstyle-deeper-plant",
+    "rrstyle-scene-stable",
+    "rrstyle-deeper-stable",
+    "rrstyle-scene-sewer",
+    "rrstyle-deeper-sewer",
+    "rrstyle-scene-mane",
+    "rrstyle-deeper-mane",
+    "rrstyle-scene-random",
+    "rrstyle-deeper-random",
+    "rrstyle-show-sewer",
+    "rrstyle-show-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "build/RandomRooms-v9-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-scene-plant-pool.xml": "EFBA83AF7EF647ED82D9A775AE73B2D01A796EE827FD1652BD636CC33EFAC2F5",
+    "rrstyle-scene-plant-layout.xml": "FDFB4C176A0CF55EE7C73629325C1ADABE61929D1153D2BA2F9D134BD3FBA375",
+    "rrstyle-scene-plant-topology.json": "C9A9C2795FD4C1B6646E6C3B8C0B0884EC4220550F8E3C52DC583A5E33101980",
+    "rrstyle-deeper-plant-pool.xml": "27BDB1A752E6181FA6DFF1C6FEEB97CBD834224B29BDF7C3D05E54D6110BD134",
+    "rrstyle-deeper-plant-layout.xml": "A1EAB2406B0FF84D95F8A8C8BB5AF43DA536BEB80352A34EA2506F0231F85EE6",
+    "rrstyle-deeper-plant-topology.json": "C74D9078EEFBFDCDA2D52EA16F271730F6AFB3E93DD2CF264EA14D9EB26CCBAF",
+    "rrstyle-scene-stable-pool.xml": "0AE9B9AD87932F7D1213938813EB56415FC03AABD0A25CEFB0AF5F9B342DEC6C",
+    "rrstyle-scene-stable-layout.xml": "49E983DD952F9F6C292CF639FB19300A6C700170E4DFF984DBC5CC3D22353298",
+    "rrstyle-scene-stable-topology.json": "7EFCD64D6DC0C4EC947C19D667D88DB57E5239EE323A0CACB3C5C9F57B6103D1",
+    "rrstyle-deeper-stable-pool.xml": "D3E723E4F8207708F4E086CA7EFCCAD721ABD42D923428E9F876AF2EF6612E42",
+    "rrstyle-deeper-stable-layout.xml": "2B164933E6C27ACCD053C83B3D0EEBBF2F428B47B57C15765EEADEF19BD102EA",
+    "rrstyle-deeper-stable-topology.json": "995323CAD45060D19CDF0C6AA0AAFE74322B624A89216370C275F9267E603399",
+    "rrstyle-scene-sewer-pool.xml": "880C14999228D4DE0455FC28B63EBB6293B0FCBCD64686B13AEA5CAF7DD016CC",
+    "rrstyle-scene-sewer-layout.xml": "AAD5E36BC96E6AC81A100DD2EE9EDDD10ECAC6A42673622D9CC9E40588B1B4EE",
+    "rrstyle-scene-sewer-topology.json": "042943642759257E9F3AE9444201CB3DCEF7C4E53D856E90F4CDDA2CDD16F281",
+    "rrstyle-deeper-sewer-pool.xml": "7D0BAED24DE558AA4C971E923C1ECE54BD8F98D0F342764B5BF5CEDF6767E631",
+    "rrstyle-deeper-sewer-layout.xml": "B1B3472D2622D10DED79A97D93CF71BDDE04E1D5FBF7EE626B688B8966A3F9F3",
+    "rrstyle-deeper-sewer-topology.json": "D59B36D37B1CBDA07074377B91E55F584D4EB113908C7D17EC3990512476C5F7",
+    "rrstyle-scene-mane-pool.xml": "4A76769BF28739D721A6257D96D3EBAFD8C1D70150199E41F4AFF56A80D5D0A7",
+    "rrstyle-scene-mane-layout.xml": "679EA6B657A08446AD2BD0C2715A030E796B2DD592ECA6BCDD59FDF10FAE9B92",
+    "rrstyle-scene-mane-topology.json": "2CD30733E01C902BB43AEA1E9DBB60DE8357CD914A37F35D54C9FDF1E0AF7937",
+    "rrstyle-deeper-mane-pool.xml": "892D82415C7FAD15CDABA4AD2E5603189DECFA24A42605C2201550F6BB69F228",
+    "rrstyle-deeper-mane-layout.xml": "DFC2ECEACCDDA143473E6CE6B121668484D4A1DB3BAAD41158464267A618D81C",
+    "rrstyle-deeper-mane-topology.json": "20A242A8C84CB03DFDCC3D50DF57C0AFCA46646070DE587B9063EE6C38FA760B",
+    "rrstyle-scene-random-pool.xml": "3E54CDC43050972EDA6A2364B39B002317761A77EE327A2F82426C2684A13E7E",
+    "rrstyle-scene-random-layout.xml": "C336D9C90D23E00B6E5E3B6924673C818489D6287B4D5927155E83958848C6C4",
+    "rrstyle-scene-random-topology.json": "FEE3258D61F53FAE75BE40CA3604D6AACC8D3FF9929E929BE3BCEC6E47EC4A48",
+    "rrstyle-deeper-random-pool.xml": "4E6E4D294F8FFB105AEA8E158D6CFA0345171CF35DDA27B0D153BCD37B86CD2A",
+    "rrstyle-deeper-random-layout.xml": "A622E8EEF1DB86752C2A6CDCB6DF9584DDF7273DF55F9DF1E9312AEA1D6523C9",
+    "rrstyle-deeper-random-topology.json": "D04E8FD9EA5D00D392F05D9601875AB23AD0A1564D61B753D656242648E203BD",
+    "rrstyle-show-sewer-pool.xml": "23FB97C4338D15DFFC6A5E189BECF5CEB9831BFFC9E30DE8C4A22125643FB16B",
+    "rrstyle-show-sewer-layout.xml": "8E0B03F255A634A62BF12D32DC74B8E394160925163BCEA5EC0152A947F82A49",
+    "rrstyle-show-sewer-topology.json": "389559A412B396FEDF67085D3F3E1FFCE9F46ED33B918E729D664AE0268252B7",
+    "rrstyle-show-mane-pool.xml": "083026378A3799A7F18123F8067A120B91D9696D4E04CF2DDCAB0B3F9340942A",
+    "rrstyle-show-mane-layout.xml": "E54AD387836F99F4CFC672121E12FEAD7FB39742DB254C7D28B8ECC289ECF9FC",
+    "rrstyle-show-mane-topology.json": "98B292828048305636CA24BD2A3CCE1806D3A184F0A60ED27A9A1F7452E19A1F",
+    "production-diag.log": "C8AE6F2D580F9A4364045E9421B2829A7F71DF2605B4D17679D88A790768999E",
+    "production-version.json": "82FF3FE191FA281772940C39247DABEEC30B1926BEE09B10D08BB14EB00296BE",
+    "startup-readiness.json": "9AACBDD4EE496D3E98B2DDC88D15985639A0CFC15853E109580EAE1543041932"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-scene-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-deeper-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-scene-stable",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-deeper-stable",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-scene-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-deeper-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-scene-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-deeper-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-scene-random",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-deeper-random",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-show-sewer",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "sewer": 12
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-show-mane",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "mane": 12
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "5BEEBF48A25CAD59EB3065EEAE62C49E6840F44186D35CE76D51CBD4383C2FF4",
+  "driverSha256": "B016067DB6E661F533FF08C4021D764EE67E9A9CC56F25345F2B733A00363174",
+  "runnerLogSha256": "723AABD305386ED9B32C6C21D80880A2F61E78F48BAD7FCD49594839B9E86F70",
+  "captured": {
+    "rrstyle-scene-plant-stage.png": "FD6D9663335A335F8D450C870E3FC760DFF70EFC0206780600D6E5ACA09B5B5E",
+    "rrstyle-scene-plant-room.png": "C1429D79CFC7DEB9D88CC5F60D5E8F82273EE5396DF4ABF7D9355E9BF34A5601",
+    "rrstyle-deeper-plant-stage.png": "3FA6FCDA4061B28A3E830C55AA7BF9C8F5354B8A8C9F805559AD385703849BFB",
+    "rrstyle-deeper-plant-room.png": "BFE2BFBFC989A4970CC3DA45A098566BD58FA1D770ED221F0A67EF2A238D42A5",
+    "rrstyle-scene-stable-stage.png": "EF0C4B92574525AEC6FD9D12ECC0896AA8B8A455D0476634FB93C5E77B1A5E63",
+    "rrstyle-scene-stable-room.png": "B9BE95CFF8BAF9CFF3651D01B542FF7A38E1EAF56D1D533F7DC2A5847DE696C9",
+    "rrstyle-deeper-stable-stage.png": "9D9044B981F9BDE96F9E414A7D8715D577AC78B15D2CCC4117B2FD5E099A2EA6",
+    "rrstyle-deeper-stable-room.png": "3D5042DD414662C5B1F81C1CBAE515B7CD6B814BF0DF89BBCAB75370C4911D27",
+    "rrstyle-scene-sewer-stage.png": "20B87D8CF9EED4E52636C8C5EFC1FDA01E51F676EDD250FB4A5EF6CC1864D72F",
+    "rrstyle-scene-sewer-room.png": "094F00902E68A8286F1C2A59D7AE2CEF441369A4AC9E4C121F5A9E148C58C808",
+    "rrstyle-deeper-sewer-stage.png": "C87FD8252667251EA62F82B1E72545A2169C16C69D4D5CB1025D16F8A035E887",
+    "rrstyle-deeper-sewer-room.png": "F010A2F26947B879BBA2CB960C72EECA64A4C94D65A40CC0F38ABAE51A7F45AC",
+    "rrstyle-scene-mane-stage.png": "0256378BDD362BA0B3047BCEC234F0AD93F1F0591852429980501DD4EF688D81",
+    "rrstyle-scene-mane-room.png": "92A813D7B50EE2029AE0EF69F6616D98F69531EE837B005BDB93381E49FB852F",
+    "rrstyle-deeper-mane-stage.png": "9E86CFB24E86B8DA11E98DE4EC77869B7CAAA1F262F6C757219FC8799B1C9D98",
+    "rrstyle-deeper-mane-room.png": "42E478C9A5E8D72D58C844732386B8AB028FFE698229F3280876A6CF5504318F",
+    "rrstyle-scene-random-stage.png": "1B12102F4751DFE44E334F090DC463AF0756E2EF42CD1D23660545DE042FA077",
+    "rrstyle-scene-random-room.png": "67138DCD51F0E866AA7AE2A28F29C94C6421700FC2B526404E02C9972FB1A8AF",
+    "rrstyle-deeper-random-stage.png": "1278FA820BC1C3C1FA8F75FC6C6A6BB2813B4A8451091992E504DE1FDB8EB6FA",
+    "rrstyle-deeper-random-room.png": "120167E145ABBEAFD0A811EE9A61390FCACDC6B15E0F871F7BB7E86E170983A8",
+    "rrstyle-show-sewer-stage.png": "D1A2ED3DAE4A5E0FB83A601AE1E758C239AAD25E322E76B8CAABD66A8EDC59A7",
+    "rrstyle-show-sewer-room.png": "DAE544B864AF211A82D949821D9CB3DFA8EEE33B9DF741B7E7C168275E88DCF8",
+    "rrstyle-show-mane-stage.png": "61E1EFA8CAFC3D801A2881DB378FCCBAB2CA90D0D51D631735AE37F6E653F051",
+    "rrstyle-show-mane-room.png": "DE5E6CA353060FEFAE5560E9562914AEC19670C61BF6A4D68071F783FC7A1A20",
+    "scene-picker.png": "DB1E7BFF9B11EA04E8B4A13A8497AE45A78F819F709B3596DF3DA5BDD212A3BC"
+  }
+}

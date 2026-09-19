@@ -8,6 +8,7 @@ package
    import flash.display.LoaderInfo;
    import flash.events.Event;
    import flash.events.IOErrorEvent;
+   import flash.events.KeyboardEvent;
    import flash.filesystem.File;
    import flash.filesystem.FileMode;
    import flash.filesystem.FileStream;
@@ -53,6 +54,11 @@ package
       private static var fixtureEnabled:Boolean = false;
       private static var fixtureCyclesOnly:Boolean = false;
       private static var navigationEnabled:Boolean = false;
+      private static var sceneLifecycle:Boolean = false;
+      private static var waterProbe:Boolean = false;
+      private static var chosenScene:String = "";
+      private static var scenePool:String = "";
+      private static var previousStage:int = 0;
       private static var probeRoom:String = "";
       private static var initialWidth:int = 5;
       private static var initialHeight:int = 5;
@@ -92,6 +98,8 @@ package
             fixtureEnabled = String(input.@fixtures) == "true";
             fixtureCyclesOnly = String(input.@fixtureCyclesOnly) == "true";
             navigationEnabled = String(input.@navigation) == "true";
+            sceneLifecycle = String(input.@sceneLifecycle) == "true";
+            waterProbe = String(input.@waterProbe) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
             SoundMixer.soundTransform = new SoundTransform(0);
@@ -151,7 +159,7 @@ package
          try
          {
             if (state == 4) return;
-            if (getTimer() - started > (navigationEnabled ? 900000 : developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
+            if (getTimer() - started > (navigationEnabled ? (cases.length()>2?1800000:900000) : developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
             var w:* = W.w;
             if (w == null) return;
             if (w.verror != null && w.verror.visible) { fail("game error: " + w.verror.txt.text); return; }
@@ -198,6 +206,9 @@ package
                if (w.gg == null || w.land == null || w.loc == null || w.allStat != 1) return;
                w.onPause = false;
                w.pip.onoff(-1);
+               // The skipped new-game intro leaves its scripted control lock.
+               // End that test setup lock before exercising real keyboard UI.
+               if (sceneLifecycle) w.gg.controlOn();
                state = 2;
                log("initial world ready land=" + w.game.curLandId);
                return;
@@ -217,16 +228,26 @@ package
                if (developmentMode)
                {
                   var target:String = String(item.@landId);
+                  if (sceneLifecycle && index==0)
+                  {
+                     // A virgin base starts a scripted tutorial on its first
+                     // world step. This fixture represents a returning player.
+                     w.game.triggers["mbase_visited"]=1;
+                     w.gg.controlOn();
+                  }
+                  if (sceneLifecycle && (w.gg==null || !w.gg.ggControl || w.land==null || w.game.curLandId!=w.land.act.id))
+                     throw new Error("Scene readiness: gg="+w.gg+" control="+w.gg.ggControl+" current="+w.game.curLandId+" actual="+w.land.act.id+" pause="+w.onPause);
                   w.pers.healAll();
                   w.onPause = false;
-                  if (w.game.curLandId == target)
+                  if ((sceneLifecycle && String(item.@action)!="deeper" && w.game.curLandId!="rbl") || (!sceneLifecycle && w.game.curLandId == target))
                   {
                      if (!developmentClass.debugTravel("rbl")) { fail("debugTravel rejected return to base"); return; }
                      state = 7; settled = -1;
                      log("return to base before refreshing " + target);
                      return;
                   }
-                  if (!developmentClass.debugTravel(target)) { fail("debugTravel rejected " + target); return; }
+                  if (sceneLifecycle) startSceneCase(w,item);
+                  else if (!developmentClass.debugTravel(target,String(item.@scene))) { fail("debugTravel rejected " + target); return; }
                   if (navigationEnabled && !growthEnabled)
                   {
                      var testLand:*=w.game.lands[target].land;
@@ -250,6 +271,9 @@ package
                var definition:XML = <land id={id} tip="rnd" rnd="1" conf="1" dif="0" biom="0" mx="1" my="1" locx="0" locy="0">
                   <options backwall="tBackWall" music="music_plant_1" fon="fonDarkClouds" xp="100"/>
                </land>;
+               var nativeScene:*=w.game.lands["random_"+String(item.room[0].@rrTheme)];
+               if (nativeScene!=null && nativeScene.xmlland.options.length())
+                  definition.options=nativeScene.xmlland.options[0].copy();
                var act:* = new Act(definition);
                act.allroom = <all/>;
                act.allroom.appendChild(item.room[0].copy());
@@ -272,16 +296,17 @@ package
             if (state == 3)
             {
                var wanted:String = developmentMode ? String(cases[index].@landId) : String(cases[index].@id);
-               if (w.game.curLandId != wanted || w.land == null || w.land.act.id != wanted || w.loc == null) return;
+               if (w.game.curLandId != wanted || w.land == null || w.land.act.id != wanted || w.loc == null || w.land!=w.game.lands[wanted].land) return;
                if (settled < 0) { settled = getTimer(); log("arrived " + wanted + " room=" + w.loc.room.id); }
                if (getTimer() - settled < 2500) return;
                var captureName:String = String(cases[index].@id);
                screenshot(w, captureName + "-stage", false);
                screenshot(w, captureName + "-room", true);
                if (developmentMode) dumpRuntimePool(w, captureName);
+               if (sceneLifecycle) verifySceneCase(w,cases[index]);
                if (navigationEnabled)
                {
-                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled);
+                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled,waterProbe);
                   state=11; moveFrame=0; return;
                }
                if (fixtureEnabled)
@@ -689,6 +714,68 @@ package
          return true;
       }
 
+      private static function sceneKey(code:int):void
+      {
+         main.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN,true,false,0,code));
+         main.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_UP,true,false,0,code));
+      }
+      private static function startSceneCase(w:*,item:XML):void
+      {
+         var landId:String=String(item.@landId);
+         if (String(item.@action)=="deeper")
+         {
+            scenePool=w.game.lands[landId].allroom.toXMLString();
+            previousStage=w.game.lands[landId].landStage;
+            sceneKey(115);
+            log("SCENE-PROBE F4 from="+chosenScene+" stage="+previousStage);
+            return;
+         }
+         var trigger:int=landId=="rr_showroom"?116:112;
+         var before:String=String(w.game.curLandId);
+         var poolBefore:String=String(w.game.lands[landId].allroom);
+         sceneKey(trigger);
+         if (!w.onPause) throw new Error("Scene picker did not pause on F1/F5");
+         if (index==0) screenshot(w,"scene-picker",false);
+         sceneKey(27);
+         if (w.onPause || w.game.curLandId!=before || String(w.game.lands[landId].allroom)!=poolBefore)
+            throw new Error("Cancel changed exploration or pause state");
+         // An already paused world must stay paused after cancelling as well.
+         w.onPause=true; sceneKey(trigger); sceneKey(27);
+         if (!w.onPause) throw new Error("Picker lost pre-existing pause");
+         w.onPause=false;
+         sceneKey(trigger);
+         var ix:int=["plant","stable","sewer","mane","random"].indexOf(String(item.@scene));
+         if (ix<0) throw new Error("Missing scene test choice");
+         sceneKey(49+ix);
+         if (w.onPause || w.game.curLandId!=landId) throw new Error("Scene selection did not travel");
+         chosenScene=String(w.game.lands[landId].allroom.room[0].@rrTheme);
+         if (ix<4 && chosenScene!=String(item.@scene)) throw new Error("Wrong selected scene");
+         log("SCENE-PROBE picker pause/cancel/restore/select PASS "+chosenScene);
+      }
+      private static function verifySceneCase(w:*,item:XML):void
+      {
+         var act:*=w.land.act;
+         var original:*=w.game.lands["random_"+chosenScene];
+         var count:int=0,wet:int=0;
+         for each (var room:XML in act.allroom.room)
+         {
+            if (String(room.@rrTheme)!=chosenScene) throw new Error("Mixed scene in "+item.@id);
+            count++;
+         }
+         for each (var k:String in ["biom","backwall","sndMusic","fon","border","color","tipWater","wrad","darkness"])
+            if (String(act[k])!=String(original[k])) throw new Error("Native environment mismatch "+k);
+         if (String(item.@action)=="deeper")
+         {
+            if (act.allroom.toXMLString()==scenePool || act.landStage<=previousStage) throw new Error("F4 did not make a new depth");
+         }
+         for (var x:int=0;x<w.loc.spaceX;x++) for (var y:int=0;y<w.loc.spaceY;y++)
+            if (w.loc.space[x][y].water>0) wet++;
+         if (chosenScene=="sewer" && (wet==0 || w.loc.tipWater!=1 || w.loc.wrad!=3)) throw new Error("Native sewer water/radiation missing");
+         if (chosenScene!="sewer" && wet>0) throw new Error("Sewer basin leaked to another scene");
+         if (chosenScene=="mane" && w.loc.backwall!="sky") throw new Error("City exterior is opaque");
+         log("SCENE-PROBE PASS "+item.@id+" theme="+chosenScene+" rooms="+count+" stage="+act.landStage+
+            " music="+act.sndMusic+" waterTiles="+wet+" waterType="+w.loc.tipWater+" waterRad="+w.loc.wrad);
+      }
       private static function dumpRuntimePool(w:*, name:String):void
       {
          var pool:XML = w.game.lands[String(cases[index].@landId)].allroom as XML;
@@ -773,6 +860,7 @@ package
          stream.writeUTFBytes(JSON.stringify({land:String(w.land.act.id),conf:w.land.act.conf,poolRooms:pool.room.length(),generatedPoolRooms:generated,themeCounts:themeCounts,kindCounts:kindCounts,tipCounts:tips,mbaseVisited:w.game.triggers["mbase_visited"],nodes:nodes,links:links,issues:issues,boundary:"Tile port checks only; interior reachability needs movement probes"}));
          stream.close();
          log("development pool " + name + " total=" + pool.room.length() + " generated=" + generated + " assembled=" + layout.loc.length() + " issues=" + issues.length + " themes=" + JSON.stringify(themeCounts));
+         if (issues.length) throw new Error("Native map ports: "+issues.join(";"));
       }
 
       public static function portCells(p:int,n:int):Array

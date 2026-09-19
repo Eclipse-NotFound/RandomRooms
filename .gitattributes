@@ -13,3 +13,5 @@ design/assets/v7-1-fixtures/* -text -whitespace
 knowledge/experiments/fixtures-v71-evidence/* -text -whitespace
 design/assets/v8-spaces/* -text -whitespace
 knowledge/experiments/generator-v8-evidence/** -text -whitespace
+design/assets/v9-scenes/** -text -whitespace
+knowledge/experiments/generator-v9-evidence/** -text -whitespace

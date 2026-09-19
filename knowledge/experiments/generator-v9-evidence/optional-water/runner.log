@@ -1,0 +1,27 @@
+appId=pferr-style-3d573ba1b1564572aadad9523902f723
+3298 ready cases=1
+3301 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-3d573ba1b1564572aadad9523902f723\Local Store existsBefore=true
+3303 STORAGE existsAfter=true
+3768 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3769 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3780 development init returned
+7441 STARTUP-READY all 31 host loaders loaded with nonempty pools
+9057 newGame(-1) issued, intro skipped
+11025 initial world ready land=rbl
+13817 NAV-SETUP native travel spawn room=1:2 declaredPorts=4
+13817 development debugTravel random_rooms case=rrstyle-water-sewer
+13837 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+16838 arrived random_rooms room=syn_7
+19727 capture rrstyle-water-sewer-stage 1008x729 room=syn_7 lightOverlay=true
+20777 capture rrstyle-water-sewer-room 1920x1000 room=syn_7 lightOverlay=false
+20810 development pool rrstyle-water-sewer total=25 generated=25 assembled=25 issues=0 themes={"sewer":25}
+20812 WATER-PROBE enter native basin then return to its dry deck; normal controls
+20833 NAV-SAMPLE {"y":560,"ladder":0,"target":0,"frame":1,"route":[],"task":{"y":2,"space":0,"floor":23,"x0":21,"x":1,"kind":"space","x1":27,"entry":"optional-water"},"stay":true,"x":721.8}
+22806 NAV-SAMPLE {"y":492,"ladder":0,"target":0,"frame":61,"route":[632,776,777,1113,1122,1026,1031,1127],"task":{"y":2,"space":0,"floor":23,"x0":21,"x":1,"kind":"space","x1":27,"entry":"optional-water"},"stay":false,"x":323.2999999999999}
+23307 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+24808 NAV-SAMPLE {"y":888.125,"ladder":1,"target":0,"frame":121,"route":[1113,1122,1026,1031,1127],"task":{"y":2,"space":0,"floor":23,"x0":21,"x":1,"kind":"space","x1":27,"entry":"optional-water"},"stay":false,"x":375}
+26805 NAV-SAMPLE {"y":960,"ladder":0,"target":0,"frame":181,"route":[1122,1026,1031,1127],"task":{"y":2,"space":0,"floor":23,"x0":21,"x":1,"kind":"space","x1":27,"entry":"optional-water"},"stay":true,"x":538.501726398809}
+28807 NAV-SAMPLE {"y":797.5,"ladder":0,"target":0,"frame":241,"route":[1031,1127],"task":{"y":2,"space":0,"floor":23,"x0":21,"x":1,"kind":"space","x1":27,"entry":"optional-water"},"stay":false,"x":824.134227031935}
+30708 NAV-END {"completed":2,"targets":2,"frames":298,"success":true,"reason":"Native water entered and dry deck regained"}
+30857 DEVELOPMENT-VERSION runtimeTag=[RR:v9.0] copiedOriginalLog=true
+30858 DONE 1 cases

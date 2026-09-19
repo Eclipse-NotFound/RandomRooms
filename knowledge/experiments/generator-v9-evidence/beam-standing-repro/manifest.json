@@ -1,0 +1,63 @@
+{
+  "appId": "pferr-style-2c395d3cbc01458281167e6ad8e79ae0",
+  "status": "complete",
+  "startedUtc": "2026-09-19T15:06:18.8427237Z",
+  "completedUtc": "2026-09-19T15:07:45.5638438Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-repro-v9-stable"
+  ],
+  "roomIds": [
+    "syn_8"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "repro-v9-stable.xml": "BAA8DB9AA77412F0A1D522406AFBC6DF048F74FBF3F892B4A3EC55FE7F0A5EF0"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-repro-v9-stable-navigation.json": "FC07AA0422535C4C74C66DA2BF383668DA56C93E67EA29F9572A3B195D7740C3"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-repro-v9-stable",
+      "success": true,
+      "completed": 10,
+      "targets": 10,
+      "frames": 1994,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "5B28405EDEFB5A6F658E73BA4528FFBC709C6252F6758A678BED755EE80E71CF",
+  "driverSha256": "6705CB258E3E5D459A14665115F60B537C356BE89796E8F2B47C8BED47F7B48C",
+  "runnerLogSha256": "233DFD386FBB9E83681A1C467887E5C708C10AE3B02C8D1D458F787EE945F0A4",
+  "captured": {
+    "rrstyle-repro-v9-stable-stage.png": "275E9F202ED4845B52E86F0825BDE897FC8D4F5B4B8C271064BD178497E7087C",
+    "rrstyle-repro-v9-stable-room.png": "3E64047A218F6F92384F578B52A39CB9A48B32BBFCE2CBF7217FA50231AA6B19"
+  }
+}

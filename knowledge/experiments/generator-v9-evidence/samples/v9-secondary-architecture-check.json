@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\generated-v9-secondary.xml",
+      "sha256": "7bc826cbd74bcecc92d0eeb244adddf6803bdc4350b0d16d3a91e35eea6e724a",
+      "rooms": 256,
+      "kinds": {
+        "offices": 38,
+        "warehouse": 52,
+        "service": 47,
+        "atrium": 39,
+        "workshop": 41,
+        "damaged": 39
+      },
+      "themes": {
+        "stable": 64,
+        "sewer": 64,
+        "plant": 64,
+        "mane": 64
+      },
+      "fixtures": {
+        "door": 509,
+        "hatch": 243,
+        "window": 275
+      },
+      "object_mean": 19.05859375,
+      "back_mean": 60.47265625
+    },
+    {
+      "file": "build\\style-review\\generated-v9-secondary-cooked.xml",
+      "sha256": "6ca5c4482584e10ab933e202bfd2091ddcc0f02d16251db0dca89c8f7dc47cb8",
+      "rooms": 256,
+      "kinds": {
+        "offices": 38,
+        "warehouse": 52,
+        "service": 47,
+        "atrium": 39,
+        "workshop": 41,
+        "damaged": 39
+      },
+      "themes": {
+        "stable": 64,
+        "sewer": 64,
+        "plant": 64,
+        "mane": 64
+      },
+      "fixtures": {
+        "door": 509,
+        "hatch": 243,
+        "window": 275
+      },
+      "object_mean": 19.05859375,
+      "back_mean": 60.47265625
+    },
+    {
+      "file": "build\\style-review\\generated-v9-secondary-map.xml",
+      "sha256": "2cfff67bf1cdca07e9ff8e7ecaebe15b24f74817ce69eb976d80a90ce04ec94c",
+      "rooms": 144,
+      "kinds": {
+        "offices": 19,
+        "workshop": 19,
+        "warehouse": 29,
+        "service": 27,
+        "damaged": 24,
+        "atrium": 26
+      },
+      "themes": {
+        "stable": 36,
+        "sewer": 36,
+        "plant": 36,
+        "mane": 36
+      },
+      "fixtures": {
+        "door": 286,
+        "hatch": 153,
+        "window": 151
+      },
+      "object_mean": 19.53472222222222,
+      "back_mean": 61.56944444444444
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

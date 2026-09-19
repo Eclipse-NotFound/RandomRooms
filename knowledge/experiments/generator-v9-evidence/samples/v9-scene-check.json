@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\generated-v9-final.xml",
+      "sha256": "72f83254da99e13ce4122a510a07d85b72aba1fd6e00bc1c037ac90d3283b65f",
+      "rooms": 1024,
+      "scenes": {
+        "stable": 256,
+        "sewer": 256,
+        "plant": 256,
+        "mane": 256
+      },
+      "forms": {
+        "atrium_ring": 77,
+        "service_cluster": 83,
+        "quarters": 96,
+        "canal_gallery": 185,
+        "pump_chain": 47,
+        "cistern": 24,
+        "service_wing": 89,
+        "storage_hall": 81,
+        "production": 86,
+        "courtyard": 101,
+        "broken_facade": 89,
+        "roof_passage": 66
+      },
+      "waterTiles": {
+        "stable": 0,
+        "sewer": 3890,
+        "plant": 0,
+        "mane": 0
+      }
+    },
+    {
+      "file": "build\\style-review\\generated-v9-secondary.xml",
+      "sha256": "7bc826cbd74bcecc92d0eeb244adddf6803bdc4350b0d16d3a91e35eea6e724a",
+      "rooms": 256,
+      "scenes": {
+        "stable": 64,
+        "sewer": 64,
+        "plant": 64,
+        "mane": 64
+      },
+      "forms": {
+        "quarters": 23,
+        "atrium_ring": 20,
+        "service_cluster": 21,
+        "canal_gallery": 50,
+        "pump_chain": 11,
+        "cistern": 3,
+        "service_wing": 24,
+        "storage_hall": 21,
+        "production": 19,
+        "broken_facade": 22,
+        "courtyard": 22,
+        "roof_passage": 20
+      },
+      "waterTiles": {
+        "stable": 0,
+        "sewer": 990,
+        "plant": 0,
+        "mane": 0
+      }
+    },
+    {
+      "file": "build\\style-review\\generated-v9-secondary-map.xml",
+      "sha256": "2cfff67bf1cdca07e9ff8e7ecaebe15b24f74817ce69eb976d80a90ce04ec94c",
+      "rooms": 144,
+      "scenes": {
+        "stable": 36,
+        "sewer": 36,
+        "plant": 36,
+        "mane": 36
+      },
+      "forms": {
+        "quarters": 16,
+        "canal_gallery": 28,
+        "storage_hall": 11,
+        "roof_passage": 15,
+        "service_wing": 12,
+        "courtyard": 13,
+        "broken_facade": 8,
+        "atrium_ring": 12,
+        "pump_chain": 8,
+        "production": 13,
+        "service_cluster": 8
+      },
+      "waterTiles": {
+        "stable": 0,
+        "sewer": 546,
+        "plant": 0,
+        "mane": 0
+      }
+    }
+  ],
+  "failedRooms": 0,
+  "errors": []
+}

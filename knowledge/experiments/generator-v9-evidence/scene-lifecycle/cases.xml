@@ -1,0 +1,14 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="true" waterProbe="false" development="true">
+  <case id="rrstyle-scene-plant" landId="random_rooms" scene="plant" action="pick" />
+  <case id="rrstyle-deeper-plant" landId="random_rooms" scene="plant" action="deeper" />
+  <case id="rrstyle-scene-stable" landId="random_rooms" scene="stable" action="pick" />
+  <case id="rrstyle-deeper-stable" landId="random_rooms" scene="stable" action="deeper" />
+  <case id="rrstyle-scene-sewer" landId="random_rooms" scene="sewer" action="pick" />
+  <case id="rrstyle-deeper-sewer" landId="random_rooms" scene="sewer" action="deeper" />
+  <case id="rrstyle-scene-mane" landId="random_rooms" scene="mane" action="pick" />
+  <case id="rrstyle-deeper-mane" landId="random_rooms" scene="mane" action="deeper" />
+  <case id="rrstyle-scene-random" landId="random_rooms" scene="random" action="pick" />
+  <case id="rrstyle-deeper-random" landId="random_rooms" scene="random" action="deeper" />
+  <case id="rrstyle-show-sewer" landId="rr_showroom" scene="sewer" action="pick" />
+  <case id="rrstyle-show-mane" landId="rr_showroom" scene="mane" action="pick" />
+</cases>

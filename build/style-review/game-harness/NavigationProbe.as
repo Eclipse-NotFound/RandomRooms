@@ -37,14 +37,35 @@ package
       private static var milestone:int;
       private static var settlingGoal:Boolean;
       private static var originals:Object;
+      private static var scene:String;
+      private static var dry:Boolean;
+      private static var wetFrames:int;
+      private static var optionalWater:Boolean;
+      private static var originBlueprint:String;
 
-      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false):void
+      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false,waterProbe:Boolean=false):void
       {
          root=directory; name=caseName; logger=log; action=doorAction; capture=screen;
          done=success=false; reason=""; ticks=legTicks=at=stuck=0;
          local=null; records=[]; targets=[]; route=[];
          originX=w.land.locX; originY=w.land.locY;
+         originBlueprint=w.loc.room.xml.toXMLString();
          growing=growth; milestone=0; settlingGoal=false; originals={};
+         scene=String(w.loc.room.xml.@rrTheme); dry=scene=="sewer"; wetFrames=0;
+         optionalWater=waterProbe;
+         if (optionalWater)
+         {
+            if (scene!="sewer" || !w.loc.room.xml.rrPlan.water.length()) throw new Error("No optional sewer basin");
+            dry=false;
+            var pool:XML=w.loc.room.xml.rrPlan.water[0];
+            var lo:int=int(pool.@x0),hi:int=int(pool.@x1);
+            if (w.loc.mirror) { var oldLo:int=lo; lo=47-hi; hi=47-oldLo; }
+            targets=[{kind:"space",x:originX,y:originY,x0:lo,x1:hi,floor:int(pool.@bottom),entry:"optional-water",space:0},
+               {kind:"space",x:originX,y:originY,x0:lo-2,x1:hi+2,floor:int(pool.@deck)-1,entry:"return-dry",space:1}];
+            w.gg.invulner=true;
+            logger("WATER-PROBE enter native basin then return to its dry deck; normal controls");
+            return;
+         }
          if (growing)
          {
             var iw:int=w.land.maxLocX,ih:int=w.land.maxLocY;
@@ -65,16 +86,18 @@ package
             for each (var c:Object in cells) if (w.loc.space[c.x][c.y].phis!=0) valid=false;
             if (valid) open.push(p);
          }
-         // After entering through EACH actual port, visit each functional space
-         // before leaving again. A single source flood is not the game test.
+         // Walk an interior circuit, then each actual port both ways back to
+         // the same anchor. The unchanged room composes these actual paths.
          addSpaces(w,"initial");
+         var first:Object=targets[0];
+         targets.push({kind:"space",x:originX,y:originY,x0:first.x0,x1:first.x1,floor:first.floor,entry:"interior-return",space:0});
          for each (p in open)
          {
             var nx:int=originX+(p<6?1:(p>=11 && p<17?-1:0));
             var ny:int=originY+(p>=17?-1:(p>=6 && p<=10?1:0));
             targets.push({kind:"cross",x:originX,y:originY,port:p,toX:nx,toY:ny});
             targets.push({kind:"cross",x:nx,y:ny,port:p<11?p+11:p-11,toX:originX,toY:originY});
-            addSpaces(w,"entry-"+p);
+            targets.push({kind:"space",x:originX,y:originY,x0:first.x0,x1:first.x1,floor:first.floor,entry:"entry-"+p,space:0});
          }
          w.gg.invulner=true;
          logger("NAV-BEGIN "+name+" origin="+originX+","+originY+" ports="+open+" targets="+targets.length+" natural spawn; no coordinate writes");
@@ -103,6 +126,8 @@ package
          {
             var i:int=y*48+x;
             clear[i]=!solid[i] && !solid[i+1] && !solid[i-48] && !solid[i-47];
+            if (dry && (local.space[x][y].water>0 || local.space[x+1][y].water>0 ||
+                local.space[x][y-1].water>0 || local.space[x+1][y-1].water>0)) clear[i]=false;
             if (!clear[i]) continue;
             graph[i]=[];
             climb[i]=local.space[x][y].stair<0 || local.space[x+1][y].stair>0;
@@ -126,7 +151,9 @@ package
          for (var i:int=0;i<clear.length;i++) if (clear[i])
          {
             var x:int=i%48,y:int=int(i/48);
-            if (target!=null && (y!=target.floor || x<target.x0 || x+1>target.x1 || !support[i])) continue;
+            // A native one-way beam immediately over the solid floor raises
+            // the actual standing surface by one tile, within this same space.
+            if (target!=null && (y<target.floor-1 || y>target.floor || x<target.x0 || x+1>target.x1 || !support[i])) continue;
             if (target!=null && furnitureAt(w,(x+1)*40,(y+1)*40-1)) continue;
             var cost:Number=target==null?Math.abs((x+1)*40-w.gg.X)+Math.abs((y+1)*40-1-w.gg.Y)*2:
                Math.abs(x-(target.x0+target.x1-1)/2);
@@ -159,7 +186,17 @@ package
          // Keep turns; combine straight runs so animation does not have to stop
          // at every tile, especially while falling or stepping off a ladder.
          var out:Array=[];
-         for (k=0;k<full.length;k++) if (k==full.length-1 || full[k+1]-full[k]!=(k==0?full[k]-start:full[k]-full[k-1])) out.push(full[k]);
+         for (k=0;k<full.length;k++)
+         {
+            var before:int=k==0?start:full[k-1];
+            var after:int=k==full.length-1?full[k]:full[k+1];
+            var edgeLanding:Boolean=support[full[k]] && Math.abs(full[k]-before)==1 && Math.abs(after-full[k])==1 &&
+               (!support[before] || !support[after]);
+            // Land on each side of a broken floor before starting the next
+            // jump. Combining a ladder-exit jump and a second gap into one
+            // horizontal run can overshoot the intervening short platform.
+            if (k==full.length-1 || after-full[k]!=full[k]-before || edgeLanding) out.push(full[k]);
+         }
          return out;
       }
       private static function goalFor(t:Object):int
@@ -234,12 +271,20 @@ package
             // Native controlOn clears invulnerability after a room transition.
             // Keep combat protection throughout this geometry-only probe.
             w.gg.invulner=true;
+            if (String(w.loc.room.xml.@rrTheme)!=scene) throw new Error("Scene changed during traversal/growth");
+            if (w.gg.inWater) { wetFrames++; if (dry) throw new Error("Mandatory dry route entered native water"); }
             if (at>=targets.length)
             {
-               if (!growing) { finish(true,"All spaces visited after each actual port entry"); return; }
+               if (!growing)
+               {
+                  if (optionalWater && (wetFrames==0 || w.gg.inWater)) throw new Error("Optional water visit/return not observed");
+                  finish(true,optionalWater?"Native water entered and dry deck regained":"Interior circuit and each actual port left/re-entered to the same anchor"); return;
+               }
                if (!growTargets(w)) return;
             }
             var t:Object=targets[at];
+            if (!growing && w.land.locX==originX && w.land.locY==originY && w.loc.room.xml.toXMLString()!=originBlueprint)
+               throw new Error("Room blueprint changed after entry");
             if (t.kind=="cross" && w.land.locX==t.toX && w.land.locY==t.toY)
             {
                records.push({kind:"cross",from:t.x+","+t.y,to:t.toX+","+t.toY,port:t.port,success:true,x:w.gg.X,y:w.gg.Y,frames:legTicks});
@@ -248,6 +293,22 @@ package
             }
             if (w.land.locX!=t.x || w.land.locY!=t.y) throw new Error("Unexpected room while aiming for "+JSON.stringify(t));
             if (local!==w.loc) { rebuild(w); w.pers.healAll(); }
+            if (legTicks==1 && t.kind=="space" && !optionalWater && !growing)
+            {
+               // Visit the interior spaces in the nearest walkable order.
+               // XML order used to add long, irrelevant repeated laps.
+               var from:int=nearest(w),dist:Object={},queue:Array=[from]; dist[from]=0;
+               for (var qi:int=0;qi<queue.length;qi++) for each (var next:int in graph[queue[qi]])
+                  if (dist[next]===undefined) { dist[next]=int(dist[queue[qi]])+1; queue.push(next); }
+               var best:int=at,bestDistance:int=100000;
+               for (var ti:int=at;ti<targets.length && targets[ti].kind=="space" && targets[ti].entry==t.entry;ti++)
+               {
+                  var destination:int=nearest(w,targets[ti]);
+                  if (destination>=0 && dist[destination]!==undefined && int(dist[destination])<bestDistance)
+                  { best=ti; bestDistance=int(dist[destination]); }
+               }
+               targets[at]=targets[best]; targets[best]=t; t=targets[at];
+            }
             if (t.crossing)
             {
                w.ctr.keyRight=t.port<6;
@@ -278,6 +339,7 @@ package
             }
             var step:int=route[0],tx:Number=(step%48+1)*40,ty:Number=(int(step/48)+1)*40-1;
             var transferUp:Boolean=climb[step] && route.length>1 && int(route[1]/48)<int(step/48);
+            var leaveSide:Boolean=climb[step] && route.length>1 && int(route[1]/48)==int(step/48) && route[1]!=step;
             if (climb[step] || Math.abs(ty-w.gg.Y)>10)
             {
                var column:int=step%48;
@@ -286,6 +348,10 @@ package
                // is outside a mirrored ladder and can never engage it.
                var scanTop:int=Math.max(0,Math.min(int((w.gg.Y-1)/40),int(step/48)));
                var scanBottom:int=Math.min(24,Math.max(int((w.gg.Y-1)/40),int(step/48))+1);
+               // While dropping from a shelf, align with the clear two-tile
+               // opening here. A distant lower rung's edge may leave a hoof
+               // on the upper solid wall and prevent the initial drop.
+               if (ty-w.gg.Y>80 && !w.gg.isLaz) scanBottom=Math.min(scanBottom,scanTop+1);
                for (var sy:int=scanTop;sy<=scanBottom;sy++)
                {
                   if (local.space[column][sy].stair<0) { tx=column*40+w.gg.scX/2; break; }
@@ -293,7 +359,7 @@ package
                }
             }
             var dx:Number=tx-w.gg.X,dy:Number=ty-w.gg.Y;
-            if (Math.abs(dx)<19 && (transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(support[step]?6:20)) &&
+            if (Math.abs(dx)<(w.gg.isLaz?32:19) && (leaveSide?w.gg.Y<=ty-12 && w.gg.Y>=ty-40:(transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(support[step]?6:20))) &&
                 (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+1) && (!transferUp || w.gg.isLaz))
             {
                route.shift();
@@ -310,13 +376,34 @@ package
                t.crossing=true;
                return;
             }
+            // A lateral ladder exit needs the hooves above the receiving
+            // ledge. Use that same height for the input controller; otherwise
+            // its down command fights the waypoint's higher arrival condition.
+            if (leaveSide) dy-=16;
             if (action(w,dx<0?-1:1)) return;
             if (Math.abs(w.gg.X-lastX)<0.5 && Math.abs(w.gg.Y-lastY)<0.5) stuck++; else stuck=0;
             lastX=w.gg.X; lastY=w.gg.Y;
             w.ctr.keyLeft=dx<-12; w.ctr.keyRight=dx>12;
+            if (!w.gg.stay && !w.gg.isLaz && support[step] && Math.abs(dy)<160)
+            {
+               // Releasing a direction in mid-air preserves native inertia.
+               // Brake before a short landing rather than only steering back
+               // after the pony has already drifted beyond the floor edge.
+               var brakingDx:Number=dx-Number(w.gg.dx)*8;
+               w.ctr.keyLeft=brakingDx<-8; w.ctr.keyRight=brakingDx>8;
+            }
+            if (dy>45 && w.gg.stay && Math.abs(dx)<30)
+            {
+               // A loose 12 px ladder alignment can leave the pony's rear
+               // hoof over an adjacent solid wall. Native double-down then
+               // correctly refuses to drop through that wall (stayPhis != 2).
+               // Walk fully onto the shelf before asking to drop through it.
+               w.ctr.keyLeft=dx<-4; w.ctr.keyRight=dx>4;
+            }
+            if (stuck==60) logger("NAV-STUCK "+JSON.stringify({x:w.gg.X,y:w.gg.Y,tx:tx,ty:ty,stayPhis:w.gg.stayPhis,dx:dx,dy:dy}));
             if (Math.abs(dx)<24)
             {
-               w.ctr.keyBeUp=dy<(w.gg.isLaz?-0.5:-5) || transferUp;
+               w.ctr.keyBeUp=dy<(w.gg.isLaz?-0.5:-5) || transferUp || (leaveSide && w.gg.Y>ty-12);
                // A free fall needs no down key. Down during a jump makes the
                // pony pass through the very platform it is trying to land on.
                w.ctr.keySit=dy>5 && (w.gg.isLaz || w.gg.stay);
@@ -324,9 +411,9 @@ package
             }
             // Native jumping releases a ladder onto its adjacent landing and
             // steps over movable furniture. Never move or delete the obstacle.
-            if (Math.abs(dx)>18 && Math.abs(dy)<50 && w.gg.isLaz || stuck>24 && w.gg.stay && Math.abs(dy)<50)
+            if (Math.abs(dx)>18 && Math.abs(dy)<50 && w.gg.isLaz || stuck>24 && w.gg.stay && dy<20 && dy>-50)
             { w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; stuck=0; }
-            if (!climb[step] && !transferUp && w.gg.stay && Math.abs(dx)>25 && Math.abs(dy)<45)
+            if (!climb[step] && !transferUp && w.gg.stay && Math.abs(dx)>25 && dy<=5 && dy>-45)
             {
                var aheadX:int=int((w.gg.X+(dx<0?-70:70))/40);
                var belowY:int=int((w.gg.Y+2)/40);
@@ -341,10 +428,11 @@ package
             // landing again. This changes only the test's intended route.
             if (legTicks%240==0 && w.gg.stay && !w.gg.isLaz && Math.abs(dy)>80)
                route=path(w,t.kind=="space"?nearest(w,t):goalFor(t));
-            if (w.gg.isLaz && Math.abs(dx)<40 && Math.abs(dy)>50)
+            if (w.gg.isLaz && Math.abs(dx)<64 && (Math.abs(dy)>50 || dy>8))
             {
                // First reach the landing height on the ladder already held;
-               // its native snap can be 25 px from the adjacent floor pose.
+               // a mirrored rung and the adjacent two-tile floor pose can be
+               // 55 px apart. Horizontal input alone cannot release a ladder.
                w.ctr.keyLeft=w.ctr.keyRight=false;
                w.ctr.keyBeUp=dy<0; w.ctr.keySit=dy>0; w.ctr.keyJump=false;
             }
@@ -358,7 +446,7 @@ package
       private static function finish(ok:Boolean,message:String):void
       {
          done=true; success=ok; reason=message;
-         var result:Object={success:ok,reason:message,caseId:name,targets:targets.length,completed:at,frames:ticks,records:records,growth:growing,milestones:growing?milestone:0};
+         var result:Object={success:ok,reason:message,caseId:name,scene:scene,dryRequired:dry,optionalWater:optionalWater,wetFrames:wetFrames,targets:targets.length,completed:at,frames:ticks,records:records,growth:growing,milestones:growing?milestone:0};
          var stream:FileStream=new FileStream();
          stream.open(root.resolvePath("captures/"+name+"-navigation.json"),FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(result)); stream.close();

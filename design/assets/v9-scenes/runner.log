@@ -1,0 +1,63 @@
+appId=pferr-style-95568ecb06614ee1bf1bc9b843211ebe
+3349 ready cases=12
+3805 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+9177 newGame(-1) issued, intro skipped
+10648 initial world ready land=rbl
+10829 beginMission rrstyle-generated-v9-final-0
+13350 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+13875 arrived rrstyle-generated-v9-final-0 room=syn_516
+16582 capture rrstyle-generated-v9-final-0-stage 1008x729 room=syn_516 lightOverlay=true
+17881 capture rrstyle-generated-v9-final-0-room 1920x1000 room=syn_516 lightOverlay=false
+17904 beginMission rrstyle-generated-v9-final-1
+20944 arrived rrstyle-generated-v9-final-1 room=syn_512
+23346 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+23826 capture rrstyle-generated-v9-final-1-stage 1008x729 room=syn_512 lightOverlay=true
+25850 capture rrstyle-generated-v9-final-1-room 1920x1000 room=syn_512 lightOverlay=false
+25870 beginMission rrstyle-generated-v9-final-2
+28883 arrived rrstyle-generated-v9-final-2 room=syn_515
+32085 capture rrstyle-generated-v9-final-2-stage 1008x729 room=syn_515 lightOverlay=true
+35509 capture rrstyle-generated-v9-final-2-room 1920x1000 room=syn_515 lightOverlay=false
+35531 heartbeat state=2 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+35532 beginMission rrstyle-generated-v9-final-3
+38611 arrived rrstyle-generated-v9-final-3 room=syn_0
+41216 capture rrstyle-generated-v9-final-3-stage 1008x729 room=syn_0 lightOverlay=true
+43003 capture rrstyle-generated-v9-final-3-room 1920x1000 room=syn_0 lightOverlay=false
+43038 beginMission rrstyle-generated-v9-final-4
+43349 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+46157 arrived rrstyle-generated-v9-final-4 room=syn_4
+49013 capture rrstyle-generated-v9-final-4-stage 1008x729 room=syn_4 lightOverlay=true
+51632 capture rrstyle-generated-v9-final-4-room 1920x1000 room=syn_4 lightOverlay=false
+51665 beginMission rrstyle-generated-v9-final-5
+53348 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54723 arrived rrstyle-generated-v9-final-5 room=syn_1
+57506 capture rrstyle-generated-v9-final-5-stage 1008x729 room=syn_1 lightOverlay=true
+59937 capture rrstyle-generated-v9-final-5-room 1920x1000 room=syn_1 lightOverlay=false
+59961 beginMission rrstyle-generated-v9-final-6
+63084 arrived rrstyle-generated-v9-final-6 room=syn_256
+63348 heartbeat state=3 case=6 allLands=true text=true resources=true rrCurrent=true rrHost=false
+65809 capture rrstyle-generated-v9-final-6-stage 1008x729 room=syn_256 lightOverlay=true
+66863 capture rrstyle-generated-v9-final-6-room 1920x1000 room=syn_256 lightOverlay=false
+66880 beginMission rrstyle-generated-v9-final-7
+69943 arrived rrstyle-generated-v9-final-7 room=syn_276
+72593 capture rrstyle-generated-v9-final-7-stage 1008x729 room=syn_276 lightOverlay=true
+73985 capture rrstyle-generated-v9-final-7-room 1920x1000 room=syn_276 lightOverlay=false
+74003 heartbeat state=2 case=8 allLands=true text=true resources=true rrCurrent=true rrHost=false
+74004 beginMission rrstyle-generated-v9-final-8
+77110 arrived rrstyle-generated-v9-final-8 room=syn_260
+79733 capture rrstyle-generated-v9-final-8-stage 1008x729 room=syn_260 lightOverlay=true
+80792 capture rrstyle-generated-v9-final-8-room 1920x1000 room=syn_260 lightOverlay=false
+80816 beginMission rrstyle-generated-v9-final-9
+83349 heartbeat state=3 case=9 allLands=true text=true resources=true rrCurrent=true rrHost=false
+83914 arrived rrstyle-generated-v9-final-9 room=syn_769
+86563 capture rrstyle-generated-v9-final-9-stage 1008x729 room=syn_769 lightOverlay=true
+87043 capture rrstyle-generated-v9-final-9-room 1920x1000 room=syn_769 lightOverlay=false
+87065 beginMission rrstyle-generated-v9-final-10
+90117 arrived rrstyle-generated-v9-final-10 room=syn_768
+92845 capture rrstyle-generated-v9-final-10-stage 1008x729 room=syn_768 lightOverlay=true
+93451 capture rrstyle-generated-v9-final-10-room 1920x1000 room=syn_768 lightOverlay=false
+93477 heartbeat state=2 case=11 allLands=true text=true resources=true rrCurrent=true rrHost=false
+93478 beginMission rrstyle-generated-v9-final-11
+96694 arrived rrstyle-generated-v9-final-11 room=syn_780
+99498 capture rrstyle-generated-v9-final-11-stage 1008x729 room=syn_780 lightOverlay=true
+100121 capture rrstyle-generated-v9-final-11-room 1920x1000 room=syn_780 lightOverlay=false
+100156 DONE 12 cases

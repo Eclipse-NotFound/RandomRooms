@@ -20,6 +20,9 @@ package rr
       public var ports:Array;
       public var links:Array;
       public var spawn:Object;
+      public var scene:Object;
+      public var sceneForm:String;
+      public var pools:Array;
       private var rnd:Function;
       private var volumes:Array;
       private var tallBias:Number;
@@ -34,11 +37,9 @@ package rr
       public function build(biome:String,requested:String="", boundary:Array=null):void
       {
          theme=biome;
-         var palettes:Object={stable:["J","K",["R","P","F"]],sewer:["L","L",["","E","T"]],
-            plant:["C","C",["","J","D"]],mane:["N","N",["","C","D"]]};
-         if (!palettes[theme]) theme="stable";
-         var palette:Array=palettes[theme];
-         wall=palette[0]; trim=palette[1]; backgrounds=palette[2];
+         scene=RRScene.profile(theme);
+         sceneForm=scene.forms[pick(0,scene.forms.length-1)];
+         wall=scene.wall; trim=scene.trim; backgrounds=scene.backgrounds;
          var kinds:Array=theme=="stable"?["atrium","offices","offices","service","warehouse"]:
             (theme=="sewer"?["service","service","workshop","damaged","warehouse"]:
              (theme=="plant"?["workshop","workshop","warehouse","service","atrium"]:
@@ -48,7 +49,7 @@ package rr
          if (requested=="corridor") requested="service";
          if (["atrium","offices","workshop","damaged","service","warehouse","connector"].indexOf(requested)>=0) archetype=requested;
          ports=boundary!=null?boundary.concat():RRPorts.sample(rnd);
-         grid=[]; regions=[]; ladders=[]; doors=[]; hatches=[]; windows=[];
+         grid=[]; regions=[]; ladders=[]; doors=[]; hatches=[]; windows=[]; pools=[];
          reserved={}; links=[];
          for (var y:int=0;y<25;y++)
          {
@@ -56,40 +57,116 @@ package rr
             for (var x:int=0;x<48;x++) grid[y][x]=wall;
          }
          // Styles influence proportions and purpose, never fixed coordinates.
-         tallBias=(archetype=="atrium" || archetype=="warehouse")?0.72:0.43;
-         var target:int=archetype=="offices"?pick(6,9):pick(4,8);
+         tallBias=scene.bias;
+         var target:int=pick(scene.min,scene.max);
          if (archetype=="connector") { target=pick(3,5); tallBias=0.9; }
          volumes=[{x0:1,top:1,x1:46,floor:23}];
+         seedScene();
          partition(target);
          for (var i:int=0;i<volumes.length;i++)
          {
             var r:Object=volumes[i];
-            r.id=i; r.bg=backgrounds[pick(0,2)]; r.role=purpose(r);
+            r.id=i; r.role=r.role?r.role:purpose(r); r.bg=RRScene.background(theme,r.role,rnd);
             open(r.x0,r.top,r.x1,r.floor,r.bg);
             regions.push(r);
          }
          connectBoundary();
          connectVolumes();
          for each (r in volumes) if (r.floor-r.top>=10 && r.x1-r.x0>=14 && rnd()<0.6) gallery(r);
+         addSceneFeatures();
          addHatches();
          addWindows();
          chooseSpawn();
          auditLadders();
          auditBoundary();
          RRTraversal.check(this);
+         if (pools.length) RRTraversal.check(this,true);
          for (y=1;y<25;y++) for (x=0;x<48;x++)
             if (solid(x,y) && !solid(x,y-1)) grid[y][x]=trim;
       }
       private function purpose(r:Object):String
       {
          var roles:Array;
-         if (archetype=="offices") roles=["office","living","office","store"];
-         else if (archetype=="service" || theme=="sewer") roles=["service","control","store"];
-         else if (archetype=="workshop") roles=["workshop","control","store","office"];
-         else if (archetype=="warehouse") roles=["warehouse","store","office"];
-         else if (archetype=="damaged") roles=["living","store","office","hall"];
-         else roles=["hall","living","office","service"];
+         if (theme=="sewer") roles=["service","service","service","control","store"];
+         else if (theme=="plant") roles=["workshop","workshop","store","control","office"];
+         else if (theme=="stable") roles=sceneForm=="quarters"?["living","living","office","store"]:
+            ["office","living","service","control","store"];
+         else roles=["living","living","office","office","store"];
          return roles[pick(0,roles.length-1)];
+      }
+      private function divide(r:Object,vertical:Boolean,lo:int,hi:int):Array
+      {
+         var cuts:Array=[];
+         for (var c:int=lo;c<=hi;c++) if (canSplit(r,vertical,c)) cuts.push(c);
+         if (!cuts.length)
+         {
+            // Preserve the scene's relation and orientation when a preferred
+            // cut intersects a real port; vary its dimensions instead.
+            lo=vertical?r.x0+8:r.top+5; hi=vertical?r.x1-8:r.floor-5;
+            for (c=lo;c<=hi;c++) if (canSplit(r,vertical,c)) cuts.push(c);
+         }
+         if (!cuts.length) throw new Error("Scene cannot meet shared ports");
+         c=cuts[pick(0,cuts.length-1)];
+         var a:Object={x0:r.x0,top:r.top,x1:vertical?c-1:r.x1,floor:vertical?r.floor:c-1};
+         var b:Object={x0:vertical?c+1:r.x0,top:vertical?r.top:c+1,x1:r.x1,floor:r.floor};
+         volumes.splice(volumes.indexOf(r),1); volumes.push(a,b);
+         return [a,b];
+      }
+      private function seedScene():void
+      {
+         var parts:Array,major:Object;
+         if (theme=="plant")
+         {
+            // One generous working bay beside (or above) supporting rooms.
+            var vertical:Boolean=sceneForm=="production" || (sceneForm=="storage_hall" && rnd()<0.5);
+            parts=divide(volumes[0],vertical,vertical?16:8,vertical?31:14);
+            major=parts[rnd()<0.5?0:1]; major.keep=true;
+            major.role=sceneForm=="storage_hall"?"warehouse":"workshop";
+         }
+         else if (theme=="sewer")
+         {
+            if (sceneForm=="cistern")
+            {
+               parts=divide(volumes[0],true,17,30);
+               major=parts[rnd()<0.5?0:1];
+            }
+            else { parts=divide(volumes[0],false,6,15); major=parts[1]; }
+            major.keep=true; major.role="canal";
+            if (sceneForm=="pump_chain")
+            {
+               major.keep=false;
+               parts=divide(major,true,18,30);
+               parts[0].keep=true; parts[0].role="canal";
+               parts[1].keep=true; parts[1].role="control";
+            }
+         }
+         else if (theme=="mane")
+         {
+            // A facade and outdoor volume; roof passage instead separates
+            // the sky band above a building. Floors remain locally varied.
+            if (sceneForm=="roof_passage")
+            {
+               parts=divide(volumes[0],false,7,12);
+               major=parts[0]; major.keep=true; major.role="roof";
+            }
+            else
+            {
+               parts=divide(volumes[0],true,16,29);
+               major=parts[rnd()<0.5?0:1];
+               if (sceneForm=="courtyard" && major.x1-major.x0>=22)
+               {
+                  parts=divide(major,true,major.x0+9,major.x1-9);
+                  major=parts[major.x0==1?1:0];
+               }
+               major.keep=true; major.role="street";
+            }
+         }
+         else if (sceneForm=="atrium_ring")
+         {
+            parts=divide(volumes[0],true,17,29);
+            major=parts[rnd()<0.5?0:1]; major.keep=true; major.role="hall";
+         }
+         else if (sceneForm=="quarters") divide(volumes[0],false,8,14);
       }
       private function canSplit(r:Object,vertical:Boolean,c:int):Boolean
       {
@@ -111,7 +188,7 @@ package rr
             for (var i:int=0;i<volumes.length;i++)
             {
                var r:Object=volumes[i];
-               if (r.x1-r.x0>=17 || r.floor-r.top>=10)
+               if (!r.keep && (r.x1-r.x0>=17 || r.floor-r.top>=10))
                   choices.push({r:r,score:(r.x1-r.x0+1)*(r.floor-r.top+1)*(0.45+rnd())});
             }
             if (!choices.length) break;
@@ -183,7 +260,9 @@ package rr
                reserve(e.x-2,f-3,e.x+2,f);
                landingToFloor(e.a,e.x,f);
                landingToFloor(e.b,e.x,f);
-               if (rnd()<0.72) { door(e.x,f,e.a.bg); e.kind="door"; }
+               var outdoors:Boolean=e.a.role=="street" || e.b.role=="street" || e.a.role=="roof" || e.b.role=="roof";
+               var chance:Number=theme=="sewer"?0.28:(theme=="stable"?0.88:0.7);
+               if (rnd()<chance && !outdoors) { door(e.x,f,e.a.bg,e.a.role,e.b.role); e.kind="door"; }
                else e.kind="opening";
                e.y=f;
             }
@@ -240,7 +319,59 @@ package rr
          platform(x0,x1,f+1,r.bg);
          var lx:int=ladderPosition(x0+1,x1-2,f+1,r.floor);
          ladderRoute(lx,f+1,r.floor,r);
-         regions.push({x0:x0,top:r.top,x1:x1,floor:f,bg:r.bg,role:purpose(r)});
+         regions.push({x0:x0,top:r.top,x1:x1,floor:f,bg:r.bg,
+            role:(r.role=="street" || r.role=="roof")?"roof":purpose(r)});
+      }
+      private function addSceneFeatures():void
+      {
+         if (theme=="sewer")
+         {
+            for each (var r:Object in volumes) if (r.role=="canal") addPool(r);
+            if (!pools.length) throw new Error("No safe space for a canal and dry bank");
+         }
+         if (theme=="mane")
+         {
+            // Short missing floor sections make visible ruptures. The directed
+            // return audit below must still pass through the remaining routes.
+            var changes:int=pick(1,3);
+            for (var t:int=0;t<60 && changes>0;t++)
+            {
+               var x:int=pick(5,39),y:int=pick(6,19),width:int=pick(2,4),ok:Boolean=true;
+               for (var xx:int=x-1;xx<=x+width;xx++)
+               {
+                  if (!solid(xx,y) || solid(xx,y-1) || solid(xx,y+1)) ok=false;
+                  for (var yy:int=y-2;yy<=y+2;yy++) if (reserved[yy+","+xx]) ok=false;
+               }
+               if (!ok) continue;
+               for (xx=x;xx<x+width;xx++) grid[y][xx]=String(grid[y+1][xx]);
+               changes--;
+            }
+         }
+      }
+      private function addPool(r:Object):void
+      {
+         var f:int=r.floor;
+         if (f-r.top<7 || r.x1-r.x0<14) return;
+         var candidates:Array=[];
+         for (var lo:int=r.x0+4;lo<=r.x1-10;lo++)
+         {
+            var width:int=pick(6,Math.min(14,r.x1-lo-4)),hi:int=lo+width-1,ok:Boolean=true;
+            for (var y:int=f-5;y<=f;y++) for (var x:int=lo-3;x<=hi+3;x++)
+               if (solid(x,y) || reserved[y+","+x] || String(grid[y][x]).indexOf("-")>=0) ok=false;
+            if (ok) candidates.push({lo:lo,hi:hi});
+         }
+         if (!candidates.length) return;
+         var p:Object=candidates[pick(0,candidates.length-1)]; lo=p.lo; hi=p.hi;
+         // Two-cell-deep contained water, a dry crossing above it, dry bank
+         // ladders outside, and a separate ladder out of the optional basin.
+         for (y=f-1;y<=f;y++) { grid[y][lo-1]=wall; grid[y][hi+1]=wall; }
+         platform(lo-2,hi+2,f-2,r.bg);
+         ladder(lo-3,f-2,f,r.bg); ladder(hi+2,f-2,f,r.bg);
+         ladder(lo+1,f-2,f,r.bg);
+         for (y=f-1;y<=f;y++) for (x=lo;x<=hi;x++) grid[y][x]+="*";
+         pools.push({x0:lo,x1:hi,top:f-1,bottom:f,deck:f-2});
+         reserve(lo-3,f-5,hi+3,f);
+         regions.push({x0:lo-2,x1:hi+2,top:r.top,floor:f-3,bg:r.bg,role:"canal_walk"});
       }
       private function open(x0:int,top:int,x1:int,bottom:int,bg:String):void
       {
@@ -316,9 +447,9 @@ package rr
          }
          ladder(x,top,bottom,r.bg);
       }
-      private function door(x:int,floor:int,bg:String):void
+      private function door(x:int,floor:int,bg:String,a:String,b:String):void
       {
-         var id:String=theme=="stable"?"stdoor":(theme=="plant"?"door2":(theme=="sewer"?"door1b":"door1"));
+         var id:String=RRScene.door(theme,a,b,rnd);
          var h:int=id=="stdoor"?3:2;
          grid[floor-h][x]=wall;
          open(x,floor-h+1,x,floor,bg);
@@ -374,7 +505,7 @@ package rr
             var overlaps:Boolean=false;
             for each (var h:Object in hatches) if (Math.abs(p.x-h.x)<3 && Math.abs(p.y-h.y)<4) overlaps=true;
             if (overlaps) continue;
-            p.id=(theme=="mane" || theme=="sewer")?"hatch1":"hatch2";
+            p.id=scene.hatches[pick(0,scene.hatches.length-1)];
             hatches.push(p); reserve(p.x-1,p.y-2,p.x+2,p.y+2);
          }
       }
@@ -389,12 +520,12 @@ package rr
             candidates.push({x:x,y:y});
          }
          shuffle(candidates);
-         var target:int=theme=="sewer"?pick(0,2):pick(1,3);
+         var target:int=pick(0,scene.windowMax);
          for each (var p:Object in candidates)
          {
             if (windows.length>=target) break;
             if (reserved[(p.y-1)+","+p.x] || reserved[p.y+","+p.x]) continue;
-            p.id=theme=="stable"?"window2":"window1";
+            p.id=scene.windows[pick(0,scene.windows.length-1)];
             open(p.x,p.y-1,p.x,p.y,backgrounds[0]);
             windows.push(p); reserve(p.x-1,p.y-2,p.x+1,p.y+1);
          }

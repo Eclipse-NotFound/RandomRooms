@@ -17,12 +17,14 @@ package
    import rr.RRGrowth;
    import rr.RRTestLand;
    import rr.RRTravelBtn;
+   import rr.RRScene;
+   import rr.RRScenePicker;
    
    /**
-    * RandomRooms v7: architectural rooms, fresh maps and connected growth.
+    * RandomRooms v9: architectural rooms, fresh maps and connected growth.
     * The existing host loader calls static init(main). Runtime changes are
     * confined to room pools and the two mod-owned lands; host SWFs stay intact.
-    * F1 enters a fresh themed adventure; F5 provides a four-theme showroom.
+    * F1 enters a fresh themed adventure; F5 opens a scene-specific showroom.
     */
    public class RandomRoomsMod extends Sprite
    {
@@ -54,6 +56,8 @@ package
       private static var seedGen:RRSeed;   // cook 用种子序列（会话级）
       private static var menu:RRMenu;
       private static var menuShown:Boolean = false;
+      private static var scenePicker:RRScenePicker;
+      private static var explorationScenes:Object={};
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
       
       // Complete generated pools, with distinct vertical and endpoint rooms.
@@ -195,7 +199,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v8.0 loaded <generator=space-v8, growth=right+down> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v9.0 loaded <generator=space-v9, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -374,7 +378,7 @@ package
             if (travelBtn == null)
             {
                travelBtn = new RRTravelBtn(diag);
-               travelBtn.travelFn = function():void { doTravelFromPip(world); };
+               travelBtn.travelFn = function():void { requestScene(LAND_ID_RR,true); };
             }
             if (travelBtn.parent == null)
             {
@@ -451,12 +455,30 @@ package
          }
       }
       
+      private static function requestScene(landId:String,fromPip:Boolean=false):void
+      {
+         var w:*=WCls?WCls["w"]:null;
+         if (scenePicker || !preflightDone || w==null || w.game==null || w.gg==null) return;
+         if (w.game.curLandId==LAND_ID_RR || w.game.curLandId==LAND_ID_SHOW)
+         { mess(w,"RandomRooms：先按 F2 回城，再选择下一次探索的场景"); return; }
+         if (w.land==null || w.game.curLandId!=w.land.act.id || (!fromPip && !w.gg.ggControl)) return;
+         scenePicker=new RRScenePicker(w,main.stage,landId==LAND_ID_SHOW,function(id:String):void
+         {
+            scenePicker=null;
+            if (id==null) { diag.log("SCENE cancel "+landId); return; }
+            explorationScenes[landId]=id=="random"?randBiome():id;
+            diag.log("SCENE choose "+landId+" theme="+explorationScenes[landId]+" choice="+id);
+            targetLand=landId;
+            if (fromPip) doTravelFromPip(w); else triggerTravel(landId,"scene-picker");
+         });
+      }
       private static function onKeyDown(ev:KeyboardEvent):void
       {
+         if (scenePicker) return;
          if (ev.keyCode == F1_KEY)
          {
-            targetLand = LAND_ID_RR;
-            triggerTravel(targetLand, "F1");
+            ev.stopImmediatePropagation(); ev.preventDefault();
+            requestScene(LAND_ID_RR);
          }
          else if (ev.keyCode == F2_KEY)
          {
@@ -473,8 +495,8 @@ package
          }
          else if (ev.keyCode == F5_KEY)
          {
-            targetLand = LAND_ID_SHOW;
-            triggerTravel(targetLand, "F5");
+            ev.stopImmediatePropagation(); ev.preventDefault();
+            requestScene(LAND_ID_SHOW);
          }
          else if (ev.keyCode == F7_KEY)
          {
@@ -733,10 +755,15 @@ package
       
       /** Test driver entry uses the exact public travel path, only in isolated apps. */
       public static function debugReady():Boolean { return preflightDone; }
-      public static function debugTravel(landId:String):Boolean
+      public static function debugTravel(landId:String,scene:String=""):Boolean
       {
          if (NativeApplication.nativeApplication.applicationID.indexOf("pferr-style-") != 0) return false;
          if (!preflightDone || [LAND_ID_RR,LAND_ID_SHOW,"rbl"].indexOf(landId)<0) return false;
+         if (scene!="")
+         {
+            if (!RRScene.valid(scene)) return false;
+            explorationScenes[landId]=scene;
+         }
          targetLand=landId;
          triggerTravel(landId,"isolated-test");
          return true;
@@ -747,7 +774,17 @@ package
          var show:Boolean=landId==LAND_ID_SHOW;
          var act:*=world["game"]["lands"][landId];
          if (act==null) throw new Error("C map LandAct is missing: "+landId);
-         var biome:String=randBiome();
+         var biome:String=String(explorationScenes[landId] || "");
+         if (!RRScene.valid(biome))
+         {
+            // Recover a generated save's scene when the mod starts in an
+            // existing exploration. Only the next explicit choice replaces it.
+            var previous:XML=act["allroom"] as XML;
+            if (previous && previous.room.length()) biome=String(previous.room[0].@rrTheme);
+            if (!RRScene.valid(biome)) biome=randBiome();
+            explorationScenes[landId]=biome;
+         }
+         RRScene.configureLand(world,act,biome);
          var st:int=int(act["landStage"]);
          act["conf"]=9;
          act["mLocX"]=show?SHOW_MX:5; act["mLocY"]=show?SHOW_MY:5;
@@ -758,7 +795,7 @@ package
          // The complete map is ready before normal travel activates it.
          world["game"]["crea"]=false;
          diag.log("C-POOL "+landId+" total="+act["allroom"].room.length()+
-            " theme="+(show?"all":biome)+" ports=coordinated");
+            " theme="+biome+" ports=coordinated");
       }
       private static function triggerTravel(landId:String, tag:String):void
       {

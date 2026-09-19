@@ -21,7 +21,8 @@ def verify(room):
     failures = []
     def check(value, detail):
         if not value: failures.append(detail)
-    g = [(a.text or '').strip().split('.') for a in room.findall('a')]
+    # Native rust, steel and concrete shelves share collision semantics.
+    g = [(a.text or '').strip().replace('Е','-').replace('К','-').split('.') for a in room.findall('a')]
     if len(g) != 25 or set(map(len,g)) != {48}:
         return ['dimensions'], {}
     def terrain_solid(x,y):
@@ -121,7 +122,7 @@ def main():
     args=ap.parse_args();results=[];errors=[]
     for path in args.files:
         rooms=ET.parse(path).getroot().findall('room')
-        generated=[r for r in rooms if r.get('rrGen') in ('space-v7','space-v8')]
+        generated=[r for r in rooms if r.get('rrGen') in ('space-v7','space-v8','space-v9')]
         if not generated: errors.append(dict(file=str(path),room=None,errors=['No generated rooms; empty evidence cannot pass']))
         stats=[]
         for r in generated:

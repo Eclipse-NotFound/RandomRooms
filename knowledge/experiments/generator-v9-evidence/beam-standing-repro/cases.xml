@@ -1,0 +1,153 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="true" sceneLifecycle="false" waterProbe="false">
+  <case id="rrstyle-repro-v9-stable">
+    <room name="syn_8" rrGen="space-v9" rrRevision="9.0" rrTheme="stable" rrKind="offices" rrForm="service_cluster" rrAttempts="1" x="1" y="3" rrMirror="0">
+      <a>J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J._R._RА.J.J.J.J.J</a>
+      <a>J._R._R._R._R._R._R._R._R.J._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O.J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._R._R._R._R._R._R.J._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O.J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._R._R._R._R._R._R._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._R._R._R._R._R._R._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._R._R._R._R._R._R._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._O._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._RЕ._R._RА._RЕ._RЕ._RЕ._RЕ._RЕ.K.K.K.K.K._R._RА.K.K.K.K.K.K.K.K.K.K._RЕ._RЕ._RЕ._RЕ._RЕ._R._RА._RЕ._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._RА._R._R._R._R._R.J._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R.J.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K._R._RА.K.K.K.K.J</a>
+      <a>J._R._R._RА._R._R._R._R._R.J._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R.J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._R._R._RА._R._R._R._R._R.J._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R</a>
+      <a>J._R._R._RА._R._R._R._R._R.J._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R</a>
+      <a>J._R._R._RА._R._R._R._R._R.J._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R</a>
+      <a>J.K._P._PА.K.K.K.K.K.J.K.K.K.K.K.K.K.K.K._P._PА.K.K.K.K.K._RЕ._RЕ._R._RА._RЕ._R._R._R._R._R._R._R._R._R._R._R._RА._RЕ._R._RА._RЕ.K</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._PА._P._P._P._P.J.K.K.K.K.K.K.K.K._R._RА.K.K.K.K.K._R._RА.K.K.K.K.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._PА._P._P._P._P._N._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._PА._P._P._P._P._N._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P._N._P._P._P._P._P._P._P._PА._P._P._P._P.K._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>_P._P._P._PА._P._P._P._P._P._P._P._P._N._P._P._P._P._P._PЕ._PЕ._PЕ._PЕ._P._PА._PЕ.J._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>_P._P._P._PА._P._P._P._P._P._P._P._P.K._P._P._P._P._P._P._P._P._P._P._PА._P.J._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>_P._P._P._PА._P._P._P._P._P._P._P._P._N._P._P._P._P._P._P._P._P._P._P._PА._P.J._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>K._PЕ._P._PА._PЕ._P._P._P._P._P._P._P._N._P._P._P._P._P._P._P._P._P._P._PА._P.J._R._R._R._R._R._R._R._R._R._RА._R._R.J._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.K._P._P._P._P._P._P._P._P._P._P._PА._P._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._P._P._P._PА._P._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J._P._P._PА._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._P._P._P._PА._P._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+      <a>J.K.K.K.K._P._PА.K.K.K.K.K.J.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.J</a>
+      <obj id="player" code="syn_8_o0" x="28" y="23" />
+      <obj id="stdoor" code="syn_8_o1" x="25" y="23" rrFixture="door" lock="0" mine="0" />
+      <obj id="stdoor" code="syn_8_o2" x="9" y="5" rrFixture="door" lock="0" mine="0" />
+      <obj id="stdoor" code="syn_8_o3" x="38" y="23" rrFixture="door" lock="0" mine="0" />
+      <obj id="stdoor" code="syn_8_o4" x="25" y="11" rrFixture="door" lock="0" mine="0" />
+      <obj id="stdoor" code="syn_8_o5" x="25" y="5" rrFixture="door" lock="0" mine="0" />
+      <obj id="hatch2" code="syn_8_o6" x="2" y="20" rrFixture="hatch" lock="0" mine="0" />
+      <obj id="hatch2" code="syn_8_o7" x="41" y="13" rrFixture="hatch" lock="0" mine="0" />
+      <obj id="window2" code="syn_8_o8" x="12" y="20" rrFixture="window" />
+      <obj id="window2" code="syn_8_o9" x="25" y="15" rrFixture="window" />
+      <obj id="window2" code="syn_8_o10" x="12" y="17" rrFixture="window" />
+      <obj id="cup" code="syn_8_o11" x="8" y="23" />
+      <obj id="table1" code="syn_8_o12" x="13" y="23" />
+      <obj id="ccup" code="syn_8_o13" x="15" y="23" />
+      <obj id="tap" code="syn_8_o14" x="16" y="23" />
+      <obj id="fridge" code="syn_8_o15" x="18" y="23" />
+      <obj id="wcup" code="syn_8_o16" x="15" y="20" />
+      <obj id="wcup" code="syn_8_o17" x="16" y="20" />
+      <obj id="table2" code="syn_8_o18" x="34" y="6" />
+      <obj id="filecab" code="syn_8_o19" x="37" y="6" />
+      <obj id="filecab" code="syn_8_o20" x="38" y="6" />
+      <obj id="filecab" code="syn_8_o21" x="44" y="6" />
+      <obj id="filecab" code="syn_8_o22" x="31" y="12" />
+      <obj id="filecab" code="syn_8_o23" x="37" y="12" />
+      <obj id="filecab" code="syn_8_o24" x="5" y="11" />
+      <obj id="mcrate1" code="syn_8_o25" x="31" y="23" />
+      <obj id="instr1" code="syn_8_o26" x="44" y="23" />
+      <obj id="bigbox" code="syn_8_o27" x="16" y="5" />
+      <obj id="table" code="syn_8_o28" x="17" y="11" />
+      <obj id="bigmed" code="syn_8_o29" x="21" y="11" />
+      <obj id="medbox" code="syn_8_o30" x="19" y="9" />
+      <back id="stlight3" x="8" y="19" />
+      <back id="stlight3" x="13" y="19" />
+      <back id="stwindow" x="33" y="3" />
+      <back id="wires1" x="39" y="3" />
+      <back id="wires1" x="39" y="5" />
+      <back id="stlight4" x="34" y="2" />
+      <back id="stlight3" x="44" y="2" />
+      <back id="stlight3" x="31" y="8" />
+      <back id="stlight3" x="37" y="8" />
+      <back id="stlight3" x="5" y="7" />
+      <back id="stlight3" x="31" y="19" />
+      <back id="stlight3" x="44" y="19" />
+      <back id="electro" x="16" y="2" />
+      <back id="pult" x="19" y="4" />
+      <back id="monitor" x="19" y="3" />
+      <back id="monitor" x="19" y="2" />
+      <back id="electro" x="21" y="2" />
+      <back id="stlight3" x="19" y="1" />
+      <back id="vent" x="17" y="8" />
+      <back id="pipe4" x="23" y="8" />
+      <back id="pipe4" x="23" y="10" />
+      <back id="stlight3" x="19" y="7" />
+      <back id="konstr" x="1" y="13" />
+      <back id="konstr" x="1" y="17" />
+      <back id="stabledoor" x="8" y="21" />
+      <back id="stlight4" x="5" y="13" />
+      <back id="konstr" x="13" y="13" />
+      <back id="konstr" x="13" y="17" />
+      <back id="stabledoor" x="21" y="21" />
+      <back id="stlight4" x="18" y="13" />
+      <back id="konstr" x="26" y="1" />
+      <back id="stabledoor" x="43" y="4" />
+      <back id="stlight4" x="35" y="1" />
+      <back id="konstr" x="26" y="8" />
+      <back id="stabledoor" x="43" y="10" />
+      <back id="stlight4" x="35" y="8" />
+      <back id="konstr" x="1" y="1" />
+      <back id="konstr" x="1" y="5" />
+      <back id="stabledoor" x="5" y="9" />
+      <back id="stlight4" x="4" y="1" />
+      <back id="konstr" x="26" y="14" />
+      <back id="konstr" x="26" y="18" />
+      <back id="stabledoor" x="34" y="21" />
+      <back id="stlight4" x="31" y="14" />
+      <back id="konstr" x="39" y="14" />
+      <back id="konstr" x="39" y="18" />
+      <back id="stabledoor" x="43" y="21" />
+      <back id="stlight4" x="42" y="14" />
+      <back id="konstr" x="10" y="1" />
+      <back id="stlight4" x="16" y="1" />
+      <back id="konstr" x="10" y="7" />
+      <back id="stabledoor" x="21" y="9" />
+      <back id="stlight4" x="16" y="7" />
+      <doors>0.0.3.0.0.0.2.0.0.0.0.0.0.0.0.3.0.0.0.0.0.2</doors>
+      <options backwall="tStConcrete" music="music_stable_1" entip="0" kolspawn="0" tip="beg0" />
+      <rrPlan>
+        <space kind="volume" x0="1" top="13" x1="11" floor="23" role="living" />
+        <space kind="volume" x0="13" top="13" x1="24" floor="23" role="living" />
+        <space kind="volume" x0="26" top="1" x1="46" floor="6" role="office" />
+        <space kind="volume" x0="26" top="8" x1="46" floor="12" role="office" />
+        <space kind="volume" x0="1" top="1" x1="8" floor="11" role="office" />
+        <space kind="volume" x0="26" top="14" x1="37" floor="23" role="store" />
+        <space kind="volume" x0="39" top="14" x1="46" floor="23" role="service" />
+        <space kind="volume" x0="10" top="1" x1="24" floor="5" role="control" />
+        <space kind="volume" x0="10" top="7" x1="24" floor="11" role="service" />
+        <link a="4" b="0" kind="ladder" x="2" y="12" />
+        <link a="5" b="1" kind="door" x="25" y="23" />
+        <link a="8" b="1" kind="ladder" x="19" y="12" />
+        <link a="6" b="3" kind="ladder" x="41" y="13" />
+        <link a="7" b="4" kind="door" x="9" y="5" />
+        <link a="8" b="7" kind="ladder" x="14" y="6" />
+        <link a="6" b="5" kind="door" x="38" y="23" />
+        <link a="3" b="2" kind="ladder" x="41" y="7" />
+        <link a="5" b="3" kind="ladder" x="34" y="13" />
+        <link a="8" b="3" kind="door" x="25" y="11" />
+        <link a="7" b="2" kind="door" x="25" y="5" />
+        <ladder x="44" top="12" bottom="12" />
+        <ladder x="5" top="24" bottom="24" />
+        <ladder x="2" top="20" bottom="23" />
+        <ladder x="41" top="0" bottom="6" />
+        <ladder x="2" top="12" bottom="23" />
+        <ladder x="19" top="12" bottom="16" />
+        <ladder x="22" top="17" bottom="23" />
+        <ladder x="41" top="13" bottom="23" />
+        <ladder x="2" top="6" bottom="11" />
+        <ladder x="14" top="6" bottom="11" />
+        <ladder x="41" top="7" bottom="12" />
+        <ladder x="34" top="13" bottom="23" />
+        <ladder x="28" top="12" bottom="12" />
+        <ladder x="31" top="6" bottom="6" />
+      </rrPlan>
+    </room>
+  </case>
+</cases>

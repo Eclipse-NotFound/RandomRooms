@@ -1,0 +1,103 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="true" sceneLifecycle="false" waterProbe="false">
+  <case id="rrstyle-repro-v9-city">
+    <room name="syn_5" rrGen="space-v9" rrRevision="9.0" rrTheme="mane" rrKind="atrium" rrForm="courtyard" rrAttempts="1" x="1" y="0" rrMirror="0">
+      <a>N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H.N._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H._C._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H._C._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H.N._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H.N._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H.N._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H.N._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H._J._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._H._H._J._J._J._J._J._J._J._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N.N.N.N._H._HА.N.N.N._H._H.N.N.N.N.N._JК._JК._JК._J._JА._JК._J._J._J._J._J._J._J.N._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._.N</a>
+      <a>_H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J._._._._._._._._._._._._._._._._._.N</a>
+      <a>_H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._К._К._К._К._К._К._._А._К._._._._._._._._.N</a>
+      <a>_H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._А._._._._._._._._._.N</a>
+      <a>N._HК._HК._HК._H._HА._HК._H._H._H._H._H._H._H._H.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._А._._._._._._._._._.N</a>
+      <a>N._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N._C._C._C._C._C._C._C._C._C._C._C._C._C.N._._._._._._._._А._._._._._._._._._._</a>
+      <a>N.N.N.N._J._JА.N.N.N.N.N.N.N.N.N.N._C._C._C._C._C._C._C._C._C._C._C._C._C.N._._._._._._._._А._._._._._._._._._._</a>
+      <a>N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J.N._C._C._C._C._C._C._C._C._C._C._C._C._C.N._._._._._._._._А._._._._._._._._._._</a>
+      <a>N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J.N._C._C._C._C._C._C._C._C._C._C._C._C._C.N._._._._._._._._А._._._._._._К._._А._К.N</a>
+      <a>N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._А._._._._._._._._А._.N</a>
+      <a>N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._А._._._._._._._._А._.N</a>
+      <a>N._J._J._J._J._JА._J._J._J._J._J._J._J._J._J.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._._._._._._._А._._._._._._._._А._.N</a>
+      <a>N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._C._CА.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+      <obj id="player" code="syn_5_o0" x="10" y="23" />
+      <obj id="door1" code="syn_5_o1" x="15" y="9" rrFixture="door" lock="0" mine="0" />
+      <obj id="hatch2" code="syn_5_o2" x="44" y="20" rrFixture="hatch" lock="0" mine="0" />
+      <obj id="window2" code="syn_5_o3" x="15" y="3" rrFixture="window" />
+      <obj id="window1" code="syn_5_o4" x="29" y="16" rrFixture="window" />
+      <obj id="filecab" code="syn_5_o5" x="7" y="23" />
+      <obj id="cup" code="syn_5_o6" x="11" y="9" />
+      <obj id="couch" code="syn_5_o7" x="7" y="17" />
+      <obj id="table1" code="syn_5_o8" x="10" y="17" />
+      <obj id="cup" code="syn_5_o9" x="13" y="17" />
+      <obj id="cup" code="syn_5_o10" x="22" y="13" />
+      <obj id="box" code="syn_5_o11" x="17" y="23" />
+      <obj id="box" code="syn_5_o12" x="20" y="23" />
+      <back id="heap3" x="30" y="23" />
+      <back id="railing" x="33" y="23" />
+      <back id="light3" x="7" y="19" />
+      <back id="light3" x="11" y="5" />
+      <back id="poster" x="7" y="14" />
+      <back id="light3" x="11" y="14" />
+      <back id="light3" x="22" y="9" />
+      <back id="stillage" x="17" y="21" />
+      <back id="stillage" x="20" y="21" />
+      <back id="light3" x="18" y="19" />
+      <back id="railing" x="31" y="23" />
+      <back id="railing" x="38" y="23" />
+      <back id="heap2" x="31" y="22" />
+      <back id="swindow" x="3" y="21" />
+      <back id="swindow" x="8" y="21" />
+      <back id="swindow" x="13" y="21" />
+      <back id="heap3" x="12" y="23" />
+      <back id="light3" x="7" y="19" />
+      <back id="swindow" x="3" y="3" />
+      <back id="swindow" x="8" y="3" />
+      <back id="swindow" x="13" y="3" />
+      <back id="heap3" x="12" y="9" />
+      <back id="light3" x="7" y="1" />
+      <back id="swindow" x="3" y="13" />
+      <back id="swindow" x="8" y="13" />
+      <back id="swindow" x="13" y="13" />
+      <back id="heap3" x="12" y="17" />
+      <back id="light3" x="7" y="11" />
+      <back id="swindow" x="18" y="3" />
+      <back id="swindow" x="23" y="3" />
+      <back id="hole" x="16" y="1" />
+      <back id="heap3" x="26" y="13" />
+      <back id="light3" x="21" y="1" />
+      <back id="swindow" x="18" y="17" />
+      <back id="swindow" x="23" y="17" />
+      <back id="heap3" x="26" y="23" />
+      <back id="light3" x="21" y="15" />
+      <doors>0.0.0.0.3.0.0.0.2.0.0.0.0.0.3.0.0.0.0.0.0.0</doors>
+      <options backwall="sky" music="music_mane_1" vis="2" darkness="-20" entip="0" kolspawn="0" tip="beg0" />
+      <rrPlan>
+        <space kind="volume" x0="30" top="1" x1="46" floor="23" role="street" />
+        <space kind="volume" x0="1" top="19" x1="14" floor="23" role="office" />
+        <space kind="volume" x0="1" top="1" x1="14" floor="9" role="living" />
+        <space kind="volume" x0="1" top="11" x1="14" floor="17" role="living" />
+        <space kind="volume" x0="16" top="1" x1="28" floor="13" role="living" />
+        <space kind="volume" x0="16" top="15" x1="28" floor="23" role="store" />
+        <link a="4" b="0" kind="opening" x="29" y="13" />
+        <link a="5" b="0" kind="opening" x="29" y="23" />
+        <link a="4" b="2" kind="door" x="15" y="9" />
+        <link a="3" b="1" kind="ladder" x="4" y="18" />
+        <link a="3" b="2" kind="ladder" x="4" y="10" />
+        <ladder x="44" top="20" bottom="23" />
+        <ladder x="23" top="24" bottom="24" />
+        <ladder x="4" top="16" bottom="17" />
+        <ladder x="36" top="14" bottom="23" />
+        <ladder x="19" top="10" bottom="13" />
+        <ladder x="4" top="18" bottom="23" />
+        <ladder x="4" top="10" bottom="17" />
+      </rrPlan>
+    </room>
+  </case>
+</cases>

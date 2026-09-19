@@ -1,70 +1,68 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-13：用户“开始生成器改进”已完成。v8.0 已部署，最终样本、正常移动、右下扩张与正式路径隔离重启验证全部通过。本页替换旧 v7.1 / v8 进行中快照；历史过程见 journal。
+> 2026-09-20：四类场景分离完成，v9.0 已部署。生成、场景保持、多入口、右下扩张、污水、门窗和正式路径隔离重启验证通过。本页替换 v8 与 v9 进行中快照；历史过程见 journal。
 
-## 1. 模组与当前版本
+## 1. 模组是什么
 
-- 入口固定 release/RandomRoomsMod.swf，入口类 RandomRoomsMod，public static function init(main:*):void。
-- 正式文件 32035 B，SHA256 5F340D05EDDFD14488D7330D6D499849F76DE9C1B0CBFEA1E818224204C46E8F，与 build/RandomRooms-v8-candidate.swf 一致。
-- 运行日志 [RR:v8.0]；XML rrGen=space-v8、rrRevision=8.0。仓库 main，准确提交查 git log。
-- 用户入口说明 README.md；实景对照 design/generator-v8-review.html。
+- 为 Remains 1.02 从零生成建筑空间，按用途摆设原版资源；不复制原版整房或地形片段。
+- 工厂、废弃避难厩、下水道、城市废墟有各自空间关系、材质、门窗、设施与原版环境。一场探索保持同一场景，地图向右、向下无限扩张。
+- 固定入口 release/RandomRoomsMod.swf，入口类 RandomRoomsMod，public static function init(main:*):void；中文使用说明 README.md。
 
-## 2. 用户已确定的方向
+## 2. 用户决定与协作边界
 
-- 中文。土地=一次旅行完整地图；合成房=48×25 土地格；房间=内部功能空间；通道=内部连接。
-- C 从零生成建筑空间，再按用途摆设，不复制原版整房或地形片段。保留向右、向下无限扩张，不能改为有限 5×5 + F4。
-- 横竖结构、内部连接关系共同变化，取消三段式、固定中央井及每四列长井。普通上下连接错开，少量允许对齐；强探索、多高度出口、错层、分岔。
-- 回环为总体偏好，少量有内容的尽头；不强制每间同一主路/环/支路配方。
-- 上下左右任一实际开放边口均可作为入口；不要求每间四面全开，不指定首入口/终点，不按进入方向重排房间。下落可达不能冒充能够返回。
-- 门、活板门、真实玻璃窗保持原版交互；不要求每房必出活板门。
-- F1 冒险（初始 5×5）、F2 回城、F4 进新深度层、F5 四主题展示馆（4×3）；F3 旧测试、F7 跳合成房。F8/F9 留给其他模组。
-- 用户需重启游戏，回城再进入新随机土地。上述方向已明确，无需重复提问。
+- 土地=一次旅行完整地图；合成房=48×25 土地格；房间=内部功能空间；通道=内部连接。
+- 已采用 C 从零生成；无限右下扩张不能改成有限 5×5 加 F4。取消固定三段式、中央井与统一穿房路线；普通上下连接错开，少量特殊场景允许对齐。
+- 较强探索、多高度出口、错层和分支；总体回环为主，少量有内容的尽头，不给每间强制同一配方。
+- 上下左右任一实际开放边口均可作为入口，均须能返回；不要求每间四面全开，不指定首入口，不随进入方向重排。
+- 门、活板门、玻璃使用原版交互；无每房必出活板门配额。
+- 本轮先完整分离四类。一次探索、扩张和 F4 固定场景，回城再换；F1 四类入口加随机。下水道真实原版污水，必经路线有干路，涉水可选。
+- F1 场景选择冒险，F2 回城，F4 新深度层，F5 场景选择展示馆；F3/F7 保留旧诊断。F8/F9 留给其他模组。
+- 重启游戏后回城再进入新随机土地；旧已加载地图不会自动转成新版。已决定事项不重复提问。
+- 只改本模组；根/DLC 游戏 SWF、真实存档、其他模组不改。测试独立 pferr-style 应用与 newGame(-1)；不使用 Ghost。
 
-## 3. 当前实现
+## 3. 当前状态
 
-- RRArchitecture：4–9 个不等尺寸空间，变化的空间相邻关系、楼层和回环数量；用途影响比例和家具。局部门洞平台、梯子、夹层，较长梯尝试错开分段；普通内部下降梯避开底部边口。
-- RRPorts：原版全部 22 槽的坐标、镜像、对面口与采样。RRMapPlan：共享边提前、确定性生成，查询顺序不影响结果，普通上下口避开上一行位置，保留少量对齐。
-- RRTraversal：两格角色净空、脚下梯格、平台、闭合玻璃的有向可达与反向可达审计；所有可站立区与实际边口必须通过。它是保守生成筛选，不替代原版物理验证。
-- RRSynth：最多 48 次重试，维持既定边口；输出 rrPlan 空间/连接/梯子资料。已生成房绕过旧 cook 变异，兼容识别 space-v7。
-- RRFurnish：按居住、办公室、维修、仓储等用途组合原版物件；为门窗、梯口、边口保留净空，小空间使用紧凑组合。门盖不锁不埋雷，玻璃不承担必经路。
-- RRGrowth：初始与新增行列共用构造流程，保留旧 XML/mirror。空 Land 引导后恢复原版随机土地生命周期；新邻居配对开口后执行原版绘制、物件、预步进、经验与地图处理。
-- 恢复旧边口同时清 opac、恢复 stair，并补原版梯首 shelf/vid；平台限制在空间和 x=1..46，生成审计防止非声明边缘漏口。
-- RandomRoomsMod：生成地图池后旅行，原版 crea 重建转回自己的地图构造；其他土地保留旧 P0。完整 31 个原版加载器就绪屏障保持。
+- v9.0 已部署，日志 [RR:v9.0]，XML space-v9 / revision 9.0。仓库 main，准确提交查 git log。
+- 正式与 build/RandomRooms-v9-candidate.swf 一致：37785 B，SHA256 7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E。
+- RRScene 集中场景构造、用途和资源，继承原版环境但不继承地图构造 conf。城市 backwall=sky 保留原版远景；下水道局部真实池水 wtip=1、wrad=3，不按整行灌水。
+- RRArchitecture 先安排场景主要空间再变化分割。RRFurnish 按场景与用途选择完整或紧凑组合，无跨主题沙发回退。避难厩钢梁、城市混凝土梁均用原版字符。
+- RRPorts/RRMapPlan 仍负责全部 22 槽、共享边、镜像与错位。RRTraversal 审计两格姿态的有向可返回路线，下水道另审不触水路线。RRSynth 最多 48 次重试，cook 保护兼容 v7/v8/v9。
+- 选择器支持鼠标、1–5、小键盘与 Esc，保存并恢复暂停状态；F4、扩张和重建沿用场景。未知场景报错。
+- 1280 单房与 288 地图房独立检查通过，cook 前后是同批房，不能重复计数。12 种构造均出现。
+- 最终候选生命周期 12 项通过；四类多入口正常移动 76/76，包含所有内部主要空间/夹层及各实际端口往返；下水道 wetFrames=0。可选涉水 2/2，20 帧真实 inWater 后返回干路。
+- 四类各正常进入新增列、新增行并返回，均 4/4、5×5→8×8，最终各 64 房同场景、接口零问题、原 25 房 XML/mirror 不变。工厂/避难厩/下水道为失败总轮中的明确成功项，城市另轮通过；没有把失败清单改写为通过。
+- 十二构造原版截图和 19 门、14 活板门、18 玻璃循环通过。24 原始 PNG 与评审页已冻结。
+- 正式路径新实例 pferr-style-8c3f5e36bbc041d58753e21b0898cbdd：v9 日志、F5 12/12、F1 25/25、零接口问题、退出 0、complete。没有替用户重启其正在运行的游戏。
 
-## 4. 已完成验证
+## 4. 正在进行与卡点
 
-- 正式 AS3 主样本 1024 + 第二组 256，cook 前后地形、物件尺寸/支撑/净空、梯顶、声明/非声明接口零错误；另两张 12×12 地图的配对、镜像、连通和乱序边口查询全部通过。cook 不是另 1280 个新房。
-- 主组 4–9 空间，308 种以上忽略标号/坐标/主题/镜像的连接关系，1007 尺寸组合；711 房有环、313 无环。308 是 WL 指纹给出的下界，不是精确同构数。
-- 第 16 格高度至少连续 6 格楼层：旧版 1024/1024，新版 258/1024（25.2%）；新楼层分布 5–20 格。主/次地图同时有上下口的 89/97 房中分别 5/3 对齐；不声称全部梯子都短。
-- 六种空间、四种主题的原版截图与物件循环通过：10 门、5 活板门、10 玻璃窗。先截图，再原版 Interact 开关/伤害破玻璃；该轮不冒充正常移动或逐武器射击。
-- F1：syn_8，起点 (1,3)，端口 4/8/14/18，5 空间；33/33 目标、7233 控制器帧。从每口离开并返回，每次重访全部内部空间。
-- F5：起点 (2,1)，端口 4/6/18，7 空间；34/34 目标、8359 帧；12 个实际房覆盖四主题。
-- 右下扩张：正常出生，进入新列 (5,0)→返回 (4,0)→新行 (4,5)→返回 (4,4)，四处均到内部空间。4/4 目标、4696 帧，5×5→8×8，最终 64 房全槽接口零问题，原 25 房 XML/mirror 不变。
-- 上述移动使用正常方向/跳跃/爬梯/行动键；出生由正常旅行坐标选择，随后不写玩家坐标、碰撞或地形。持续受击保护仅隔离战斗。
-- 部署后正式 release 路径新实例 pferr-style-c85b877cd7244f54a716299abb795d1d：F5 12/12、F1 25/25，实际 v8.0 日志、接口零问题、退出 0，清单 complete。
-- 证据：knowledge/experiments/generator-v8-evidence/ 中 generated-samples.zip、multi-entry-f1、multi-entry-f5、growth、release-smoke；六图 design/assets/v8-spaces/。
+- 本轮四类分离、验证与发布已完成，无阻塞事项。用户可重启后直接比较四种场景。
+- 未验证范围不是已承诺待办；下一轮按用户实际画面反馈定位，不自动重开方案拷问。
 
-## 5. 已知边界与原版机制
+## 5. 已知边界与调试线索
 
-- 结构仍偏直角，家具与生活细节可以丰富。未穷尽所有种子、长时间扩张内存、联机、真实旧存档、六模组集成或逐武器破窗。
-- 测试使用独立 pferr-style 应用和 newGame(-1)；隔离根自写 TDFC 薄壳加载原封候选，调用方与正式 loader 不同。真实其他模组未访问，真实存档未改。
-- AIR 需要独立 AppData；默认沙箱 #3003 发生于模组初始化前，经工具权限审查后运行。不能改真实存储目录绕行。
-- 原版 controlOn 跨房会清 invulner；驾驶器需持续受击保护。梯子按脚下 Tile 与符号吸附，目标横坐标使用原版宽度规则；空中不能凭身旁梯子假定已攀爬。
-- Location.getDist 将光标坐标 round 到 visi 格；屏幕缩放、整数光标可能把半格中心取到暗格。瞄真实可见表面并保留原版距离/视线检查；活板门可在脚下，不能用面朝方向漏选。
-- hatch2 图像高 48 px、碰撞高 40 px，落脚取 Tile 楼层。window2 hp1000/thre100；lov 是陷阱，沙发是 couch。
-- 原版接口、镜像、梯首恢复详见共享发现 shared-knowledge/world-objects/discoveries/room-port-restoration-and-ladder-heads.md（相对游戏根）。
+- 结构仍偏直角，部分大墙面与生活痕迹可丰富。下水道重试使水渠多于集水池，未承诺构造均匀分布。
+- 未穷尽所有种子、长期扩张内存、联机、真实旧存档重启/死亡恢复、六模组集成或逐武器破窗；未单独测原版辐射伤害数值曲线。
+- 城市整房图不含独立远景层，室外为黑底；游戏屏幕有原版远景。PNG 未重绘；页面标记另层叠加。
+- AS3 可返回审计和 Python 干路净空检查不替代原版物理；真实移动只发方向/爬梯/跳跃/行动键，不改坐标、碰撞或地形。跨房 controlOn 会清 invulner，测试持续保护仅排除战斗。
+- 原版梁可能抬高落脚；双按下若后蹄压实体墙会拒绝穿透。梯子按脚下格吸附，抽象两格中心可能不同；侧向离梯须先到出口高度带，下降不能提前对齐远处低层梯边。
+- 空中松开水平键仍有惯性，测试驾驶器需按 dx 提前反向减速，保留缺口两侧真实站立节点。原失败城市房 7/7、643 帧原样通过；避难厩失败房 10/10 原样通过。
+- 活板门可在脚下，光标须瞄真实可见表面。hatch2 图高 48 px、碰撞 40 px；window2 hp1000/thre100；lov 是陷阱，沙发是 couch。
+- AIR 独立 AppData 在默认沙箱可能 #3003，按工具权限审查运行隔离测试；不能改真实存储绕行。
 
-## 6. 构建、发布与回滚
+## 6. 下一步与回滚
 
-- build/build-v7.ps1 -OutputName RandomRooms-v8-candidate.swf 只写 build；脚本名沿用，旧 build-m0.sh 会直写 release，不用于普通验证。
-- v7.1 回滚备份 build/release-backups/RandomRoomsMod_before_v8_20260913.swf，27326 B，SHA256 F4C1E36E4E9038EBCF86AFB433EDAA0854F9A8F588B5850723DA13781D3250C8。复制回正式入口并重启；禁止覆盖备份。
-- 根 pfe.swf SHA256 5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7 未变，根/DLC SWF 均未修改。
-- 发布按 release-gate；release、备份、可再生大型运行目录不进 Git，冻结截图/XML/日志/清单与源代码进 Git。
+- 用户实测后按具体房间、场景和入口调查；优先提升场景细节，不重做已确定的探索规则。
+- v8 回滚备份 build/release-backups/RandomRoomsMod_before_v9_20260920.swf，32035 B，SHA256 5F340D05EDDFD14488D7330D6D499849F76DE9C1B0CBFEA1E818224204C46E8F。复制到正式入口并重启，禁止覆盖备份。
+- 根 pfe.swf SHA256 5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7 未变，根/DLC SWF 未修改。
+- 发布走 release-gate；release、备份、大型运行目录不进 Git，源代码与冻结图/XML/日志/清单进 Git。
 
-## 7. 后续阅读与复现
+## 7. 深入阅读与复现
 
-- 本轮无未完成的必要工作。最终验证与边界见 knowledge/experiments/generator-v8-validation-2026-09-13.md；设计选择见 design/structure-diversity-brainstorm-2026-09-12.md，旧报告只作历史。
-- 实景页可切换整房/真实屏幕和空间/预留边口标记。单房展示原版封外缘，彩点是预留口；另有 F1 实际四入口样本。PNG 原图不加标记，页面标记独立叠加。
-- build/style-review/harness/run-baseline.ps1 导出正式 AS3 样本；build/verify_architecture.py 独立对照原版 AllData；measure_v8_diversity.py 统计尺寸与连接关系。
-- build/style-review/game-harness/run-game-captures.ps1 使用 -DevelopmentSwf、-NavigationProbe -NavigationLand random_rooms|rr_showroom、-GrowthProbe、-SmokeOnly。六图使用 -ArchitectureKinds -FixtureProbe -FixtureCyclesOnly，不要求每样本有活板门。
-- 旧 MovementProbe/CrossingProbe 的固定底层目标不适合作为 v8 多入口证据；使用 NavigationProbe。驾驶器失败记录保留在隔离 app/history，不能混入最终通过数据。
+- 决策 decisions/DEC-0006-scene-identity.md；调查 design/scene-separation-2026-09-19.md；实景 design/generator-v9-review.html。
+- 本轮报告 knowledge/experiments/generator-v9-validation-2026-09-19.md；证据 generator-v9-evidence/ 与 design/assets/v9-scenes/。完整清单用文件指纹识别运行，growth-partial 用独立 evidence-index 保留失败总轮。
+- 构建 build/build-v7.ps1 -OutputName RandomRooms-v9-candidate.swf，只写 build；旧 build-m0.sh 直写 release，不用于验证。
+- build/style-review/harness/run-baseline.ps1 导出正式 AS3；build/verify_architecture.py、verify_scenes.py 独立核原版 AllData、场景用途与干路。
+- build/style-review/game-harness/run-game-captures.ps1：-DevelopmentSwf、-SceneLifecycle、-NavigationProbe -AllScenes、-NavigationProbe -Scene sewer -WaterProbe；扩张必须 -NavigationProbe -GrowthProbe，可配 -AllScenes 或 -Scene；-SamplesPerScene 3 -FixtureCyclesOnly 生成十二实景与门窗循环；-SmokeOnly 验正式路径。
+- build/style-review/freeze_captures.py 仅接受 complete 运行并核哈希；build_scene_review.py 从冻结十二样本生成页面。旧固定底层 GrowthProbe 不适合多高度接口。
+- 游戏机制公共来源：shared-knowledge/physics-collision/discoveries/collision-motion-source-audit-2026-09-09.md、world-objects/discoveries/room-port-restoration-and-ladder-heads.md（相对游戏根）。

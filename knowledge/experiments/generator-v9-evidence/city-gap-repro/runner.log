@@ -1,0 +1,27 @@
+appId=pferr-style-55dbe05622174d4287b3f49bb913ffa7
+3583 ready cases=1
+4036 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+10430 newGame(-1) issued, intro skipped
+12610 initial world ready land=rbl
+12738 beginMission rrstyle-repro-v9-city
+13570 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+15998 arrived rrstyle-repro-v9-city room=syn_5
+18663 capture rrstyle-repro-v9-city-stage 1008x729 room=syn_5 lightOverlay=true
+19274 capture rrstyle-repro-v9-city-room 1920x1000 room=syn_5 lightOverlay=false
+19277 NAV-BEGIN rrstyle-repro-v9-city origin=0,0 ports= targets=7 natural spawn; no coordinate writes
+19306 NAV-SAMPLE {"y":960,"task":{"y":0,"space":1,"x1":14,"floor":23,"entry":"initial","kind":"space","x":0,"x0":1},"stay":true,"frame":1,"route":[],"x":441.8,"target":0,"ladder":0}
+21298 NAV-SAMPLE {"y":807.75,"task":{"y":0,"space":3,"x1":14,"floor":17,"entry":"initial","kind":"space","x":0,"x0":1},"stay":false,"frame":50,"route":[820,821],"x":215,"target":1,"ladder":1}
+23297 NAV-SAMPLE {"y":529.5,"task":{"y":0,"space":2,"x1":14,"floor":9,"entry":"initial","kind":"space","x":0,"x0":1},"stay":false,"frame":37,"route":[436,439],"x":215,"target":2,"ladder":1}
+23597 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25299 NAV-SAMPLE {"y":358,"task":{"y":0,"space":4,"x1":28,"floor":13,"entry":"initial","kind":"space","x":0,"x0":16},"stay":false,"frame":8,"route":[442,452,644],"x":380.6000000000001,"target":3,"ladder":0}
+26430 DOOR target=door1 x=620 lock=0 mine=0
+27298 NAV-SAMPLE {"y":377,"task":{"y":0,"space":4,"x1":28,"floor":13,"entry":"initial","kind":"space","x":0,"x0":16},"stay":false,"frame":68,"route":[452,644],"x":708.0000000000001,"target":3,"ladder":0}
+29298 NAV-SAMPLE {"y":477.875,"task":{"y":0,"space":0,"x1":46,"floor":23,"entry":"initial","kind":"space","x":0,"x0":30},"stay":false,"frame":15,"route":[661,1141],"x":905.4595373674388,"target":4,"ladder":0}
+31300 NAV-SAMPLE {"y":560,"task":{"y":0,"space":0,"x1":46,"floor":23,"entry":"initial","kind":"space","x":0,"x0":30},"stay":true,"frame":75,"route":[661,1141],"x":1325.4595373674388,"target":4,"ladder":0}
+33300 NAV-SAMPLE {"y":762.125,"task":{"y":0,"space":0,"x1":46,"floor":23,"entry":"initial","kind":"space","x":0,"x0":30},"stay":false,"frame":135,"route":[1141],"x":1495,"target":4,"ladder":1}
+33597 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+35296 NAV-SAMPLE {"y":960,"task":{"y":0,"space":5,"x1":28,"floor":23,"entry":"initial","kind":"space","x":0,"x0":16},"stay":true,"frame":10,"route":[1126],"x":1468.0491158200548,"target":5,"ladder":0}
+37295 NAV-SAMPLE {"y":960,"task":{"y":0,"space":5,"x1":28,"floor":23,"entry":"initial","kind":"space","x":0,"x0":16},"stay":true,"frame":70,"route":[1126],"x":1048.0491158200548,"target":5,"ladder":0}
+39295 NAV-SAMPLE {"y":960,"task":{"y":0,"space":0,"x1":46,"floor":23,"entry":"interior-return","kind":"space","x":0,"x0":30},"stay":true,"frame":44,"route":[1141],"x":1215.0491158200548,"target":6,"ladder":0}
+40697 NAV-END {"completed":7,"success":true,"frames":643,"targets":7,"reason":"Interior circuit and each actual port left/re-entered to the same anchor"}
+40732 DONE 1 cases

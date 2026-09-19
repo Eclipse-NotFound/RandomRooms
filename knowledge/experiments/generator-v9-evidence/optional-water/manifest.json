@@ -1,0 +1,81 @@
+{
+  "appId": "pferr-style-3d573ba1b1564572aadad9523902f723",
+  "status": "complete",
+  "startedUtc": "2026-09-19T15:21:44.0672107Z",
+  "completedUtc": "2026-09-19T15:22:16.0654596Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-water-sewer"
+  ],
+  "roomIds": [
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "build/RandomRooms-v9-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-water-sewer-pool.xml": "B4BC4BCB2F37AD4002ACC16AF727DC7B7B4EA5ACA4DA86DCD7C85D314420AF45",
+    "rrstyle-water-sewer-layout.xml": "39252E45BA858BD4AC54269C3DB4955549C1EB0B432E22B584939D5B52F9F7D3",
+    "rrstyle-water-sewer-topology.json": "1FC2FDEE5768FD90EE1BF6E14A57BB85DBE467AB9E43E5A34E0E2965400FD79F",
+    "production-diag.log": "DD08D4ADFD4098F2E0BEAC806FE1D1EF103D8B3A7D4D69E79796B7E0CEA76A2C",
+    "production-version.json": "0B1F15E4BB439AE4A80A9282E9B0DEDBAA393CB3F035405E764275C84D8991F7",
+    "rrstyle-water-sewer-navigation.json": "F93C23A04F9A5C475FEE8A24C9EF18C97412B77521ACC702F7A1E80571B334FA",
+    "startup-readiness.json": "21BFD10F7D2B5688411E1DC2523402B1CB14CBFF8BD0443C4B93374128BA7DBD"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-water-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-water-sewer",
+      "success": true,
+      "completed": 2,
+      "targets": 2,
+      "frames": 298,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "5BEFDC78D7546EE7C5E51C19A7B2DFF522D1980682AE28C49492DC713517AF38",
+  "driverSha256": "E4F89B6DD16D71F85B623FE241C23829C6569355B2EAF4D66D25D2A58EDA4E4F",
+  "runnerLogSha256": "C6F382809DBF715EDDE794AF2B33AD8056AC3ED5E5EDEE34E46F7F28D33A31D2",
+  "captured": {
+    "rrstyle-water-sewer-stage.png": "B71D3939D02F1B52D845A97F2C259FDF6FEB43697C0BD7A4505A40AD9BBA8C86",
+    "rrstyle-water-sewer-room.png": "6017D8E5DC99755598C757F6E9AE8C5F399D8894954151EAE6D0006C9019BE22"
+  }
+}

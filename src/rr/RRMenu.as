@@ -77,7 +77,7 @@ package rr
          hint.x = 6;
          hint.y = 60;
          hint.selectable = false;
-         hint.text = "热键: F1废墟 F2回城 F4升层 F5合成房展示馆 F7跳合成房";
+         hint.text = "热键: F1选场景 F2回城 F4升层 F5展示馆 F7跳合成房";
          var hfmt:TextFormat = new TextFormat();
          hfmt.color = 0xAAAAAA;
          hfmt.size = 10;
@@ -112,7 +112,7 @@ package rr
       
       public function refresh():void
       {
-         label.text = "RandomRooms v0.2  [变异:" + (cfg.enabled ? "开" : "关") +
+         label.text = "RandomRooms v9.0  [变异:" + (cfg.enabled ? "开" : "关") +
                       " 种子:" + (cfg.seedEnabled ? String(cfg.seed) : "随机") + "]  (点击切换)";
          input.text = cfg.seedEnabled ? String(cfg.seed) : "";
       }

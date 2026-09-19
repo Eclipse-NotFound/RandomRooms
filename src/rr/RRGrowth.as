@@ -119,7 +119,7 @@ package rr
             var mirror:Boolean=synth.rnd()<0.5;
             var kind:String="";
             for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
-            var xml:XML=synth.generate(serial++,show?String(RRSynth.BIOMES[(x*nh+y)%4]):biome,kind,mirror?RRPorts.mirror(ports):ports);
+            var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports);
             xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
             if (w>0 || h>0) xml.@rrGrowth="1";
             if (x==0 && y==0) xml.@name="rr_begin";

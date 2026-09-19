@@ -8,6 +8,7 @@ param(
     [ValidateSet('app','visual-app')][string]$SessionDirectory = 'app',
     [switch]$CrossingProbe,
     [switch]$ArchitectureKinds,
+    [ValidateRange(0,3)][int]$SamplesPerScene = 0,
     [switch]$DevelopmentShaftProbe,
     [switch]$VerticalProbe,
     [switch]$GrowthProbe,
@@ -16,17 +17,25 @@ param(
     [switch]$FixtureProbe,
     [switch]$FixtureCyclesOnly,
     [switch]$NavigationProbe,
+    [switch]$SceneLifecycle,
+    [switch]$AllScenes,
+    [switch]$WaterProbe,
+    [ValidateSet('','plant','stable','sewer','mane')][string]$Scene = '',
     [ValidateSet('both','random_rooms','rr_showroom')][string]$NavigationLand = 'both',
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
 )
 $ErrorActionPreference = 'Stop'
 if ($StartupDelay -and -not $DevelopmentSwf) { throw 'StartupDelay requires DevelopmentSwf.' }
+if (($WaterProbe -or ($AllScenes -and $GrowthProbe)) -and -not $NavigationProbe) {
+    throw 'Scene water/growth checks require NavigationProbe; the legacy fixed-floor driver cannot follow these rooms.'
+}
 $modRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../../..')).Path
 $gameRoot = (Resolve-Path -LiteralPath (Join-Path $modRoot '../..')).Path
 $appRoot = Join-Path $PSScriptRoot $SessionDirectory
 $assetFiles = @('pfe.swf','texture.swf','texture1.swf','sprite.swf','sprite1.swf',
     'sound.swf','sound_unit.swf','sound_weapon.swf','lang.xml','text_en.xml',
-    'Music/mainmenu.mp3','Music/music_base.mp3','Music/music_plant_1.mp3','Music/music_begin.mp3')
+    'Music/mainmenu.mp3','Music/music_base.mp3','Music/music_plant_1.mp3','Music/music_begin.mp3',
+    'Music/music_stable_1.mp3','Music/music_sewer_1.mp3','Music/music_mane_1.mp3')
 $rooms = @(Get-ChildItem -LiteralPath (Join-Path $gameRoot 'Rooms') -File)
 $assetBytes = 0L
 foreach ($relative in $assetFiles) { $assetBytes += (Get-Item -LiteralPath (Join-Path $gameRoot $relative)).Length }
@@ -78,6 +87,8 @@ $caseDoc.DocumentElement.SetAttribute('startupDelay', $StartupDelay.IsPresent.To
 $caseDoc.DocumentElement.SetAttribute('fixtures', ($FixtureProbe.IsPresent -or $FixtureCyclesOnly.IsPresent).ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('fixtureCyclesOnly', $FixtureCyclesOnly.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('navigation', $NavigationProbe.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('sceneLifecycle', $SceneLifecycle.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('waterProbe', $WaterProbe.IsPresent.ToString().ToLowerInvariant())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
     'baseline-v66.xml' = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot '../baseline-v66.xml') -Algorithm SHA256).Hash
@@ -93,6 +104,16 @@ foreach ($prototypeFile in $PrototypeFiles) {
         $prototypeRooms = @($prototype.SelectNodes('/*/room'))
         if ($prototypeRooms.Count -eq 0) { throw "No room in prototype: $prototypePath" }
         if ($VerticalProbe) { $prototypeRooms = @($prototypeRooms | Where-Object { $_.rrKind -eq 'connector' }) }
+        if ($SamplesPerScene -gt 0) {
+            $selectedRooms = @()
+            foreach ($scene in @('plant','stable','sewer','mane')) {
+                $sceneRooms = @($prototypeRooms | Where-Object { $_.rrTheme -eq $scene })
+                $forms = @($sceneRooms | Group-Object rrForm | ForEach-Object { $_.Group[0] } | Select-Object -First $SamplesPerScene)
+                if ($forms.Count -ne $SamplesPerScene) { throw "Not enough distinct forms for scene $scene" }
+                $selectedRooms += $forms
+            }
+            $prototypeRooms = $selectedRooms
+        }
         if ($ArchitectureKinds) {
             $selectedRooms = @()
             $wantedKinds = @('atrium','workshop','offices','damaged','service','warehouse')
@@ -110,6 +131,7 @@ foreach ($prototypeFile in $PrototypeFiles) {
         $take = if ($prototypeName -eq 'prototype-c') { [Math]::Min(2, $prototypeRooms.Count) } else { 1 }
         if ($PrototypeSampleCount -gt 0) { $take = [Math]::Min($PrototypeSampleCount, $prototypeRooms.Count) }
         if ($ArchitectureKinds) { $take = $prototypeRooms.Count }
+        if ($SamplesPerScene -gt 0) { $take = $prototypeRooms.Count }
         if ($VerticalProbe) { $take = [Math]::Min(2,$prototypeRooms.Count) }
         for ($sample = 0; $sample -lt $take; $sample++) {
             $suffix = if ($take -gt 1) { '-' + $sample } else { '' }
@@ -117,7 +139,7 @@ foreach ($prototypeFile in $PrototypeFiles) {
         }
     }
 }
-if ($MovementOnly -or $FixtureProbe -or $FixtureCyclesOnly) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
+if ($MovementOnly -or $FixtureProbe -or $FixtureCyclesOnly -or $SamplesPerScene -gt 0) { $caseSources = @($caseSources | Where-Object { $_.prototype }) }
 if ($CrossingProbe -or $VerticalProbe) {
     if ($MovementProbe -or $DevelopmentSwf) { throw 'Run crossing as a separate probe.' }
     $crossSources = @($caseSources | Where-Object { $_.prototype })
@@ -141,12 +163,31 @@ if ($DevelopmentSwf) {
     if ($DevelopmentShaftProbe) { $caseSources = @(@{id='rrstyle-f5-shaft';landId='rr_showroom'}) }
     if ($GrowthProbe) { $caseSources = @(@{id='rrstyle-growth';landId='random_rooms'}) }
     if ($NavigationProbe -and $NavigationLand -ne 'both') { $caseSources = @($caseSources | Where-Object { $_.landId -eq $NavigationLand }) }
+    if ($AllScenes) {
+        $caseSources = @()
+        foreach ($theme in @('plant','stable','sewer','mane')) {
+            $caseSources += @{id=('rrstyle-' + $(if ($GrowthProbe) {'growth'} else {'navigation'}) + '-' + $theme);landId='random_rooms';scene=$theme}
+        }
+    }
+    if ($WaterProbe) { $caseSources=@(@{id='rrstyle-water-sewer';landId='random_rooms';scene='sewer'}) }
+    if ($SceneLifecycle) {
+        $caseSources = @()
+        foreach ($theme in @('plant','stable','sewer','mane','random')) {
+            $caseSources += @{id=('rrstyle-scene-' + $theme);landId='random_rooms';scene=$theme;action='pick'}
+            $caseSources += @{id=('rrstyle-deeper-' + $theme);landId='random_rooms';scene=$theme;action='deeper'}
+        }
+        foreach ($theme in @('sewer','mane')) {
+            $caseSources += @{id=('rrstyle-show-' + $theme);landId='rr_showroom';scene=$theme;action='pick'}
+        }
+    }
 }
 foreach ($caseSource in $caseSources) {
     $case = $caseDoc.CreateElement('case')
     $case.SetAttribute('id', $caseSource.id)
     if ($DevelopmentSwf) {
         $case.SetAttribute('landId',$caseSource.landId)
+        $case.SetAttribute('scene',$(if ($caseSource.scene) { $caseSource.scene } else { $Scene }))
+        if ($caseSource.action) { $case.SetAttribute('action',$caseSource.action) }
         $caseDoc.DocumentElement.AppendChild($case) | Out-Null
         continue
     }
@@ -222,7 +263,7 @@ try {
     while (-not $instance.WaitForExit(1000)) {
         $elapsed++
         if ($elapsed % 10 -eq 0) { Write-Output ('Capture process running: ' + $elapsed + 's; PID ' + $instance.Id) }
-        $timeout = if ($NavigationProbe) { 960 } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { 120 }
+        $timeout = if ($NavigationProbe) { if ($AllScenes) {1860} else {960} } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { 120 }
         if ($elapsed -ge $timeout) { throw ('Capture process exceeded ' + $timeout + ' second timeout.') }
     }
     $instance.Refresh()
@@ -269,7 +310,7 @@ try {
             $navigationResults += [ordered]@{case=$caseSource.id;success=$nav.success;completed=$nav.completed;targets=$nav.targets;frames=$nav.frames;milestones=$nav.milestones}
         }
     }
-    if (-not $NavigationProbe -and ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe -or $FixtureProbe)) {
+    if (-not $NavigationProbe -and -not $FixtureCyclesOnly -and ($MovementProbe -or $CrossingProbe -or $DevelopmentShaftProbe -or $VerticalProbe -or $GrowthProbe -or $FixtureProbe)) {
         $movementResults = @(Get-Content -LiteralPath (Join-Path $captureRoot 'movement.json') -Raw | ConvertFrom-Json)
     }
     [ordered]@{

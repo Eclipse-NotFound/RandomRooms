@@ -78,7 +78,7 @@ try {
         versionTag = $VersionTag
         cookCopies = $CookCopies
     }
-    foreach ($source in @('rr/RRSynth.as', 'rr/RRGrammar.as', 'rr/RRSeed.as','rr/RRCook.as','rr/RRArchitecture.as','rr/RRFurnish.as','rr/RRPorts.as','rr/RRTraversal.as','rr/RRMapPlan.as')) {
+    foreach ($source in @('rr/RRSynth.as', 'rr/RRGrammar.as', 'rr/RRSeed.as','rr/RRCook.as','rr/RRArchitecture.as','rr/RRFurnish.as','rr/RRPorts.as','rr/RRTraversal.as','rr/RRMapPlan.as','rr/RRScene.as')) {
         if (-not (Test-Path -LiteralPath (Join-Path $modRoot ('src/' + $source)))) { continue }
         $manifest.sources[$source] = (Get-FileHash -LiteralPath (Join-Path $modRoot ('src/' + $source)) -Algorithm SHA256).Hash
     }

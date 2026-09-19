@@ -26,7 +26,7 @@ package rr
          t.width = 170;
          t.height = 26;
          t.selectable = false;
-         t.text = "  RandomRooms 废墟 ->";
+         t.text = "  RandomRooms 选择场景";
          var fmt:TextFormat = new TextFormat();
          fmt.color = 0xFFDD88;
          fmt.size = 12;
