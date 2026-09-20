@@ -119,7 +119,8 @@ package rr
             var mirror:Boolean=synth.rnd()<0.5;
             var kind:String="";
             for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
-            var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports);
+            var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports,
+               int(land["act"]["landStage"]),show,x==0 && y==0);
             xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
             if (w>0 || h>0) xml.@rrGrowth="1";
             if (x==0 && y==0) xml.@name="rr_begin";
@@ -128,13 +129,9 @@ package rr
             pool.appendChild(xml);
             staged.push({x:x,y:y,mirror:mirror});
          }
-         if (!show) cook.rollEnemies(pool,int(land["act"]["landStage"]));
-         else for each (xml in pool.room)
-         {
-            for (var j:int=xml.obj.length()-1;j>=0;j--)
-               if (String(xml.obj[j].@id).indexOf("en")==0) delete xml.obj[j];
-            xml.options.@entip="0"; xml.options.@kolspawn="0";
-         }
+         // Explicit scene populations own counts. Native placeholder waves
+         // must not silently add off-scene enemies or repopulate old rooms.
+         for each (xml in pool.room) xml.options.@kolspawn="0";
          for (var i:int=0;i<staged.length;i++)
          {
             var cell:Object=staged[i];

@@ -269,21 +269,6 @@ package rr
             }
          }
          facilities();
-         // Spawn markers use open, supported positions after furnishing. They
-         // are gameplay markers, not members of the furniture density budget.
-         var targets:int=4+int(rnd()*4), made:int=0;
-         var rates:Array=RRSynth.EN_RATE[RRSynth.BIOMES.indexOf(plan.theme)];
-         for (var t:int=0;t<180 && made<targets;t++)
-         {
-            x=6+int(rnd()*36);
-            var y:int=3+int(rnd()*21);
-            var key:String=y+","+x;
-            if (!plan.support(x,y) || plan.solid(x,y) || plan.solid(x,y-1) ||
-                plan.reserved[key] || occupied[key] || occupied[(y-1)+","+x]) continue;
-            var roll:Number=rnd()*100;
-            var id:String=roll<rates[0]?"enl1":(roll<rates[0]+rates[1]?"enl2":"enf1");
-            objects.push([id,x,y]); occupied[key]=true; made++;
-         }
       }
    }
 }

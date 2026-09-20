@@ -21,7 +21,7 @@ package
    import rr.RRScenePicker;
    
    /**
-    * RandomRooms v9: architectural rooms, fresh maps and connected growth.
+    * RandomRooms v10: architectural rooms, fresh maps and connected growth.
     * The existing host loader calls static init(main). Runtime changes are
     * confined to room pools and the two mod-owned lands; host SWFs stay intact.
     * F1 enters a fresh themed adventure; F5 opens a scene-specific showroom.
@@ -199,7 +199,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v9.0 loaded <generator=space-v9, growth=right+down> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v10.0 loaded <generator=space-v10, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void

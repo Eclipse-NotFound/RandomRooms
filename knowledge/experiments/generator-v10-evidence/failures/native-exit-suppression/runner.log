@@ -1,0 +1,21 @@
+appId=pferr-style-21ae3b9d25fe488cb8fbd83ee81cebba
+3319 ready cases=4
+3321 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-21ae3b9d25fe488cb8fbd83ee81cebba\Local Store existsBefore=true
+3321 STORAGE existsAfter=true
+3780 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3782 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3794 development init returned
+7215 STARTUP-READY all 31 host loaders loaded with nonempty pools
+8879 newGame(-1) issued, intro skipped
+11015 initial world ready land=rbl
+14089 development debugTravel random_rooms case=rrstyle-navigation-plant
+14114 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+17077 arrived random_rooms room=rr_begin
+19865 capture rrstyle-navigation-plant-stage 1008x729 room=rr_begin lightOverlay=true
+21291 capture rrstyle-navigation-plant-room 1920x1000 room=rr_begin lightOverlay=false
+21314 development pool rrstyle-navigation-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+21330 FAIL Error: POPULATION missing rrp_7_1 instr2 at 1,2
+Error: POPULATION missing rrp_7_1 instr2 at 1,2
+	at PopulationProbe$/require()
+	at PopulationProbe$/begin()
+	at StyleDriver$/tick()

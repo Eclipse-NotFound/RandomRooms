@@ -12,16 +12,17 @@ package rr
       public static const BIOMES:Array=["stable","sewer","plant","mane"];
       public static const EN_RATE:Array=[[28,49,23],[21,36,43],[35,50,15],[31,52,17]];
       public static const EN_IDS:Array=["enl1","enl2","enf1"];
-      public static const GENERATOR:String="space-v9";
+      public static const GENERATOR:String="space-v10";
       public var rnd:Function;
       public var debugStages:Array=[];
       private var plan:RRArchitecture;
       private var furnishing:RRFurnish;
+      private var population:RRPopulation;
       private var attempts:int;
 
       public function RRSynth(random:Function=null) { rnd=random!=null?random:Math.random; }
 
-      public function genGrid(biome:String, rtype:String="", ports:Array=null):Array
+      public function genGrid(biome:String, rtype:String="", ports:Array=null,n:int=0,depth:int=0,peaceful:Boolean=false,safe:Boolean=false):Array
       {
          if (ports==null) ports=RRPorts.sample(rnd);
          var lastError:*=null;
@@ -37,16 +38,18 @@ package rr
             catch (error:*) { lastError=error; var reason:String=String(error); errors[reason]=int(errors[reason])+1; }
          }
          if (lastError!=null) throw new Error("Architecture cannot fit "+biome+" ports="+ports.join(".")+": "+JSON.stringify(errors));
+         population=new RRPopulation(plan,rnd,n,depth,peaceful,safe);
+         population.build();
          furnishing=new RRFurnish(plan,rnd);
          furnishing.build();
          debugStages=[[plan.archetype,plan.regions.length]];
          return plan.grid;
       }
 
-      public function generate(n:int, biome:String="stable", rtype:String="", boundary:Array=null):XML
+      public function generate(n:int, biome:String="stable", rtype:String="", boundary:Array=null,depth:int=0,peaceful:Boolean=false,safe:Boolean=false):XML
       {
-         var grid:Array=genGrid(biome,rtype,boundary);
-         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="9.0" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts}/>;
+         var grid:Array=genGrid(biome,rtype,boundary,n,depth,peaceful,safe);
+         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="10.0" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage}/>;
          // All three native beams have identical shelf collision; the plan
          // uses '-' internally and the scene chooses the exported material.
          var beam:String=biome=="stable"?"Е":(biome=="mane"?"К":"-");
@@ -60,6 +63,11 @@ package rr
             if (o.length>3) objectXML.@rrFixture=o[3];
             if (o[3]=="door" || o[3]=="hatch") { objectXML.@lock="0"; objectXML.@mine="0"; }
             room.appendChild(objectXML);
+         }
+         for each(var content:XML in population.objects)
+         {
+            content.@code="syn_"+n+"_p"+String(room.obj.length());
+            room.appendChild(content);
          }
          for each (var b:Array in furnishing.backs) room.appendChild(<back id={b[0]} x={b[1]} y={b[2]}/>);
          room.appendChild(<doors>{plan.ports.join(".")}</doors>);
@@ -79,7 +87,7 @@ package rr
       }
 
       public static function isGenerated(room:XML):Boolean
-      { return String(room.@rrGen)==GENERATOR || String(room.@rrGen)=="space-v8" || String(room.@rrGen)=="space-v7"; }
+      { return String(room.@rrGen)==GENERATOR || String(room.@rrGen)=="space-v9" || String(room.@rrGen)=="space-v8" || String(room.@rrGen)=="space-v7"; }
 
       /** Generic Tile.dec check also accepts authored fallbacks. */
       public static function validateRoom(room:XML):Boolean

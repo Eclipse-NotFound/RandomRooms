@@ -42,6 +42,10 @@ package
       private static var wetFrames:int;
       private static var optionalWater:Boolean;
       private static var originBlueprint:String;
+      private static var activeWorld:*;
+      private static var contentBefore:Object;
+      private static var consumedCache:*;
+      private static var persistentCount:int;
 
       public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false,waterProbe:Boolean=false):void
       {
@@ -50,6 +54,21 @@ package
          local=null; records=[]; targets=[]; route=[];
          originX=w.land.locX; originY=w.land.locY;
          originBlueprint=w.loc.room.xml.toXMLString();
+         activeWorld=w; contentBefore={}; consumedCache=null; persistentCount=0;
+         for each(var oldRoom:XML in w.land.act.allroom.room) for each(var content:XML in oldRoom.obj)
+            if(String(content.@rrContent).length)
+            {
+               var uid:String=String(content.@uid),runtime:*=w.land.uidObjs[uid];
+               if(runtime==null) throw new Error("Missing content before navigation "+uid);
+               contentBefore[uid]=runtime;
+            }
+         for each(content in w.loc.room.xml.obj) if(content.@rrContent=="loot")
+         {
+            consumedCache=w.land.uidObjs[String(content.@uid)];
+            consumedCache.inter.command("unlock"); consumedCache.inter.actOsn();
+            if(consumedCache.inter.cont!="empty") throw new Error("Cache was not consumed before navigation");
+            break;
+         }
          growing=growth; milestone=0; settlingGoal=false; originals={};
          scene=String(w.loc.room.xml.@rrTheme); dry=scene=="sewer"; wetFrames=0;
          optionalWater=waterProbe;
@@ -127,7 +146,11 @@ package
             var i:int=y*48+x;
             clear[i]=!solid[i] && !solid[i+1] && !solid[i-48] && !solid[i-47];
             if (dry && (local.space[x][y].water>0 || local.space[x+1][y].water>0 ||
-                local.space[x][y-1].water>0 || local.space[x+1][y-1].water>0)) clear[i]=false;
+                local.space[x][y-1].water>0 || local.space[x+1][y-1].water>0 ||
+                y<24 && (local.space[x][y+1].water>0 || local.space[x+1][y+1].water>0))) clear[i]=false;
+            // A pose just below a one-way dry deck is geometrically empty,
+            // but reaching its foot height touches the water surface. Route
+            // along the actual deck above it instead of pressing down through.
             if (!clear[i]) continue;
             graph[i]=[];
             climb[i]=local.space[x][y].stair<0 || local.space[x+1][y].stair>0;
@@ -445,8 +468,20 @@ package
       }
       private static function finish(ok:Boolean,message:String):void
       {
+         if(ok)
+         {
+            for(var uid:String in contentBefore)
+            {
+               if(activeWorld.land.uidObjs[uid]!==contentBefore[uid]) { ok=false; message="Old content replaced "+uid; break; }
+               persistentCount++;
+            }
+            if(consumedCache && consumedCache.inter.cont!="empty") { ok=false; message="Loot respawned after travel/growth"; }
+            for each(var room:XML in activeWorld.land.act.allroom.room) for each(var xml:XML in room.obj)
+               if(String(xml.@rrContent).length && activeWorld.land.uidObjs[String(xml.@uid)]==null)
+               { ok=false; message="Missing generated content after travel/growth "+xml.@uid; }
+         }
          done=true; success=ok; reason=message;
-         var result:Object={success:ok,reason:message,caseId:name,scene:scene,dryRequired:dry,optionalWater:optionalWater,wetFrames:wetFrames,targets:targets.length,completed:at,frames:ticks,records:records,growth:growing,milestones:growing?milestone:0};
+         var result:Object={success:ok,reason:message,caseId:name,scene:scene,dryRequired:dry,optionalWater:optionalWater,wetFrames:wetFrames,targets:targets.length,completed:at,frames:ticks,records:records,growth:growing,milestones:growing?milestone:0,persistentObjects:persistentCount,cacheStayedEmpty:consumedCache!=null && consumedCache.inter.cont=="empty"};
          var stream:FileStream=new FileStream();
          stream.open(root.resolvePath("captures/"+name+"-navigation.json"),FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(result)); stream.close();

@@ -76,7 +76,8 @@ def verify(room):
             check(d is not None,f'unknown furniture {oid}')
             if d is None: continue
             w=int(d.get('size',1)); h=max(int(d.get('wid',1)),(int(d.get('scy',0))+39)//40)
-            check(not d.get('allact'),f'script dependency {oid}')
+            allowed={'hack_robot','hack_lock','work','lab','stove','robocell','alarm','electro_check'}
+            check(not d.get('allact') or (o.get('rrContent') and d.get('allact') in allowed),f'script dependency {oid}')
         cells={(xx,yy) for xx in range(x,x+w) for yy in range(y-h+1,y+1)}
         check(all(not terrain_solid(xx,yy) and '-' not in g[yy][xx] for xx,yy in cells),f'object wall/platform {oid}@{x},{y}')
         check(not (cells&used),f'object overlap {oid}@{x},{y}')
@@ -94,7 +95,13 @@ def verify(room):
             check(w==1 and h==2 and solid(x,y-2) and solid(x,y+1),f'window frame {x},{y}')
             check(all(not terrain_solid(xx,yy) for xx in (x-1,x+1) for yy in (y-1,y)),f'window sides {x},{y}')
         used.update(cells)
-        if not int(d.get('wall',0)):
+        if o.get('rrMount')=='ceiling':
+            check(all(terrain_solid(xx,y-h) for xx in range(x,x+w)),f'ceiling support {oid}@{x},{y}')
+        elif o.get('rrMount')=='wall':
+            check(terrain_solid(x-1,y) or terrain_solid(x+w,y),f'wall mount {oid}@{x},{y}')
+        elif o.get('rrMount')=='swim':
+            check('*' in g[y][x],f'swim requires water {oid}@{x},{y}')
+        elif not int(d.get('wall',0)):
             check(all(support(xx,y) for xx in range(x,x+w)),f'object support {oid}@{x},{y}')
     # A player's two-cell clearance must connect every usable floor to spawn.
     clear={(x,y) for x in range(47) for y in range(1,24)
@@ -122,7 +129,7 @@ def main():
     args=ap.parse_args();results=[];errors=[]
     for path in args.files:
         rooms=ET.parse(path).getroot().findall('room')
-        generated=[r for r in rooms if r.get('rrGen') in ('space-v7','space-v8','space-v9')]
+        generated=[r for r in rooms if r.get('rrGen') in ('space-v7','space-v8','space-v9','space-v10')]
         if not generated: errors.append(dict(file=str(path),room=None,errors=['No generated rooms; empty evidence cannot pass']))
         stats=[]
         for r in generated:

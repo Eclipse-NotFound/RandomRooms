@@ -113,8 +113,8 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('files',nargs='+',type=Path);ap.add_argument('--output',type=Path)
     a=ap.parse_args();errors=[];results=[]
     for path in a.files:
-        rooms=[r for r in ET.parse(path).getroot().findall('room') if r.get('rrGen')=='space-v9']
-        if not rooms: errors.append({'file':str(path),'errors':['no v9 rooms']})
+        rooms=[r for r in ET.parse(path).getroot().findall('room') if r.get('rrGen') in ('space-v9','space-v10')]
+        if not rooms: errors.append({'file':str(path),'errors':['no scene-aware rooms']})
         counts=Counter(); forms=Counter();waters=Counter()
         for r in rooms:
             err,stats=audit(r)

@@ -63,7 +63,7 @@ package
                   var seed:uint = uint(baseSeed + b * 1000 + n);
                   var rng:RRSeed = new RRSeed(seed).fork("synth");
                   var synth:RRSynth = new RRSynth(function():Number { return rng.next(); });
-                  var room:XML = synth.generate(count, String(biomes[b]),settings.roomKind==null?"":String(settings.roomKind));
+                  var room:XML = synth.generate(count, String(biomes[b]),settings.roomKind==null?"":String(settings.roomKind),null,int(settings.populationDepth));
                   room.@harnessBiome = String(biomes[b]);
                   room.@harnessSeed = seed;
                   room.@harnessValid = RRSynth.validateRoom(room);
@@ -87,7 +87,7 @@ package
                   var ports:Array=planner.ports(mx,my);
                   contracts[mx+","+my]=ports.join(".");
                   var mirror:Boolean=mapRng.next()<0.5;
-                  var mapRoom:XML=mapSynth.generate(mx*mapSize+my,biomes[(mx+my)%4],"",mirror?RRPorts.mirror(ports):ports);
+                  var mapRoom:XML=mapSynth.generate(mx*mapSize+my,biomes[(mx+my)%4],"",mirror?RRPorts.mirror(ports):ports,int(settings.populationDepth));
                   mapRoom.@x=mx; mapRoom.@y=my; mapRoom.@rrMirror=mirror?"1":"0";
                   map.appendChild(mapRoom);
                }

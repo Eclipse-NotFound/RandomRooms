@@ -20,6 +20,9 @@ param(
     [switch]$SceneLifecycle,
     [switch]$AllScenes,
     [switch]$WaterProbe,
+    [switch]$PopulationProbe,
+    [switch]$ContentGallery,
+    [ValidateRange(0,50)][int]$PopulationDepth = 0,
     [ValidateSet('','plant','stable','sewer','mane')][string]$Scene = '',
     [ValidateSet('both','random_rooms','rr_showroom')][string]$NavigationLand = 'both',
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
@@ -89,6 +92,9 @@ $caseDoc.DocumentElement.SetAttribute('fixtureCyclesOnly', $FixtureCyclesOnly.Is
 $caseDoc.DocumentElement.SetAttribute('navigation', $NavigationProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('sceneLifecycle', $SceneLifecycle.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('waterProbe', $WaterProbe.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('population', $PopulationProbe.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('contentGallery', $ContentGallery.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('populationDepth', $PopulationDepth.ToString())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
     'baseline-v66.xml' = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot '../baseline-v66.xml') -Algorithm SHA256).Hash
@@ -302,6 +308,12 @@ try {
         elseif ($fresh.Name -ne 'runner.log') { $runtimeArtifacts[$fresh.Name] = (Get-FileHash -LiteralPath $fresh.FullName -Algorithm SHA256).Hash }
     }
     $movementResults = @()
+    if ($PopulationProbe) {
+        foreach ($caseSource in $caseSources) {
+            $population = Get-Content -LiteralPath (Join-Path $captureRoot ($caseSource.id + '-population.json')) -Raw | ConvertFrom-Json
+            if (-not $population.passed) { throw ('Native population failed: ' + $caseSource.id) }
+        }
+    }
     $navigationResults = @()
     if ($NavigationProbe) {
         foreach ($caseSource in $caseSources) {
@@ -320,6 +332,7 @@ try {
         stageSize=@(1008,729); roomSize=@(1920,1000); fullRoomLightOverlay=$false
         sourceSha256=$sourceHashes; hostSha256=$hostHash
         navigationProbe=$NavigationProbe.IsPresent
+        populationProbe=$PopulationProbe.IsPresent
         movementProbe=$MovementProbe.IsPresent
         crossingProbe=$CrossingProbe.IsPresent
         verticalProbe=$VerticalProbe.IsPresent

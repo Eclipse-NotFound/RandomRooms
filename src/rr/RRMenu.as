@@ -112,7 +112,7 @@ package rr
       
       public function refresh():void
       {
-         label.text = "RandomRooms v9.0  [变异:" + (cfg.enabled ? "开" : "关") +
+         label.text = "RandomRooms v10.0  [变异:" + (cfg.enabled ? "开" : "关") +
                       " 种子:" + (cfg.seedEnabled ? String(cfg.seed) : "随机") + "]  (点击切换)";
          input.text = cfg.seedEnabled ? String(cfg.seed) : "";
       }

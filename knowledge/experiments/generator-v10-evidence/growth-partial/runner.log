@@ -1,0 +1,349 @@
+appId=pferr-style-1c43cb28ecdf47b7bf8440995ab53abc
+3514 ready cases=4
+3516 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-1c43cb28ecdf47b7bf8440995ab53abc\Local Store existsBefore=true
+3518 STORAGE existsAfter=true
+4038 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+4040 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+4052 development init returned
+8242 STARTUP-READY all 31 host loaders loaded with nonempty pools
+10092 newGame(-1) issued, intro skipped
+12364 initial world ready land=rbl
+15342 development debugTravel random_rooms case=rrstyle-growth-plant
+15363 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+18440 arrived random_rooms room=rr_begin
+21234 capture rrstyle-growth-plant-stage 1008x729 room=rr_begin lightOverlay=true
+22677 capture rrstyle-growth-plant-room 1920x1000 room=rr_begin lightOverlay=false
+22701 development pool rrstyle-growth-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+22729 NAV-GROWTH natural spawn, initial=5x5; targets=[{"y":0,"x":5,"label":"new-column"},{"y":0,"x":4,"label":"return-column"},{"y":5,"x":4,"label":"new-row"},{"y":4,"x":4,"label":"return-row"}]
+22750 NAV-GROW-ROUTE 0,0 -> 4,0 edges=4
+22753 NAV-SAMPLE {"route":[],"task":{"y":0,"port":5,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":0,"y":600,"x":521.8,"ladder":0}
+23515 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+24716 NAV-SAMPLE {"route":[713,857,858,1146,1150],"task":{"y":0,"port":5,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":60,"y":537,"x":938.3,"ladder":0}
+26716 NAV-SAMPLE {"route":[713,857,858,1146,1150],"task":{"y":0,"port":5,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":120,"y":600,"x":1358.3,"ladder":0}
+28714 NAV-SAMPLE {"route":[857,858,1146,1150],"task":{"y":0,"port":5,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":180,"y":600,"x":1691.65,"ladder":0}
+30718 NAV-SAMPLE {"route":[1146,1150],"task":{"y":0,"port":5,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":240,"y":873.75,"x":1731.3986048096285,"ladder":0}
+32382 NAV-CROSS {"y":960,"from":"0,0","port":5,"kind":"cross","success":true,"frames":279,"x":34,"to":"1,0"}
+33049 NAV-SAMPLE {"route":[1144,952,958],"task":{"y":0,"port":4,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":21,"y":960,"x":181,"ladder":0}
+33514 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+35049 NAV-SAMPLE {"route":[1144,952,958],"task":{"y":0,"port":4,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":81,"y":960,"x":601,"ladder":0}
+35250 DOOR target=door1 x=740 lock=0 mine=0
+37048 NAV-SAMPLE {"route":[1144,952,958],"task":{"y":0,"port":4,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":141,"y":960,"x":1021,"ladder":0}
+38144 DOOR target=door2 x=1340 lock=0 mine=0
+39051 NAV-SAMPLE {"route":[1144,952,958],"task":{"y":0,"port":4,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":201,"y":960,"x":1441,"ladder":0}
+41055 NAV-SAMPLE {"route":[958],"task":{"y":0,"port":4,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":261,"y":755.25,"x":1653,"ladder":0}
+42509 NAV-CROSS {"y":800,"from":"1,0","port":4,"kind":"cross","success":true,"frames":296,"x":34,"to":"2,0"}
+43316 NAV-SAMPLE {"route":[916,917,1109,1142,854,858,570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":25,"y":767,"x":194.4,"ladder":0}
+43523 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+45319 NAV-SAMPLE {"route":[1142,854,858,570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":85,"y":960,"x":371.80000000000007,"ladder":0}
+47316 NAV-SAMPLE {"route":[1142,854,858,570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":145,"y":960,"x":791.8000000000001,"ladder":0}
+49317 NAV-SAMPLE {"route":[1142,854,858,570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":205,"y":960,"x":1211.8000000000002,"ladder":0}
+51317 NAV-SAMPLE {"route":[854,858,570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":265,"y":886.5,"x":1545,"ladder":-1}
+53323 NAV-SAMPLE {"route":[570,574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":325,"y":650.25,"x":1705,"ladder":-1}
+53524 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+55317 NAV-SAMPLE {"route":[574],"task":{"y":0,"port":2,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":385,"y":480,"x":1872.3999999999999,"ladder":0}
+55863 NAV-CROSS {"y":480,"from":"2,0","port":2,"kind":"cross","success":true,"frames":389,"x":34,"to":"3,0"}
+58117 NAV-SAMPLE {"route":[533,869,873,875,876,877,1117,1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":false,"target":3,"frame":56,"y":493,"x":269.15,"ladder":0}
+60122 NAV-SAMPLE {"route":[875,876,877,1117,1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":116,"y":760,"x":415.0499999999999,"ladder":0}
+62118 NAV-SAMPLE {"route":[877,1117,1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":false,"target":3,"frame":176,"y":787,"x":596.2500000000001,"ladder":0}
+62884 DOOR target=door1 x=740 lock=0 mine=0
+63517 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+64128 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":236,"y":960,"x":899.8500000000004,"ladder":0}
+65750 DOOR target=door1 x=1340 lock=0 mine=0
+66118 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":296,"y":960,"x":1319.8500000000004,"ladder":0}
+68117 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":356,"y":960,"x":1739.8500000000004,"ladder":0}
+69319 NAV-CROSS {"y":960,"from":"3,0","port":5,"kind":"cross","success":true,"frames":379,"x":34,"to":"4,0"}
+69821 NAV-GROW-ROUTE 4,0 -> 5,0 edges=1
+71016 NAV-SAMPLE {"route":[1141,757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":36,"y":960,"x":293,"ladder":0}
+73018 NAV-SAMPLE {"route":[1141,757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":96,"y":960,"x":713,"ladder":0}
+73515 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+75019 NAV-SAMPLE {"route":[1141,757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":156,"y":960,"x":1133,"ladder":0}
+77015 NAV-SAMPLE {"route":[757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":216,"y":944.25,"x":1535,"ladder":1}
+79020 NAV-SAMPLE {"route":[761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":276,"y":627.75,"x":1541.6640054924642,"ladder":0}
+81017 NAV-SAMPLE {"route":[425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":336,"y":422.5,"x":1695,"ladder":1}
+83130 NAV-CROSS {"y":320,"from":"4,0","port":1,"kind":"cross","success":true,"frames":388,"x":34,"to":"5,0"}
+83770 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+83982 NAV-SAMPLE {"route":[340,484,485,725,726,728,741,742,1126,1127],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":46,"x":5},"stay":true,"target":0,"frame":7,"y":320,"x":90,"ladder":0}
+85983 NAV-SAMPLE {"route":[725,726,728,741,742,1126,1127],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":46,"x":5},"stay":false,"target":0,"frame":67,"y":545.75,"x":215,"ladder":1}
+87989 NAV-SAMPLE {"route":[726,728,741,742,1126,1127],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":46,"x":5},"stay":false,"target":0,"frame":127,"y":607,"x":279.6437473115077,"ladder":0}
+89985 NAV-SAMPLE {"route":[741,742,1126,1127],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":46,"x":5},"stay":true,"target":0,"frame":187,"y":640,"x":539.1437473115077,"ladder":0}
+91985 NAV-SAMPLE {"route":[741,742,1126,1127],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":46,"x":5},"stay":false,"target":0,"frame":247,"y":598,"x":894.7937473115076,"ladder":0}
+93518 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+93851 NAV-MILESTONE {"y":0,"width":8,"height":5,"kind":"milestone","success":true,"x":5,"label":"new-column"}
+95217 capture rrstyle-growth-plant-new-column 1920x1000 room=syn_25 lightOverlay=false
+95241 NAV-GROW-ROUTE 5,0 -> 4,0 edges=1
+95318 NAV-SAMPLE {"route":[1114,730,728,726,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":true,"target":0,"frame":3,"y":960,"x":946.7937473115077,"ladder":0}
+97315 NAV-SAMPLE {"route":[1114,730,728,726,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":true,"target":0,"frame":63,"y":960,"x":526.7937473115077,"ladder":0}
+99318 NAV-SAMPLE {"route":[730,728,726,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":123,"y":687,"x":455,"ladder":1}
+101317 NAV-SAMPLE {"route":[726,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":183,"y":869.9999999999999,"x":260.15,"ladder":0}
+103318 NAV-SAMPLE {"route":[1110,1105,721,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":243,"y":923,"x":281.3,"ladder":0}
+103518 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+105316 NAV-SAMPLE {"route":[721,724,340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":303,"y":792,"x":95,"ladder":1}
+105417 DOOR target=hatch1 x=80 lock=0 mine=0
+107317 NAV-SAMPLE {"route":[340,336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":363,"y":524.5,"x":215,"ladder":1}
+109317 NAV-SAMPLE {"route":[336],"task":{"y":0,"port":12,"toX":4,"kind":"cross","x":5,"toY":0},"stay":false,"target":0,"frame":423,"y":269.75,"x":76.55000000000001,"ladder":0}
+110182 NAV-CROSS {"y":320,"from":"5,0","port":12,"kind":"cross","success":true,"frames":433,"x":1886,"to":"4,0"}
+111816 NAV-SAMPLE {"route":[377,569,568,760,755,754,1138,1127],"task":{"y":0,"x0":1,"entry":"return-column","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":49,"y":270,"x":1638.3500000000001,"ladder":0}
+113518 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+113823 NAV-SAMPLE {"route":[568,760,755,754,1138,1127],"task":{"y":0,"x0":1,"entry":"return-column","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":109,"y":502.5,"x":1663.9500000000003,"ladder":0}
+115818 NAV-SAMPLE {"route":[754,1138,1127],"task":{"y":0,"x0":1,"entry":"return-column","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":169,"y":565,"x":1366.3000000000002,"ladder":0}
+117815 NAV-SAMPLE {"route":[1127],"task":{"y":0,"x0":1,"entry":"return-column","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":true,"target":0,"frame":229,"y":960,"x":1208.1,"ladder":0}
+118950 NAV-MILESTONE {"y":0,"width":8,"height":5,"kind":"milestone","success":true,"x":4,"label":"return-column"}
+121893 capture rrstyle-growth-plant-return-column 1920x1000 room=syn_20 lightOverlay=false
+121911 NAV-GROW-ROUTE 4,0 -> 4,4 edges=6
+122716 NAV-SAMPLE {"route":[1141,757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":25,"y":960,"x":1130.6,"ladder":0}
+123517 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+124718 NAV-SAMPLE {"route":[757,761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":85,"y":944.25,"x":1535,"ladder":1}
+126734 NAV-SAMPLE {"route":[761,425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":145,"y":627.75,"x":1541.6640054924642,"ladder":0}
+128716 NAV-SAMPLE {"route":[425,428,380,382],"task":{"y":0,"port":1,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":205,"y":422.5,"x":1695,"ladder":1}
+130839 NAV-CROSS {"y":320,"from":"4,0","port":1,"kind":"cross","success":true,"frames":257,"x":34,"to":"5,0"}
+131084 NAV-SAMPLE {"route":[340,484,485,725,726,728,741,742,1126,1127,1175],"task":{"y":0,"port":8,"toX":5,"kind":"cross","x":5,"toY":1},"stay":true,"target":1,"frame":8,"y":320,"x":90,"ladder":0}
+133083 NAV-SAMPLE {"route":[725,726,728,741,742,1126,1127,1175],"task":{"y":0,"port":8,"toX":5,"kind":"cross","x":5,"toY":1},"stay":false,"target":1,"frame":68,"y":545.75,"x":215,"ladder":1}
+133522 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+135145 NAV-SAMPLE {"route":[726,728,741,742,1126,1127,1175],"task":{"y":0,"port":8,"toX":5,"kind":"cross","x":5,"toY":1},"stay":false,"target":1,"frame":128,"y":607,"x":279.6437473115077,"ladder":0}
+137084 NAV-SAMPLE {"route":[741,742,1126,1127,1175],"task":{"y":0,"port":8,"toX":5,"kind":"cross","x":5,"toY":1},"stay":true,"target":1,"frame":188,"y":640,"x":539.1437473115077,"ladder":0}
+139088 NAV-SAMPLE {"route":[741,742,1126,1127,1175],"task":{"y":0,"port":8,"toX":5,"kind":"cross","x":5,"toY":1},"stay":false,"target":1,"frame":248,"y":598,"x":894.7937473115076,"ladder":0}
+141585 NAV-CROSS {"y":80,"from":"5,0","port":8,"kind":"cross","success":true,"frames":310,"x":975,"to":"5,1"}
+143320 DOOR target=hatch1 x=1160 lock=0 mine=0
+143481 NAV-SAMPLE {"route":[364,508,509,749,756,757,1141,1145,1193],"task":{"y":1,"port":10,"toX":5,"kind":"cross","x":5,"toY":2},"stay":false,"target":2,"frame":58,"y":304.25,"x":1135.0555827575822,"ladder":0}
+143518 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+145485 NAV-SAMPLE {"route":[749,756,757,1141,1145,1193],"task":{"y":1,"port":10,"toX":5,"kind":"cross","x":5,"toY":2},"stay":false,"target":2,"frame":118,"y":557.375,"x":1211.7589324121313,"ladder":0}
+147485 NAV-SAMPLE {"route":[756,757,1141,1145,1193],"task":{"y":1,"port":10,"toX":5,"kind":"cross","x":5,"toY":2},"stay":false,"target":2,"frame":178,"y":577,"x":1491.8625053769845,"ladder":0}
+149523 NAV-SAMPLE {"route":[1145,1193],"task":{"y":1,"port":10,"toX":5,"kind":"cross","x":5,"toY":2},"stay":true,"target":2,"frame":238,"y":960,"x":1545.5125053769837,"ladder":0}
+151282 NAV-CROSS {"y":80,"from":"5,1","port":10,"kind":"cross","success":true,"frames":278,"x":1695,"to":"5,2"}
+151949 NAV-SAMPLE {"route":[136,280,279,278,326,325,305,449,448,736,728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":20,"y":114.9,"x":1665,"ladder":0}
+153517 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+153952 NAV-SAMPLE {"route":[278,326,325,305,449,448,736,728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":80,"y":217,"x":1516.6000000000006,"ladder":0}
+155952 NAV-SAMPLE {"route":[305,449,448,736,728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":true,"target":3,"frame":140,"y":280,"x":1145.5000000000007,"ladder":0}
+157957 NAV-SAMPLE {"route":[305,449,448,736,728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":200,"y":208,"x":738.1000000000006,"ladder":0}
+160050 NAV-SAMPLE {"route":[448,736,728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":260,"y":408.5,"x":704.6500000000001,"ladder":0}
+162048 NAV-SAMPLE {"route":[728,724,722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":320,"y":565,"x":369.4500000000003,"ladder":0}
+163528 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+164051 NAV-SAMPLE {"route":[722,914,915,1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":380,"y":563,"x":122.80000000000018,"ladder":0}
+166048 NAV-SAMPLE {"route":[1107,1109,1157],"task":{"y":2,"port":6,"toX":5,"kind":"cross","x":5,"toY":3},"stay":false,"target":3,"frame":440,"y":902.375,"x":156.00148873535528,"ladder":0}
+168343 NAV-CROSS {"y":80,"from":"5,2","port":6,"kind":"cross","success":true,"frames":495,"x":225,"to":"5,3"}
+169185 NAV-SAMPLE {"route":[102,390,404,548,547,691,690,689,1121,1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":false,"target":4,"frame":5,"y":103.625,"x":225,"ladder":-1}
+171184 NAV-SAMPLE {"route":[404,548,547,691,690,689,1121,1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":true,"target":4,"frame":65,"y":360,"x":481.10000000000014,"ladder":0}
+173184 NAV-SAMPLE {"route":[404,548,547,691,690,689,1121,1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":false,"target":4,"frame":125,"y":297,"x":847.5500000000002,"ladder":0}
+173523 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+175183 NAV-SAMPLE {"route":[690,689,1121,1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":false,"target":4,"frame":185,"y":530.625,"x":760.3100690060929,"ladder":0}
+177184 NAV-SAMPLE {"route":[1121,1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":true,"target":4,"frame":245,"y":900,"x":711.5489770633412,"ladder":0}
+179191 NAV-SAMPLE {"route":[1118,1166],"task":{"y":3,"port":7,"toX":5,"kind":"cross","x":5,"toY":4},"stay":true,"target":4,"frame":305,"y":960,"x":579.6989770633413,"ladder":0}
+179862 NAV-CROSS {"y":80,"from":"5,3","port":7,"kind":"cross","success":true,"frames":313,"x":585,"to":"5,4"}
+182349 NAV-SAMPLE {"route":[195,194,770,769,913,912],"task":{"y":4,"port":15,"toX":4,"kind":"cross","x":5,"toY":4},"stay":true,"target":5,"frame":52,"y":200,"x":361.4822262615205,"ladder":0}
+183519 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+184347 NAV-SAMPLE {"route":[194,770,769,913,912],"task":{"y":4,"port":15,"toX":4,"kind":"cross","x":5,"toY":4},"stay":false,"target":5,"frame":112,"y":293,"x":92.30000000000003,"ladder":0}
+186364 NAV-SAMPLE {"route":[194,770,769,913,912],"task":{"y":4,"port":15,"toX":4,"kind":"cross","x":5,"toY":4},"stay":true,"target":5,"frame":172,"y":560,"x":99.14999999999995,"ladder":0}
+187183 NAV-STUCK {"y":560,"dy":-361,"tx":105,"x":99.14999999999995,"ty":199,"dx":5.850000000000051,"stayPhis":1}
+188347 NAV-SAMPLE {"route":[194,770,769,913,912],"task":{"y":4,"port":15,"toX":4,"kind":"cross","x":5,"toY":4},"stay":true,"target":5,"frame":232,"y":560,"x":99.14999999999995,"ladder":0}
+190350 NAV-SAMPLE {"route":[913,912],"task":{"y":4,"port":15,"toX":4,"kind":"cross","x":5,"toY":4},"stay":false,"target":5,"frame":292,"y":730.625,"x":105,"ladder":-1}
+192041 NAV-CROSS {"y":800,"from":"5,4","port":15,"kind":"cross","success":true,"frames":333,"x":1886,"to":"4,4"}
+192081 NAV-GROW-ROUTE 4,4 -> 4,5 edges=1
+192648 NAV-SAMPLE {"route":[955,952,1144,1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":false,"target":0,"frame":18,"y":782,"x":1759.6000000000001,"ladder":0}
+193517 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+194654 NAV-SAMPLE {"route":[955,952,1144,1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":78,"y":960,"x":1766.5,"ladder":0}
+195683 NAV-STUCK {"y":960,"dy":-161,"tx":1760,"x":1766.5,"ty":799,"dx":-6.5,"stayPhis":1}
+196651 NAV-SAMPLE {"route":[955,952,1144,1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":138,"y":960,"x":1766.5,"ladder":0}
+198651 NAV-SAMPLE {"route":[955,952,1144,1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":198,"y":960,"x":1766.5,"ladder":0}
+200650 NAV-SAMPLE {"route":[1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":false,"target":0,"frame":258,"y":892,"x":1666.75,"ladder":0}
+202649 NAV-SAMPLE {"route":[1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":318,"y":960,"x":1246.75,"ladder":0}
+203517 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+204651 NAV-SAMPLE {"route":[1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":378,"y":960,"x":826.75,"ladder":0}
+206651 NAV-SAMPLE {"route":[1109,1157],"task":{"y":4,"port":6,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":438,"y":960,"x":406.75,"ladder":0}
+208593 NAV-CROSS {"y":80,"from":"4,4","port":6,"kind":"cross","success":true,"frames":485,"x":225,"to":"4,5"}
+209747 NAV-SAMPLE {"route":[484,482,626,627,723,734,735,1119,1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":12,"y":158.75,"x":225,"ladder":-1}
+211747 NAV-SAMPLE {"route":[482,626,627,723,734,735,1119,1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":72,"y":422.375,"x":98.8001145817284,"ladder":0}
+213521 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+213755 NAV-SAMPLE {"route":[734,735,1119,1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":true,"target":0,"frame":132,"y":640,"x":190.04999999999995,"ladder":0}
+215749 NAV-SAMPLE {"route":[734,735,1119,1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":192,"y":563,"x":594.0499999999998,"ladder":0}
+217757 NAV-SAMPLE {"route":[1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":true,"target":0,"frame":252,"y":960,"x":620.5999999999999,"ladder":0}
+219750 NAV-SAMPLE {"route":[1127],"task":{"y":5,"x0":1,"entry":"new-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":312,"y":918,"x":963.6,"ladder":0}
+219955 NAV-MILESTONE {"y":5,"width":8,"height":8,"kind":"milestone","success":true,"x":4,"label":"new-row"}
+223185 capture rrstyle-growth-plant-new-row 1920x1000 room=syn_44 lightOverlay=false
+223205 NAV-GROW-ROUTE 4,5 -> 4,4 edges=1
+223516 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+224949 NAV-SAMPLE {"route":[1106,482,485,53],"task":{"y":5,"port":17,"toX":4,"kind":"cross","x":4,"toY":4},"stay":true,"target":0,"frame":53,"y":960,"x":590.5000000000001,"ladder":0}
+226948 NAV-SAMPLE {"route":[1106,482,485,53],"task":{"y":5,"port":17,"toX":4,"kind":"cross","x":4,"toY":4},"stay":true,"target":0,"frame":113,"y":960,"x":170.5000000000001,"ladder":0}
+228949 NAV-SAMPLE {"route":[482,485,53],"task":{"y":5,"port":17,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":0,"frame":173,"y":692.25,"x":105,"ladder":-1}
+230948 NAV-SAMPLE {"route":[485,53],"task":{"y":5,"port":17,"toX":4,"kind":"cross","x":4,"toY":4},"stay":true,"target":0,"frame":233,"y":440,"x":184.1,"ladder":0}
+232949 NAV-SAMPLE {"route":[53],"task":{"y":5,"port":17,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":0,"frame":293,"y":146,"x":225,"ladder":-1}
+233841 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+233842 NAV-CROSS {"y":984.75,"from":"4,5","port":17,"kind":"cross","success":true,"frames":309,"x":255,"to":"4,4"}
+235287 NAV-SAMPLE {"route":[1126],"task":{"y":4,"x0":1,"entry":"return-row","floor":23,"kind":"space","space":0,"x1":46,"x":4},"stay":true,"target":0,"frame":43,"y":960,"x":509.09999999999997,"ladder":0}
+237192 NAV-MILESTONE {"y":4,"width":8,"height":8,"kind":"milestone","success":true,"x":4,"label":"return-row"}
+238975 capture rrstyle-growth-plant-return-row 1920x1000 room=rr_exit lightOverlay=false
+239024 NAV-END {"completed":0,"success":true,"frames":5939,"reason":"Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged","targets":0}
+239085 development pool rrstyle-growth-plant-after-growth total=64 generated=64 assembled=64 issues=0 themes={"plant":64}
+239101 return to base before refreshing random_rooms
+243518 heartbeat state=7 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+243652 returned to base
+247180 development debugTravel random_rooms case=rrstyle-growth-stable
+250330 arrived random_rooms room=rr_begin
+252961 capture rrstyle-growth-stable-stage 1008x729 room=rr_begin lightOverlay=true
+254628 capture rrstyle-growth-stable-room 1920x1000 room=rr_begin lightOverlay=false
+254650 development pool rrstyle-growth-stable total=25 generated=25 assembled=25 issues=0 themes={"stable":25}
+254671 NAV-GROWTH natural spawn, initial=5x5; targets=[{"y":0,"x":5,"label":"new-column"},{"y":0,"x":4,"label":"return-column"},{"y":5,"x":4,"label":"new-row"},{"y":4,"x":4,"label":"return-row"}]
+254691 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+254692 NAV-GROW-ROUTE 0,0 -> 4,0 edges=4
+254693 NAV-SAMPLE {"route":[],"task":{"y":0,"port":3,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":0,"y":960,"x":841.8,"ladder":0}
+256688 NAV-SAMPLE {"route":[1147,763,766],"task":{"y":0,"port":3,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":60,"y":960,"x":1258.3,"ladder":0}
+256817 DOOR target=stdoor x=1380 lock=0 mine=0
+258684 NAV-SAMPLE {"route":[1147,763,766],"task":{"y":0,"port":3,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":120,"y":960,"x":1578.8,"ladder":0}
+260690 NAV-SAMPLE {"route":[763,766],"task":{"y":0,"port":3,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":180,"y":760.5,"x":1745,"ladder":-1}
+262954 NAV-CROSS {"y":640,"from":"0,0","port":3,"kind":"cross","success":true,"frames":236,"x":34,"to":"1,0"}
+263048 NAV-SAMPLE {"route":[727,728,824,854,998,999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":4,"y":640,"x":62,"ladder":0}
+263514 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+265054 NAV-SAMPLE {"route":[728,824,854,998,999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":64,"y":572,"x":397.20000000000005,"ladder":0}
+267018 DOOR target=stdoor x=740 lock=0 mine=0
+267055 NAV-SAMPLE {"route":[854,998,999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":124,"y":652,"x":651.8,"ladder":0}
+267056 DOOR-SAMPLE {"x1":720,"x2":760,"cx":739.047619047619,"action":false,"y2":719,"visi":1,"remaining":0,"y1":599,"face":1,"cursor":0,"selectedId":null,"cy":601.9047619047619,"open":false,"selected":false}
+269150 NAV-SAMPLE {"route":[854,998,999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":184,"y":720,"x":992.5,"ladder":0}
+271151 NAV-SAMPLE {"route":[854,998,999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":244,"y":720,"x":1412.5,"ladder":0}
+273152 NAV-SAMPLE {"route":[999,1143,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":304,"y":785.5,"x":1572.507418790756,"ladder":0}
+273520 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+275149 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":364,"y":960,"x":1804.7,"ladder":0}
+275993 NAV-CROSS {"y":960,"from":"1,0","port":5,"kind":"cross","success":true,"frames":377,"x":34,"to":"2,0"}
+277518 NAV-SAMPLE {"route":[1112,824,825,850,418,425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":47,"y":960,"x":363,"ladder":0}
+279520 NAV-SAMPLE {"route":[850,418,425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":107,"y":661.5,"x":409.65024553227516,"ladder":0}
+279684 DOOR target=stdoor x=540 lock=0 mine=0
+281517 NAV-SAMPLE {"route":[850,418,425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":167,"y":720,"x":750.5,"ladder":0}
+282718 DOOR target=stdoor x=1100 lock=0 mine=0
+283517 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+283517 NAV-SAMPLE {"route":[850,418,425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":227,"y":720,"x":1071,"ladder":0}
+285521 NAV-SAMPLE {"route":[418,425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":287,"y":657,"x":1415,"ladder":1}
+287617 NAV-SAMPLE {"route":[425,377,382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":347,"y":334.75,"x":1425.9900000000002,"ladder":0}
+289619 NAV-SAMPLE {"route":[382],"task":{"y":0,"port":1,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":407,"y":240,"x":1781.1000000000001,"ladder":0}
+290632 NAV-CROSS {"y":320,"from":"2,0","port":1,"kind":"cross","success":true,"frames":425,"x":34,"to":"3,0"}
+291649 DOOR target=hatch2 x=240 lock=0 mine=0
+292519 NAV-SAMPLE {"route":[367,368,608,613,614,1142,1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":false,"target":3,"frame":42,"y":287,"x":328,"ladder":0}
+292685 DOOR target=stdoor x=460 lock=0 mine=0
+293524 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+294522 NAV-SAMPLE {"route":[367,368,608,613,614,1142,1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":102,"y":320,"x":648.5,"ladder":0}
+295254 DOOR target=stdoor x=900 lock=0 mine=0
+295520 DOOR-SAMPLE {"x1":880,"x2":920,"cx":899.047619047619,"action":true,"y2":319,"visi":1,"remaining":9,"y1":199,"face":1,"cursor":2.000208333333333,"selectedId":"stdoor","cy":257.1428571428571,"open":false,"selected":true}
+296520 NAV-SAMPLE {"route":[367,368,608,613,614,1142,1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":162,"y":320,"x":991.5,"ladder":0}
+298527 NAV-SAMPLE {"route":[368,608,613,614,1142,1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":false,"target":3,"frame":222,"y":242,"x":1350.6000000000001,"ladder":0}
+300524 NAV-SAMPLE {"route":[614,1142,1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":282,"y":520,"x":1527.0999999999995,"ladder":0}
+302517 NAV-SAMPLE {"route":[1148,764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":true,"target":3,"frame":342,"y":960,"x":1603.949999999999,"ladder":0}
+303518 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+304518 NAV-SAMPLE {"route":[764,766],"task":{"y":0,"port":3,"toX":4,"kind":"cross","x":3,"toY":0},"stay":false,"target":3,"frame":402,"y":771,"x":1785,"ladder":-1}
+306854 NAV-CROSS {"y":640,"from":"3,0","port":3,"kind":"cross","success":true,"frames":460,"x":34,"to":"4,0"}
+307421 NAV-GROW-ROUTE 4,0 -> 5,0 edges=1
+307448 NAV-SAMPLE {"route":[763,907,908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":1,"y":640,"x":48,"ladder":0}
+309448 NAV-SAMPLE {"route":[763,907,908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":61,"y":640,"x":468,"ladder":0}
+311448 NAV-SAMPLE {"route":[763,907,908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":121,"y":640,"x":888,"ladder":0}
+312388 DOOR target=stdoor x=1180 lock=0 mine=0
+312451 DOOR-SAMPLE {"x1":1160,"x2":1200,"cx":1179.047619047619,"action":true,"y2":639,"visi":1,"remaining":0,"y1":519,"face":1,"cursor":2.000208333333333,"selectedId":"stdoor","cy":577.1428571428571,"open":false,"selected":true}
+313453 NAV-SAMPLE {"route":[763,907,908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":181,"y":640,"x":1208.5,"ladder":0}
+313516 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+315450 NAV-SAMPLE {"route":[763,907,908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":true,"target":0,"frame":241,"y":640,"x":1628.5,"ladder":0}
+315617 DOOR target=hatch2 x=1760 lock=0 mine=0
+317550 NAV-SAMPLE {"route":[908,1148,1150],"task":{"y":0,"port":5,"toX":5,"kind":"cross","x":4,"toY":0},"stay":false,"target":0,"frame":301,"y":687.5,"x":1775,"ladder":0}
+319479 NAV-CROSS {"y":960,"from":"4,0","port":5,"kind":"cross","success":true,"frames":346,"x":34,"to":"5,0"}
+320450 NAV-SAMPLE {"route":[1116],"task":{"y":0,"x0":1,"entry":"new-column","floor":23,"kind":"space","space":0,"x1":25,"x":5},"stay":true,"target":0,"frame":14,"y":960,"x":139,"ladder":0}
+322214 NAV-MILESTONE {"y":0,"width":8,"height":5,"kind":"milestone","success":true,"x":5,"label":"new-column"}
+323772 capture rrstyle-growth-stable-new-column 1920x1000 room=syn_25 lightOverlay=false
+323787 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+323788 NAV-GROW-ROUTE 5,0 -> 4,0 edges=1
+323983 NAV-SAMPLE {"route":[1104],"task":{"y":0,"port":16,"toX":4,"kind":"cross","x":5,"toY":0},"stay":true,"target":0,"frame":6,"y":960,"x":482.5,"ladder":0}
+325984 NAV-SAMPLE {"route":[1104],"task":{"y":0,"port":16,"toX":4,"kind":"cross","x":5,"toY":0},"stay":true,"target":0,"frame":66,"y":960,"x":62.5,"ladder":0}
+326575 NAV-CROSS {"y":960,"from":"5,0","port":16,"kind":"cross","success":true,"frames":72,"x":1886,"to":"4,0"}
+327481 NAV-MILESTONE {"y":0,"width":8,"height":5,"kind":"milestone","success":true,"x":4,"label":"return-column"}
+330067 capture rrstyle-growth-stable-return-column 1920x1000 room=syn_20 lightOverlay=false
+330088 NAV-GROW-ROUTE 4,0 -> 4,4 edges=4
+330915 NAV-SAMPLE {"route":[1127,1175],"task":{"y":0,"port":8,"toX":4,"kind":"cross","x":4,"toY":1},"stay":true,"target":0,"frame":25,"y":960,"x":1510.5,"ladder":0}
+331082 DOOR target=stdoor x=1380 lock=0 mine=0
+332915 NAV-SAMPLE {"route":[1127,1175],"task":{"y":0,"port":8,"toX":4,"kind":"cross","x":4,"toY":1},"stay":true,"target":0,"frame":85,"y":960,"x":1190,"ladder":0}
+333518 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+334086 DOOR target=stdoor x=860 lock=0 mine=0
+334917 NAV-SAMPLE {"route":[1175],"task":{"y":0,"port":8,"toX":4,"kind":"cross","x":4,"toY":1},"stay":true,"target":0,"frame":145,"y":960,"x":957.9,"ladder":0}
+334917 DOOR-SAMPLE {"x1":840,"x2":880,"cx":876.1904761904761,"action":true,"y2":959,"visi":1,"remaining":14,"y1":839,"face":-1,"cursor":2.000208333333333,"selectedId":"stdoor","cy":954.2857142857142,"open":false,"selected":true}
+336035 NAV-CROSS {"y":80,"from":"4,0","port":8,"kind":"cross","success":true,"frames":166,"x":975,"to":"4,1"}
+337319 NAV-SAMPLE {"route":[370,371,1139,1145,1193],"task":{"y":1,"port":10,"toX":4,"kind":"cross","x":4,"toY":2},"stay":false,"target":1,"frame":39,"y":266.25,"x":1002.9976738510074,"ladder":0}
+339322 NAV-SAMPLE {"route":[371,1139,1145,1193],"task":{"y":1,"port":10,"toX":4,"kind":"cross","x":4,"toY":2},"stay":false,"target":1,"frame":99,"y":287,"x":1409.9467433914103,"ladder":0}
+341316 NAV-SAMPLE {"route":[371,1139,1145,1193],"task":{"y":1,"port":10,"toX":4,"kind":"cross","x":4,"toY":2},"stay":true,"target":1,"frame":159,"y":882,"x":1443.1467433914095,"ladder":0}
+343318 NAV-SAMPLE {"route":[371,1139,1145,1193],"task":{"y":1,"port":10,"toX":4,"kind":"cross","x":4,"toY":2},"stay":true,"target":1,"frame":219,"y":882,"x":1447.1467433914095,"ladder":0}
+343383 NAV-STUCK {"y":882,"dy":-563,"tx":1440,"x":1447.1467433914095,"ty":319,"dx":-7.146743391409473,"stayPhis":2}
+343516 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+345416 NAV-SAMPLE {"route":[1145,1193],"task":{"y":1,"port":10,"toX":4,"kind":"cross","x":4,"toY":2},"stay":false,"target":1,"frame":279,"y":885,"x":1643.1467433914095,"ladder":0}
+346750 NAV-CROSS {"y":80,"from":"4,1","port":10,"kind":"cross","success":true,"frames":305,"x":1695,"to":"4,2"}
+347854 NAV-SAMPLE {"route":[136,376,375,374,1142,1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":true,"target":2,"frame":34,"y":320,"x":1635.5000000000005,"ladder":0}
+349856 NAV-SAMPLE {"route":[374,1142,1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":false,"target":2,"frame":94,"y":431.99999999999994,"x":1526.2500000000005,"ladder":0}
+351854 NAV-SAMPLE {"route":[374,1142,1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":true,"target":2,"frame":154,"y":880,"x":1554.7499999999995,"ladder":0}
+352850 NAV-STUCK {"y":880,"dy":-561,"tx":1560,"x":1554.7499999999995,"ty":319,"dx":5.250000000000455,"stayPhis":2}
+353528 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+353851 NAV-SAMPLE {"route":[374,1142,1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":true,"target":2,"frame":214,"y":880,"x":1554.7499999999995,"ladder":0}
+355858 NAV-SAMPLE {"route":[1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":true,"target":2,"frame":274,"y":960,"x":1393.7499999999995,"ladder":0}
+357956 NAV-SAMPLE {"route":[1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":true,"target":2,"frame":334,"y":960,"x":973.7499999999995,"ladder":0}
+358019 DOOR target=stdoor x=860 lock=0 mine=0
+359952 NAV-SAMPLE {"route":[1118,1166],"task":{"y":2,"port":7,"toX":4,"kind":"cross","x":4,"toY":3},"stay":false,"target":2,"frame":394,"y":937,"x":653.5999999999995,"ladder":0}
+361528 NAV-CROSS {"y":80,"from":"4,2","port":7,"kind":"cross","success":true,"frames":425,"x":585,"to":"4,3"}
+363516 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+363553 NAV-SAMPLE {"route":[398,399,735,737,881,882,1122,1127,1175],"task":{"y":3,"port":8,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":3,"frame":29,"y":300.5,"x":585,"ladder":-1}
+365556 NAV-SAMPLE {"route":[737,881,882,1122,1127,1175],"task":{"y":3,"port":8,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":3,"frame":89,"y":568,"x":702.4999999999999,"ladder":0}
+367551 NAV-SAMPLE {"route":[882,1122,1127,1175],"task":{"y":3,"port":8,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":3,"frame":149,"y":768.5,"x":735.3499999999999,"ladder":0}
+369554 NAV-SAMPLE {"route":[1175],"task":{"y":3,"port":8,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":3,"frame":209,"y":965.25,"x":945,"ladder":-1}
+369934 NAV-CROSS {"y":80,"from":"4,3","port":8,"kind":"cross","success":true,"frames":214,"x":945,"to":"4,4"}
+371083 NAV-GROW-ROUTE 4,4 -> 4,5 edges=1
+371951 DOOR target=hatch2 x=1080 lock=0 mine=0
+372790 DOOR target=stdoor x=1220 lock=0 mine=0
+372851 NAV-SAMPLE {"route":[316,1132,1145,1193],"task":{"y":4,"port":10,"toX":4,"kind":"cross","x":4,"toY":5},"stay":false,"target":0,"frame":54,"y":230,"x":1150.4499999999994,"ladder":0}
+372852 DOOR-SAMPLE {"x1":1200,"x2":1240,"cx":1219.047619047619,"action":true,"y2":279,"visi":0.9999999999999999,"remaining":14,"y1":159,"face":1,"cursor":2.000208333333333,"selectedId":"stdoor","cy":217.14285714285714,"open":false,"selected":true}
+373518 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+374864 NAV-SAMPLE {"route":[1132,1145,1193],"task":{"y":4,"port":10,"toX":4,"kind":"cross","x":4,"toY":5},"stay":false,"target":0,"frame":114,"y":455.00000000000006,"x":1160.15,"ladder":0}
+376390 DOOR target=stdoor x=1220 lock=0 mine=0
+376852 NAV-SAMPLE {"route":[1145,1193],"task":{"y":4,"port":10,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":174,"y":960,"x":1175,"ladder":0}
+376852 DOOR-SAMPLE {"x1":1200,"x2":1240,"cx":1219.047619047619,"action":true,"y2":959,"visi":1,"remaining":3,"y1":839,"face":1,"cursor":2.000208333333333,"selectedId":"stdoor","cy":841.9047619047618,"open":false,"selected":true}
+378851 NAV-SAMPLE {"route":[1145,1193],"task":{"y":4,"port":10,"toX":4,"kind":"cross","x":4,"toY":5},"stay":true,"target":0,"frame":234,"y":960,"x":1563.5,"ladder":0}
+380613 NAV-CROSS {"y":80,"from":"4,4","port":10,"kind":"cross","success":true,"frames":274,"x":1695,"to":"4,5"}
+382117 NAV-SAMPLE {"route":[136,424,420],"task":{"y":5,"x0":28,"entry":"new-row","floor":8,"kind":"space","space":0,"x1":46,"x":4},"stay":false,"target":0,"frame":19,"y":114.9,"x":1665,"ladder":0}
+383385 NAV-MILESTONE {"y":5,"width":8,"height":8,"kind":"milestone","success":true,"x":4,"label":"new-row"}
+385457 capture rrstyle-growth-stable-new-row 1920x1000 room=syn_44 lightOverlay=false
+385475 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+385475 NAV-GROW-ROUTE 4,5 -> 4,4 edges=1
+386149 NAV-SAMPLE {"route":[425,89],"task":{"y":5,"port":21,"toX":4,"kind":"cross","x":4,"toY":4},"stay":true,"target":0,"frame":21,"y":360,"x":1620.4,"ladder":0}
+388152 NAV-SAMPLE {"route":[89],"task":{"y":5,"port":21,"toX":4,"kind":"cross","x":4,"toY":4},"stay":false,"target":0,"frame":81,"y":97.5,"x":1695,"ladder":1}
+388732 NAV-CROSS {"y":984.75,"from":"4,5","port":21,"kind":"cross","success":true,"frames":88,"x":1665,"to":"4,4"}
+390484 NAV-SAMPLE {"route":[1118],"task":{"y":4,"x0":1,"entry":"return-row","floor":23,"kind":"space","space":0,"x1":29,"x":4},"stay":true,"target":0,"frame":52,"y":960,"x":1347.8999999999999,"ladder":0}
+392486 NAV-SAMPLE {"route":[1118],"task":{"y":4,"x0":1,"entry":"return-row","floor":23,"kind":"space","space":0,"x1":29,"x":4},"stay":true,"target":0,"frame":112,"y":960,"x":927.8999999999999,"ladder":0}
+393516 heartbeat state=11 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+394021 NAV-MILESTONE {"y":4,"width":8,"height":8,"kind":"milestone","success":true,"x":4,"label":"return-row"}
+396722 capture rrstyle-growth-stable-return-row 1920x1000 room=rr_exit lightOverlay=false
+396763 NAV-END {"completed":0,"success":true,"frames":3708,"reason":"Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged","targets":0}
+396912 development pool rrstyle-growth-stable-after-growth total=64 generated=64 assembled=64 issues=0 themes={"stable":64}
+396928 return to base before refreshing random_rooms
+401498 returned to base
+404830 development debugTravel random_rooms case=rrstyle-growth-sewer
+404841 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+407989 arrived random_rooms room=rr_begin
+410651 capture rrstyle-growth-sewer-stage 1008x729 room=rr_begin lightOverlay=true
+411811 capture rrstyle-growth-sewer-room 1920x1000 room=rr_begin lightOverlay=false
+411834 development pool rrstyle-growth-sewer total=25 generated=25 assembled=25 issues=0 themes={"sewer":25}
+411860 NAV-GROWTH natural spawn, initial=5x5; targets=[{"y":0,"x":5,"label":"new-column"},{"y":0,"x":4,"label":"return-column"},{"y":5,"x":4,"label":"new-row"},{"y":4,"x":4,"label":"return-row"}]
+411878 NAV-GROW-ROUTE 0,0 -> 4,0 edges=4
+411881 NAV-SAMPLE {"route":[],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":0,"y":240,"x":601.8,"ladder":0}
+413017 DOOR target=door1 x=940 lock=0 mine=0
+413519 heartbeat state=11 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+413854 NAV-SAMPLE {"route":[266,267,987,997,998,1142,1147,955,956,958],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":60,"y":228,"x":1018.3,"ladder":0}
+415851 NAV-SAMPLE {"route":[267,987,997,998,1142,1147,955,956,958],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":120,"y":392.00000000000006,"x":1123.7499999999993,"ladder":0}
+417858 NAV-SAMPLE {"route":[997,998,1142,1147,955,956,958],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":180,"y":840,"x":1273.1,"ladder":0}
+419987 NAV-SAMPLE {"route":[1142,1147,955,956,958],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":true,"target":0,"frame":240,"y":960,"x":1592.7500000000005,"ladder":0}
+421986 NAV-SAMPLE {"route":[955,956,958],"task":{"y":0,"port":4,"toX":1,"kind":"cross","x":0,"toY":0},"stay":false,"target":0,"frame":300,"y":802.5,"x":1745,"ladder":-1}
+423944 heartbeat state=11 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+423944 NAV-CROSS {"y":800,"from":"0,0","port":4,"kind":"cross","success":true,"frames":346,"x":34,"to":"1,0"}
+424383 NAV-SAMPLE {"route":[918,919,967,978,979,1123,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":14,"y":800,"x":132,"ladder":0}
+426386 NAV-SAMPLE {"route":[919,967,978,979,1123,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":74,"y":807,"x":322.1499999999999,"ladder":0}
+428384 NAV-SAMPLE {"route":[978,979,1123,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":134,"y":840,"x":494.3999999999999,"ladder":0}
+430395 NAV-SAMPLE {"route":[1123,1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":false,"target":1,"frame":194,"y":945,"x":800.0499999999995,"ladder":0}
+432387 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":254,"y":960,"x":1195.5499999999995,"ladder":0}
+433515 heartbeat state=11 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+434520 NAV-SAMPLE {"route":[1150],"task":{"y":0,"port":5,"toX":2,"kind":"cross","x":1,"toY":0},"stay":true,"target":1,"frame":314,"y":960,"x":1615.5499999999995,"ladder":0}
+436319 NAV-CROSS {"y":960,"from":"1,0","port":5,"kind":"cross","success":true,"frames":354,"x":34,"to":"2,0"}
+436950 NAV-SAMPLE {"route":[1132,1036,1037,1038,1040,992,1000,1002,762,763,766],"task":{"y":0,"port":3,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":20,"y":960,"x":174,"ladder":0}
+438951 NAV-SAMPLE {"route":[1132,1036,1037,1038,1040,992,1000,1002,762,763,766],"task":{"y":0,"port":3,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":80,"y":960,"x":594,"ladder":0}
+440951 NAV-SAMPLE {"route":[1132,1036,1037,1038,1040,992,1000,1002,762,763,766],"task":{"y":0,"port":3,"toX":3,"kind":"cross","x":2,"toY":0},"stay":true,"target":2,"frame":140,"y":960,"x":1014,"ladder":0}
+442954 NAV-SAMPLE {"route":[1038,1040,992,1000,1002,762,763,766],"task":{"y":0,"port":3,"toX":3,"kind":"cross","x":2,"toY":0},"stay":false,"target":2,"frame":200,"y":805.375,"x":1239.7280650179082,"ladder":0}
+443514 heartbeat state=11 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+445041 capture rrstyle-growth-sewer-nav-failure 1920x1000 room=syn_10 lightOverlay=false
+445042 NAV-END {"completed":2,"success":false,"frames":936,"reason":"Error: Mandatory dry route entered native water","targets":4}
+445200 DEVELOPMENT-VERSION runtimeTag=[RR:v10.0] copiedOriginalLog=true
+445202 FAIL Error: Mandatory dry route entered native water

@@ -1,0 +1,27 @@
+<layout land="random_rooms" poolRooms="25" generatedPoolRooms="25">
+  <loc x="0" y="0" room="rr_begin" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="atrium" openPorts="1,10"/>
+  <loc x="0" y="1" room="syn_1" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="atrium" openPorts="9,21"/>
+  <loc x="0" y="2" room="syn_2" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="4,6,20"/>
+  <loc x="0" y="3" room="syn_3" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="2,9,17"/>
+  <loc x="0" y="4" room="syn_4" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="connector" openPorts="2,20"/>
+  <loc x="1" y="0" room="syn_5" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="5,6,12"/>
+  <loc x="1" y="1" room="syn_6" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="2,7,17"/>
+  <loc x="1" y="2" room="syn_7" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="warehouse" openPorts="6,15,18"/>
+  <loc x="1" y="3" room="syn_8" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="9,13,17"/>
+  <loc x="1" y="4" room="syn_9" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="1,13,20"/>
+  <loc x="2" y="0" room="syn_10" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="5,10,16"/>
+  <loc x="2" y="1" room="syn_11" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="warehouse" openPorts="1,9,13,21"/>
+  <loc x="2" y="2" room="syn_12" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="3,7,20"/>
+  <loc x="2" y="3" room="syn_13" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="1,8,18"/>
+  <loc x="2" y="4" room="syn_14" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="atrium" openPorts="12,19"/>
+  <loc x="3" y="0" room="syn_15" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="1,8,16"/>
+  <loc x="3" y="1" room="syn_16" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="6,12,19"/>
+  <loc x="3" y="2" room="syn_17" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="5,14,17"/>
+  <loc x="3" y="3" room="syn_18" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="atrium" openPorts="6,12"/>
+  <loc x="3" y="4" room="syn_19" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="17"/>
+  <loc x="4" y="0" room="syn_20" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="warehouse" openPorts="10,12"/>
+  <loc x="4" y="1" room="syn_21" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="workshop" openPorts="6,21"/>
+  <loc x="4" y="2" room="syn_22" mirror="true" rrGen="space-v10" rrTheme="plant" rrKind="service" openPorts="8,16,17"/>
+  <loc x="4" y="3" room="syn_23" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="atrium" openPorts="7,19"/>
+  <loc x="4" y="4" room="rr_exit" mirror="false" rrGen="space-v10" rrTheme="plant" rrKind="warehouse" openPorts="18"/>
+</layout>

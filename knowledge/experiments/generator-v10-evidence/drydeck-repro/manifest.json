@@ -1,0 +1,64 @@
+{
+  "appId": "pferr-style-6bc12193949e46f2b7b161a6d6919eea",
+  "status": "complete",
+  "startedUtc": "2026-09-20T02:10:04.2117529Z",
+  "completedUtc": "2026-09-20T02:10:55.9805255Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-repro-v10-drydeck"
+  ],
+  "roomIds": [
+    "syn_10"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "repro-v10-drydeck.xml": "DA30DEE9979882B52C4D4853E30E180ED3D26E611601546368FC5A872DEE4DBE"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-repro-v10-drydeck-navigation.json": "D289A4F172146DD7BA33F48EB579DDE12DC3927CFD0D6498B48FA567F6EA1F0F"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-repro-v10-drydeck",
+      "success": true,
+      "completed": 7,
+      "targets": 7,
+      "frames": 988,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "E37A50AA3526918465BF2B9F4B3FC23861F70BAA926BC94ECA4C80944A7FA884",
+  "driverSha256": "13E3D61A32042FED74C57E317E3F89097E7A10616C84329B99CA8D66313F0645",
+  "runnerLogSha256": "57A4B07F17E29AC4A66D6480D22D7A23CE34AD8B361A7B843884D579D2577CA7",
+  "captured": {
+    "rrstyle-repro-v10-drydeck-stage.png": "CD6A3249D56478EA4FC04BE4855C4F0324ADA3D3AD8DC4DAC8F60690E893D976",
+    "rrstyle-repro-v10-drydeck-room.png": "61921C67CCC5B24D1689275195B9B64720847441D8A4CC888FA10BCE39B5AAD5"
+  }
+}

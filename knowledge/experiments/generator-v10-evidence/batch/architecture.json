@@ -1,0 +1,163 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\generated-v10-final-depth0.xml",
+      "sha256": "8761415fa94378e8ee1e9e9e7072bc79dd3a205ccecf6f078338e32d9933261b",
+      "rooms": 512,
+      "kinds": {
+        "atrium": 71,
+        "service": 101,
+        "offices": 73,
+        "warehouse": 112,
+        "workshop": 76,
+        "damaged": 79
+      },
+      "themes": {
+        "stable": 128,
+        "sewer": 128,
+        "plant": 128,
+        "mane": 128
+      },
+      "fixtures": {
+        "door": 955,
+        "hatch": 439,
+        "window": 551
+      },
+      "object_mean": 20.279296875,
+      "back_mean": 56.8984375
+    },
+    {
+      "file": "build\\style-review\\generated-v10-final-depth0-map.xml",
+      "sha256": "645c583a96005ec227ec6df76896a7a442b77f5330db3af72df9509feb267ac6",
+      "rooms": 64,
+      "kinds": {
+        "atrium": 14,
+        "service": 12,
+        "damaged": 14,
+        "warehouse": 11,
+        "workshop": 9,
+        "offices": 4
+      },
+      "themes": {
+        "stable": 16,
+        "sewer": 16,
+        "plant": 16,
+        "mane": 16
+      },
+      "fixtures": {
+        "door": 126,
+        "window": 83,
+        "hatch": 48
+      },
+      "object_mean": 20.734375,
+      "back_mean": 57.609375
+    },
+    {
+      "file": "build\\style-review\\generated-v10-final-depth0-cooked.xml",
+      "sha256": "72eee05d082ced93b670b9a07661b1e8a0a8c48255eade5073a7da29e22f5a28",
+      "rooms": 512,
+      "kinds": {
+        "atrium": 71,
+        "service": 101,
+        "offices": 73,
+        "warehouse": 112,
+        "workshop": 76,
+        "damaged": 79
+      },
+      "themes": {
+        "stable": 128,
+        "sewer": 128,
+        "plant": 128,
+        "mane": 128
+      },
+      "fixtures": {
+        "door": 955,
+        "hatch": 439,
+        "window": 551
+      },
+      "object_mean": 20.279296875,
+      "back_mean": 56.8984375
+    },
+    {
+      "file": "build\\style-review\\generated-v10-final-depth6.xml",
+      "sha256": "a32a6b0484d730de1e71d6df8e09486d426b72022485b0431f514c02f8cc4405",
+      "rooms": 512,
+      "kinds": {
+        "warehouse": 108,
+        "offices": 74,
+        "atrium": 72,
+        "service": 105,
+        "workshop": 75,
+        "damaged": 78
+      },
+      "themes": {
+        "stable": 128,
+        "sewer": 128,
+        "plant": 128,
+        "mane": 128
+      },
+      "fixtures": {
+        "door": 942,
+        "hatch": 448,
+        "window": 564
+      },
+      "object_mean": 20.80859375,
+      "back_mean": 56.36328125
+    },
+    {
+      "file": "build\\style-review\\generated-v10-final-depth6-map.xml",
+      "sha256": "a9e7427217d2f12144fee14eb4d410edbb5f67324e6bee10c8f3505f43e1ba1c",
+      "rooms": 64,
+      "kinds": {
+        "warehouse": 11,
+        "service": 11,
+        "damaged": 9,
+        "offices": 9,
+        "workshop": 12,
+        "atrium": 12
+      },
+      "themes": {
+        "stable": 16,
+        "sewer": 16,
+        "plant": 16,
+        "mane": 16
+      },
+      "fixtures": {
+        "door": 112,
+        "window": 70,
+        "hatch": 54
+      },
+      "object_mean": 20.03125,
+      "back_mean": 53.015625
+    },
+    {
+      "file": "build\\style-review\\generated-v10-final-depth6-cooked.xml",
+      "sha256": "4b3ae70c5cb8a5825ad8b16399e966af20134aded9f7c619788f89bd332a1190",
+      "rooms": 512,
+      "kinds": {
+        "warehouse": 108,
+        "offices": 74,
+        "atrium": 72,
+        "service": 105,
+        "workshop": 75,
+        "damaged": 78
+      },
+      "themes": {
+        "stable": 128,
+        "sewer": 128,
+        "plant": 128,
+        "mane": 128
+      },
+      "fixtures": {
+        "door": 942,
+        "hatch": 448,
+        "window": 564
+      },
+      "object_mean": 20.80859375,
+      "back_mean": 56.36328125
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

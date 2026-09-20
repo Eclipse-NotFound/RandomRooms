@@ -1,0 +1,32 @@
+<layout land="random_rooms" poolRooms="30" generatedPoolRooms="30">
+  <loc x="0" y="0" room="rr_begin" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="5,7"/>
+  <loc x="0" y="1" room="syn_1" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="3,10,18"/>
+  <loc x="0" y="2" room="syn_2" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="4,8,21"/>
+  <loc x="0" y="3" room="syn_3" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="3,7,19"/>
+  <loc x="0" y="4" room="syn_4" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="2,18"/>
+  <loc x="1" y="0" room="syn_5" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="warehouse" openPorts="3,16"/>
+  <loc x="1" y="1" room="syn_6" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="1,6,14"/>
+  <loc x="1" y="2" room="syn_7" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="5,15,17"/>
+  <loc x="1" y="3" room="syn_8" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="1,8,14"/>
+  <loc x="1" y="4" room="syn_9" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="5,13,19"/>
+  <loc x="2" y="0" room="syn_10" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="1,7,14"/>
+  <loc x="2" y="1" room="syn_11" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="3,12,18"/>
+  <loc x="2" y="2" room="syn_12" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="4,16"/>
+  <loc x="2" y="3" room="syn_13" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="4,6,12"/>
+  <loc x="2" y="4" room="syn_14" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="16,17"/>
+  <loc x="3" y="0" room="syn_15" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="warehouse" openPorts="3,9,12"/>
+  <loc x="3" y="1" room="syn_16" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="5,8,14,20"/>
+  <loc x="3" y="2" room="syn_17" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="1,15,19"/>
+  <loc x="3" y="3" room="syn_18" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="4,9,15"/>
+  <loc x="3" y="4" room="syn_19" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="3,20"/>
+  <loc x="4" y="0" room="syn_20" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="3,10,14"/>
+  <loc x="4" y="1" room="syn_21" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="1,7,16,21"/>
+  <loc x="4" y="2" room="syn_22" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="5,10,12,18"/>
+  <loc x="4" y="3" room="syn_23" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="atrium" openPorts="5,15,21"/>
+  <loc x="4" y="4" room="rr_exit" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="14"/>
+  <loc x="5" y="0" room="syn_25" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="offices" openPorts="8,14"/>
+  <loc x="5" y="1" room="syn_26" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="10,12,19"/>
+  <loc x="5" y="2" room="syn_27" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="connector" openPorts="10,16,21"/>
+  <loc x="5" y="3" room="syn_28" mirror="true" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="6,16,21"/>
+  <loc x="5" y="4" room="syn_29" mirror="false" rrGen="space-v10" rrTheme="mane" rrKind="damaged" openPorts="17"/>
+</layout>

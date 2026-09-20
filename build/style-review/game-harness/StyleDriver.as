@@ -56,6 +56,9 @@ package
       private static var navigationEnabled:Boolean = false;
       private static var sceneLifecycle:Boolean = false;
       private static var waterProbe:Boolean = false;
+      private static var populationEnabled:Boolean = false;
+      private static var populationDepth:int = 0;
+      private static var contentGallery:Boolean = false;
       private static var chosenScene:String = "";
       private static var scenePool:String = "";
       private static var previousStage:int = 0;
@@ -100,6 +103,9 @@ package
             navigationEnabled = String(input.@navigation) == "true";
             sceneLifecycle = String(input.@sceneLifecycle) == "true";
             waterProbe = String(input.@waterProbe) == "true";
+            populationEnabled = String(input.@population) == "true";
+            populationDepth = int(input.@populationDepth);
+            contentGallery = String(input.@contentGallery) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
             SoundMixer.soundTransform = new SoundTransform(0);
@@ -247,7 +253,11 @@ package
                      return;
                   }
                   if (sceneLifecycle) startSceneCase(w,item);
-                  else if (!developmentClass.debugTravel(target,String(item.@scene))) { fail("debugTravel rejected " + target); return; }
+                  else
+                  {
+                     if (populationEnabled || contentGallery) w.game.lands[target].landStage=populationDepth;
+                     if (!developmentClass.debugTravel(target,String(item.@scene))) { fail("debugTravel rejected " + target); return; }
+                  }
                   if (navigationEnabled && !growthEnabled)
                   {
                      var testLand:*=w.game.lands[target].land;
@@ -262,6 +272,19 @@ package
                      // spawning. All subsequent movement is normal controls.
                      w.game.curCoord=chosenX+":"+chosenY;
                      log("NAV-SETUP native travel spawn room="+w.game.curCoord+" declaredPorts="+bestPorts);
+                  }
+                  if (contentGallery)
+                  {
+                     var galleryLand:*=w.game.lands[target].land,bestScore:int=-1;
+                     for(var gx:int=0;gx<galleryLand.maxLocX;gx++) for(var gy:int=0;gy<galleryLand.maxLocY;gy++)
+                     {
+                        var score:int=0;
+                        for each(var piece:XML in galleryLand.locs[gx][gy][0].room.xml.obj)
+                           if(String(piece.@rrContent).length) score+=piece.@rrContent=="trigger"?12:(piece.@rrContent=="terminal"?5:1);
+                        if(score>bestScore) { bestScore=score; w.game.curCoord=gx+":"+gy; }
+                     }
+                     w.gg.invulner=true;
+                     log("CONTENT-GALLERY native travel spawn="+w.game.curCoord+" score="+bestScore);
                   }
                   settled = -1;
                   state = 3;
@@ -304,6 +327,12 @@ package
                screenshot(w, captureName + "-room", true);
                if (developmentMode) dumpRuntimePool(w, captureName);
                if (sceneLifecycle) verifySceneCase(w,cases[index]);
+               if (populationEnabled)
+               {
+                  PopulationProbe.begin(w,rootDir,captureName);
+                  log("POPULATION PASS "+captureName);
+                  index++; state=2; return;
+               }
                if (navigationEnabled)
                {
                   NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled,waterProbe);

@@ -1,0 +1,21 @@
+appId=pferr-style-43ede5c7e04b41d58c97a98818c6b382
+3203 ready cases=4
+3204 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-43ede5c7e04b41d58c97a98818c6b382\Local Store existsBefore=true
+3205 STORAGE existsAfter=true
+3463 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3472 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3482 development init returned
+7157 STARTUP-READY all 31 host loaders loaded with nonempty pools
+8865 newGame(-1) issued, intro skipped
+10983 initial world ready land=rbl
+13841 development debugTravel random_rooms case=rrstyle-navigation-plant
+13893 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+16935 arrived random_rooms room=rr_begin
+19717 capture rrstyle-navigation-plant-stage 1008x729 room=rr_begin lightOverlay=true
+20955 capture rrstyle-navigation-plant-room 1920x1000 room=rr_begin lightOverlay=false
+20985 development pool rrstyle-navigation-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+21168 FAIL Error: POPULATION disarm failed mine
+Error: POPULATION disarm failed mine
+	at PopulationProbe$/require()
+	at PopulationProbe$/begin()
+	at StyleDriver$/tick()

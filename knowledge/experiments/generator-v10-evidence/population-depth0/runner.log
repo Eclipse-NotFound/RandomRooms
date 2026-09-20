@@ -1,0 +1,48 @@
+appId=pferr-style-bacebcfe6fa84cd39e5bf12d3693a0c0
+3252 ready cases=4
+3254 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-bacebcfe6fa84cd39e5bf12d3693a0c0\Local Store existsBefore=true
+3255 STORAGE existsAfter=true
+3745 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3747 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3756 development init returned
+7447 STARTUP-READY all 31 host loaders loaded with nonempty pools
+9070 newGame(-1) issued, intro skipped
+10969 initial world ready land=rbl
+13738 development debugTravel random_rooms case=rrstyle-navigation-plant
+13756 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+16797 arrived random_rooms room=rr_begin
+19575 capture rrstyle-navigation-plant-stage 1008x729 room=rr_begin lightOverlay=true
+20787 capture rrstyle-navigation-plant-room 1920x1000 room=rr_begin lightOverlay=false
+20815 development pool rrstyle-navigation-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+21451 POPULATION PASS rrstyle-navigation-plant
+21483 return to base before refreshing random_rooms
+23265 heartbeat state=7 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+26096 returned to base
+29073 development debugTravel random_rooms case=rrstyle-navigation-stable
+32132 arrived random_rooms room=rr_begin
+33263 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+34792 capture rrstyle-navigation-stable-stage 1008x729 room=rr_begin lightOverlay=true
+36371 capture rrstyle-navigation-stable-room 1920x1000 room=rr_begin lightOverlay=false
+36395 development pool rrstyle-navigation-stable total=25 generated=25 assembled=25 issues=0 themes={"stable":25}
+37237 POPULATION PASS rrstyle-navigation-stable
+37269 return to base before refreshing random_rooms
+41896 returned to base
+44654 development debugTravel random_rooms case=rrstyle-navigation-sewer
+44670 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+47652 arrived random_rooms room=rr_begin
+50339 capture rrstyle-navigation-sewer-stage 1008x729 room=rr_begin lightOverlay=true
+51332 capture rrstyle-navigation-sewer-room 1920x1000 room=rr_begin lightOverlay=false
+51357 development pool rrstyle-navigation-sewer total=25 generated=25 assembled=25 issues=0 themes={"sewer":25}
+51830 POPULATION PASS rrstyle-navigation-sewer
+51852 return to base before refreshing random_rooms
+53262 heartbeat state=7 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+56467 returned to base
+58752 development debugTravel random_rooms case=rrstyle-navigation-mane
+61859 arrived random_rooms room=rr_begin
+63262 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+64555 capture rrstyle-navigation-mane-stage 1008x729 room=rr_begin lightOverlay=true
+65358 capture rrstyle-navigation-mane-room 1920x1000 room=rr_begin lightOverlay=false
+65379 development pool rrstyle-navigation-mane total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+66060 POPULATION PASS rrstyle-navigation-mane
+66229 DEVELOPMENT-VERSION runtimeTag=[RR:v10.0] copiedOriginalLog=true
+66230 DONE 4 cases

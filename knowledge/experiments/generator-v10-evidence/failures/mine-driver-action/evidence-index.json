@@ -1,0 +1,8 @@
+{
+  "classification": "failed historical run, not acceptance evidence",
+  "files": {
+    "cases.xml": "a9105781f2a32c2d16fbe76319a831e35a3ff25c74d40ff78c41ed471be6a51b",
+    "manifest.json": "93c90217366672b047c3f70ec3b0c53f221ae0cb6bd540c38c19a3cc505c83a4",
+    "runner.log": "6e1db70786bb4bbbbb72f86d3129c03d0c9e0444890f125bb95117dc3dcd810c"
+  }
+}
