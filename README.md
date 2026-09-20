@@ -1,8 +1,8 @@
-# RandomRooms v10.0
+# RandomRooms v11.1
 
 为 Remains 1.02 从零生成建筑空间的模组。
 
-v11 开发进度：[对应原版的场景与房间尺度对照](design/generator-v11-density-review.html)。已增加合成房内的功能分隔、缩小普通房间，并按整张地图组织城市建筑与街巷。正式入口目前仍为 v10，开发验证见[本轮记录](knowledge/experiments/generator-v11-density-validation-2026-09-20.md)。
+v11.1 已部署：[对应原版的场景与房间尺度对照](design/generator-v11-density-review.html)。已增加合成房内的功能分隔、缩小普通房间，并按整张地图组织城市建筑与街巷。正式入口已更新，验证及回滚说明见[本轮记录](knowledge/experiments/generator-v11-density-validation-2026-09-20.md)。
 
 ## 使用
 
@@ -14,6 +14,12 @@ v11 开发进度：[对应原版的场景与房间尺度对照](design/generator
 - **F5**：选择一类场景，进入该场景的展示馆。
 
 选择界面支持鼠标和数字键 1–5；Esc 取消。一次探索始终保持同一场景，按 F2 回城后可重新选择。
+
+## v11.1 的变化
+
+- 参考对应原版场景，分别配置材料、家具、敌群及设施，保留原版合理共用。
+- 缩小普通功能房、增加附室与紧凑家具组合；工厂作业厅、避难厩公共空间及下水道水渠仍保留用途所需的尺度。
+- 城市按整张地图组织建筑组、街巷和屋顶，楼内区分住宅、办公、商业与坍塌空间；向右、向下扩张延续原有街区。
 
 ## v10 的变化
 
@@ -46,16 +52,18 @@ v11 开发进度：[对应原版的场景与房间尺度对照](design/generator
 
 ## 画面与验证
 
+- [v11.1 对应原版的场景与房间尺度对照](design/generator-v11-density-review.html)
+- [v11.1 验证与发布记录](knowledge/experiments/generator-v11-density-validation-2026-09-20.md)
 - [四类场景探索内容实景](design/generator-v10-review.html)
 - [结构与材质实景对照](design/generator-v9-review.html)
-- [本次验证与发布记录](knowledge/experiments/generator-v10-validation-2026-09-20.md)
+- [v10 历史验证与发布记录](knowledge/experiments/generator-v10-validation-2026-09-20.md)
 
-本轮内容、结构与场景检查覆盖 1,024 间单房样本、两张各 64 间的地图；另在原版游戏中检查实际创建、领取、终端控制、机关触发与拆除、扩张和状态保持。精确范围见记录。
+v11.1 生成逻辑已通过 192 间结构与场景检查、四类场景扩张往返、100 房共 807 个探索物体检查，以及工厂和下水道内部通行复查。正式产物另经独立游戏实例确认版本与 F1/F5 入口。精确范围和限制见 v11.1 记录；v10 的历史测试另存。
 
 现有构造仍偏直角建筑，局部摆设和生活痕迹可以继续丰富。未穷尽所有种子，未验证联机或极长时间扩张的内存上限。
 
 ## 构建与回滚
 
-构建使用 `build/build-v7.ps1 -OutputName RandomRooms-v10-candidate.swf`；脚本名沿用既有名称，产物在 build 中，发布按工作区门禁执行。
+构建使用 `build/build-v7.ps1 -OutputName RandomRooms-v11.1-next.swf`；脚本名沿用既有名称，产物在 build 中，发布按工作区门禁执行。
 
 正式入口固定为 `release/RandomRoomsMod.swf`。本机回滚备份及部署指纹见验证记录。游戏主 SWF 和真实存档没有修改。

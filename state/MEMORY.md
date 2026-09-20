@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-20：v11.1开发候选已实现对应原版的房间尺度与城市编排。城市Q2已批准，无待答设计题。正式release仍是v10；不得混淆开发验证与部署。
+> 2026-09-20：用户明确要求部署，v11.1已正式替换release并通过独立原版入口检查。对应原版的房间尺度、城市编排与四类扩张验证完成，无待答设计题。
 
 ## 1. 模组是什么
 
@@ -23,8 +23,8 @@
 
 ## 3. 当前状态
 
-- 正式release：v10.0，41027 B，SHA256 7AC89A73D6A09C0922FD0C7F1FFE7C2C2A836EE635393BF5D32FCC503463058C。本轮未替换。
-- 最新候选build/RandomRooms-v11-dev-13.swf，46043 B，SHA256 959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533；日志[RR:v11-dev]，XML space-v11/revision11.1。
+- 正式release：v11.1，46044 B，SHA256 16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F；对应build/RandomRooms-v11.1-candidate.swf。日志[RR:v11.1]。
+- 完整核心验证候选build/RandomRooms-v11-dev-13.swf，46043 B，SHA256 959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533；日志[RR:v11-dev]，XML space-v11/revision11.1。
 - 原版调查192间外置房、12间实景。RREcology按1.02实际难度选择同房生态，RRGrowth恢复被Land改写的tipEnemy；材料、家具和设施按场景与用途配置。
 - 本轮缩小普通功能房、增加附室，保留作业厅/公共厅/水渠等大空间；小家具组合适配窄房，背景装饰失败不再连带取消实体家具。
 - 城市按坐标稳定生成2–4列建筑组及街巷，顶部屋顶，下方住宅/办公/商业/坍塌空间；相邻两行用途延续，扩张保持街巷位置；取消城市随机镜像。
@@ -36,7 +36,7 @@
 
 ## 4. 正在进行
 
-- 本轮实现、四类扩张、最新内容与两间原样问题房复查均已完成；候选保留在build，正式release尚未部署。
+- 实现和验证已完成，用户授权后的v11.1部署完成；相对dev13只修改两处日志版本字符串。正式SWF独立冒烟2/2通过（F5避难厩12房、F1工厂25房，issues=0），证据release-v11.1-smoke。
 - 开发验证失败多处涉及驾驶器（过早离梯、坡向、梁面、家具顶面），失败XML/图/日志独立冻结；只有真实完整通过才更新结果。
 - 原样单房复查最终通过：工厂18/18目标、4941帧，下水道13/13、1609帧且wetFrames=0。证据plant-interior-dev13、sewer-interior-dev13。早期失败另存；独立封边样本证明内部空间/楼梯平台访问，不当作跨房或每段指定楼梯的独占路径证明。
 - 最新结果和证据入口：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。
@@ -53,16 +53,16 @@
 
 ## 6. 下一步与回滚
 
-- 本轮实现、四类扩张与内容复查完成；附加复查结果见报告。后续按用户对实景的反馈改善空墙/狭长空间，正式部署另走release-gate，不能写成已上线。
+- v11.1已通过发布门禁并部署；用户需完全退出重启，回城后F1进入新地图。后续按实景反馈打磨空墙/狭长空间/城市屋顶边框。
 - 根pfe.swf已观测为9A81430D775209E37E8E7FD54414057995E0680671445F38797623865B5A699A（15078864 B），与上一阶段5300EC…指纹不同。本轮未写根文件；当前已通过实测的manifest均为新指纹，测试副本相同。原因未推定，不覆盖外部变化。
-- 既有v9回滚包build/release-backups/RandomRoomsMod_before_v10_20260920.swf，37785 B，SHA256 7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E。当前没有新部署需要回滚。
-- 更新MEMORY/journal并提交本模组；正式产物和运行目录不进Git，冻结证据要校验Git字节哈希。
+- 既有v9回滚包build/release-backups/RandomRoomsMod_before_v10_20260920.swf，37785 B，SHA256 7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E。v11.1回滚用build/release-backups/RandomRoomsMod_before_v11_1_20260920.swf（v10，41027 B，SHA256 7AC89A73D6A09C0922FD0C7F1FFE7C2C2A836EE635393BF5D32FCC503463058C）；退出游戏后复制回release并核对哈希，重启后进入新地图。
+- 正式产物和运行目录不进Git；本次新增冻结证据须保持Git字节哈希，部署记录见当前验证报告末节。
 
 ## 7. 深入阅读与复现
 
 - 设计来源design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。旧调查页已链接最新密度对照。
 - 当前实证knowledge/experiments/generator-v11-density-validation-2026-09-20.md与generator-v11-evidence/；正式v10结果另见v10报告。
-- 构建build/build-v7.ps1 -OutputName RandomRooms-v11-dev-14.swf只写build；dev13已冻结，不覆盖。旧build-m0.sh直写release，勿用于验证。
+- 构建build/build-v7.ps1 -OutputName RandomRooms-v11.1-next.swf只写build；dev13与v11.1-candidate已冻结，不覆盖。旧build-m0.sh直写release，勿用于验证。
 - 批量build/style-review/harness/run-baseline.ps1支持-SamplesPerBiome 32 -PopulationDepth 3 -MapSize 8 -MapScene mane；verify_architecture/scenes/population/city_map分别检查。
 - 实机build/style-review/game-harness/run-game-captures.ps1 -DevelopmentSwf build/RandomRooms-v11-dev-13.swf -NavigationProbe -GrowthProbe -Scene plant；-SessionDirectory visual-app隔离另一轮。内容-PopulationProbe -AllScenes，冒烟-SmokeOnly。
 - freeze_captures.py仅完整且哈希匹配才冻结；失败用freeze_failed_run.py按manifest时间窗口留证，不混入旧captures。AIR独立存储走隔离测试审批，不能借真实存储绕行。

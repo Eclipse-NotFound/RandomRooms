@@ -199,7 +199,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v11-dev loaded <generator=space-v11, growth=right+down> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v11.1 loaded <generator=space-v11, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void

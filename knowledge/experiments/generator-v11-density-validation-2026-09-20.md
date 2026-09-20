@@ -9,7 +9,7 @@ scope: RandomRooms
 
 用户明确选择 Q2 的第 1 项：城市按整张地图组织建筑、街巷、屋顶；随后要求减少大而空的空间、增加单个合成房内的房间，并强调参考**对应原版场景**。这不是把四类场景统一细分为相同小格的授权。
 
-当前开发候选 `build/RandomRooms-v11-dev-13.swf`，46043 B，SHA256 `959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533`。日志 `[RR:v11-dev]`，XML `space-v11/revision11.1`。正式入口尚未替换，仍为 v10。
+发布前开发候选 `build/RandomRooms-v11-dev-13.swf`，46043 B，SHA256 `959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533`。日志 `[RR:v11-dev]`，XML `space-v11/revision11.1`。该候选已完成下列核心验证；用户随后明确要求部署，正式产物及部署检查见文末。
 
 ## 原版依据与实现
 
@@ -91,3 +91,18 @@ scope: RandomRooms
 当前还不能声称风格完全达到原版：局部高而窄的空间、少家具的附室、城市屋顶的顶边框仍可继续改善。结构数量增加并不自动解决所有自然度问题。
 
 不把上一阶段dev4内容交互、dev7/dev8三类扩张通过直接当作当前dev13的完整运行验证。未穷尽随机种子、长期扩张、联机、六模组集成和全部战斗平衡。
+
+## v11.1 正式部署（2026-09-20）
+
+用户明确要求“请部署”。本次发布基于已提交的 `58f437a`，生产源码仅将两处日志版本字符串从 v11-dev 改为 v11.1，生成器和测试驾驶器没有改动。因此沿用上述 dev13 完整核心验证，另对正式 SWF 完成原版运行时入口检查；不把部署冒烟描述为重新完成全部通行测试。
+
+- 构建：`build/build-v7.ps1 -OutputName RandomRooms-v11.1-candidate.swf` 零错误；候选与 `release/RandomRoomsMod.swf` 均为 46044 B，SHA256 `16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F`。
+- 部署前扫描根 SWF，确认既有 `mods/RandomRooms/release/RandomRoomsMod.swf` 加载路径；同次扫描还发现 ModSettings 加载项，保留全部既有加载器。`application.xml` 仍指向根 `pfe.swf`。根文件在本次部署前后均为 `9A81430D775209E37E8E7FD54414057995E0680671445F38797623865B5A699A`，本次未修改根/DLC 游戏文件或真实存档。
+- 替换前唯一备份：`build/release-backups/RandomRoomsMod_before_v11_1_20260920.swf`，41027 B，SHA256 `7AC89A73D6A09C0922FD0C7F1FFE7C2C2A836EE635393BF5D32FCC503463058C`，即 v10；复制后核对哈希再替换 release。
+- 部署后运行 `run-game-captures.ps1 -SmokeOnly -DevelopmentSwf release/RandomRoomsMod.swf`。独立隐藏应用 `pferr-style-d39095e3fefc4fc797cb8ef4eb84b483` 使用临时新档，09:19:18–09:19:58 UTC 完成；持续心跳、退出码 0、日志 `[RR:v11.1]` 及 `RandomRoomsMod v11.1 loaded` 均确认。
+- F5 对应展示入口生成 12/12 间避难厩房，F1 对应探索入口生成 25/25 间工厂房，两项问题列表均空。此轮通过测试接口调用对应旅行逻辑，不声称逐键手动操作或六模组集成验证。正式 SWF 在独立子域加载，manifest 的输入哈希与 release 完全相同。
+- 完整证据：[release-v11.1-smoke/manifest.json](generator-v11-evidence/release-v11.1-smoke/manifest.json)，版本、诊断日志、两组地图 XML、截图与持续心跳日志已冻结并校验。既有 dev13 四场景扩张、内容和通行结果仍按原范围保留。
+- 回滚：完全退出游戏，把上述 v10 备份复制回 `release/RandomRoomsMod.swf`，核对 v10 哈希后重启；回城重新进入地图。无需回滚根游戏 SWF。本次冒烟通过，未执行回滚。
+- 生效：用户完全退出并重启游戏，回城后按 F1 进入新随机土地。已载入的旧地图不会自动更新；没有关闭或重启用户原有实例。
+
+README、实景页及其生成脚本、MEMORY 与 journal 已同步发布状态；本轮源码和冻结证据提交本模组仓库，SWF 与运行目录按原规则不入 Git。
