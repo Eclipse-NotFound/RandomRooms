@@ -116,11 +116,12 @@ package rr
             var ports:Array=planner.ports(x,y);
             // A mirror transforms both terrain and the port contract. Native
             // Location then mirrors them back into the agreed world positions.
-            var mirror:Boolean=synth.rnd()<0.5;
+            var mirror:Boolean=biome!="mane" && synth.rnd()<0.5;
             var kind:String="";
             for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
             var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports,
-               int(land["act"]["landStage"]),show,x==0 && y==0,{difficulty:land["landDifLevel"],parity:x+y});
+               int(land["act"]["landStage"]),show,x==0 && y==0,
+               {difficulty:land["landDifLevel"],parity:x+y,city:biome=="mane"?planner.city(x,y):null});
             xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
             if (w>0 || h>0) xml.@rrGrowth="1";
             if (x==0 && y==0) xml.@name="rr_begin";

@@ -1,0 +1,13 @@
+{
+  "cases.xml": "8095abef20a2514040704ebee566db35c2555eebb2faac9a10e990124325b44f",
+  "manifest.json": "1873c67770c694514d598c2a139987a8343b71d83cc0afa82157328f91fa439f",
+  "rrstyle-v11-city-beam-regression-navigation.json": "b2ce7c40d7c469989a45a88ea786131456468c8ee1d93a917f5e9a6f2e2b365a",
+  "rrstyle-v11-city-beam-regression-room.png": "ac7b17dd774fbb5049c998b9bb069eeacea000ff29950ccfc76af5cce9336a53",
+  "rrstyle-v11-city-beam-regression-stage.png": "e41240b88b9a5902d00db3106f1bdde271954de054d1e084a57084a3f888289f",
+  "rrstyle-v11-plant-ladder-regression-failure-room.xml": "1b5b4806596430f9069e3965f3cda9fdeb4461b2228346128fabea8b1598c76f",
+  "rrstyle-v11-plant-ladder-regression-nav-failure.png": "e6c253c5384c2a1182e2d369bc3d66d6ae1d4ce053b21e3baa8fdc298ebab0c2",
+  "rrstyle-v11-plant-ladder-regression-navigation.json": "8029ef525ff19a18af08ad1b211298ec449e20e41b415a2cebdbd74fd53f6937",
+  "rrstyle-v11-plant-ladder-regression-room.png": "65641ab2fcd1b17c5f4b8c33c8e2336f41af3d189897272f83e5c26bb9e3ea38",
+  "rrstyle-v11-plant-ladder-regression-stage.png": "3ce0479039028ccc7be4ee7c355dbbea022167cd249b52919d4a95d6e263b976",
+  "runner.log": "2e7cf61670d993bfdf86f4c2b6ff562a7040d7f5d7001cee48dc278fd97d56f0"
+}

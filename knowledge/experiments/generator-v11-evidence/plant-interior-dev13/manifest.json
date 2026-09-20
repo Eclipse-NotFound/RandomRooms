@@ -1,0 +1,64 @@
+{
+  "appId": "pferr-style-04be95bb9e1e40708695946f89a2ab24",
+  "status": "complete",
+  "startedUtc": "2026-09-20T08:41:37.3032316Z",
+  "completedUtc": "2026-09-20T08:44:43.8170231Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-v11-plant-ladder-regression"
+  ],
+  "roomIds": [
+    "rr_begin"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-plant-ladder-regression.xml": "3518C3371884F691A364EEACC6C9EBE55741970A86E2A3FA97035FED8714DE30"
+  },
+  "hostSha256": "9A81430D775209E37E8E7FD54414057995E0680671445F38797623865B5A699A",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-v11-plant-ladder-regression-navigation.json": "C8EE24DB07640591DF7222446798B3FAD7C7ED1BF4CF1523E17610653571CEB3"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-v11-plant-ladder-regression",
+      "success": true,
+      "completed": 18,
+      "targets": 18,
+      "frames": 4941,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "2C74FF63113B40CBAF0B050223417B51A11DA8842F75FFBC6F1D65EF605C2173",
+  "driverSha256": "F0697F48C8D95E108023B7F34EFC6D104D86918D0D7C62DB4DAA15E89071680A",
+  "runnerLogSha256": "DF6C38DF47825A157CDB68241E652807DD3A0A66BEB379846C53FCAD1C32F9E4",
+  "captured": {
+    "rrstyle-v11-plant-ladder-regression-stage.png": "27D3928B8366104B8A23B041F9831115076A4F434D42BC8C5843EA14DE1BC915",
+    "rrstyle-v11-plant-ladder-regression-room.png": "4E1FA3C8C2AEE2FCAEDCF2B57C815F04135E32DF7207363C60191ABAB843E60F"
+  }
+}

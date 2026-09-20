@@ -1,0 +1,124 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="true" sceneLifecycle="false" waterProbe="false" population="false" contentGallery="false" populationDepth="0">
+  <case id="rrstyle-v11-city-beam-regression">
+    <room name="syn_44" rrGen="space-v11" rrRevision="11.1" rrTheme="mane" rrKind="atrium" rrForm="street_links" rrAttempts="2" rrPopulation="guarded" rrDepth="0" rrEcology="3" rrDifficulty="8" rrDistrict="street" rrBlock="0" rrRoofRow="0" x="4" y="5" rrMirror="0" rrGrowth="1">
+      <a>N.N.N.N.N._H._HА.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H.N._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H._C._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H._C._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H.N._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H._H._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H._H</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H._H._._._._._._._._._._._._._._._.N._H._H._H._H._H._H._H._H._H._H._H._H._H._H</a>
+      <a>N._H._H._H._H._H._HА._H.N._H._H._H._H._H._H._H._H._H._._._._._._._._._К._К._К._._А._К._К._C._H._H._H._H._H._H._H._H._H._H._H._H._H._H</a>
+      <a>N.N._H._HА.N.N.N.N.N.N.N.N._H._HА.N.N.D.D._._А._К._._._._._._._._._._А._._._C._H._H._H._H._H._H._H._H._H._HК._H._HА._HК.N</a>
+      <a>N._H._H._HА._H._H._H._H.N._H._H._H._H._HА._H._H._H.D._._А._._._._._._._._._._._А._._.N._H._H._H._H._H._H._H._H._H._H._H._HА._H.N</a>
+      <a>N._H._H._HА._H._H._H._H.N._H._H._H._H._HА._H._H._H._C._._А._._._._._._._._._._._А._._._H._H._H._H._H._H._H._H._H._H._H._H._HА._H.N</a>
+      <a>N._H._H._HА._H._H._H._H.N._H._H._H._H._HА._H._H._H._C._._А._._._._._._._._._._._А._._._H._H._H._H._H._H._H._H._H._H._H._H._HА._H.N</a>
+      <a>N._H._H._HА._H._H._H._H.D._H._H._H._H._HА._H._H._H.N._._А._._._._._._._._._._._А._._._H._H._H._H._H._H._H._H._H._H._H._H._HА._H.N</a>
+      <a>_H._H._H._HА._H._H._H._H.D._H._H._H._H._HА._H._H._H.N._._А._._._._._._._._._._._А._К._К.D.D.D.D.D.D._H._HА.N.N.N.N.N.N.N</a>
+      <a>_H._H._H._HА._H._H._H._H.D._H._H._H._H._HА._H._H._H._H._К._К._К._К._К._К._К._К._._А._К._._А._._.D._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>_H._H._H._HА._H._H._H._H._H._H._H._H._H._HА._H._H._H._H._._._._._._._._._._А._._._А._._.D._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._HК._H._HА._HК._H._HА._HК._H._H._H._H._H._HА._H._H._H._H._._._._._._._._._._А._._._А._._.D._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N.N.N.N.N.N.N.N.D.D.D.D._H._HА.D.D.N.N._К._._А._К._._._._._._А._._._А._._._C._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H.N._._._А._._._._._._._А._._._А._._._C._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H.N._._._А._._._._._._._А._._._А._._.N._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H.N._._._А._._._._._._._А._._._А._._.N._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._H._._._А._._._._._._._А._._._А._._._H._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._H._._._А._._._._._._._А._._._А._._._H._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._H._._._А._._._._._._._А._._._А._._._H._H._H._H._H._H._H._HА._H._H._H._H._H._H.N</a>
+      <a>N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._._А.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+      <obj id="player" code="syn_44_o0" x="36" y="23" />
+      <obj id="door1a" code="syn_44_o1" x="8" y="16" rrFixture="door" lock="0" mine="0" />
+      <obj id="hatch1" code="syn_44_o2" x="39" y="13" rrFixture="hatch" lock="0" mine="0" />
+      <obj id="window1" code="syn_44_o3" x="33" y="8" rrFixture="window" />
+      <obj id="window1" code="syn_44_o4" x="17" y="3" rrFixture="window" />
+      <obj id="window1" code="syn_44_o5" x="17" y="11" rrFixture="window" />
+      <obj id="window2" code="syn_44_o6" x="33" y="18" rrFixture="window" />
+      <obj id="mcrate2" code="syn_44_o7" x="44" y="23" />
+      <obj id="mcrate2" code="syn_44_o8" x="1" y="23" />
+      <obj id="chest" x="9" y="7" rrContent="loot" rrMount="floor" uid="rrp_44_0" code="syn_44_p9" />
+      <obj id="instr2" x="8" y="23" rrContent="loot" rrMount="floor" uid="rrp_44_1" code="syn_44_p10" />
+      <obj id="explbox" x="36" y="12" rrContent="loot" rrMount="floor" uid="rrp_44_2" code="syn_44_p11" />
+      <obj id="weapcase" x="3" y="23" rrContent="reward" rrMount="floor" uid="rrp_44_3" code="syn_44_p12" />
+      <obj id="term3" x="37" y="12" rrContent="terminal" rrMount="floor" uid="rrp_44_4" code="syn_44_p13" />
+      <obj id="chest" x="42" y="23" rrContent="reward" rrMount="floor" uid="rrp_44_5" mine="0" lock="1" code="syn_44_p14" />
+      <obj id="knop3" x="10" y="23" rrContent="switch" rrMount="floor" uid="rrp_44_6" code="syn_44_p15">
+        <scr act="unlock" targ="rrp_44_5" />
+      </obj>
+      <obj id="mine" x="7" y="23" rrContent="hazard" rrMount="floor" uid="rrp_44_7" code="syn_44_p16" />
+      <obj id="fspikes" x="6" y="9" rrContent="hazard" rrMount="ceiling" uid="rrp_44_8" code="syn_44_p17" />
+      <obj id="slaver" x="27" y="6" rrContent="enemy" rrMount="floor" uid="rrp_44_9" code="syn_44_p18" />
+      <obj id="vortex" x="27" y="11" rrContent="enemy" rrMount="air" uid="rrp_44_10" code="syn_44_p19" />
+      <back id="heap3" x="23" y="23" />
+      <back id="railing" x="26" y="23" />
+      <back id="heap3" x="30" y="23" />
+      <back id="heap3" x="26" y="6" />
+      <back id="railing" x="29" y="6" />
+      <back id="railing" x="19" y="23" />
+      <back id="railing" x="26" y="23" />
+      <back id="heap2" x="19" y="22" />
+      <back id="swindow" x="36" y="3" />
+      <back id="swindow" x="41" y="3" />
+      <back id="hole" x="34" y="1" />
+      <back id="heap3" x="44" y="12" />
+      <back id="light3" x="39" y="1" />
+      <back id="swindow" x="36" y="16" />
+      <back id="swindow" x="41" y="16" />
+      <back id="hole" x="34" y="14" />
+      <back id="heap3" x="44" y="23" />
+      <back id="light3" x="39" y="14" />
+      <back id="swindow" x="3" y="20" />
+      <back id="swindow" x="8" y="20" />
+      <back id="swindow" x="13" y="20" />
+      <back id="heap3" x="14" y="23" />
+      <back id="light3" x="8" y="18" />
+      <back id="swindow" x="3" y="11" />
+      <back id="heap3" x="5" y="16" />
+      <back id="light3" x="3" y="9" />
+      <back id="swindow" x="11" y="11" />
+      <back id="heap3" x="14" y="16" />
+      <back id="light3" x="12" y="9" />
+      <back id="swindow" x="3" y="3" />
+      <back id="heap3" x="5" y="7" />
+      <back id="light3" x="3" y="1" />
+      <back id="swindow" x="11" y="3" />
+      <back id="heap3" x="14" y="7" />
+      <back id="light3" x="12" y="1" />
+      <doors>0.3.0.0.0.0.0.0.2.0.0.0.0.0.3.0.0.2.0.0.0.0</doors>
+      <options backwall="tWindows2" music="music_mane_1" vis="2" darkness="-20" entip="0" kolspawn="0" tip="beg0" />
+      <rrPlan>
+        <space kind="volume" x0="18" top="1" x1="32" floor="23" role="street" />
+        <space kind="volume" x0="34" top="1" x1="46" floor="12" role="service" />
+        <space kind="volume" x0="34" top="14" x1="46" floor="23" role="store" />
+        <space kind="volume" x0="1" top="18" x1="16" floor="23" role="store" />
+        <space kind="volume" x0="1" top="9" x1="7" floor="16" role="store" />
+        <space kind="volume" x0="9" top="9" x1="16" floor="16" role="store" />
+        <space kind="volume" x0="1" top="1" x1="7" floor="7" role="store" />
+        <space kind="volume" x0="9" top="1" x1="16" floor="7" role="store" />
+        <space kind="gallery" x0="26" top="1" x1="32" floor="6" role="roof" />
+        <link a="5" b="4" kind="door" x="8" y="16" />
+        <link a="7" b="0" kind="opening" x="17" y="7" />
+        <link a="5" b="0" kind="opening" x="17" y="16" />
+        <link a="2" b="0" kind="opening" x="33" y="23" />
+        <link a="1" b="0" kind="opening" x="33" y="12" />
+        <link a="5" b="3" kind="ladder" x="12" y="17" />
+        <link a="6" b="4" kind="ladder" x="2" y="8" />
+        <link a="2" b="1" kind="ladder" x="39" y="13" />
+        <link a="3" b="0" kind="opening" x="17" y="23" />
+        <link a="7" b="5" kind="ladder" x="12" y="8" />
+        <ladder x="44" top="8" bottom="12" />
+        <ladder x="23" top="24" bottom="24" />
+        <ladder x="5" top="16" bottom="16" />
+        <ladder x="5" top="0" bottom="7" />
+        <ladder x="18" top="8" bottom="13" />
+        <ladder x="26" top="14" bottom="23" />
+        <ladder x="19" top="17" bottom="23" />
+        <ladder x="29" top="13" bottom="23" />
+        <ladder x="12" top="17" bottom="23" />
+        <ladder x="2" top="8" bottom="16" />
+        <ladder x="39" top="13" bottom="23" />
+        <ladder x="12" top="8" bottom="16" />
+        <ladder x="29" top="7" bottom="23" />
+      </rrPlan>
+    </room>
+  </case>
+</cases>

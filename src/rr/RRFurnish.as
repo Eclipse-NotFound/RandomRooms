@@ -1,6 +1,6 @@
 package rr
 {
-   /** Furnish a completed space by purpose. Whole groups fit or are omitted;
+   /** Furnish a completed space by purpose. Collision groups fit as a whole;
     * background facilities can overlap furniture, but cannot cut walls/shafts. */
    public class RRFurnish
    {
@@ -49,7 +49,8 @@ package rr
             if (role=="canal" || role=="canal_walk")
                return group(3,3,[],[["light1",0,-3],["pipe4",2,-2]]);
             if (compact)
-               return group(3,3,[["instr1",0,0]],[["light1",0,-3],["vent",2,-2]]);
+               return role=="store"?group(2,3,[["locker",0,0]],[]):
+                  group(2,2,[["instr1",0,0]],[["vent",0,-2]]);
             if (role=="control")
                return group(7,4,[["instr1",0,0],["table1",3,0]],[["pult",3,-2],["pipe4",6,-3],["pipe4",6,-1],["light1",2,-4]]);
             if (role=="store")
@@ -58,9 +59,16 @@ package rr
          }
          if (compact)
          {
-            var small:String=role=="office"?"filecab":(role=="living"?(theme=="stable"?"tumba2":"tumba1"):
-               (role=="service" || role=="workshop"?"instr1":(theme=="stable"?"mcrate1":(theme=="plant"?"woodbox":"mcrate2"))));
-            return group(3,4,[[small,0,0]],[[light,0,-4]]);
+            if(role=="living") return theme=="stable" && rnd()<0.7?
+               group(4,1,[["bed",0,0]],[]):group(3,1,[["couch",0,0],[theme=="stable"?"tumba2":"tumba1",2,0]],[]);
+            if(role=="office") return group(3,2,[[theme=="stable"?"table2":"table",0,0],["filecab",2,0]],[["clock",0,-2]]);
+            if(role=="kitchen") return group(3,2,[["ccup",0,0],["tap",1,0],["fridge",2,0]],[["vent",1,-2]]);
+            if(role=="medical") return group(2,3,[["bigmed",0,0]],[]);
+            if(role=="control") return group(2,2,[["table1",0,0]],[["monitor",0,-2],["pult",0,-1]]);
+            if(role=="hall" || role=="corridor") return group(2,1,[["couch",0,0]],[]);
+            var small:String=role=="service" || role=="workshop"?"instr1":
+               (theme=="stable"?"mcrate1":(theme=="plant"?"woodbox":"mcrate2"));
+            return group(2,2,[[small,0,0]],[]);
          }
          if (role == "office")
          {
@@ -242,7 +250,8 @@ package rr
             if (!fitsObject(a[0],x+a[1],f+a[2],extra)) return false;
             mark(a[0],x+a[1],f+a[2],extra);
          }
-         for each (a in g.back) if (!fitsBack(a[0],x+a[1],f+a[2])) return false;
+         // A ceiling bulkhead may hide a window or light without invalidating
+         // the bed/desk underneath. Back art never changes collision space.
          // Do not stack two scenery groups in the same strip. Overlap within a
          // coherent group (display over machine, shelf behind crate) is intended.
          for (var ix:int=x;ix<x+g.w;ix++) if (backUsed[f+","+ix]) return false;
@@ -252,7 +261,7 @@ package rr
             objects.push([a[0],x+a[1],f+a[2]]);
             mark(a[0],x+a[1],f+a[2],occupied);
          }
-         for each (a in g.back) backs.push([a[0],x+a[1],f+a[2]]);
+         for each (a in g.back) if(fitsBack(a[0],x+a[1],f+a[2])) backs.push([a[0],x+a[1],f+a[2]]);
          return true;
       }
 
@@ -266,7 +275,7 @@ package rr
          {
             if (r.role=="shaft") continue;
             var width:int=r.x1-r.x0+1;
-            var groups:int=width>26 ? 3 : (width>17?2:1);
+            var groups:int=width>26 ? 3 : (width>11?2:1);
             for (var n:int=0;n<groups;n++)
             {
                var placed:Boolean=false;
@@ -280,9 +289,16 @@ package rr
                // The smaller alternative belongs to the same scene and role.
                if (!placed && width>=3)
                {
-                  g=kit(r.role,true);
-                  for (trial=0;trial<8 && !placed && g.h<=r.floor-r.top;trial++)
-                     placed=place(g,r.x0+int(rnd()*(width-g.w+1)),r.floor);
+                  // Try each available offset, not eight repeated random
+                  // guesses that can miss the only usable corner in a cell.
+                  for(var variant:int=0;variant<2 && !placed;variant++)
+                  {
+                     g=kit(r.role,true);
+                     if(g.w>width || g.h>r.floor-r.top) continue;
+                     var slots:int=width-g.w+1,start:int=int(rnd()*slots);
+                     for (trial=0;trial<slots && !placed;trial++)
+                        placed=place(g,r.x0+(start+trial)%slots,r.floor);
+                  }
                }
             }
          }

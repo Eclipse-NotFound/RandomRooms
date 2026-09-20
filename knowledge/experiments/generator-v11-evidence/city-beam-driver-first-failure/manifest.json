@@ -1,0 +1,11 @@
+{
+  "appId": "pferr-style-82928d3f132240728cbde8ad62968786",
+  "status": "failed",
+  "startedUtc": "2026-09-20T07:12:22.0428441Z",
+  "error": "AIR returned 1; inspect app/captures/runner.log and app/stdout.txt",
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-city-beam-regression.xml": "81F21ACF197DD8CF23447776C04B9206DEFFE6D5E160BB2B7388EDE2FDC987C6"
+  }
+}

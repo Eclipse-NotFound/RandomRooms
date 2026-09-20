@@ -1,0 +1,84 @@
+appId=pferr-style-c1a0dbde494c4feab4d6f282598ec8a0
+4830 ready cases=16
+5321 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+18927 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=true rrHost=false
+22185 newGame(-1) issued, intro skipped
+25175 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25176 initial world ready land=rbl
+25327 beginMission rrstyle-v11-density-final-forms-0
+28775 arrived rrstyle-v11-density-final-forms-0 room=syn_64
+32128 capture rrstyle-v11-density-final-forms-0-stage 1008x729 room=syn_64 lightOverlay=true
+34294 capture rrstyle-v11-density-final-forms-0-room 1920x1000 room=syn_64 lightOverlay=false
+34316 beginMission rrstyle-v11-density-final-forms-1
+34820 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+37530 arrived rrstyle-v11-density-final-forms-1 room=syn_66
+40262 capture rrstyle-v11-density-final-forms-1-stage 1008x729 room=syn_66 lightOverlay=true
+41824 capture rrstyle-v11-density-final-forms-1-room 1920x1000 room=syn_66 lightOverlay=false
+41851 beginMission rrstyle-v11-density-final-forms-2
+44975 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44975 arrived rrstyle-v11-density-final-forms-2 room=syn_71
+47608 capture rrstyle-v11-density-final-forms-2-stage 1008x729 room=syn_71 lightOverlay=true
+49550 capture rrstyle-v11-density-final-forms-2-room 1920x1000 room=syn_71 lightOverlay=false
+49580 beginMission rrstyle-v11-density-final-forms-3
+52732 arrived rrstyle-v11-density-final-forms-3 room=syn_0
+54821 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+55574 capture rrstyle-v11-density-final-forms-3-stage 1008x729 room=syn_0 lightOverlay=true
+57929 capture rrstyle-v11-density-final-forms-3-room 1920x1000 room=syn_0 lightOverlay=false
+57949 beginMission rrstyle-v11-density-final-forms-4
+61108 arrived rrstyle-v11-density-final-forms-4 room=syn_1
+63766 capture rrstyle-v11-density-final-forms-4-stage 1008x729 room=syn_1 lightOverlay=true
+66833 capture rrstyle-v11-density-final-forms-4-room 1920x1000 room=syn_1 lightOverlay=false
+66856 heartbeat state=2 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+66857 beginMission rrstyle-v11-density-final-forms-5
+70045 arrived rrstyle-v11-density-final-forms-5 room=syn_2
+72671 capture rrstyle-v11-density-final-forms-5-stage 1008x729 room=syn_2 lightOverlay=true
+75529 capture rrstyle-v11-density-final-forms-5-room 1920x1000 room=syn_2 lightOverlay=false
+75551 heartbeat state=2 case=6 allLands=true text=true resources=true rrCurrent=true rrHost=false
+75552 beginMission rrstyle-v11-density-final-forms-6
+78708 arrived rrstyle-v11-density-final-forms-6 room=syn_32
+81440 capture rrstyle-v11-density-final-forms-6-stage 1008x729 room=syn_32 lightOverlay=true
+82787 capture rrstyle-v11-density-final-forms-6-room 1920x1000 room=syn_32 lightOverlay=false
+82807 beginMission rrstyle-v11-density-final-forms-7
+84820 heartbeat state=3 case=7 allLands=true text=true resources=true rrCurrent=true rrHost=false
+85953 arrived rrstyle-v11-density-final-forms-7 room=syn_33
+88617 capture rrstyle-v11-density-final-forms-7-stage 1008x729 room=syn_33 lightOverlay=true
+89632 capture rrstyle-v11-density-final-forms-7-room 1920x1000 room=syn_33 lightOverlay=false
+89654 beginMission rrstyle-v11-density-final-forms-8
+92783 arrived rrstyle-v11-density-final-forms-8 room=syn_38
+94821 heartbeat state=3 case=8 allLands=true text=true resources=true rrCurrent=true rrHost=false
+95569 capture rrstyle-v11-density-final-forms-8-stage 1008x729 room=syn_38 lightOverlay=true
+97073 capture rrstyle-v11-density-final-forms-8-room 1920x1000 room=syn_38 lightOverlay=false
+97093 beginMission rrstyle-v11-density-final-forms-9
+100249 arrived rrstyle-v11-density-final-forms-9 room=syn_46
+102850 capture rrstyle-v11-density-final-forms-9-stage 1008x729 room=syn_46 lightOverlay=true
+104489 capture rrstyle-v11-density-final-forms-9-room 1920x1000 room=syn_46 lightOverlay=false
+104522 beginMission rrstyle-v11-density-final-forms-10
+104820 heartbeat state=3 case=10 allLands=true text=true resources=true rrCurrent=true rrHost=false
+107761 arrived rrstyle-v11-density-final-forms-10 room=syn_96
+110374 capture rrstyle-v11-density-final-forms-10-stage 1008x729 room=syn_96 lightOverlay=true
+111317 capture rrstyle-v11-density-final-forms-10-room 1920x1000 room=syn_96 lightOverlay=false
+111337 beginMission rrstyle-v11-density-final-forms-11
+114501 arrived rrstyle-v11-density-final-forms-11 room=syn_97
+114821 heartbeat state=3 case=11 allLands=true text=true resources=true rrCurrent=true rrHost=false
+117262 capture rrstyle-v11-density-final-forms-11-stage 1008x729 room=syn_97 lightOverlay=true
+118211 capture rrstyle-v11-density-final-forms-11-room 1920x1000 room=syn_97 lightOverlay=false
+118240 beginMission rrstyle-v11-density-final-forms-12
+121369 arrived rrstyle-v11-density-final-forms-12 room=syn_98
+124059 capture rrstyle-v11-density-final-forms-12-stage 1008x729 room=syn_98 lightOverlay=true
+124816 capture rrstyle-v11-density-final-forms-12-room 1920x1000 room=syn_98 lightOverlay=false
+124840 heartbeat state=2 case=13 allLands=true text=true resources=true rrCurrent=true rrHost=false
+124840 beginMission rrstyle-v11-density-final-forms-13
+128055 arrived rrstyle-v11-density-final-forms-13 room=syn_99
+130975 capture rrstyle-v11-density-final-forms-13-stage 1008x729 room=syn_99 lightOverlay=true
+131762 capture rrstyle-v11-density-final-forms-13-room 1920x1000 room=syn_99 lightOverlay=false
+131781 beginMission rrstyle-v11-density-final-forms-14
+134793 arrived rrstyle-v11-density-final-forms-14 room=syn_101
+134818 heartbeat state=3 case=14 allLands=true text=true resources=true rrCurrent=true rrHost=false
+137441 capture rrstyle-v11-density-final-forms-14-stage 1008x729 room=syn_101 lightOverlay=true
+138257 capture rrstyle-v11-density-final-forms-14-room 1920x1000 room=syn_101 lightOverlay=false
+138278 beginMission rrstyle-v11-density-final-forms-15
+141546 arrived rrstyle-v11-density-final-forms-15 room=syn_113
+144317 capture rrstyle-v11-density-final-forms-15-stage 1008x729 room=syn_113 lightOverlay=true
+145868 capture rrstyle-v11-density-final-forms-15-room 1920x1000 room=syn_113 lightOverlay=false
+145889 heartbeat state=2 case=16 allLands=true text=true resources=true rrCurrent=true rrHost=false
+145889 DONE 16 cases

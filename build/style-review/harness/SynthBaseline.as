@@ -84,22 +84,30 @@ package
                var mapRng:RRSeed=new RRSeed(baseSeed).fork("map");
                var planner:RRMapPlan=new RRMapPlan(function():Number { return mapRng.next(); });
                var mapSynth:RRSynth=new RRSynth(function():Number { return mapRng.next(); });
-               var map:XML=<baseline generator="space-v8-map" width={mapSize} height={mapSize} seed={baseSeed}/>;
+               var map:XML=<baseline generator={RRSynth.GENERATOR+"-map"} width={mapSize} height={mapSize} seed={baseSeed}/>;
                var contracts:Object={};
                for (var mx:int=0;mx<mapSize;mx++) for (var my:int=0;my<mapSize;my++)
                {
                   var ports:Array=planner.ports(mx,my);
                   contracts[mx+","+my]=ports.join(".");
-                  var mirror:Boolean=mapRng.next()<0.5;
-                  var mapRoom:XML=mapSynth.generate(mx*mapSize+my,biomes[(mx+my)%4],"",mirror?RRPorts.mirror(ports):ports,int(settings.populationDepth));
+                  var theme:String=settings.mapScene?String(settings.mapScene):biomes[(mx+my)%4];
+                  var mirror:Boolean=theme!="mane" && mapRng.next()<0.5;
+                  var context:Object={difficulty:8+2*int(settings.populationDepth),parity:mx+my,
+                     city:theme=="mane"?planner.city(mx,my):null};
+                  var mapRoom:XML=mapSynth.generate(mx*mapSize+my,theme,"",mirror?RRPorts.mirror(ports):ports,int(settings.populationDepth),false,false,context);
                   mapRoom.@x=mx; mapRoom.@y=my; mapRoom.@rrMirror=mirror?"1":"0";
                   map.appendChild(mapRoom);
+                  if(theme=="mane") contracts["city:"+mx+","+my]=JSON.stringify(planner.city(mx,my));
                }
                // Re-query in reverse order after deeper edge requests. Existing
                // contracts must not depend on generation/exploration order.
                planner.ports(mapSize+2,mapSize+3);
                for (mx=mapSize-1;mx>=0;mx--) for (my=mapSize-1;my>=0;my--)
+               {
                   if (contracts[mx+","+my]!=planner.ports(mx,my).join(".")) throw new Error("Mutable shared edge "+mx+","+my);
+                  if(contracts["city:"+mx+","+my] && contracts["city:"+mx+","+my]!=JSON.stringify(planner.city(mx,my)))
+                     throw new Error("Mutable city district "+mx+","+my);
+               }
                map.@orderIndependent="true";
                writeText(outputStem+"-map.xml",map.toXMLString()+"\n");
             }

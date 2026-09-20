@@ -269,7 +269,7 @@ try {
     while (-not $instance.WaitForExit(1000)) {
         $elapsed++
         if ($elapsed % 10 -eq 0) { Write-Output ('Capture process running: ' + $elapsed + 's; PID ' + $instance.Id) }
-        $timeout = if ($NavigationProbe) { if ($AllScenes) {1860} else {960} } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { 120 }
+        $timeout = if ($NavigationProbe) { if ($AllScenes) {1860} else {960} } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { [Math]::Max(120,75+25*$caseSources.Count) }
         if ($elapsed -ge $timeout) { throw ('Capture process exceeded ' + $timeout + ' second timeout.') }
     }
     $instance.Refresh()

@@ -8,7 +8,7 @@ package rr
    {
       public static function check(plan:RRArchitecture,dry:Boolean=false):void
       {
-         var clear:Array=[],climb:Array=[],stand:Array=[],hard:Array=[],slope:Array=[];
+         var clear:Array=[],climb:Array=[],stand:Array=[],hard:Array=[],slope:Array=[],slopeDirection:Array=[];
          var forward:Array=[],reverse:Array=[];
          var glass:Object={};
          for each (var window:Object in plan.windows)
@@ -29,7 +29,8 @@ package rr
             stand[i]=false;
             slope[i]=false;
             for (var sy:int=y;sy<=Math.min(24,y+1);sy++) for (var sx:int=x;sx<=x+1;sx++)
-               if(/[ВГ]/.test(String(plan.grid[sy][sx]))) slope[i]=true;
+               if(/[ВГ]/.test(String(plan.grid[sy][sx])))
+               { slope[i]=true; slopeDirection[i]=String(plan.grid[sy][sx]).indexOf("Г")>=0?1:-1; }
             if (y<24)
                for (var xx:int=x;xx<=x+1;xx++)
                   if (hard[(y+1)*48+xx] || String(plan.grid[y+1][xx]).indexOf("-")>=0 ||
@@ -48,6 +49,7 @@ package rr
                {
                   var diagonal:int=n+dy*48;
                   if(x+dx>=0 && x+dx<47 && clear[diagonal] && (slope[i] || slope[diagonal]) &&
+                     dy==dx*(slope[i]?slopeDirection[i]:slopeDirection[diagonal]) &&
                      (clear[n] || clear[i+dy*48])) edge(forward,reverse,i,diagonal);
                }
             }

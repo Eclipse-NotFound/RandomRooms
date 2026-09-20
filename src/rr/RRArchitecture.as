@@ -35,11 +35,12 @@ package rr
          for (var i:int=a.length-1;i>0;i--)
          { var j:int=pick(0,i); var v:*=a[i]; a[i]=a[j]; a[j]=v; }
       }
-      public function build(biome:String,requested:String="", boundary:Array=null):void
+      public function build(biome:String,requested:String="", boundary:Array=null,context:Object=null):void
       {
          theme=biome;
          scene=RRScene.profile(theme);
          sceneForm=scene.forms[pick(0,scene.forms.length-1)];
+         if(theme=="mane" && context && context.city) sceneForm=String(context.city.form);
          wall=scene.wall; trim=scene.trim; backgrounds=scene.backgrounds;
          var kinds:Array=theme=="stable"?["atrium","offices","offices","service","warehouse"]:
             (theme=="sewer"?["service","service","workshop","damaged","warehouse"]:
@@ -60,6 +61,7 @@ package rr
          tallBias=scene.bias;
          volumes=[{x0:1,top:1,x1:46,floor:23}];
          seedScene();
+         refineSpaces();
          for (var i:int=0;i<volumes.length;i++)
          {
             var r:Object=volumes[i];
@@ -143,9 +145,9 @@ package rr
       }
       private function centralBay(role:String):Object
       {
-         var left:Array=divide(volumes[0],true,10,14);
-         var right:Array=divide(left[1],true,32,36);
-         var center:Object=right[0]; center.keep=true; center.role=role;
+         var left:Array=divide(volumes[0],true,12,16);
+         var right:Array=divide(left[1],true,30,34);
+         var center:Object=right[0]; center.role=role;
          splitWing(left[0],theme=="stable"?["office","living"]:["control","store"]);
          splitWing(right[1],theme=="stable"?["service","office"]:["office","service"]);
          return center;
@@ -201,6 +203,7 @@ package rr
                // their descending ladders out of the main reservoir volume.
                parts=divide(volumes[0],false,6,8);
                cells(parts[0],2,["service","service"]);
+               for each(var galleryRoom:Object in volumes) if(galleryRoom.floor<=8) galleryRoom.keep=true;
                other=divide(parts[1],true,11,14);
                other[0].role="control"; other[1].role="canal";
             }
@@ -214,7 +217,7 @@ package rr
             }
             else
             {
-               parts=divide(volumes[0],false,7,11);
+               parts=divide(volumes[0],false,sceneForm=="canal_gallery"?12:7,sceneForm=="canal_gallery"?14:11);
                cells(parts[0],2,["service","control"]);
                if(sceneForm=="pump_chain")
                {
@@ -225,19 +228,83 @@ package rr
             }
             return;
          }
-         // City map districts are being separated from indoor room forms.
-         // Keep the old city branch until the district decision is settled.
-         if(sceneForm=="roof_passage")
+         if(sceneForm=="rooftops")
          {
-            parts=divide(volumes[0],false,7,12);
+            parts=divide(volumes[0],false,6,9);
             major=parts[0]; major.keep=true; major.role="roof";
+            parts[1].role="service";
          }
-         else
+         else if(sceneForm=="street_links")
          {
-            parts=divide(volumes[0],true,16,29);
-            major=parts[rnd()<0.5?0:1]; major.keep=true; major.role="street";
+            parts=divide(volumes[0],true,13,17);
+            other=divide(parts[1],true,30,34);
+            other[0].role="street"; other[0].keep=true;
+            parts[0].role="store"; other[1].role="service";
          }
-         partition(pick(4,8));
+         else if(sceneForm=="offices")
+         {
+            parts=divide(volumes[0],true,9,12);
+            parts[0].role="service"; parts[1].role="office";
+         }
+         else if(sceneForm=="commercial")
+         {
+            parts=divide(volumes[0],false,10,14);
+            parts[0].role="office"; parts[1].role="store";
+         }
+         else if(sceneForm=="ruined")
+         {
+            parts=divide(volumes[0],true,18,25);
+            parts[0].role="living"; parts[1].role="hall";
+         }
+         else volumes[0].role="living";
+      }
+      /** Subdivide oversize functional rooms before any circulation is built.
+       * No furniture quota can make a 20-tile bedroom feel inhabited. Keep
+       * purposeful reservoirs/outdoors, with only a few double-height halls. */
+      private function refineSpaces():void
+      {
+         var limit:int=theme=="stable"?pick(11,15):(theme=="plant"?pick(8,11):
+            (theme=="sewer"?pick(8,11):(sceneForm=="rooftops" || sceneForm=="street_links"?pick(7,10):pick(10,14))));
+         for(var attempt:int=0;attempt<60 && volumes.length<limit;attempt++)
+         {
+            var candidates:Array=[];
+            for each(var r:Object in volumes)
+            {
+               if(r.keep || r.role=="canal" || r.role=="corridor") continue;
+               var w:int=r.x1-r.x0+1,h:int=r.floor-r.top+1;
+               var hall:Boolean=r.role=="workshop" || r.role=="warehouse" || r.role=="hall";
+               var maxArea:int=hall?210:(theme=="sewer"?110:95);
+               var maxHeight:int=hall?12:8, maxWidth:int=hall?25:16;
+               if(w*h<=maxArea && h<=maxHeight && w<=maxWidth) continue;
+               var directions:Array=(h>maxHeight && h>=11)?[false,true]:[true,false];
+               var cuts:Array=[];
+               for each(var vertical:Boolean in directions)
+               {
+                  var lo:int=vertical?r.x0+7:r.top+5,hi:int=vertical?r.x1-7:r.floor-5;
+                  for(var c:int=lo;c<=hi;c++) if(canSplit(r,vertical,c))
+                     cuts.push({vertical:vertical,c:c,center:Math.abs(c-(lo+hi)/2)});
+                  if(cuts.length) break;
+               }
+               if(cuts.length) candidates.push({r:r,cuts:cuts,score:w*h/maxArea});
+            }
+            if(!candidates.length) break;
+            candidates.sortOn("score",Array.NUMERIC|Array.DESCENDING);
+            var chosen:Object=candidates[0]; r=chosen.r;
+            hall=r.role=="workshop" || r.role=="warehouse" || r.role=="hall";
+            chosen.cuts.sortOn("center",Array.NUMERIC);
+            var cut:Object=chosen.cuts[pick(0,Math.min(3,chosen.cuts.length-1))];
+            var pair:Array=divide(r,cut.vertical,cut.c,cut.c);
+            pair[0].role=r.role; pair[1].role=r.role;
+            if(hall)
+            {
+               // The smaller room is a supporting use, not another huge hall.
+               var small:Object=(pair[0].x1-pair[0].x0+1)*(pair[0].floor-pair[0].top+1)<
+                  (pair[1].x1-pair[1].x0+1)*(pair[1].floor-pair[1].top+1)?pair[0]:pair[1];
+               small.role=theme=="plant"?"control":(theme=="stable"?"office":"store");
+            }
+            else if(r.role=="living" && rnd()<0.4) pair[1].role=rnd()<0.5?"kitchen":"office";
+            else if(r.role=="service" && rnd()<0.4) pair[1].role="store";
+         }
       }
       private function canSplit(r:Object,vertical:Boolean,c:int):Boolean
       {
@@ -409,7 +476,7 @@ package rr
             for each (var r:Object in volumes) if (r.role=="canal") addPool(r);
             if (sceneForm!="dry_tunnels" && !pools.length) throw new Error("No safe space for a canal and dry bank");
          }
-         if (theme=="mane")
+         if (theme=="mane" && (sceneForm=="ruined" || sceneForm=="rooftops" || sceneForm=="street_links"))
          {
             // Short missing floor sections make visible ruptures. The directed
             // return audit below must still pass through the remaining routes.
@@ -423,7 +490,10 @@ package rr
                   for (var yy:int=y-2;yy<=y+2;yy++) if (reserved[yy+","+xx]) ok=false;
                }
                if (!ok) continue;
-               for (xx=x;xx<x+width;xx++) grid[y][xx]=String(grid[y+1][xx]);
+               // Concrete has fallen away, leaving a traversable native beam.
+               // The old clearance-only gap implied jumps the route audit did
+               // not simulate. A residual beam keeps both approaches valid.
+               for (xx=x;xx<x+width;xx++) grid[y][xx]=String(grid[y+1][xx])+"-";
                changes--;
             }
          }

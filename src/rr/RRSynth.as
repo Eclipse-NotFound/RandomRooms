@@ -33,7 +33,7 @@ package rr
             try
             {
                plan=new RRArchitecture(rnd);
-               plan.build(biome,rtype,ports);
+               plan.build(biome,rtype,ports,context);
                lastError=null; break;
             }
             catch (error:*)
@@ -55,7 +55,12 @@ package rr
       public function generate(n:int, biome:String="stable", rtype:String="", boundary:Array=null,depth:int=0,peaceful:Boolean=false,safe:Boolean=false,context:Object=null):XML
       {
          var grid:Array=genGrid(biome,rtype,boundary,n,depth,peaceful,safe,context);
-         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="11.0" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage} rrEcology={population.ecology.type} rrDifficulty={population.ecology.difficulty}/>;
+         var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="11.1" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage} rrEcology={population.ecology.type} rrDifficulty={population.ecology.difficulty}/>;
+         if(biome=="mane")
+         {
+            room.@rrDistrict=plan.sceneForm=="street_links"?"street":(plan.sceneForm=="rooftops"?"roof":"building");
+            if(context && context.city) { room.@rrBlock=context.city.block; room.@rrRoofRow=context.city.roofRow; }
+         }
          // All three native beams have identical shelf collision; the plan
          // uses '-' internally and the scene chooses the exported material.
          var beam:String=biome=="stable"?"Е":(biome=="mane"?"К":"-");

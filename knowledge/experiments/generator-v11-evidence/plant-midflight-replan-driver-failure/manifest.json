@@ -1,0 +1,11 @@
+{
+  "appId": "pferr-style-ac042b356d0144388c4248da8c85537e",
+  "status": "failed",
+  "startedUtc": "2026-09-20T08:37:43.7685633Z",
+  "error": "AIR returned 1; inspect app/captures/runner.log and app/stdout.txt",
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-plant-ladder-regression.xml": "3518C3371884F691A364EEACC6C9EBE55741970A86E2A3FA97035FED8714DE30"
+  }
+}

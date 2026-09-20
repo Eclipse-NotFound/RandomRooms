@@ -47,6 +47,7 @@ page = '''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="vi
 </style><main><p class="eyebrow">RANDOMROOMS / 2026.09.20 / 开发中</p><h1>让不同场景拥有自己的空间逻辑</h1>
 <p>本轮核对了四类场景的192间外置原房、原版敌群解析与材质定义，并用原版游戏渲染参考和生成样本。普通共享素材保留，专属生态与用途分开。地形继续从零生成。</p>
 <p class="notice">这是开发对照，尚未替换正式版。四类生态已修正；工厂、避难厩、下水道已有构造改进，并完成向右、向下扩张往返的实际行走测试。下水道必经路保持干燥，八格深池也已实测下水并返回干岸。城市地图组织等待选择，旧城市断层路线复测尚未通过；空旷区域仍需打磨，不能把本页视为风格验收完成。</p>
+<p class="notice">后续进展：Q2 已确认，城市地图编排与房间密度已改进。<a href="generator-v11-density-review.html">查看最新对应原版的实景对照</a>。以下保留上一阶段记录。</p>
 <nav><a href="#plant">工厂</a><a href="#stable">废弃避难厩</a><a href="#sewer">下水道</a><a href="#mane">城市废墟</a></nav>
 ''' + ''.join(parts) + '''<footer><p>这些是未重绘的原版渲染图。参考房与开发房并非一一复刻；独立展示时边口可能被游戏封闭。原版参考移除了通用敌人占位符，因此用来比较建筑与环境，不用于比较战斗密度。工厂与避难厩取第一轮完整房型；下水道取后续深池修订。</p><p><a href="native-scene-audit-2026-09-20.md">阅读原版调查依据</a> · 图像、房XML和运行清单保存在各自 assets 目录。</p></footer></main></html>'''
 (DESIGN/'generator-v11-investigation.html').write_text(page, encoding='utf-8')

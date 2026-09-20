@@ -1,0 +1,31 @@
+SandyMod: load start
+SandyMod: load issued
+RConnectMod: load start
+RConnectMod: load issued
+RVision: load start
+RVision: load issued
+MSWMod: load start
+MSWMod: load issued
+TDFC: load start
+TDFC: load issued
+RandomRoomsMod: load start
+RandomRoomsMod: load issued
+ModSettings: IO error: Error #2035: URL Not Found. URL: app:/mods/ModSettings/release/ModSettingsMod.swf
+SandyMod: IOError Error #2035: URL Not Found. URL: app:/mods/Sandevistan/release/SandevistanMod.swf
+RConnectMod: IOError Error #2035: URL Not Found. URL: app:/mods/Rconnect/release/RConnectMod.swf
+RVision: IOError Error #2035: URL Not Found. URL: app:/mods/RealisticVision/release/RealisticVisionMod.swf
+MSWMod: IOError Error #2035: URL Not Found. URL: app:/mods/MoreSkills&Weapons/release/MoreSkillsWeaponsMod.swf
+TDFC: IOError Error #2035: URL Not Found. URL: app:/mods/TDFC/release/TDFCMod.swf
+RandomRoomsMod: complete fired
+RandomRoomsMod: class=[class RandomRoomsMod]
+RandomRoomsMod: init returned
+660 Интерфейс
+1429 Game init
+1109 Персонаж
+12 Местность
+796 Создание местности
+408 Вход в местность
+RConnectRndSeed  rrstyle-v11-city-beam-regression 2166298059
+93 Создание местности
+false
+344 Вход в местность

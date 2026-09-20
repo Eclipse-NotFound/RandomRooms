@@ -23,7 +23,7 @@ package rr
             forms:["canal_gallery","cistern","pump_chain","dry_tunnels"],min:3,max:6,bias:0.22,
             light:"light1",hatches:["hatch1","hatch1","hatch2"],windows:["window1"],windowMax:1};
          if (id=="mane") return {wall:"N",trim:"N",backgrounds:["C","D","J"],
-            forms:["courtyard","broken_facade","roof_passage"],min:4,max:8,bias:0.55,
+            forms:["apartments","offices","commercial","ruined","rooftops","street_links"],min:8,max:14,bias:0.55,
             light:"light3",hatches:["hatch1","hatch2"],windows:["window1","window1","window2"],windowMax:5};
          throw new Error("Unknown scene: "+id);
       }
@@ -32,7 +32,7 @@ package rr
          if (id=="plant") return <options backwall="tBackWall" music="music_plant_1"/>;
          if (id=="stable") return <options backwall="tStConcrete" music="music_stable_1"/>;
          if (id=="sewer") return <options backwall="tMossy" music="music_sewer_1" color="green" wtip="1" wrad="3"/>;
-         if (id=="mane") return <options backwall={form=="roof_passage"?"sky":"tWindows"} music="music_mane_1" vis="2" darkness="-20"/>;
+         if (id=="mane") return <options backwall={form=="rooftops"?"sky":(form=="street_links"?"tWindows2":"tWindows")} music="music_mane_1" vis="2" darkness="-20"/>;
          throw new Error("Unknown scene options: "+id);
       }
       public static function configureLand(world:*,act:*,id:String):void

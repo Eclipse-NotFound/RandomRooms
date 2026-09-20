@@ -1,0 +1,83 @@
+appId=pferr-style-54091092c8604f62b48b9620dc116aea
+4190 ready cases=1
+4193 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-54091092c8604f62b48b9620dc116aea\Local Store existsBefore=true
+4194 STORAGE existsAfter=true
+4747 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+4766 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+4793 development init returned
+10005 STARTUP-READY all 31 host loaders loaded with nonempty pools
+12020 newGame(-1) issued, intro skipped
+14352 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+14353 initial world ready land=rbl
+18320 development debugTravel random_rooms case=rrstyle-growth
+21521 arrived random_rooms room=rr_begin
+24341 capture rrstyle-growth-stage 1008x729 room=rr_begin lightOverlay=true
+26029 capture rrstyle-growth-room 1920x1000 room=rr_begin lightOverlay=false
+26059 development pool rrstyle-growth total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+26090 NAV-GROWTH natural spawn, initial=5x5; targets=[{"y":0,"x":5,"label":"new-column"},{"y":0,"x":4,"label":"return-column"},{"y":5,"x":4,"label":"new-row"},{"y":4,"x":4,"label":"return-row"}]
+26106 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+26112 NAV-GROW-ROUTE 0,0 -> 4,0 edges=4
+26118 NAV-SAMPLE {"route":[],"stay":true,"frame":0,"y":360,"x":961.8,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0}}
+27074 DOOR target=door2 x=1260 lock=0 mine=0
+27102 DOOR-SAMPLE {"x1":1240,"selectedId":null,"visi":1,"y1":279,"cursor":0,"y2":359,"action":false,"cx":1259.047619047619,"remaining":0,"x2":1280,"cy":318.0952380952381,"face":1,"open":false,"selected":false}
+28106 NAV-SAMPLE {"route":[420,852,1146,1150],"stay":false,"frame":60,"y":348,"x":1378.3,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0}}
+28638 DOOR target=door1 x=1580 lock=0 mine=0
+30100 NAV-SAMPLE {"route":[852,1146,1150],"stay":false,"frame":120,"y":514.875,"x":1495,"target":0,"ladder":1,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0}}
+31797 NAV-POSE {"leaveSide":false,"dy":239.375,"step":1146,"stayPhis":0,"y":719.625,"stuck":24,"x":1495,"stay":false,"ladder":1,"dx":225}
+32032 NAV-POSE {"leaveSide":false,"dy":239.375,"step":1146,"stayPhis":0,"y":719.625,"stuck":31,"x":1495,"stay":false,"ladder":1,"dx":225}
+32099 NAV-SAMPLE {"route":[1146,1150],"stay":false,"frame":180,"y":696.625,"x":1509,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0}}
+34096 NAV-SAMPLE {"route":[1146,1150],"stay":true,"frame":240,"y":720,"x":1719.8,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0}}
+34102 NAV-AVOID-FURNITURE alternate native tile route
+34199 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+36099 NAV-SAMPLE {"route":[855,999,1146,1150],"stay":false,"frame":300,"y":795,"x":1573.1000000000004,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0,"furnitureRerouted":true}}
+38097 NAV-SAMPLE {"route":[1150],"stay":true,"frame":360,"y":960,"x":1803.800000000001,"target":0,"ladder":0,"task":{"toX":1,"kind":"cross","port":5,"y":0,"toY":0,"x":0,"furnitureRerouted":true}}
+39200 NAV-CROSS {"y":960,"frames":374,"kind":"cross","port":5,"from":"0,0","success":true,"x":34,"to":"1,0"}
+40701 NAV-SAMPLE {"route":[627,634,586,587,592,736,737,1121,1148,956,958],"stay":false,"frame":46,"y":792,"x":145,"target":1,"ladder":-1,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1}}
+42699 NAV-SAMPLE {"route":[634,586,587,592,736,737,1121,1148,956,958],"stay":false,"frame":106,"y":478.75,"x":243,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1}}
+44200 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+44699 NAV-SAMPLE {"route":[592,736,737,1121,1148,956,958],"stay":true,"frame":166,"y":520,"x":555.1,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1}}
+46705 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":226,"y":516.25,"x":704.8000000000001,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1}}
+48698 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":286,"y":520,"x":716.6,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+49664 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":24,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+49903 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":31,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+50698 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":346,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+50862 NAV-STUCK {"y":520,"dy":119,"tx":720,"x":721.9,"ty":639,"dx":-1.8999999999999773,"stayPhis":1}
+52708 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":406,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+54196 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+54696 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":466,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+56700 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":526,"y":516.25,"x":695,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+58229 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":24,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+58474 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":31,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+58697 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":586,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+59429 NAV-STUCK {"y":520,"dy":119,"tx":720,"x":721.9,"ty":639,"dx":-1.8999999999999773,"stayPhis":1}
+60698 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":646,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+62697 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":706,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+64200 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+64709 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":766,"y":516.25,"x":695,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+66230 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":24,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+66462 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":31,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+66695 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":826,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+67427 NAV-STUCK {"y":520,"dy":119,"tx":720,"x":721.9,"ty":639,"dx":-1.8999999999999773,"stayPhis":1}
+68698 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":886,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+70697 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":946,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+72710 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":1006,"y":516.25,"x":695,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+74197 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+74232 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":24,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+74462 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":31,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+74699 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1066,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+75429 NAV-STUCK {"y":520,"dy":119,"tx":720,"x":721.9,"ty":639,"dx":-1.8999999999999773,"stayPhis":1}
+76696 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1126,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+78702 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1186,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+80701 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":1246,"y":516.25,"x":695,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+82230 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":24,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+82463 NAV-POSE {"leaveSide":false,"dy":119,"step":737,"stayPhis":1,"y":520,"stuck":31,"x":721.9,"stay":true,"ladder":0,"dx":-1.8999999999999773}
+82696 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1306,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+83430 NAV-STUCK {"y":520,"dy":119,"tx":720,"x":721.9,"ty":639,"dx":-1.8999999999999773,"stayPhis":1}
+84197 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+84695 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1366,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+86698 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":true,"frame":1426,"y":520,"x":721.9,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+88700 NAV-SAMPLE {"route":[737,1121,1148,956,958],"stay":false,"frame":1486,"y":516.25,"x":695,"target":1,"ladder":0,"task":{"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}}
+91289 capture rrstyle-growth-nav-failure 1920x1000 room=syn_5 lightOverlay=false
+91297 NAV-END {"frames":1876,"targets":4,"completed":1,"success":false,"reason":"Error: Movement timed out at {\"toX\":2,\"kind\":\"cross\",\"port\":4,\"y\":0,\"toY\":0,\"x\":1,\"furnitureRerouted\":true}"}
+91480 DEVELOPMENT-VERSION runtimeTag=[RR:v11-dev] copiedOriginalLog=true
+91481 FAIL Error: Movement timed out at {"toX":2,"kind":"cross","port":4,"y":0,"toY":0,"x":1,"furnitureRerouted":true}

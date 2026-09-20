@@ -1,0 +1,47 @@
+appId=pferr-style-7fc37868ff0c45ecaf29979bb9fbf650
+3064 ready cases=2
+3516 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+9561 newGame(-1) issued, intro skipped
+11636 initial world ready land=rbl
+11729 beginMission rrstyle-v11-sewer-slope-regression
+13065 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14837 arrived rrstyle-v11-sewer-slope-regression room=syn_20
+17479 capture rrstyle-v11-sewer-slope-regression-stage 1008x729 room=syn_20 lightOverlay=true
+18520 capture rrstyle-v11-sewer-slope-regression-room 1920x1000 room=syn_20 lightOverlay=false
+18535 NAV-BEGIN rrstyle-v11-sewer-slope-regression origin=0,0 ports= targets=13 natural spawn; no coordinate writes
+18565 NAV-SAMPLE {"y":520,"ladder":0,"stay":true,"route":[],"frame":1,"x":1001.8,"target":0,"task":{"y":0,"space":4,"x0":23,"floor":12,"kind":"space","x1":32,"x":0,"entry":"initial"}}
+19699 DOOR target=door3 x=1340 lock=0 mine=0
+20537 NAV-SAMPLE {"y":520,"ladder":0,"stay":true,"route":[615],"frame":56,"x":1318.8,"target":1,"task":{"y":0,"space":5,"x0":34,"floor":12,"kind":"space","x1":46,"x":0,"entry":"initial"}}
+22533 NAV-SAMPLE {"y":463,"ladder":0,"stay":false,"route":[620,764,763,955,954,940],"frame":22,"x":1738.8,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+23066 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+24532 NAV-SAMPLE {"y":585.5,"ladder":0,"stay":false,"route":[763,955,954,940],"frame":82,"x":1785,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+26535 NAV-SAMPLE {"y":742,"ladder":0,"stay":false,"route":[954,940],"frame":142,"x":1741.2,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+28533 NAV-SAMPLE {"y":768,"ladder":0,"stay":false,"route":[954,940],"frame":202,"x":1720.9,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+30538 NAV-SAMPLE {"y":810,"ladder":1,"stay":false,"route":[954,940],"frame":262,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+32535 NAV-SAMPLE {"y":844.5,"ladder":1,"stay":false,"route":[954,940],"frame":322,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+33067 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+34540 NAV-SAMPLE {"y":865.5,"ladder":1,"stay":false,"route":[954,940],"frame":382,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+36534 NAV-SAMPLE {"y":886.5,"ladder":1,"stay":false,"route":[954,940],"frame":442,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+38536 NAV-SAMPLE {"y":907.5,"ladder":1,"stay":false,"route":[954,940],"frame":502,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+40532 NAV-SAMPLE {"y":928.5,"ladder":1,"stay":false,"route":[954,940],"frame":562,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+42534 NAV-SAMPLE {"y":949.5,"ladder":1,"stay":false,"route":[954,940],"frame":622,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+43066 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44531 NAV-SAMPLE {"y":960,"ladder":0,"stay":true,"route":[954,940],"frame":682,"x":1730.3000000000002,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+46578 NAV-SAMPLE {"y":922.0000000000001,"ladder":0,"stay":false,"route":[954,940],"frame":742,"x":1746.65,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+48537 NAV-SAMPLE {"y":852,"ladder":0,"stay":false,"route":[954,940],"frame":802,"x":1758.7000000000003,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+50538 NAV-SAMPLE {"y":798,"ladder":0,"stay":false,"route":[954,940],"frame":862,"x":1766.4,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+52539 NAV-SAMPLE {"y":760,"ladder":0,"stay":false,"route":[954,940],"frame":922,"x":1768.5,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+53084 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54545 NAV-SAMPLE {"y":738,"ladder":0,"stay":false,"route":[954,940],"frame":982,"x":1765,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+56542 NAV-SAMPLE {"y":732,"ladder":0,"stay":false,"route":[954,940],"frame":1042,"x":1755.9,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+58537 NAV-SAMPLE {"y":742,"ladder":0,"stay":false,"route":[954,940],"frame":1102,"x":1741.2,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+60537 NAV-SAMPLE {"y":768,"ladder":0,"stay":false,"route":[954,940],"frame":1162,"x":1720.9,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+62546 NAV-SAMPLE {"y":810,"ladder":1,"stay":false,"route":[954,940],"frame":1222,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+63074 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+64539 NAV-SAMPLE {"y":844.5,"ladder":1,"stay":false,"route":[954,940],"frame":1282,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+66535 NAV-SAMPLE {"y":865.5,"ladder":1,"stay":false,"route":[954,940],"frame":1342,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+68535 NAV-SAMPLE {"y":886.5,"ladder":1,"stay":false,"route":[954,940],"frame":1402,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+70533 NAV-SAMPLE {"y":907.5,"ladder":1,"stay":false,"route":[954,940],"frame":1462,"x":1695,"target":2,"task":{"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}}
+73246 capture rrstyle-v11-sewer-slope-regression-nav-failure 1920x1000 room=syn_20 lightOverlay=false
+73252 NAV-END {"frames":1600,"success":false,"completed":2,"reason":"Error: Movement timed out at {\"y\":0,\"space\":8,\"x0\":17,\"floor\":19,\"kind\":\"space\",\"x1\":41,\"x\":0,\"entry\":\"initial\"}","targets":13}
+73252 FAIL Error: Movement timed out at {"y":0,"space":8,"x0":17,"floor":19,"kind":"space","x1":41,"x":0,"entry":"initial"}

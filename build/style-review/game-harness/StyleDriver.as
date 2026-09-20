@@ -165,7 +165,7 @@ package
          try
          {
             if (state == 4) return;
-            if (getTimer() - started > (navigationEnabled ? (cases.length()>2?1800000:900000) : developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : 105000)) { fail("driver timeout"); return; }
+            if (getTimer() - started > (navigationEnabled ? (cases.length()>2?1800000:900000) : developmentMode || fixtureEnabled || crossingEnabled && cases.length()>4 ? 345000 : movementEnabled || crossingEnabled || shaftEnabled ? 225000 : Math.max(105000,60000+cases.length()*25000))) { fail("driver timeout"); return; }
             var w:* = W.w;
             if (w == null) return;
             if (w.verror != null && w.verror.visible) { fail("game error: " + w.verror.txt.text); return; }

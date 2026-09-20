@@ -40,6 +40,25 @@ package rr
          }
          return prev;
       }
+      /** Building identity is coordinate based, independent of exploration
+       * order. Several columns share a building; a narrow street separates
+       * blocks. Its roof elevation persists when the map grows downward. */
+      public function city(x:int,y:int):Object
+      {
+         var start:int=0,block:int=0,width:int;
+         while(true)
+         {
+            width=2+int(value(block,0,81)%3);
+            if(x<start+width+1) break;
+            start+=width+1; block++;
+         }
+         var roof:int=0;
+         var street:Boolean=x==start+width;
+         var form:String=street?"street_links":(y<=roof?"rooftops":
+            ["apartments","offices","commercial","ruined"][value(block,int((y-roof-1)/2),83)%4]);
+         return {form:form,zone:street?"street":(y<=roof?"roof":"building"),block:block,
+            roofRow:roof,leftFacade:x==start,rightFacade:x==start+width-1};
+      }
       public function ports(x:int,y:int):Array
       {
          var a:Array=RRPorts.empty();

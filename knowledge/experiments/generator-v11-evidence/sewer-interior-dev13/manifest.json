@@ -1,0 +1,64 @@
+{
+  "appId": "pferr-style-bc2aca3c56d64df6913325884cc8c8a8",
+  "status": "complete",
+  "startedUtc": "2026-09-20T08:33:26.1862375Z",
+  "completedUtc": "2026-09-20T08:34:40.0953931Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-v11-sewer-slope-regression"
+  ],
+  "roomIds": [
+    "syn_20"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-sewer-slope-regression.xml": "CAC571331868564D5400BDEFDB57C7AA64861E7F1BDDFA6E53AE0598393745C4"
+  },
+  "hostSha256": "9A81430D775209E37E8E7FD54414057995E0680671445F38797623865B5A699A",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-v11-sewer-slope-regression-navigation.json": "6510AA359AA6C712FA130743B7A40D589A6BF26C67EC4785E18DE01191983B5C"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-v11-sewer-slope-regression",
+      "success": true,
+      "completed": 13,
+      "targets": 13,
+      "frames": 1609,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "BDA2D32E29DEFF1AAE5594565443E1AD12F4D0B29885A936257E13B8890565EA",
+  "driverSha256": "BCD04FDE37AA44177209942A02F4C50DEC4E969546A3375B21ED949449F006D3",
+  "runnerLogSha256": "D7D14BB2624C7C0F088831FC476F9613DE64C95DDB99C834BBF441F9FED381A8",
+  "captured": {
+    "rrstyle-v11-sewer-slope-regression-stage.png": "7C56A2FD9C324D1B17A841DBF4C0377361967A409B67455F4AF42FC57BE42037",
+    "rrstyle-v11-sewer-slope-regression-room.png": "B2E7CB0F44E39D13BF2B3039CB8768DCA46686C944DD7FD51B8AF539C97E4827"
+  }
+}

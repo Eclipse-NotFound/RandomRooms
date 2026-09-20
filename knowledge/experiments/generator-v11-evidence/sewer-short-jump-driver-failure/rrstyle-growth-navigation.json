@@ -1,0 +1,1 @@
+{"growth":true,"reason":"Error: Movement timed out at {\"y\":0,\"kind\":\"cross\",\"port\":5,\"toX\":1,\"furnitureRerouted\":true,\"x\":0,\"toY\":0}","wetFrames":0,"targets":4,"optionalWater":false,"persistentObjects":0,"completed":0,"success":false,"cacheStayedEmpty":true,"records":[],"milestones":0,"caseId":"rrstyle-growth","dryRequired":true,"frames":1502,"scene":"sewer"}

@@ -2,6 +2,8 @@
 
 为 Remains 1.02 从零生成建筑空间的模组。
 
+v11 开发进度：[对应原版的场景与房间尺度对照](design/generator-v11-density-review.html)。已增加合成房内的功能分隔、缩小普通房间，并按整张地图组织城市建筑与街巷。正式入口目前仍为 v10，开发验证见[本轮记录](knowledge/experiments/generator-v11-density-validation-2026-09-20.md)。
+
 ## 使用
 
 更新后重启游戏，回城再进入新的随机土地。已经载入的旧地图不会自动变成新版。
