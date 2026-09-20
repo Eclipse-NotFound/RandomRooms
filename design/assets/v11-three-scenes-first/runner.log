@@ -1,0 +1,54 @@
+appId=pferr-style-417920b2386f44e59a929fef678b7df5
+3641 ready cases=10
+3969 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+9428 newGame(-1) issued, intro skipped
+11446 initial world ready land=rbl
+11548 beginMission rrstyle-v11-three-scene-forms-0
+13642 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14775 arrived rrstyle-v11-three-scene-forms-0 room=syn_128
+17633 capture rrstyle-v11-three-scene-forms-0-stage 1008x729 room=syn_128 lightOverlay=true
+19022 capture rrstyle-v11-three-scene-forms-0-room 1920x1000 room=syn_128 lightOverlay=false
+19042 beginMission rrstyle-v11-three-scene-forms-1
+22125 arrived rrstyle-v11-three-scene-forms-1 room=syn_129
+23641 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25164 capture rrstyle-v11-three-scene-forms-1-stage 1008x729 room=syn_129 lightOverlay=true
+26485 capture rrstyle-v11-three-scene-forms-1-room 1920x1000 room=syn_129 lightOverlay=false
+26501 beginMission rrstyle-v11-three-scene-forms-2
+29610 arrived rrstyle-v11-three-scene-forms-2 room=syn_130
+32444 capture rrstyle-v11-three-scene-forms-2-stage 1008x729 room=syn_130 lightOverlay=true
+33565 capture rrstyle-v11-three-scene-forms-2-room 1920x1000 room=syn_130 lightOverlay=false
+33583 beginMission rrstyle-v11-three-scene-forms-3
+33644 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+36619 arrived rrstyle-v11-three-scene-forms-3 room=syn_0
+39380 capture rrstyle-v11-three-scene-forms-3-stage 1008x729 room=syn_0 lightOverlay=true
+41190 capture rrstyle-v11-three-scene-forms-3-room 1920x1000 room=syn_0 lightOverlay=false
+41207 beginMission rrstyle-v11-three-scene-forms-4
+43649 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44442 arrived rrstyle-v11-three-scene-forms-4 room=syn_3
+47092 capture rrstyle-v11-three-scene-forms-4-stage 1008x729 room=syn_3 lightOverlay=true
+48972 capture rrstyle-v11-three-scene-forms-4-room 1920x1000 room=syn_3 lightOverlay=false
+48986 beginMission rrstyle-v11-three-scene-forms-5
+52098 arrived rrstyle-v11-three-scene-forms-5 room=syn_7
+53641 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54701 capture rrstyle-v11-three-scene-forms-5-stage 1008x729 room=syn_7 lightOverlay=true
+57135 capture rrstyle-v11-three-scene-forms-5-room 1920x1000 room=syn_7 lightOverlay=false
+57153 beginMission rrstyle-v11-three-scene-forms-6
+60237 arrived rrstyle-v11-three-scene-forms-6 room=syn_64
+62945 capture rrstyle-v11-three-scene-forms-6-stage 1008x729 room=syn_64 lightOverlay=true
+63789 capture rrstyle-v11-three-scene-forms-6-room 1920x1000 room=syn_64 lightOverlay=false
+63806 heartbeat state=2 case=7 allLands=true text=true resources=true rrCurrent=true rrHost=false
+63806 beginMission rrstyle-v11-three-scene-forms-7
+66870 arrived rrstyle-v11-three-scene-forms-7 room=syn_66
+69585 capture rrstyle-v11-three-scene-forms-7-stage 1008x729 room=syn_66 lightOverlay=true
+70542 capture rrstyle-v11-three-scene-forms-7-room 1920x1000 room=syn_66 lightOverlay=false
+70557 beginMission rrstyle-v11-three-scene-forms-8
+73619 arrived rrstyle-v11-three-scene-forms-8 room=syn_68
+73641 heartbeat state=3 case=8 allLands=true text=true resources=true rrCurrent=true rrHost=false
+76305 capture rrstyle-v11-three-scene-forms-8-stage 1008x729 room=syn_68 lightOverlay=true
+77178 capture rrstyle-v11-three-scene-forms-8-room 1920x1000 room=syn_68 lightOverlay=false
+77195 beginMission rrstyle-v11-three-scene-forms-9
+80245 arrived rrstyle-v11-three-scene-forms-9 room=syn_78
+83062 capture rrstyle-v11-three-scene-forms-9-stage 1008x729 room=syn_78 lightOverlay=true
+84362 capture rrstyle-v11-three-scene-forms-9-room 1920x1000 room=syn_78 lightOverlay=false
+84379 heartbeat state=2 case=10 allLands=true text=true resources=true rrCurrent=true rrHost=false
+84380 DONE 10 cases

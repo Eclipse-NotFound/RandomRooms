@@ -1,0 +1,24 @@
+appId=pferr-style-81135ca35e2e44a9bba196f3a396eb16
+4536 ready cases=1
+4766 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+12118 newGame(-1) issued, intro skipped
+14429 initial world ready land=rbl
+14539 heartbeat state=2 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14540 beginMission rrstyle-v11-deep-water-probe
+17800 arrived rrstyle-v11-deep-water-probe room=syn_36
+20596 capture rrstyle-v11-deep-water-probe-stage 1008x729 room=syn_36 lightOverlay=true
+22196 capture rrstyle-v11-deep-water-probe-room 1920x1000 room=syn_36 lightOverlay=false
+22213 WATER-PROBE enter native basin then return to its dry deck; normal controls
+22245 NAV-SAMPLE {"y":280,"route":[],"stay":true,"frame":1,"x":1161.8,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+24214 NAV-SAMPLE {"y":280,"route":[331,475,474,714,713,702,1134],"stay":true,"frame":61,"x":1578.3,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+24544 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+26212 NAV-SAMPLE {"y":353.5,"route":[474,714,713,702,1134],"stay":false,"frame":121,"x":1752.8665285358657,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+28220 NAV-SAMPLE {"y":550.75,"route":[713,702,1134],"stay":false,"frame":181,"x":1710.8900000000006,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+30213 NAV-SAMPLE {"y":600,"route":[702,1134],"stay":true,"frame":241,"x":1329.410000000001,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+32223 NAV-SAMPLE {"y":784.4165425152,"route":[1134],"stay":false,"frame":301,"x":1239.210000000001,"target":0,"ladder":0,"task":{"y":0,"space":0,"entry":"optional-water","kind":"space","x0":23,"floor":23,"x":0,"x1":38}}
+34212 NAV-SAMPLE {"y":960,"route":[1128,696,702],"stay":false,"frame":19,"x":1155.210000000001,"target":1,"ladder":0,"task":{"y":0,"space":1,"entry":"return-dry","kind":"space","x0":21,"floor":14,"x":0,"x1":40}}
+34544 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+36212 NAV-SAMPLE {"y":771,"route":[696,702],"stay":false,"frame":79,"x":1015,"target":1,"ladder":1,"task":{"y":0,"space":1,"entry":"return-dry","kind":"space","x0":21,"floor":14,"x":0,"x1":40}}
+38220 NAV-SAMPLE {"y":600,"route":[702],"stay":true,"frame":139,"x":1191.9,"target":1,"ladder":0,"task":{"y":0,"space":1,"entry":"return-dry","kind":"space","x0":21,"floor":14,"x":0,"x1":40}}
+38415 NAV-END {"targets":2,"success":true,"frames":487,"completed":2,"reason":"Native water entered and dry deck regained"}
+38484 DONE 1 cases

@@ -24,6 +24,7 @@ package
       private static var clear:Array;
       private static var support:Array;
       private static var climb:Array;
+      private static var slope:Array;
       private static var at:int;
       private static var ticks:int;
       private static var legTicks:int;
@@ -130,6 +131,17 @@ package
             if (w.loc.mirror) { var old:int=x0; x0=47-x1; x1=47-old; }
             targets.push({kind:"space",x:originX,y:originY,x0:x0,x1:x1,floor:int(r.@floor),entry:entry,space:i++});
          }
+         for each(var stairs:XML in w.loc.room.xml.rrPlan.stairs)
+         {
+            var dir:int=int(stairs.@dir),start:int=int(stairs.@x),bottom:int=int(stairs.@bottom),top:int=int(stairs.@top);
+            if(w.loc.mirror) { start=47-start; dir=-dir; }
+            var end:int=start+dir*(bottom-top);
+            var head:int=start-dir*2,foot:int=end+dir*2;
+            var label:String="stairs-"+i;
+            targets.push({kind:"space",x:originX,y:originY,x0:foot-1,x1:foot+1,floor:bottom,entry:label+"-bottom",space:i++});
+            targets.push({kind:"space",x:originX,y:originY,x0:head-1,x1:head+1,floor:top-1,entry:label+"-top",space:i++});
+            targets.push({kind:"space",x:originX,y:originY,x0:foot-1,x1:foot+1,floor:bottom,entry:label+"-return",space:i++});
+         }
       }
       private static function tileSolid(t:*):Boolean
       {
@@ -138,7 +150,7 @@ package
       }
       private static function rebuild(w:*):void
       {
-         local=w.loc; graph=[]; clear=[]; support=[]; climb=[];
+         local=w.loc; graph=[]; clear=[]; support=[]; climb=[]; slope=[];
          var solid:Array=[];
          for (var y:int=0;y<25;y++) for (var x:int=0;x<48;x++) solid[y*48+x]=tileSolid(local.space[x][y]);
          for (y=1;y<25;y++) for (x=0;x<47;x++)
@@ -155,6 +167,10 @@ package
             graph[i]=[];
             climb[i]=local.space[x][y].stair<0 || local.space[x+1][y].stair>0;
             support[i]=y<24 && (solid[i+48] || solid[i+49] || local.space[x][y+1].shelf || local.space[x+1][y+1].shelf);
+            slope[i]=false;
+            for(var sy:int=y;sy<=Math.min(24,y+1);sy++) for(var sx:int=x;sx<=x+1;sx++)
+               if(local.space[sx][sy].diagon!=0) slope[i]=true;
+            if(slope[i]) support[i]=true;
          }
          for (y=1;y<25;y++) for (x=0;x<47;x++)
          {
@@ -163,6 +179,12 @@ package
             {
                var n:int=i+dx;
                if (x+dx>=0 && x+dx<47 && clear[n] && (support[i] || support[n] || climb[i] || climb[n])) graph[i].push(n);
+               for each(var dy:int in [-1,1])
+               {
+                  var diagonal:int=n+dy*48;
+                  if(x+dx>=0 && x+dx<47 && clear[diagonal] && (slope[i] || slope[diagonal]) &&
+                     (clear[n] || clear[i+dy*48])) graph[i].push(diagonal);
+               }
             }
             if (clear[i-48] && (climb[i] || climb[i-48])) graph[i].push(i-48);
             if (clear[i+48] && !solid[i+48] && !solid[i+49]) graph[i].push(i+48);
@@ -176,13 +198,34 @@ package
             var x:int=i%48,y:int=int(i/48);
             // A native one-way beam immediately over the solid floor raises
             // the actual standing surface by one tile, within this same space.
-            if (target!=null && (y<target.floor-1 || y>target.floor || x<target.x0 || x+1>target.x1 || !support[i])) continue;
+            if (target!=null && (y<target.floor-1 || y>target.floor || x<target.x0 || x+1>target.x1 || !support[i] || slope[i])) continue;
+            // A floor pose directly under a one-way stair is not a stable
+            // arrival from above. Pick a visible landing beside that flight.
+            if(target!=null && underStair(i)) continue;
             if (target!=null && furnitureAt(w,(x+1)*40,(y+1)*40-1)) continue;
-            var cost:Number=target==null?Math.abs((x+1)*40-w.gg.X)+Math.abs((y+1)*40-1-w.gg.Y)*2:
+            var cost:Number=target==null?Math.abs((x+1)*40-w.gg.X)+Math.abs(poseY(i)-w.gg.Y)*2:
                Math.abs(x-(target.x0+target.x1-1)/2);
             if (cost<score) { score=cost; best=i; }
          }
          return best;
+      }
+      private static function underStair(i:int):Boolean
+      {
+         var x:int=i%48,y:int=int(i/48);
+         for(var yy:int=y-2;yy>=Math.max(0,y-7);yy--)
+         {
+            if(local.space[x][yy].phis!=0 || local.space[x+1][yy].phis!=0) break;
+            if(local.space[x][yy].diagon!=0 || local.space[x+1][yy].diagon!=0) return true;
+         }
+         return false;
+      }
+      private static function poseY(i:int):Number
+      {
+         if(!slope[i]) return (int(i/48)+1)*40-1;
+         var x:int=i%48,y:int=int(i/48),surface:Number=Number.POSITIVE_INFINITY;
+         for(var sy:int=y;sy<=Math.min(24,y+1);sy++) for(var sx:int=x;sx<=x+1;sx++)
+            if(local.space[sx][sy].diagon!=0) surface=Math.min(surface,local.space[sx][sy].getMaxY((x+1)*40));
+         return isFinite(surface)?surface-1:(y+1)*40-1;
       }
       private static function furnitureAt(w:*,x:Number,y:Number):Boolean
       {
@@ -338,6 +381,7 @@ package
                w.ctr.keyLeft=t.port>=11 && t.port<17;
                w.ctr.keyBeUp=t.port>=17;
                w.ctr.keySit=t.port>=6 && t.port<=10;
+               if((t.port<6 || t.port>=11 && t.port<17) && w.gg.isLaz) w.ctr.keyJump=true;
                if (legTicks>1500) throw new Error("Boundary crossing timed out "+t.port);
                return;
             }
@@ -356,11 +400,11 @@ package
             for (var ahead:int=route.length-1;ahead>0;ahead--)
             {
                var later:int=route[ahead];
-               if (Math.abs((later%48+1)*40-w.gg.X)<22 && Math.abs((int(later/48)+1)*40-1-w.gg.Y)<(support[later]?6:22) &&
+               if (Math.abs((later%48+1)*40-w.gg.X)<22 && Math.abs(poseY(later)-w.gg.Y)<(slope[later]?22:(support[later]?6:22)) &&
                    (!support[later] || w.gg.stay || w.gg.isLaz && w.gg.Y<=(int(later/48)+1)*40))
                { route=route.slice(ahead); break; }
             }
-            var step:int=route[0],tx:Number=(step%48+1)*40,ty:Number=(int(step/48)+1)*40-1;
+            var step:int=route[0],tx:Number=(step%48+1)*40,ty:Number=poseY(step);
             var transferUp:Boolean=climb[step] && route.length>1 && int(route[1]/48)<int(step/48);
             var leaveSide:Boolean=climb[step] && route.length>1 && int(route[1]/48)==int(step/48) && route[1]!=step;
             if (climb[step] || Math.abs(ty-w.gg.Y)>10)
@@ -382,8 +426,18 @@ package
                }
             }
             var dx:Number=tx-w.gg.X,dy:Number=ty-w.gg.Y;
-            if (Math.abs(dx)<(w.gg.isLaz?32:19) && (leaveSide?w.gg.Y<=ty-12 && w.gg.Y>=ty-40:(transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(support[step]?6:20))) &&
-                (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+1) && (!transferUp || w.gg.isLaz))
+            // A movable cabinet can support the pony above an intermediate
+            // floor waypoint. Continue from its actual top rather than trying
+            // to press down through the cabinet to the empty-tile graph.
+            if(route.length>1 && support[step] && !slope[step] && w.gg.stay &&
+               Math.abs(dx)<35 && dy>10 && dy<100 && furnitureAt(w,tx,ty))
+            {
+               logger("NAV-FURNITURE-LANDING "+JSON.stringify({x:w.gg.X,y:w.gg.Y,waypoint:step}));
+               route.shift(); return;
+            }
+            if (Math.abs(dx)<(w.gg.isLaz?32:19) && (leaveSide?w.gg.Y<=ty-12 && w.gg.Y>=ty-40:(transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(slope[step]?42:(support[step]?6:20)))) &&
+                (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+1 ||
+                 optionalWater && t.entry=="optional-water" && w.gg.inWater) && (!transferUp || w.gg.isLaz))
             {
                route.shift();
                if (route.length) return;
@@ -407,6 +461,18 @@ package
             if (Math.abs(w.gg.X-lastX)<0.5 && Math.abs(w.gg.Y-lastY)<0.5) stuck++; else stuck=0;
             lastX=w.gg.X; lastY=w.gg.Y;
             w.ctr.keyLeft=dx<-12; w.ctr.keyRight=dx>12;
+            // Native Unit.checkDiagon only enters an ascending stair from a
+            // solid floor while the player holds up (isUp), or is airborne.
+            // Walking alone deliberately passes underneath this one-way stair.
+            if(dy<-10 && Math.abs(dx)>12 && !w.gg.isLaz)
+            {
+               var rampX:int=int((w.gg.X+(dx>0?60:-60))/40),rampY:int=int((w.gg.Y-2)/40);
+               var hoofX:int=int(w.gg.X/40);
+               if(hoofX>=0 && hoofX<48 && rampY>=0 && rampY<25 && local.space[hoofX][rampY].diagon!=0) w.ctr.keyBeUp=true;
+               if(rampX>=0 && rampX<48)
+                  for(var ry:int=Math.max(0,rampY-1);ry<=Math.min(24,rampY+1);ry++)
+                     if(local.space[rampX][ry].diagon==(dx>0?1:-1)) w.ctr.keyBeUp=true;
+            }
             if (!w.gg.stay && !w.gg.isLaz && support[step] && Math.abs(dy)<160)
             {
                // Releasing a direction in mid-air preserves native inertia.
@@ -432,6 +498,21 @@ package
                w.ctr.keySit=dy>5 && (w.gg.isLaz || w.gg.stay);
                if (dy>20 && stuck>15 && w.gg.stay) w.ctr.keyDubSit=true;
             }
+            if(dy>20 && Math.abs(dx)<30 && w.gg.stay && !w.gg.isLaz)
+            {
+               var sx:int=int(w.gg.X/40),syFeet:int=int((w.gg.Y-1)/40);
+               if(sx>=0 && sx<48 && syFeet>=0 && syFeet<25)
+               {
+                  var incline:int=local.space[sx][syFeet].diagon;
+                  if(incline!=0)
+                  {
+                     // Native down does not drop vertically through a slope.
+                     // Walk down its end, then approach the floor waypoint.
+                     w.ctr.keyLeft=incline>0; w.ctr.keyRight=incline<0;
+                     w.ctr.keySit=false; w.ctr.keyDubSit=false; w.ctr.keyBeUp=false;
+                  }
+               }
+            }
             // Native jumping releases a ladder onto its adjacent landing and
             // steps over movable furniture. Never move or delete the obstacle.
             if (Math.abs(dx)>18 && Math.abs(dy)<50 && w.gg.isLaz || stuck>24 && w.gg.stay && dy<20 && dy>-50)
@@ -443,7 +524,7 @@ package
                if (aheadX>=0 && aheadX<48 && belowY<25)
                {
                   var aheadTile:*=w.loc.space[aheadX][belowY];
-                  if (aheadTile.phis==0 && !aheadTile.shelf)
+                  if (aheadTile.phis==0 && !aheadTile.shelf && aheadTile.diagon==0)
                   { w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; }
                }
             }
@@ -485,6 +566,13 @@ package
          var stream:FileStream=new FileStream();
          stream.open(root.resolvePath("captures/"+name+"-navigation.json"),FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(result)); stream.close();
+         if(!ok && activeWorld!=null && activeWorld.loc!=null)
+         {
+            var failure:XML=<failure roomX={activeWorld.land.locX} roomY={activeWorld.land.locY} mirror={activeWorld.loc.mirror}/>;
+            failure.appendChild(activeWorld.loc.room.xml.copy());
+            stream.open(root.resolvePath("captures/"+name+"-failure-room.xml"),FileMode.WRITE);
+            stream.writeUTFBytes(failure.toXMLString()); stream.close();
+         }
          logger("NAV-END "+JSON.stringify({success:ok,completed:at,targets:targets.length,frames:ticks,reason:message}));
       }
    }

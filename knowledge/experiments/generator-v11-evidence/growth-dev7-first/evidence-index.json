@@ -1,0 +1,49 @@
+{
+  "status": "failed",
+  "binarySha256": "D748E4516C10DA8369DA2EA6F5ECB7155694E21BBE66F58B35BCAF3893DC91C3",
+  "plant": {
+    "passed": true,
+    "milestones": 4,
+    "frames": 5481,
+    "persistentObjects": 190
+  },
+  "stable": {
+    "passed": false,
+    "milestones": 0,
+    "frames": 3629,
+    "observed": "Reached new column, then aimed at floor beneath a one-way staircase. Failure room XML was not captured in this run."
+  },
+  "sewer": "not reached",
+  "mane": "not reached",
+  "files": {
+    "cases.xml": "dcc9d6699afbfd9388168fd801aedb0d7c0a54eea56cbf69f10aaff8f1342927",
+    "manifest.json": "84d69bb9e5e398e4d46dd345e0cd7ddfa6afde64f8a2a7f476b77ed559f21ef5",
+    "production-diag.log": "d3b45e54cf0a53c9dd836674eeb7c1200265f0a3cbed7c175de50a803740dd26",
+    "production-version.json": "37d4c3667afb540e64292105debc98c14ee913e7dd7d9f507774580461de2ef1",
+    "rrstyle-growth-plant-after-growth-layout.xml": "d16402ac8f3fa1fe030cfa7460ae86479b8760adce69ec4b7ce92c3ddedeb28f",
+    "rrstyle-growth-plant-after-growth-pool.xml": "968bb855714bc72c3c3698a54b1a7750c4be2e7a2aa9773b4a3703e716841dd6",
+    "rrstyle-growth-plant-after-growth-topology.json": "73fcf49760e2db42657acc5fc3df265b0b1e51cc4fb88e3ccd0fe5a4477be0c9",
+    "rrstyle-growth-plant-layout.xml": "e7d8acd5979b4d5ad1d9b55744d886fc0e40faa02cbfb2d3c6cc8133e349d99f",
+    "rrstyle-growth-plant-navigation.json": "d6ae90ecea6236d36b05f3e3b24c24a5a95c3f275ea732cc3a8b5b018dd9e370",
+    "rrstyle-growth-plant-new-column.png": "34b5a30969df412345c9384b1dec5fb167dc4346575296ef67b2f2c1ef11fdc6",
+    "rrstyle-growth-plant-new-row.png": "ae1c62a3c732ccc522a674bcd8293946a958431eb8b6c21463480a22dd548ef6",
+    "rrstyle-growth-plant-pool.xml": "0a2f70642d7e7f85289dd9961211c6082fb75dd340635b82eb9a4285152a7fb2",
+    "rrstyle-growth-plant-return-column.png": "b90cb3d657302bd91ab77e380df46e1c69bc37d40803c4c5ab9e85f3b312f837",
+    "rrstyle-growth-plant-return-row.png": "478c8b28e45352cb61a8cc860860a17ac7974929ba1d820d56fe4c50ecadb849",
+    "rrstyle-growth-plant-room.png": "e084bb310d29434d465b1e4facd1f4af4abd3c232f067d980df9f4817097f028",
+    "rrstyle-growth-plant-stage.png": "32b3d56892c6afd8f107c9bc956f3e124c6b4055e3da99014d67bbbb6100cc14",
+    "rrstyle-growth-plant-topology.json": "6ea1fe0b186c19f3c17502391a6862dc9cd714bf29ec01bce021a38b1e2f43d4",
+    "rrstyle-growth-stable-layout.xml": "73c7316dba572317ddda6f55fc3aa9afc68147d15c368d4d36a306d7ea724022",
+    "rrstyle-growth-stable-nav-failure.png": "257e3b458f668b013961944f78daffcf77982506a69b22e0d6378a6f36baf31d",
+    "rrstyle-growth-stable-navigation.json": "d3854594ae108e845dd8a7e99ca0b237e6d0bee3480f5bf455164d99db8bc7b7",
+    "rrstyle-growth-stable-pool.xml": "5350ed518b5af358d68d63ac3b9713994ab4ce1a79ee65983641a2ff217fef6b",
+    "rrstyle-growth-stable-room.png": "a72519dbd5573dd819ff61691d44dbce890f2e90202d3630d1f9ae148bc2c7ee",
+    "rrstyle-growth-stable-stage.png": "80f06f350db2f59b2bab1293a4f98016f169c3ff71adfaf82ff5595dd207fcfc",
+    "rrstyle-growth-stable-topology.json": "c268854a23f7245700b0692a5472b09253684d829d7d10f61243dfd6ad9420e3",
+    "runner.log": "5bff7176628703d079909e159891b854157604deaa2bcbe5bd19cd9aee3c9a0c",
+    "startup-readiness.json": "35f4d535f8383516364ea3c32dba4277ff46bdb7e0198ca070c215028b40bb0e",
+    "stderr.txt": "2bffac922478105a54a0ee573500ae522bb164d3f9be349100a0203d5683687a",
+    "stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "attribution": "Only artifacts named in this run log plus current startup/diagnostics and two navigation reports. Reused harness directory had stale artifacts; excluded from this archive."
+}

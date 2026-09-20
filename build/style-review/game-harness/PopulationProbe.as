@@ -19,11 +19,18 @@ package
       }
       public static function begin(w:*,directory:File,caseId:String):void
       {
-         var records:Array=[],objects:Array=[],circuits:Array=[],counts:Object={},checks:Object={loot:0,lootCreated:0,terminalRobot:0,terminalLock:0,disarm:0,switches:0,stations:0,npc:0,circuitsActivated:0};
+         var records:Array=[],ecologies:Array=[],objects:Array=[],circuits:Array=[],counts:Object={},checks:Object={loot:0,lootCreated:0,terminalRobot:0,terminalLock:0,disarm:0,switches:0,stations:0,npc:0,circuitsActivated:0,ecology:0,slimeMines:0};
          var blueprint:String=w.land.act.allroom.toXMLString();
          for(var x:int=0;x<w.land.maxLocX;x++) for(var y:int=0;y<w.land.maxLocY;y++)
          {
             var loc:*=w.land.locs[x][y][0];
+            if(String(loc.room.xml.@rrGen)=="space-v11")
+            {
+               require(int(loc.room.xml.@rrEcology)==loc.tipEnemy,"host rerolled ecology at "+x+","+y);
+               require(Number(loc.room.xml.@rrDifficulty)==loc.locDifLevel,"host difficulty differs at "+x+","+y);
+               ecologies.push({room:loc.room.id,scene:String(loc.room.xml.@rrTheme),planned:int(loc.room.xml.@rrEcology),actual:loc.tipEnemy,difficulty:loc.locDifLevel});
+               checks.ecology++;
+            }
             for each(var xml:XML in loc.room.xml.obj)
             {
                if(!String(xml.@rrContent).length) continue;
@@ -35,6 +42,11 @@ package
                objects.push({obj:obj,xml:xml,loc:loc});
                records.push({id:id,uid:String(xml.@uid),kind:kind,className:getQualifiedClassName(obj),room:loc.room.id,x:obj.X,y:obj.Y});
                if(kind=="enemy") require(getQualifiedClassName(obj).indexOf("fe.unit::")==0,"enemy class "+id);
+               if(id=="slime" && String(xml.@rrContent)=="hazard")
+               {
+                  require(String(xml.@tr)=="10" && getQualifiedClassName(obj)=="fe.unit::UnitSlime" && obj.levitPoss==false,"slime mine subtype not applied");
+                  checks.slimeMines++;
+               }
                if(kind=="loot" || kind=="reward") require(obj.inter!=null && String(obj.inter.cont)!="", "container "+id);
                if(kind=="trigger")
                {
@@ -139,7 +151,7 @@ package
          require(w.land.act.allroom.toXMLString()==blueprint,"interaction rewrote blueprint");
          var stream:FileStream=new FileStream();
          stream.open(directory.resolvePath("captures/"+caseId+"-population.json"),FileMode.WRITE);
-         stream.writeUTFBytes(JSON.stringify({caseId:caseId,passed:true,rooms:w.land.maxLocX*w.land.maxLocY,counts:counts,checks:checks,records:records,
+         stream.writeUTFBytes(JSON.stringify({caseId:caseId,passed:true,rooms:w.land.maxLocX*w.land.maxLocY,counts:counts,checks:checks,ecologies:ecologies,records:records,
             scope:"Native construction, successful interactions, and real trigger collision using an injected native actor; no assertion about hacking probability or walking to every object"}));
          stream.close();
       }

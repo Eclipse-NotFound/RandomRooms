@@ -1,0 +1,21 @@
+{
+  "status": "failed",
+  "appId": "pferr-style-d71af99b2d5044d8abb9c344d231f946",
+  "note": "New column reached; returning-room roof target timed out after falling at a broken floor gap. One of four milestones passed. City map redesign remains pending Q2. This run does not establish all-direction city traversability.",
+  "files": {
+    "manifest.json": "b049aed39b30f9e1f7822e7c5a9b1f02f759d2c03d5cd16d2e05aea146789787",
+    "runner.log": "54127c7b5a94eaccd7321ac8e57efd388bec112cac61d2f630b8d0695cae2824",
+    "production-diag.log": "8cb6b125aa9167b581c07711b39567f597c2f5c553a999a8ff7e3a2f3dd04e7d",
+    "production-version.json": "4a20841f94662ec885e4162121536cd11e2bf91cde6703d4120d1da89815fa19",
+    "rrstyle-growth-pool.xml": "955530b5a9ee55395bb909d1ceea43702b6122ae9b74ddf14932ce14fc30d5b7",
+    "rrstyle-growth-layout.xml": "7d5c022e9c612d634857d21f2b4eb0beb3b32daed748545a8a2c24cf0f1e588b",
+    "rrstyle-growth-topology.json": "ed20e6174c98d57e3d513555e2ffc3e2a6736618ac6d8d91129e3405ca9498c5",
+    "rrstyle-growth-navigation.json": "f5b9bdb8f92b22a8483af479e8bc88493e105f4b811a3846ea3d15bba87163f1",
+    "rrstyle-growth-failure-room.xml": "88ea2a77eedc42f8af21013de96a89c48bab587954ffe9e6572a5571b14b358c",
+    "rrstyle-growth-nav-failure.png": "5e1b73fd67c9a92c42296e64c5f8c70d11529bbdf50ea3e7d42726749a66b545",
+    "rrstyle-growth-stage.png": "a5f452460b37ddf0356a5ffeb2662c7eac3de7ca78f4cebf5da10b9691150998",
+    "rrstyle-growth-room.png": "5a45a477a087dec8d54069b573469ef9b2fac41192934d44d7ba705ccc258abb",
+    "rrstyle-growth-new-column.png": "dcd24048de3160f63d04f273a1b43ffdebea5cfd1d97c06c04aaefe6f153b9ad",
+    "cases.xml": "f6271f8d4d19d984694fe87fe845e58dd6c79bac1a88365828095b2f01fb2638"
+  }
+}

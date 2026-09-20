@@ -1,0 +1,64 @@
+{
+  "appId": "pferr-style-80ba120901b942a88e68f474c57238c8",
+  "status": "complete",
+  "startedUtc": "2026-09-20T04:03:08.5717271Z",
+  "completedUtc": "2026-09-20T04:04:04.9807341Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-stair-regression"
+  ],
+  "roomIds": [
+    "syn_7"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "stair-regression.xml": "B25E6A24A559591166AE07DFBF649558AC50CD73A6E8986C0F2D95A1B99D0C0B"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-stair-regression-navigation.json": "573CE05267C5DCE60069DBC1586F4B426423BFCE39F4B88FA293350E8F6E6ED5"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-stair-regression",
+      "success": true,
+      "completed": 7,
+      "targets": 7,
+      "frames": 1085,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "7CD8E15D10FE919473E04FCD8C824CF1A712121A6D8D30005A15622229C367C8",
+  "driverSha256": "5F4DA5A0992A8A6D8CE77BD988FBD238CC664470AD6907C7DA3F5B8F75F3735A",
+  "runnerLogSha256": "0C03B1D83B80F7E789EDDDFAADB35787C805294FF33E1A7FB8B1D897F4E8DFDC",
+  "captured": {
+    "rrstyle-stair-regression-stage.png": "1FDBBAF24A2D889389585A0805770DBB3631D1C1C5D260F4B8E04FCD643C9EA2",
+    "rrstyle-stair-regression-room.png": "BEB5B263DC273C6219FE254DDEA8F6F873AFA67C6A4BE18BBAC4E709D24649C3"
+  }
+}

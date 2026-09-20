@@ -1,0 +1,124 @@
+{
+  "appId": "pferr-style-2e324a12d0364e62b74400e415dba0f6",
+  "status": "complete",
+  "startedUtc": "2026-09-20T04:15:00.9001646Z",
+  "completedUtc": "2026-09-20T04:16:11.3433325Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-navigation-plant",
+    "rrstyle-navigation-stable",
+    "rrstyle-navigation-sewer",
+    "rrstyle-navigation-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "6F50C4D234E523833507F137B0E80D9459623B28F6814489DD30C192598969DE"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": false,
+  "populationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "build/RandomRooms-v11-dev-4.swf",
+  "runtimeArtifacts": {
+    "rrstyle-navigation-plant-pool.xml": "220F320B9C13F62D1A898D0C31E4368DDB50BB28CFB0877EA35575128B1D687C",
+    "rrstyle-navigation-plant-layout.xml": "F516BED88D472AB47937F9290CDCC0EB4D0BFD7859F29ED3D6E24A54F9ED01E3",
+    "rrstyle-navigation-plant-topology.json": "80726C4281576E4C114814D8297D1018E84CF73CDE0E01A43215B44484DD6AB2",
+    "rrstyle-navigation-stable-pool.xml": "64558B8A8FE41461F8CA8B38314188E8C0BB2F93789FC0662EFBE504A4BB96F3",
+    "rrstyle-navigation-stable-layout.xml": "D2DE16301215153E0CF7606051E9CFD49E707934389DA31DFE74BA074B1913DD",
+    "rrstyle-navigation-stable-topology.json": "ABE6269A009473CFAC71008E0F7352A5A04FEB4958692B4BA992C72043CE4811",
+    "rrstyle-navigation-sewer-pool.xml": "E87FEBF05A9D89BCC68AA5AFF319C9CF9292BB5992562C38BD142740E8949789",
+    "rrstyle-navigation-sewer-layout.xml": "0423354260CA853459D4D053E8614B8E724135324EF4AD8A11DFCB1C3E5D13EC",
+    "rrstyle-navigation-sewer-topology.json": "5FF86FF726A1D3C224F185047C502DB80F3903879F30A32CD3ED85EA08A975F6",
+    "rrstyle-navigation-mane-pool.xml": "A405D71C459AC77338F6D474DD332C0DCC73AF698F04ADDC36759C473DA1175E",
+    "rrstyle-navigation-mane-layout.xml": "230D1E2C1791302843D7489F00EABB7010C6C87CD4F76CB5686D511CA901184F",
+    "rrstyle-navigation-mane-topology.json": "BF8CD9358FAB488DA379C901952131364899705B57586B2768C9BA6DE1B18614",
+    "production-diag.log": "4BD34CC457B44F7FDA7FD7C17EB787D4C59FBC32BBFB631A92DE5D69154C24B3",
+    "production-version.json": "75EE33DBA6BF2B269C4408B12796CC63C45AC500CEA46865C0046B3750340849",
+    "rrstyle-navigation-mane-population.json": "39298528194009A709A7C35E347D892B3E068BE2F16B4FC8C621AF393E932883",
+    "rrstyle-navigation-plant-population.json": "CB56410C761A17FC1984158F9026689AD9548D63DBE6221166E363BF62A1B116",
+    "rrstyle-navigation-sewer-population.json": "57F92F143F189B083A1178628A91DD85E9837A1C70C08E69EE6501489A628493",
+    "rrstyle-navigation-stable-population.json": "3FB58969CF0D5CE58507E07706EF0A198233A676CFE739550CD0ED165732035B",
+    "startup-readiness.json": "678C645E652F9D51CCAE137C7874C90AAA3FD52B9416E4E34DC9C7D585CD3993"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-navigation-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-stable",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "F643C6C5095A5FB2AD945004DC980695ACF75756215772F50E1E5E8ED22A4828",
+  "driverSha256": "36D548A3FC2470D11F7F810C4D55C9596D4E1E667696637CB9189712CB9B912A",
+  "runnerLogSha256": "09D4AECC63C4BE119B424D7D92B4C9486BE575CE66BDE1FD80BCE2FBCB84E3BA",
+  "captured": {
+    "rrstyle-navigation-plant-stage.png": "347A64AAE2427B4FFD24A95C19E6EF50E58B29F66ED68CA39D74D50CCE73D545",
+    "rrstyle-navigation-plant-room.png": "22171C6EF1D9F57C6EEE17F3690862D9A8820D3B65CE09086DD0EEDD5E9549CD",
+    "rrstyle-navigation-stable-stage.png": "310EE5C9E644A42DC2D6F988A523DA13CC82EBFD5A3617160CC836C1AD87F94F",
+    "rrstyle-navigation-stable-room.png": "DC599DE485342E2AED44D17D50C90C6ABCD560F2DC2B55E8793CC6723D1B0B40",
+    "rrstyle-navigation-sewer-stage.png": "B2DEA23295222FE80FCFE4A1590AFEA3BCCDA1095AD5B44E4B8B1E9614991044",
+    "rrstyle-navigation-sewer-room.png": "AED6F80AD3A1E5436DCBA92169706BC8E8107AF21C91BC02A07FF5AF95119463",
+    "rrstyle-navigation-mane-stage.png": "96F8F466304412F6B7FA5073A40BBF3AFCC998FC4FEFFC65FB3221DE3398D773",
+    "rrstyle-navigation-mane-room.png": "F46E3E790D649728D3B97486878618824E441AFE2372B8C952B77AA108A04F66"
+  }
+}

@@ -33,7 +33,12 @@ def audit(room):
         if not ok: errors.append(why)
     scene = room.get('rrTheme')
     if scene not in RULES: return ['unknown scene'], {}
-    rule = RULES[scene]
+    rule = dict(RULES[scene])
+    if room.get('rrGen')=='space-v11':
+        rule['walls']={'plant':set('CD'),'stable':set('JK'),'sewer':set('ILM'),'mane':set('DN')}[scene]
+        rule['doors']={'plant':{'door1','door2','door3'},'stable':{'stdoor','door1b','door2'},
+                       'sewer':{'door1','door3'},'mane':{'door1','door1a'}}[scene]
+        if scene=='sewer': rule['forms']=rule['forms']|{'dry_tunnels'}
     g = [(a.text or '').strip().split('.') for a in room.findall('a')]
     if len(g) != 25 or {len(row) for row in g} != {48}: return ['dimensions'], {}
     def solid(x,y): return not (0 <= x < 48 and 0 <= y < 25) or g[y][x][0] in WALL
@@ -42,11 +47,16 @@ def audit(room):
     need(walls <= rule['walls'], 'foreign foreground walls: '+str(walls-rule['walls']))
     backgrounds={c[1] for row in g for c in row if len(c)>1 and c[1] in WALL}
     allowed_backgrounds={'plant':set('CDFBJ'),'stable':set('OQNPR'),'sewer':set('CTES'),'mane':set('CDJH')}
+    if room.get('rrGen')=='space-v11': allowed_backgrounds={'plant':set('BCDH'),'stable':set('OQNPR'),'sewer':set('ESH'),'mane':set('CDJH')}
     need(backgrounds <= allowed_backgrounds[scene], 'foreign background wall')
     need(beams <= {rule['beam']}, 'foreign platform material')
     need(room.get('rrForm') in rule['forms'], 'foreign spatial form')
     opt = room.find('options')
-    for attr in ('music','backwall'): need(opt.get(attr) == rule[attr], 'wrong '+attr)
+    for attr in ('music','backwall'):
+        expected = rule[attr]
+        if room.get('rrGen') == 'space-v11' and scene == 'mane' and attr == 'backwall':
+            expected = 'sky' if room.get('rrForm') == 'roof_passage' else 'tWindows'
+        need(opt.get(attr) == expected, 'wrong '+attr)
     ids = Counter(o.get('id') for o in room.findall('obj'))
     backs = Counter(b.get('id') for b in room.findall('back'))
     for obj in room.findall('obj'):
@@ -68,7 +78,8 @@ def audit(room):
              f'back intersects structure {bid}@{x},{y} ({w}x{h})')
     wet={(x,y) for y,row in enumerate(g) for x,c in enumerate(row) if '*' in c}
     pools=room.findall('rrPlan/water')
-    need(bool(wet) == (scene=='sewer'), 'scene water presence')
+    needs_water=scene=='sewer' and room.get('rrForm')!='dry_tunnels'
+    need(bool(wet) == needs_water, 'scene water presence')
     if scene=='sewer':
         need(opt.get('wtip')=='1' and opt.get('wrad')=='3', 'native sewer water options')
         documented=set()
@@ -103,7 +114,7 @@ def audit(room):
     spaces=room.findall('rrPlan/space')
     roles=Counter(s.get('role') for s in spaces if s.get('kind')=='volume')
     if scene=='plant': need(bool(roles['workshop']+roles['warehouse']), 'missing working bay')
-    if scene=='sewer': need(bool(roles['canal']), 'missing canal space')
+    if scene=='sewer' and needs_water: need(bool(roles['canal']), 'missing canal space')
     if scene=='mane': need(bool(roles['street']+roles['roof']), 'missing outside space')
     return errors, dict(scene=scene,form=room.get('rrForm'),water=len(wet),roles=dict(roles),
                         doors={o.get('id'):ids[o.get('id')] for o in room.findall('obj') if o.get('rrFixture')=='door'})
@@ -113,7 +124,7 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('files',nargs='+',type=Path);ap.add_argument('--output',type=Path)
     a=ap.parse_args();errors=[];results=[]
     for path in a.files:
-        rooms=[r for r in ET.parse(path).getroot().findall('room') if r.get('rrGen') in ('space-v9','space-v10')]
+        rooms=[r for r in ET.parse(path).getroot().findall('room') if r.get('rrGen') in ('space-v9','space-v10','space-v11')]
         if not rooms: errors.append({'file':str(path),'errors':['no scene-aware rooms']})
         counts=Counter(); forms=Counter();waters=Counter()
         for r in rooms:

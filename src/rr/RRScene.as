@@ -20,19 +20,19 @@ package rr
             forms:["quarters","atrium_ring","service_cluster"],min:6,max:9,bias:0.46,
             light:"stlight3",hatches:["hatch2"],windows:["window2"],windowMax:3};
          if (id=="sewer") return {wall:"L",trim:"M",backgrounds:["E","C","T"],
-            forms:["canal_gallery","cistern","pump_chain"],min:3,max:6,bias:0.22,
+            forms:["canal_gallery","cistern","pump_chain","dry_tunnels"],min:3,max:6,bias:0.22,
             light:"light1",hatches:["hatch1","hatch1","hatch2"],windows:["window1"],windowMax:1};
          if (id=="mane") return {wall:"N",trim:"N",backgrounds:["C","D","J"],
             forms:["courtyard","broken_facade","roof_passage"],min:4,max:8,bias:0.55,
             light:"light3",hatches:["hatch1","hatch2"],windows:["window1","window1","window2"],windowMax:5};
          throw new Error("Unknown scene: "+id);
       }
-      public static function options(id:String):XML
+      public static function options(id:String,form:String=""):XML
       {
          if (id=="plant") return <options backwall="tBackWall" music="music_plant_1"/>;
          if (id=="stable") return <options backwall="tStConcrete" music="music_stable_1"/>;
          if (id=="sewer") return <options backwall="tMossy" music="music_sewer_1" color="green" wtip="1" wrad="3"/>;
-         if (id=="mane") return <options backwall="sky" music="music_mane_1" vis="2" darkness="-20"/>;
+         if (id=="mane") return <options backwall={form=="roof_passage"?"sky":"tWindows"} music="music_mane_1" vis="2" darkness="-20"/>;
          throw new Error("Unknown scene options: "+id);
       }
       public static function configureLand(world:*,act:*,id:String):void
@@ -63,19 +63,21 @@ package rr
       {
          var a:Array;
          if (role=="street" || role=="roof") return "";
-         if (id=="stable") a=role=="control"?["O","Q"]:(role=="living"?["N","P"]:["R","Q"]);
-         else if (id=="plant") a=role=="office" || role=="living"?["B","J"]:["C","D","F"];
-         else if (id=="sewer") a=role=="control"?["C","T"]:["E","S","T"];
-         else if (id=="mane") a=role=="living"?["H","J"]:["C","D","J"];
+         if (id=="stable") a=role=="living" || role=="kitchen" || role=="medical"?["N"]:
+            (role=="control" || role=="service"?["Q"]:["P"]);
+         else if (id=="plant") a=role=="office"?["B"]:(role=="control"?["H"]:["C","D"]);
+         else if (id=="sewer") a=role=="control"?["H"]:(role=="service"?["S"]:["E"]);
+         else if (id=="mane") a=role=="service" || role=="store"?["H"]:(role=="kitchen" || role=="medical"?["J"]:["C","D"]);
          else throw new Error("Unknown background scene: "+id);
          return String(a[int(random()*a.length)]);
       }
       public static function door(id:String,a:String,b:String,random:Function):String
       {
          if (a=="street" || b=="street" || a=="roof" || b=="roof") return "door1";
-         if (id=="stable") return "stdoor";
-         if (id=="sewer") return random()<0.78?"door1":"door1b";
-         if (id=="plant") return a=="control" || b=="control"?"door2":(random()<0.8?"door1":"door1b");
+         if (id=="stable") return a=="service" || b=="service"?"door1b":(a=="control" || b=="control"?"door2":"stdoor");
+         if (id=="sewer") return a=="control" || b=="control"?"door3":"door1";
+         if (id=="plant") return a=="control" || b=="control"?"door2":
+            ((a=="workshop" || b=="workshop") && random()<0.2?"door3":"door1");
          if (id=="mane") return random()<0.8?"door1":"door1a";
          throw new Error("Unknown door scene: "+id);
       }

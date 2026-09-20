@@ -18,3 +18,8 @@ knowledge/experiments/generator-v9-evidence/** -text -whitespace
 
 design/assets/v10-content/** -text -whitespace
 knowledge/experiments/generator-v10-evidence/** -text -whitespace
+
+design/assets/native-scenes-2026-09-20/** -text -whitespace
+design/assets/v11-three-scenes-first/** -text -whitespace
+design/assets/v11-sewer-refined/** -text -whitespace
+knowledge/experiments/generator-v11-evidence/** -text -whitespace

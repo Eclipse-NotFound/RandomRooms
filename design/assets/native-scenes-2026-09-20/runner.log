@@ -1,0 +1,63 @@
+appId=pferr-style-10c2a01d0eef437cb9cf790d3a387dae
+3616 ready cases=12
+3994 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+10545 newGame(-1) issued, intro skipped
+12759 initial world ready land=rbl
+12873 beginMission rrstyle-native-scene-examples-0
+13616 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+15962 arrived rrstyle-native-scene-examples-0 room=цех1
+18610 capture rrstyle-native-scene-examples-0-stage 1008x729 room=цех1 lightOverlay=true
+21058 capture rrstyle-native-scene-examples-0-room 1920x1000 room=цех1 lightOverlay=false
+21083 beginMission rrstyle-native-scene-examples-1
+23616 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+24239 arrived rrstyle-native-scene-examples-1 room=склад1
+26845 capture rrstyle-native-scene-examples-1-stage 1008x729 room=склад1 lightOverlay=true
+28459 capture rrstyle-native-scene-examples-1-room 1920x1000 room=склад1 lightOverlay=false
+28481 beginMission rrstyle-native-scene-examples-2
+31623 arrived rrstyle-native-scene-examples-2 room=вертикаль
+33618 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+34334 capture rrstyle-native-scene-examples-2-stage 1008x729 room=вертикаль lightOverlay=true
+36555 capture rrstyle-native-scene-examples-2-room 1920x1000 room=вертикаль lightOverlay=false
+36595 beginMission rrstyle-native-scene-examples-3
+39762 arrived rrstyle-native-scene-examples-3 room=кабинеты2
+42372 capture rrstyle-native-scene-examples-3-stage 1008x729 room=кабинеты2 lightOverlay=true
+44648 capture rrstyle-native-scene-examples-3-room 1920x1000 room=кабинеты2 lightOverlay=false
+44666 heartbeat state=2 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44667 beginMission rrstyle-native-scene-examples-4
+47884 arrived rrstyle-native-scene-examples-4 room=зал
+50505 capture rrstyle-native-scene-examples-4-stage 1008x729 room=зал lightOverlay=true
+52566 capture rrstyle-native-scene-examples-4-room 1920x1000 room=зал lightOverlay=false
+52591 beginMission rrstyle-native-scene-examples-5
+53619 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=true rrHost=false
+55756 arrived rrstyle-native-scene-examples-5 room=служ.пом.7
+58418 capture rrstyle-native-scene-examples-5-stage 1008x729 room=служ.пом.7 lightOverlay=true
+60397 capture rrstyle-native-scene-examples-5-room 1920x1000 room=служ.пом.7 lightOverlay=false
+60413 beginMission rrstyle-native-scene-examples-6
+63608 arrived rrstyle-native-scene-examples-6 room=туннели4
+63614 heartbeat state=3 case=6 allLands=true text=true resources=true rrCurrent=true rrHost=false
+66192 capture rrstyle-native-scene-examples-6-stage 1008x729 room=туннели4 lightOverlay=true
+66829 capture rrstyle-native-scene-examples-6-room 1920x1000 room=туннели4 lightOverlay=false
+66850 beginMission rrstyle-native-scene-examples-7
+69966 arrived rrstyle-native-scene-examples-7 room=трубы
+72571 capture rrstyle-native-scene-examples-7-stage 1008x729 room=трубы lightOverlay=true
+73534 capture rrstyle-native-scene-examples-7-room 1920x1000 room=трубы lightOverlay=false
+73554 beginMission rrstyle-native-scene-examples-8
+73620 heartbeat state=3 case=8 allLands=true text=true resources=true rrCurrent=true rrHost=false
+76720 arrived rrstyle-native-scene-examples-8 room=слив2
+79295 capture rrstyle-native-scene-examples-8-stage 1008x729 room=слив2 lightOverlay=true
+80256 capture rrstyle-native-scene-examples-8-room 1920x1000 room=слив2 lightOverlay=false
+80273 beginMission rrstyle-native-scene-examples-9
+83616 heartbeat state=3 case=9 allLands=true text=true resources=true rrCurrent=true rrHost=false
+83616 arrived rrstyle-native-scene-examples-9 room=ко.столовка
+86387 capture rrstyle-native-scene-examples-9-stage 1008x729 room=ко.столовка lightOverlay=true
+87969 capture rrstyle-native-scene-examples-9-room 1920x1000 room=ко.столовка lightOverlay=false
+87994 beginMission rrstyle-native-scene-examples-10
+91127 arrived rrstyle-native-scene-examples-10 room=ко.развалено3
+93617 heartbeat state=3 case=10 allLands=true text=true resources=true rrCurrent=true rrHost=false
+94404 capture rrstyle-native-scene-examples-10-stage 1008x729 room=ко.развалено3 lightOverlay=true
+95636 capture rrstyle-native-scene-examples-10-room 1920x1000 room=ко.развалено3 lightOverlay=false
+95660 beginMission rrstyle-native-scene-examples-11
+98915 arrived rrstyle-native-scene-examples-11 room=ко.кабинеты
+101606 capture rrstyle-native-scene-examples-11-stage 1008x729 room=ко.кабинеты lightOverlay=true
+102690 capture rrstyle-native-scene-examples-11-room 1920x1000 room=ко.кабинеты lightOverlay=false
+102708 DONE 12 cases

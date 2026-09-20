@@ -1,0 +1,22 @@
+{
+  "status": "failed",
+  "appId": "pferr-style-aa5900baeac745629b650868cc87e9b5",
+  "note": "Two horizontal growth milestones completed; movement stopped on an instrument cabinet while aiming at an intermediate floor waypoint. This is not a passed growth run. Only named artifacts written since this run started were frozen.",
+  "files": {
+    "manifest.json": "e0ac411c509dbcd806bba9b77e045b17a640199ebf0252de501a9a583e7f77c2",
+    "runner.log": "0078807c8fb12b9900bea76d530e93ef5d5d77848d4f75511caae9cc1928fa43",
+    "production-diag.log": "00cdcfa091909798d5579c52b457d42efbf6d8cd431f8640dff87c6da0b4e8ac",
+    "production-version.json": "71f4478d3bcc5e84e49daabc0b25c6e9e3a64fd955ee2b22978de2b0b494404f",
+    "rrstyle-growth-pool.xml": "185218785289cc4c28337201ad92ff2da7f2a1b819b8a3a2f63ac12dfce040ce",
+    "rrstyle-growth-layout.xml": "a3da90c133cf792b118878b60d53fa40fef58e1be45f9761321dd342c6d4b5b0",
+    "rrstyle-growth-topology.json": "b7dfe82ad06d025a62ee67a57a6f6be052c11e8225c6d668daa3c138373a0c69",
+    "rrstyle-growth-navigation.json": "a7652b01ebb27c4a946587c3d70d15a288868149ad288b96320134ff34f1a482",
+    "rrstyle-growth-failure-room.xml": "1cb32719f9268cf27f46a26930dd2e725017fc08e2d3bd1eca9a6ada9164611c",
+    "rrstyle-growth-nav-failure.png": "ba5019ef344c9ee738ed629dee0494eebb30440c473131706c269052a29740dc",
+    "rrstyle-growth-stage.png": "b645b8de98687423e266c9b6200f91c2e65ff4c16023c2d096746c72ebb1e532",
+    "rrstyle-growth-room.png": "2b0c2d81b29392c3e4bb9066420c093e930fcac380c35ebedb0ddca1a27b67e3",
+    "rrstyle-growth-new-column.png": "fdc503bc6066db65c0f3258c113e1c9a410c2867ef8b4ef60d867f63f4a8b358",
+    "rrstyle-growth-return-column.png": "b4de44333ac88d1bd3c95f1be1bf1e193cc9d66d590f61ceae5dbea6ffe9ed0b",
+    "cases.xml": "75bfca6f62661012ea1a08d988d8c2918273e8c3e38541536da1f3a98ce53ea4"
+  }
+}

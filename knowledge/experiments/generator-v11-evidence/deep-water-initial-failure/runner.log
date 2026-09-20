@@ -1,0 +1,47 @@
+appId=pferr-style-d721302990c745c59e333ba38efd6f65
+4272 ready cases=1
+4742 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+11725 newGame(-1) issued, intro skipped
+14248 initial world ready land=rbl
+14365 heartbeat state=2 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14366 beginMission rrstyle-v11-deep-water-probe
+17582 arrived rrstyle-v11-deep-water-probe room=syn_36
+20364 capture rrstyle-v11-deep-water-probe-stage 1008x729 room=syn_36 lightOverlay=true
+21796 capture rrstyle-v11-deep-water-probe-room 1920x1000 room=syn_36 lightOverlay=false
+21814 WATER-PROBE enter native basin then return to its dry deck; normal controls
+21843 NAV-SAMPLE {"y":280,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":true,"target":0,"frame":1,"x":1161.8,"route":[],"ladder":0}
+23835 NAV-SAMPLE {"y":280,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":true,"target":0,"frame":61,"x":1578.3,"route":[331,475,474,714,713,702,1134],"ladder":0}
+24272 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25836 NAV-SAMPLE {"y":353.5,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":121,"x":1752.8665285358657,"route":[474,714,713,702,1134],"ladder":0}
+27843 NAV-SAMPLE {"y":550.75,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":181,"x":1710.8900000000006,"route":[713,702,1134],"ladder":0}
+29836 NAV-SAMPLE {"y":600,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":true,"target":0,"frame":241,"x":1329.410000000001,"route":[702,1134],"ladder":0}
+31841 NAV-SAMPLE {"y":784.4165425152,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":301,"x":1239.210000000001,"route":[1134],"ladder":0}
+33834 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":361,"x":1239.210000000001,"route":[1134],"ladder":0}
+34268 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+35284 NAV-STUCK {"y":960,"dy":-1,"tx":1240,"x":1239.210000000001,"ty":959,"dx":0.7899999999990541,"stayPhis":0}
+35834 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":421,"x":1239.210000000001,"route":[1134],"ladder":0}
+37833 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":481,"x":1239.210000000001,"route":[1134],"ladder":0}
+39839 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":541,"x":1239.210000000001,"route":[1134],"ladder":0}
+41835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":601,"x":1239.210000000001,"route":[1134],"ladder":0}
+43836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":661,"x":1239.210000000001,"route":[1134],"ladder":0}
+44269 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+45835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":721,"x":1239.210000000001,"route":[1134],"ladder":0}
+47848 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":781,"x":1239.210000000001,"route":[1134],"ladder":0}
+49841 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":841,"x":1239.210000000001,"route":[1134],"ladder":0}
+51835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":901,"x":1239.210000000001,"route":[1134],"ladder":0}
+53835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":961,"x":1239.210000000001,"route":[1134],"ladder":0}
+54267 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+55841 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1021,"x":1239.210000000001,"route":[1134],"ladder":0}
+57836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1081,"x":1239.210000000001,"route":[1134],"ladder":0}
+59836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1141,"x":1239.210000000001,"route":[1134],"ladder":0}
+61835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1201,"x":1239.210000000001,"route":[1134],"ladder":0}
+63835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1261,"x":1239.210000000001,"route":[1134],"ladder":0}
+64268 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+65836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1321,"x":1239.210000000001,"route":[1134],"ladder":0}
+67836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1381,"x":1239.210000000001,"route":[1134],"ladder":0}
+69836 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1441,"x":1239.210000000001,"route":[1134],"ladder":0}
+71835 NAV-SAMPLE {"y":960,"task":{"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0},"stay":false,"target":0,"frame":1501,"x":1239.210000000001,"route":[1134],"ladder":0}
+73302 capture rrstyle-v11-deep-water-probe-nav-failure 1920x1000 room=syn_36 lightOverlay=false
+73307 NAV-END {"completed":0,"targets":2,"frames":1501,"reason":"Error: Movement timed out at {\"x1\":38,\"space\":0,\"entry\":\"optional-water\",\"y\":0,\"kind\":\"space\",\"x0\":23,\"floor\":23,\"x\":0}","success":false}
+73308 DEVELOPMENT-VERSION export error TypeError: Error #1009: Cannot access a property or method of a null object reference.
+73309 FAIL Error: Movement timed out at {"x1":38,"space":0,"entry":"optional-water","y":0,"kind":"space","x0":23,"floor":23,"x":0}

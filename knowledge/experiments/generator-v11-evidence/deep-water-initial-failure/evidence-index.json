@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "note": "Reached actual pool bottom with 1213 wet frames; test incorrectly required dry standing state while underwater. Return not attempted.",
+  "appId": "pferr-style-d721302990c745c59e333ba38efd6f65",
+  "files": {
+    "manifest.json": "b31ec5968d0ea270a663f0894fed1622224656c692a3d7e28166c8bba522e3ec",
+    "runner.log": "5ad69f0a4500070df482a289c880bb26fa18315697df2d62b1cb479827c1c66b",
+    "rrstyle-v11-deep-water-probe-navigation.json": "058f8c0471f96f56ba9e9f2dd3aba124a8f75e2ae738e2c448200577a57dd042",
+    "rrstyle-v11-deep-water-probe-failure-room.xml": "dc962d567a8734ce9ab31b6171536ecce56ee6186ccd3282dde14936c411343b",
+    "rrstyle-v11-deep-water-probe-nav-failure.png": "bd6423abe71da37f9d1e45818c143f8d3c1f0eb7f6e1418c384487738455dde7",
+    "rrstyle-v11-deep-water-probe-room.png": "b62f632a699d3e10705aac9fc85f25b11f0dccc96147d1bc88fa81dd00681341",
+    "rrstyle-v11-deep-water-probe-stage.png": "250289e3b21382c8002235e568def21160aa369777c6822ea5dad6809ef016b2",
+    "cases.xml": "f631455225e24f616d29faf658add79e8f643605f7a67810ebe71e5c223140c8"
+  }
+}

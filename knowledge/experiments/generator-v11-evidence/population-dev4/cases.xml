@@ -1,0 +1,6 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="false" waterProbe="false" population="true" contentGallery="false" populationDepth="3" development="true">
+  <case id="rrstyle-navigation-plant" landId="random_rooms" scene="plant" />
+  <case id="rrstyle-navigation-stable" landId="random_rooms" scene="stable" />
+  <case id="rrstyle-navigation-sewer" landId="random_rooms" scene="sewer" />
+  <case id="rrstyle-navigation-mane" landId="random_rooms" scene="mane" />
+</cases>

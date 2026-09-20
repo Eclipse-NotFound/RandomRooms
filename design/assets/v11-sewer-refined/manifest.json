@@ -1,0 +1,65 @@
+{
+  "appId": "pferr-style-a99b85f9c05744aa84a7eae4dc37612e",
+  "status": "complete",
+  "startedUtc": "2026-09-20T04:24:21.8243883Z",
+  "completedUtc": "2026-09-20T04:25:04.3198060Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-v11-sewer-refined-0",
+    "rrstyle-v11-sewer-refined-1",
+    "rrstyle-v11-sewer-refined-2",
+    "rrstyle-v11-sewer-refined-3"
+  ],
+  "roomIds": [
+    "syn_32",
+    "syn_35",
+    "syn_36",
+    "syn_37"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-sewer-refined.xml": "945E8B2E985846AD64EE39D4097197F4D39FBE8CC77934614C32D40B7A69E9B7"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": false,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "",
+  "runtimeArtifacts": {},
+  "topology": [],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "626C1F9E4138B55151D29776F4FEF45928F3C3810D314CF70D4B37B31384E86D",
+  "driverSha256": "26F0FD68F57AE3FB6ED8BB568E2549EB8E931A8842FD04E9D5D23F12A7C7E29E",
+  "runnerLogSha256": "56F56A19EF6A6AB594D68879E5AD70158E8106F4DDA2CBBC53539B70E95C9A90",
+  "captured": {
+    "rrstyle-v11-sewer-refined-0-stage.png": "D6DB9AFD99D9AD348939C33BC827CD4AE05EB0623D02F67228BA3D9A10203E61",
+    "rrstyle-v11-sewer-refined-0-room.png": "69AC5215E78695958F8CC0181A3769A67044B321CFDB041B1F32198F48DCC862",
+    "rrstyle-v11-sewer-refined-1-stage.png": "E79907D03585D3A334422B99CAB6C1351BACABC3A8B27511A8549E842BE39DB5",
+    "rrstyle-v11-sewer-refined-1-room.png": "0C2E2FB38BFA5CB6C8D2B46EE63E886408614BB9F8FDA77AD99A76706F3B3457",
+    "rrstyle-v11-sewer-refined-2-stage.png": "591C0D48CCE38A9F6F189A42319A874DDAE2749335FE1E567208572705B89B97",
+    "rrstyle-v11-sewer-refined-2-room.png": "2188BB185AADD642E1D83C64262D9ECA69BA01CFA01233031A8FFDAFD30353B6",
+    "rrstyle-v11-sewer-refined-3-stage.png": "570DD8A1D94749FE6A7EA5244AD48D678F3E902D8CAB0EE2A7449FF1F681EF17",
+    "rrstyle-v11-sewer-refined-3-room.png": "D78544900F993EAED82CAEE4CF00C36C93D9FD49040B310497EB3AA5B589A373"
+  }
+}

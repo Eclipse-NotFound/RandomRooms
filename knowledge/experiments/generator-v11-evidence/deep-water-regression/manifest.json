@@ -1,0 +1,64 @@
+{
+  "appId": "pferr-style-81135ca35e2e44a9bba196f3a396eb16",
+  "status": "complete",
+  "startedUtc": "2026-09-20T05:02:03.6130615Z",
+  "completedUtc": "2026-09-20T05:02:43.4427488Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-v11-deep-water-probe"
+  ],
+  "roomIds": [
+    "syn_36"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-deep-water-probe.xml": "0138A0171451E2DB62F958C7B4AFC2396248F433F50261CA51D24B9BFF0E3584"
+  },
+  "hostSha256": "5300EC4874E0404D298BB58C5D2A7469E82F93B455AD29AD64DD2E29D17241E7",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "",
+  "runtimeArtifacts": {
+    "rrstyle-v11-deep-water-probe-navigation.json": "643EA72147835DE4CB07C5CF33E080E33A02FB6F78BFFD30AF78CA056F20BCBA"
+  },
+  "topology": [],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-v11-deep-water-probe",
+      "success": true,
+      "completed": 2,
+      "targets": 2,
+      "frames": 487,
+      "milestones": 0
+    }
+  ],
+  "casesSha256": "F631455225E24F616D29FAF658ADD79E8F643605F7A67810EBE71E5C223140C8",
+  "driverSha256": "509220DA51EFF40C12BD72DA5A2148C8596A0EFD5F96AFD3BAA99198E7A80E08",
+  "runnerLogSha256": "ABFC4E14145F0327696B0B00B50BBBB39293F0737B0099D7173B8236C24BF1B6",
+  "captured": {
+    "rrstyle-v11-deep-water-probe-stage.png": "CC14753AF65F10257A84ECC973215549B8BC66C97413D6424B110FD08CA8288E",
+    "rrstyle-v11-deep-water-probe-room.png": "640ACA44963DBDDBA6D4DBF472B16D1D01C22F030039ED6BCAEFC0E2B316254B"
+  }
+}

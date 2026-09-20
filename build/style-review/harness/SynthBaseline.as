@@ -56,6 +56,7 @@ package
             var result:XML = <baseline generator={String(settings.versionTag)} baseSeed={baseSeed} samplesPerBiome={sampleCount}/>;
             var biomes:Array = ["stable", "sewer", "plant", "mane"];
             var count:int = 0;
+            var rejections:Object={};
             for (var b:int = 0; b < biomes.length; b++)
             {
                for (var n:int = 0; n < sampleCount; n++)
@@ -68,11 +69,14 @@ package
                   room.@harnessSeed = seed;
                   room.@harnessValid = RRSynth.validateRoom(room);
                   result.appendChild(room);
+                  for(var rejected:String in synth.rejections)
+                     rejections[rejected]=int(rejections[rejected])+int(synth.rejections[rejected]);
                   count++;
                   writeText(outputStem + "-progress.txt", "generated=" + count + "\n");
                }
             }
             result.@count = count;
+            writeText(outputStem+"-rejections.json",JSON.stringify(rejections));
             writeText(outputName, result.toXMLString() + "\n");
             if (int(settings.mapSize)>0)
             {

@@ -120,7 +120,7 @@ package rr
             var kind:String="";
             for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
             var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports,
-               int(land["act"]["landStage"]),show,x==0 && y==0);
+               int(land["act"]["landStage"]),show,x==0 && y==0,{difficulty:land["landDifLevel"],parity:x+y});
             xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
             if (w>0 || h>0) xml.@rrGrowth="1";
             if (x==0 && y==0) xml.@name="rr_begin";
@@ -137,7 +137,11 @@ package rr
             var cell:Object=staged[i];
             cell.xml=pool.room[i];
             cell.loc=land["newLoc"](new RoomClass(cell.xml),cell.x,cell.y,0,
-               {mirror:cell.mirror,water:null,ramka:null,backform:0,transpFon:false});
+               {mirror:cell.mirror,water:null,ramka:null,backform:0,transpFon:biome=="mane"});
+            // Land.setLocDif rerolls entip even when XML explicitly specifies
+            // one. Restore the planned ecology before native contents decode,
+            // including alarm/reinforcement and robot-cell follow-up spawns.
+            cell.loc["tipEnemy"]=int(cell.xml.@rrEcology);
             cell.loc["pass_r"]=[]; cell.loc["pass_d"]=[];
          }
          // Publish only after every XML and Location was constructed.

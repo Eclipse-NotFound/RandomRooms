@@ -8,7 +8,7 @@ package rr
    {
       public static function check(plan:RRArchitecture,dry:Boolean=false):void
       {
-         var clear:Array=[],climb:Array=[],stand:Array=[],hard:Array=[];
+         var clear:Array=[],climb:Array=[],stand:Array=[],hard:Array=[],slope:Array=[];
          var forward:Array=[],reverse:Array=[];
          var glass:Object={};
          for each (var window:Object in plan.windows)
@@ -27,10 +27,14 @@ package rr
             climb[i]=false;
             if (String(plan.grid[y][x+1]).indexOf("А")>=0) climb[i]=true;
             stand[i]=false;
+            slope[i]=false;
+            for (var sy:int=y;sy<=Math.min(24,y+1);sy++) for (var sx:int=x;sx<=x+1;sx++)
+               if(/[ВГ]/.test(String(plan.grid[sy][sx]))) slope[i]=true;
             if (y<24)
                for (var xx:int=x;xx<=x+1;xx++)
                   if (hard[(y+1)*48+xx] || String(plan.grid[y+1][xx]).indexOf("-")>=0 ||
                      (String(plan.grid[y+1][xx]).indexOf("А")>=0 && String(plan.grid[y][xx]).indexOf("А")<0)) stand[i]=true;
+            if(slope[i]) stand[i]=true;
          }
          for (y=1;y<25;y++) for (x=0;x<47;x++)
          {
@@ -40,6 +44,12 @@ package rr
             {
                var n:int=i+dx;
                if (x+dx>=0 && x+dx<47 && clear[n] && (stand[i] || stand[n] || climb[i] || climb[n])) edge(forward,reverse,i,n);
+               for each(var dy:int in [-1,1])
+               {
+                  var diagonal:int=n+dy*48;
+                  if(x+dx>=0 && x+dx<47 && clear[diagonal] && (slope[i] || slope[diagonal]) &&
+                     (clear[n] || clear[i+dy*48])) edge(forward,reverse,i,diagonal);
+               }
             }
             n=i-48;
             if (clear[n] && (climb[i] || climb[n])) edge(forward,reverse,i,n);

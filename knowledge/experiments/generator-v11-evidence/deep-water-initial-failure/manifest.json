@@ -1,0 +1,11 @@
+{
+  "appId": "pferr-style-d721302990c745c59e333ba38efd6f65",
+  "status": "failed",
+  "startedUtc": "2026-09-20T04:59:16.6330544Z",
+  "error": "AIR returned 1; inspect app/captures/runner.log and app/stdout.txt",
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "v11-deep-water-probe.xml": "0138A0171451E2DB62F958C7B4AFC2396248F433F50261CA51D24B9BFF0E3584"
+  }
+}

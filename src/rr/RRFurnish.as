@@ -16,7 +16,8 @@ package rr
          bookcase:[2,3,0],locker:[2,3,0],couch:[2,1,0],bed:[4,1,0],
          mcrate1:[2,2,0],box:[2,2,0],bigbox:[3,2,0],instr1:[2,2,0],
          bigmed:[2,3,0],medbox:[1,1,1],wcup:[1,1,1],wallcab:[1,1,1],
-         cup:[2,2,0],ccup:[1,1,0],tap:[1,2,0],fridge:[1,2,0],trash:[1,1,0]
+         cup:[2,2,0],ccup:[1,1,0],tap:[1,2,0],fridge:[1,2,0],trash:[1,1,0],
+         woodbox:[2,2,0],mcrate2:[2,2,0],tumba1:[1,1,0],tumba2:[1,1,0]
       };
       private static const BACKS:Object = {
          stwindow:[4,2],bwindow:[4,2],stlight3:[2,1],stlight4:[2,1],
@@ -52,13 +53,13 @@ package rr
             if (role=="control")
                return group(7,4,[["instr1",0,0],["table1",3,0]],[["pult",3,-2],["pipe4",6,-3],["pipe4",6,-1],["light1",2,-4]]);
             if (role=="store")
-               return group(6,4,[["locker",0,0],["instr1",4,0]],[["storage",2,-2],["light1",3,-4]]);
+               return group(6,4,[["locker",0,0],["mcrate2",4,0]],[["storage",2,-2],["light1",3,-4]]);
             return group(6,4,[["table1",0,0],["instr1",4,0]],[["pipe4",3,-3],["pipe4",3,-1],["vent",0,-3],["light1",5,-4]]);
          }
          if (compact)
          {
-            var small:String=role=="office"?"filecab":(role=="living"?"cup":
-               (role=="service" || role=="workshop"?"instr1":(theme=="stable"?"mcrate1":"box")));
+            var small:String=role=="office"?"filecab":(role=="living"?(theme=="stable"?"tumba2":"tumba1"):
+               (role=="service" || role=="workshop"?"instr1":(theme=="stable"?"mcrate1":(theme=="plant"?"woodbox":"mcrate2"))));
             return group(3,4,[[small,0,0]],[[light,0,-4]]);
          }
          if (role == "office")
@@ -67,43 +68,49 @@ package rr
                return group(7,4,[["table2",1,0],["filecab",4,0],["filecab",5,0]],
                   [["stwindow",0,-3],["wires1",6,-3],["wires1",6,-1],["stlight4",1,-4]]);
             if (rnd() < 0.5)
-               return group(7,4,[["table2",1,0],["filecab",4,0],["filecab",5,0]],
+               return group(7,4,[["table",1,0],["filecab",4,0],["filecab",5,0]],
                   [["bwindow",0,-3],["clock",5,-3],[light,2,-4]]);
             return group(7,4,[["bookcase",0,0],["table",3,0],["trash",6,0]],
                [["poster",3,-3],[light,4,-4]]);
          }
          if (role == "living")
          {
-            if (theme=="stable" && rnd()<0.6)
-               return group(7,4,[["bed",0,0],["cup",5,0]],[["stwindow",1,-3],["stlight3",4,-4]]);
+            if (theme=="stable")
+               return rnd()<0.65?group(7,4,[["bed",0,0],["tumba2",4,0],["cup",5,0]],[["stwindow",1,-3],["stlight3",4,-4]]):
+                  group(7,4,[["couch",0,0],["table2",3,0],["tumba2",6,0]],[["stwindow",0,-3],["stlight3",4,-4]]);
             if (rnd() < 0.55)
                return group(8,3,[["couch",0,0],["table1",3,0],["cup",6,0]],
                   [["poster",0,-3],[light,4,-3]]);
             return group(6,4,[["table1",0,0],["ccup",2,0],["tap",3,0],["fridge",5,0],
                   ["wcup",2,-3],["wcup",3,-3]],[[light,0,-4]]);
          }
-         if (role == "workshop" || role == "control")
+         if (role=="kitchen")
+            return group(7,4,[[theme=="stable"?"table2":"table1",0,0],["ccup",3,0],["tap",4,0],["fridge",6,0],
+               ["wcup",3,-3],["wcup",4,-3]],[[light,0,-4]]);
+         if (role == "workshop" || role == "control" || role=="service")
          {
             if (theme=="plant" && role=="workshop")
                return group(9,5,[["instr1",5,0],["box",7,0]],[["zavod1",0,-2],["pult",5,-2],["light4",3,-5],["konstr",8,-4]]);
-            if (rnd() < 0.65)
+            if (role=="control")
                return group(8,4,[["bigbox",0,0]],[["electro",0,-3],["pult",3,-1],
                   ["monitor",3,-2],["monitor",3,-3],["electro",5,-3],[light,3,-4]]);
             return group(7,4,[["table1",0,0],["instr1",4,0]],
                [["vent",1,-3],["pipe4",6,-3],["pipe4",6,-1],[light,2,-4]]);
          }
-         if (role == "service")
+         if (role == "medical")
          {
             return group(7,4,[["table",0,0],["bigmed",4,0],["medbox",2,-2]],
                [["vent",0,-3],["pipe4",6,-3],["pipe4",6,-1],[light,2,-4]]);
          }
-         if (role == "hall") return kit(choose(["living","office","control"]));
+         if (role=="hall" || role=="corridor")
+            return theme=="stable"?group(6,4,[["couch",0,0],["tumba2",4,0]],[["stwindow",0,-3],[light,3,-4]]):
+               group(5,3,[["trash",3,0]],[[light,1,-3]]);
          // Storage bays use back-layer shelves for density, leaving front space.
          var count:int = 2 + int(rnd()*2);
          var o:Array=[], b:Array=[];
          for (var i:int=0;i<count;i++)
          {
-            o.push([theme=="stable"?"mcrate1":"box",i*3,0]);
+            o.push([theme=="stable"?"mcrate1":(theme=="plant"?"woodbox":"mcrate2"),i*3,0]);
             b.push([theme=="mane"?"stillage":"depot",i*3,-2]);
          }
          b.push([light,1,-4]);
@@ -168,7 +175,18 @@ package rr
                   }
                   for (y=r.top+3;y<r.floor;y+=2) facility("pipe4",r.x0+1,y,r);
                   for (x=r.x0;x+9<=r.x1;x+=10) facility(rnd()<0.5?"potek":"plesen",x,r.floor-3,r);
-                  if (w>=12 && h>=9) facility("pipe1",r.x0+1,r.top+4,r);
+                  if (w>=12 && h>=9)
+                     for(x=r.x0+1;x+9<=r.x1;x+=10) facility("pipe1",x,r.top+4,r);
+                  // The masonry cuts away to moss at an actual drainage band;
+                  // pipes terminate at the basin rather than floating above it.
+                  if(r.role=="canal") for each(var basin:Object in plan.pools)
+                  {
+                     if(basin.x0<r.x0 || basin.x1>r.x1 || basin.bottom!=r.floor) continue;
+                     facility("stok",basin.x0,basin.top-2,r);
+                     if(basin.x1-basin.x0>13) facility("stok2",basin.x1-2,basin.top-1,r);
+                     for(x=basin.x0;x+3<=basin.x1;x+=4) facility("railing",x,basin.deck-1,r);
+                     for(x=r.x0;x+9<=r.x1;x+=10) facility("moss",x,basin.top-1,r);
+                  }
                }
                facility("light1",r.x0+int(w/2),r.top,r);
             }

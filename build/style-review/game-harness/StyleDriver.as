@@ -397,7 +397,7 @@ package
                NavigationProbe.step(w);
                if (NavigationProbe.done)
                {
-                  if (!NavigationProbe.success) { exportDevelopmentLog(); fail(NavigationProbe.reason); return; }
+                  if (!NavigationProbe.success) { if (developmentMode) exportDevelopmentLog(); fail(NavigationProbe.reason); return; }
                   if (growthEnabled) dumpRuntimePool(w,String(cases[index].@id)+"-after-growth");
                   index++; state=2;
                }
@@ -450,7 +450,8 @@ package
          {
             if ("door" in obj && obj.door > 0 && obj.inter != null && !obj.inter.open && obj.inter.active &&
                 ((obj.X-w.gg.X)*direction>=-10 || Math.abs(obj.X-w.gg.X)<(obj.scX+w.gg.scX)/2) &&
-                Math.abs(obj.X-w.gg.X)<100 && Math.abs(obj.Y-w.gg.Y)<100)
+                Math.abs(obj.X-w.gg.X)<100 && Math.abs(obj.Y-w.gg.Y)<100 &&
+                w.loc.isLine(w.gg.X,w.gg.Y-w.gg.scY*0.75,obj.X,obj.Y-obj.scY/2,obj))
             {
                if (obj !== doorTarget) { doorTarget=obj; log("DOOR target="+obj.id+" x="+obj.X+" lock="+obj.inter.lock+" mine="+obj.inter.mine); }
                aimObject(w,obj);

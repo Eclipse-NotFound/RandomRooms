@@ -1,0 +1,25 @@
+appId=pferr-style-a99b85f9c05744aa84a7eae4dc37612e
+3824 ready cases=4
+7740 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=true rrHost=false
+10385 newGame(-1) issued, intro skipped
+12775 initial world ready land=rbl
+12882 beginMission rrstyle-v11-sewer-refined-0
+13847 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+16022 arrived rrstyle-v11-sewer-refined-0 room=syn_32
+18857 capture rrstyle-v11-sewer-refined-0-stage 1008x729 room=syn_32 lightOverlay=true
+19662 capture rrstyle-v11-sewer-refined-0-room 1920x1000 room=syn_32 lightOverlay=false
+19684 beginMission rrstyle-v11-sewer-refined-1
+22849 arrived rrstyle-v11-sewer-refined-1 room=syn_35
+23844 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25530 capture rrstyle-v11-sewer-refined-1-stage 1008x729 room=syn_35 lightOverlay=true
+26377 capture rrstyle-v11-sewer-refined-1-room 1920x1000 room=syn_35 lightOverlay=false
+26396 beginMission rrstyle-v11-sewer-refined-2
+29456 arrived rrstyle-v11-sewer-refined-2 room=syn_36
+32171 capture rrstyle-v11-sewer-refined-2-stage 1008x729 room=syn_36 lightOverlay=true
+33587 capture rrstyle-v11-sewer-refined-2-room 1920x1000 room=syn_36 lightOverlay=false
+33604 beginMission rrstyle-v11-sewer-refined-3
+33845 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+36753 arrived rrstyle-v11-sewer-refined-3 room=syn_37
+39411 capture rrstyle-v11-sewer-refined-3-stage 1008x729 room=syn_37 lightOverlay=true
+41278 capture rrstyle-v11-sewer-refined-3-room 1920x1000 room=syn_37 lightOverlay=false
+41301 DONE 4 cases

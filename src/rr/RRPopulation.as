@@ -7,6 +7,7 @@ package rr
       public var objects:Array=[];
       public var mood:String;
       public var stage:int;
+      public var ecology:RREcology;
       private var p:RRArchitecture;
       private var random:Function;
       private var used:Object={};
@@ -27,11 +28,13 @@ package rr
          raider:[2,2],slaver:[2,2],merc:[2,2],zebra:[2,2],zombie:[2,2],
          alicorn:[2,3],hellhound:[2,3],necros:[2,2],robot:[2,2],protect:[2,2],gutsy:[2,2],eqd:[2,2],
          bloat:[1,1],tarakan:[1,1],rat:[1,1],ant:[1,1],molerat:[2,1],scorp:[2,1],
-         slime:[1,1],bloodwing:[1,1],fish:[1,1],roller:[1,1],spritebot:[1,1],msp:[1,1]
+         slime:[1,1],bloodwing:[1,1],fish:[1,1],roller:[1,1],spritebot:[1,1],msp:[1,1],vortex:[1,1]
       };
-      public function RRPopulation(plan:RRArchitecture,rnd:Function,n:int,depth:int,peaceful:Boolean,safe:Boolean)
+      public function RRPopulation(plan:RRArchitecture,rnd:Function,n:int,depth:int,peaceful:Boolean,safe:Boolean,context:Object=null)
       {
          p=plan; random=rnd; prefix="rrp_"+n+"_"; stage=Math.max(0,depth);
+         ecology=new RREcology(p.theme,context && context.hasOwnProperty("difficulty")?Number(context.difficulty):8+2*stage,
+            context && context.hasOwnProperty("parity")?int(context.parity):n,rnd);
          // Native setDoor/setNoObj suppresses removable objects farther from
          // an opening than the visible border. Reserve that whole landing for
          // contents AND subsequent furniture, including mirrored placements.
@@ -102,15 +105,20 @@ package rr
       }
       private function rewards():void
       {
-         var containers:Array=p.theme=="plant"?["chest","ammobox","explbox","instr2","weapbox"]:
-            (p.theme=="stable"?["basechest","medbox","bigmed","bookcase","case","cryocap"]:
-             (p.theme=="sewer"?["chest","ammobox","instr1","explbox","case"]:["chest","ammobox","medbox","bookcase","case"]));
          var count:int=mood=="cache" || mood=="guarded"?3:1+int(random()*2);
-         for(var i:int=0;i<count;i++) add(pick(containers),"loot");
+         var places:Array=p.regions.concat(); shuffle(places);
+         for(var i:int=0;i<count && i<places.length;i++)
+         {
+            var r:Object=places[i], containers:Array;
+            if(r.role=="medical") containers=["medbox","bigmed","case"];
+            else if(r.role=="office" || r.role=="living") containers=["bookcase","case","medbox"];
+            else if(r.role=="control") containers=["instr2","case","chest"];
+            else containers=p.theme=="sewer"?["chest","instr1","case"]:["chest","ammobox","instr2","explbox"];
+            add(pick(containers),"loot","floor",null,r);
+         }
          if(mood=="guarded" || mood=="cache")
          {
-            var prize:String=pick(["safe","wallsafe","weapcase","weapbox","bigexpl"]);
-            if(p.theme=="sewer" && prize=="wallsafe") prize="safe";
+            var prize:String=pick(p.theme=="sewer"?["safe","chest","instr2"]:["safe","wallsafe","weapcase","weapbox"]);
             add(prize,"reward");
          }
          // A lock-control terminal always has an actual hackable optional cache.
@@ -130,7 +138,7 @@ package rr
             var reward:XML=add("chest","reward","floor",{lock:1+Math.min(4,int(stage/2)),mine:0});
             if(reward!=null)
             {
-               var button:XML=add(pick(["knop1","knop2","knop3","knop4"]),"switch");
+               var button:XML=add(p.theme=="stable"?"knop1":(p.theme=="plant"?pick(["knop1","knop3"]):"knop3"),"switch");
                if(button!=null) button.appendChild(<scr act="unlock" targ={String(reward.@uid)}/>);
             }
          }
@@ -139,29 +147,34 @@ package rr
       {
          if(random()<0.3 || mood=="arrival")
          {
-            var stations:Array=p.theme=="plant"?["work","work","himlab"]:
-               (p.theme=="sewer"?["work","stove"]:["work","himlab","stove"]);
-            add(pick(stations),"service");
+            var rooms:Array=p.regions.concat(); shuffle(rooms);
+            for each(var r:Object in rooms)
+            {
+               var id:String="";
+               if(r.role=="workshop" || r.role=="service" || r.role=="control") id="work";
+               if(r.role=="medical" && p.theme!="plant" && p.theme!="sewer") id="himlab";
+               if(r.role=="kitchen") id="stove";
+               if(id && add(id,"service","floor",null,r)!=null) break;
+            }
          }
          if(mood=="quiet" && p.theme!="sewer" && random()<0.3)
             add(pick(["vendor","vendor","doctor"]),"service");
       }
       private function enemies():void
       {
-         var groups:Array;
-         if(p.theme=="sewer") groups=[["zombie"],["rat","molerat","slime","ant"],["bloat","bloodwing","tarakan"]];
-         else if(p.theme=="plant") groups=[["raider"],["robot","protect"],["rat","scorp","tarakan","molerat"]];
-         else if(p.theme=="stable") groups=[["zombie"],["robot","protect"],["raider"],["rat","tarakan","slime"]];
-         else groups=[["raider"],["zombie"],["merc"],["bloat","bloodwing","scorp","ant"]];
-         if(stage>=2 && p.theme=="plant") groups.push(["gutsy","robot","msp","roller"]);
-         if(stage>=3 && p.theme=="stable") groups.push(["gutsy","spritebot","roller"]);
-         if(stage>=3 && p.theme=="mane") groups.push(["slaver","zebra"],["alicorn"]);
-         if(stage>=6 && p.theme=="plant") groups.push(["eqd","gutsy"]);
-         if(stage>=6 && p.theme=="sewer") groups.push(["zombie","necros"]);
-         var group:Array=groups[int(random()*groups.length)];
          var count:int=(mood=="guarded"?4:2)+int(random()*3)+Math.min(2,int(stage/3));
          if(mood=="cache") count=1+int(random()*2);
-         for(var i:int=0;i<count;i++) add(pick(group),"enemy");
+         for(var i:int=0;i<count;i++) add(random()<0.68?ecology.large():ecology.small(),"enemy");
+         if(random()<0.4)
+         {
+            var flyer:String=ecology.flying();
+            if(flyer) add(flyer,"enemy","air");
+         }
+         if(random()<0.25)
+         {
+            var ceiling:String=ecology.ceiling();
+            if(ceiling!="turret") add(ceiling,"enemy","ceiling");
+         }
          if(p.theme=="sewer" && random()<0.45)
             for each(var pool:Object in p.pools)
             {
@@ -171,15 +184,16 @@ package rr
       }
       private function security():void
       {
-         if(p.theme=="sewer" || random()>0.42) return;
-         var id:String=pick(["landturret","turret","hturret","armturret","wturret"]);
-         if(stage>=4 && random()<0.2) id="cturret";
-         var mount:String=["turret","hturret","cturret"].indexOf(id)>=0?"ceiling":(id=="wturret"?"wall":"floor");
+         if(!ecology.armed() || p.theme=="sewer" || random()>0.42) return;
+         var id:String=pick(p.theme=="plant"?["turret","turret","landturret","armturret"]:
+            ["landturret","turret","hturret","armturret","wturret"]);
+         var mount:String=["turret","hturret"].indexOf(id)>=0?"ceiling":(id=="wturret"?"wall":"floor");
          var turret:XML=add(id,"security",mount);
          if(turret!=null) add("term1","terminal");
-         if(random()<0.2) add(pick(["robocell","alarm"]),"security");
+         var hidden:String=ecology.hidden();
+         if(hidden && random()<0.2) add(hidden,"security");
       }
-      private function circuit():void
+      private function circuit(id:String):void
       {
          // Explicit same-room allid prevents UnitTrigger's unbounded native
          // fallback from creating its gun inside a wall or outside this room.
@@ -187,7 +201,6 @@ package rr
          for each(var r:Object in regions)
          {
             if(r.x1-r.x0<8 || r.floor-r.top<4) continue;
-            var id:String=pick(["trridge","trplate","trlaser"]);
             var triggers:Array=positions(id,"floor","trigger",r);
             if(!triggers.length) continue;
             var hit:String=pick(["damshot","damgren","expl1"]);
@@ -206,17 +219,20 @@ package rr
       }
       private function hazards():void
       {
-         if(random()<0.5) add(pick(p.theme=="sewer"?["trap","spikes"]:["mine","mine","trap","spikes"]),"hazard");
-         if(random()<0.17) add("fspikes","hazard","ceiling");
-         if(p.theme!="sewer" && random()<0.25) circuit();
-         if(p.theme!="sewer" && random()<0.13) add("trcans","hazard","floor",{res:"noise"});
-         if((p.theme=="plant" || p.theme=="sewer") && random()<0.13)
+         if(random()<0.6)
+         {
+            var id:String=ecology.trap();
+            if(["trplate","trridge","trlaser"].indexOf(id)>=0) circuit(id);
+            else if(id=="slime") add(id,"hazard","floor",{tr:"10"});
+            else add(id,"hazard","floor",id=="trcans"?{res:"noise"}:null);
+         }
+         if(p.theme!="stable")
+         {
+            if(random()<0.22) add("spikes","hazard");
+            if(random()<0.12) add("fspikes","hazard","ceiling");
+         }
+         if(p.theme!="mane" && random()<0.13)
             add(pick(["radbarrel","radbarrel","radbigbarrel"]),"hazard");
-         if((p.theme=="plant" || p.theme=="stable") && random()<0.12) add("moln1","hazard");
-         if(stage>=2 && p.theme=="sewer" && random()<0.08) add("transm","hazard","floor",{on:1});
-         // This native panel electrifies the entire Location. It must start
-         // switched off so entering from another boundary is never an ambush.
-         if(p.theme=="plant" && random()<0.08) add("elpanel","service","floor",{open:1,lock:0,mine:0});
       }
       public function build():void
       {

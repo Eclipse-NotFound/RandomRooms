@@ -42,6 +42,20 @@ def check_room(room):
         if oid=='term1':require(any(x.get('rrContent')=='security' and 'turret' in x.get('id') for x in content),'robot terminal without security')
         if oid=='term2':require(any(x.get('id')=='wallsafe' for x in content),'lock terminal without hackable cache')
         if room.get('rrTheme')=='sewer':require(oid not in ('raider','merc','slaver','zebra','alicorn','robot','protect','gutsy','eqd','term1','term2'),'sewer scene leak '+oid)
+        if room.get('rrGen')=='space-v11':
+            scene=room.get('rrTheme'); eco=int(room.get('rrEcology')); difficulty=float(room.get('rrDifficulty'))
+            require(oid not in {'basechest','knop4','cturret','necros','transm','moln1','elpanel','bigexpl'},'foreign ordinary content '+oid)
+            if oid=='eqd': require(scene=='stable' and eco==2 and difficulty>=12,'eqd native gate')
+            if oid=='robocell': require(eco==2 and scene!='mane','robot-cell ecology')
+            if oid=='alarm': require(eco in (1,3),'alarm ecology')
+            if oid=='trlaser': require(scene=='stable' and eco==2,'laser defence ecology')
+            if oid in ('trplate','trridge','trcans'): require(eco in (1,3,4,6),'armed trap ecology')
+            if oid in ('spikes','fspikes'): require(scene!='stable','stable spike contamination')
+            large={'zombie':0,'raider':1,'robot':2,'protect':2,'gutsy':2,'eqd':2,'slaver':3,'merc':4,'alicorn':5,'zebra':6}
+            if oid in large: require(eco==large[oid],'large enemy ecology '+oid)
+            if scene=='sewer':require(oid not in ('molerat','tarakan','vortex','spritebot'),'sewer companion ecology '+oid)
+            if oid=='himlab': require(scene in ('stable','mane'),'lab context')
+            if oid=='slime' and kind=='hazard': require(o.get('tr')=='10','slime mine map subtype')
     for group,parts in groups.items():
         require(len(parts)==2 and {o.get('rrContent') for o in parts}=={'trigger','damager'},'incomplete circuit '+group)
         if len(parts)==2: require(4<=abs(int(parts[0].get('x'))-int(parts[1].get('x')))<=8,'circuit separation '+group)
