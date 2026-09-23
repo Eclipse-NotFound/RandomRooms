@@ -3,7 +3,7 @@ const {chromium}=require('C:/Users/hello/.cache/codex-runtimes/codex-primary-run
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url');
 const {createHash}=require('node:crypto');
-const out=path.resolve(__dirname,'../../',process.argv[2]||'design/partition-preview-v12-2');
+const out=path.resolve(__dirname,'../../',process.argv[2]||'design/partition-preview-v12-3');
 (async()=>{
  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  try{
@@ -34,12 +34,15 @@ const out=path.resolve(__dirname,'../../',process.argv[2]||'design/partition-pre
   await page.locator('#newMap .region').first().click();assert.match(await page.locator('#inspect').textContent(),/格。连接/);
   await page.locator('#newMap .region').first().focus();await page.keyboard.press('Enter');
   assert.match(await page.locator('#inspect').textContent(),/格。连接/);
+  await page.evaluate(()=>{const c=DATA.cases.find(c=>DATA.new[c.index]?.floors.length);scene=c.scene;form=c.form;port=c.port;pos=c.sample;$('ports').value=port;setScene(scene,true);});
   await page.locator('#floorLines').check();
   assert(await page.locator('#newMap path[stroke-dasharray="10 5"]').count()>0);await page.locator('#floorLines').uncheck();
+  await page.locator('#partitions').check();assert(await page.locator('#newMap rect[stroke-dasharray="3 4"]').count()>0);await page.locator('#partitions').uncheck();
   await page.locator('#links').check();assert(await page.locator('#newMap path[stroke-dasharray]').count()>0);await page.locator('#links').uncheck();
   await page.locator('.thumb').nth(4).click();assert.equal(await page.locator('.thumb[aria-current="true"]').count(),1);
   assert.match(await page.locator('#sampleStatus').textContent(),/5 \/ 8/);
   await page.locator('.thumb').first().click();
+  await page.locator('[data-scene="plant"]').click();await page.selectOption('#ports','0');
   await page.evaluate(()=>scrollTo(0,0));
   await page.screenshot({path:path.join(out,'preview-desktop.png')});
   await page.locator('.compare').screenshot({path:path.join(out,'preview-compare.png')});

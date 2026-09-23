@@ -1,0 +1,941 @@
+{
+  "scope": "Interior solid tiles exclude the outer frame. Thick cells belong to at least one solid 5-by-3 tile rectangle. No room-count or author-probability inference.",
+  "scenes": [
+    {
+      "scene": "plant",
+      "source": "Rooms/rooms_plant.xml",
+      "sha256": "7466ded79a7438ee3de776bb1b7e00c97f1c6a8776a7f0b2ed28bf0b1e69fb68",
+      "ordinaryRooms": 40,
+      "meanSolidPercent": 22.86,
+      "withThickBlock": 22,
+      "rooms": [
+        {
+          "index": 0,
+          "name": "сортиры",
+          "solidCells": 208,
+          "solidPercent": 19.66,
+          "thickCells": 0
+        },
+        {
+          "index": 2,
+          "name": "цех3",
+          "solidCells": 272,
+          "solidPercent": 25.71,
+          "thickCells": 135
+        },
+        {
+          "index": 3,
+          "name": "офисы",
+          "solidCells": 180,
+          "solidPercent": 17.01,
+          "thickCells": 0
+        },
+        {
+          "index": 6,
+          "name": "архив",
+          "solidCells": 286,
+          "solidPercent": 27.03,
+          "thickCells": 0
+        },
+        {
+          "index": 7,
+          "name": "легкость3",
+          "solidCells": 364,
+          "solidPercent": 34.4,
+          "thickCells": 288
+        },
+        {
+          "index": 9,
+          "name": "скорпионы",
+          "solidCells": 210,
+          "solidPercent": 19.85,
+          "thickCells": 36
+        },
+        {
+          "index": 10,
+          "name": "склад1",
+          "solidCells": 207,
+          "solidPercent": 19.57,
+          "thickCells": 36
+        },
+        {
+          "index": 11,
+          "name": "проходы2",
+          "solidCells": 502,
+          "solidPercent": 47.45,
+          "thickCells": 296
+        },
+        {
+          "index": 14,
+          "name": "склад2",
+          "solidCells": 216,
+          "solidPercent": 20.42,
+          "thickCells": 123
+        },
+        {
+          "index": 15,
+          "name": "дерьмище",
+          "solidCells": 188,
+          "solidPercent": 17.77,
+          "thickCells": 0
+        },
+        {
+          "index": 16,
+          "name": "цех1",
+          "solidCells": 101,
+          "solidPercent": 9.55,
+          "thickCells": 0
+        },
+        {
+          "index": 17,
+          "name": "рейдеры",
+          "solidCells": 148,
+          "solidPercent": 13.99,
+          "thickCells": 0
+        },
+        {
+          "index": 18,
+          "name": "ячейки",
+          "solidCells": 193,
+          "solidPercent": 18.24,
+          "thickCells": 0
+        },
+        {
+          "index": 21,
+          "name": "змейка",
+          "solidCells": 258,
+          "solidPercent": 24.39,
+          "thickCells": 0
+        },
+        {
+          "index": 22,
+          "name": "бассейн",
+          "solidCells": 98,
+          "solidPercent": 9.26,
+          "thickCells": 0
+        },
+        {
+          "index": 24,
+          "name": "офисы2",
+          "solidCells": 260,
+          "solidPercent": 24.57,
+          "thickCells": 113
+        },
+        {
+          "index": 25,
+          "name": "проходы",
+          "solidCells": 681,
+          "solidPercent": 64.37,
+          "thickCells": 623
+        },
+        {
+          "index": 26,
+          "name": "отдых",
+          "solidCells": 310,
+          "solidPercent": 29.3,
+          "thickCells": 112
+        },
+        {
+          "index": 27,
+          "name": "завод",
+          "solidCells": 159,
+          "solidPercent": 15.03,
+          "thickCells": 0
+        },
+        {
+          "index": 28,
+          "name": "кпп",
+          "solidCells": 225,
+          "solidPercent": 21.27,
+          "thickCells": 126
+        },
+        {
+          "index": 29,
+          "name": "подвал",
+          "solidCells": 123,
+          "solidPercent": 11.63,
+          "thickCells": 0
+        },
+        {
+          "index": 31,
+          "name": "базар",
+          "solidCells": 192,
+          "solidPercent": 18.15,
+          "thickCells": 25
+        },
+        {
+          "index": 32,
+          "name": "офисы3",
+          "solidCells": 279,
+          "solidPercent": 26.37,
+          "thickCells": 76
+        },
+        {
+          "index": 36,
+          "name": "медик",
+          "solidCells": 164,
+          "solidPercent": 15.5,
+          "thickCells": 0
+        },
+        {
+          "index": 37,
+          "name": "несложно",
+          "solidCells": 135,
+          "solidPercent": 12.76,
+          "thickCells": 0
+        },
+        {
+          "index": 39,
+          "name": "слизни",
+          "solidCells": 200,
+          "solidPercent": 18.9,
+          "thickCells": 0
+        },
+        {
+          "index": 40,
+          "name": "камера",
+          "solidCells": 237,
+          "solidPercent": 22.4,
+          "thickCells": 102
+        },
+        {
+          "index": 41,
+          "name": "цех4",
+          "solidCells": 89,
+          "solidPercent": 8.41,
+          "thickCells": 0
+        },
+        {
+          "index": 42,
+          "name": "диагон",
+          "solidCells": 125,
+          "solidPercent": 11.81,
+          "thickCells": 0
+        },
+        {
+          "index": 43,
+          "name": "логово2",
+          "solidCells": 443,
+          "solidPercent": 41.87,
+          "thickCells": 282
+        },
+        {
+          "index": 44,
+          "name": "вертикаль",
+          "solidCells": 246,
+          "solidPercent": 23.25,
+          "thickCells": 209
+        },
+        {
+          "index": 45,
+          "name": "логово",
+          "solidCells": 204,
+          "solidPercent": 19.28,
+          "thickCells": 27
+        },
+        {
+          "index": 46,
+          "name": "цех2",
+          "solidCells": 111,
+          "solidPercent": 10.49,
+          "thickCells": 0
+        },
+        {
+          "index": 47,
+          "name": "сюрприз",
+          "solidCells": 223,
+          "solidPercent": 21.08,
+          "thickCells": 71
+        },
+        {
+          "index": 48,
+          "name": "вентиляция",
+          "solidCells": 344,
+          "solidPercent": 32.51,
+          "thickCells": 146
+        },
+        {
+          "index": 49,
+          "name": "цех5",
+          "solidCells": 305,
+          "solidPercent": 28.83,
+          "thickCells": 209
+        },
+        {
+          "index": 50,
+          "name": "канализация",
+          "solidCells": 343,
+          "solidPercent": 32.42,
+          "thickCells": 91
+        },
+        {
+          "index": 52,
+          "name": "яма",
+          "solidCells": 14,
+          "solidPercent": 1.32,
+          "thickCells": 0
+        },
+        {
+          "index": 53,
+          "name": "парковка",
+          "solidCells": 430,
+          "solidPercent": 40.64,
+          "thickCells": 325
+        },
+        {
+          "index": 54,
+          "name": "обвал",
+          "solidCells": 403,
+          "solidPercent": 38.09,
+          "thickCells": 207
+        }
+      ],
+      "examples": [
+        {
+          "index": 14,
+          "name": "склад2"
+        },
+        {
+          "index": 24,
+          "name": "офисы2"
+        },
+        {
+          "index": 44,
+          "name": "вертикаль"
+        }
+      ]
+    },
+    {
+      "scene": "stable",
+      "source": "Rooms/rooms_stable.xml",
+      "sha256": "6119717f2ff5de034f6c7b148b01c0d2e28d1f2076cc1be878f55b40b7e26109",
+      "ordinaryRooms": 32,
+      "meanSolidPercent": 27.75,
+      "withThickBlock": 27,
+      "rooms": [
+        {
+          "index": 0,
+          "name": "13",
+          "solidCells": 479,
+          "solidPercent": 45.27,
+          "thickCells": 380
+        },
+        {
+          "index": 1,
+          "name": "служ.пом.3",
+          "solidCells": 294,
+          "solidPercent": 27.79,
+          "thickCells": 144
+        },
+        {
+          "index": 2,
+          "name": "коридор4",
+          "solidCells": 235,
+          "solidPercent": 22.21,
+          "thickCells": 46
+        },
+        {
+          "index": 4,
+          "name": "служ. пом.",
+          "solidCells": 195,
+          "solidPercent": 18.43,
+          "thickCells": 60
+        },
+        {
+          "index": 5,
+          "name": "кабинеты2",
+          "solidCells": 292,
+          "solidPercent": 27.6,
+          "thickCells": 104
+        },
+        {
+          "index": 6,
+          "name": "помещения4",
+          "solidCells": 338,
+          "solidPercent": 31.95,
+          "thickCells": 202
+        },
+        {
+          "index": 9,
+          "name": "пещера2",
+          "solidCells": 384,
+          "solidPercent": 36.29,
+          "thickCells": 243
+        },
+        {
+          "index": 10,
+          "name": "атриум",
+          "solidCells": 138,
+          "solidPercent": 13.04,
+          "thickCells": 0
+        },
+        {
+          "index": 11,
+          "name": "производство",
+          "solidCells": 98,
+          "solidPercent": 9.26,
+          "thickCells": 15
+        },
+        {
+          "index": 12,
+          "name": "коридор2",
+          "solidCells": 215,
+          "solidPercent": 20.32,
+          "thickCells": 63
+        },
+        {
+          "index": 14,
+          "name": "служ. пом.2",
+          "solidCells": 162,
+          "solidPercent": 15.31,
+          "thickCells": 0
+        },
+        {
+          "index": 15,
+          "name": "служ.пом.5",
+          "solidCells": 348,
+          "solidPercent": 32.89,
+          "thickCells": 303
+        },
+        {
+          "index": 17,
+          "name": "пещера",
+          "solidCells": 422,
+          "solidPercent": 39.89,
+          "thickCells": 209
+        },
+        {
+          "index": 18,
+          "name": "кабинеты",
+          "solidCells": 334,
+          "solidPercent": 31.57,
+          "thickCells": 224
+        },
+        {
+          "index": 19,
+          "name": "помещения",
+          "solidCells": 272,
+          "solidPercent": 25.71,
+          "thickCells": 0
+        },
+        {
+          "index": 20,
+          "name": "зал",
+          "solidCells": 333,
+          "solidPercent": 31.47,
+          "thickCells": 166
+        },
+        {
+          "index": 21,
+          "name": "коридор",
+          "solidCells": 340,
+          "solidPercent": 32.14,
+          "thickCells": 214
+        },
+        {
+          "index": 22,
+          "name": "пещера3",
+          "solidCells": 405,
+          "solidPercent": 38.28,
+          "thickCells": 202
+        },
+        {
+          "index": 23,
+          "name": "служ.пом.7",
+          "solidCells": 335,
+          "solidPercent": 31.66,
+          "thickCells": 242
+        },
+        {
+          "index": 26,
+          "name": "служ.пом.6",
+          "solidCells": 327,
+          "solidPercent": 30.91,
+          "thickCells": 216
+        },
+        {
+          "index": 27,
+          "name": "столовая",
+          "solidCells": 287,
+          "solidPercent": 27.13,
+          "thickCells": 147
+        },
+        {
+          "index": 28,
+          "name": "кабинеты3",
+          "solidCells": 293,
+          "solidPercent": 27.69,
+          "thickCells": 162
+        },
+        {
+          "index": 29,
+          "name": "оранжерея",
+          "solidCells": 128,
+          "solidPercent": 12.1,
+          "thickCells": 0
+        },
+        {
+          "index": 31,
+          "name": "склад3",
+          "solidCells": 115,
+          "solidPercent": 10.87,
+          "thickCells": 0
+        },
+        {
+          "index": 33,
+          "name": "служ.пом.4",
+          "solidCells": 402,
+          "solidPercent": 38.0,
+          "thickCells": 324
+        },
+        {
+          "index": 35,
+          "name": "помещения5",
+          "solidCells": 261,
+          "solidPercent": 24.67,
+          "thickCells": 138
+        },
+        {
+          "index": 38,
+          "name": "помещения3",
+          "solidCells": 348,
+          "solidPercent": 32.89,
+          "thickCells": 260
+        },
+        {
+          "index": 42,
+          "name": "стар. пом.",
+          "solidCells": 177,
+          "solidPercent": 16.73,
+          "thickCells": 30
+        },
+        {
+          "index": 44,
+          "name": "коридор3",
+          "solidCells": 328,
+          "solidPercent": 31.0,
+          "thickCells": 191
+        },
+        {
+          "index": 46,
+          "name": "служ.пом.8",
+          "solidCells": 235,
+          "solidPercent": 22.21,
+          "thickCells": 54
+        },
+        {
+          "index": 47,
+          "name": "помещения2",
+          "solidCells": 402,
+          "solidPercent": 38.0,
+          "thickCells": 291
+        },
+        {
+          "index": 48,
+          "name": "пещера4",
+          "solidCells": 472,
+          "solidPercent": 44.61,
+          "thickCells": 113
+        }
+      ],
+      "examples": [
+        {
+          "index": 1,
+          "name": "служ.пом.3"
+        },
+        {
+          "index": 20,
+          "name": "зал"
+        },
+        {
+          "index": 19,
+          "name": "помещения"
+        }
+      ]
+    },
+    {
+      "scene": "sewer",
+      "source": "Rooms/rooms_sewer.xml",
+      "sha256": "e7e178f48826de4982b64e85bb380a85f891bf421cb5e93d07ff15d3202b2dd4",
+      "ordinaryRooms": 22,
+      "meanSolidPercent": 33.48,
+      "withThickBlock": 22,
+      "rooms": [
+        {
+          "index": 0,
+          "name": "отходы3",
+          "solidCells": 393,
+          "solidPercent": 37.15,
+          "thickCells": 216
+        },
+        {
+          "index": 1,
+          "name": "трубы3",
+          "solidCells": 401,
+          "solidPercent": 37.9,
+          "thickCells": 110
+        },
+        {
+          "index": 2,
+          "name": "двери",
+          "solidCells": 481,
+          "solidPercent": 45.46,
+          "thickCells": 376
+        },
+        {
+          "index": 3,
+          "name": "стоки2",
+          "solidCells": 377,
+          "solidPercent": 35.63,
+          "thickCells": 251
+        },
+        {
+          "index": 4,
+          "name": "двери2",
+          "solidCells": 380,
+          "solidPercent": 35.92,
+          "thickCells": 259
+        },
+        {
+          "index": 5,
+          "name": "туннели2",
+          "solidCells": 395,
+          "solidPercent": 37.33,
+          "thickCells": 114
+        },
+        {
+          "index": 6,
+          "name": "отходы",
+          "solidCells": 230,
+          "solidPercent": 21.74,
+          "thickCells": 90
+        },
+        {
+          "index": 7,
+          "name": "комнаты2",
+          "solidCells": 359,
+          "solidPercent": 33.93,
+          "thickCells": 167
+        },
+        {
+          "index": 8,
+          "name": "стоки3",
+          "solidCells": 419,
+          "solidPercent": 39.6,
+          "thickCells": 360
+        },
+        {
+          "index": 9,
+          "name": "туннели4",
+          "solidCells": 333,
+          "solidPercent": 31.47,
+          "thickCells": 150
+        },
+        {
+          "index": 10,
+          "name": "туннели3",
+          "solidCells": 430,
+          "solidPercent": 40.64,
+          "thickCells": 145
+        },
+        {
+          "index": 11,
+          "name": "отходы2",
+          "solidCells": 221,
+          "solidPercent": 20.89,
+          "thickCells": 40
+        },
+        {
+          "index": 12,
+          "name": "трубы",
+          "solidCells": 249,
+          "solidPercent": 23.53,
+          "thickCells": 72
+        },
+        {
+          "index": 13,
+          "name": "комнаты",
+          "solidCells": 346,
+          "solidPercent": 32.7,
+          "thickCells": 75
+        },
+        {
+          "index": 14,
+          "name": "стоки",
+          "solidCells": 382,
+          "solidPercent": 36.11,
+          "thickCells": 263
+        },
+        {
+          "index": 16,
+          "name": "стоки4",
+          "solidCells": 238,
+          "solidPercent": 22.5,
+          "thickCells": 81
+        },
+        {
+          "index": 17,
+          "name": "комнаты3",
+          "solidCells": 451,
+          "solidPercent": 42.63,
+          "thickCells": 299
+        },
+        {
+          "index": 18,
+          "name": "туннели",
+          "solidCells": 482,
+          "solidPercent": 45.56,
+          "thickCells": 171
+        },
+        {
+          "index": 19,
+          "name": "слив2",
+          "solidCells": 273,
+          "solidPercent": 25.8,
+          "thickCells": 153
+        },
+        {
+          "index": 20,
+          "name": "слив",
+          "solidCells": 260,
+          "solidPercent": 24.57,
+          "thickCells": 66
+        },
+        {
+          "index": 21,
+          "name": "двери3",
+          "solidCells": 348,
+          "solidPercent": 32.89,
+          "thickCells": 104
+        },
+        {
+          "index": 22,
+          "name": "трубы2",
+          "solidCells": 344,
+          "solidPercent": 32.51,
+          "thickCells": 103
+        }
+      ],
+      "examples": [
+        {
+          "index": 7,
+          "name": "комнаты2"
+        },
+        {
+          "index": 18,
+          "name": "туннели"
+        },
+        {
+          "index": 19,
+          "name": "слив2"
+        }
+      ]
+    },
+    {
+      "scene": "mane",
+      "source": "Rooms/rooms_mane.xml",
+      "sha256": "d743dea9fa1eab3b5d09144ad4975e56bfdd4359fabbd73d43963a5ac5b6708e",
+      "ordinaryRooms": 26,
+      "meanSolidPercent": 11.77,
+      "withThickBlock": 7,
+      "rooms": [
+        {
+          "index": 0,
+          "name": "ко.развалено",
+          "solidCells": 44,
+          "solidPercent": 4.16,
+          "thickCells": 0
+        },
+        {
+          "index": 3,
+          "name": "ко.архивы",
+          "solidCells": 141,
+          "solidPercent": 13.33,
+          "thickCells": 0
+        },
+        {
+          "index": 7,
+          "name": "ко.тех",
+          "solidCells": 162,
+          "solidPercent": 15.31,
+          "thickCells": 0
+        },
+        {
+          "index": 8,
+          "name": "ко.операционная",
+          "solidCells": 211,
+          "solidPercent": 19.94,
+          "thickCells": 102
+        },
+        {
+          "index": 13,
+          "name": "ко.офисы ",
+          "solidCells": 112,
+          "solidPercent": 10.59,
+          "thickCells": 0
+        },
+        {
+          "index": 16,
+          "name": "ко.столовка2",
+          "solidCells": 276,
+          "solidPercent": 26.09,
+          "thickCells": 0
+        },
+        {
+          "index": 19,
+          "name": "ко.клуб",
+          "solidCells": 129,
+          "solidPercent": 12.19,
+          "thickCells": 32
+        },
+        {
+          "index": 23,
+          "name": "ко.столовка",
+          "solidCells": 134,
+          "solidPercent": 12.67,
+          "thickCells": 0
+        },
+        {
+          "index": 26,
+          "name": "ко.разлом",
+          "solidCells": 92,
+          "solidPercent": 8.7,
+          "thickCells": 0
+        },
+        {
+          "index": 27,
+          "name": "ко.служ.пом.",
+          "solidCells": 128,
+          "solidPercent": 12.1,
+          "thickCells": 25
+        },
+        {
+          "index": 28,
+          "name": "ко.серверная2",
+          "solidCells": 154,
+          "solidPercent": 14.56,
+          "thickCells": 75
+        },
+        {
+          "index": 29,
+          "name": "ко.кабинеты2",
+          "solidCells": 186,
+          "solidPercent": 17.58,
+          "thickCells": 24
+        },
+        {
+          "index": 30,
+          "name": "ко.служ.пом.2",
+          "solidCells": 109,
+          "solidPercent": 10.3,
+          "thickCells": 0
+        },
+        {
+          "index": 36,
+          "name": "ко.серверная",
+          "solidCells": 128,
+          "solidPercent": 12.1,
+          "thickCells": 0
+        },
+        {
+          "index": 41,
+          "name": "ко.госпиталь",
+          "solidCells": 103,
+          "solidPercent": 9.74,
+          "thickCells": 0
+        },
+        {
+          "index": 42,
+          "name": "ко.кабинеты3",
+          "solidCells": 115,
+          "solidPercent": 10.87,
+          "thickCells": 0
+        },
+        {
+          "index": 44,
+          "name": "ко.офисы3",
+          "solidCells": 70,
+          "solidPercent": 6.62,
+          "thickCells": 0
+        },
+        {
+          "index": 45,
+          "name": "ко.развалено3",
+          "solidCells": 14,
+          "solidPercent": 1.32,
+          "thickCells": 0
+        },
+        {
+          "index": 47,
+          "name": "ко.камеры",
+          "solidCells": 205,
+          "solidPercent": 19.38,
+          "thickCells": 63
+        },
+        {
+          "index": 49,
+          "name": "ко.серверная3",
+          "solidCells": 150,
+          "solidPercent": 14.18,
+          "thickCells": 0
+        },
+        {
+          "index": 51,
+          "name": "ко.кабинеты",
+          "solidCells": 170,
+          "solidPercent": 16.07,
+          "thickCells": 45
+        },
+        {
+          "index": 52,
+          "name": "ко.офисы2",
+          "solidCells": 120,
+          "solidPercent": 11.34,
+          "thickCells": 0
+        },
+        {
+          "index": 56,
+          "name": "ко.офисы4",
+          "solidCells": 73,
+          "solidPercent": 6.9,
+          "thickCells": 0
+        },
+        {
+          "index": 58,
+          "name": "ко.тех2",
+          "solidCells": 80,
+          "solidPercent": 7.56,
+          "thickCells": 0
+        },
+        {
+          "index": 60,
+          "name": "ко.развалено2",
+          "solidCells": 51,
+          "solidPercent": 4.82,
+          "thickCells": 0
+        },
+        {
+          "index": 61,
+          "name": "ко.припасы",
+          "solidCells": 79,
+          "solidPercent": 7.47,
+          "thickCells": 0
+        }
+      ],
+      "examples": [
+        {
+          "index": 51,
+          "name": "ко.кабинеты"
+        },
+        {
+          "index": 26,
+          "name": "ко.разлом"
+        },
+        {
+          "index": 45,
+          "name": "ко.развалено3"
+        }
+      ]
+    }
+  ]
+}

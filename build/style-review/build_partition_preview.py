@@ -20,13 +20,48 @@ SCENES = {'plant':'工厂','stable':'废弃避难厩','sewer':'下水道','mane'
 SPECIAL = {'workshop','warehouse','hall','canal','roof','street'}
 
 
+def outline(cells):
+    edges=set()
+    for x,y in cells:
+        for a,b in [((x,y),(x+1,y)),((x+1,y),(x+1,y+1)),((x+1,y+1),(x,y+1)),((x,y+1),(x,y))]:
+            if (b,a) in edges: edges.remove((b,a))
+            else: edges.add((a,b))
+    following={}
+    for a,b in sorted(edges): following.setdefault(a,[]).append(b)
+    paths=[]
+    while following:
+        start=next(iter(following));a=start;points=[a]
+        while True:
+            b=following[a].pop()
+            if not following[a]: del following[a]
+            points.append(b);a=b
+            if a==start: break
+        paths.append('M'+'L'.join(f'{x*20} {y*20}' for x,y in points)+'Z')
+    return ''.join(paths)
+
+
 def read_rooms(path):
     out = {}
     for room in ET.parse(path).getroot().findall('room'):
         plan = room.find('rrPlan')
-        spaces = [{k: (int(v) if k in ('x0','top','x1','floor') else v) for k,v in s.attrib.items()}
+        spaces = [{k: (int(v) if k in ('x0','top','x1','floor','room') else v) for k,v in s.attrib.items()}
                   for s in plan.findall('space')]
         volumes = [s for s in spaces if s.get('kind') == 'volume']
+        grid=[a.text.strip().split('.') for a in room.findall('a')]
+        merges=[{k:(v if k=='axis' else int(v)) for k,v in m.attrib.items()} for m in plan.findall('merge')]
+        groups={}
+        for i,s in enumerate(volumes): groups.setdefault(s.get('room',i),[]).append(i)
+        chambers=[]
+        for key,parts in groups.items():
+            cells={(x,y) for i in parts for x in range(volumes[i]['x0'],volumes[i]['x1']+1)
+                   for y in range(volumes[i]['top'],volumes[i]['floor']+1)}
+            for m in merges:
+                if m['a'] in parts and m['b'] in parts:
+                    cells.update((x,y) for x in range(m['x0'],m['x1']+1) for y in range(m['top'],m['floor']+1))
+            cells={p for p in cells if grid[p[1]][p[0]][0] not in 'ABCDEFGHIJKLMNOPQRST'}
+            anchor=max((volumes[i] for i in parts),key=lambda s:(s['x1']-s['x0']+1)*(s['floor']-s['top']+1))
+            chambers.append(dict(id=key,parts=parts,path=outline(cells),area=len(cells),role=anchor['role'],anchor=anchor,
+                irregular=len(cells)!=(max(x for x,y in cells)-min(x for x,y in cells)+1)*(max(y for x,y in cells)-min(y for x,y in cells)+1)))
         links = [{k:(int(v) if k in ('a','b','x','y') else v) for k,v in s.attrib.items()} for s in plan.findall('link')]
         areas = [(s['x1']-s['x0']+1)*(s['floor']-s['top']+1) for s in volumes]
         heights=[s['floor']-s['top']+1 for s in volumes if s['role'] not in SPECIAL]
@@ -46,9 +81,13 @@ def read_rooms(path):
             attrs=dict(room.attrib), grid=[a.text.strip() for a in room.findall('a')], spaces=spaces, links=links,
             ports=list(map(int,room.findtext('doors').split('.'))),
             objects=[dict(o.attrib) for o in room.findall('obj')],
-            floors=floors,
+            floors=floors,chambers=chambers,merges=merges,
+            masses=[{k:int(v) for k,v in m.attrib.items()} for m in plan.findall('mass')],
             water=[{k:int(v) for k,v in o.attrib.items()} for o in plan.findall('water')],
             stats={'spaces':len(volumes), 'cycles':len(links)-len(volumes)+1,
+                   'rooms':len(chambers),'merged':sum(len(c['parts'])>1 for c in chambers),
+                   'irregularMerged':sum(len(c['parts'])>1 and c['irregular'] for c in chambers),
+                   'solidPercent':round(100*sum(grid[y][x][0] in 'ABCDEFGHIJKLMNOPQRST' for y in range(1,24) for x in range(1,47))/(46*23),1),
                    'height':round(statistics.mean(heights),1) if heights else None,
                    'heights':heights,'contrast':round(max(areas)/min(areas),1),'aligned':len(floors),
                    'largest':round(100*max(areas)/sum(areas)), 'seams':seams, 'fingerprint':fingerprint,
@@ -59,8 +98,9 @@ def read_rooms(path):
 
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument('--stem',required=True); ap.add_argument('--out',default='design/partition-preview-v12-2')
+    ap=argparse.ArgumentParser(); ap.add_argument('--stem',required=True); ap.add_argument('--out',default='design/partition-preview-v12-3')
     ap.add_argument('--baseline',help='Compare the new.xml from this earlier batch instead of the legacy control')
+    ap.add_argument('--baseline-label',default='上一版 v12.2')
     args=ap.parse_args(); out=ROOT/args.out; out.mkdir(parents=True,exist_ok=True)
     new=read_rooms(HERE/(args.stem+'-new.xml')); old=read_rooms(HERE/(args.stem+'-old.xml'))
     report=json.loads((HERE/(args.stem+'-results.json')).read_text(encoding='utf-8-sig'))
@@ -73,7 +113,7 @@ def main():
             before=previous[c['index']]
             assert all(c[key]==before[key] for key in ('seed','scene','form','port','sample'))
             c['old']=before['new']
-        baseline_label='上一版 v12'
+        baseline_label=args.baseline_label
     aggregate=[]
     for scene,name in SCENES.items():
         paired={key for key in new.keys() & old.keys() if new[key]['attrs']['rrTheme']==scene}
@@ -82,6 +122,11 @@ def main():
             selected=[rooms[key] for key in paired]
             row[mode]={'count':sum(r['attrs']['rrTheme']==scene for r in rooms.values()),
                 'spaces':round(statistics.mean(r['stats']['spaces'] for r in selected),2),
+                'rooms':round(statistics.mean(r['stats']['rooms'] for r in selected),2),
+                'roomRange':[min(r['stats']['rooms'] for r in selected),max(r['stats']['rooms'] for r in selected)],
+                'solidPercent':round(statistics.mean(r['stats']['solidPercent'] for r in selected),1),
+                'irregularMerged':sum(r['stats']['irregularMerged'] for r in selected),
+                'mergeAxes':dict(Counter(m['axis'] for r in selected for m in r['merges'])),
                 'graphs':len({r['stats']['fingerprint'] for r in selected}),
                 'sizeCombinations':len({r['stats']['sizeKey'] for r in selected}),
                 'withoutSeam':sum(r['stats']['seams']==0 for r in selected),
@@ -112,13 +157,19 @@ def main():
     xml_new={int(r.get('harnessCase')):r for r in ET.parse(HERE/(args.stem+'-new.xml')).getroot()}
     xml_old={int(r.get('harnessCase')):r for r in ET.parse(HERE/((args.baseline+'-new.xml') if args.baseline else (args.stem+'-old.xml'))).getroot()}
     # Select by declared structural feature, never by visual attractiveness.
-    filters={'production':('rrP_density','sparse'),'storage_hall':('rrP_density','dense'),
+    filters={'production':('feature','irregular-side-merge'),'storage_hall':('rrP_density','standard'),
              'quarters':('rrP_layout','storeys'),'atrium_ring':('rrP_density','sparse'),
              'canal_gallery':('rrP_density','sparse'),'dry_tunnels':('rrP_layout','storeys'),
-             'apartments':('rrP_layout','storeys'),'rooftops':('rrP_density','standard')}
+             'apartments':('rrP_layout','storeys'),'ruined':('feature','floor-merge'),
+             'rooftops':('rrP_density','standard')}
+    def matches(case,condition):
+        room=xml_new[case['index']]
+        if condition[0]!='feature': return room.get(condition[0])==condition[1]
+        if condition[1]=='floor-merge': return room.find("rrPlan/merge[@axis='floor']") is not None
+        return new[case['index']]['stats']['irregularMerged']>0 and room.find("rrPlan/merge[@axis='side']") is not None
     for form,condition in filters.items():
         candidates=[c for c in report['cases'] if c['form']==form and c['new']['ok'] and c['old']['ok']]
-        chosen=next((c for c in candidates if xml_new[c['index']].get(condition[0])==condition[1]),candidates[0])
+        chosen=next((c for c in candidates if matches(c,condition)),candidates[0])
         idx=chosen['index']; ids.append(idx); selected_new.append(xml_new[idx]); selected_old.append(xml_old[idx])
     for mode,xml in [('new',selected_new),('old',selected_old)]:
         ET.indent(xml); ET.ElementTree(xml).write(HERE/f'partition-native-{mode}.xml',encoding='utf-8',xml_declaration=True)

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/30.0">
+  <id>rr-partition-inspect</id><versionNumber>1.0.0</versionNumber><filename>RRPartitionInspect</filename>
+  <initialWindow><content>PartitionInspect.swf</content><visible>false</visible><width>48</width><height>25</height></initialWindow>
+  <supportedProfiles>extendedDesktop</supportedProfiles>
+</application>

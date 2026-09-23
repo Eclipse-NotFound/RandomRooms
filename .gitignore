@@ -10,6 +10,7 @@ release/
 *.log
 !design/partition-preview-v12/native-captures/runner.log
 !design/partition-preview-v12-2/native-captures/runner.log
+!design/partition-preview-v12-3/native-captures/runner.log
 
 # 操作系统/编辑器垃圾
 .DS_Store
@@ -23,6 +24,7 @@ build/style-review/__pycache__/
 build/style-review/*.png
 build/style-review/*.xml
 build/style-review/*.json
+build/style-review/partition-*-sources.zip
 build/style-review/composite/
 build/style-review/horizontal/
 build/style-review/local/

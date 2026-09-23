@@ -27,7 +27,7 @@ package rr
       {
          sceneId=theme;
          var rooms:Array=[],bag:Array,count:int,main:String;
-         var density:String=pick(["sparse","standard","standard","dense","dense"]);
+         var density:String=pick(["sparse","standard","standard","standard","dense"]);
          var wide:Boolean=density=="sparse" || (density=="standard" && rnd()<0.45);
          var levels:Number=theme=="stable"?0.58:(theme=="mane"?0.46:(theme=="plant"?0.35:0.24));
          var vertical:Number=0.5,extra:Number=0.2+rnd()*0.5;
@@ -35,7 +35,7 @@ package rr
          {
             vertical=0.40+rnd()*0.20;
             main=form=="storage_hall"?"warehouse":(form=="service_wing"?"service":"workshop");
-            count=density=="dense"?between(14,19):(density=="sparse" && main!="service"?between(4,7):between(8,12));
+            count=density=="dense"?between(10,12):(density=="sparse" && main!="service"?between(4,6):between(6,9));
             rooms.push(demand(main,wide && main!="service"));
             bag=main=="warehouse"?["store","store","warehouse","control","service"]:
                (main=="service"?["service","service","control","control","office","store"]:
@@ -46,7 +46,7 @@ package rr
          {
             vertical=0.30+rnd()*0.20;
             main=form=="atrium_ring"?"hall":(form=="quarters"?"living":"service");
-            count=density=="dense"?between(14,20):(density=="sparse" && main=="hall"?between(5,8):between(8,13));
+            count=density=="dense"?between(10,13):(density=="sparse" && main=="hall"?between(4,6):between(7,10));
             rooms.push(demand(main,wide && main=="hall"));
             bag=main=="living"?["living","living","living","office","kitchen","medical"]:
                (main=="hall"?["living","office","office","service","store","medical"]:
@@ -55,12 +55,12 @@ package rr
          }
          else if(theme=="sewer")
          {
-            count=density=="dense"?between(13,18):between(8,12); vertical=0.3+rnd()*0.2; main=form=="dry_tunnels"?"service":"canal";
+            count=density=="dense"?between(9,11):between(5,8); vertical=0.3+rnd()*0.2; main=form=="dry_tunnels"?"service":"canal";
             if(main=="canal")
             {
                rooms.push({role:"canal",minW:form=="cistern"?26:23,minH:form=="cistern"?12:10,
                   maxW:46,maxH:21,weight:form=="cistern"?7:5});
-               count=density=="dense"?between(11,15):(density=="sparse"?between(4,6):between(7,10));
+               count=density=="dense"?between(8,10):(density=="sparse"?between(3,5):between(5,7));
             }
             else rooms.push(demand("service"));
             bag=form=="pump_chain"?["control","control","service","service","store"]:
@@ -73,17 +73,24 @@ package rr
             main=form=="offices"?"office":(form=="commercial"?"store":(form=="ruined"?"hall":
                (form=="rooftops"?"roof":(form=="street_links"?"street":"living"))));
             rooms.push(demand(main,main=="hall"));
-            count=density=="dense"?between(14,20):(density=="sparse" && main=="hall"?between(4,7):between(8,12));
+            count=density=="dense"?between(9,12):(density=="sparse" && main=="hall"?between(3,5):between(5,8));
             bag=main=="office"?["office","office","office","store","service"]:
                (main=="store"?["store","store","office","kitchen","service"]:
                (main=="roof" || main=="street"?["service","store","service","office"]:
                ["living","living","kitchen","office","store"]));
-            if(main=="roof" || main=="street") count=density=="dense"?between(11,15):between(5,9);
+            if(main=="roof" || main=="street") count=density=="dense"?between(8,10):between(4,7);
          }
          while(rooms.length<count) rooms.push(demand(pick(bag)));
+         // Structural mass is planned alongside usable cells. Its area is not
+         // forced into extra low rooms; the terrain remains solid when carved.
+         var massChance:Number=theme=="mane"?0.35:(theme=="plant"?0.65:(theme=="stable"?0.90:1));
+         var masses:int=rnd()<massChance?between(1,theme=="sewer"?3:(theme=="stable"?2:1)):0;
+         for(i=0;i<masses;i++) rooms.push({role:"mass",minW:5,minH:3,
+            maxW:theme=="mane"?18:(theme=="plant"?28:38),maxH:theme=="mane"?6:(theme=="sewer"?17:11),
+            weight:theme=="mane"?0.8+rnd():1.6+rnd()*1.8});
          for(var i:int=0;i<rooms.length;i++) rooms[i].uid=i;
          return {theme:theme,form:form,main:main,rooms:rooms,vertical:vertical,extra:extra,levels:levels,density:density,
-            variant:wide?"large-and-small":"compact-cluster"};
+            requested:count,variant:wide?"large-and-small":"compact-cluster"};
       }
       /** Larger values mean a useful architectural relationship, not a door
        * that must appear in every room. Geometry feasibility remains mandatory. */

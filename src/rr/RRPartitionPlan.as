@@ -6,6 +6,7 @@ package rr
    public class RRPartitionPlan
    {
       public var info:Object;
+      public var masses:Array;
       private var rnd:Function;
       private var ports:Array;
       private var program:Object;
@@ -22,7 +23,7 @@ package rr
 
       public function build(theme:String,form:String,boundary:Array):Array
       {
-         ports=boundary; visits=0;
+         ports=boundary; visits=0; masses=[];
          program=new RRSpaceRules(rnd).create(theme,form);
          var whole:Object=rect(1,1,46,23),out:Array;
          var layout:String=rnd()<program.levels?"storeys":
@@ -31,9 +32,13 @@ package rr
          if(out==null) throw new Error("Partition demand search exhausted: "+layout);
          // The explicit common-floor operation must survive local editing.
          var shifted:int=layout=="storeys"?0:retile(out);
+         var usable:Array=[];
+         for each(var cell:Object in out)
+            if(cell.role=="mass") masses.push(cell); else usable.push(cell);
+         out=usable;
          validatePorts(out);
          info={main:program.main,variant:program.variant,layout:layout,density:program.density,
-            requested:program.rooms.length,count:out.length,visits:visits,retiled:shifted,extra:program.extra};
+            requested:program.requested,count:out.length,masses:masses.length,visits:visits,retiled:shifted,extra:program.extra};
          return out;
       }
       private function feasible(r:Object,items:Array):Boolean
@@ -50,6 +55,16 @@ package rr
          {
             p=items[0];
             if(width(r)>p.maxW || height(r)>p.maxH) return false;
+            if(p.role=="mass")
+               for(var port:int=0;port<22;port++) if(ports[port]>=2)
+               {
+                  var socket:Object=RRPorts.rect(port,ports[port]);
+                  if(RRPorts.vertical(port))
+                  {
+                     if((port>=17?r.top==1:r.floor==23) && r.x0<=socket.x1+1 && r.x1>=socket.x0-1) return false;
+                  }
+                  else if((port>=11?r.x0==1:r.x1==46) && r.top<=socket.y1 && r.floor>=socket.y0) return false;
+               }
             // Keep descending upper sockets out of the water vessel itself.
             // Its roof-adjacent dry spaces take those sockets instead.
             if(p.role=="canal" && r.top==1)

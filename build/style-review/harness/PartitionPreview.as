@@ -22,7 +22,7 @@ package
       private var jobs:Array=[];
       private var index:int=0;
       private var timer:Timer;
-      private var modern:XML=<baseline generator="partition-prototype-2"/>;
+      private var modern:XML=<baseline generator="partition-prototype-3"/>;
       private var legacy:XML=<baseline generator="v11.1-forced-form-control"/>;
       private var report:Object={cases:[],rejections:{},repeatChecks:0};
       private function write(name:String,s:String):void

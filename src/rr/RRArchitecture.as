@@ -25,6 +25,8 @@ package rr
       public var sceneForm:String;
       public var pools:Array;
       public var partitionInfo:Object;
+      public var masses:Array;
+      public var merges:Array;
       private var rnd:Function;
       private var volumes:Array;
       private var tallBias:Number;
@@ -54,7 +56,7 @@ package rr
          if (["atrium","offices","workshop","damaged","service","warehouse","connector"].indexOf(requested)>=0) archetype=requested;
          ports=boundary!=null?boundary.concat():RRPorts.sample(rnd);
          grid=[]; regions=[]; ladders=[]; stairs=[]; doors=[]; hatches=[]; windows=[]; pools=[];
-         reserved={}; links=[]; partitionInfo=null;
+         reserved={}; links=[]; partitionInfo=null; masses=[]; merges=[];
          for (var y:int=0;y<25;y++)
          {
             grid[y]=[];
@@ -67,6 +69,7 @@ package rr
             var partition:RRPartitionPlan=new RRPartitionPlan(rnd);
             volumes=partition.build(theme,sceneForm,ports);
             partitionInfo=partition.info;
+            masses=partition.masses;
          }
          else { seedScene(); refineSpaces(); }
          for (var i:int=0;i<volumes.length;i++)
@@ -356,17 +359,82 @@ package rr
       private function adjacent(a:Object,b:Object):Object
       {
          var lo:int,hi:int;
-         if (a.x1+2==b.x0 || b.x1+2==a.x0)
+         var reach:int=partitionInfo?12:1;
+         var left:Object=a.x0<b.x0?a:b,right:Object=left==a?b:a;
+         var above:Object=a.top<b.top?a:b,below:Object=above==a?b:a;
+         if (right.x0-left.x1>=2 && right.x0-left.x1<=reach+1)
          {
             lo=Math.max(a.top,b.top); hi=Math.min(a.floor,b.floor);
-            if (hi-lo>=(partitionInfo?2:3)) return {a:a,b:b,vertical:false,x:a.x1<b.x0?a.x1+1:b.x1+1,lo:lo,hi:hi};
+            if (hi-lo>=(partitionInfo?2:3) && emptyBridge(left.x1+1,hi-2,right.x0-1,hi,a,b))
+               return {a:a,b:b,vertical:false,x:left.x1+1,x0:left.x1+1,x1:right.x0-1,lo:lo,hi:hi};
          }
-         if (a.floor+2==b.top || b.floor+2==a.top)
+         if (below.top-above.floor>=2 && below.top-above.floor<=reach+1)
          {
             lo=Math.max(a.x0,b.x0); hi=Math.min(a.x1,b.x1);
-            if (hi-lo>=4) return {a:a,b:b,vertical:true,y:a.floor<b.top?a.floor+1:b.floor+1,lo:lo,hi:hi};
+            if (hi-lo>=4 && emptyBridge(lo,above.floor+1,hi,below.top-1,a,b))
+               return {a:a,b:b,vertical:true,y:above.floor+1,y1:below.top-1,lo:lo,hi:hi};
          }
          return null;
+      }
+      private function emptyBridge(x0:int,y0:int,x1:int,y1:int,a:Object,b:Object):Boolean
+      {
+         for each(var r:Object in volumes) if(r!=a && r!=b &&
+            r.x0<=x1 && r.x1>=x0 && r.top<=y1 && r.floor>=y0) return false;
+         return true;
+      }
+      private function mergeSide(e:Object,roomGroups:Array):Boolean
+      {
+         if(!partitionInfo || e.vertical || e.x0!=e.x1 || roomGroups[e.a.id]==roomGroups[e.b.id]) return false;
+         var excluded:Array=["canal","roof","street","medical"];
+         if(excluded.indexOf(e.a.role)>=0 || excluded.indexOf(e.b.role)>=0) return false;
+         var size:int=0;
+         for each(var g:int in roomGroups) if(g==roomGroups[e.a.id] || g==roomGroups[e.b.id]) size++;
+         if(size>3) return false;
+         var irregular:Boolean=e.a.top!=e.b.top || e.a.floor!=e.b.floor;
+         if(rnd()>(irregular?0.6:0.22)) return false;
+         // Keep previously built stairs and boundary landings. A broad opening
+         // is a room merge; a small doorway remains a graph connection only.
+         for(var y:int=e.lo;y<=e.hi;y++)
+            if(reserved[y+","+e.x] || /[АВГ-]/.test(String(grid[y][e.x]))) return false;
+         open(e.x,e.lo,e.x,e.hi,e.a.bg);
+         reserve(e.x-1,e.lo,e.x+1,e.hi);
+         merges.push({a:e.a.id,b:e.b.id,x0:e.x,top:e.lo,x1:e.x,floor:e.hi,axis:"side"});
+         return true;
+      }
+      private function mergeStoreys(e:Object,roomGroups:Array):Boolean
+      {
+         if(!partitionInfo || e.y1!=e.y || e.hi-e.lo<9 || roomGroups[e.a.id]==roomGroups[e.b.id]) return false;
+         var excluded:Array=["canal","roof","street","medical"];
+         if(excluded.indexOf(e.a.role)>=0 || excluded.indexOf(e.b.role)>=0) return false;
+         var size:int=0;
+         for each(var g:int in roomGroups) if(g==roomGroups[e.a.id] || g==roomGroups[e.b.id]) size++;
+         if(size>3 || rnd()>(theme=="stable"?0.10:0.20)) return false;
+         // Open part of the slab after the return route exists. Keep every
+         // authored landing, frame and stair reserve, and leave a balcony.
+         var upper:Object=e.a.top<e.b.top?e.a:e.b;
+         var runs:Array=[];
+         // An interior cut can strand the floor on its far side. Start at an
+         // actual end of the upper room instead, leaving one continuous ledge.
+         for each(var direction:int in [-1,1])
+         {
+            var edge:int=direction>0?e.lo:e.hi;
+            if(edge!=(direction>0?upper.x0:upper.x1)) continue;
+            var length:int=0;
+            for(var x:int=edge;x>=e.lo && x<=e.hi && length<9;x+=direction)
+            {
+               var ok:Boolean=solid(x,e.y);
+               for(var y:int=e.y-2;y<=e.y+1;y++) if(reserved[y+","+x]) ok=false;
+               if(!ok) break;
+               length++;
+            }
+            if(length>=5) runs.push({x:direction>0?edge:edge-length+1,w:length});
+         }
+         if(!runs.length) return false;
+         var cut:Object=runs[pick(0,runs.length-1)];
+         open(cut.x,e.y,cut.x+cut.w-1,e.y,e.a.bg);
+         reserve(cut.x,e.y-2,cut.x+cut.w-1,e.y+1);
+         merges.push({a:e.a.id,b:e.b.id,x0:cut.x,top:e.y,x1:cut.x+cut.w-1,floor:e.y,axis:"floor"});
+         return true;
       }
       private function connectVolumes():void
       {
@@ -395,29 +463,50 @@ package rr
          if (chosen.length!=volumes.length-1) throw new Error("Disconnected architectural partition");
          var density:Number=partitionInfo?Number(partitionInfo.extra):[0,0.45,0.75,1][pick(0,3)];
          for each (e in extras) if (rnd()<density) chosen.push(e);
+         var roomGroups:Array=[];
+         for(i=0;i<volumes.length;i++) roomGroups[i]=i;
          for each (e in chosen)
          {
+            var merged:Boolean=false;
             if (e.vertical)
             {
                var lower:Object=e.a.top>e.b.top?e.a:e.b;
                var lx:int=ladderPosition(e.lo+1,e.hi-2,e.y,lower.floor,lower.role=="canal"?lower:null);
                ladderRoute(lx,e.y,lower.floor,lower);
                e.x=lx; e.kind="ladder";
+               merged=mergeStoreys(e,roomGroups);
             }
             else
             {
                var f:int=e.hi;
-               open(e.x,f-2,e.x,f,e.a.bg);
-               reserve(e.x-2,f-3,e.x+2,f);
+               merged=mergeSide(e,roomGroups);
+               if(!merged) open(e.x0,f-2,e.x1,f,e.a.bg);
+               reserve(e.x0-2,f-3,e.x1+2,f);
                landingToFloor(e.a,e.x,f);
-               landingToFloor(e.b,e.x,f);
+               landingToFloor(e.b,e.x1,f);
                var outdoors:Boolean=e.a.role=="street" || e.b.role=="street" || e.a.role=="roof" || e.b.role=="roof";
                var chance:Number=theme=="sewer"?0.28:(theme=="stable"?0.88:0.7);
-               if (rnd()<chance && !outdoors && support(e.x,f)) { door(e.x,f,e.a.bg,e.a.role,e.b.role); e.kind="door"; }
+               if(merged) e.kind="merge";
+               else if (rnd()<chance && !outdoors && support(e.x,f)) { door(e.x,f,e.a.bg,e.a.role,e.b.role); e.kind="door"; }
                else e.kind="opening";
                e.y=f;
             }
+            if(merged)
+            {
+               e.kind="merge"; ga=roomGroups[e.a.id]; gb=roomGroups[e.b.id];
+               for(i=0;i<roomGroups.length;i++) if(roomGroups[i]==gb) roomGroups[i]=ga;
+            }
             links.push({a:e.a.id,b:e.b.id,kind:e.kind,x:e.x,y:e.y});
+         }
+         if(partitionInfo)
+         {
+            var distinct:Object={},rooms:int=0;
+            for(i=0;i<volumes.length;i++)
+            {
+               volumes[i].room=roomGroups[i];
+               if(!distinct[roomGroups[i]]) { distinct[roomGroups[i]]=true; rooms++; }
+            }
+            partitionInfo.rooms=rooms; partitionInfo.merges=merges.length;
          }
       }
       private function volumeAt(x:int,y:int):Object
@@ -691,6 +780,10 @@ package rr
             var apertureLo:int=Math.min(x,start+dir*4),apertureHi:int=Math.max(x+1,start+dir*4);
             if(Math.min(start,end)<r.x0+2 || Math.max(start,end)>r.x1-2) continue;
             if(!landing(dir>0?x-1:x+2,top)) continue;
+            // A wide stair head in the middle of an intact upper floor can
+            // divide it into one-way ledges. Use the narrow ladder fallback;
+            // stairs remain available at a floor/platform end.
+            if(partitionInfo && landing(apertureLo-1,top) && landing(apertureHi+1,top)) continue;
             var ok:Boolean=true;
             for(var y:int=top;y<=bottom;y++)
             {

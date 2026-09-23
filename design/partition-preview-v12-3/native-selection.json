@@ -1,0 +1,52 @@
+{
+  "caseIds": [
+    1,
+    32,
+    96,
+    129,
+    192,
+    288,
+    320,
+    419,
+    448
+  ],
+  "selection": "First successful pair matching each declared structural feature, or first success if none match. Not selected by appearance.",
+  "filters": {
+    "production": [
+      "feature",
+      "irregular-side-merge"
+    ],
+    "storage_hall": [
+      "rrP_density",
+      "standard"
+    ],
+    "quarters": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "atrium_ring": [
+      "rrP_density",
+      "sparse"
+    ],
+    "canal_gallery": [
+      "rrP_density",
+      "sparse"
+    ],
+    "dry_tunnels": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "apartments": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "ruined": [
+      "feature",
+      "floor-merge"
+    ],
+    "rooftops": [
+      "rrP_density",
+      "standard"
+    ]
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "aggregate": [
+    {
+      "scene": "plant",
+      "name": "工厂",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 7.97,
+        "rooms": 6.55,
+        "roomRange": [
+          2,
+          11
+        ],
+        "solidPercent": 19.2,
+        "irregularMerged": 75,
+        "mergeAxes": {
+          "side": 106,
+          "floor": 30
+        },
+        "graphs": 82,
+        "sizeCombinations": 95,
+        "withoutSeam": 6,
+        "height": 4.44,
+        "countRange": [
+          4,
+          12
+        ],
+        "maxContrast": 28.8,
+        "layouts": {
+          "storeys": 32,
+          "sliced": 57,
+          "staggered": 7
+        },
+        "maxMs": 398,
+        "medianMs": 57,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 11.1,
+        "rooms": 11.1,
+        "roomRange": [
+          4,
+          19
+        ],
+        "solidPercent": 12.3,
+        "irregularMerged": 0,
+        "mergeAxes": {},
+        "graphs": 94,
+        "sizeCombinations": 96,
+        "withoutSeam": 4,
+        "height": 4.48,
+        "countRange": [
+          4,
+          19
+        ],
+        "maxContrast": 41.6,
+        "layouts": {
+          "sliced": 40,
+          "staggered": 10,
+          "storeys": 46
+        },
+        "maxMs": 683,
+        "medianMs": 63,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "stable",
+      "name": "废弃避难厩",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 8.89,
+        "rooms": 8.2,
+        "roomRange": [
+          4,
+          13
+        ],
+        "solidPercent": 27.5,
+        "irregularMerged": 31,
+        "mergeAxes": {
+          "side": 53,
+          "floor": 13
+        },
+        "graphs": 91,
+        "sizeCombinations": 96,
+        "withoutSeam": 0,
+        "height": 4.3,
+        "countRange": [
+          4,
+          13
+        ],
+        "maxContrast": 32.2,
+        "layouts": {
+          "storeys": 56,
+          "sliced": 39,
+          "staggered": 1
+        },
+        "maxMs": 289,
+        "medianMs": 54,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 13.12,
+        "rooms": 13.12,
+        "roomRange": [
+          5,
+          20
+        ],
+        "solidPercent": 14.1,
+        "irregularMerged": 0,
+        "mergeAxes": {},
+        "graphs": 95,
+        "sizeCombinations": 96,
+        "withoutSeam": 1,
+        "height": 4.34,
+        "countRange": [
+          5,
+          20
+        ],
+        "maxContrast": 48.6,
+        "layouts": {
+          "sliced": 30,
+          "storeys": 63,
+          "staggered": 3
+        },
+        "maxMs": 2431,
+        "medianMs": 72,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "sewer",
+      "name": "下水道",
+      "paired": 128,
+      "new": {
+        "count": 128,
+        "spaces": 6.4,
+        "rooms": 5.81,
+        "roomRange": [
+          2,
+          11
+        ],
+        "solidPercent": 31.6,
+        "irregularMerged": 34,
+        "mergeAxes": {
+          "side": 54,
+          "floor": 21
+        },
+        "graphs": 75,
+        "sizeCombinations": 128,
+        "withoutSeam": 0,
+        "height": 3.94,
+        "countRange": [
+          3,
+          11
+        ],
+        "maxContrast": 33.7,
+        "layouts": {
+          "storeys": 29,
+          "sliced": 94,
+          "staggered": 5
+        },
+        "maxMs": 491,
+        "medianMs": 89,
+        "requested": 128
+      },
+      "old": {
+        "count": 128,
+        "spaces": 9.06,
+        "rooms": 9.06,
+        "roomRange": [
+          4,
+          18
+        ],
+        "solidPercent": 11.0,
+        "irregularMerged": 0,
+        "mergeAxes": {},
+        "graphs": 114,
+        "sizeCombinations": 126,
+        "withoutSeam": 0,
+        "height": 4.1,
+        "countRange": [
+          4,
+          18
+        ],
+        "maxContrast": 58.3,
+        "layouts": {
+          "storeys": 38,
+          "sliced": 87,
+          "staggered": 3
+        },
+        "maxMs": 1166,
+        "medianMs": 130,
+        "requested": 128
+      }
+    },
+    {
+      "scene": "mane",
+      "name": "城市废墟",
+      "paired": 192,
+      "new": {
+        "count": 192,
+        "spaces": 7.82,
+        "rooms": 6.64,
+        "roomRange": [
+          2,
+          12
+        ],
+        "solidPercent": 11.6,
+        "irregularMerged": 102,
+        "mergeAxes": {
+          "side": 172,
+          "floor": 55
+        },
+        "graphs": 150,
+        "sizeCombinations": 188,
+        "withoutSeam": 0,
+        "height": 5.64,
+        "countRange": [
+          3,
+          12
+        ],
+        "maxContrast": 36.7,
+        "layouts": {
+          "storeys": 73,
+          "sliced": 115,
+          "staggered": 4
+        },
+        "maxMs": 948,
+        "medianMs": 72,
+        "requested": 192
+      },
+      "old": {
+        "count": 192,
+        "spaces": 11.21,
+        "rooms": 11.21,
+        "roomRange": [
+          4,
+          20
+        ],
+        "solidPercent": 11.6,
+        "irregularMerged": 0,
+        "mergeAxes": {},
+        "graphs": 189,
+        "sizeCombinations": 191,
+        "withoutSeam": 2,
+        "height": 5.35,
+        "countRange": [
+          4,
+          20
+        ],
+        "maxContrast": 38.3,
+        "layouts": {
+          "storeys": 86,
+          "sliced": 100,
+          "staggered": 6
+        },
+        "maxMs": 1237,
+        "medianMs": 62,
+        "requested": 192
+      }
+    }
+  ],
+  "requested": 512,
+  "newSuccess": 512,
+  "oldSuccess": 512,
+  "repeatChecks": 16,
+  "newFailures": [],
+  "oldFailures": []
+}

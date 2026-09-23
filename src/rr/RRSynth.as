@@ -63,7 +63,7 @@ package rr
          var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="11.1" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage} rrEcology={population.ecology.type} rrDifficulty={population.ecology.difficulty}/>;
          if(plan.partitionInfo)
          {
-            room.@rrRevision="12-prototype-2";
+            room.@rrRevision="12-prototype-3";
             room.@rrPartition="rules"; room.@rrSeed=prototypeSeed.seed;
             for(var field:String in plan.partitionInfo) room.@["rrP_"+field]=plan.partitionInfo[field];
          }
@@ -102,7 +102,13 @@ package rr
          if(plan.partitionInfo) for each(var coverage:Object in furnishing.coverage)
             meta.appendChild(<furnish region={coverage.region} role={coverage.role} groups={coverage.groups} target={coverage.target}/>);
          for each (var r:Object in plan.regions)
-            meta.appendChild(<space kind={r.hasOwnProperty("id")?"volume":"gallery"} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} role={r.role}/>);
+         {
+            var space:XML=<space kind={r.hasOwnProperty("id")?"volume":"gallery"} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} role={r.role}/>;
+            if(r.hasOwnProperty("room")) space.@room=r.room;
+            meta.appendChild(space);
+         }
+         for each(r in plan.masses) meta.appendChild(<mass x0={r.x0} top={r.top} x1={r.x1} floor={r.floor}/>);
+         for each(r in plan.merges) meta.appendChild(<merge a={r.a} b={r.b} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} axis={r.axis}/>);
          for each (var e:Object in plan.links)
             meta.appendChild(<link a={e.a} b={e.b} kind={e.kind} x={e.x} y={e.y}/>);
          for each (var l:Object in plan.ladders)

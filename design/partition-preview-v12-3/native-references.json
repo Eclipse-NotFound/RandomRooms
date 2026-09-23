@@ -1,0 +1,26 @@
+[
+  {
+    "scene": "plant",
+    "title": "原版工厂：办公室2（XML第25房）",
+    "note": "右侧办公室净高四格，厚基座与阶梯压顶包围较小附室；左侧保留作业主腔。实体墙块参与塑形，不是把所有剩余面积都填成小房。",
+    "image": "native-captures/rrstyle-mass-native-reference-0-room.png"
+  },
+  {
+    "scene": "stable",
+    "title": "原版废弃避难厩：大厅（XML第21房）",
+    "note": "主厅下方有约35×4格大基座，侧面留梯道；主厅左下抬高，顶部矮通道连接较高库房。可辨约三处主要功能空间，交通和台阶凹入不各算一间房。",
+    "image": "native-captures/rrstyle-mass-native-reference-1-room.png"
+  },
+  {
+    "scene": "sewer",
+    "title": "原版下水道：排水2（XML第20房）",
+    "note": "约30×17格的大水腔下方是30×3格厚池底，两岸留小设施和交通。大实体、大空腔与小附室并存；梁台不等同于独立房间。",
+    "image": "native-captures/rrstyle-mass-native-reference-2-room.png"
+  },
+  {
+    "scene": "mane",
+    "title": "原版城市：断裂建筑（XML第27房）",
+    "note": "两道主楼板局部缺失，残余梁和边缘房间保留，形成跨层空间。城市厚实体整体少于避难厩和下水道，不能共用同一种填实比例。",
+    "image": "native-captures/rrstyle-mass-native-reference-3-room.png"
+  }
+]

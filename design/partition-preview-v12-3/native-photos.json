@@ -1,0 +1,74 @@
+[
+  {
+    "caseId": 1,
+    "scene": "plant",
+    "form": "production",
+    "seed": 20268842,
+    "new": "native-captures/rrstyle-partition-native-new-0-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-0-room.png"
+  },
+  {
+    "caseId": 32,
+    "scene": "plant",
+    "form": "storage_hall",
+    "seed": 20514331,
+    "new": "native-captures/rrstyle-partition-native-new-1-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-1-room.png"
+  },
+  {
+    "caseId": 96,
+    "scene": "stable",
+    "form": "quarters",
+    "seed": 21021147,
+    "new": "native-captures/rrstyle-partition-native-new-2-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-2-room.png"
+  },
+  {
+    "caseId": 129,
+    "scene": "stable",
+    "form": "atrium_ring",
+    "seed": 21282474,
+    "new": "native-captures/rrstyle-partition-native-new-3-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-3-room.png"
+  },
+  {
+    "caseId": 192,
+    "scene": "sewer",
+    "form": "canal_gallery",
+    "seed": 21781371,
+    "new": "native-captures/rrstyle-partition-native-new-4-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-4-room.png"
+  },
+  {
+    "caseId": 288,
+    "scene": "sewer",
+    "form": "dry_tunnels",
+    "seed": 22541595,
+    "new": "native-captures/rrstyle-partition-native-new-5-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-5-room.png"
+  },
+  {
+    "caseId": 320,
+    "scene": "mane",
+    "form": "apartments",
+    "seed": 22795003,
+    "new": "native-captures/rrstyle-partition-native-new-6-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-6-room.png"
+  },
+  {
+    "caseId": 419,
+    "scene": "mane",
+    "form": "ruined",
+    "seed": 23578984,
+    "new": "native-captures/rrstyle-partition-native-new-7-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-7-room.png"
+  },
+  {
+    "caseId": 448,
+    "scene": "mane",
+    "form": "rooftops",
+    "seed": 23808635,
+    "new": "native-captures/rrstyle-partition-native-new-8-room.png",
+    "old": "native-captures/rrstyle-partition-native-old-8-room.png"
+  }
+]

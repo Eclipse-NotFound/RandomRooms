@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "legacySemanticMatch": true,
+  "legacyRooms": 494,
+  "inputs": [
+    {
+      "path": "build\\style-review\\partition-mass-dev4-old.xml",
+      "sha256": "d613aa8b9328b596555b485a90d5a225fef9f637a3b9dce71df2b9409b8532af"
+    },
+    {
+      "path": "build\\style-review\\partition-scale-dev3-old.xml",
+      "sha256": "d613aa8b9328b596555b485a90d5a225fef9f637a3b9dce71df2b9409b8532af"
+    }
+  ],
+  "sameRejectedInput": {
+    "index": 76,
+    "seed": 20862767,
+    "scene": "plant",
+    "form": "service_wing",
+    "port": 1,
+    "sample": 4,
+    "new": {
+      "attempts": 2,
+      "ms": 66,
+      "ok": true
+    }
+  },
+  "scope": "Legacy XML semantic parity and same rejected input regression; not deployed game smoke test."
+}

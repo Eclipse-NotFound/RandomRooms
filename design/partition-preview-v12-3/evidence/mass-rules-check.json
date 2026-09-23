@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "input": "build\\style-review\\partition-mass-dev4-new.xml",
+  "sha256": "940ec16ebae010e03b2b51495193a7e21f301a79b28830d1b95bdcfcf2e5928c",
+  "samples": 512,
+  "countRange": [
+    2,
+    13
+  ],
+  "merges": 504,
+  "rectangles": 3939,
+  "plannedMasses": 501,
+  "roomsWithRealThickBlock": 330,
+  "axis_side": 385,
+  "axis_floor": 119,
+  "scope": "Real solid tiles and explicit broad merges; no movement or semantic native-room count proof."
+}
