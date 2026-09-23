@@ -1,89 +1,68 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-23：完成v12.3厚墙与合并HTML：按原版分场景配置实体块、减少规划数量、横向为主/少量跨层合并。512组静态通过、9组前后实景+4间原房。尚未接入正式F1/扩张，未部署；正式版仍为v11.1。
+> 2026-09-24：v12.2/v12.3 对照版已按用户授权部署。两版四场景共 8 案完整扩张往返通过；正式 SWF 两版分别重启，F1/F5 共 4 案、74 房冒烟通过。当前等待用户实玩对照反馈。部署/回滚/验证入口：design/v12-runtime-comparison/validation.md。
 
 ## 1. 模组是什么
 
-- 为Remains 1.02从零生成建筑空间，按用途安排原版家具与通用探索内容，不复制原版整房或地形片段。
-- 工厂、废弃避难厩、下水道、城市废墟分别控制空间、材料、门窗、敌群和设施；一次探索固定场景，向右、向下无限扩张。
-- 运行入口固定release/RandomRoomsMod.swf，类RandomRoomsMod，public static init(main)。仓库在本模组目录，分支main。
+- 为 Remains 1.02 从零生成建筑空间，不复制原版整房或局部地形；按用途安排原版家具、敌群和通用探索内容。
+- 四类场景：工厂、废弃避难厩、下水道、城市废墟；一次探索固定场景，向右、向下无限扩张。
+- 固定入口 release/RandomRoomsMod.swf，类 RandomRoomsMod，public static init(main)。本目录独立 Git 仓库，main 分支。
 
 ## 2. 用户决定与边界
 
-- 土地=整次旅行地图；合成房=48×25格；房间=内部功能空间。采用C从零生成，不能改成有限5×5加F4。
-- 取消统一三段式、中央井和穿房路线。普通上下连接错开、少量特殊井；较强探索、回环为主、少量有内容的尽头。
-- 上下左右任一实际开放入口都能进入与返回，不要求每房四面全开，不指定首入口，不随进入方向重排。
-- 保留原版门、活板门、玻璃；四类场景整次探索保持，扩张和F4不换。F1四类入口加随机，F2回城，F4深入，F5展示馆。
-- 下水道真实污水，必经干路，涉水可选。通用敌群/机关/奖励/服务可刷新；剧情NPC、任务装置、首领另行设计。
-- Q1按原版生态和空间用途分离，允许合理共用。Q2已答“1”：城市按整张地图组织连续建筑、街巷、屋顶，不再每个合成房都塞室内外。
-- 尺度要求：开发房偏大空荡，应增加内部房间，参考对应原版场景，不能四类统一切成小格。
-- 2026-09-23分区规划Q1：本轮保持矩形，先丰富数量、尺寸和位置；Q2：允许同场景各合成房明显偏重不同用途，并保留合理配套。随后明确要求开始实施、先在HTML里看效果；本轮先交付真实算法原型和预览，不部署。
-- 用户看v12首版后明确要求：相较原版降低偏高房间；部分合成房采用几个房间同顶同底的“层”；更极端大小反差；房间数也随机。本轮按这四项直接实施，grilling只委托必要原版事实调查，没有重复确认已定方向。
-- v12.2后用户要求厚实体块、减少房数、矩形规划后拆墙形成不规则房；Q1确认“横向为主，少量跨层合并”。这已替代先前“不规则房暂不做”的限制；仍先HTML，不部署。普通门洞/梯井不自动合算一个房。
-- 只改本模组。根/DLC SWF、真实存档、其他模组不改。测试用唯一pferr-style-*应用、newGame(-1)、隐藏ADL，不用Ghost、不干扰用户实例。
-- 评审页自动打开曾被Browser URL策略拒绝；不换浏览器、代理或服务器绕过，提供本地文件链接即可。
-- 版本替换须重启、回城后新开土地。已载入地图不会自动更新。已决定事项不重复询问。
+- 土地＝整次旅行地图；合成房＝48×25 格；房间＝内部功能空间。采用 C 从零生成；不能改成有限 5×5 加 F4。
+- 普通上下连接错开，少量特殊长井；较强探索、回环为主，少量有内容的尽头。不指定统一穿房路线或首入口；任一实际开放入口均应可进出，不要求四面全开。
+- 保留门、活板门、玻璃、场景生态与用途。允许原版合理共用，禁止专属敌人/设施混入不适用场景。剧情 NPC、任务装置和首领另行设计。
+- 下水道使用真实污水，必经干路、涉水可选；城市按地图坐标组织连续建筑/街巷/屋顶，不能每个合成房都塞全套室内外。
+- 随机用途侧重、房间数量、大小与位置；普通空间降低净高，部分合成房采用对齐的楼层，允许显著大小反差。
+- v12.3 已获准厚实体块、减少房数、矩形规划后横向拆墙为主、少量拆楼板跨层合并；这替代了最初仅矩形的限制。
+- 先 HTML 的阶段已经结束：2026-09-24 用户明确要求把 v12.2 与 v12.3 实际部署供对照。本轮不再重复请求部署许可。
+- 仅改本模组；正式存档、其他模组、根/DLC SWF 不改。测试用独立 pferr-style-* 应用、newGame(-1)、隐藏 ADL，不用 Ghost，不关闭用户游戏。
+- 每次替换 SWF 后须完全退出重启，再回城 F1 生成新土地；旧地图不会自动更新。已决定事项不重复提问。
 
 ## 3. 当前状态
 
-- 最新原型入口design/partition-preview-v12-3/index.html：四场景16用途×4边口×8种子，对照v12.2；真实不规则轮廓、规划矩形/共层/连接开关、三图层、连续样本、9对原版渲染与4间原房。Chrome 512条件/9图组/4原房、1440/390宽度通过，0脚本错误。旧页v12、v12.2原样保留。
-- RRSpaceRules先抽稀疏/标准/密集需求、用途、数量和尺寸；普通高度上限工厂6/避难厩5/下水道5/城市7，辅助房最低3，生活/厨房/医疗最低4。主厅/作业厅/水区单独约束；支持大主空间配小附室。
-- RRPartitionPlan做受约束切分/交错分区/局部重排，并按场景倾向增加随机层数/层高的storeys；共层不做打散楼板的retile。connectVolumes按用途关系加权；仅context.partition="rules"且明确seed时启用，普通F1仍走旧链。
-- v12.3的RRSpaceRules减少需求数并加入mass，分区后将mass保留为真实实体。原型连接允许穿过有限厚墙；RRArchitecture显式合并最多3个矩形，侧向拆共墙/局部拆楼板，记录room组与merge。水区/街隙/屋顶/医疗暂不合并；家具和内容仍使用矩形子区，不是完整不规则房装饰器。
-- 最终开发SWF build/RandomRooms-v12-prototype-3-final.swf，53245 B，SHA256 BD8C62E18C55C7A464FA60499C3DECFBBFCD02097986A2E3013124958F6650C9。不可直接当已接入的新正式版部署。无-final的prototype-3.swf是dev2中间版；prototype-1/2与旧证据均保留。
+- 正式 release/RandomRoomsMod.swf 已为对照版，76834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9；与 build/RandomRooms-v12-comparison-candidate.swf 一致，日志 [RR:v12-compare]。
+- F1/F5 新增 v12.2/v12.3、种子和四场景/随机选择；取消恢复暂停。每次明确新开从第 1 层开始，F4 与右下扩张保持版本/种子/场景。菜单种子更改用于下次 F1，无须为改种子重启。
+- RRExpedition 将规则分区真正接进地图：场景+深度派生地图随机源，坐标派生房间种子；版本不参与种子派生，镜像/边口/城市条件可公平对照。原版掉落和 AI 仍有运行时随机。
+- v12.2 七类冻结于 src/rr/v122，来源 93e7fef，只改包名/导入；当前 rr 中的 v12.3 规则保留 430d085。不要直接部署原 prototype-2/3 SWF，它们的 F1 仍走旧链。
+- v12.2 以矩形数量/尺度/共层随机为主；v12.3 在此基础上减少分隔房、加入实体块和最多三个矩形合并。家具与内容目前仍按矩形子区布置。
+- 原正式 v11.1 已备份：46044 B，SHA256 16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F；回滚位置见第 6 节。
 
-- 正式release：v11.1，46044 B，SHA256 16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F；对应build/RandomRooms-v11.1-candidate.swf。日志[RR:v11.1]。
-- 完整核心验证候选build/RandomRooms-v11-dev-13.swf，46043 B，SHA256 959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533；日志[RR:v11-dev]，XML space-v11/revision11.1。
-- 原版调查192间外置房、12间实景。RREcology按1.02实际难度选择同房生态，RRGrowth恢复被Land改写的tipEnemy；材料、家具和设施按场景与用途配置。
-- v11.1已缩小普通功能房、增加附室，保留作业厅/公共厅/水渠等大空间；小家具组合适配窄房，背景装饰失败不再连带取消实体家具。
-- 城市按坐标稳定生成2–4列建筑组及街巷，顶部屋顶，下方住宅/办公/商业/坍塌空间；相邻两行用途延续，扩张保持街巷位置；取消城市随机镜像。
-- v11.1同组种子每类32间：内部规划空间平均数工厂4.22→9.81、避难厩5.88→11.06、下水道3.88→7.81、城市5.97→10.75。包括走廊/大厅，不能冒充原版作者房间数。
-- 批量128单房+64城市房结构/材料通过，128单房生态通过；16房型均出现；城市112对邻接及请求顺序独立性通过。冻结batch-density-dev13.zip。
-- 原版渲染16房型、32图冻结design/assets/v11-density-dev12；这16间与dev13 XML逐项语义一致。新页design/generator-v11-density-review.html含对应原版对照和64格城市用途图。
-- dev13四类独立完整扩张均4/4：工厂5717帧/193个旧对象、避难厩6302/189、下水道6120/165、城市5299/190；5×5→8×8、原XML/mirror不变、空箱不补；下水道wetFrames=0。结果对应固定种子，不是穷尽证明。
-- 最新dev13原版内容检查100房807个对象、4/4通过；生态100/100一致，创建、成功交互、实际碰撞触发通过。不是逐物体步行、技能成功率或战斗平衡证明。历史dev4/dev7/dev8与独立深池结果另存，不冒充当前验证。
+## 4. 正在进行与验证证据
 
-## 4. 正在进行
-
-- 当前里程碑v12.3厚墙/合并HTML。partition-mass-dev4新512/512、16重放一致；结构/素材/生态各512通过。3939矩形+501实体规划块不重叠/不越界；512对v12.2边口相同。385横向/119跨层合并、242不规则合并组；111/512合成房含跨层合并。22房44图输入逐项匹配，含9对前后与4间原房。旧链494成功XML与上次完全语义一致。
-- 平均规划数工厂11.10→7.97、避难厩13.12→8.89、下水道9.06→6.40、城市11.21→7.82；合并后均值6.55/8.20/5.81/6.64，范围2–13，仍含交通/水区。实体占比19.2%/27.5%/31.6%/11.6%；对应原版普通池22.86%/27.75%/33.48%/11.77%，只用来发现偏差，不是原版风格证明。
-- 当前普通矩形平均净高4.44/4.30/3.94/5.64，共层190/512；无贯穿分隔6，部分连接图/面积反差指标下降。家具覆盖3226/3939，仍有713个子区未放用途组、大腔空墙和合并背景接缝；最慢948ms。静态门/活板门/窗753/515/419，通过不代表真实通行。
-- mass-dev2全512通过但城市实体30.5%过重，随后分场景调频率/尺寸。dev3新511/512，工厂case76/seed20862767耗尽48候选；诊断宽楼梯口/中段拆板切出单向落脚面，改边缘拆板和双侧地板间窄梯回退后dev4原条件全过，该种子第2候选成功。失败、48候选诊断、dev2/dev3源码快照均冻结。
-- 最新记录design/partition-preview-v12-3/validation.md、native-study.md。调查原版120普通池实体+12逐房；纠正避难厩19“九几何单元”为六主房+三门厅，不能冒充九功能房。源码/SWF/批次/图片/manifest已冻结。尚未做本版真实通行或地图接入。
-- 上一阶段v11.1实现、验证与用户授权后的部署已完成；相对dev13只修改两处日志版本字符串。正式SWF独立冒烟2/2通过（F5避难厩12房、F1工厂25房，issues=0），证据release-v11.1-smoke。
-- 开发验证失败多处涉及驾驶器（过早离梯、坡向、梁面、家具顶面），失败XML/图/日志独立冻结；只有真实完整通过才更新结果。
-- 原样单房复查最终通过：工厂18/18目标、4941帧，下水道13/13、1609帧且wetFrames=0。证据plant-interior-dev13、sewer-interior-dev13。早期失败另存；独立封边样本证明内部空间/楼梯平台访问，不当作跨房或每段指定楼梯的独占路径证明。
-- 上一正式阶段完整证据：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。
+- 发布检查的源代码/候选已一致冻结在 design/v12-runtime-comparison/algorithm-evidence.zip。1024 历史 HTML XML 重放一致；512 实际坐标输入结构、材料、生态均通过；256 对版本输入相同，896 对邻接口一致。
+- 当前候选 UI 生命周期 8/8，174 房：两版 F1→F4、回城切换、随机种子选择、F5 展示馆、取消/暂停；ui-lifecycle 下完整证据与原生界面截图。
+- 同一候选、种子 20260818，两版四场景 8/8 完整扩张往返通过；每案真实按键、5×5→8×8、新列/新行往返、旧 XML/mirror/内容实例保持，下水道 wetFrames=0。每案均核对 64 房接口和版本/主种子。详见 growth-results.json。正式文件的 release-smoke-12.2 / release-smoke-12.3 各 2 案、37 房通过，日志版本和文件哈希均正确。
+- 一些成功单案保存在整体后来失败的运行目录中：driver-descending-flight-failed 的 v12.2 工厂/避难厩；driver-hanging-ladder-failed 的 v12.3 工厂。必须按单案引用，不能将父运行改报全过。
+- 驾驶器失败均原样冻结：梯子 0.25 像素落脚误差、斜梯与下方地面混淆、应下降的边缘反复起跳。仅调整测试按键/选路，不移动角色、不改地图/家具；生成器与候选指纹未变。
+- 六模组全组合、联机、所有种子和长期扩张未覆盖。出生房无奖励箱时 cacheStayedEmpty=false 是该项不适用；存在且领取过的箱子若补货会令整案失败。
 
 ## 5. 已知问题与机制
 
-- 正式v11.1走seedScene→refineSpaces，旧partition/profile.min/max/bias不是有效布局入口。v12原型则走RRSpaceRules→RRPartitionPlan；sceneForm在新链中表示用途组合家族而非固定坐标。archetype除connector特例外不直接选择主体。
-- 配置遗留：RRMenu仍显示v10.0；enabled存储/显示但未接入当前合成链；修改种子只保存，synth序列在初始化创建，需要重启。本轮未处理这些配置遗留。
-- 正式版房内仍用共享推进的synth随机序列。v12原型固定边口/用途/种子/内容时按阶段独立复现；没有接入地图坐标种子，省略边口仍从外部rnd抽口，不宣称整个地图已顺序独立。v12.3单房中位54–89ms、最慢948ms，仅本批观测，接受偏差仍在。普通长梯错开失败仍可能回退直梯。
-- 自然度尚未等同原版：部分狭长空间、空墙、矩形厚块和城市屋顶顶边框待打磨；合并后的背景/家具仍沿原矩形配置，整体用途辨识需要继续完善。
-- RRTraversal只是地形图，不是完整物理；实际行走须处理单向梁、家具、门的视线和计时。
-- 行动要有到交互中心的isLine视线并持续按住；下键加双击下会先抓邻梯，低门旁落梁只用双击下。梯子中段无接收平台时不能提前跳出。
-- 斜梯需上键；公开tile.diagon/getMaxY可读，UnitPlayer.diagon为internal。斜梯下方实体地面是独立行走层，不能把地面格心替换成斜面高度；保留入梯节点、在斜面上沿当前路径走，避免中途重选下方平地。原版跳跃高度依赖按住数帧，一帧脉冲不足以越过普通箱子。固体平台边缘有时须正常跳跃。
-- setDoor/setNoObj会省略rem对象：左右入口向内6格、上下3行。人口和家具预留遵守规则。黏液地雷用slime tr=10，不是cid，不读取internal aiState。
-- 必经干桥下一格的脚点可能触水；真实干路图排除水面上一格。水下池底stay可能false，不可强求干地站立。
-- 未穷尽随机种子、长期扩张、联机、真实旧档死亡恢复、六模组集成、逐敌人战斗、伤害与购买平衡。
+- 自然度仍待用户实玩：部分狭长空间/空墙，厚块偏矩形，合并房背景接缝与家具仍沿子矩形，城市屋顶顶边框；不是已等同原版的声明。
+- 新分区中 sceneForm 是用途组合家族，非固定坐标；archetype 仅 connector 特例影响主体。旧 partition/profile 参数不可混作新链有效入口。XML 的 generator=space-v11 是沿用的元数据；实际版本看 rrVersion / rrMasterSeed 和日志。
+- RRTraversal 只是地形图；真实通行还受单向梁、门、家具影响。普通长梯错开失败仍可能回退直梯。性能慢尾和分布偏向待进一步优化。
+- 交互要满足 isLine 并持续按住；低门旁落梁只用双下，梯子没有接收平台时不能提前跳出。正常跳跃需长按数帧。
+- 斜梯可读 tile.diagon/getMaxY；斜梯下的地面是独立路径。测试从坡面去下方地面应先到梯脚，再从实际落点规划；不能在半空追坡下节点。
+- 必经干桥下一格脚点可能触水；干路图排除水面上一格。水下池底 stay 可能 false。
+- setDoor/setNoObj 会省略 rem 物体：左右入口向内 6 格、上下 3 行；人口和家具要保留此净空。原版 Land 会改 tipEnemy，RRGrowth 已恢复。
+- 测试归档已修正 PowerShell ISO DateTime 二次解析丢 UTC Kind 的问题；旧重复 PNG/XML 经 SHA256 去重，索引 duplicate-capture-index.json.gz。开始需 1 GiB 空余、每轮/归档上限 512 MiB、保留 256 MiB；不要重建巨大旧归档。
 
 ## 6. 下一步与回滚
 
-- 依据新版HTML实景反馈完善家具、大小空间内部交通和用途辨识；共层是部分房型的用户要求，不能一律当重复去除。先验证三格矮房带家具/门梯的真实通行，优化搜索慢尾及分布偏向；再接F1/右下扩张房间种子，做各入口往返、污水干路、城市连续性和旧对象状态测试。截图/静态检查不能替代；部署另走门禁。
-- v11.1已通过发布门禁并部署；用户需完全退出重启，回城后F1进入新地图。后续按实景反馈打磨空墙/狭长空间/城市屋顶边框。
-- 当前根pfe.swf为B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2读取mods/loader-manifest.txt；共享事实库已记录此更新。本轮未写根文件或正式清单。截图驾驶器已生成仅测试入口的隔离清单，并按哈希更新宿主副本、拒绝旧日志。v11历史9A814…验证不冒充此宿主的完整功能回归。
-- 既有v9回滚包build/release-backups/RandomRoomsMod_before_v10_20260920.swf，37785 B，SHA256 7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E。v11.1回滚用build/release-backups/RandomRoomsMod_before_v11_1_20260920.swf（v10，41027 B，SHA256 7AC89A73D6A09C0922FD0C7F1FFE7C2C2A836EE635393BF5D32FCC503463058C）；退出游戏后复制回release并核对哈希，重启后进入新地图。
-- 正式产物和运行目录不进Git；本次新增冻结证据须保持Git字节哈希，部署记录见当前验证报告末节。
+- 当前部署里程碑已完成，等待用户实玩 v12.2 与 v12.3 的对照反馈；F2 回城后 F1 切版本，保持相同种子/场景，每次从第 1 层开始。F4 与右下扩张保持此次选择。
+- 已验证备份 build/release-backups/RandomRoomsMod_before_v12_compare_20260924.swf。回滚时完全退出游戏，复制回 release/RandomRoomsMod.swf，核对 v11.1 指纹 16F3D2BD…6346C7F，再重启并进入新地图。部署时间/完整哈希在 design/v12-runtime-comparison/deployment.json。
+- 根 pfe.swf SHA256 B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2 读 mods/loader-manifest.txt。本轮读取发现加载名单发生外部更新，RandomRooms|RandomRoomsMod|1|1|0 仍正确，不覆盖它。
+- 待用户实玩比较后继续完善合并房整体装饰/交通及性能；保持两个可比较版本，未经决定不要删掉 v12.2。
 
 ## 7. 深入阅读与复现
 
-- 当前预览design/partition-preview-v12-3/index.html；native-study.md为本轮原版厚块与不规则依据，validation.md为验证/局限。evidence/partition-mass-dev4.zip含最终源码、SWF、完整XML，dev1/2/3保留过程与失败。v12.2及更早页未覆盖，规划已接续并明确矩形房限制被用户替代。
-- 原型批次build/style-review/harness/run-partitions.ps1 -Output <新批次名> -Samples 8；页面build_partition_preview.py --stem <批次> --baseline partition-scale-dev3 --out <新目录>；check_partition_preview.cjs <预览目录>做Chrome检查。freeze_partition_preview.py支持stem/baseline/history/out/swf/native-reference，核对来源后冻结。audit_native_mass.py --output <json>只读原版实体，check_partition_mass.py核对真实合并；新增4原房参考mass-native-reference.xml，预览选9对，捕获PrototypeSampleCount=9。
-- 用户向算法学习：design/generator-explained-v11.1/guide.html（16样本四图层、尺寸实验、有效/遗留参数），flow.html（Archify流程图），source-map.md（源码行号与范围）；文档交互检查不冒充游戏回归。
-- 设计来源design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。旧调查页已链接最新密度对照。
-- 当前实证knowledge/experiments/generator-v11-density-validation-2026-09-20.md与generator-v11-evidence/；正式v10结果另见v10报告。
-- 构建build/build-v7.ps1 -OutputName RandomRooms-v11.1-next.swf只写build；dev13与v11.1-candidate已冻结，不覆盖。旧build-m0.sh直写release，勿用于验证。
-- 批量build/style-review/harness/run-baseline.ps1支持-SamplesPerBiome 32 -PopulationDepth 3 -MapSize 8 -MapScene mane；verify_architecture/scenes/population/city_map分别检查。
-- 实机build/style-review/game-harness/run-game-captures.ps1 -DevelopmentSwf build/RandomRooms-v11-dev-13.swf -NavigationProbe -GrowthProbe -Scene plant；-SessionDirectory visual-app隔离另一轮。内容-PopulationProbe -AllScenes，冒烟-SmokeOnly。
-- freeze_captures.py仅完整且哈希匹配才冻结；失败用freeze_failed_run.py按manifest时间窗口留证，不混入旧captures。AIR独立存储走隔离测试审批，不能借真实存储绕行。
+- 本轮：design/v12-runtime-comparison/validation.md；两个 HTML 入口 design/partition-preview-v12-2/index.html 与 partition-preview-v12-3/index.html，各自 native-study/validation/evidence 保留对应原版调查和历史失败。
+- 调查：design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。
+- 旧正式版实证：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。教程：design/generator-explained-v11.1/guide.html，仅解释旧链，不能当当前新分区文档。
+- 构建：build/build-v7.ps1 -OutputName RandomRooms-v12-comparison-next.swf。仅写 build；旧 build-m0.sh 直写 release，勿用于验证。
+- 比对：build/style-review/harness/run-comparison.ps1；verify_comparison.py。汇总完整实际扩张：summarize_comparison_growth.py。
+- 实机：build/style-review/game-harness/run-game-captures.ps1 -DevelopmentSwf <SWF> -GeneratorVersion 12.2 或 12.3；-ComparisonLifecycle；-AllScenes -Scenes @('plant','stable','sewer','mane') -NavigationProbe -GrowthProbe；-SmokeOnly -Scene plant。
+- 隔离 SessionDirectory 为 app / visual-app / comparison-app；只通过独立 AIR 存储权限运行，不能借真实存储绕行。freeze_captures.py 只收完整成功且哈希匹配结果；失败用 freeze_failed_run.py 按新鲜时间窗口冻结。
+- 正式 SWF 与运行目录不进 Git，冻结证据保持 Git 字节哈希。回滚历史见 journal 和既有验证报告。

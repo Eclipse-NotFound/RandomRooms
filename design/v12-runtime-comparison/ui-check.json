@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "rooms": 174,
+  "versions": {
+    "12.2": [
+      "plant",
+      "plant",
+      "mane",
+      "sewer"
+    ],
+    "12.3": [
+      "plant",
+      "plant",
+      "mane",
+      "sewer"
+    ]
+  },
+  "randomScene": "mane"
+}

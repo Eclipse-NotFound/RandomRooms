@@ -1,0 +1,30 @@
+{
+  "deployedUtc": "2026-09-23T23:25:14.4110394Z",
+  "release": "release/RandomRoomsMod.swf",
+  "bytes": 76834,
+  "sha256": "8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9",
+  "backup": "build/release-backups/RandomRoomsMod_before_v12_compare_20260924.swf",
+  "backupSha256": "16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F",
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "loaderManifestSha256": "3FEC194F7DE2ED9325E7D81AE3A0B3BF54F62B8FB04211CBE2492BA674EB3927",
+  "rootOrManifestModified": false,
+  "smokeStatus": "passed",
+  "authorization": "User requested actual deployment of v12.2 and v12.3 for comparison, 2026-09-24",
+  "smokeCheckedUtc": "2026-09-23T23:27:32.303180+00:00",
+  "smokes": [
+    {
+      "version": "12.2",
+      "appId": "pferr-style-fbac45220d514149947666c86018c06f",
+      "cases": 2,
+      "rooms": 37,
+      "source": "release-smoke-12.2"
+    },
+    {
+      "version": "12.3",
+      "appId": "pferr-style-04c689be63e64f44b2f40cc0e3278626",
+      "cases": 2,
+      "rooms": 37,
+      "source": "release-smoke-12.3"
+    }
+  ]
+}

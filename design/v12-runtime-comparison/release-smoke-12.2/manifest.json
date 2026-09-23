@@ -1,0 +1,89 @@
+{
+  "appId": "pferr-style-fbac45220d514149947666c86018c06f",
+  "status": "complete",
+  "startedUtc": "2026-09-23T23:25:40.5711685Z",
+  "completedUtc": "2026-09-23T23:26:17.1275981Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-smoke-f5",
+    "rrstyle-smoke-f1"
+  ],
+  "roomIds": [
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "navigationProbe": false,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "./release/RandomRoomsMod.swf",
+  "runtimeArtifacts": {
+    "rrstyle-smoke-f5-pool.xml": "DE514970B24B9D4C9215383D2E6F64C746BFBDE4CD044D29CEB968FBF771C7A4",
+    "rrstyle-smoke-f5-layout.xml": "AC602552E4DCD2C751C058204DF0C6D09A623DF68C3600683CC5ACB4DB5EEB5E",
+    "rrstyle-smoke-f5-topology.json": "54740CCD06E7CC54D67E6ECDB25612DF653858476CD1A8692E5E1E3B9D34AF91",
+    "rrstyle-smoke-f1-pool.xml": "817A611AAD74D0C2F2B7EC3EBCDBB4FD4B47EB2173E285C0C03E87ED8599A5CF",
+    "rrstyle-smoke-f1-layout.xml": "677B9B47ED99C5ADB48B8E7DA8A6A18E60E79217B0AB6EA9F57FD58F870881D0",
+    "rrstyle-smoke-f1-topology.json": "1FD573645EB1E9BD035023BD6EEB7C8A870EF73D27EBF2261E6B8362805AA48D",
+    "production-diag.log": "81550BEE74BA6DF515805D3C37FFCA7C630762FB8A6A687AACF635B9E24F86C4",
+    "production-version.json": "ECEEA963CE06D64EEACF696666C60B3078BD4FD6B8CDF51C7D8671AE09D0CA07",
+    "startup-readiness.json": "D24BEB493AF97CC57CB87178B20AF55C945668FA444A8CA71060CDD6DCFB9C4E"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-smoke-f5",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "plant": 12
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-smoke-f1",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "2D39BC010C9F00BB6B562B21D21856C5E42464F75AE16C96D55A6B0B7B44D127",
+  "driverSha256": "EDE0FCEF49BAC50D7F4FA8FAF95F0D23506E14ACBB04B4B26CE086129DE7F695",
+  "runnerLogSha256": "FB8E7473360463E6573884FDF554D1B3060D4B78552533C4AC15837DE0BCD463",
+  "captured": {
+    "rrstyle-smoke-f5-stage.png": "C290A3BF03A502F94CB366F62575502FD0C3DA97C0D2392CBEEC8DDAB920D2FC",
+    "rrstyle-smoke-f5-room.png": "60E5DF7513CB8DF0CB17E62EC6C374B5C71D6EE128B8ACAC0D319E0C41C0A307",
+    "rrstyle-smoke-f1-stage.png": "BDF637D1E4EC7E7217C408F2A7D172B0203B38356E83F48D2A01D1A20F1DAB05",
+    "rrstyle-smoke-f1-room.png": "1E12B7BD042F6677104396538A9615AD396CCA5CA06BA2C133DC3FC4DFC483CA"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "pairedRooms": 256,
+  "adjacentEdges": 896,
+  "frozenV122Sources": [
+    "RRArchitecture.as",
+    "RRFurnish.as",
+    "RRPartitionPlan.as",
+    "RRPopulation.as",
+    "RRSpaceRules.as",
+    "RRSynth.as",
+    "RRTraversal.as"
+  ],
+  "parityReplays": 1024,
+  "runtimeRooms": 512,
+  "archiveSha256": "1cd247147b89ab353c5c22b7139ae9fd8f3b349216501fb4f3a63a32a75d4ec9"
+}

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\comparison-batch\\runtime.xml",
+      "sha256": "912c50d490dbcde4208d6bfed989b0dee4f1903f839a221b28be819bf6ba7dae",
+      "rooms": 512,
+      "kinds": {
+        "workshop": 67,
+        "service": 107,
+        "warehouse": 98,
+        "atrium": 76,
+        "connector": 18,
+        "offices": 66,
+        "damaged": 80
+      },
+      "themes": {
+        "plant": 128,
+        "stable": 128,
+        "sewer": 128,
+        "mane": 128
+      },
+      "fixtures": {
+        "door": 1403,
+        "hatch": 560,
+        "window": 450
+      },
+      "object_mean": 29.748046875,
+      "back_mean": 60.626953125
+    }
+  ],
+  "failed_rooms": 0,
+  "errors": []
+}

@@ -11,6 +11,7 @@ release/
 !design/partition-preview-v12/native-captures/runner.log
 !design/partition-preview-v12-2/native-captures/runner.log
 !design/partition-preview-v12-3/native-captures/runner.log
+!design/v12-runtime-comparison/**/*.log
 
 # 操作系统/编辑器垃圾
 .DS_Store
@@ -46,3 +47,5 @@ build/RandomRooms-v11-*.swf
 build/RandomRooms-v11.*.swf
 build/RandomRooms-v12-*.swf
 build/style-review/scene-lifecycle-before-labels-20260919/
+build/style-review/comparison-batch/
+build/style-review/game-harness/comparison-app/

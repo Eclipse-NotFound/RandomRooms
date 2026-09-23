@@ -5,7 +5,7 @@ param(
     [switch]$MovementProbe,
     [switch]$MovementOnly,
     [string]$DevelopmentSwf = '',
-    [ValidateSet('app','visual-app')][string]$SessionDirectory = 'app',
+    [ValidateSet('app','visual-app','comparison-app')][string]$SessionDirectory = 'app',
     [switch]$CrossingProbe,
     [switch]$ArchitectureKinds,
     [ValidateRange(0,3)][int]$SamplesPerScene = 0,
@@ -18,16 +18,21 @@ param(
     [switch]$FixtureCyclesOnly,
     [switch]$NavigationProbe,
     [switch]$SceneLifecycle,
+    [switch]$ComparisonLifecycle,
     [switch]$AllScenes,
+    [ValidateSet('plant','stable','sewer','mane')][string[]]$Scenes = @('plant','stable','sewer','mane'),
     [switch]$WaterProbe,
     [switch]$PopulationProbe,
     [switch]$ContentGallery,
     [ValidateRange(0,50)][int]$PopulationDepth = 0,
     [ValidateSet('','plant','stable','sewer','mane')][string]$Scene = '',
     [ValidateSet('both','random_rooms','rr_showroom')][string]$NavigationLand = 'both',
-    [ValidateRange(0,16)][int]$PrototypeSampleCount = 0
+    [ValidateRange(0,16)][int]$PrototypeSampleCount = 0,
+    [ValidateSet('','12.2','12.3')][string]$GeneratorVersion = '',
+    [uint32]$ComparisonSeed = 20260818
 )
 $ErrorActionPreference = 'Stop'
+if ($ComparisonLifecycle) { $SceneLifecycle = $true }
 if ($StartupDelay -and -not $DevelopmentSwf) { throw 'StartupDelay requires DevelopmentSwf.' }
 if (($WaterProbe -or ($AllScenes -and $GrowthProbe)) -and -not $NavigationProbe) {
     throw 'Scene water/growth checks require NavigationProbe; the legacy fixed-floor driver cannot follow these rooms.'
@@ -35,6 +40,9 @@ if (($WaterProbe -or ($AllScenes -and $GrowthProbe)) -and -not $NavigationProbe)
 $modRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../../..')).Path
 $gameRoot = (Resolve-Path -LiteralPath (Join-Path $modRoot '../..')).Path
 $appRoot = Join-Path $PSScriptRoot $SessionDirectory
+$captureDrive = [IO.DriveInfo]::new([IO.Path]::GetPathRoot($appRoot))
+Write-Output ('Available capture disk: {0:N2} GiB' -f ($captureDrive.AvailableFreeSpace / 1GB))
+if ($captureDrive.AvailableFreeSpace -lt 1GB) { throw 'Less than 1 GiB free: stop before copying assets or captures.' }
 $assetFiles = @('pfe.swf','texture.swf','texture1.swf','sprite.swf','sprite1.swf',
     'sound.swf','sound_unit.swf','sound_weapon.swf','lang.xml','text_en.xml',
     'Music/mainmenu.mp3','Music/music_base.mp3','Music/music_plant_1.mp3','Music/music_begin.mp3',
@@ -57,9 +65,18 @@ if (Test-Path -LiteralPath $previousLog) {
     $priorManifest = Join-Path $captureRoot 'manifest.json'
     if (Test-Path -LiteralPath $priorManifest) {
         $priorMetadata = Get-Content -LiteralPath $priorManifest -Raw | ConvertFrom-Json
-        if ($priorMetadata.startedUtc) { $previousStarted = [DateTime]::Parse($priorMetadata.startedUtc).ToUniversalTime().AddSeconds(-2) }
+        if ($priorMetadata.startedUtc) {
+            # PowerShell 7 already deserializes ISO timestamps as DateTime.
+            # Stringifying and reparsing would lose Kind and subtract UTC+8
+            # twice, archiving hours of unrelated old captures each run.
+            $priorUtc = if ($priorMetadata.startedUtc -is [DateTime]) { $priorMetadata.startedUtc.ToUniversalTime() } else { [DateTime]::Parse($priorMetadata.startedUtc,$null,[Globalization.DateTimeStyles]::RoundtripKind).ToUniversalTime() }
+            $previousStarted = $priorUtc.AddSeconds(-2)
+        }
     }
-    foreach ($previous in @(Get-ChildItem -LiteralPath $captureRoot -File | Where-Object { $null -eq $previousStarted -or $_.LastWriteTimeUtc -ge $previousStarted })) {
+    $previousFiles=@(Get-ChildItem -LiteralPath $captureRoot -File | Where-Object { $null -eq $previousStarted -or $_.LastWriteTimeUtc -ge $previousStarted })
+    $archiveBytes=($previousFiles | Measure-Object Length -Sum).Sum
+    if ($archiveBytes -gt 512MB) { throw 'Previous capture archive exceeds 512 MiB: inspect it before copying.' }
+    foreach ($previous in $previousFiles) {
         Copy-Item -LiteralPath $previous.FullName -Destination (Join-Path $archiveRoot $previous.Name)
     }
     foreach ($previousName in @('cases.xml','stdout.txt','stderr.txt')) {
@@ -172,7 +189,7 @@ if ($DevelopmentSwf) {
     if ($NavigationProbe -and $NavigationLand -ne 'both') { $caseSources = @($caseSources | Where-Object { $_.landId -eq $NavigationLand }) }
     if ($AllScenes) {
         $caseSources = @()
-        foreach ($theme in @('plant','stable','sewer','mane')) {
+        foreach ($theme in $Scenes) {
             $caseSources += @{id=('rrstyle-' + $(if ($GrowthProbe) {'growth'} else {'navigation'}) + '-' + $theme);landId='random_rooms';scene=$theme}
         }
     }
@@ -187,6 +204,17 @@ if ($DevelopmentSwf) {
             $caseSources += @{id=('rrstyle-show-' + $theme);landId='rr_showroom';scene=$theme;action='pick'}
         }
     }
+    if ($ComparisonLifecycle) {
+        $caseSources=@()
+        foreach($v in @('12.2','12.3')) {
+            $caseSources+=@{id="rrstyle-compare-$v-plant";landId='random_rooms';scene='plant';action='pick';version=$v}
+            $caseSources+=@{id="rrstyle-compare-$v-deeper";landId='random_rooms';scene='plant';action='deeper';version=$v}
+        }
+        foreach($v in @('12.2','12.3')) {
+            $caseSources+=@{id="rrstyle-compare-$v-random";landId='random_rooms';scene='random';action='pick';version=$v}
+            $caseSources+=@{id="rrstyle-compare-$v-show";landId='rr_showroom';scene='sewer';action='pick';version=$v}
+        }
+    }
 }
 foreach ($caseSource in $caseSources) {
     $case = $caseDoc.CreateElement('case')
@@ -194,6 +222,8 @@ foreach ($caseSource in $caseSources) {
     if ($DevelopmentSwf) {
         $case.SetAttribute('landId',$caseSource.landId)
         $case.SetAttribute('scene',$(if ($caseSource.scene) { $caseSource.scene } else { $Scene }))
+        $case.SetAttribute('generatorVersion',$(if($caseSource.version){$caseSource.version}else{$GeneratorVersion}))
+        $case.SetAttribute('comparisonSeed',$ComparisonSeed.ToString())
         if ($caseSource.action) { $case.SetAttribute('action',$caseSource.action) }
         $caseDoc.DocumentElement.AppendChild($case) | Out-Null
         continue
@@ -279,6 +309,9 @@ try {
         $elapsed++
         if ($elapsed % 10 -eq 0) { Write-Output ('Capture process running: ' + $elapsed + 's; PID ' + $instance.Id) }
         if ($elapsed % 10 -eq 0) {
+            if ($captureDrive.AvailableFreeSpace -lt 256MB) { throw 'Capture disk reserve reached: stopping this isolated instance.' }
+            $writtenBytes=(@(Get-ChildItem -LiteralPath $captureRoot -File | Where-Object { $_.LastWriteTimeUtc -ge $runStarted.AddSeconds(-2) }) | Measure-Object Length -Sum).Sum
+            if ($writtenBytes -gt 512MB) { throw 'This run exceeded its 512 MiB capture budget: stopping isolated instance.' }
             $bootOutput = Get-Content -LiteralPath (Join-Path $appRoot 'stdout.txt') -Raw -ErrorAction SilentlyContinue
             if ($bootOutput -match 'ModLoader\[err_loader\].*manifest') { throw 'Test-local loader manifest could not be loaded.' }
         }

@@ -6,9 +6,12 @@ package
    import flash.display.Sprite;
    import flash.display.Loader;
    import flash.display.LoaderInfo;
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
    import flash.events.Event;
    import flash.events.IOErrorEvent;
    import flash.events.KeyboardEvent;
+   import flash.events.MouseEvent;
    import flash.filesystem.File;
    import flash.filesystem.FileMode;
    import flash.filesystem.FileStream;
@@ -256,7 +259,7 @@ package
                   else
                   {
                      if (populationEnabled || contentGallery) w.game.lands[target].landStage=populationDepth;
-                     if (!developmentClass.debugTravel(target,String(item.@scene))) { fail("debugTravel rejected " + target); return; }
+                     if (!developmentClass.debugTravel(target,String(item.@scene),String(item.@generatorVersion),uint(item.@comparisonSeed))) { fail("debugTravel rejected " + target); return; }
                   }
                   if (navigationEnabled && !growthEnabled)
                   {
@@ -774,6 +777,16 @@ package
          if (!w.onPause) throw new Error("Picker lost pre-existing pause");
          w.onPause=false;
          sceneKey(trigger);
+         if(String(item.@generatorVersion)!="")
+         {
+            var choice:DisplayObject=findNamed(main.stage,"rrVersion"+String(item.@generatorVersion).replace(".",""));
+            if(choice==null) throw new Error("Missing generator version selector");
+            choice.dispatchEvent(new MouseEvent(MouseEvent.CLICK,true));
+            var seedField:*=findNamed(main.stage,"rrComparisonSeed");
+            if(seedField==null) throw new Error("Missing comparison seed field");
+            seedField.text=String(item.@comparisonSeed);
+            if(index==0) screenshot(w,"comparison-picker",false);
+         }
          var ix:int=["plant","stable","sewer","mane","random"].indexOf(String(item.@scene));
          if (ix<0) throw new Error("Missing scene test choice");
          sceneKey(49+ix);
@@ -781,6 +794,17 @@ package
          chosenScene=String(w.game.lands[landId].allroom.room[0].@rrTheme);
          if (ix<4 && chosenScene!=String(item.@scene)) throw new Error("Wrong selected scene");
          log("SCENE-PROBE picker pause/cancel/restore/select PASS "+chosenScene);
+      }
+      private static function findNamed(root:DisplayObject,name:String):DisplayObject
+      {
+         if(root.name==name) return root;
+         var container:DisplayObjectContainer=root as DisplayObjectContainer;
+         if(container) for(var i:int=0;i<container.numChildren;i++)
+         {
+            var found:DisplayObject=findNamed(container.getChildAt(i),name);
+            if(found) return found;
+         }
+         return null;
       }
       private static function verifySceneCase(w:*,item:XML):void
       {
@@ -790,6 +814,9 @@ package
          for each (var room:XML in act.allroom.room)
          {
             if (String(room.@rrTheme)!=chosenScene) throw new Error("Mixed scene in "+item.@id);
+            if(String(item.@generatorVersion)!="" &&
+               (String(room.@rrVersion)!=String(item.@generatorVersion) || uint(room.@rrMasterSeed)!=uint(item.@comparisonSeed)))
+               throw new Error("Generator version/seed changed in "+item.@id);
             count++;
          }
          for each (var k:String in ["biom","backwall","sndMusic","fon","border","color","tipWater","wrad","darkness"])
@@ -809,6 +836,12 @@ package
       private static function dumpRuntimePool(w:*, name:String):void
       {
          var pool:XML = w.game.lands[String(cases[index].@landId)].allroom as XML;
+         if(String(cases[index].@generatorVersion)!="") for each(var checkRoom:XML in pool.room)
+         {
+            var expectedRevision:String=String(cases[index].@generatorVersion)=="12.2"?"12-prototype-2":"12-prototype-3";
+            if(String(checkRoom.@rrRevision)!=expectedRevision || String(checkRoom.@rrVersion)!=String(cases[index].@generatorVersion))
+               throw new Error("Runtime used the wrong generator: "+checkRoom.@rrRevision);
+         }
          var generated:int = 0;
          var themeCounts:Object = {}, kindCounts:Object = {}, tips:Object = {};
          for each (var room:XML in pool.room)

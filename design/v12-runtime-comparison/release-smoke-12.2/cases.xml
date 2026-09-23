@@ -1,0 +1,4 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="false" waterProbe="false" population="false" contentGallery="false" populationDepth="0" development="true">
+  <case id="rrstyle-smoke-f5" landId="rr_showroom" scene="plant" generatorVersion="12.2" comparisonSeed="20260818" />
+  <case id="rrstyle-smoke-f1" landId="random_rooms" scene="plant" generatorVersion="12.2" comparisonSeed="20260818" />
+</cases>

@@ -35,7 +35,7 @@ package rr
          if (id=="mane") return <options backwall={form=="rooftops"?"sky":(form=="street_links"?"tWindows2":"tWindows")} music="music_mane_1" vis="2" darkness="-20"/>;
          throw new Error("Unknown scene options: "+id);
       }
-      public static function configureLand(world:*,act:*,id:String):void
+      public static function configureLand(world:*,act:*,id:String,version:String=""):void
       {
          if (!valid(id)) throw new Error("Unknown adventure scene: "+id);
          var original:*=world["game"]["lands"]["random_"+id];
@@ -55,6 +55,7 @@ package rr
          {
             var entries:XMLList=text.map.(@id==ownId);
             var title:String=name(id)+(ownId=="rr_showroom"?" · 展示馆":" · 随机探索");
+            if(version!="") title+=" · v"+version;
             if (!entries.length()) text.appendChild(<map id={ownId}><n>{title}</n></map>);
             else entries[0].n=title;
          }

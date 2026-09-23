@@ -10,13 +10,13 @@ package rr
    
    /**
     * RRMenu —— 主菜单集成配置条（P1）。
-    * 主菜单阶段右下角显示：变异开关（点击切换）+ 种子（INPUT，Enter 应用）。
+    * 主菜单显示对照版本与下次探索的种子（Enter 应用）。
     * 纯自带 UI（TextField + 矩形），不依赖游戏组件。
     */
    public class RRMenu extends Sprite
    {
       private var cfg:RRConfig;
-      private var label:TextField;   // 状态行（点击切换开关）
+      private var label:TextField;
       private var input:TextField;   // 种子输入
       private var diag:RRDiag;
       
@@ -32,7 +32,7 @@ package rr
       {
          // 背景
          graphics.beginFill(0x000000, 0.75);
-         graphics.drawRect(0, 0, 300, 64);
+         graphics.drawRect(0, 0, 300, 86);
          graphics.endFill();
          
          // 状态行（点击切换 enabled）
@@ -42,8 +42,7 @@ package rr
          label.x = 6;
          label.y = 4;
          label.selectable = false;
-         label.mouseEnabled = true;
-         label.addEventListener(MouseEvent.CLICK, onToggle);
+         label.mouseEnabled = false;
          var fmt:TextFormat = new TextFormat();
          fmt.color = 0xFFFFFF;
          fmt.size = 13;
@@ -112,8 +111,7 @@ package rr
       
       public function refresh():void
       {
-         label.text = "RandomRooms v10.0  [变异:" + (cfg.enabled ? "开" : "关") +
-                      " 种子:" + (cfg.seedEnabled ? String(cfg.seed) : "随机") + "]  (点击切换)";
+         label.text = "RandomRooms v12.2 / v12.3 对照版";
          input.text = cfg.seedEnabled ? String(cfg.seed) : "";
       }
       

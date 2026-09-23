@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "file": "build\\style-review\\comparison-batch\\runtime.xml",
+      "sha256": "912c50d490dbcde4208d6bfed989b0dee4f1903f839a221b28be819bf6ba7dae",
+      "rooms": 512,
+      "scenes": {
+        "plant": 128,
+        "stable": 128,
+        "sewer": 128,
+        "mane": 128
+      },
+      "forms": {
+        "storage_hall": 47,
+        "production": 44,
+        "service_wing": 37,
+        "service_cluster": 38,
+        "quarters": 37,
+        "atrium_ring": 53,
+        "pump_chain": 37,
+        "dry_tunnels": 30,
+        "cistern": 31,
+        "canal_gallery": 30,
+        "rooftops": 12,
+        "offices": 32,
+        "commercial": 32,
+        "street_links": 32,
+        "apartments": 12,
+        "ruined": 8
+      },
+      "waterTiles": {
+        "plant": 0,
+        "stable": 0,
+        "sewer": 4750,
+        "mane": 0
+      }
+    }
+  ],
+  "failedRooms": 0,
+  "errors": []
+}

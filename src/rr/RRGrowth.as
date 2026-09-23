@@ -16,12 +16,14 @@ package rr
       private var mapPlan:RRMapPlan;
       private var busy:Boolean=false;
       private var failedLand:*=null;
+      private var expedition:RRExpedition;
 
       public function RRGrowth(s:RRSynth,c:RRCook,d:RRDiag) { synth=s; cook=c; diag=d; }
 
-      public function build(world:*,act:*,width:int,height:int,biome:String,show:Boolean):*
+      public function build(world:*,act:*,width:int,height:int,biome:String,show:Boolean,choice:Object):*
       {
-         var planner:RRMapPlan=new RRMapPlan(synth.rnd);
+         var run:RRExpedition=new RRExpedition(choice.version,uint(choice.seed),biome,int(act["landStage"]),show);
+         var planner:RRMapPlan=run.planner();
          // Bootstrap an empty native Land, without constructing or discarding
          // any live rooms. Restore the LandAct synchronously, even on failure.
          var LandClass:*=getDefinitionByName("fe.loc.Land");
@@ -37,11 +39,13 @@ package rr
          land["landDifLevel"]=Math.max(Number(act["dif"]),show?0:int(world["pers"]["level"])-1);
          land["locs"]=[];
          land["maxLocX"]=0; land["maxLocY"]=0;
-         act["allroom"]=<all><land serial="1"/></all>;
+         act["allroom"]=<all rrVersion={run.version} rrSeed={run.seed}><land serial="1"/></all>;
+         var previousSerial:int=serial;
          serial=0;
-         append(land,world,0,0,width,height,planner,biome,show);
-         if (!show) { mapPlan=planner; theme=biome; failedLand=null; }
-         diag.log("C-BUILD "+act["id"]+" grid="+width+"x"+height+" coordinated=1");
+         try { append(land,world,0,0,width,height,planner,biome,show,run); }
+         catch(error:*) { act["allroom"]=oldPool; serial=previousSerial; throw error; }
+         if (!show) { mapPlan=planner; theme=biome; expedition=run; failedLand=null; }
+         diag.log("C-BUILD "+act["id"]+" grid="+width+"x"+height+" coordinated=1 version="+run.version+" seed="+run.seed);
          return land;
       }
 
@@ -56,7 +60,7 @@ package rr
          var down:Boolean=int(land["locY"])>=h-2;
          if (!right && !down) return;
          busy=true;
-         try { append(land,world,w,h,w+(right?1:0),h+(down?1:0),mapPlan,theme,false); }
+         try { append(land,world,w,h,w+(right?1:0),h+(down?1:0),mapPlan,theme,false,expedition); }
          catch (e:*)
          {
             failedLand=land; diag.log("C-GROW-FAIL "+e);
@@ -105,7 +109,7 @@ package rr
             { tile["shelf"]=true; tile["vid"]++; }
          }
       }
-      private function append(land:*,world:*,w:int,h:int,nw:int,nh:int,planner:RRMapPlan,biome:String,show:Boolean):void
+      private function append(land:*,world:*,w:int,h:int,nw:int,nh:int,planner:RRMapPlan,biome:String,show:Boolean,run:RRExpedition):void
       {
          var staged:Array=[],pool:XML=<all/>;
          var RoomClass:*=getDefinitionByName("fe.loc.Room");
@@ -116,12 +120,9 @@ package rr
             var ports:Array=planner.ports(x,y);
             // A mirror transforms both terrain and the port contract. Native
             // Location then mirrors them back into the agreed world positions.
-            var mirror:Boolean=biome!="mane" && synth.rnd()<0.5;
-            var kind:String="";
-            for (var p:int=6;p<=10;p++) if (ports[p]>=2 && ports[p+11]>=2) kind="connector";
-            var xml:XML=synth.generate(serial++,biome,kind,mirror?RRPorts.mirror(ports):ports,
-               int(land["act"]["landStage"]),show,x==0 && y==0,
-               {difficulty:land["landDifLevel"],parity:x+y,city:biome=="mane"?planner.city(x,y):null});
+            var mirror:Boolean=run.mirror(x,y);
+            var xml:XML=run.generate(serial++,x,y,mirror?RRPorts.mirror(ports):ports,
+               biome=="mane"?planner.city(x,y):null,land["landDifLevel"]);
             xml.@x=x; xml.@y=y; xml.@rrMirror=mirror?"1":"0";
             if (w>0 || h>0) xml.@rrGrowth="1";
             if (x==0 && y==0) xml.@name="rr_begin";
@@ -174,7 +175,7 @@ package rr
          for each (cell in staged)
          {
             cell.loc["setObjects"]();
-            if ((cell.x==0 && cell.y==0) || (!show && synth.rnd()<0.22))
+            if ((cell.x==0 && cell.y==0) || (!show && run.checkpoint(cell.x,cell.y)))
                cell.loc["createCheck"](cell.x==0 && cell.y==0);
             cell.loc["preStep"]();
             cell.loc["createXpBonuses"](5);

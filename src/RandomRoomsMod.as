@@ -19,6 +19,7 @@ package
    import rr.RRTravelBtn;
    import rr.RRScene;
    import rr.RRScenePicker;
+   import rr.RRExpedition;
    
    /**
     * RandomRooms v11 development: native scene ecology and architecture.
@@ -58,6 +59,7 @@ package
       private static var menuShown:Boolean = false;
       private static var scenePicker:RRScenePicker;
       private static var explorationScenes:Object={};
+      private static var explorationChoices:Object={};
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
       
       // Complete generated pools, with distinct vertical and endpoint rooms.
@@ -199,7 +201,7 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v11.1 loaded <generator=space-v11, growth=right+down> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v12.2+12.3 loaded <generator=partition-comparison, growth=right+down> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -313,7 +315,7 @@ package
             }
             var st:* = main.stage;
             menu.x = st.stageWidth - 310;
-            menu.y = st.stageHeight - 70;
+            menu.y = st.stageHeight - 92;
             st.addChild(menu);
             diag.log("RRMenu: 主菜单配置条已显示");
          }
@@ -462,15 +464,24 @@ package
          if (w.game.curLandId==LAND_ID_RR || w.game.curLandId==LAND_ID_SHOW)
          { mess(w,"RandomRooms：先按 F2 回城，再选择下一次探索的场景"); return; }
          if (w.land==null || w.game.curLandId!=w.land.act.id || (!fromPip && !w.gg.ggControl)) return;
-         scenePicker=new RRScenePicker(w,main.stage,landId==LAND_ID_SHOW,function(id:String):void
+         scenePicker=new RRScenePicker(w,main.stage,landId==LAND_ID_SHOW,config,function(id:String,version:String,seed:uint):void
          {
             scenePicker=null;
             if (id==null) { diag.log("SCENE cancel "+landId); return; }
-            explorationScenes[landId]=id=="random"?randBiome():id;
-            diag.log("SCENE choose "+landId+" theme="+explorationScenes[landId]+" choice="+id);
+            config.version=version; config.seed=seed; config.seedEnabled=true; config.save();
+            beginExploration(w,landId,id,version,seed);
+            diag.log("SCENE choose "+landId+" theme="+explorationScenes[landId]+" choice="+id+" version="+version+" seed="+seed);
             targetLand=landId;
             if (fromPip) doTravelFromPip(w); else triggerTravel(landId,"scene-picker");
          });
+      }
+      private static function beginExploration(w:*,landId:String,scene:String,version:String,seed:uint):void
+      {
+         explorationScenes[landId]=scene=="random"?RRScene.IDS[new RRSeed(seed).fork("scene").nextInt(4)]:scene;
+         explorationChoices[landId]={version:version,seed:seed};
+         // Explicit F1/F5 choice begins a new comparison at the same depth.
+         // F4 keeps this choice and advances only its stage.
+         if(w.game.lands[landId]) w.game.lands[landId].landStage=0;
       }
       private static function onKeyDown(ev:KeyboardEvent):void
       {
@@ -755,7 +766,7 @@ package
       
       /** Test driver entry uses the exact public travel path, only in isolated apps. */
       public static function debugReady():Boolean { return preflightDone; }
-      public static function debugTravel(landId:String,scene:String=""):Boolean
+      public static function debugTravel(landId:String,scene:String="",version:String="",seed:uint=20260818):Boolean
       {
          if (NativeApplication.nativeApplication.applicationID.indexOf("pferr-style-") != 0) return false;
          if (!preflightDone || [LAND_ID_RR,LAND_ID_SHOW,"rbl"].indexOf(landId)<0) return false;
@@ -763,6 +774,12 @@ package
          {
             if (!RRScene.valid(scene)) return false;
             explorationScenes[landId]=scene;
+         }
+         if(version!="")
+         {
+            if(!RRExpedition.valid(version)) return false;
+            var w:*=WCls["w"];
+            beginExploration(w,landId,scene!=""?scene:"random",version,seed);
          }
          targetLand=landId;
          triggerTravel(landId,"isolated-test");
@@ -784,18 +801,28 @@ package
             if (!RRScene.valid(biome)) biome=randBiome();
             explorationScenes[landId]=biome;
          }
-         RRScene.configureLand(world,act,biome);
          var st:int=int(act["landStage"]);
+         var choice:Object=explorationChoices[landId];
+         if(choice==null)
+         {
+            var saved:XML=act["allroom"] as XML;
+            choice={version:config.version,seed:config.seed};
+            if(saved && RRExpedition.valid(String(saved.@rrVersion)))
+               choice={version:String(saved.@rrVersion),seed:uint(saved.@rrSeed)};
+            explorationChoices[landId]=choice;
+         }
+         RRScene.configureLand(world,act,biome,String(choice.version));
          act["conf"]=9;
          act["mLocX"]=show?SHOW_MX:5; act["mLocY"]=show?SHOW_MY:5;
          act["lastCpCode"]="";
          act["dif"]=show?0:BASE_DIF_RR+st*DIF_PER_STAGE;
-         var built:*=growth.build(world,act,int(act["mLocX"]),int(act["mLocY"]),biome,show);
+         var built:*=growth.build(world,act,int(act["mLocX"]),int(act["mLocY"]),biome,show,choice);
          act["land"]=built;
          // The complete map is ready before normal travel activates it.
          world["game"]["crea"]=false;
          diag.log("C-POOL "+landId+" total="+act["allroom"].room.length()+
-            " theme="+biome+" ports=coordinated");
+            " theme="+biome+" ports=coordinated version="+choice.version+" seed="+choice.seed);
+         mess(world,"RandomRooms v"+choice.version+" · "+RRScene.name(biome)+" · 第 "+(st+1)+" 层 · 种子 "+choice.seed);
       }
       private static function triggerTravel(landId:String, tag:String):void
       {
@@ -841,6 +868,7 @@ package
          catch (e:*)
          {
             diag.log(tag + " 调用 gotoLand 异常: " + e);
+            mess(world,"RandomRooms：本次地图生成失败，请保留日志后重新选择。");
          }
       }
       

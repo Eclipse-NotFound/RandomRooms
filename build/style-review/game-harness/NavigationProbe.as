@@ -31,6 +31,7 @@ package
       private static var legTicks:int;
       private static var stuck:int;
       private static var jumpHold:int;
+      private static var flightFoot:int=-1;
       private static var lastX:Number;
       private static var lastY:Number;
       private static var originX:int;
@@ -54,6 +55,7 @@ package
       {
          root=directory; name=caseName; logger=log; action=doorAction; capture=screen;
          done=success=false; reason=""; ticks=legTicks=at=stuck=jumpHold=0;
+         flightFoot=-1;
          local=null; records=[]; targets=[]; route=[];
          originX=w.land.locX; originY=w.land.locY;
          originBlueprint=w.loc.room.xml.toXMLString();
@@ -263,6 +265,18 @@ package
          }
          return false;
       }
+      private static function standingOnSlope(w:*):Boolean
+      {
+         var x:int=int(w.gg.X/40),y:int=int((w.gg.Y-1)/40);
+         if(x<0 || x>=48) return false;
+         if(y>=0 && y<24 && tileSolid(local.space[x][y+1]) && Math.abs((y+1)*40-w.gg.Y)<2) return false;
+         for(var row:int=Math.max(0,y-1);row<=Math.min(24,y+1);row++)
+         {
+            var tile:*=local.space[x][row];
+            if(tile.diagon!=0 && Math.abs(tile.getMaxY(w.gg.X)-w.gg.Y)<8) return true;
+         }
+         return false;
+      }
       private static function path(w:*,goal:int,refreshed:Boolean=false):Array
       {
          var start:int=nearest(w),prev:Object={},cost:Object={},q:Array=[{id:start,cost:0}];
@@ -404,7 +418,7 @@ package
             {
                records.push({kind:"cross",from:t.x+","+t.y,to:t.toX+","+t.toY,port:t.port,success:true,x:w.gg.X,y:w.gg.Y,frames:legTicks});
                logger("NAV-CROSS "+JSON.stringify(records[records.length-1]));
-               at++; route=[]; legTicks=0; local=null; return;
+               at++; route=[]; flightFoot=-1; legTicks=0; local=null; return;
             }
             if (w.land.locX!=t.x || w.land.locY!=t.y) throw new Error("Unexpected room while aiming for "+JSON.stringify(t));
             if (local!==w.loc) { rebuild(w); w.pers.healAll(); }
@@ -464,6 +478,36 @@ package
                         finalY>w.gg.Y && slopeBelow>=0 && slopeBelow<=40))
                      {
                         var uphill:Boolean=finalY<w.gg.Y;
+                        if(!uphill && !slope[int(route[0])] && flightFoot<0)
+                        {
+                           // A fall node underneath a one-way stair cannot
+                           // be approached vertically from its surface. Aim
+                           // at the actual foot first, including while in air,
+                           // then plan the rest from the observed landing.
+                           var down:int=standingTile.diagon>0?-1:1;
+                           var footX:int=actualX,footY:int=stairY;
+                           while(footX+down>=0 && footX+down<48 && footY<24 &&
+                              local.space[footX+down][footY+1].diagon==standingTile.diagon)
+                           { footX+=down; footY++; }
+                           var footCentre:Number=(down<0?footX:footX+1)*40+down*(w.gg.scX/2+18);
+                           var footScore:Number=1e10;
+                           for(var footPose:int=0;footPose<clear.length;footPose++)
+                              if(clear[footPose] && support[footPose] && !slope[footPose] &&
+                                 Math.abs(poseY(footPose)-(footY+1)*40)<3 &&
+                                 ((footPose%48+1)*40-footCentre)*down>=-15 &&
+                                 !furnitureAt(w,(footPose%48+1)*40,poseY(footPose)))
+                              {
+                                 var footDistance:Number=Math.abs((footPose%48+1)*40-footCentre);
+                                 if(footDistance<120 && footDistance<footScore)
+                                 { flightFoot=footPose; footScore=footDistance; }
+                              }
+                           if(flightFoot>=0)
+                           {
+                              route=[flightFoot];
+                              logger("NAV-FLIGHT-FOOT "+JSON.stringify({pose:flightFoot,x:(flightFoot%48+1)*40,y:poseY(flightFoot)}));
+                           }
+                        }
+                        if(ticks%120==1) logger("NAV-SLOPE "+JSON.stringify({step:route[0],finalY:finalY,diagon:standingTile.diagon,x:w.gg.X,y:w.gg.Y,stuck:stuck,uphill:uphill}));
                         w.ctr.keyRight=uphill?standingTile.diagon>0:standingTile.diagon<0;
                         w.ctr.keyLeft=!w.ctr.keyRight; w.ctr.keyBeUp=uphill;
                         if (Math.abs(w.gg.X-lastX)<0.5 && Math.abs(w.gg.Y-lastY)<0.5) stuck++; else stuck=0;
@@ -473,7 +517,7 @@ package
                         // before its centre reaches the end of the ramp.
                         // A normal jump clears that lip; holding up alone
                         // cannot override the horizontal collision.
-                        if(uphill && stuck>24) { w.ctr.keyJump=true; w.ctr.keyBeUp=false; stuck=0; }
+                        if(stuck>24) { jumpHold=5; w.ctr.keyJump=true; w.ctr.keyBeUp=false; stuck=0; }
                         // Keep this flight's waypoint while moving on it;
                         // re-snapping to the grid halfway up can select the
                         // separate floor underneath and drop off the ramp.
@@ -481,7 +525,7 @@ package
                      }
                   }
             }
-            if(legTicks>=240 && legTicks%240==0 && w.gg.stay && !t.furnitureRerouted)
+            if(legTicks>=240 && legTicks%240==0 && w.gg.stay && !t.furnitureRerouted && flightFoot<0)
             {
                // Furniture can block the tile graph's preferred floor run.
                // Search an actual alternative through the existing room;
@@ -510,7 +554,7 @@ package
             {
                var later:int=route[ahead];
                if (Math.abs((later%48+1)*40-w.gg.X)<22 && Math.abs(poseY(later)-w.gg.Y)<(slope[later]?22:(support[later]?6:22)) &&
-                   (!support[later] || w.gg.stay || w.gg.isLaz && w.gg.Y<=(int(later/48)+1)*40))
+                   (!support[later] || w.gg.stay || w.gg.isLaz && w.gg.Y<=(int(later/48)+1)*40+2))
                { route=route.slice(ahead); break; }
             }
             var step:int=route[0],tx:Number=(step%48+1)*40,ty:Number=poseY(step);
@@ -536,6 +580,7 @@ package
                }
             }
             var dx:Number=tx-w.gg.X,dy:Number=ty-w.gg.Y;
+            if(ticks%120==1) logger("NAV-CONTROL "+JSON.stringify({step:step,tx:tx,ty:ty,dx:dx,dy:dy,climb:climb[step],support:support[step],leaveSide:leaveSide,transferUp:transferUp,ladder:w.gg.isLaz}));
             if(leaveSide && w.gg.isLaz && Math.abs(dx)<64 && dy>=-30 && dy<=1)
             {
                // Some native ladders end at the deck itself. They cannot lift
@@ -554,9 +599,16 @@ package
                route.shift(); return;
             }
             if (Math.abs(dx)<(w.gg.isLaz?32:19) && (leaveSide?w.gg.Y<=ty-12 && w.gg.Y>=ty-40:(transferUp?w.gg.Y<=ty+20:Math.abs(dy)<(slope[step]?42:(support[step]?6:20)))) &&
-                (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+1 ||
+                // A rung can hold the pony 0.25 px below its nominal ledge.
+                // Accept the observed rung pose, then actually jump/walk the
+                // next edge; insisting on exact equality jumps the wrong way.
+                (!support[step] || w.gg.stay || w.gg.isLaz && w.gg.Y<=ty+3 ||
                  optionalWater && t.entry=="optional-water" && w.gg.inWater) && (!transferUp || w.gg.isLaz))
             {
+               if(step==flightFoot)
+               {
+                  flightFoot=-1; route=[]; stuck=0; return;
+               }
                route.shift();
                if (route.length) return;
                if (t.kind=="space")
@@ -581,7 +633,7 @@ package
                stay:w.gg.stay,stayPhis:w.gg.stayPhis,ladder:w.gg.isLaz,step:step,leaveSide:leaveSide,stuck:stuck}));
             // Step down beside a low door before aiming at its interaction
             // point. Otherwise the door helper can wait forever above it.
-            if(stuck>30 && w.gg.stay && !w.gg.isLaz && w.gg.stayPhis==2 && dy>20 && dy<65)
+            if(stuck>30 && w.gg.stay && !w.gg.isLaz && w.gg.stayPhis==2 && dy>20 && dy<65 && !standingOnSlope(w))
             {
                w.ctr.keyDubSit=true; return;
             }
@@ -624,7 +676,10 @@ package
                w.ctr.keySit=dy>5 && (w.gg.isLaz || w.gg.stay);
                if (dy>20 && stuck>15 && w.gg.stay) w.ctr.keyDubSit=true;
             }
-            if(dy>20 && w.gg.stay && !w.gg.isLaz)
+            // Keep walking to the foot of a flight when the requested pose
+            // belongs to the floor under it. A 20 px threshold alternates
+            // uphill/downhill every frame near the bottom of the same stair.
+            if(dy>=-2 && w.gg.stay && !w.gg.isLaz && !slope[step] && standingOnSlope(w))
             {
                var sx:int=int(w.gg.X/40),syFeet:int=int((w.gg.Y-1)/40);
                if(sx>=0 && sx<48 && syFeet>=0 && syFeet<25)
@@ -647,7 +702,8 @@ package
                if(w.gg.stay && !w.gg.isLaz) jumpHold=5;
                w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; stuck=0;
             }
-            if (!climb[step] && !transferUp && w.gg.stay && Math.abs(dx)>25 && dy<=5 && dy>-45)
+            var nextIsDrop:Boolean=route.length>1 && poseY(int(route[1]))>ty+40;
+            if (w.gg.stay && Math.abs(dx)>25 && dy<=5 && dy>-45 && !nextIsDrop)
             {
                var aheadX:int=int((w.gg.X+(dx<0?-70:70))/40);
                var belowY:int=int((w.gg.Y+2)/40);
@@ -655,12 +711,18 @@ package
                {
                   var aheadTile:*=w.loc.space[aheadX][belowY];
                   if (aheadTile.phis==0 && !aheadTile.shelf && aheadTile.diagon==0)
-                  { w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=false; }
+                  {
+                     // Approach a planned downward edge without auto-jumping
+                     // away from it. A short hanging ladder across a gap must be caught
+                     // while jumping. Walking off drops below its last rung
+                     // before the horizontal alignment can engage it.
+                     w.ctr.keyJump=true; w.ctr.keySit=false; w.ctr.keyBeUp=transferUp || climb[step];
+                  }
                }
             }
             // If an ordinary fall missed a ledge, navigate from the observed
             // landing again. This changes only the test's intended route.
-            if (legTicks%240==0 && w.gg.stay && !w.gg.isLaz && Math.abs(dy)>80)
+            if (legTicks%240==0 && w.gg.stay && !w.gg.isLaz && Math.abs(dy)>80 && flightFoot<0)
                route=path(w,t.kind=="space"?nearest(w,t):goalFor(t));
             if (w.gg.isLaz && Math.abs(dx)<64 && (Math.abs(dy)>50 || dy>8))
             {

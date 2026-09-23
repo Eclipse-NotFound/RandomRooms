@@ -1,0 +1,168 @@
+<failure roomX="3" roomY="0" mirror="false">
+  <room name="syn_15" rrGen="space-v11" rrRevision="12-prototype-2" rrTheme="plant" rrKind="warehouse" rrForm="service_wing" rrAttempts="15" rrPopulation="patrol" rrDepth="0" rrEcology="1" rrDifficulty="8" rrPartition="rules" rrSeed="1471520701" rrP_main="service" rrP_density="dense" rrP_extra="0.314319569664076" rrP_visits="51" rrP_count="17" rrP_retiled="0" rrP_layout="storeys" rrP_requested="17" rrP_variant="compact-cluster" rrVersion="12.2" rrMasterSeed="20260818" x="3" y="0" rrMirror="0">
+    <a>C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C</a>
+    <a>C._D._D._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B.C</a>
+    <a>C._D._D._D._D._D.C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.C._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B._B.C</a>
+    <a>C.C._D._DА.C.C.C.C.C.C._D._D._D._D._DВ.C.C.C.C.C.C.C.C.C.C.C.C.C.C._B._BА.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C</a>
+    <a>C._D._D._DА._D._D._D._D._D._D._D._D._D._DВ._D._D._D._D.C._H._H._H._H._H._H._H._H.C._B._B._BА._B._B._B._B._B._B._B._B.C._H._H._H._H._H._H._H.C</a>
+    <a>C._D._D._DА._D._D._D._D._D._D._D._D._DВ._D._D._D._D._D.C._H._H._H._H._H._H._H._H.C._B._B._BА._B._B._B._B._B._B._B._B.C._H._H._H._H._H._H._H.C</a>
+    <a>C._D._D._DА._D._D._D._D._D._D._D._DВ._D._D._D._D._D._D.C._H._H._H._H._H._H._H._H._B._B._B._BА._B._B._B._B._B._B._B._B.C._H._H._H._H._H._H._H.C</a>
+    <a>C._D._D._DА._D._D._D._D._D._D._DВ._D._D._D._D._D._D._D._H._H._H._H._H._H._H._H._H._B._B._B._BА._B._B._B._B._B._B._B._B.C._H._H._H._H._H._H._H.C</a>
+    <a>C._D._D._DА._D._D._D._D._D._DВ._D._D._D._D._D._D._D._D._H._H._H._H._H._H._H._H._H._B._B._B._BА._B._B._B._B._B._B._B._B.C._H._H._H._H._H._H._H.C</a>
+    <a>C.C.C.C.C.C._C._CА.C.C.C.C.C.C.C.C.C.C.C.C.C.C._H._HА.C.C.C.C.C.C.C.C.C._D._DА.C.C.C.C.C.C.C.C._D._DА.C.C.C</a>
+    <a>_C._C._C._C._C._C._C._CА._C._C._C.C._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H.C._D._D._DА._D._D.C._D._D._D._D._D._D._DА._D._D._D</a>
+    <a>_C._C._C._C._C._C._C._CА._C._C._C.C._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H.C._D._D._DА._D._D.C._D._D._D._D._D._D._DА._D._D._D</a>
+    <a>_C._C._C._C._C._C._C._CА._C._C._C.C._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H.C._D._D._DА._D._D.C._D._D._D._D._D._D._DА._D._D._D</a>
+    <a>C._C-._C-._C-._C-._C-._C._CА._C-._C._C.C._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H.C._D._D._DА._D._D.C._D._D._D._D._D-._D._DА._D-._D-.C</a>
+    <a>C._C._C._C._C._C._C._CА._C._C._C._H._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H._D._D._D._DА._D._D._D._D._D._D._D._D._D._DА._D._D.C</a>
+    <a>C._C._C._C._C._C._C._CА._C._C._C._H._H._H._H._H._H._H._H._H._H._H._H._HА._H.C._H._H._H._H._H._D._D._D._DА._D._D._D._D._D._D._D._D._D._DА._D._D.C</a>
+    <a>C.D.D._H._HА.C.C.C.C.C.C.C.C.C.C.C.C._DГ._D._D._D._D.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._D._DА.D.D.C</a>
+    <a>C._H._H._H._HА._H._H._H._H._H.C._D._D._D._D._D._D._D._DГ._D._D._D._D._D._D._D._D._D._D.C._D._D._D._D._D.C._C._C._C._C._C.C._D._D._DА._D._D.C</a>
+    <a>C._H._H._H._HА._H._H._H._H._H._D._D._D._D._D._D._D._D._D._DГ._D._D._D._D._D._D._D._D._D.C._D._D._D._D._D.D._C._C._C._C._C.D._D._D._DА._D._D.C</a>
+    <a>C._H._H._H._HА._H._H._H._H._H._D._D._D._D._D._D._D._D._D._D._DГ._D._D._D._D._D._D._D._D._D._D._D._D._D._D._C._C._C._C._C._C._D._D._D._DА._D._D.C</a>
+    <a>C._H._H._H._HА._H._H._H._H._H._D._D._D._D._D._D._D._D._D._D._D._DГ._D._D._D._D._D._D._D._D._D._D._D._D._D._C._C._C._C._C._C._D._D._D._DА._D._D.C</a>
+    <a>C.C.C.C.C.C.C.C.C.C.C.C.C.C._D._DА.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C</a>
+    <obj id="player" code="syn_15_o0" x="38" y="5"/>
+    <obj id="door2" code="syn_15_o1" x="31" y="18" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_15_o2" x="37" y="18" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_15_o3" x="41" y="23" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_15_o4" x="29" y="23" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_15_o5" x="35" y="23" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door2" code="syn_15_o6" x="11" y="18" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door2" code="syn_15_o7" x="18" y="11" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_15_o8" x="26" y="5" rrFixture="door" lock="0" mine="0"/>
+    <obj id="hatch1" code="syn_15_o9" x="6" y="12" rrFixture="hatch" lock="0" mine="0"/>
+    <obj id="hatch1" code="syn_15_o10" x="2" y="6" rrFixture="hatch" lock="0" mine="0"/>
+    <obj id="woodbox" code="syn_15_o11" x="18" y="5"/>
+    <obj id="woodbox" code="syn_15_o12" x="21" y="5"/>
+    <obj id="table" code="syn_15_o13" x="31" y="5"/>
+    <obj id="filecab" code="syn_15_o14" x="34" y="5"/>
+    <obj id="filecab" code="syn_15_o15" x="35" y="5"/>
+    <obj id="table" code="syn_15_o16" x="41" y="5"/>
+    <obj id="filecab" code="syn_15_o17" x="43" y="5"/>
+    <obj id="instr1" code="syn_15_o18" x="12" y="11"/>
+    <obj id="instr1" code="syn_15_o19" x="14" y="11"/>
+    <obj id="table" code="syn_15_o20" x="35" y="11"/>
+    <obj id="filecab" code="syn_15_o21" x="37" y="11"/>
+    <obj id="table1" code="syn_15_o22" x="45" y="11"/>
+    <obj id="instr1" code="syn_15_o23" x="1" y="18"/>
+    <obj id="table1" code="syn_15_o24" x="14" y="18"/>
+    <obj id="table1" code="syn_15_o25" x="26" y="18"/>
+    <obj id="instr1" code="syn_15_o26" x="40" y="18"/>
+    <obj id="table1" code="syn_15_o27" x="6" y="23"/>
+    <obj id="instr1" code="syn_15_o28" x="17" y="23"/>
+    <obj id="instr1" code="syn_15_o29" x="23" y="23"/>
+    <obj id="instr2" x="40" y="11" rrContent="loot" rrMount="floor" uid="rrp_15_0" code="syn_15_p30"/>
+    <obj id="raider" x="25" y="23" rrContent="enemy" rrMount="floor" uid="rrp_15_1" code="syn_15_p31"/>
+    <obj id="tarakan" x="17" y="5" rrContent="enemy" rrMount="floor" uid="rrp_15_2" code="syn_15_p32"/>
+    <obj id="vortex" x="17" y="13" rrContent="enemy" rrMount="air" uid="rrp_15_3" code="syn_15_p33"/>
+    <back id="depot" x="18" y="3"/>
+    <back id="depot" x="21" y="3"/>
+    <back id="light4" x="19" y="1"/>
+    <back id="bwindow" x="30" y="2"/>
+    <back id="clock" x="35" y="2"/>
+    <back id="light4" x="32" y="1"/>
+    <back id="clock" x="41" y="3"/>
+    <back id="clock" x="35" y="9"/>
+    <back id="monitor" x="45" y="9"/>
+    <back id="pult" x="45" y="10"/>
+    <back id="monitor" x="14" y="16"/>
+    <back id="pult" x="14" y="17"/>
+    <back id="monitor" x="26" y="16"/>
+    <back id="pult" x="26" y="17"/>
+    <back id="monitor" x="6" y="21"/>
+    <back id="pult" x="6" y="22"/>
+    <back id="light4" x="2" y="1"/>
+    <back id="light4" x="15" y="1"/>
+    <back id="light4" x="36" y="1"/>
+    <back id="light4" x="8" y="7"/>
+    <back id="light4" x="22" y="7"/>
+    <back id="light4" x="32" y="7"/>
+    <back id="light4" x="42" y="7"/>
+    <back id="light4" x="5" y="13"/>
+    <back id="light4" x="17" y="13"/>
+    <back id="light4" x="27" y="13"/>
+    <back id="light4" x="33" y="13"/>
+    <back id="light4" x="41" y="13"/>
+    <back id="light4" x="4" y="20"/>
+    <back id="light4" x="19" y="20"/>
+    <back id="light4" x="31" y="20"/>
+    <back id="light4" x="37" y="20"/>
+    <back id="light4" x="43" y="20"/>
+    <doors>0.0.0.3.0.0.0.2.0.0.0.0.0.0.3.0.0.0.0.0.0.0</doors>
+    <options backwall="tBackWall" music="music_plant_1" entip="1" kolspawn="0"/>
+    <rrPlan>
+      <furnish region="0" role="store" groups="0" target="1"/>
+      <furnish region="1" role="store" groups="1" target="2"/>
+      <furnish region="2" role="office" groups="2" target="2"/>
+      <furnish region="3" role="service" groups="2" target="2"/>
+      <furnish region="4" role="control" groups="0" target="1"/>
+      <furnish region="5" role="office" groups="1" target="1"/>
+      <furnish region="6" role="control" groups="1" target="1"/>
+      <furnish region="7" role="service" groups="1" target="1"/>
+      <furnish region="8" role="control" groups="1" target="2"/>
+      <furnish region="9" role="control" groups="1" target="1"/>
+      <furnish region="10" role="service" groups="0" target="1"/>
+      <furnish region="11" role="service" groups="1" target="1"/>
+      <furnish region="12" role="control" groups="1" target="1"/>
+      <furnish region="13" role="service" groups="2" target="2"/>
+      <furnish region="14" role="service" groups="0" target="1"/>
+      <furnish region="15" role="service" groups="0" target="1"/>
+      <furnish region="16" role="service" groups="0" target="1"/>
+      <space kind="volume" x0="1" top="1" x1="5" floor="5" role="store"/>
+      <space kind="volume" x0="7" top="1" x1="25" floor="5" role="store"/>
+      <space kind="volume" x0="27" top="1" x1="46" floor="5" role="office"/>
+      <space kind="volume" x0="1" top="7" x1="17" floor="11" role="service"/>
+      <space kind="volume" x0="19" top="7" x1="26" floor="11" role="control"/>
+      <space kind="volume" x0="28" top="7" x1="38" floor="11" role="office"/>
+      <space kind="volume" x0="40" top="7" x1="46" floor="11" role="control"/>
+      <space kind="volume" x0="1" top="13" x1="10" floor="18" role="service"/>
+      <space kind="volume" x0="12" top="13" x1="24" floor="18" role="control"/>
+      <space kind="volume" x0="26" top="13" x1="30" floor="18" role="control"/>
+      <space kind="volume" x0="32" top="13" x1="36" floor="18" role="service"/>
+      <space kind="volume" x0="38" top="13" x1="46" floor="18" role="service"/>
+      <space kind="volume" x0="1" top="20" x1="9" floor="23" role="control"/>
+      <space kind="volume" x0="11" top="20" x1="28" floor="23" role="service"/>
+      <space kind="volume" x0="30" top="20" x1="34" floor="23" role="service"/>
+      <space kind="volume" x0="36" top="20" x1="40" floor="23" role="service"/>
+      <space kind="volume" x0="42" top="20" x1="46" floor="23" role="service"/>
+      <link a="10" b="9" kind="door" x="31" y="18"/>
+      <link a="11" b="10" kind="door" x="37" y="18"/>
+      <link a="16" b="15" kind="door" x="41" y="23"/>
+      <link a="14" b="13" kind="door" x="29" y="23"/>
+      <link a="16" b="11" kind="ladder" x="43" y="19"/>
+      <link a="12" b="7" kind="ladder" x="3" y="19"/>
+      <link a="10" b="5" kind="ladder" x="33" y="12"/>
+      <link a="3" b="1" kind="ladder" x="13" y="6"/>
+      <link a="15" b="14" kind="door" x="35" y="23"/>
+      <link a="8" b="4" kind="ladder" x="22" y="12"/>
+      <link a="13" b="12" kind="opening" x="10" y="23"/>
+      <link a="11" b="6" kind="ladder" x="43" y="12"/>
+      <link a="5" b="2" kind="ladder" x="29" y="6"/>
+      <link a="8" b="7" kind="door" x="11" y="18"/>
+      <link a="4" b="3" kind="door" x="18" y="11"/>
+      <link a="3" b="0" kind="ladder" x="2" y="6"/>
+      <link a="7" b="3" kind="ladder" x="6" y="12"/>
+      <link a="13" b="8" kind="ladder" x="17" y="19"/>
+      <link a="1" b="0" kind="opening" x="6" y="5"/>
+      <link a="2" b="1" kind="door" x="26" y="5"/>
+      <link a="5" b="4" kind="opening" x="27" y="11"/>
+      <ladder x="43" top="16" bottom="18"/>
+      <ladder x="14" top="24" bottom="24"/>
+      <ladder x="6" top="16" bottom="18"/>
+      <ladder x="43" top="19" bottom="23"/>
+      <ladder x="3" top="19" bottom="23"/>
+      <ladder x="33" top="12" bottom="18"/>
+      <ladder x="22" top="12" bottom="18"/>
+      <ladder x="43" top="12" bottom="18"/>
+      <ladder x="29" top="6" bottom="11"/>
+      <ladder x="2" top="6" bottom="11"/>
+      <ladder x="6" top="12" bottom="18"/>
+      <stairs x="14" top="6" bottom="11" dir="-1"/>
+      <stairs x="17" top="19" bottom="23" dir="1"/>
+    </rrPlan>
+  </room>
+</failure>

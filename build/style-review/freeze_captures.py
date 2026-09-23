@@ -7,7 +7,7 @@ from pathlib import Path
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('destination',type=Path)
-    ap.add_argument('--session',choices=('app','visual-app'),default='app'); args=ap.parse_args()
+    ap.add_argument('--session',choices=('app','visual-app','comparison-app'),default='app'); args=ap.parse_args()
     app=Path(__file__).resolve().parent/'game-harness'/args.session; source=app/'captures'
     manifest=json.loads((source/'manifest.json').read_text(encoding='utf-8-sig'))
     if manifest.get('status')!='complete' or manifest.get('failed'): raise ValueError('Run did not pass')
