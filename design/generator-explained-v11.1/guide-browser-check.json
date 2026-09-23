@@ -1,0 +1,23 @@
+{
+  "status": "pass",
+  "scope": "Guide browser controls and layout only; not a game rerun",
+  "rooms": 16,
+  "layersPerRoom": 4,
+  "sliderCases": 3,
+  "viewports": [
+    {
+      "w": 1440,
+      "sw": 1440,
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "w": 390,
+      "sw": 390,
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "pageErrors": [],
+  "sha256": "d9eb23be299ab7262b73014034800d1a1709d45b61faf369c0879650b2734725"
+}

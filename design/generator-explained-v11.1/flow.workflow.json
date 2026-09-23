@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "一间合成房怎样生成",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "玩家选择"
+        },
+        "backend": {
+          "label": "生成规则"
+        },
+        "security": {
+          "label": "通行检查"
+        },
+        "messagebus": {
+          "label": "重新尝试"
+        },
+        "external": {
+          "label": "原版引擎"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "map",
+      "label": "整张地图"
+    },
+    {
+      "id": "room",
+      "label": "每间合成房"
+    },
+    {
+      "id": "result",
+      "label": "重试与交付"
+    }
+  ],
+  "mainPath": [
+    "input",
+    "map",
+    "shape",
+    "check",
+    "contents",
+    "furniture",
+    "xml",
+    "game"
+  ],
+  "nodes": [
+    {
+      "id": "input",
+      "lane": "map",
+      "col": 0,
+      "type": "frontend",
+      "label": "选场景与种子",
+      "sublabel": "同一次探索保持场景",
+      "width": 152
+    },
+    {
+      "id": "map",
+      "lane": "map",
+      "col": 1,
+      "type": "backend",
+      "label": "先定相邻出口",
+      "sublabel": "城市还先分街区",
+      "width": 152
+    },
+    {
+      "id": "shape",
+      "lane": "room",
+      "col": 1,
+      "type": "backend",
+      "label": "划房间与通路",
+      "sublabel": "用途、墙体、门梯、水池",
+      "width": 168
+    },
+    {
+      "id": "check",
+      "lane": "room",
+      "col": 2,
+      "type": "security",
+      "label": "检查能去能回",
+      "sublabel": "净空、落脚、入口、干路",
+      "width": 168
+    },
+    {
+      "id": "contents",
+      "lane": "room",
+      "col": 3,
+      "type": "backend",
+      "label": "安排探索物",
+      "sublabel": "奖励、设施、敌群、机关",
+      "width": 168
+    },
+    {
+      "id": "furniture",
+      "lane": "room",
+      "col": 4,
+      "type": "backend",
+      "label": "摆家具与背景",
+      "sublabel": "避让已有物体和通路",
+      "width": 168
+    },
+    {
+      "id": "retry",
+      "lane": "result",
+      "col": 2,
+      "type": "messagebus",
+      "label": "重新规划空间",
+      "sublabel": "同一组出口，最多 48 次",
+      "width": 184
+    },
+    {
+      "id": "game",
+      "lane": "result",
+      "col": 5,
+      "type": "external",
+      "label": "原版游戏还原",
+      "sublabel": "读取房间 XML，创建物体",
+      "width": 184
+    },
+    {
+      "id": "xml",
+      "lane": "room",
+      "col": 5,
+      "type": "backend",
+      "label": "写成房间说明",
+      "sublabel": "XML：格子、坐标、选项",
+      "width": 174
+    }
+  ],
+  "edges": [
+    {
+      "from": "input",
+      "to": "map",
+      "role": "main"
+    },
+    {
+      "from": "map",
+      "to": "shape",
+      "role": "main"
+    },
+    {
+      "from": "shape",
+      "to": "check",
+      "role": "main"
+    },
+    {
+      "from": "check",
+      "to": "contents",
+      "label": "通过",
+      "role": "main"
+    },
+    {
+      "from": "contents",
+      "to": "furniture",
+      "role": "main"
+    },
+    {
+      "from": "check",
+      "to": "retry",
+      "label": "结构不合格",
+      "role": "error",
+      "variant": "security"
+    },
+    {
+      "from": "retry",
+      "to": "shape",
+      "label": "重抽布局",
+      "role": "return",
+      "variant": "dashed"
+    },
+    {
+      "from": "furniture",
+      "to": "xml",
+      "role": "main"
+    },
+    {
+      "from": "xml",
+      "to": "game",
+      "role": "main"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "先有用途，再安排空间",
+      "items": [
+        "工厂作业厅、居住舱、沟渠、城市楼层各有构造规则。",
+        "矩形划分与门梯连接仍由同一套底层工具完成。"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "探索物先占位置",
+      "items": [
+        "奖励、敌群与机关先放；家具随后避让。",
+        "放不下会少放，不会无条件填满目标数量。"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "通行检查有边界",
+      "items": [
+        "检查地形里的往返关系；落下去不等于爬得回来。",
+        "这不是完整游戏物理，也不是原版风格评分器。"
+      ]
+    }
+  ]
+}

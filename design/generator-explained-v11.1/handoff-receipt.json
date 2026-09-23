@@ -1,0 +1,15 @@
+{
+  "diagram_type": "workflow",
+  "output": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\generator-explained-v11.1\\flow.html",
+  "specification_sha256": "8220eed483bc2f11d24913a53505116dcf1c10385247b269a35dab306d370649",
+  "artifact_sha256": "57a3c3535fe3487d0977ff31dfae06d97d3a46592a1a058ce212fc003bc80272",
+  "validation": "9/9 showcase, 0 errors, 0 warnings",
+  "browser_evidence": "passed",
+  "visual_review": "passed",
+  "correction_rounds": 1,
+  "visual_review_scope": "READ still state; four desktop screenshots across light/dark endpoint sizes. Chinese labels, routes, cards and composition inspected. No claim of every optional viewer export feature.",
+  "guide_sha256": "d9eb23be299ab7262b73014034800d1a1709d45b61faf369c0879650b2734725",
+  "guide_browser_evidence": "passed",
+  "guide_visual_review": "passed",
+  "guide_visual_review_scope": "Overview, actual room purpose and sewer layers, width/height experiment, 390px room panel."
+}

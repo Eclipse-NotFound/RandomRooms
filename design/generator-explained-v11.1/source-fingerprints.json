@@ -1,0 +1,23 @@
+{
+  "sourceCommit": "8954613",
+  "sampleSource": "design\\assets\\v11-density-dev12\\cases.xml",
+  "sampleSha256": "4d4677683b26e2491ff153353de788e3e6320da35322d2f628274256ec82ea09",
+  "rooms": 16,
+  "releaseSha256": "16f3d2bd63d19660e039f5f44b4792fd85f3e2119a59f058f8290f5746346c7f",
+  "sourceFiles": {
+    "src/RandomRoomsMod.as": "c9eb2e8661a2ac48f195e33a44cca985fbeb5e9e80602837421a1f5900208cee",
+    "src/rr/RRScene.as": "217259e95d19db2d2f15cfe426c05a54a4a741c61f213b17f03fa0cfc2d68154",
+    "src/rr/RRMapPlan.as": "1d6004ca72cee5b7bcfe0ecdd18017b962ff00b23ae263d332d9a178f7d3e475",
+    "src/rr/RRArchitecture.as": "98915992098353282eb14f9252ca8ac9fc420fb70015bf7dff271032301e0285",
+    "src/rr/RRSynth.as": "cc1b195f40306ecca729bbdd6ed30e3a398c64fa8fb19ece02475572acc351e5",
+    "src/rr/RRGrowth.as": "2d53c44def4c65df8ae64b44f53fa046c6b4a0b144b741d9dcd397329cb9b2f5",
+    "src/rr/RRPorts.as": "1991d5fb15ceda3a64eb0346abde98512fdf2b241e534f8fb45eedb3943b7b97",
+    "src/rr/RRTraversal.as": "a0281538d34cbf0bee494dc5a24f37f35560863ec4074a025ea42da0b80d2580",
+    "src/rr/RRPopulation.as": "de21b1898ea837e95219be671316ee0cce88efa827c5f78f3983847bffb8d8a9",
+    "src/rr/RREcology.as": "14b560ee32d87aac42866fe51d55d4a1927db10c3e3ab13e5a54f83fd3ec34e0",
+    "src/rr/RRFurnish.as": "2f39c786b33f888d7ea79227a7db22259fd1772bfd7591d07808cc9746883205",
+    "src/rr/RRSeed.as": "5a084167ae06dd1c4ed4662d42b8fc2627aaa24137856ff08ea9dbc632ae3966",
+    "src/rr/RRConfig.as": "5a59bd166e9d5640dc8f1a8d77945549f0a040e1113550e9f4cab550d77d5320",
+    "src/rr/RRMenu.as": "a6712258e06082115a10fef4f207218f7d93712c491ad0697c0cf0fab6de0a51"
+  }
+}

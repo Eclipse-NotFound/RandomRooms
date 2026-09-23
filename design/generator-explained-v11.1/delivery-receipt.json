@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "workflow",
+  "input": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\generator-explained-v11.1\\flow.workflow.json",
+  "output": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\generator-explained-v11.1\\flow.html",
+  "specification": {
+    "sha256": "8220eed483bc2f11d24913a53505116dcf1c10385247b269a35dab306d370649",
+    "bytes": 4620
+  },
+  "artifact": {
+    "sha256": "57a3c3535fe3487d0977ff31dfae06d97d3a46592a1a058ce212fc003bc80272",
+    "bytes": 711501
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

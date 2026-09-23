@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-20：用户明确要求部署，v11.1已正式替换release并通过独立原版入口检查。对应原版的房间尺度、城市编排与四类扩张验证完成，无待答设计题。
+> 2026-09-23：补充eli5+archify算法图解与有效参数说明，未改运行代码。正式部署仍是2026-09-20的v11.1，四类验证和入口检查已完成，无待答设计题。
 
 ## 1. 模组是什么
 
@@ -43,6 +43,9 @@
 
 ## 5. 已知问题与机制
 
+- 解释源码时确认：当前走seedScene→refineSpaces，未调用partition；profile的min/max/bias不决定当前布局。archetype除connector梯井特例外不选择主体构造；主体是sceneForm。不要继续按旧参数解释或调风格。
+- 配置遗留：RRMenu仍显示v10.0；enabled存储/显示但未接入当前合成链；修改种子只保存，synth序列在初始化创建，需要重启。此轮仅解释，未顺带修复。
+- 坐标稳定性只适用于本地图的边口和城市编排；房内使用共享推进的synth随机序列，同种子复现还依赖相同状态与调用顺序。房内回环有0档，普通长梯错开失败仍可回退直梯。
 - 自然度尚未等同原版：部分狭长空间、空墙、城市屋顶顶边框可继续打磨；下水道大池保留，几何空格率仍高于原版。
 - RRTraversal只是地形图，不是完整物理；实际行走须处理单向梁、家具、门的视线和计时。
 - 行动要有到交互中心的isLine视线并持续按住；下键加双击下会先抓邻梯，低门旁落梁只用双击下。梯子中段无接收平台时不能提前跳出。
@@ -60,6 +63,7 @@
 
 ## 7. 深入阅读与复现
 
+- 用户向算法学习：design/generator-explained-v11.1/guide.html（16样本四图层、尺寸实验、有效/遗留参数），flow.html（Archify流程图），source-map.md（源码行号与范围）；文档交互检查不冒充游戏回归。
 - 设计来源design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。旧调查页已链接最新密度对照。
 - 当前实证knowledge/experiments/generator-v11-density-validation-2026-09-20.md与generator-v11-evidence/；正式v10结果另见v10报告。
 - 构建build/build-v7.ps1 -OutputName RandomRooms-v11.1-next.swf只写build；dev13与v11.1-candidate已冻结，不覆盖。旧build-m0.sh直写release，勿用于验证。
