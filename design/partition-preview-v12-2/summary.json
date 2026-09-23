@@ -1,0 +1,194 @@
+{
+  "aggregate": [
+    {
+      "scene": "plant",
+      "name": "工厂",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 11.1,
+        "graphs": 94,
+        "sizeCombinations": 96,
+        "withoutSeam": 4,
+        "height": 4.48,
+        "countRange": [
+          4,
+          19
+        ],
+        "maxContrast": 41.6,
+        "layouts": {
+          "sliced": 40,
+          "staggered": 10,
+          "storeys": 46
+        },
+        "maxMs": 683,
+        "medianMs": 63,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 9.9,
+        "graphs": 89,
+        "sizeCombinations": 96,
+        "withoutSeam": 15,
+        "height": 6.88,
+        "countRange": [
+          8,
+          12
+        ],
+        "maxContrast": 9.6,
+        "layouts": {
+          "sliced": 73,
+          "staggered": 23
+        },
+        "maxMs": 1037,
+        "medianMs": 94,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "stable",
+      "name": "废弃避难厩",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 13.12,
+        "graphs": 95,
+        "sizeCombinations": 96,
+        "withoutSeam": 1,
+        "height": 4.34,
+        "countRange": [
+          5,
+          20
+        ],
+        "maxContrast": 48.6,
+        "layouts": {
+          "sliced": 30,
+          "storeys": 63,
+          "staggered": 3
+        },
+        "maxMs": 2431,
+        "medianMs": 72,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 11.86,
+        "graphs": 96,
+        "sizeCombinations": 96,
+        "withoutSeam": 12,
+        "height": 6.73,
+        "countRange": [
+          10,
+          14
+        ],
+        "maxContrast": 9.9,
+        "layouts": {
+          "staggered": 19,
+          "sliced": 77
+        },
+        "maxMs": 1487,
+        "medianMs": 104,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "sewer",
+      "name": "下水道",
+      "paired": 128,
+      "new": {
+        "count": 128,
+        "spaces": 9.06,
+        "graphs": 114,
+        "sizeCombinations": 126,
+        "withoutSeam": 0,
+        "height": 4.1,
+        "countRange": [
+          4,
+          18
+        ],
+        "maxContrast": 58.3,
+        "layouts": {
+          "storeys": 38,
+          "sliced": 87,
+          "staggered": 3
+        },
+        "maxMs": 1166,
+        "medianMs": 130,
+        "requested": 128
+      },
+      "old": {
+        "count": 128,
+        "spaces": 7.57,
+        "graphs": 98,
+        "sizeCombinations": 127,
+        "withoutSeam": 5,
+        "height": 7.21,
+        "countRange": [
+          6,
+          10
+        ],
+        "maxContrast": 18.5,
+        "layouts": {
+          "sliced": 116,
+          "staggered": 12
+        },
+        "maxMs": 2232,
+        "medianMs": 147,
+        "requested": 128
+      }
+    },
+    {
+      "scene": "mane",
+      "name": "城市废墟",
+      "paired": 192,
+      "new": {
+        "count": 192,
+        "spaces": 11.21,
+        "graphs": 189,
+        "sizeCombinations": 191,
+        "withoutSeam": 2,
+        "height": 5.35,
+        "countRange": [
+          4,
+          20
+        ],
+        "maxContrast": 38.3,
+        "layouts": {
+          "storeys": 86,
+          "sliced": 100,
+          "staggered": 6
+        },
+        "maxMs": 1237,
+        "medianMs": 62,
+        "requested": 192
+      },
+      "old": {
+        "count": 192,
+        "spaces": 9.84,
+        "graphs": 180,
+        "sizeCombinations": 192,
+        "withoutSeam": 14,
+        "height": 6.98,
+        "countRange": [
+          6,
+          13
+        ],
+        "maxContrast": 10.2,
+        "layouts": {
+          "sliced": 163,
+          "staggered": 29
+        },
+        "maxMs": 1871,
+        "medianMs": 105,
+        "requested": 192
+      }
+    }
+  ],
+  "requested": 512,
+  "newSuccess": 512,
+  "oldSuccess": 512,
+  "repeatChecks": 16,
+  "newFailures": [],
+  "oldFailures": []
+}

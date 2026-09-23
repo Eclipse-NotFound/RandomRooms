@@ -3,7 +3,7 @@ const {chromium}=require('C:/Users/hello/.cache/codex-runtimes/codex-primary-run
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url');
 const {createHash}=require('node:crypto');
-const out=path.resolve(__dirname,'../../design/partition-preview-v12');
+const out=path.resolve(__dirname,'../../',process.argv[2]||'design/partition-preview-v12-2');
 (async()=>{
  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  try{
@@ -32,6 +32,10 @@ const out=path.resolve(__dirname,'../../design/partition-preview-v12');
   assert.notEqual(await page.locator('#newSeed').textContent(),before);await page.locator('#previous').click();
   assert.equal(await page.locator('#newSeed').textContent(),before);
   await page.locator('#newMap .region').first().click();assert.match(await page.locator('#inspect').textContent(),/格。连接/);
+  await page.locator('#newMap .region').first().focus();await page.keyboard.press('Enter');
+  assert.match(await page.locator('#inspect').textContent(),/格。连接/);
+  await page.locator('#floorLines').check();
+  assert(await page.locator('#newMap path[stroke-dasharray="10 5"]').count()>0);await page.locator('#floorLines').uncheck();
   await page.locator('#links').check();assert(await page.locator('#newMap path[stroke-dasharray]').count()>0);await page.locator('#links').uncheck();
   await page.locator('.thumb').nth(4).click();assert.equal(await page.locator('.thumb[aria-current="true"]').count(),1);
   assert.match(await page.locator('#sampleStatus').textContent(),/5 \/ 8/);
@@ -50,7 +54,12 @@ const out=path.resolve(__dirname,'../../design/partition-preview-v12');
    await page.locator('#photos button').click();
    assert.equal(await page.evaluate(()=>list()[pos].index),await page.evaluate(i=>DATA.photos[i].caseId,i));
   }
-  if(photos){await page.selectOption('#photoSelect','0');await page.locator('.native').screenshot({path:path.join(out,'preview-native.png')});}
+  if(photos){await page.selectOption('#photoSelect','0');await page.locator('.native').first().screenshot({path:path.join(out,'preview-native.png')});}
+  const references=await page.evaluate(()=>DATA.references.length);
+  for(const scene of ['plant','stable','sewer','mane']){
+   await page.locator(`[data-scene="${scene}"]`).click();
+   if(references){await page.locator('#nativeReference').scrollIntoViewIfNeeded();await page.waitForFunction(()=>document.querySelector('#nativeReference img')?.naturalWidth>0);}
+  }
   const viewports=[];
   for(const [width,height]of [[1440,1080],[390,844]]){
    await page.setViewportSize({width,height});const dims=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth}));
@@ -59,7 +68,7 @@ const out=path.resolve(__dirname,'../../design/partition-preview-v12');
   await page.locator('[data-scene="plant"]').click();await page.locator('[data-layer="roles"]').click();
   await page.locator('.toolbar').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'preview-mobile.png')});
   assert.deepEqual(errors,[]);
-  const result={status:'passed',scope:'HTML interaction and browser rendering; not game navigation',cases:selected,photos,viewports,pageErrors:errors,sha256:createHash('sha256').update(fs.readFileSync(path.join(out,'index.html'))).digest('hex')};
+  const result={status:'passed',scope:'HTML interaction and browser rendering; not game navigation',cases:selected,photos,references,viewports,pageErrors:errors,sha256:createHash('sha256').update(fs.readFileSync(path.join(out,'index.html'))).digest('hex')};
   fs.writeFileSync(path.join(out,'browser-check.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

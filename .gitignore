@@ -9,6 +9,7 @@ release/
 # 运行期日志（applicationStorageDirectory 副本不入库）
 *.log
 !design/partition-preview-v12/native-captures/runner.log
+!design/partition-preview-v12-2/native-captures/runner.log
 
 # 操作系统/编辑器垃圾
 .DS_Store

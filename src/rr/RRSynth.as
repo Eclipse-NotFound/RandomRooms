@@ -63,7 +63,7 @@ package rr
          var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="11.1" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage} rrEcology={population.ecology.type} rrDifficulty={population.ecology.difficulty}/>;
          if(plan.partitionInfo)
          {
-            room.@rrRevision="12-prototype-1";
+            room.@rrRevision="12-prototype-2";
             room.@rrPartition="rules"; room.@rrSeed=prototypeSeed.seed;
             for(var field:String in plan.partitionInfo) room.@["rrP_"+field]=plan.partitionInfo[field];
          }

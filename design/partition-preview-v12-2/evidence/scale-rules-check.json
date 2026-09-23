@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "input": "build\\style-review\\partition-scale-dev3-new.xml",
+  "sha256": "8f8ef56db33be178283ec6d113f8e23fbaf6e85060a2d944f19caadc6eac0d8b",
+  "rooms": 512,
+  "ordinarySpacesWithinSceneHeightBounds": 5186,
+  "storeyLayoutsWithSharedCeilingAndFloor": 233,
+  "actualCountEqualsRequested": 512,
+  "countRange": [
+    4,
+    20
+  ],
+  "fixedConditions": 64,
+  "fixedConditionsWithVaryingCounts": 64,
+  "scope": "Exported prototype requirements; not physics or gameplay proof."
+}

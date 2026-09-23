@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "sourceHashesVerified": 22,
+  "rooms": 512,
+  "disjointRectanglesChecked": 5639,
+  "pairedPortsChecked": 512,
+  "captureXmlMatched": 20,
+  "verifiedImages": 40,
+  "prototypeCaptureCases": 16,
+  "nativeReferenceCases": 4,
+  "furnitureCoverage": {
+    "spaces": 5639,
+    "with_furniture_group": 3828
+  },
+  "archives": {
+    "partition-scale-dev1.zip": {
+      "sha256": "8bef69b367f70570288cb30e103b8e236de874491df6034115873ecc90dc1fcf",
+      "files": 5
+    },
+    "partition-scale-dev2.zip": {
+      "sha256": "6adaeaf0eb54d25d6957de2ce66228d6d654ef18c38bf6c43613b8ff566231fd",
+      "files": 8
+    },
+    "partition-scale-dev3.zip": {
+      "sha256": "37e44fe593c4c06e865579d1338c910416071dfec9169c54f3d3b32d807cb19e",
+      "files": 36
+    }
+  },
+  "scope": "Rectangle and artifact attribution checks; no movement or battle proof."
+}

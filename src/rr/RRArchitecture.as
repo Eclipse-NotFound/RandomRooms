@@ -54,7 +54,7 @@ package rr
          if (["atrium","offices","workshop","damaged","service","warehouse","connector"].indexOf(requested)>=0) archetype=requested;
          ports=boundary!=null?boundary.concat():RRPorts.sample(rnd);
          grid=[]; regions=[]; ladders=[]; stairs=[]; doors=[]; hatches=[]; windows=[]; pools=[];
-         reserved={}; links=[];
+         reserved={}; links=[]; partitionInfo=null;
          for (var y:int=0;y<25;y++)
          {
             grid[y]=[];
@@ -359,7 +359,7 @@ package rr
          if (a.x1+2==b.x0 || b.x1+2==a.x0)
          {
             lo=Math.max(a.top,b.top); hi=Math.min(a.floor,b.floor);
-            if (hi-lo>=3) return {a:a,b:b,vertical:false,x:a.x1<b.x0?a.x1+1:b.x1+1,lo:lo,hi:hi};
+            if (hi-lo>=(partitionInfo?2:3)) return {a:a,b:b,vertical:false,x:a.x1<b.x0?a.x1+1:b.x1+1,lo:lo,hi:hi};
          }
          if (a.floor+2==b.top || b.floor+2==a.top)
          {

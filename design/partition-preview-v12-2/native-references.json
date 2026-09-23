@@ -1,0 +1,26 @@
+[
+  {
+    "scene": "plant",
+    "title": "原版工厂：办公室2（XML第25房）",
+    "note": "原版工厂的两层办公室均为4格净高（y7–10、y12–15），与左侧更大的作业空间并存。相邻房间共享楼板；小房和大空间承担不同用途。",
+    "image": "native-captures/rrstyle-scale-native-reference-0-room.png"
+  },
+  {
+    "scene": "stable",
+    "title": "原版废弃避难厩：房间组（XML第20房）",
+    "note": "原版避难厩中央有三排3格高的小单元，每排宽度约10、4、10格，外围另有交通和设备空间。新规则保留低矮房群的特点，同时让层数、宽度与单元数变化。",
+    "image": "native-captures/rrstyle-scale-native-reference-1-room.png"
+  },
+  {
+    "scene": "sewer",
+    "title": "原版下水道：排水2（XML第20房）",
+    "note": "原版中央蓄水大腔约30×17格，内部是水体、梁和斜梯，两岸另有较小维护空间。跨层大腔与普通附室采用不同尺寸要求，梁平台不冒充实体楼层。",
+    "image": "native-captures/rrstyle-scale-native-reference-2-room.png"
+  },
+  {
+    "scene": "mane",
+    "title": "原版城市：办公室（XML第52房）",
+    "note": "原版城市办公楼的主要实体楼板位于y8、y16，普通层净高7格。新规则仍保留这种高度；城市不会像避难厩一样普遍压低。",
+    "image": "native-captures/rrstyle-scale-native-reference-3-room.png"
+  }
+]

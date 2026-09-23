@@ -25,18 +25,20 @@ package rr
          ports=boundary; visits=0;
          program=new RRSpaceRules(rnd).create(theme,form);
          var whole:Object=rect(1,1,46,23),out:Array;
-         var interlocked:Boolean=rnd()<0.32 && form!="cistern" && form!="street_links" && form!="rooftops";
-         out=interlocked?staggered(whole,program.rooms):split(whole,program.rooms);
-         if(out==null) throw new Error("Partition demand search exhausted: "+(interlocked?"staggered":"sliced"));
-         var shifted:int=retile(out);
+         var layout:String=rnd()<program.levels?"storeys":
+            (rnd()<0.28 && form!="cistern" && form!="street_links" && form!="rooftops"?"staggered":"sliced");
+         out=layout=="storeys"?storeys(whole,program.rooms):(layout=="staggered"?staggered(whole,program.rooms):split(whole,program.rooms));
+         if(out==null) throw new Error("Partition demand search exhausted: "+layout);
+         // The explicit common-floor operation must survive local editing.
+         var shifted:int=layout=="storeys"?0:retile(out);
          validatePorts(out);
-         info={main:program.main,variant:program.variant,layout:interlocked?"staggered":"sliced",
-            count:out.length,visits:visits,retiled:shifted,extra:program.extra};
+         info={main:program.main,variant:program.variant,layout:layout,density:program.density,
+            requested:program.rooms.length,count:out.length,visits:visits,retiled:shifted,extra:program.extra};
          return out;
       }
       private function feasible(r:Object,items:Array):Boolean
       {
-         if(!items.length || width(r)<7 || height(r)<4) return false;
+         if(!items.length || width(r)<5 || height(r)<3) return false;
          var need:int=0,capacity:int=0;
          for each(var p:Object in items)
          {
@@ -62,7 +64,9 @@ package rr
          {
             var b:Object=RRPorts.rect(p,ports[p]);
             if(vertical && RRPorts.vertical(p) && ((p>=17 && r.top==1) || (p<11 && r.floor==23)) && c>=b.x0-1 && c<=b.x1+1) return false;
-            if(!vertical && !RRPorts.vertical(p) && ((p>=11 && r.x0==1) || (p<6 && r.x1==46)) && c>=b.y0-1 && c<=b.y1) return false;
+            // A solid ceiling directly above the aperture is valid. The old
+            // extra-row guard forced a 7-high room at the y=7 side socket.
+            if(!vertical && !RRPorts.vertical(p) && ((p>=11 && r.x0==1) || (p<6 && r.x1==46)) && c>=b.y0 && c<=b.y1) return false;
          }
          return true;
       }
@@ -89,7 +93,7 @@ package rr
             }
             var k:int=n(1,order.length-1),left:Array=order.slice(0,k),right:Array=order.slice(k);
             var vertical:Boolean=rnd()<program.vertical;
-            var lo:int=vertical?r.x0+7:r.top+4,hi:int=vertical?r.x1-7:r.floor-4;
+            var lo:int=vertical?r.x0+5:r.top+3,hi:int=vertical?r.x1-5:r.floor-3;
             if(lo>hi) continue;
             var fraction:Number=weight(left)/(weight(left)+weight(right));
             var c:int=rnd()<0.25?n(lo,hi):int((vertical?r.x0:r.top)+(vertical?width(r):height(r))*(fraction+(rnd()-0.5)*0.34));
@@ -100,6 +104,82 @@ package rr
             if(!feasible(a,left) || !feasible(b,right)) continue;
             var aa:Array=split(a,left); if(aa==null) continue;
             var bb:Array=split(b,right); if(bb!=null) return aa.concat(bb);
+         }
+         return null;
+      }
+      /** Generate shared ceiling/floor bands, then allocate the pre-existing
+       * use demands to them. Band count and heights vary; vertical room walls
+       * do not have to align with the storey above. Not a fixed 3-tier template. */
+      private function storeys(r:Object,items:Array):Array
+      {
+         var tall:int=0;
+         for each(var p:Object in items) tall=Math.max(tall,int(p.minH));
+         for(var trial:int=0;trial<80 && visits<maxVisits;trial++)
+         {
+            visits++;
+            var counts:Array=program.theme=="mane"?[3,3,3,4,5]:[4,5,5];
+            var count:int=tall>7?n(2,3):counts[n(0,counts.length-1)];
+            count=Math.min(count,items.length,int((height(r)+1)/4));
+            var hs:Array=[],remaining:int=height(r)-(count-1)-3*count;
+            if(remaining<0) continue;
+            for(var b:int=0;b<count;b++) hs.push(3);
+            var tallBand:int=tall>7?n(0,count-1):-1;
+            if(tallBand>=0) { hs[tallBand]=tall; remaining-=tall-3; }
+            if(remaining<0) continue;
+            var tries:int=0;
+            while(remaining>0 && tries++<100)
+            {
+               var preferred:int=program.theme=="mane"?7:4,shorter:Array=[];
+               for(b=0;b<count;b++) if(b!=tallBand && hs[b]<preferred) shorter.push(b);
+               b=shorter.length?shorter[n(0,shorter.length-1)]:n(0,count-1);
+               if(hs[b]>=(b==tallBand?21:(program.theme=="mane"?7:6))) continue;
+               hs[b]++; remaining--;
+            }
+            if(remaining) continue;
+            var bands:Array=[],y:int=r.top,good:Boolean=true;
+            for(b=0;b<count;b++)
+            {
+               bands.push(rect(r.x0,y,r.x1,y+hs[b]-1));
+               if(b<count-1 && !cutOK(r,false,y+hs[b])) good=false;
+               y+=hs[b]+1;
+            }
+            if(!good) continue;
+            for(var assignment:int=0;assignment<20 && visits<maxVisits;assignment++)
+            {
+               visits++;
+               var groups:Array=[],used:Array=[];
+               for(b=0;b<count;b++) { groups.push([]); used.push(0); }
+               var pending:Array=items.concat(); shuffle(pending);
+               pending.sort(function(a:Object,b:Object):Number { return b.minH-a.minH; });
+               good=true;
+               for(var i:int=0;i<pending.length;i++)
+               {
+                  p=pending[i]; var choices:Array=[],empty:int=0;
+                  for(b=0;b<count;b++) if(!groups[b].length) empty++;
+                  for(b=0;b<count;b++)
+                  {
+                     if(pending.length-i==empty && groups[b].length) continue;
+                     if(hs[b]<p.minH || hs[b]>p.maxH || (p.edge=="top" && bands[b].top!=1)) continue;
+                     if(used[b]+p.minW+(groups[b].length?1:0)>width(r)) continue;
+                     if(p.role=="canal" && !feasible(bands[b],[p])) continue;
+                     choices.push({index:b,score:(width(r)-used[b])*(0.5+rnd())});
+                  }
+                  if(!choices.length) { good=false; break; }
+                  choices.sortOn("score",Array.NUMERIC|Array.DESCENDING); b=choices[0].index;
+                  used[b]+=p.minW+(groups[b].length?1:0); groups[b].push(p);
+               }
+               if(!good) continue;
+               for(b=0;b<count;b++) if(!feasible(bands[b],groups[b])) good=false;
+               if(!good) continue;
+               var result:Array=[];
+               for(b=0;b<count;b++)
+               {
+                  var part:Array=split(bands[b],groups[b]);
+                  if(part==null) { good=false; break; }
+                  result=result.concat(part);
+               }
+               if(good) return result;
+            }
          }
          return null;
       }

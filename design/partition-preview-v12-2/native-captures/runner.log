@@ -1,0 +1,100 @@
+appId=pferr-style-3e27539cda9a4e93a463cea8d8f6b894
+3895 ready cases=20
+7287 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=true rrHost=false
+9328 newGame(-1) issued, intro skipped
+11427 initial world ready land=rbl
+11537 beginMission rrstyle-partition-native-new-0
+13909 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+14699 arrived rrstyle-partition-native-new-0 room=syn_7
+17463 capture rrstyle-partition-native-new-0-stage 1008x729 room=syn_7 lightOverlay=true
+18645 capture rrstyle-partition-native-new-0-room 1920x1000 room=syn_7 lightOverlay=false
+18664 beginMission rrstyle-partition-native-new-1
+21959 arrived rrstyle-partition-native-new-1 room=syn_33
+23909 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+24619 capture rrstyle-partition-native-new-1-stage 1008x729 room=syn_33 lightOverlay=true
+25434 capture rrstyle-partition-native-new-1-room 1920x1000 room=syn_33 lightOverlay=false
+25456 beginMission rrstyle-partition-native-new-2
+28576 arrived rrstyle-partition-native-new-2 room=syn_97
+31218 capture rrstyle-partition-native-new-2-stage 1008x729 room=syn_97 lightOverlay=true
+33310 capture rrstyle-partition-native-new-2-room 1920x1000 room=syn_97 lightOverlay=false
+33328 beginMission rrstyle-partition-native-new-3
+33908 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+36407 arrived rrstyle-partition-native-new-3 room=syn_131
+39113 capture rrstyle-partition-native-new-3-stage 1008x729 room=syn_131 lightOverlay=true
+41429 capture rrstyle-partition-native-new-3-room 1920x1000 room=syn_131 lightOverlay=false
+41445 beginMission rrstyle-partition-native-new-4
+43909 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44543 arrived rrstyle-partition-native-new-4 room=syn_194
+47166 capture rrstyle-partition-native-new-4-stage 1008x729 room=syn_194 lightOverlay=true
+47853 capture rrstyle-partition-native-new-4-room 1920x1000 room=syn_194 lightOverlay=false
+47873 beginMission rrstyle-partition-native-new-5
+50937 arrived rrstyle-partition-native-new-5 room=syn_289
+53552 capture rrstyle-partition-native-new-5-stage 1008x729 room=syn_289 lightOverlay=true
+54343 capture rrstyle-partition-native-new-5-room 1920x1000 room=syn_289 lightOverlay=false
+54359 heartbeat state=2 case=6 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54360 beginMission rrstyle-partition-native-new-6
+57547 arrived rrstyle-partition-native-new-6 room=syn_320
+60253 capture rrstyle-partition-native-new-6-stage 1008x729 room=syn_320 lightOverlay=true
+61108 capture rrstyle-partition-native-new-6-room 1920x1000 room=syn_320 lightOverlay=false
+61166 beginMission rrstyle-partition-native-new-7
+64197 heartbeat state=3 case=7 allLands=true text=true resources=true rrCurrent=true rrHost=false
+64197 arrived rrstyle-partition-native-new-7 room=syn_449
+66949 capture rrstyle-partition-native-new-7-stage 1008x729 room=syn_449 lightOverlay=true
+67625 capture rrstyle-partition-native-new-7-room 1920x1000 room=syn_449 lightOverlay=false
+67642 beginMission rrstyle-partition-native-old-0
+70775 arrived rrstyle-partition-native-old-0 room=syn_7
+73369 capture rrstyle-partition-native-old-0-stage 1008x729 room=syn_7 lightOverlay=true
+74572 capture rrstyle-partition-native-old-0-room 1920x1000 room=syn_7 lightOverlay=false
+74588 heartbeat state=2 case=9 allLands=true text=true resources=true rrCurrent=true rrHost=false
+74589 beginMission rrstyle-partition-native-old-1
+77691 arrived rrstyle-partition-native-old-1 room=syn_33
+80301 capture rrstyle-partition-native-old-1-stage 1008x729 room=syn_33 lightOverlay=true
+81141 capture rrstyle-partition-native-old-1-room 1920x1000 room=syn_33 lightOverlay=false
+81158 beginMission rrstyle-partition-native-old-2
+84251 heartbeat state=3 case=10 allLands=true text=true resources=true rrCurrent=true rrHost=false
+84251 arrived rrstyle-partition-native-old-2 room=syn_97
+86917 capture rrstyle-partition-native-old-2-stage 1008x729 room=syn_97 lightOverlay=true
+88765 capture rrstyle-partition-native-old-2-room 1920x1000 room=syn_97 lightOverlay=false
+88786 beginMission rrstyle-partition-native-old-3
+91901 arrived rrstyle-partition-native-old-3 room=syn_131
+93909 heartbeat state=3 case=11 allLands=true text=true resources=true rrCurrent=true rrHost=false
+94517 capture rrstyle-partition-native-old-3-stage 1008x729 room=syn_131 lightOverlay=true
+97000 capture rrstyle-partition-native-old-3-room 1920x1000 room=syn_131 lightOverlay=false
+97044 beginMission rrstyle-partition-native-old-4
+100213 arrived rrstyle-partition-native-old-4 room=syn_194
+102881 capture rrstyle-partition-native-old-4-stage 1008x729 room=syn_194 lightOverlay=true
+104095 capture rrstyle-partition-native-old-4-room 1920x1000 room=syn_194 lightOverlay=false
+104112 heartbeat state=2 case=13 allLands=true text=true resources=true rrCurrent=true rrHost=false
+104113 beginMission rrstyle-partition-native-old-5
+107260 arrived rrstyle-partition-native-old-5 room=syn_289
+109927 capture rrstyle-partition-native-old-5-stage 1008x729 room=syn_289 lightOverlay=true
+110786 capture rrstyle-partition-native-old-5-room 1920x1000 room=syn_289 lightOverlay=false
+110806 beginMission rrstyle-partition-native-old-6
+113967 heartbeat state=3 case=14 allLands=true text=true resources=true rrCurrent=true rrHost=false
+113967 arrived rrstyle-partition-native-old-6 room=syn_320
+116625 capture rrstyle-partition-native-old-6-stage 1008x729 room=syn_320 lightOverlay=true
+117306 capture rrstyle-partition-native-old-6-room 1920x1000 room=syn_320 lightOverlay=false
+117331 beginMission rrstyle-partition-native-old-7
+120415 arrived rrstyle-partition-native-old-7 room=syn_449
+123223 capture rrstyle-partition-native-old-7-stage 1008x729 room=syn_449 lightOverlay=true
+123786 capture rrstyle-partition-native-old-7-room 1920x1000 room=syn_449 lightOverlay=false
+123802 beginMission rrstyle-scale-native-reference-0
+123909 heartbeat state=3 case=16 allLands=true text=true resources=true rrCurrent=true rrHost=false
+127101 arrived rrstyle-scale-native-reference-0 room=офисы2
+129708 capture rrstyle-scale-native-reference-0-stage 1008x729 room=офисы2 lightOverlay=true
+131067 capture rrstyle-scale-native-reference-0-room 1920x1000 room=офисы2 lightOverlay=false
+131083 beginMission rrstyle-scale-native-reference-1
+134364 heartbeat state=3 case=17 allLands=true text=true resources=true rrCurrent=true rrHost=false
+134366 arrived rrstyle-scale-native-reference-1 room=помещения
+136963 capture rrstyle-scale-native-reference-1-stage 1008x729 room=помещения lightOverlay=true
+139164 capture rrstyle-scale-native-reference-1-room 1920x1000 room=помещения lightOverlay=false
+139184 beginMission rrstyle-scale-native-reference-2
+142560 arrived rrstyle-scale-native-reference-2 room=слив2
+143908 heartbeat state=3 case=18 allLands=true text=true resources=true rrCurrent=true rrHost=false
+145200 capture rrstyle-scale-native-reference-2-stage 1008x729 room=слив2 lightOverlay=true
+146068 capture rrstyle-scale-native-reference-2-room 1920x1000 room=слив2 lightOverlay=false
+146086 beginMission rrstyle-scale-native-reference-3
+149287 arrived rrstyle-scale-native-reference-3 room=ко.кабинеты
+151959 capture rrstyle-scale-native-reference-3-stage 1008x729 room=ко.кабинеты lightOverlay=true
+152800 capture rrstyle-scale-native-reference-3-room 1920x1000 room=ко.кабинеты lightOverlay=false
+152820 DONE 20 cases

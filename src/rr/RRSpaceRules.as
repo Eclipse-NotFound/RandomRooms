@@ -5,30 +5,37 @@ package rr
    public class RRSpaceRules
    {
       private var rnd:Function;
+      private var sceneId:String;
       private function pick(a:Array):String { return String(a[int(rnd()*a.length)]); }
       private function between(a:int,b:int):int { return a+int(rnd()*(b-a+1)); }
       public function RRSpaceRules(random:Function) { rnd=random; }
 
       private function demand(role:String,wide:Boolean=false):Object
       {
-         var p:Object={role:role,minW:7,minH:5,maxW:19,maxH:10,weight:0.7+rnd()*0.8};
-         if(role=="living") { p.minW=8; p.maxW=17; p.maxH=9; }
+         var p:Object={role:role,minW:5,minH:3,maxW:25,maxH:sceneId=="mane"?7:(sceneId=="plant"?6:5),weight:0.5+rnd()*0.8};
+         if(role=="living") { p.minW=7; p.minH=4; p.maxW=26; }
+         if(role=="kitchen" || role=="medical") p.minH=4;
          if(role=="workshop" || role=="warehouse" || role=="hall")
-         { p.minW=wide?17:10; p.minH=wide?9:6; p.maxW=wide?35:25; p.maxH=wide?18:12; p.weight=wide?3.4+rnd()*1.7:1.3+rnd(); }
-         if(role=="corridor") { p.minW=10; p.minH=4; p.maxW=40; p.maxH=7; p.weight=1.1; }
-         if(role=="service") { p.maxW=24; p.maxH=11; }
-         if(role=="roof") { p.minW=16; p.minH=5; p.maxW=46; p.maxH=12; p.weight=2.4; p.edge="top"; }
+         { p.minW=wide?22:8; p.minH=wide?10:4; p.maxW=wide?46:32; p.maxH=wide?21:8; p.weight=wide?6+rnd()*3:1.1+rnd(); }
+         if(role=="corridor") { p.minW=10; p.minH=3; p.maxW=46; p.maxH=5; p.weight=1.1; }
+         if(role=="service") { p.maxW=30; }
+         if(role=="roof") { p.minW=16; p.minH=4; p.maxW=46; p.maxH=9; p.weight=2.4; p.edge="top"; }
          if(role=="street") { p.minW=10; p.minH=14; p.maxW=23; p.maxH=23; p.weight=3.5; }
          return p;
       }
       public function create(theme:String,form:String):Object
       {
-         var rooms:Array=[],bag:Array,count:int,main:String,wide:Boolean=rnd()<0.55;
+         sceneId=theme;
+         var rooms:Array=[],bag:Array,count:int,main:String;
+         var density:String=pick(["sparse","standard","standard","dense","dense"]);
+         var wide:Boolean=density=="sparse" || (density=="standard" && rnd()<0.45);
+         var levels:Number=theme=="stable"?0.58:(theme=="mane"?0.46:(theme=="plant"?0.35:0.24));
          var vertical:Number=0.5,extra:Number=0.2+rnd()*0.5;
          if(theme=="plant")
          {
-            count=between(8,12); vertical=0.45+rnd()*0.25;
+            vertical=0.40+rnd()*0.20;
             main=form=="storage_hall"?"warehouse":(form=="service_wing"?"service":"workshop");
+            count=density=="dense"?between(14,19):(density=="sparse" && main!="service"?between(4,7):between(8,12));
             rooms.push(demand(main,wide && main!="service"));
             bag=main=="warehouse"?["store","store","warehouse","control","service"]:
                (main=="service"?["service","service","control","control","office","store"]:
@@ -37,8 +44,9 @@ package rr
          }
          else if(theme=="stable")
          {
-            count=between(10,14); vertical=0.35+rnd()*0.25;
+            vertical=0.30+rnd()*0.20;
             main=form=="atrium_ring"?"hall":(form=="quarters"?"living":"service");
+            count=density=="dense"?between(14,20):(density=="sparse" && main=="hall"?between(5,8):between(8,13));
             rooms.push(demand(main,wide && main=="hall"));
             bag=main=="living"?["living","living","living","office","kitchen","medical"]:
                (main=="hall"?["living","office","office","service","store","medical"]:
@@ -47,12 +55,12 @@ package rr
          }
          else if(theme=="sewer")
          {
-            count=between(7,10); vertical=0.3+rnd()*0.3; main=form=="dry_tunnels"?"service":"canal";
+            count=density=="dense"?between(13,18):between(8,12); vertical=0.3+rnd()*0.2; main=form=="dry_tunnels"?"service":"canal";
             if(main=="canal")
             {
                rooms.push({role:"canal",minW:form=="cistern"?26:23,minH:form=="cistern"?12:10,
-                  maxW:46,maxH:21,weight:form=="cistern"?5.4:3.6});
-               count=between(6,9);
+                  maxW:46,maxH:21,weight:form=="cistern"?7:5});
+               count=density=="dense"?between(11,15):(density=="sparse"?between(4,6):between(7,10));
             }
             else rooms.push(demand("service"));
             bag=form=="pump_chain"?["control","control","service","service","store"]:
@@ -61,20 +69,21 @@ package rr
          }
          else
          {
-            count=between(9,13); vertical=0.4+rnd()*0.3;
+            vertical=0.35+rnd()*0.2;
             main=form=="offices"?"office":(form=="commercial"?"store":(form=="ruined"?"hall":
                (form=="rooftops"?"roof":(form=="street_links"?"street":"living"))));
             rooms.push(demand(main,main=="hall"));
+            count=density=="dense"?between(14,20):(density=="sparse" && main=="hall"?between(4,7):between(8,12));
             bag=main=="office"?["office","office","office","store","service"]:
                (main=="store"?["store","store","office","kitchen","service"]:
                (main=="roof" || main=="street"?["service","store","service","office"]:
                ["living","living","kitchen","office","store"]));
-            if(main=="roof" || main=="street") count=between(6,9);
+            if(main=="roof" || main=="street") count=density=="dense"?between(11,15):between(5,9);
          }
          while(rooms.length<count) rooms.push(demand(pick(bag)));
          for(var i:int=0;i<rooms.length;i++) rooms[i].uid=i;
-         return {theme:theme,form:form,main:main,rooms:rooms,vertical:vertical,extra:extra,
-            variant:wide?"mixed-scale":"compact-cluster"};
+         return {theme:theme,form:form,main:main,rooms:rooms,vertical:vertical,extra:extra,levels:levels,density:density,
+            variant:wide?"large-and-small":"compact-cluster"};
       }
       /** Larger values mean a useful architectural relationship, not a door
        * that must appear in every room. Geometry feasibility remains mandatory. */

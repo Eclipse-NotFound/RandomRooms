@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-23：按用户“开始实施，先在HTML看效果”完成v12随机矩形分区原型与交互对照，512组静态验证、8组新旧原版实景。尚未接入正式F1/扩张，未部署；正式版仍为2026-09-20的v11.1。
+> 2026-09-23：按用户四项尺度反馈完成v12.2原型与HTML：普通房按场景降低、部分共层、强大小反差与随机数量。512组静态通过、8组前后实景+4间原房参考。尚未接入正式F1/扩张，未部署；正式版仍为v11.1。
 
 ## 1. 模组是什么
 
@@ -18,15 +18,17 @@
 - Q1按原版生态和空间用途分离，允许合理共用。Q2已答“1”：城市按整张地图组织连续建筑、街巷、屋顶，不再每个合成房都塞室内外。
 - 尺度要求：开发房偏大空荡，应增加内部房间，参考对应原版场景，不能四类统一切成小格。
 - 2026-09-23分区规划Q1：本轮保持矩形，先丰富数量、尺寸和位置；Q2：允许同场景各合成房明显偏重不同用途，并保留合理配套。随后明确要求开始实施、先在HTML里看效果；本轮先交付真实算法原型和预览，不部署。
+- 用户看v12首版后明确要求：相较原版降低偏高房间；部分合成房采用几个房间同顶同底的“层”；更极端大小反差；房间数也随机。本轮按这四项直接实施，grilling只委托必要原版事实调查，没有重复确认已定方向。
 - 只改本模组。根/DLC SWF、真实存档、其他模组不改。测试用唯一pferr-style-*应用、newGame(-1)、隐藏ADL，不用Ghost、不干扰用户实例。
 - 评审页自动打开曾被Browser URL策略拒绝；不换浏览器、代理或服务器绕过，提供本地文件链接即可。
 - 版本替换须重启、回城后新开土地。已载入地图不会自动更新。已决定事项不重复询问。
 
 ## 3. 当前状态
 
-- v12原型入口design/partition-preview-v12/index.html：四场景16用途×4边口×8种子；新旧并排、用途/地形/物体三层、分区详情、连续样本和8组原版实景。最终浏览器512条件/8图组、1440/390宽度检查通过，0脚本错误。
-- RRSpaceRules先抽用途和尺寸要求，RRPartitionPlan做受约束矩形切分/交错分区/局部重排，connectVolumes按用途联系加权；保留原版地形/内容消费者。仅context.partition="rules"且明确seed时启用，普通F1仍走旧链。
-- 开发SWF build/RandomRooms-v12-prototype-1.swf，50589 B，SHA256 299FAD4DA952840C0BB53207335062C573C99A38E478549AE0602D02AF9749A4。不可直接当作已接入的新正式版部署。
+- 最新原型入口design/partition-preview-v12-2/index.html：四场景16用途×4边口×8种子，对照上次v12（不是v11.1）；三图层、共层虚线、尺寸/连接详情、连续样本、8对原版渲染和4间原房参考。Chrome 512条件/8图组/4原房、1440/390宽度通过，0脚本错误。旧页partition-preview-v12原样保留。
+- RRSpaceRules先抽稀疏/标准/密集需求、用途、数量和尺寸；普通高度上限工厂6/避难厩5/下水道5/城市7，辅助房最低3，生活/厨房/医疗最低4。主厅/作业厅/水区单独约束；支持大主空间配小附室。
+- RRPartitionPlan做受约束切分/交错分区/局部重排，并按场景倾向增加随机层数/层高的storeys；共层不做打散楼板的retile。connectVolumes按用途关系加权；仅context.partition="rules"且明确seed时启用，普通F1仍走旧链。
+- 开发SWF build/RandomRooms-v12-prototype-2.swf，51867 B，SHA256 D30DC613226F61562458913E1D85BC3F348B0AF22C8207666B981E031CDD9C3B。不可直接当作已接入的新正式版部署。旧prototype-1产物与证据保留。
 
 - 正式release：v11.1，46044 B，SHA256 16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F；对应build/RandomRooms-v11.1-candidate.swf。日志[RR:v11.1]。
 - 完整核心验证候选build/RandomRooms-v11-dev-13.swf，46043 B，SHA256 959A4C3ECD314B988FCECD20CA1DD6C4E78E098F34A7DA7CF2FC6704B0704533；日志[RR:v11-dev]，XML space-v11/revision11.1。
@@ -41,9 +43,10 @@
 
 ## 4. 正在进行
 
-- 当前里程碑为随机矩形分区HTML原型。partition-dev3新512/512、旧494/512，16组种子重放一致；结构/素材/生态各512通过，4947矩形不重叠/不越界，494对新旧边口相同。8个用途首个成功配对由原版渲染16房32图，捕获输入与导出语义一致。
-- 本批新房46间没有贯穿分隔线；连接图多样性提高，但大多数仍有长分隔、局部空墙。4947空间中3002至少有一组用途家具，剩余空间仍可能有其他内容；不能声称家具净空需求已完成。旧版18个失败和dev2新10个失败已冻结，未换种子掩盖。
-- 最新完整记录design/partition-preview-v12/validation.md；源码/批次、失败、图片与manifest冻结在同目录。原型已交付可审查；下一步完善家具适配，再接游戏地图与真实通行。
+- 当前里程碑v12.2尺度/楼层HTML。partition-scale-dev3新512/512；驾驶器旧v11.1链494/512；HTML与上次v12的512样本对照。16组重放一致；结构/素材/生态各512通过，5639矩形不重叠/不越界，512对前后边口相同。20房40图完整，含8对前后与4间原房，捕获输入逐项匹配。
+- 普通空间平均净高（按空间等权）工厂6.88→4.48、避难厩6.73→4.34、下水道7.21→4.10、城市6.98→5.35。空间数量分别4–19、5–20、4–18、4–20；最大/最小面积比的样本最大值41.6/48.6/58.3/38.3，不是平均。共层布局233/512，其余为自由切分/交错；无贯穿分隔7间（上次46），不可宣称每种多样性都提升。
+- 家具覆盖3828/5639（上次3002/4947），仍有空墙和大腔内交通偏简单。scale-dev1新57/64，7失败同属y7左边口；修正禁切范围允许边口正上方实体天花板，scale-dev2原64全过，dev3扩512全过。失败批次已冻结，没有换种子。
+- 最新记录design/partition-preview-v12-2/validation.md、native-study.md；原版调查120间普通池几何带+12间逐房，不能把地形带数当原作者房间数。源码、开发SWF、批次、图片与manifest冻结在同目录。尚未做本版真实通行/地图接入。
 - 上一阶段v11.1实现、验证与用户授权后的部署已完成；相对dev13只修改两处日志版本字符串。正式SWF独立冒烟2/2通过（F5避难厩12房、F1工厂25房，issues=0），证据release-v11.1-smoke。
 - 开发验证失败多处涉及驾驶器（过早离梯、坡向、梁面、家具顶面），失败XML/图/日志独立冻结；只有真实完整通过才更新结果。
 - 原样单房复查最终通过：工厂18/18目标、4941帧，下水道13/13、1609帧且wetFrames=0。证据plant-interior-dev13、sewer-interior-dev13。早期失败另存；独立封边样本证明内部空间/楼梯平台访问，不当作跨房或每段指定楼梯的独占路径证明。
@@ -53,7 +56,7 @@
 
 - 正式v11.1走seedScene→refineSpaces，旧partition/profile.min/max/bias不是有效布局入口。v12原型则走RRSpaceRules→RRPartitionPlan；sceneForm在新链中表示用途组合家族而非固定坐标。archetype除connector特例外不直接选择主体。
 - 配置遗留：RRMenu仍显示v10.0；enabled存储/显示但未接入当前合成链；修改种子只保存，synth序列在初始化创建，需要重启。本轮未处理这些配置遗留。
-- 正式版房内仍用共享推进的synth随机序列。v12原型固定边口/用途/种子/内容时按阶段独立复现；没有接入地图坐标种子，省略边口仍从外部rnd抽口，不宣称整个地图已顺序独立。原型单房中位约94–147ms、最慢2232ms，搜索慢尾待优化。普通长梯错开失败仍可能回退直梯。
+- 正式版房内仍用共享推进的synth随机序列。v12原型固定边口/用途/种子/内容时按阶段独立复现；没有接入地图坐标种子，省略边口仍从外部rnd抽口，不宣称整个地图已顺序独立。v12.2单房中位62–130ms、最慢2431ms，搜索慢尾与接受偏差待优化。普通长梯错开失败仍可能回退直梯。
 - 自然度尚未等同原版：部分狭长空间、空墙、城市屋顶顶边框可继续打磨；下水道大池保留，几何空格率仍高于原版。
 - RRTraversal只是地形图，不是完整物理；实际行走须处理单向梁、家具、门的视线和计时。
 - 行动要有到交互中心的isLine视线并持续按住；下键加双击下会先抓邻梯，低门旁落梁只用双击下。梯子中段无接收平台时不能提前跳出。
@@ -64,7 +67,7 @@
 
 ## 6. 下一步与回滚
 
-- 依据HTML实景反馈完善家具落位和用途辨识，继续减少机械分层/空墙；优化搜索慢尾及分布偏向。再接F1/右下扩张的房间种子，做实际各入口往返、污水干路、城市连续性和旧对象状态测试。原型静态检查与截图不能替代这些验证；部署另走门禁。
+- 依据新版HTML实景反馈完善家具、大小空间内部交通和用途辨识；共层是部分房型的用户要求，不能一律当重复去除。先验证三格矮房带家具/门梯的真实通行，优化搜索慢尾及分布偏向；再接F1/右下扩张房间种子，做各入口往返、污水干路、城市连续性和旧对象状态测试。截图/静态检查不能替代；部署另走门禁。
 - v11.1已通过发布门禁并部署；用户需完全退出重启，回城后F1进入新地图。后续按实景反馈打磨空墙/狭长空间/城市屋顶边框。
 - 当前根pfe.swf为B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2读取mods/loader-manifest.txt；共享事实库已记录此更新。本轮未写根文件或正式清单。截图驾驶器已生成仅测试入口的隔离清单，并按哈希更新宿主副本、拒绝旧日志。v11历史9A814…验证不冒充此宿主的完整功能回归。
 - 既有v9回滚包build/release-backups/RandomRoomsMod_before_v10_20260920.swf，37785 B，SHA256 7DC5DB91D6FCE0802EEE73BD3312C6724FB0BCF16A2B48246D00554BEFD8BC4E。v11.1回滚用build/release-backups/RandomRoomsMod_before_v11_1_20260920.swf（v10，41027 B，SHA256 7AC89A73D6A09C0922FD0C7F1FFE7C2C2A836EE635393BF5D32FCC503463058C）；退出游戏后复制回release并核对哈希，重启后进入新地图。
@@ -72,8 +75,8 @@
 
 ## 7. 深入阅读与复现
 
-- 当前预览design/partition-preview-v12/index.html；验证/局限validation.md；证据evidence/partition-dev3.zip包含生成时源码、开发SWF和完整XML，dev2失败另存。规划design/rule-based-partitions-plan-2026-09-23.md已注明实施进度；此前路线见design/structure-diversity-brainstorm-2026-09-12.md。
-- 原型批次build/style-review/harness/run-partitions.ps1 -Output <新批次名> -Samples 8；生成页面build_partition_preview.py --stem <批次名>；check_partition_preview.cjs做实际Chrome交互检查。freeze_partition_preview.py只冻结已验dev3且拒绝覆盖已有包，不用于任意新批次。
+- 当前预览design/partition-preview-v12-2/index.html；native-study.md为本轮原版尺度依据，validation.md为验证与局限。evidence/partition-scale-dev3.zip含源码、SWF、完整XML，dev1/dev2分别保留。上次v12同目录前缀不含-2，历史未覆盖。规划design/rule-based-partitions-plan-2026-09-23.md已接续。
+- 原型批次build/style-review/harness/run-partitions.ps1 -Output <新批次名> -Samples 8；页面build_partition_preview.py --stem <批次> --baseline partition-dev3 --out <新目录>；check_partition_preview.cjs <预览目录>做Chrome检查。freeze_partition_preview.py支持stem/baseline/history/out/swf/native-reference，核对来源和已通过的批次，拒绝覆盖ZIP。audit_native_scale.py --output <json>只读原版几何，并输出本模组参考XML。
 - 用户向算法学习：design/generator-explained-v11.1/guide.html（16样本四图层、尺寸实验、有效/遗留参数），flow.html（Archify流程图），source-map.md（源码行号与范围）；文档交互检查不冒充游戏回归。
 - 设计来源design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。旧调查页已链接最新密度对照。
 - 当前实证knowledge/experiments/generator-v11-density-validation-2026-09-20.md与generator-v11-evidence/；正式v10结果另见v10报告。

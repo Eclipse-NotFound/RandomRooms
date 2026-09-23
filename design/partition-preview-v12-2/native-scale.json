@@ -1,0 +1,6026 @@
+{
+  "scope": "Terrain bands bounded above and below by solid tiles, no intervening solid/beam/slope, width >=5, height >=3. Vertical ladders allowed. Objects and side walls ignored. Not author-room counts, probabilities or gameplay clearance.",
+  "scenes": [
+    {
+      "scene": "plant",
+      "source": "Rooms\\rooms_plant.xml",
+      "sha256": "7466ded79a7438ee3de776bb1b7e00c97f1c6a8776a7f0b2ed28bf0b1e69fb68",
+      "ordinaryRooms": 40,
+      "bands": 228,
+      "heights": {
+        "3": 126,
+        "4": 32,
+        "5": 6,
+        "6": 7,
+        "7": 35,
+        "8": 2,
+        "9": 1,
+        "10": 1,
+        "11": 17,
+        "19": 1
+      },
+      "examples": [
+        {
+          "index": 6,
+          "name": "архив"
+        },
+        {
+          "index": 14,
+          "name": "склад2"
+        },
+        {
+          "index": 24,
+          "name": "офисы2"
+        },
+        {
+          "index": 44,
+          "name": "вертикаль"
+        },
+        {
+          "index": 28,
+          "name": "кпп"
+        }
+      ],
+      "bandDetails": [
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 4,
+          "x1": 8,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 10,
+          "x1": 24,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 27,
+          "x1": 47,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 1,
+          "x1": 7,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 11,
+          "x1": 22,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 28,
+          "x1": 40,
+          "ceilingY": 8,
+          "floorY": 20,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 0,
+          "x1": 26,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 42,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "сортиры",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 0,
+          "x1": 8,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 1,
+          "x1": 8,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 1,
+          "x1": 5,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 16,
+          "x1": 20,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "цех3",
+          "x0": 15,
+          "x1": 19,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 1,
+          "x1": 18,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 29,
+          "x1": 43,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 7,
+          "x1": 22,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 29,
+          "x1": 33,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 35,
+          "x1": 41,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 13,
+          "x1": 17,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 29,
+          "x1": 38,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 15,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "офисы",
+          "x0": 16,
+          "x1": 22,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 4,
+          "floorY": 11,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 25,
+          "x1": 33,
+          "ceilingY": 4,
+          "floorY": 11,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 35,
+          "x1": 41,
+          "ceilingY": 4,
+          "floorY": 11,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 22,
+          "x1": 32,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 35,
+          "x1": 41,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 13,
+          "x1": 18,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "архив",
+          "x0": 21,
+          "x1": 27,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "легкость3",
+          "x0": 21,
+          "x1": 26,
+          "ceilingY": 0,
+          "floorY": 11,
+          "clearHeight": 10
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "легкость3",
+          "x0": 21,
+          "x1": 28,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 29,
+          "x1": 36,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 0,
+          "x1": 5,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 5,
+          "floorY": 17,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 10,
+          "floorY": 17,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 32,
+          "x1": 38,
+          "ceilingY": 13,
+          "floorY": 19,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "скорпионы",
+          "x0": 22,
+          "x1": 28,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 6,
+          "x1": 16,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 30,
+          "x1": 34,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 39,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 1,
+          "x1": 8,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 20,
+          "x1": 27,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 31,
+          "x1": 46,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 36,
+          "x1": 46,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 12,
+          "x1": 18,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "склад1",
+          "x0": 37,
+          "x1": 45,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 0,
+          "x1": 12,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 31,
+          "x1": 38,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 32,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 0,
+          "x1": 9,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 19,
+          "x1": 24,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "проходы2",
+          "x0": 39,
+          "x1": 44,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "склад2",
+          "x0": 32,
+          "x1": 41,
+          "ceilingY": 10,
+          "floorY": 16,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "склад2",
+          "x0": 31,
+          "x1": 35,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "склад2",
+          "x0": 37,
+          "x1": 41,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "дерьмище",
+          "x0": 10,
+          "x1": 36,
+          "ceilingY": 5,
+          "floorY": 11,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "дерьмище",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "дерьмище",
+          "x0": 11,
+          "x1": 18,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "дерьмище",
+          "x0": 21,
+          "x1": 26,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "дерьмище",
+          "x0": 30,
+          "x1": 41,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 1,
+          "x1": 11,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 37,
+          "x1": 46,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 33,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 1,
+          "x1": 15,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 37,
+          "x1": 46,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 0,
+          "x1": 16,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 17,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "рейдеры",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 5,
+          "x1": 14,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 28,
+          "x1": 34,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 35,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 17,
+          "x1": 27,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 35,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 0,
+          "x1": 26,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "ячейки",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 5,
+          "x1": 16,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 31,
+          "x1": 42,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 21,
+          "x1": 26,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 16,
+          "x1": 31,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 4,
+          "x1": 19,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 26,
+          "x1": 42,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "змейка",
+          "x0": 20,
+          "x1": 25,
+          "ceilingY": 16,
+          "floorY": 21,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "бассейн",
+          "x0": 19,
+          "x1": 28,
+          "ceilingY": 0,
+          "floorY": 20,
+          "clearHeight": 19
+        },
+        {
+          "roomIndex": 24,
+          "roomName": "офисы2",
+          "x0": 22,
+          "x1": 46,
+          "ceilingY": 6,
+          "floorY": 11,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 24,
+          "roomName": "офисы2",
+          "x0": 22,
+          "x1": 31,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 24,
+          "roomName": "офисы2",
+          "x0": 34,
+          "x1": 46,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 24,
+          "roomName": "офисы2",
+          "x0": 22,
+          "x1": 31,
+          "ceilingY": 17,
+          "floorY": 24,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 24,
+          "roomName": "офисы2",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 25,
+          "roomName": "проходы",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 25,
+          "roomName": "проходы",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 4,
+          "floorY": 10,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 25,
+          "roomName": "проходы",
+          "x0": 25,
+          "x1": 30,
+          "ceilingY": 4,
+          "floorY": 10,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 25,
+          "roomName": "проходы",
+          "x0": 25,
+          "x1": 35,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 25,
+          "roomName": "проходы",
+          "x0": 38,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 25,
+          "x1": 32,
+          "ceilingY": 2,
+          "floorY": 7,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 1,
+          "x1": 16,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 25,
+          "x1": 32,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 34,
+          "x1": 46,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 0,
+          "x1": 10,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 11,
+          "x1": 16,
+          "ceilingY": 12,
+          "floorY": 17,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 25,
+          "x1": 30,
+          "ceilingY": 12,
+          "floorY": 17,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 40,
+          "x1": 46,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "отдых",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 7,
+          "x1": 13,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 5,
+          "x1": 14,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 38,
+          "x1": 42,
+          "ceilingY": 8,
+          "floorY": 20,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 5,
+          "x1": 15,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 8,
+          "x1": 14,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "завод",
+          "x0": 34,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 6,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 29,
+          "x1": 35,
+          "ceilingY": 6,
+          "floorY": 16,
+          "clearHeight": 9
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 11,
+          "x1": 17,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 20,
+          "x1": 26,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кпп",
+          "x0": 35,
+          "x1": 40,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 4,
+          "x1": 13,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 34,
+          "x1": 43,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 4,
+          "x1": 11,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 37,
+          "x1": 43,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 4,
+          "x1": 13,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 16,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 25,
+          "x1": 31,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "подвал",
+          "x0": 34,
+          "x1": 43,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 31,
+          "roomName": "базар",
+          "x0": 31,
+          "x1": 36,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 31,
+          "roomName": "базар",
+          "x0": 14,
+          "x1": 33,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 16,
+          "x1": 23,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 26,
+          "x1": 31,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 34,
+          "x1": 40,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 12,
+          "x1": 23,
+          "ceilingY": 4,
+          "floorY": 9,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 11,
+          "x1": 18,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 33,
+          "x1": 42,
+          "ceilingY": 15,
+          "floorY": 19,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 32,
+          "roomName": "офисы3",
+          "x0": 33,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 7,
+          "x1": 18,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 0,
+          "x1": 6,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 39,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 0,
+          "x1": 7,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 10,
+          "x1": 18,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 29,
+          "x1": 35,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "медик",
+          "x0": 38,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 7,
+          "x1": 13,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 15,
+          "x1": 22,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 25,
+          "x1": 37,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 0,
+          "x1": 8,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 11,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 37,
+          "roomName": "несложно",
+          "x0": 34,
+          "x1": 41,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 35,
+          "x1": 42,
+          "ceilingY": 3,
+          "floorY": 7,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 1,
+          "x1": 5,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 13,
+          "x1": 17,
+          "ceilingY": 7,
+          "floorY": 11,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 7,
+          "floorY": 11,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 37,
+          "x1": 42,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 37,
+          "x1": 43,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 10,
+          "x1": 20,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 39,
+          "roomName": "слизни",
+          "x0": 23,
+          "x1": 28,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 9,
+          "x1": 14,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 27,
+          "x1": 32,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 9,
+          "x1": 14,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 27,
+          "x1": 32,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 8,
+          "x1": 33,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 31,
+          "x1": 37,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 40,
+          "roomName": "камера",
+          "x0": 1,
+          "x1": 7,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "цех4",
+          "x0": 14,
+          "x1": 19,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "цех4",
+          "x0": 24,
+          "x1": 29,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "цех4",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "цех4",
+          "x0": 24,
+          "x1": 29,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "цех4",
+          "x0": 34,
+          "x1": 39,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "диагон",
+          "x0": 14,
+          "x1": 20,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "диагон",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "диагон",
+          "x0": 42,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 43,
+          "roomName": "логово2",
+          "x0": 0,
+          "x1": 6,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "вертикаль",
+          "x0": 11,
+          "x1": 18,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "вертикаль",
+          "x0": 29,
+          "x1": 36,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "вертикаль",
+          "x0": 12,
+          "x1": 17,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "вертикаль",
+          "x0": 30,
+          "x1": 35,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 45,
+          "roomName": "логово",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "цех2",
+          "x0": 11,
+          "x1": 19,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "цех2",
+          "x0": 28,
+          "x1": 36,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "цех2",
+          "x0": 1,
+          "x1": 9,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 3,
+          "floorY": 12,
+          "clearHeight": 8
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 29,
+          "x1": 36,
+          "ceilingY": 3,
+          "floorY": 12,
+          "clearHeight": 8
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 27,
+          "x1": 32,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 34,
+          "x1": 40,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "сюрприз",
+          "x0": 13,
+          "x1": 36,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "вентиляция",
+          "x0": 40,
+          "x1": 47,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "вентиляция",
+          "x0": 39,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "вентиляция",
+          "x0": 12,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 21,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 15,
+          "x1": 19,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 31,
+          "x1": 36,
+          "ceilingY": 3,
+          "floorY": 7,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 13,
+          "x1": 19,
+          "ceilingY": 7,
+          "floorY": 19,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 30,
+          "x1": 36,
+          "ceilingY": 7,
+          "floorY": 19,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 37,
+          "x1": 43,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "цех5",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 50,
+          "roomName": "канализация",
+          "x0": 14,
+          "x1": 18,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 50,
+          "roomName": "канализация",
+          "x0": 34,
+          "x1": 38,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 50,
+          "roomName": "канализация",
+          "x0": 32,
+          "x1": 38,
+          "ceilingY": 12,
+          "floorY": 19,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 50,
+          "roomName": "канализация",
+          "x0": 1,
+          "x1": 5,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 50,
+          "roomName": "канализация",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 0,
+          "x1": 7,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 8,
+          "x1": 15,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 53,
+          "roomName": "парковка",
+          "x0": 24,
+          "x1": 36,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 54,
+          "roomName": "обвал",
+          "x0": 1,
+          "x1": 7,
+          "ceilingY": 1,
+          "floorY": 8,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 54,
+          "roomName": "обвал",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        }
+      ]
+    },
+    {
+      "scene": "stable",
+      "source": "Rooms\\rooms_stable.xml",
+      "sha256": "6119717f2ff5de034f6c7b148b01c0d2e28d1f2076cc1be878f55b40b7e26109",
+      "ordinaryRooms": 32,
+      "bands": 210,
+      "heights": {
+        "3": 92,
+        "4": 96,
+        "5": 1,
+        "6": 5,
+        "7": 10,
+        "8": 1,
+        "11": 4,
+        "15": 1
+      },
+      "examples": [
+        {
+          "index": 1,
+          "name": "служ.пом.3"
+        },
+        {
+          "index": 19,
+          "name": "помещения"
+        },
+        {
+          "index": 28,
+          "name": "кабинеты3"
+        }
+      ],
+      "bandDetails": [
+        {
+          "roomIndex": 0,
+          "roomName": "13",
+          "x0": 34,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 1,
+          "x1": 18,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 1,
+          "x1": 13,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 15,
+          "x1": 20,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 27,
+          "x1": 32,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 34,
+          "x1": 46,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 1,
+          "x1": 8,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "служ.пом.3",
+          "x0": 23,
+          "x1": 29,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 8,
+          "x1": 15,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 20,
+          "x1": 31,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 15,
+          "x1": 19,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 7,
+          "x1": 11,
+          "ceilingY": 12,
+          "floorY": 17,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 36,
+          "x1": 42,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 23,
+          "x1": 27,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 15,
+          "x1": 19,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 29,
+          "x1": 42,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "коридор4",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "служ. пом.",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "служ. пом.",
+          "x0": 19,
+          "x1": 25,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "служ. пом.",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "служ. пом.",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "служ. пом.",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 7,
+          "x1": 12,
+          "ceilingY": 6,
+          "floorY": 11,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 6,
+          "floorY": 11,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 26,
+          "x1": 40,
+          "ceilingY": 6,
+          "floorY": 11,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 8,
+          "x1": 30,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 21,
+          "x1": 25,
+          "ceilingY": 17,
+          "floorY": 22,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "кабинеты2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 7,
+          "x1": 13,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 16,
+          "x1": 22,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 29,
+          "x1": 46,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 1,
+          "x1": 8,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 11,
+          "x1": 22,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 24,
+          "x1": 36,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 39,
+          "x1": 46,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 6,
+          "x1": 36,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "помещения4",
+          "x0": 39,
+          "x1": 46,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "пещера2",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "пещера2",
+          "x0": 9,
+          "x1": 13,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "пещера2",
+          "x0": 24,
+          "x1": 29,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "пещера2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "атриум",
+          "x0": 37,
+          "x1": 43,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "атриум",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "атриум",
+          "x0": 38,
+          "x1": 42,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "атриум",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 10,
+          "roomName": "атриум",
+          "x0": 38,
+          "x1": 42,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 33,
+          "x1": 42,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 12,
+          "x1": 25,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 33,
+          "x1": 42,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 7,
+          "x1": 13,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 16,
+          "x1": 22,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "производство",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "коридор2",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "коридор2",
+          "x0": 34,
+          "x1": 38,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "коридор2",
+          "x0": 20,
+          "x1": 30,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 17,
+          "x1": 24,
+          "ceilingY": 0,
+          "floorY": 12,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 5,
+          "x1": 15,
+          "ceilingY": 3,
+          "floorY": 12,
+          "clearHeight": 8
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 38,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 10,
+          "x1": 18,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 20,
+          "x1": 24,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 28,
+          "x1": 32,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 34,
+          "x1": 39,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 16,
+          "x1": 22,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "служ. пом.2",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 1,
+          "x1": 18,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 20,
+          "x1": 27,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 12,
+          "x1": 27,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 15,
+          "roomName": "служ.пом.5",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "пещера",
+          "x0": 34,
+          "x1": 46,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 16,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 7,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 1,
+          "x1": 17,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 27,
+          "x1": 31,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 34,
+          "x1": 46,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 8,
+          "x1": 17,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "кабинеты",
+          "x0": 32,
+          "x1": 43,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 40,
+          "x1": 46,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 0,
+          "x1": 7,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 27,
+          "x1": 36,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 27,
+          "x1": 36,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 40,
+          "x1": 47,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 27,
+          "x1": 36,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 40,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "помещения",
+          "x0": 38,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 33,
+          "x1": 39,
+          "ceilingY": 4,
+          "floorY": 11,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 25,
+          "x1": 35,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 42,
+          "x1": 46,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 26,
+          "x1": 35,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 20,
+          "roomName": "зал",
+          "x0": 42,
+          "x1": 46,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "коридор",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "коридор",
+          "x0": 19,
+          "x1": 29,
+          "ceilingY": 4,
+          "floorY": 9,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "коридор",
+          "x0": 19,
+          "x1": 29,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "коридор",
+          "x0": 16,
+          "x1": 35,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "коридор",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "пещера3",
+          "x0": 11,
+          "x1": 17,
+          "ceilingY": 8,
+          "floorY": 15,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "пещера3",
+          "x0": 24,
+          "x1": 40,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 30,
+          "x1": 35,
+          "ceilingY": 6,
+          "floorY": 10,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 30,
+          "x1": 35,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 17,
+          "x1": 24,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "служ.пом.7",
+          "x0": 17,
+          "x1": 22,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 12,
+          "x1": 21,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 16,
+          "x1": 20,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 7,
+          "x1": 11,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 16,
+          "x1": 20,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "служ.пом.6",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 26,
+          "x1": 31,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 37,
+          "x1": 46,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 37,
+          "x1": 43,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 12,
+          "x1": 16,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 18,
+          "x1": 38,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 12,
+          "x1": 16,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "столовая",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 4,
+          "x1": 11,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 16,
+          "x1": 20,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 25,
+          "x1": 32,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 1,
+          "x1": 11,
+          "ceilingY": 12,
+          "floorY": 17,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 26,
+          "x1": 31,
+          "ceilingY": 17,
+          "floorY": 24,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 8,
+          "x1": 22,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "кабинеты3",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 31,
+          "roomName": "склад3",
+          "x0": 38,
+          "x1": 46,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 31,
+          "roomName": "склад3",
+          "x0": 20,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 16,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 31,
+          "roomName": "склад3",
+          "x0": 20,
+          "x1": 36,
+          "ceilingY": 17,
+          "floorY": 24,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 10,
+          "x1": 22,
+          "ceilingY": 3,
+          "floorY": 7,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 23,
+          "x1": 38,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 7,
+          "floorY": 12,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 20,
+          "x1": 27,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 29,
+          "x1": 36,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 39,
+          "x1": 46,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 39,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 34,
+          "x1": 40,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 33,
+          "roomName": "служ.пом.4",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 5,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 1,
+          "x1": 12,
+          "ceilingY": 8,
+          "floorY": 13,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 29,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 13,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 1,
+          "x1": 22,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 25,
+          "x1": 40,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 11,
+          "x1": 18,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 35,
+          "roomName": "помещения5",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 38,
+          "roomName": "помещения3",
+          "x0": 1,
+          "x1": 37,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 38,
+          "roomName": "помещения3",
+          "x0": 10,
+          "x1": 37,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 38,
+          "roomName": "помещения3",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 38,
+          "roomName": "помещения3",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 38,
+          "roomName": "помещения3",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 6,
+          "x1": 11,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 12,
+          "x1": 16,
+          "ceilingY": 8,
+          "floorY": 13,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 17,
+          "x1": 29,
+          "ceilingY": 8,
+          "floorY": 14,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 31,
+          "x1": 36,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 9,
+          "floorY": 14,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 5,
+          "x1": 10,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 16,
+          "x1": 25,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 30,
+          "x1": 36,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 14,
+          "floorY": 19,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 16,
+          "x1": 25,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "коридор3",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 0,
+          "x1": 7,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 10,
+          "x1": 16,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 28,
+          "x1": 32,
+          "ceilingY": 8,
+          "floorY": 13,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 35,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 46,
+          "roomName": "служ.пом.8",
+          "x0": 36,
+          "x1": 46,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 17,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 35,
+          "x1": 40,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 6,
+          "x1": 10,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 12,
+          "x1": 21,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 26,
+          "x1": 35,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 37,
+          "x1": 41,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 6,
+          "x1": 10,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 12,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 26,
+          "x1": 35,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 37,
+          "x1": 41,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "помещения2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "пещера4",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 1,
+          "floorY": 5,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "пещера4",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 6,
+          "floorY": 10,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 48,
+          "roomName": "пещера4",
+          "x0": 31,
+          "x1": 35,
+          "ceilingY": 7,
+          "floorY": 11,
+          "clearHeight": 3
+        }
+      ]
+    },
+    {
+      "scene": "sewer",
+      "source": "Rooms\\rooms_sewer.xml",
+      "sha256": "e7e178f48826de4982b64e85bb380a85f891bf421cb5e93d07ff15d3202b2dd4",
+      "ordinaryRooms": 22,
+      "bands": 83,
+      "heights": {
+        "3": 47,
+        "4": 11,
+        "5": 7,
+        "6": 2,
+        "7": 7,
+        "8": 2,
+        "9": 3,
+        "10": 2,
+        "11": 1,
+        "20": 1
+      },
+      "examples": [
+        {
+          "index": 7,
+          "name": "комнаты2"
+        },
+        {
+          "index": 19,
+          "name": "слив2"
+        }
+      ],
+      "bandDetails": [
+        {
+          "roomIndex": 0,
+          "roomName": "отходы3",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "трубы3",
+          "x0": 19,
+          "x1": 23,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "трубы3",
+          "x0": 19,
+          "x1": 23,
+          "ceilingY": 12,
+          "floorY": 18,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 1,
+          "roomName": "трубы3",
+          "x0": 19,
+          "x1": 23,
+          "ceilingY": 18,
+          "floorY": 24,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "двери",
+          "x0": 9,
+          "x1": 16,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 2,
+          "roomName": "двери",
+          "x0": 31,
+          "x1": 37,
+          "ceilingY": 5,
+          "floorY": 9,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 5,
+          "x1": 13,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 23,
+          "x1": 28,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 33,
+          "x1": 38,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 4,
+          "floorY": 15,
+          "clearHeight": 10
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 39,
+          "x1": 43,
+          "ceilingY": 4,
+          "floorY": 15,
+          "clearHeight": 10
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 5,
+          "x1": 9,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 14,
+          "x1": 21,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "стоки2",
+          "x0": 35,
+          "x1": 47,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 19,
+          "x1": 23,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 24,
+          "x1": 28,
+          "ceilingY": 10,
+          "floorY": 17,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 10,
+          "floorY": 17,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 24,
+          "x1": 28,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 4,
+          "roomName": "двери2",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 19,
+          "floorY": 24,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 5,
+          "roomName": "туннели2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "отходы",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "отходы",
+          "x0": 21,
+          "x1": 26,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "отходы",
+          "x0": 11,
+          "x1": 16,
+          "ceilingY": 3,
+          "floorY": 7,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "отходы",
+          "x0": 39,
+          "x1": 46,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 6,
+          "roomName": "отходы",
+          "x0": 8,
+          "x1": 27,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "комнаты2",
+          "x0": 1,
+          "x1": 11,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "комнаты2",
+          "x0": 16,
+          "x1": 28,
+          "ceilingY": 11,
+          "floorY": 16,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "комнаты2",
+          "x0": 22,
+          "x1": 34,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "комнаты2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "стоки3",
+          "x0": 13,
+          "x1": 17,
+          "ceilingY": 12,
+          "floorY": 24,
+          "clearHeight": 11
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "стоки3",
+          "x0": 35,
+          "x1": 46,
+          "ceilingY": 15,
+          "floorY": 20,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "туннели4",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "туннели4",
+          "x0": 17,
+          "x1": 24,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "туннели4",
+          "x0": 7,
+          "x1": 12,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "туннели4",
+          "x0": 17,
+          "x1": 22,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 9,
+          "roomName": "туннели4",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 4,
+          "x1": 12,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 17,
+          "x1": 22,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 12,
+          "x1": 17,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 27,
+          "x1": 35,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 24,
+          "x1": 28,
+          "ceilingY": 12,
+          "floorY": 20,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 11,
+          "roomName": "отходы2",
+          "x0": 4,
+          "x1": 11,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "трубы",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "трубы",
+          "x0": 28,
+          "x1": 33,
+          "ceilingY": 1,
+          "floorY": 11,
+          "clearHeight": 9
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "трубы",
+          "x0": 18,
+          "x1": 23,
+          "ceilingY": 11,
+          "floorY": 20,
+          "clearHeight": 8
+        },
+        {
+          "roomIndex": 12,
+          "roomName": "трубы",
+          "x0": 28,
+          "x1": 33,
+          "ceilingY": 11,
+          "floorY": 20,
+          "clearHeight": 8
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 10,
+          "x1": 14,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 15,
+          "x1": 20,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 36,
+          "x1": 46,
+          "ceilingY": 3,
+          "floorY": 8,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 10,
+          "x1": 14,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 21,
+          "x1": 25,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 5,
+          "x1": 17,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 20,
+          "x1": 30,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "комнаты",
+          "x0": 35,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 5,
+          "x1": 12,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 17,
+          "x1": 27,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 29,
+          "x1": 39,
+          "ceilingY": 4,
+          "floorY": 12,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 6,
+          "x1": 11,
+          "ceilingY": 14,
+          "floorY": 20,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 12,
+          "x1": 16,
+          "ceilingY": 14,
+          "floorY": 24,
+          "clearHeight": 9
+        },
+        {
+          "roomIndex": 14,
+          "roomName": "стоки",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 14,
+          "floorY": 24,
+          "clearHeight": 9
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 0,
+          "x1": 7,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 10,
+          "x1": 17,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 25,
+          "x1": 29,
+          "ceilingY": 8,
+          "floorY": 14,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 35,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "стоки4",
+          "x0": 36,
+          "x1": 46,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "комнаты3",
+          "x0": 2,
+          "x1": 12,
+          "ceilingY": 18,
+          "floorY": 23,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "комнаты3",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 18,
+          "floorY": 23,
+          "clearHeight": 4
+        },
+        {
+          "roomIndex": 17,
+          "roomName": "комнаты3",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 18,
+          "floorY": 24,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 18,
+          "roomName": "туннели",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "слив2",
+          "x0": 4,
+          "x1": 9,
+          "ceilingY": 10,
+          "floorY": 14,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "двери3",
+          "x0": 6,
+          "x1": 10,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "двери3",
+          "x0": 11,
+          "x1": 20,
+          "ceilingY": 4,
+          "floorY": 10,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 21,
+          "roomName": "двери3",
+          "x0": 29,
+          "x1": 38,
+          "ceilingY": 4,
+          "floorY": 10,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "трубы2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 1,
+          "floorY": 5,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "трубы2",
+          "x0": 10,
+          "x1": 18,
+          "ceilingY": 3,
+          "floorY": 24,
+          "clearHeight": 20
+        },
+        {
+          "roomIndex": 22,
+          "roomName": "трубы2",
+          "x0": 0,
+          "x1": 4,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        }
+      ]
+    },
+    {
+      "scene": "mane",
+      "source": "Rooms\\rooms_mane.xml",
+      "sha256": "d743dea9fa1eab3b5d09144ad4975e56bfdd4359fabbd73d43963a5ac5b6708e",
+      "ordinaryRooms": 26,
+      "bands": 133,
+      "heights": {
+        "3": 22,
+        "5": 6,
+        "6": 7,
+        "7": 90,
+        "10": 1,
+        "15": 5,
+        "23": 2
+      },
+      "examples": [
+        {
+          "index": 51,
+          "name": "ко.кабинеты"
+        },
+        {
+          "index": 45,
+          "name": "ко.развалено3"
+        }
+      ],
+      "bandDetails": [
+        {
+          "roomIndex": 0,
+          "roomName": "ко.развалено",
+          "x0": 1,
+          "x1": 15,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 0,
+          "roomName": "ко.развалено",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 24,
+          "clearHeight": 23
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 22,
+          "x1": 27,
+          "ceilingY": 8,
+          "floorY": 15,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 35,
+          "x1": 45,
+          "ceilingY": 9,
+          "floorY": 15,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 3,
+          "roomName": "ко.архивы",
+          "x0": 17,
+          "x1": 36,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "ко.тех",
+          "x0": 1,
+          "x1": 8,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "ко.тех",
+          "x0": 1,
+          "x1": 7,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "ко.тех",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 7,
+          "roomName": "ко.тех",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 16,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 26,
+          "x1": 31,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 1,
+          "x1": 12,
+          "ceilingY": 10,
+          "floorY": 16,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 20,
+          "x1": 31,
+          "ceilingY": 10,
+          "floorY": 16,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 8,
+          "x1": 13,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 8,
+          "roomName": "ко.операционная",
+          "x0": 26,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "ко.офисы ",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "ко.офисы ",
+          "x0": 20,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "ко.офисы ",
+          "x0": 5,
+          "x1": 33,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 13,
+          "roomName": "ко.офисы ",
+          "x0": 23,
+          "x1": 33,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "ко.столовка2",
+          "x0": 29,
+          "x1": 37,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "ко.столовка2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 16,
+          "roomName": "ко.столовка2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 11,
+          "x1": 17,
+          "ceilingY": 0,
+          "floorY": 16,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 30,
+          "x1": 36,
+          "ceilingY": 0,
+          "floorY": 16,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 19,
+          "x1": 28,
+          "ceilingY": 4,
+          "floorY": 15,
+          "clearHeight": 10
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 4,
+          "x1": 9,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 19,
+          "roomName": "ко.клуб",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 34,
+          "x1": 43,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 14,
+          "x1": 33,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 35,
+          "x1": 43,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 23,
+          "roomName": "ко.столовка",
+          "x0": 31,
+          "x1": 43,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "ко.разлом",
+          "x0": 11,
+          "x1": 16,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "ко.разлом",
+          "x0": 34,
+          "x1": 44,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 26,
+          "roomName": "ко.разлом",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 1,
+          "x1": 6,
+          "ceilingY": 8,
+          "floorY": 24,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 7,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 23,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 27,
+          "roomName": "ко.служ.пом.",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "ко.серверная2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "ко.серверная2",
+          "x0": 28,
+          "x1": 34,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "ко.серверная2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "ко.серверная2",
+          "x0": 1,
+          "x1": 24,
+          "ceilingY": 10,
+          "floorY": 16,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 28,
+          "roomName": "ко.серверная2",
+          "x0": 29,
+          "x1": 36,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "ко.кабинеты2",
+          "x0": 32,
+          "x1": 37,
+          "ceilingY": 9,
+          "floorY": 16,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 29,
+          "roomName": "ко.кабинеты2",
+          "x0": 32,
+          "x1": 39,
+          "ceilingY": 17,
+          "floorY": 24,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 7,
+          "x1": 11,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 36,
+          "x1": 40,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 23,
+          "x1": 27,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 30,
+          "roomName": "ко.служ.пом.2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "ко.серверная",
+          "x0": 14,
+          "x1": 33,
+          "ceilingY": 10,
+          "floorY": 16,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 36,
+          "roomName": "ко.серверная",
+          "x0": 17,
+          "x1": 27,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 16,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 38,
+          "x1": 44,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 9,
+          "x1": 21,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 26,
+          "x1": 38,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 26,
+          "x1": 31,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 41,
+          "roomName": "ко.госпиталь",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 17,
+          "floorY": 24,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 20,
+          "x1": 27,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 1,
+          "x1": 7,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 20,
+          "x1": 24,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 38,
+          "x1": 42,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 42,
+          "roomName": "ко.кабинеты3",
+          "x0": 38,
+          "x1": 46,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 0,
+          "floorY": 24,
+          "clearHeight": 23
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 41,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 43,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 44,
+          "roomName": "ко.офисы3",
+          "x0": 9,
+          "x1": 13,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 4,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 7,
+          "x1": 11,
+          "ceilingY": 4,
+          "floorY": 8,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 19,
+          "x1": 25,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 40,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 19,
+          "x1": 25,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 40,
+          "x1": 46,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 19,
+          "x1": 25,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 40,
+          "x1": 47,
+          "ceilingY": 16,
+          "floorY": 20,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 47,
+          "roomName": "ко.камеры",
+          "x0": 18,
+          "x1": 22,
+          "ceilingY": 20,
+          "floorY": 24,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "ко.серверная3",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 2,
+          "floorY": 8,
+          "clearHeight": 5
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "ко.серверная3",
+          "x0": 8,
+          "x1": 18,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 49,
+          "roomName": "ко.серверная3",
+          "x0": 8,
+          "x1": 18,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 1,
+          "x1": 12,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 31,
+          "x1": 37,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 40,
+          "x1": 47,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 13,
+          "x1": 17,
+          "ceilingY": 16,
+          "floorY": 23,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 21,
+          "x1": 25,
+          "ceilingY": 16,
+          "floorY": 23,
+          "clearHeight": 6
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 51,
+          "roomName": "ко.кабинеты",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 14,
+          "x1": 18,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 23,
+          "x1": 27,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 32,
+          "x1": 36,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 38,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 52,
+          "roomName": "ко.офисы2",
+          "x0": 14,
+          "x1": 30,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 56,
+          "roomName": "ко.офисы4",
+          "x0": 1,
+          "x1": 5,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 56,
+          "roomName": "ко.офисы4",
+          "x0": 42,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 8,
+          "x1": 12,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 17,
+          "x1": 21,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 39,
+          "x1": 44,
+          "ceilingY": 8,
+          "floorY": 12,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 1,
+          "x1": 15,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 32,
+          "x1": 38,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 39,
+          "x1": 44,
+          "ceilingY": 12,
+          "floorY": 16,
+          "clearHeight": 3
+        },
+        {
+          "roomIndex": 58,
+          "roomName": "ко.тех2",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 60,
+          "roomName": "ко.развалено2",
+          "x0": 22,
+          "x1": 27,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 0,
+          "floorY": 8,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 26,
+          "x1": 30,
+          "ceilingY": 0,
+          "floorY": 16,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 1,
+          "x1": 9,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 32,
+          "x1": 46,
+          "ceilingY": 8,
+          "floorY": 16,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 11,
+          "x1": 15,
+          "ceilingY": 8,
+          "floorY": 24,
+          "clearHeight": 15
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 1,
+          "x1": 10,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        },
+        {
+          "roomIndex": 61,
+          "roomName": "ко.припасы",
+          "x0": 35,
+          "x1": 39,
+          "ceilingY": 16,
+          "floorY": 24,
+          "clearHeight": 7
+        }
+      ]
+    }
+  ]
+}

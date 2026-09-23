@@ -1,0 +1,47 @@
+{
+  "caseIds": [
+    7,
+    33,
+    97,
+    131,
+    194,
+    289,
+    320,
+    449
+  ],
+  "selection": "First successful pair matching each declared structural feature, or first success if none match. Not selected by appearance.",
+  "filters": {
+    "production": [
+      "rrP_density",
+      "sparse"
+    ],
+    "storage_hall": [
+      "rrP_density",
+      "dense"
+    ],
+    "quarters": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "atrium_ring": [
+      "rrP_density",
+      "sparse"
+    ],
+    "canal_gallery": [
+      "rrP_density",
+      "sparse"
+    ],
+    "dry_tunnels": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "apartments": [
+      "rrP_layout",
+      "storeys"
+    ],
+    "rooftops": [
+      "rrP_density",
+      "standard"
+    ]
+  }
+}

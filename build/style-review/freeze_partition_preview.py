@@ -1,6 +1,7 @@
 """Freeze the preview's actual inputs after checking source and capture attribution."""
 from collections import Counter
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import xml.etree.ElementTree as ET
@@ -20,7 +21,13 @@ def semantic(e):
 
 
 def main():
-    stem='partition-dev3'
+    global OUT
+    ap=argparse.ArgumentParser();ap.add_argument('--stem',default='partition-dev3')
+    ap.add_argument('--out',default='design/partition-preview-v12');ap.add_argument('--baseline')
+    ap.add_argument('--history',nargs='*',default=['partition-dev2'])
+    ap.add_argument('--swf',default='build/RandomRooms-v12-prototype-1.swf')
+    ap.add_argument('--native-reference')
+    args=ap.parse_args();stem=args.stem;OUT=ROOT/args.out
     manifest=json.loads((HERE/f'{stem}-manifest.json').read_text(encoding='utf-8-sig'))
     for name,sha in manifest['sources'].items():
         assert digest(ROOT/'src/rr'/name).lower()==sha.lower(), name
@@ -28,6 +35,8 @@ def main():
         assert digest(HERE/(stem+suffix)).lower()==sha.lower(), suffix
     rooms={mode:{int(r.get('harnessCase')):r for r in ET.parse(HERE/f'{stem}-{mode}.xml').getroot()}
            for mode in ['new','old']}
+    if args.baseline:
+        rooms['old']={int(r.get('harnessCase')):r for r in ET.parse(HERE/f'{args.baseline}-new.xml').getroot()}
     occupied_checks=0
     coverage=Counter()
     for key,room in rooms['new'].items():
@@ -55,10 +64,18 @@ def main():
     assert digest(capture_dir/'cases.xml').lower()==cap['casesSha256'].lower()
     assert digest(capture_dir/'runner.log').lower()==cap['runnerLogSha256'].lower()
     cases=ET.parse(capture_dir/'cases.xml').getroot()
+    native=list(ET.parse(ROOT/args.native_reference).getroot()) if args.native_reference else []
+    prototype_cases=0;native_cases=0
     for case in cases:
         mode='new' if '-new-' in case.get('id') else 'old'
-        captured=case.find('room'); key=int(captured.get('harnessCase'))
-        original=ET.fromstring(ET.tostring(rooms[mode][key]))
+        captured=case.find('room')
+        if captured.get('harnessCase') is not None:
+            key=int(captured.get('harnessCase'));source=rooms[mode][key];prototype_cases+=1
+        else:
+            key=captured.get('sourceIndex')
+            source=next(r for r in native if r.get('sourceIndex')==key and r.get('rrTheme')==captured.get('rrTheme'))
+            native_cases+=1
+        original=ET.fromstring(ET.tostring(source))
         options=original.find('options')
         for name,value in [('tip','beg0'),('entip','0'),('kolspawn','0')]:
             options.set(name,value)
@@ -67,14 +84,15 @@ def main():
         assert semantic(original)==semantic(captured), (mode,key)
     evidence=OUT/'evidence'; evidence.mkdir(exist_ok=True)
     archives={}
-    for batch in ['partition-dev2',stem]:
+    for batch in args.history+[stem]:
         destination=evidence/(batch+'.zip')
         assert not destination.exists(), destination
         files=sorted(p for p in HERE.glob(batch+'-*') if p.is_file())
         if batch==stem:
             files+=list((ROOT/'src').rglob('*.as'))
             files+=[HERE/'harness/PartitionPreview.as',HERE/'harness/run-partitions.ps1',
-                    HERE/'harness/partition-preview-app.xml',ROOT/'build/RandomRooms-v12-prototype-1.swf']
+                    HERE/'harness/partition-preview-app.xml',ROOT/args.swf]
+            if args.native_reference: files.append(ROOT/args.native_reference)
         with zipfile.ZipFile(destination,'w',compression=zipfile.ZIP_DEFLATED) as z:
             for p in files: z.write(p,p.relative_to(ROOT).as_posix())
         archives[destination.name]={'sha256':digest(destination),'files':len(files)}
@@ -82,6 +100,7 @@ def main():
         'rooms':len(rooms['new']),'disjointRectanglesChecked':occupied_checks,
         'pairedPortsChecked':len(rooms['new'].keys() & rooms['old'].keys()),
         'captureXmlMatched':len(cases),'verifiedImages':len(cap['captured']),
+        'prototypeCaptureCases':prototype_cases,'nativeReferenceCases':native_cases,
         'furnitureCoverage':dict(coverage),'archives':archives,
         'scope':'Rectangle and artifact attribution checks; no movement or battle proof.'}
     (evidence/'integrity.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
