@@ -6,6 +6,7 @@ package rr
    {
       public var objects:Array = [];
       public var backs:Array = [];
+      public var coverage:Array = [];
       private var plan:RRArchitecture;
       private var rnd:Function;
       private var occupied:Object = {};
@@ -276,6 +277,7 @@ package rr
             if (r.role=="shaft") continue;
             var width:int=r.x1-r.x0+1;
             var groups:int=width>26 ? 3 : (width>11?2:1);
+            var placedGroups:int=0;
             for (var n:int=0;n<groups;n++)
             {
                var placed:Boolean=false;
@@ -300,7 +302,9 @@ package rr
                         placed=place(g,r.x0+(start+trial)%slots,r.floor);
                   }
                }
+               if(placed) placedGroups++;
             }
+            if(r.hasOwnProperty("id")) coverage.push({region:r.id,role:r.role,groups:placedGroups,target:groups});
          }
          facilities();
       }

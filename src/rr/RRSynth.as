@@ -20,19 +20,24 @@ package rr
       private var furnishing:RRFurnish;
       private var population:RRPopulation;
       private var attempts:int;
+      private var prototypeSeed:RRSeed;
+      private static function source(seed:RRSeed):Function
+      { return function():Number { return seed.next(); }; }
 
       public function RRSynth(random:Function=null) { rnd=random!=null?random:Math.random; }
 
       public function genGrid(biome:String, rtype:String="", ports:Array=null,n:int=0,depth:int=0,peaceful:Boolean=false,safe:Boolean=false,context:Object=null):Array
       {
          if (ports==null) ports=RRPorts.sample(rnd);
+         if(context && context.partition=="rules" && !context.hasOwnProperty("seed")) throw new Error("Partition prototype requires an explicit room seed");
+         prototypeSeed=context && context.partition=="rules"?new RRSeed(uint(context.seed)):null;
          var lastError:*=null;
          var errors:Object={}; rejections={};
          for (attempts=1;attempts<=48;attempts++)
          {
             try
             {
-               plan=new RRArchitecture(rnd);
+               plan=new RRArchitecture(prototypeSeed?source(prototypeSeed.fork("geometry:"+attempts)):rnd);
                plan.build(biome,rtype,ports,context);
                lastError=null; break;
             }
@@ -44,9 +49,9 @@ package rr
             }
          }
          if (lastError!=null) throw new Error("Architecture cannot fit "+biome+" ports="+ports.join(".")+": "+JSON.stringify(errors));
-         population=new RRPopulation(plan,rnd,n,depth,peaceful,safe,context);
+         population=new RRPopulation(plan,prototypeSeed?source(prototypeSeed.fork("population")):rnd,n,depth,peaceful,safe,context);
          population.build();
-         furnishing=new RRFurnish(plan,rnd);
+         furnishing=new RRFurnish(plan,prototypeSeed?source(prototypeSeed.fork("furnishing")):rnd);
          furnishing.build();
          debugStages=[[plan.archetype,plan.regions.length]];
          return plan.grid;
@@ -56,6 +61,12 @@ package rr
       {
          var grid:Array=genGrid(biome,rtype,boundary,n,depth,peaceful,safe,context);
          var room:XML=<room name={"syn_"+n} rrGen={GENERATOR} rrRevision="11.1" rrTheme={plan.theme} rrKind={plan.archetype} rrForm={plan.sceneForm} rrAttempts={attempts} rrPopulation={population.mood} rrDepth={population.stage} rrEcology={population.ecology.type} rrDifficulty={population.ecology.difficulty}/>;
+         if(plan.partitionInfo)
+         {
+            room.@rrRevision="12-prototype-1";
+            room.@rrPartition="rules"; room.@rrSeed=prototypeSeed.seed;
+            for(var field:String in plan.partitionInfo) room.@["rrP_"+field]=plan.partitionInfo[field];
+         }
          if(biome=="mane")
          {
             room.@rrDistrict=plan.sceneForm=="street_links"?"street":(plan.sceneForm=="rooftops"?"roof":"building");
@@ -88,6 +99,8 @@ package rr
          room.options.@entip=population.ecology.type;
          // Evidence and in-game test targets. Native Room ignores this node.
          var meta:XML=<rrPlan/>;
+         if(plan.partitionInfo) for each(var coverage:Object in furnishing.coverage)
+            meta.appendChild(<furnish region={coverage.region} role={coverage.role} groups={coverage.groups} target={coverage.target}/>);
          for each (var r:Object in plan.regions)
             meta.appendChild(<space kind={r.hasOwnProperty("id")?"volume":"gallery"} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} role={r.role}/>);
          for each (var e:Object in plan.links)

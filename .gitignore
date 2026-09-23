@@ -8,6 +8,7 @@ release/
 
 # 运行期日志（applicationStorageDirectory 副本不入库）
 *.log
+!design/partition-preview-v12/native-captures/runner.log
 
 # 操作系统/编辑器垃圾
 .DS_Store
@@ -26,6 +27,7 @@ build/style-review/horizontal/
 build/style-review/local/
 build/style-review/harness/*.swf
 build/style-review/harness/adl-*.txt
+build/style-review/harness/partition-settings.json
 build/style-review/game-harness/app/
 build/style-review/game-harness/*.swf
 build/RandomRooms-v7-*.swf
@@ -39,4 +41,5 @@ build/RandomRooms-v9-*.swf
 build/RandomRooms-v10-*.swf
 build/RandomRooms-v11-*.swf
 build/RandomRooms-v11.*.swf
+build/RandomRooms-v12-*.swf
 build/style-review/scene-lifecycle-before-labels-20260919/

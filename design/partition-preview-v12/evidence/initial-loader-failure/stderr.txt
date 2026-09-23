@@ -1,0 +1,2 @@
+ModLoader[boot_start] v2 run=run_1790152793176_463183
+ModLoader[err_loader] manifest IOError Error #2032: Stream Error. URL: app:/mods/loader-manifest.txt

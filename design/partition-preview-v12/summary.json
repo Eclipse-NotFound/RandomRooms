@@ -1,0 +1,435 @@
+{
+  "aggregate": [
+    {
+      "scene": "plant",
+      "name": "工厂",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 9.9,
+        "graphs": 89,
+        "sizeCombinations": 96,
+        "withoutSeam": 15,
+        "maxMs": 1037,
+        "medianMs": 94,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 9.55,
+        "graphs": 85,
+        "sizeCombinations": 95,
+        "withoutSeam": 0,
+        "maxMs": 193,
+        "medianMs": 54,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "stable",
+      "name": "废弃避难厩",
+      "paired": 96,
+      "new": {
+        "count": 96,
+        "spaces": 11.86,
+        "graphs": 96,
+        "sizeCombinations": 96,
+        "withoutSeam": 12,
+        "maxMs": 1487,
+        "medianMs": 104,
+        "requested": 96
+      },
+      "old": {
+        "count": 96,
+        "spaces": 11.23,
+        "graphs": 88,
+        "sizeCombinations": 96,
+        "withoutSeam": 0,
+        "maxMs": 156,
+        "medianMs": 57,
+        "requested": 96
+      }
+    },
+    {
+      "scene": "sewer",
+      "name": "下水道",
+      "paired": 110,
+      "new": {
+        "count": 128,
+        "spaces": 7.68,
+        "graphs": 86,
+        "sizeCombinations": 109,
+        "withoutSeam": 5,
+        "maxMs": 2232,
+        "medianMs": 147,
+        "requested": 128
+      },
+      "old": {
+        "count": 110,
+        "spaces": 8.25,
+        "graphs": 79,
+        "sizeCombinations": 108,
+        "withoutSeam": 0,
+        "maxMs": 1439,
+        "medianMs": 165,
+        "requested": 128
+      }
+    },
+    {
+      "scene": "mane",
+      "name": "城市废墟",
+      "paired": 192,
+      "new": {
+        "count": 192,
+        "spaces": 9.84,
+        "graphs": 180,
+        "sizeCombinations": 192,
+        "withoutSeam": 14,
+        "maxMs": 1871,
+        "medianMs": 105,
+        "requested": 192
+      },
+      "old": {
+        "count": 192,
+        "spaces": 10.35,
+        "graphs": 169,
+        "sizeCombinations": 190,
+        "withoutSeam": 0,
+        "maxMs": 248,
+        "medianMs": 62,
+        "requested": 192
+      }
+    }
+  ],
+  "requested": 512,
+  "newSuccess": 512,
+  "oldSuccess": 494,
+  "repeatChecks": 16,
+  "newFailures": [],
+  "oldFailures": [
+    {
+      "seed": 22034779,
+      "old": {
+        "ms": 1352,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: Later ladder cuts an existing stair flight\":1,\"Error: No safe space for a canal and dry bank\":46,\"Error: No separate ladder landing 16..17\":1}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 692,
+        "attempts": 7,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 224,
+      "sample": 0
+    },
+    {
+      "seed": 22042698,
+      "old": {
+        "ms": 1403,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: No separate ladder landing 15..17\":1,\"Error: No safe space for a canal and dry bank\":45,\"Error: Later ladder cuts an existing stair flight\":2}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 257,
+        "attempts": 7,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 225,
+      "sample": 1
+    },
+    {
+      "seed": 22050617,
+      "old": {
+        "ms": 1385,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: No safe space for a canal and dry bank\":41,\"Error: Later ladder cuts an existing stair flight\":7}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 542,
+        "attempts": 11,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 226,
+      "sample": 2
+    },
+    {
+      "seed": 22058536,
+      "old": {
+        "ms": 1369,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: No safe space for a canal and dry bank\":44,\"Error: Later ladder cuts an existing stair flight\":4}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 2021,
+        "attempts": 29,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 227,
+      "sample": 3
+    },
+    {
+      "seed": 22066455,
+      "old": {
+        "ms": 1240,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: No separate ladder landing 15..18\":1,\"Error: Later ladder cuts an existing stair flight\":6,\"Error: No safe space for a canal and dry bank\":41}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 819,
+        "attempts": 20,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 228,
+      "sample": 4
+    },
+    {
+      "seed": 22074374,
+      "old": {
+        "ms": 1423,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: Later ladder cuts an existing stair flight\":5,\"Error: No safe space for a canal and dry bank\":43}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 675,
+        "attempts": 11,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 229,
+      "sample": 5
+    },
+    {
+      "seed": 22082293,
+      "old": {
+        "ms": 1364,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: Later ladder cuts an existing stair flight\":5,\"Error: No safe space for a canal and dry bank\":42,\"Error: No separate ladder landing 15..18\":1}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 469,
+        "attempts": 13,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 230,
+      "sample": 6
+    },
+    {
+      "seed": 22090212,
+      "old": {
+        "ms": 1251,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: Later ladder cuts an existing stair flight\":6,\"Error: No safe space for a canal and dry bank\":42}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 2232,
+        "attempts": 15,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 231,
+      "sample": 7
+    },
+    {
+      "seed": 22224835,
+      "old": {
+        "ms": 1147,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":12,\"Error: No safe space for a canal and dry bank\":36}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 225,
+        "attempts": 6,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 248,
+      "sample": 0
+    },
+    {
+      "seed": 22232754,
+      "old": {
+        "ms": 1277,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":12,\"Error: No safe space for a canal and dry bank\":36}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 39,
+        "attempts": 1,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 249,
+      "sample": 1
+    },
+    {
+      "seed": 22240673,
+      "old": {
+        "ms": 1326,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":13,\"Error: No safe space for a canal and dry bank\":35}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 1116,
+        "attempts": 10,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 250,
+      "sample": 2
+    },
+    {
+      "seed": 22248592,
+      "old": {
+        "ms": 1207,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":8,\"Error: No safe space for a canal and dry bank\":40}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 134,
+        "attempts": 1,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 251,
+      "sample": 3
+    },
+    {
+      "seed": 22264430,
+      "old": {
+        "ms": 1293,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: No safe space for a canal and dry bank\":38,\"Error: No separate ladder landing 15..21\":1,\"Error: Later ladder cuts an existing stair flight\":9}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 1154,
+        "attempts": 6,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 253,
+      "sample": 5
+    },
+    {
+      "seed": 22272349,
+      "old": {
+        "ms": 1390,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":5,\"Error: No safe space for a canal and dry bank\":43}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 121,
+        "attempts": 1,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 254,
+      "sample": 6
+    },
+    {
+      "seed": 22280268,
+      "old": {
+        "ms": 1439,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":11,\"Error: No safe space for a canal and dry bank\":37}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 104,
+        "attempts": 1,
+        "ok": true
+      },
+      "form": "cistern",
+      "index": 255,
+      "sample": 7
+    },
+    {
+      "seed": 22327782,
+      "old": {
+        "ms": 500,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.3.0.0.0.0.2.0.0.0.0.0.3.0.0.0.2.0.0.0: {\"Error: No separate ladder landing 22..25\":1,\"Error: No separate ladder landing 22..24\":1,\"Error: No separate ladder landing 19..25\":2,\"Error: No separate ladder landing 23..24\":1,\"Error: No safe space for a canal and dry bank\":30,\"Error: No separate ladder landing 23..25\":1,\"Error: No separate ladder landing 18..24\":1,\"Error: Later ladder cuts an existing stair flight\":11}",
+        "ok": false
+      },
+      "port": 0,
+      "scene": "sewer",
+      "new": {
+        "ms": 301,
+        "attempts": 4,
+        "ok": true
+      },
+      "form": "pump_chain",
+      "index": 261,
+      "sample": 5
+    },
+    {
+      "seed": 22430729,
+      "old": {
+        "ms": 564,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.3.0.0.0.2.0.0.0.0.0.0.0.0.0.3.0.0.0.2.0: {\"Error: Later ladder cuts an existing stair flight\":10,\"Error: No safe space for a canal and dry bank\":38}",
+        "ok": false
+      },
+      "port": 2,
+      "scene": "sewer",
+      "new": {
+        "ms": 116,
+        "attempts": 1,
+        "ok": true
+      },
+      "form": "pump_chain",
+      "index": 274,
+      "sample": 2
+    },
+    {
+      "seed": 22486162,
+      "old": {
+        "ms": 829,
+        "error": "Error: Architecture cannot fit sewer ports=0.0.0.0.3.0.0.0.0.2.0.0.0.0.0.0.0.0.0.2.0.0: {\"Error: Later ladder cuts an existing stair flight\":19,\"Error: Ladder landing 44,18\":1,\"Error: No safe space for a canal and dry bank\":26,\"Error: No separate ladder landing 16..22\":2}",
+        "ok": false
+      },
+      "port": 3,
+      "scene": "sewer",
+      "new": {
+        "ms": 149,
+        "attempts": 6,
+        "ok": true
+      },
+      "form": "pump_chain",
+      "index": 281,
+      "sample": 1
+    }
+  ]
+}

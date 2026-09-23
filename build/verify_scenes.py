@@ -39,7 +39,7 @@ def audit(room):
         rule['doors']={'plant':{'door1','door2','door3'},'stable':{'stdoor','door1b','door2'},
                        'sewer':{'door1','door3'},'mane':{'door1','door1a'}}[scene]
         if scene=='sewer': rule['forms']=rule['forms']|{'dry_tunnels'}
-        if scene=='mane' and room.get('rrRevision')=='11.1':
+        if scene=='mane' and room.get('rrRevision') in {'11.1','12-prototype-1'}:
             rule['forms']={'apartments','offices','commercial','ruined','rooftops','street_links'}
     g = [(a.text or '').strip().split('.') for a in room.findall('a')]
     if len(g) != 25 or {len(row) for row in g} != {48}: return ['dimensions'], {}
@@ -58,7 +58,7 @@ def audit(room):
         expected = rule[attr]
         if room.get('rrGen') == 'space-v11' and scene == 'mane' and attr == 'backwall':
             expected = 'sky' if room.get('rrForm') == 'roof_passage' else 'tWindows'
-            if room.get('rrRevision')=='11.1':
+            if room.get('rrRevision') in {'11.1','12-prototype-1'}:
                 expected={'rooftops':'sky','street_links':'tWindows2'}.get(room.get('rrForm'),'tWindows')
         need(opt.get(attr) == expected, 'wrong '+attr)
     ids = Counter(o.get('id') for o in room.findall('obj'))
@@ -117,10 +117,13 @@ def audit(room):
             need(pose in seen, 'port has no dry clearance path '+str(p))
     spaces=room.findall('rrPlan/space')
     roles=Counter(s.get('role') for s in spaces if s.get('kind')=='volume')
-    if scene=='plant': need(bool(roles['workshop']+roles['warehouse']), 'missing working bay')
+    if scene=='plant':
+        if room.get('rrPartition')=='rules' and room.get('rrForm')=='service_wing':
+            need(bool(roles['service']+roles['control']), 'missing service/control use')
+        else: need(bool(roles['workshop']+roles['warehouse']), 'missing working bay')
     if scene=='sewer' and needs_water: need(bool(roles['canal']), 'missing canal space')
     if scene=='mane':
-        if room.get('rrRevision')=='11.1':
+        if room.get('rrRevision') in {'11.1','12-prototype-1'}:
             expected={'street_links':'street','rooftops':'roof'}.get(room.get('rrForm'),'building')
             need(room.get('rrDistrict')==expected,'city district differs from form')
             need(bool(roles['street']+roles['roof'])==(expected!='building'),'indoor/outdoor district mismatch')

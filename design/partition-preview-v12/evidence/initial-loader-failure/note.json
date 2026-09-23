@@ -1,0 +1,5 @@
+{
+  "status": "interrupted",
+  "reason": "Current host needs mods/loader-manifest.txt; isolated harness lacked it. Boot stdout reports manifest IOError. No new runner log or captures produced. Old runner log excluded.",
+  "rootHostSHA256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC"
+}

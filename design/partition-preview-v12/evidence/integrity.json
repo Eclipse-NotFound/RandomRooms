@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "sourceHashesVerified": 22,
+  "rooms": 512,
+  "disjointRectanglesChecked": 4947,
+  "pairedPortsChecked": 494,
+  "captureXmlMatched": 16,
+  "verifiedImages": 32,
+  "furnitureCoverage": {
+    "spaces": 4947,
+    "with_furniture_group": 3002
+  },
+  "archives": {
+    "partition-dev2.zip": {
+      "sha256": "960702162c023bf516fe9488af42a7765f8d2afc8307387cc56b4592f588b3af",
+      "files": 7
+    },
+    "partition-dev3.zip": {
+      "sha256": "85ffe238147dd5bfb88646a02880d8b22a5a361ca6cf574116c3c3637174e398",
+      "files": 35
+    }
+  },
+  "scope": "Rectangle and artifact attribution checks; no movement or battle proof."
+}

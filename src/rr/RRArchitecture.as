@@ -24,6 +24,7 @@ package rr
       public var scene:Object;
       public var sceneForm:String;
       public var pools:Array;
+      public var partitionInfo:Object;
       private var rnd:Function;
       private var volumes:Array;
       private var tallBias:Number;
@@ -40,6 +41,7 @@ package rr
          theme=biome;
          scene=RRScene.profile(theme);
          sceneForm=scene.forms[pick(0,scene.forms.length-1)];
+         if(context && context.form && scene.forms.indexOf(String(context.form))>=0) sceneForm=String(context.form);
          if(theme=="mane" && context && context.city) sceneForm=String(context.city.form);
          wall=scene.wall; trim=scene.trim; backgrounds=scene.backgrounds;
          var kinds:Array=theme=="stable"?["atrium","offices","offices","service","warehouse"]:
@@ -60,8 +62,13 @@ package rr
          }
          tallBias=scene.bias;
          volumes=[{x0:1,top:1,x1:46,floor:23}];
-         seedScene();
-         refineSpaces();
+         if(context && context.partition=="rules")
+         {
+            var partition:RRPartitionPlan=new RRPartitionPlan(rnd);
+            volumes=partition.build(theme,sceneForm,ports);
+            partitionInfo=partition.info;
+         }
+         else { seedScene(); refineSpaces(); }
          for (var i:int=0;i<volumes.length;i++)
          {
             var r:Object=volumes[i];
@@ -371,6 +378,12 @@ package rr
             { var e:Object=adjacent(volumes[i],volumes[j]); if (e) edges.push(e); }
          }
          shuffle(edges);
+         if(partitionInfo)
+         {
+            for each(var relation:Object in edges)
+               relation.priority=-Math.log(Math.max(0.00001,rnd()))/RRSpaceRules.affinity(theme,relation.a.role,relation.b.role);
+            edges.sortOn("priority",Array.NUMERIC);
+         }
          var chosen:Array=[], extras:Array=[];
          for each (e in edges)
          {
@@ -380,7 +393,7 @@ package rr
             for (i=0;i<groups.length;i++) if (groups[i]==gb) groups[i]=ga;
          }
          if (chosen.length!=volumes.length-1) throw new Error("Disconnected architectural partition");
-         var density:Number=[0,0.45,0.75,1][pick(0,3)];
+         var density:Number=partitionInfo?Number(partitionInfo.extra):[0,0.45,0.75,1][pick(0,3)];
          for each (e in extras) if (rnd()<density) chosen.push(e);
          for each (e in chosen)
          {
@@ -439,8 +452,9 @@ package rr
       {
          if (r.floor==f) return;
          var left:Boolean=edgeX<=r.x0;
-         var lx:int=left?ladderPosition(r.x0,Math.min(r.x0+6,r.x1-1),f+1,r.floor):
-            ladderPosition(Math.max(r.x1-7,r.x0),r.x1-1,f+1,r.floor);
+         var bank:Object=partitionInfo && r.role=="canal"?r:null;
+         var lx:int=left?ladderPosition(r.x0,Math.min(r.x0+6,r.x1-1),f+1,r.floor,bank):
+            ladderPosition(Math.max(r.x1-7,r.x0),r.x1-1,f+1,r.floor,bank);
          var x0:int=left?r.x0:Math.max(r.x0,lx-1), x1:int=left?Math.min(r.x1,lx+2):r.x1;
          platform(x0,x1,f+1,r.bg);
          ladderRoute(lx,f+1,r.floor,r);
@@ -502,12 +516,13 @@ package rr
       {
          var f:int=r.floor;
          var depth:int=sceneForm=="cistern"?pick(5,8):pick(2,3);
+         if(partitionInfo && sceneForm=="cistern") depth=Math.min(depth,r.floor-r.top-4);
          if (f-r.top<depth+4 || r.x1-r.x0<14) return;
          var candidates:Array=[];
          for (var lo:int=r.x0+4;lo<=r.x1-10;lo++)
          {
             var available:int=Math.min(sceneForm=="pump_chain"?12:26,r.x1-lo-4);
-            var minimum:int=sceneForm=="cistern"?12:(sceneForm=="pump_chain"?6:10);
+            var minimum:int=sceneForm=="cistern"?(partitionInfo?10:12):(sceneForm=="pump_chain"?6:10);
             if(available<minimum) continue;
             for(var width:int=available;width>=minimum;width--)
             {
@@ -635,6 +650,9 @@ package rr
       }
       private function ladderRoute(x:int,top:int,bottom:int,r:Object):void
       {
+         // In a planned water volume, circulation belongs on its banks. A
+         // diagonal/staggered flight here would consume the basin's footprint.
+         if(partitionInfo && r.role=="canal") { ladder(x,top,bottom,r.bg); return; }
          if(top>=4 && bottom-top>=3 && bottom-top<=8 && rnd()<0.65 && stairRoute(x,top,bottom,r)) return;
          if (bottom-top>10 && archetype!="connector")
          {

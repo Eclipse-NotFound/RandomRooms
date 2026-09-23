@@ -72,7 +72,8 @@ foreach ($relative in $assetFiles) {
     $source = Join-Path $gameRoot $relative
     $destination = Join-Path $appRoot $relative
     New-Item -ItemType Directory -Path (Split-Path -Parent $destination) -Force | Out-Null
-    if (-not (Test-Path -LiteralPath $destination) -or (Get-Item -LiteralPath $destination).Length -ne (Get-Item -LiteralPath $source).Length) {
+    if (-not (Test-Path -LiteralPath $destination) -or (Get-Item -LiteralPath $destination).Length -ne (Get-Item -LiteralPath $source).Length -or
+        ($relative -eq 'pfe.swf' -and (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash)) {
         Copy-Item -LiteralPath $source -Destination $destination
     }
 }
@@ -243,6 +244,14 @@ if ($DevelopmentSwf) {
     ('-source-path=' + $PSScriptRoot) ('-output=' + $testOutput) (Join-Path $PSScriptRoot $entrySource)
 if ($LASTEXITCODE -ne 0) { throw "Compiler failed: $LASTEXITCODE" }
 
+# Current hosts discover entries through mods/loader-manifest.txt. This file
+# belongs only to the isolated app; never copy/enable the user's whole mod set.
+# Older embedded-loader hosts simply ignore this additional test-local file.
+$testLoaderManifest = Join-Path $appRoot 'mods/loader-manifest.txt'
+$testLoaderEntry = if ($DevelopmentSwf) { 'TDFC|TDFCMod|1|0|0' } else { 'RandomRooms|RandomRoomsMod|1|0|0' }
+Set-Content -LiteralPath $testLoaderManifest -Value $testLoaderEntry -Encoding utf8
+$sourceHashes['test-local/loader-manifest.txt'] = (Get-FileHash -LiteralPath $testLoaderManifest -Algorithm SHA256).Hash
+
 $appId = 'pferr-style-' + [guid]::NewGuid().ToString('N')
 $descriptor = Join-Path $appRoot 'style-capture-app.xml'
 $descriptorText = @"
@@ -269,11 +278,16 @@ try {
     while (-not $instance.WaitForExit(1000)) {
         $elapsed++
         if ($elapsed % 10 -eq 0) { Write-Output ('Capture process running: ' + $elapsed + 's; PID ' + $instance.Id) }
+        if ($elapsed % 10 -eq 0) {
+            $bootOutput = Get-Content -LiteralPath (Join-Path $appRoot 'stdout.txt') -Raw -ErrorAction SilentlyContinue
+            if ($bootOutput -match 'ModLoader\[err_loader\].*manifest') { throw 'Test-local loader manifest could not be loaded.' }
+        }
         $timeout = if ($NavigationProbe) { if ($AllScenes) {1860} else {960} } elseif ($DevelopmentSwf -or $ArchitectureKinds) { 360 } elseif ($MovementProbe -or $CrossingProbe -or $VerticalProbe) { 240 } else { [Math]::Max(120,75+25*$caseSources.Count) }
         if ($elapsed -ge $timeout) { throw ('Capture process exceeded ' + $timeout + ' second timeout.') }
     }
     $instance.Refresh()
     if ($instance.ExitCode -ne 0) { throw "AIR returned $($instance.ExitCode); inspect app/captures/runner.log and app/stdout.txt" }
+    if ((Get-Item -LiteralPath (Join-Path $captureRoot 'runner.log')).LastWriteTimeUtc -lt $runStarted.AddSeconds(-2)) { throw 'Runner log predates this capture run.' }
     $runLog = Get-Content -LiteralPath (Join-Path $captureRoot 'runner.log') -Raw
     if ($runLog.Contains('FAIL') -or -not $runLog.Contains('DONE ' + $caseSources.Count + ' cases')) { throw 'Driver did not complete every case.' }
     $imageHashes = [ordered]@{}

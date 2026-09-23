@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "scope": "HTML interaction and browser rendering; not game navigation",
+  "cases": 512,
+  "photos": 8,
+  "viewports": [
+    {
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "width": 390,
+      "scroll": 390
+    }
+  ],
+  "pageErrors": [],
+  "sha256": "780a0b6ad53445b691e62570b18f23c912d5d9bd209edda34d0818fd5c71d48c"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/30.0">
+  <id>pferr-partition-preview-20260923</id>
+  <versionNumber>1.0.0</versionNumber>
+  <filename>RandomRoomsPartitionPreview</filename>
+  <initialWindow><content>PartitionPreview.swf</content><visible>false</visible><width>320</width><height>240</height><renderMode>cpu</renderMode></initialWindow>
+  <supportedProfiles>extendedDesktop</supportedProfiles>
+</application>
