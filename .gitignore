@@ -49,3 +49,10 @@ build/RandomRooms-v12-*.swf
 build/style-review/scene-lifecycle-before-labels-20260919/
 build/style-review/comparison-batch/
 build/style-review/game-harness/comparison-app/
+
+# 2026-09 公开仓库策略（用户决定）：截图/预览图与证据打包不入库
+design/**/*.png
+knowledge/**/*.png
+design/**/*.zip
+knowledge/**/*.zip
+build/dump_render.png
