@@ -1,0 +1,171 @@
+{
+  "scope": "Static 1.02 source/authoring audit; counts are not runtime probabilities or loot value.",
+  "sources": {
+    "game-reference/decompiled/1.02/src102/scripts/fe/AllData.as": "975b0d0e68059a288549805c960c4402b34cc88740a8309007f75b6f0e2763e2",
+    "Rooms/rooms_plant.xml": "7466ded79a7438ee3de776bb1b7e00c97f1c6a8776a7f0b2ed28bf0b1e69fb68",
+    "Rooms/rooms_stable.xml": "6119717f2ff5de034f6c7b148b01c0d2e28d1f2076cc1be878f55b40b7e26109",
+    "Rooms/rooms_sewer.xml": "e7e178f48826de4982b64e85bb380a85f891bf421cb5e93d07ff15d3202b2dd4",
+    "Rooms/rooms_mane.xml": "d743dea9fa1eab3b5d09144ad4975e56bfdd4359fabbd73d43963a5ac5b6708e",
+    "mods/RandomRooms/design/v12-runtime-comparison/algorithm-evidence.zip": "1cd247147b89ab353c5c22b7139ae9fd8f3b349216501fb4f3a63a32a75d4ec9",
+    "game-reference/decompiled/1.02/src102/scripts/fe/loc/Location.as": "197483f298595771eabb06cf76633cf4403f4cb3400fdfb3462d6b691c19c707",
+    "game-reference/decompiled/1.02/src102/scripts/fe/loc/Land.as": "b3392523dcfbbcfd10d999172fdddf9fb5813b86ae369098988535660efec061",
+    "game-reference/decompiled/1.02/src102/scripts/fe/serv/Interact.as": "379b1fe8ca8bb2954ec1fe0994766b56e7319140be48a06540995f42f1131be9",
+    "game-reference/decompiled/1.02/src102/scripts/fe/serv/LootGen.as": "dd53209164c74f5979326e635b1bc40f7d47602bc1c6311f19f14396d7276531",
+    "game-reference/decompiled/1.02/src102/scripts/fe/unit/UnitTurret.as": "8929d53313aec9bfa16cbb6228e0707af0169bc6f9d525d1b2071b38798e0c25",
+    "mods/RandomRooms/src/rr/RRPopulation.as": "de21b1898ea837e95219be671316ee0cce88efa827c5f78f3983847bffb8d8a9",
+    "mods/RandomRooms/src/rr/RREcology.as": "14b560ee32d87aac42866fe51d55d4a1927db10c3e3ab13e5a54f83fd3ec34e0",
+    "mods/RandomRooms/src/rr/RRFurnish.as": "07c271e38788702237378756e22b29d855bface72a0b2401d7c3dc55da79192b",
+    "mods/RandomRooms/src/rr/RRSynth.as": "bcb6a5b4bb13122be547c0e13435c2ad8da129ca5d8ffe505b1859f2daf90ec2",
+    "mods/RandomRooms/src/rr/RRArchitecture.as": "8c21debdd4bb7b35853031e77ed01d1bc732a473fb7ba4e5ac6035595834ab75",
+    "mods/RandomRooms/src/rr/RRExpedition.as": "c69b2dcf56d300e8cbc3e2fbb3ef7899481302b67158e52977ebcf284b2a02ed"
+  },
+  "nativeOrdinaryRooms": {
+    "plant": {
+      "rooms": 40,
+      "objects": {
+        "enl1": 77,
+        "enl2": 109,
+        "enf1": 34,
+        "enc1": 6,
+        "lov": 10,
+        "turret": 16,
+        "landturret": 8,
+        "armturret": 1,
+        "hturret": 0,
+        "wturret": 0,
+        "safe": 11,
+        "wallsafe": 7,
+        "term1": 6,
+        "term2": 16
+      },
+      "filter": "options.tip absent or empty; fixed objects and random slots counted separately"
+    },
+    "stable": {
+      "rooms": 32,
+      "objects": {
+        "enl1": 80,
+        "enl2": 155,
+        "enf1": 65,
+        "enc1": 14,
+        "lov": 68,
+        "turret": 2,
+        "landturret": 2,
+        "armturret": 4,
+        "hturret": 5,
+        "wturret": 2,
+        "safe": 3,
+        "wallsafe": 4,
+        "term1": 4,
+        "term2": 2
+      },
+      "filter": "options.tip absent or empty; fixed objects and random slots counted separately"
+    },
+    "sewer": {
+      "rooms": 22,
+      "objects": {
+        "enl1": 47,
+        "enl2": 88,
+        "enf1": 103,
+        "enc1": 22,
+        "lov": 6,
+        "turret": 0,
+        "landturret": 0,
+        "armturret": 0,
+        "hturret": 0,
+        "wturret": 0,
+        "safe": 3,
+        "wallsafe": 0,
+        "term1": 0,
+        "term2": 0
+      },
+      "filter": "options.tip absent or empty; fixed objects and random slots counted separately"
+    },
+    "mane": {
+      "rooms": 26,
+      "objects": {
+        "enl1": 30,
+        "enl2": 93,
+        "enf1": 25,
+        "enc1": 13,
+        "lov": 27,
+        "turret": 2,
+        "landturret": 3,
+        "armturret": 2,
+        "hturret": 1,
+        "wturret": 3,
+        "safe": 4,
+        "wallsafe": 4,
+        "term1": 4,
+        "term2": 4
+      },
+      "filter": "options.tip absent or empty; fixed objects and random slots counted separately"
+    }
+  },
+  "comparisonXml": {
+    "12.2": {
+      "rooms": 256,
+      "nativeContObjects": {
+        "furnishing": 2513,
+        "population": 717
+      },
+      "boundary": "Generated XML objects whose native definition has cont; not actual loot items, coin value or runtime instance count."
+    },
+    "12.3": {
+      "rooms": 256,
+      "nativeContObjects": {
+        "population": 786,
+        "furnishing": 2430
+      },
+      "boundary": "Generated XML objects whose native definition has cont; not actual loot items, coin value or runtime instance count."
+    }
+  },
+  "nativeSafeDefaults": {
+    "safe": {
+      "ed": "2",
+      "ico": "cont",
+      "id": "safe",
+      "tip": "box",
+      "explcrack": "1",
+      "xp": "50",
+      "hp": "1200",
+      "shield": "0.5",
+      "thre": "200",
+      "mat": "1",
+      "inter": "1",
+      "cont": "safe",
+      "lock": "2.2",
+      "lockhp": "16",
+      "mine": "2",
+      "minech": "0.6",
+      "massaMult": "1.5",
+      "lurk": "2",
+      "size": "2",
+      "wid": "2",
+      "fall": "fall_metal_safe",
+      "open": "safe_open"
+    },
+    "wallsafe": {
+      "ed": "2",
+      "ico": "cont",
+      "id": "wallsafe",
+      "tip": "box",
+      "explcrack": "1",
+      "xp": "50",
+      "hp": "1200",
+      "thre": "200",
+      "mat": "1",
+      "inter": "1",
+      "hack": "1",
+      "wall": "2",
+      "cont": "safe",
+      "mine": "3",
+      "minech": "0.75",
+      "lock": "2.5",
+      "lockhp": "13",
+      "massaMult": "1.5",
+      "size": "1",
+      "wid": "1",
+      "open": "safe_open"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-24：v12.2/v12.3 对照版已按用户授权部署。两版四场景共 8 案完整扩张往返通过；正式 SWF 两版分别重启，F1/F5 共 4 案、74 房冒烟通过。当前等待用户实玩对照反馈。部署/回滚/验证入口：design/v12-runtime-comparison/validation.md。
+> 2026-09-27：完成危险度/价值度设计评估，见 design/danger-value-2026-09-27/assessment.md。用户确认合成房基调＋内部局部变化，D 先影响主要敌群概率、规模和布防，不升敌人等级。本轮只有调查与设计，未实现或部署；正式仍为 09-24 的 v12.2/v12.3 对照版。
 
 ## 1. 模组是什么
 
@@ -16,6 +16,7 @@
 - 下水道使用真实污水，必经干路、涉水可选；城市按地图坐标组织连续建筑/街巷/屋顶，不能每个合成房都塞全套室内外。
 - 随机用途侧重、房间数量、大小与位置；普通空间降低净高，部分合成房采用对齐的楼层，允许显著大小反差。
 - v12.3 已获准厚实体块、减少房数、矩形规划后横向拆墙为主、少量拆楼板跨层合并；这替代了最初仅矩形的限制。
+- 新增 D/V 方向：合成房有整体基调，内部空间局部变化；D 先控制主要敌群出现概率、规模、布防，型号强度遵守原版场景/难度/深度。允许合理耦合，也须允许单独高危或高值。具体比例与实现尚未批准。
 - 先 HTML 的阶段已经结束：2026-09-24 用户明确要求把 v12.2 与 v12.3 实际部署供对照。本轮不再重复请求部署许可。
 - 仅改本模组；正式存档、其他模组、根/DLC SWF 不改。测试用独立 pferr-style-* 应用、newGame(-1)、隐藏 ADL，不用 Ghost，不关闭用户游戏。
 - 每次替换 SWF 后须完全退出重启，再回城 F1 生成新土地；旧地图不会自动更新。已决定事项不重复提问。
@@ -31,6 +32,7 @@
 
 ## 4. 正在进行与验证证据
 
+- 新设计评估已完成：推荐主要遭遇、零散生态、战术布防、搜刮奖励分开规划，再复核叠加压力。静态调查 120 原版普通房及两版各 256 XML，来源指纹和统计在 design/danger-value-2026-09-27/native-evidence.json；不是本轮战斗实测。
 - 发布检查的源代码/候选已一致冻结在 design/v12-runtime-comparison/algorithm-evidence.zip。1024 历史 HTML XML 重放一致；512 实际坐标输入结构、材料、生态均通过；256 对版本输入相同，896 对邻接口一致。
 - 当前候选 UI 生命周期 8/8，174 房：两版 F1→F4、回城切换、随机种子选择、F5 展示馆、取消/暂停；ui-lifecycle 下完整证据与原生界面截图。
 - 同一候选、种子 20260818，两版四场景 8/8 完整扩张往返通过；每案真实按键、5×5→8×8、新列/新行往返、旧 XML/mirror/内容实例保持，下水道 wetFrames=0。每案均核对 64 房接口和版本/主种子。详见 growth-results.json。正式文件的 release-smoke-12.2 / release-smoke-12.3 各 2 案、37 房通过，日志版本和文件哈希均正确。
@@ -40,6 +42,7 @@
 
 ## 5. 已知问题与机制
 
+- D/V 接入风险：RREcology 主池也能出炮塔，不能只改 security；合并前的矩形不能各分一份遭遇预算；家具已有大量原生 cont。原版终端按整 Location 尝试 hack；容器 mine=0 不能阻止 cont 自带刷怪。公共机制归档见 native-container-latent-hazards / native-control-location-scope（world-objects/discoveries，静态调查未实测）。
 - 自然度仍待用户实玩：部分狭长空间/空墙，厚块偏矩形，合并房背景接缝与家具仍沿子矩形，城市屋顶顶边框；不是已等同原版的声明。
 - 新分区中 sceneForm 是用途组合家族，非固定坐标；archetype 仅 connector 特例影响主体。旧 partition/profile 参数不可混作新链有效入口。XML 的 generator=space-v11 是沿用的元数据；实际版本看 rrVersion / rrMasterSeed 和日志。
 - RRTraversal 只是地形图；真实通行还受单向梁、门、家具影响。普通长梯错开失败仍可能回退直梯。性能慢尾和分布偏向待进一步优化。
@@ -51,6 +54,7 @@
 
 ## 6. 下一步与回滚
 
+- 危险度/价值度尚属设计：建议下一步固定建筑做四场景 D/V 低中高对照，显示主要敌群/生态、布防射界、终端范围、奖励与潜在危险；这是待接续建议，不能当已实现预览或已获准重写部署。
 - 当前部署里程碑已完成，等待用户实玩 v12.2 与 v12.3 的对照反馈；F2 回城后 F1 切版本，保持相同种子/场景，每次从第 1 层开始。F4 与右下扩张保持此次选择。
 - 已验证备份 build/release-backups/RandomRoomsMod_before_v12_compare_20260924.swf。回滚时完全退出游戏，复制回 release/RandomRoomsMod.swf，核对 v11.1 指纹 16F3D2BD…6346C7F，再重启并进入新地图。部署时间/完整哈希在 design/v12-runtime-comparison/deployment.json。
 - 根 pfe.swf SHA256 B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2 读 mods/loader-manifest.txt。本轮读取发现加载名单发生外部更新，RandomRooms|RandomRoomsMod|1|1|0 仍正确，不覆盖它。
@@ -58,7 +62,8 @@
 
 ## 7. 深入阅读与复现
 
-- 本轮：design/v12-runtime-comparison/validation.md；两个 HTML 入口 design/partition-preview-v12-2/index.html 与 partition-preview-v12-3/index.html，各自 native-study/validation/evidence 保留对应原版调查和历史失败。
+- 新设计：design/danger-value-2026-09-27/assessment.md、native-evidence.json；静态复现 build/style-review/audit_danger_value.py。
+- 部署证据：design/v12-runtime-comparison/validation.md；两个 HTML 入口 design/partition-preview-v12-2/index.html 与 partition-preview-v12-3/index.html，各自 native-study/validation/evidence 保留对应原版调查和历史失败。
 - 调查：design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。
 - 旧正式版实证：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。教程：design/generator-explained-v11.1/guide.html，仅解释旧链，不能当当前新分区文档。
 - 构建：build/build-v7.ps1 -OutputName RandomRooms-v12-comparison-next.swf。仅写 build；旧 build-m0.sh 直写 release，勿用于验证。
