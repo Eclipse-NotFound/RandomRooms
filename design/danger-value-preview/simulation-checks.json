@@ -1,0 +1,425 @@
+{
+  "checked": 736,
+  "distinctLiveGeometries": 256,
+  "frozenSamplesChecked": 16,
+  "totals": {
+    "plant": {
+      "samples": 64,
+      "special": 63,
+      "blindMines": 39,
+      "landThreats": 55,
+      "turrets": 31
+    },
+    "stable": {
+      "samples": 64,
+      "special": 89,
+      "blindMines": 47,
+      "landThreats": 79,
+      "turrets": 37
+    },
+    "sewer": {
+      "samples": 64,
+      "special": 0,
+      "blindMines": 0,
+      "landThreats": 0,
+      "turrets": 0
+    },
+    "mane": {
+      "samples": 64,
+      "special": 54,
+      "blindMines": 38,
+      "landThreats": 54,
+      "turrets": 23
+    }
+  },
+  "paired": [
+    {
+      "scene": "plant",
+      "d": 20,
+      "v": 20,
+      "samples": 12,
+      "enemy": 29,
+      "prize": 18,
+      "special": 4
+    },
+    {
+      "scene": "plant",
+      "d": 20,
+      "v": 50,
+      "samples": 12,
+      "enemy": 29,
+      "prize": 31,
+      "special": 10
+    },
+    {
+      "scene": "plant",
+      "d": 20,
+      "v": 85,
+      "samples": 12,
+      "enemy": 29,
+      "prize": 50,
+      "special": 15
+    },
+    {
+      "scene": "plant",
+      "d": 50,
+      "v": 20,
+      "samples": 12,
+      "enemy": 93,
+      "prize": 18,
+      "special": 2
+    },
+    {
+      "scene": "plant",
+      "d": 50,
+      "v": 50,
+      "samples": 12,
+      "enemy": 93,
+      "prize": 31,
+      "special": 4
+    },
+    {
+      "scene": "plant",
+      "d": 50,
+      "v": 85,
+      "samples": 12,
+      "enemy": 93,
+      "prize": 50,
+      "special": 9
+    },
+    {
+      "scene": "plant",
+      "d": 85,
+      "v": 20,
+      "samples": 12,
+      "enemy": 171,
+      "prize": 18,
+      "special": 0
+    },
+    {
+      "scene": "plant",
+      "d": 85,
+      "v": 50,
+      "samples": 12,
+      "enemy": 171,
+      "prize": 31,
+      "special": 0
+    },
+    {
+      "scene": "plant",
+      "d": 85,
+      "v": 85,
+      "samples": 12,
+      "enemy": 171,
+      "prize": 50,
+      "special": 0
+    },
+    {
+      "scene": "stable",
+      "d": 20,
+      "v": 20,
+      "samples": 12,
+      "enemy": 15,
+      "prize": 19,
+      "special": 5
+    },
+    {
+      "scene": "stable",
+      "d": 20,
+      "v": 50,
+      "samples": 12,
+      "enemy": 15,
+      "prize": 35,
+      "special": 11
+    },
+    {
+      "scene": "stable",
+      "d": 20,
+      "v": 85,
+      "samples": 12,
+      "enemy": 15,
+      "prize": 59,
+      "special": 14
+    },
+    {
+      "scene": "stable",
+      "d": 50,
+      "v": 20,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 19,
+      "special": 4
+    },
+    {
+      "scene": "stable",
+      "d": 50,
+      "v": 50,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 35,
+      "special": 8
+    },
+    {
+      "scene": "stable",
+      "d": 50,
+      "v": 85,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 57,
+      "special": 14
+    },
+    {
+      "scene": "stable",
+      "d": 85,
+      "v": 20,
+      "samples": 12,
+      "enemy": 125,
+      "prize": 19,
+      "special": 3
+    },
+    {
+      "scene": "stable",
+      "d": 85,
+      "v": 50,
+      "samples": 12,
+      "enemy": 125,
+      "prize": 35,
+      "special": 4
+    },
+    {
+      "scene": "stable",
+      "d": 85,
+      "v": 85,
+      "samples": 12,
+      "enemy": 125,
+      "prize": 58,
+      "special": 7
+    },
+    {
+      "scene": "sewer",
+      "d": 20,
+      "v": 20,
+      "samples": 12,
+      "enemy": 26,
+      "prize": 12,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 20,
+      "v": 50,
+      "samples": 12,
+      "enemy": 26,
+      "prize": 26,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 20,
+      "v": 85,
+      "samples": 12,
+      "enemy": 26,
+      "prize": 41,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 50,
+      "v": 20,
+      "samples": 12,
+      "enemy": 85,
+      "prize": 12,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 50,
+      "v": 50,
+      "samples": 12,
+      "enemy": 85,
+      "prize": 26,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 50,
+      "v": 85,
+      "samples": 12,
+      "enemy": 85,
+      "prize": 41,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 85,
+      "v": 20,
+      "samples": 12,
+      "enemy": 168,
+      "prize": 12,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 85,
+      "v": 50,
+      "samples": 12,
+      "enemy": 168,
+      "prize": 26,
+      "special": 0
+    },
+    {
+      "scene": "sewer",
+      "d": 85,
+      "v": 85,
+      "samples": 12,
+      "enemy": 168,
+      "prize": 41,
+      "special": 0
+    },
+    {
+      "scene": "mane",
+      "d": 20,
+      "v": 20,
+      "samples": 12,
+      "enemy": 14,
+      "prize": 13,
+      "special": 1
+    },
+    {
+      "scene": "mane",
+      "d": 20,
+      "v": 50,
+      "samples": 12,
+      "enemy": 14,
+      "prize": 30,
+      "special": 8
+    },
+    {
+      "scene": "mane",
+      "d": 20,
+      "v": 85,
+      "samples": 12,
+      "enemy": 14,
+      "prize": 48,
+      "special": 19
+    },
+    {
+      "scene": "mane",
+      "d": 50,
+      "v": 20,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 13,
+      "special": 1
+    },
+    {
+      "scene": "mane",
+      "d": 50,
+      "v": 50,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 30,
+      "special": 3
+    },
+    {
+      "scene": "mane",
+      "d": 50,
+      "v": 85,
+      "samples": 12,
+      "enemy": 47,
+      "prize": 48,
+      "special": 11
+    },
+    {
+      "scene": "mane",
+      "d": 85,
+      "v": 20,
+      "samples": 12,
+      "enemy": 150,
+      "prize": 13,
+      "special": 0
+    },
+    {
+      "scene": "mane",
+      "d": 85,
+      "v": 50,
+      "samples": 12,
+      "enemy": 150,
+      "prize": 30,
+      "special": 0
+    },
+    {
+      "scene": "mane",
+      "d": 85,
+      "v": 85,
+      "samples": 12,
+      "enemy": 150,
+      "prize": 48,
+      "special": 1
+    }
+  ],
+  "blindComparison": {
+    "on": {
+      "placed": 32,
+      "occluded": 20
+    },
+    "off": {
+      "placed": 32,
+      "occluded": 14
+    }
+  },
+  "failures": [],
+  "uiMock": {
+    "initial": {
+      "cfg": {
+        "seed": "20260927",
+        "scene": "plant",
+        "source": "live",
+        "danger": 38,
+        "value": 72,
+        "variation": 32,
+        "coupling": 30,
+        "special": 100,
+        "count": 0,
+        "difficulty": 8,
+        "ecology": "robot",
+        "preferCache": true,
+        "preferBlind": true
+      },
+      "counts": {
+        "enemy": 1,
+        "turret": 0,
+        "mine": 1,
+        "spider": 1,
+        "drone": 0,
+        "wild": 1,
+        "loot": 3,
+        "prize": 4,
+        "terminal": 0
+      },
+      "geometry": 3772474605,
+      "source": "live",
+      "rooms": 5
+    },
+    "errors": [],
+    "scope": "Minimal DOM execution; no browser rendering, typography, real pointer/keyboard or responsive layout verification."
+  },
+  "boundary": "Browser design simulation only. Not native game, collision, AI, damage, real loot or combat tests.",
+  "finalAudit": {
+    "checked": 736,
+    "independencePairs": 144,
+    "frozen": 16,
+    "failures": [],
+    "pairedCountsUnchanged": true,
+    "finalPresentationOnlyChange": "Added room-border class for existing keyboard focus CSS; simulator hash unchanged; scripts reparsed."
+  },
+  "fingerprints": {
+    "html": "14093fd5dcb35680e5c8d3f188763b8c4d767ad7713ea8d0a9668cc4282ad212",
+    "simulator": "720fb1b066cc91fb5e42ec221db47f20a28d042e26fbc701241aea66e4027f42",
+    "template": "4676fe3801bda24190f38a8ac5b501b19f5b08e4bf0adab1b782a8f1ead19d57"
+  },
+  "browserCheck": {
+    "status": "not_run",
+    "reason": "Connected browser policy rejected local file URL. No indirect browser workaround used."
+  }
+}

@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-27：完成危险度/价值度设计评估，见 design/danger-value-2026-09-27/assessment.md。用户确认合成房基调＋内部局部变化，D 先影响主要敌群概率、规模和布防，不升敌人等级。本轮只有调查与设计，未实现或部署；正式仍为 09-24 的 v12.2/v12.3 对照版。
+> 2026-09-27：危险度/价值度及特殊威胁已做成浏览器实时模拟，入口 design/danger-value-preview/index.html。736 条件、144 对独立性检查通过；浏览器工具拒绝本地文件，HTML 实际排版未验。未接入 AS3 或部署；正式仍为 09-24 的 v12.2/v12.3 对照版。
 
 ## 1. 模组是什么
 
@@ -16,13 +16,14 @@
 - 下水道使用真实污水，必经干路、涉水可选；城市按地图坐标组织连续建筑/街巷/屋顶，不能每个合成房都塞全套室内外。
 - 随机用途侧重、房间数量、大小与位置；普通空间降低净高，部分合成房采用对齐的楼层，允许显著大小反差。
 - v12.3 已获准厚实体块、减少房数、矩形规划后横向拆墙为主、少量拆楼板跨层合并；这替代了最初仅矩形的限制。
-- 新增 D/V 方向：合成房有整体基调，内部空间局部变化；D 先控制主要敌群出现概率、规模、布防，型号强度遵守原版场景/难度/深度。允许合理耦合，也须允许单独高危或高值。具体比例与实现尚未批准。
-- 先 HTML 的阶段已经结束：2026-09-24 用户明确要求把 v12.2 与 v12.3 实际部署供对照。本轮不再重复请求部署许可。
+- 新增 D/V 方向：合成房有整体基调，内部空间局部变化；D 先控制主要敌群概率、规模、布防，强度遵守原版场景/难度/深度。允许合理耦合，也须允许单独高危或高值。09-27 用户另要求蜘蛛地雷/地雷/无人机可偏向低危高值，地雷类偏向盲区；已授权先 HTML 实时模拟，参数尚待评估。
+- 09-24 的 v12.2/v12.3 已授权并完成部署；09-27 新内容机制本轮范围为 HTML。不要将旧部署许可误读为本轮已接入或已部署新内容。
 - 仅改本模组；正式存档、其他模组、根/DLC SWF 不改。测试用独立 pferr-style-* 应用、newGame(-1)、隐藏 ADL，不用 Ghost，不关闭用户游戏。
 - 每次替换 SWF 后须完全退出重启，再回城 F1 生成新土地；旧地图不会自动更新。已决定事项不重复提问。
 
 ## 3. 当前状态
 
+- 新预览单 HTML 内嵌模拟算法与 16 份 v12.3 AS3 布局；可切实时生成/实际布局重排内容，调 D/V、差异、耦合、特殊偏好与机会、生态和规划数量，查看三层图、逐房理由与 3×3 对照。仅模型级风险与射线，不是原版 AI/物理/掉落。旧两页顶部各增一个入口，DATA 不变。
 - 正式 release/RandomRoomsMod.swf 已为对照版，76834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9；与 build/RandomRooms-v12-comparison-candidate.swf 一致，日志 [RR:v12-compare]。
 - F1/F5 新增 v12.2/v12.3、种子和四场景/随机选择；取消恢复暂停。每次明确新开从第 1 层开始，F4 与右下扩张保持版本/种子/场景。菜单种子更改用于下次 F1，无须为改种子重启。
 - RRExpedition 将规则分区真正接进地图：场景+深度派生地图随机源，坐标派生房间种子；版本不参与种子派生，镜像/边口/城市条件可公平对照。原版掉落和 AI 仍有运行时随机。
@@ -32,7 +33,8 @@
 
 ## 4. 正在进行与验证证据
 
-- 新设计评估已完成：推荐主要遭遇、零散生态、战术布防、搜刮奖励分开规划，再复核叠加压力。静态调查 120 原版普通房及两版各 256 XML，来源指纹和统计在 design/danger-value-2026-09-27/native-evidence.json；不是本轮战斗实测。
+- 新预览验证见 design/danger-value-preview/validation.md、simulation-checks.json：最终 736 条件、144 对仅改 V 主敌/墙体不变；遮挡偏好开/关各 32 地雷类，20/14 个受遮挡。最小 DOM 验证按钮逻辑；离线 SVG/PNG 查看不等于浏览器截图。file URL 被策略拒绝，未绕行；桌面/窄屏实际排版仍未验。
+- 原版调查 120 普通房及两版各 256 XML，来源指纹和统计在 design/danger-value-2026-09-27/native-evidence.json；不是本轮战斗实测。
 - 发布检查的源代码/候选已一致冻结在 design/v12-runtime-comparison/algorithm-evidence.zip。1024 历史 HTML XML 重放一致；512 实际坐标输入结构、材料、生态均通过；256 对版本输入相同，896 对邻接口一致。
 - 当前候选 UI 生命周期 8/8，174 房：两版 F1→F4、回城切换、随机种子选择、F5 展示馆、取消/暂停；ui-lifecycle 下完整证据与原生界面截图。
 - 同一候选、种子 20260818，两版四场景 8/8 完整扩张往返通过；每案真实按键、5×5→8×8、新列/新行往返、旧 XML/mirror/内容实例保持，下水道 wetFrames=0。每案均核对 64 房接口和版本/主种子。详见 growth-results.json。正式文件的 release-smoke-12.2 / release-smoke-12.3 各 2 案、37 房通过，日志版本和文件哈希均正确。
@@ -54,7 +56,7 @@
 
 ## 6. 下一步与回滚
 
-- 危险度/价值度尚属设计：建议下一步固定建筑做四场景 D/V 低中高对照，显示主要敌群/生态、布防射界、终端范围、奖励与潜在危险；这是待接续建议，不能当已实现预览或已获准重写部署。
+- 新内容先在 design/danger-value-preview/index.html 比较；正式迁移须按最终合并房规划、分离随机来源，并测试真实入口/射界/特殊威胁与开箱事件。当前 JS 模拟不能直接当正式生成器；不得用其连通图检查替代原版通行和战斗。
 - 当前部署里程碑已完成，等待用户实玩 v12.2 与 v12.3 的对照反馈；F2 回城后 F1 切版本，保持相同种子/场景，每次从第 1 层开始。F4 与右下扩张保持此次选择。
 - 已验证备份 build/release-backups/RandomRoomsMod_before_v12_compare_20260924.swf。回滚时完全退出游戏，复制回 release/RandomRoomsMod.swf，核对 v11.1 指纹 16F3D2BD…6346C7F，再重启并进入新地图。部署时间/完整哈希在 design/v12-runtime-comparison/deployment.json。
 - 根 pfe.swf SHA256 B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2 读 mods/loader-manifest.txt。本轮读取发现加载名单发生外部更新，RandomRooms|RandomRoomsMod|1|1|0 仍正确，不覆盖它。
@@ -62,7 +64,7 @@
 
 ## 7. 深入阅读与复现
 
-- 新设计：design/danger-value-2026-09-27/assessment.md、native-evidence.json；静态复现 build/style-review/audit_danger_value.py。
+- 新预览：design/danger-value-preview/index.html、model-notes.md、validation.md；重新打包 build/style-review/build_danger_preview.py（模板同目录 danger-value-preview.template.html）。设计与原版证据：design/danger-value-2026-09-27/assessment.md、native-evidence.json；静态复现 audit_danger_value.py。
 - 部署证据：design/v12-runtime-comparison/validation.md；两个 HTML 入口 design/partition-preview-v12-2/index.html 与 partition-preview-v12-3/index.html，各自 native-study/validation/evidence 保留对应原版调查和历史失败。
 - 调查：design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。
 - 旧正式版实证：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。教程：design/generator-explained-v11.1/guide.html，仅解释旧链，不能当当前新分区文档。
