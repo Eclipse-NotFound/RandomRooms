@@ -1,0 +1,175 @@
+{
+  "date": "2026-09-27",
+  "scope": "browser simulation only; no game or browser validation",
+  "conditions": 882,
+  "byScene": {
+    "plant": 219,
+    "stable": 217,
+    "sewer": 220,
+    "mane": 226
+  },
+  "byMount": {
+    "mixed": 594,
+    "ceiling": 144,
+    "floor": 144
+  },
+  "ceiling": 147,
+  "floor": 505,
+  "terminals": 323,
+  "terminalNotDrawn": 71,
+  "terminalNoPlacement": 4,
+  "routes": {
+    "clear": 410,
+    "exposed": 67,
+    "unproven": 815
+  },
+  "pairs": {
+    "valueIndependent": 144,
+    "terminalChanceTurretsUnchanged": 64
+  },
+  "frozenCases": [
+    1,
+    32,
+    64,
+    96,
+    128,
+    162,
+    288,
+    193,
+    227,
+    256,
+    416,
+    448,
+    354,
+    384,
+    480,
+    321
+  ],
+  "failures": [],
+  "maxBuildMs": 119,
+  "example": {
+    "cfg": {
+      "seed": "4345",
+      "scene": "plant",
+      "source": "live",
+      "danger": 70,
+      "value": 65,
+      "variation": 32,
+      "coupling": 30,
+      "special": 100,
+      "count": 0,
+      "difficulty": 8,
+      "ecology": "robot",
+      "preferCache": true,
+      "preferBlind": true,
+      "mounts": "mixed",
+      "terminalChance": 100
+    },
+    "counts": {
+      "enemy": 15,
+      "turret": 2,
+      "mine": 0,
+      "spider": 0,
+      "drone": 1,
+      "wild": 3,
+      "loot": 4,
+      "prize": 4,
+      "terminal": 1
+    },
+    "routes": [
+      {
+        "side": "left",
+        "portIndex": 0,
+        "status": "exposed",
+        "exposedCells": 42,
+        "steps": 72,
+        "afterSteps": 72
+      },
+      {
+        "side": "right",
+        "portIndex": 1,
+        "status": "clear",
+        "exposedCells": 0,
+        "steps": 11,
+        "afterSteps": 11
+      },
+      {
+        "side": "top",
+        "portIndex": 2,
+        "status": "clear",
+        "exposedCells": 0,
+        "steps": 10,
+        "afterSteps": 10
+      },
+      {
+        "side": "bottom",
+        "portIndex": 3,
+        "status": "unproven",
+        "exposedCells": 0,
+        "steps": 0,
+        "afterSteps": 0
+      }
+    ],
+    "terminal": {
+      "type": "terminal",
+      "x": 37.5,
+      "y": 10.55,
+      "room": 1,
+      "blind": 0.8,
+      "label": "安保终端",
+      "scope": "location",
+      "controls": 2,
+      "reason": "安置在生产车间的遮挡旁；操作站位避开全部炮塔潜在射界，2/4 个入口有避开炮塔的步行／梯路近似路径。控制整间合成房的 2 座炮塔；普通破解为关闭，原版相关能力可能改为友方。"
+    }
+  },
+  "userCurrent": {
+    "counts": {
+      "enemy": 4,
+      "turret": 0,
+      "mine": 0,
+      "spider": 0,
+      "drone": 1,
+      "wild": 2,
+      "loot": 4,
+      "prize": 1,
+      "terminal": 0
+    },
+    "reason": "本张没有符合生态、射界与压力条件的炮塔，无需安保终端。"
+  },
+  "hashes": {
+    "html": "53d1e451a8db8a03e8e4eaf8c861f8e29196b8e3d84e060e1a064bf987dfc910",
+    "simulator": "d417607ece2be563381ad8932c599f0ba765e81946e6d48666c9f6e78e067729",
+    "template": "ad33038183f34ef5d07f218172ab4f7b7fdefc79b06ffbb4f0767682f7a0afbc",
+    "release": "8e0e8a83e0de96d0ca6f5162dd81f226b53cf8f0634f0ad073e9e3829ba292e9"
+  },
+  "ui": {
+    "method": "minimal DOM substitute; not browser",
+    "checks": [
+      "sample button",
+      "all four guides",
+      "every entry selector",
+      "disable/restore all turrets without replacing content",
+      "mount filters",
+      "terminal chance zero",
+      "sewer disabled",
+      "rebuild resets shutdown",
+      "3x3 comparison",
+      "value slider",
+      "frozen/live switch",
+      "URL serialization",
+      "reset"
+    ],
+    "diagrams": [
+      "security-on.svg",
+      "security-off.svg"
+    ],
+    "browserVerified": false,
+    "gameVerified": false
+  },
+  "nativeSources": {
+    "fe/unit/UnitTurret.as": "8929d53313aec9bfa16cbb6228e0707af0169bc6f9d525d1b2071b38798e0c25",
+    "fe/weapon/Weapon.as": "3e5cf1dc01d7304d5824c7dfd08f0f4de73d2d107ff2b30d2abfb3d6f770b4e4",
+    "fe/serv/Interact.as": "379b1fe8ca8bb2954ec1fe0994766b56e7319140be48a06540995f42f1131be9",
+    "fe/AllData.as": "975b0d0e68059a288549805c960c4402b34cc88740a8309007f75b6f0e2763e2"
+  }
+}
