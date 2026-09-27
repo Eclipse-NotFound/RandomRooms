@@ -1,0 +1,252 @@
+[RR:v13-dv] RRDiag init, fileStream=C:\Users\hello\AppData\Roaming\pferr-style-5d0c58f5d1cc4341a77f92eecd2747a6\Local Store\RandomRooms_diag.log
+[RR:v13-dv] init(main) called (static), main=[object MainFE] stage=[object Stage]
+[RR:v13-dv] 诊断: uncaughtError 监听已挂载
+[RR:v13-dv] config: enabled=true seedEnabled=true seed=20260818
+[RR:v13-dv] 种子模式: cook PRNG 已注入（seed=20260818），preview=0.46089801378548145,0.7550768959335983,0.6226073675788939,0.8610204008873552,0.497080652276054
+[RR:v13-dv] 合成器: synth PRNG 已注入（fork(synth)）
+[RR:v13-dv] class probe fe.World => OK
+[RR:v13-dv] class probe fe.GameData => OK
+[RR:v13-dv] class probe fe.loc.Game => OK
+[RR:v13-dv] class probe fe.loc.Land => OK
+[RR:v13-dv] [RR] RandomRoomsMod v13 loaded <content=danger-value-1, legacy=12.2+12.3, growth=right+down, debug=Shift+F3> stage bound (KEY_DOWN capture)
+[RR:v13-dv] RRMenu: 主菜单配置条已显示
+[RR:v13-dv] preflight start: World.w 就绪
+[RR:v13-dv] ensureRooms: World.w.rooms 为 null，反射实例化 fe.rooms.Rooms
+[RR:v13-dv] ensureRooms: 已创建并挂接 Rooms 实例（内部池项=0）
+[RR:v13-dv] preflight: 计划加载 29 个房间文件: rooms_begin,rooms_surf,rooms_rbl,rooms_plant,rooms_nio,rooms_sewer,rooms_raiders,rooms_stable,rooms_core,rooms_garages,rooms_mane,rooms_mtn,rooms_way,rooms_covert,rooms_src,rooms_canter,rooms_minst,rooms_mbase,rooms_workshop,rooms_hql,rooms_post,rooms_encl,rooms_comm,rooms_art,rooms_pi,rooms_pis,rooms_thunder,rooms_grave,rooms_prob
+[RR:v13-dv] preflight: rr_test 已注册=false
+[RR:v13-dv] 房间文件已载入数组: rooms_rbl（房间数=4）
+[RR:v13-dv] 房间文件已载入数组: rooms_core（房间数=9）
+[RR:v13-dv] 房间文件已载入数组: rooms_garages（房间数=2）
+[RR:v13-dv] 房间文件已载入数组: rooms_mtn（房间数=12）
+[RR:v13-dv] 房间文件已载入数组: rooms_way（房间数=1）
+[RR:v13-dv] 房间文件已载入数组: rooms_covert（房间数=4）
+[RR:v13-dv] 房间文件已载入数组: rooms_src（房间数=1）
+[RR:v13-dv] 房间文件已载入数组: rooms_post（房间数=3）
+[RR:v13-dv] 房间文件已载入数组: rooms_comm（房间数=5）
+[RR:v13-dv] 房间文件已载入数组: rooms_thunder（房间数=7）
+[RR:v13-dv] 房间文件已载入数组: rooms_grave（房间数=3）
+[RR:v13-dv] 房间文件已载入数组: rooms_surf（房间数=20）
+[RR:v13-dv] 房间文件已载入数组: rooms_begin（房间数=20）
+[RR:v13-dv] 房间文件已载入数组: rooms_nio（房间数=17）
+[RR:v13-dv] 房间文件已载入数组: rooms_sewer（房间数=23）
+[RR:v13-dv] 房间文件已载入数组: rooms_raiders（房间数=23）
+[RR:v13-dv] 房间文件已载入数组: rooms_minst（房间数=15）
+[RR:v13-dv] 房间文件已载入数组: rooms_workshop（房间数=17）
+[RR:v13-dv] 房间文件已载入数组: rooms_hql（房间数=14）
+[RR:v13-dv] 房间文件已载入数组: rooms_encl（房间数=23）
+[RR:v13-dv] 房间文件已载入数组: rooms_art（房间数=29）
+[RR:v13-dv] 房间文件已载入数组: rooms_pis（房间数=20）
+[RR:v13-dv] 房间文件已载入数组: rooms_plant（房间数=55）
+[RR:v13-dv] 房间文件已载入数组: rooms_stable（房间数=49）
+[RR:v13-dv] 房间文件已载入数组: rooms_mane（房间数=65）
+[RR:v13-dv] 房间文件已载入数组: rooms_canter（房间数=59）
+[RR:v13-dv] 房间文件已载入数组: rooms_mbase（房间数=31）
+[RR:v13-dv] 房间文件已载入数组: rooms_pi（房间数=46）
+[RR:v13-dv] 房间文件已载入数组: rooms_prob（房间数=81）
+[RR:v13-dv] preflight finalize: 文件加载完成 成功=29 失败=0 / 共29
+[RR:v13-dv] inject: GameData.d 已追加 <land id=rr_test conf=1 3x3>
+[RR:v13-dv] makePoolXML: 池构造完成，选中 4 个房间: вход(beg0),13,служ. пом.,пещера2
+[RR:v13-dv] inject: rr_test 池边界缺口已统一（门 bug 修复）
+[RR:v13-dv] C maps registered: coordinated architecture on travel
+[RR:v13-dv] P0 cook: rooms_plant +40 个变异副本（池房间数=95）
+[RR:v13-dv] P0 cook: rooms_sewer +22 个变异副本（池房间数=45）
+[RR:v13-dv] P0 cook: rooms_stable +32 个变异副本（池房间数=81）
+[RR:v13-dv] P0 cook: rooms_mane +26 个变异副本（池房间数=91）
+[RR:v13-dv] P0 cook: rooms_canter +34 个变异副本（池房间数=93）
+[RR:v13-dv] P0 cook: rooms_encl +20 个变异副本（池房间数=43）
+[RR:v13-dv] P0 cook: rooms_pi +25 个变异副本（池房间数=71）
+[RR:v13-dv] P0 cook: rooms_rr_test +3 个变异副本（池房间数=7）
+[RR:v13-dv] P0 cook 完成: 共 202 个变异副本（tip=rnd 土地）
+[RR:v13-dv] inject: roomsLoad=0，rr_test 池已就位（房间数=7） | READY: F1 随机冒险，F5 展示馆，F2 回城
+[RR:v13-dv] isolated-test -> gotoLand(random_rooms), preflight=OK, lands[random_rooms]=true, 当前土地=rbl
+[RR:v13-dv] C-BUILD random_rooms grid=5x5 coordinated=1 version=13 seed=20260818
+[RR:v13-dv] C-POOL random_rooms total=25 theme=plant ports=coordinated version=13 seed=20260818
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=rr_begin tip=null
+[RR:v13-dv] verifyEntry: locs[0][1] loc=loc0_1 room=syn_1 tip=null
+[RR:v13-dv] verifyEntry: locs[0][2] loc=loc0_2 room=syn_2 tip=null
+[RR:v13-dv] verifyEntry: locs[0][3] loc=loc0_3 room=syn_3 tip=null
+[RR:v13-dv] verifyEntry: locs[0][4] loc=loc0_4 room=syn_4 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=syn_5 tip=null
+[RR:v13-dv] verifyEntry: locs[1][1] loc=loc1_1 room=syn_6 tip=null
+[RR:v13-dv] verifyEntry: locs[1][2] loc=loc1_2 room=syn_7 tip=null
+[RR:v13-dv] verifyEntry: locs[1][3] loc=loc1_3 room=syn_8 tip=null
+[RR:v13-dv] verifyEntry: locs[1][4] loc=loc1_4 room=syn_9 tip=null
+[RR:v13-dv] verifyEntry: locs[2][0] loc=loc2_0 room=syn_10 tip=null
+[RR:v13-dv] verifyEntry: locs[2][1] loc=loc2_1 room=syn_11 tip=null
+[RR:v13-dv] verifyEntry: locs[2][2] loc=loc2_2 room=syn_12 tip=null
+[RR:v13-dv] verifyEntry: locs[2][3] loc=loc2_3 room=syn_13 tip=null
+[RR:v13-dv] verifyEntry: locs[2][4] loc=loc2_4 room=syn_14 tip=null
+[RR:v13-dv] verifyEntry: locs[3][0] loc=loc3_0 room=syn_15 tip=null
+[RR:v13-dv] verifyEntry: locs[3][1] loc=loc3_1 room=syn_16 tip=null
+[RR:v13-dv] verifyEntry: locs[3][2] loc=loc3_2 room=syn_17 tip=null
+[RR:v13-dv] verifyEntry: locs[3][3] loc=loc3_3 room=syn_18 tip=null
+[RR:v13-dv] verifyEntry: locs[3][4] loc=loc3_4 room=syn_19 tip=null
+[RR:v13-dv] verifyEntry: locs[4][0] loc=loc4_0 room=syn_20 tip=null
+[RR:v13-dv] verifyEntry: locs[4][1] loc=loc4_1 room=syn_21 tip=null
+[RR:v13-dv] verifyEntry: locs[4][2] loc=loc4_2 room=syn_22 tip=null
+[RR:v13-dv] verifyEntry: locs[4][3] loc=loc4_3 room=syn_23 tip=null
+[RR:v13-dv] verifyEntry: locs[4][4] loc=loc4_4 room=rr_exit tip=null
+[RR:v13-dv] verifyEntry: 进入 random_rooms 成功！网格=5x5,5,5,5,5 采集 25 个 loc，房间 id 集合(25)=rr_begin,rr_exit,syn_1,syn_10,syn_11,syn_12,syn_13,syn_14,syn_15,syn_16,syn_17,syn_18,syn_19,syn_2,syn_20,syn_21,syn_22,syn_23,syn_3,syn_4,syn_5,syn_6,syn_7,syn_8,syn_9
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=2/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] C-GROW 5x5 -> 6x5 rooms=5 player=3,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 6x5 -> 7x5 rooms=5 player=4,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 7x5 -> 8x5 rooms=5 player=5,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x5 -> 8x6 rooms=8 player=5,3 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x6 -> 8x7 rooms=8 player=5,4 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] C-GROW 8x7 -> 8x8 rooms=8 player=4,5 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] isolated-test -> gotoLand(rbl), preflight=OK, lands[rbl]=true, 当前土地=random_rooms
+[RR:v13-dv] refreshLandPool: rooms_rbl 无原始池快照（非 tip=rnd 土地？），跳过
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=room_0_0 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=room_1_0 tip=null
+[RR:v13-dv] verifyEntry: 进入 rbl 成功！网格=2x1,1 采集 2 个 loc，房间 id 集合(2)=room_0_0,room_1_0
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=0/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] isolated-test -> gotoLand(random_rooms), preflight=OK, lands[random_rooms]=true, 当前土地=rbl
+[RR:v13-dv] C-BUILD random_rooms grid=5x5 coordinated=1 version=13 seed=20260818
+[RR:v13-dv] C-POOL random_rooms total=25 theme=stable ports=coordinated version=13 seed=20260818
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=rr_begin tip=null
+[RR:v13-dv] verifyEntry: locs[0][1] loc=loc0_1 room=syn_1 tip=null
+[RR:v13-dv] verifyEntry: locs[0][2] loc=loc0_2 room=syn_2 tip=null
+[RR:v13-dv] verifyEntry: locs[0][3] loc=loc0_3 room=syn_3 tip=null
+[RR:v13-dv] verifyEntry: locs[0][4] loc=loc0_4 room=syn_4 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=syn_5 tip=null
+[RR:v13-dv] verifyEntry: locs[1][1] loc=loc1_1 room=syn_6 tip=null
+[RR:v13-dv] verifyEntry: locs[1][2] loc=loc1_2 room=syn_7 tip=null
+[RR:v13-dv] verifyEntry: locs[1][3] loc=loc1_3 room=syn_8 tip=null
+[RR:v13-dv] verifyEntry: locs[1][4] loc=loc1_4 room=syn_9 tip=null
+[RR:v13-dv] verifyEntry: locs[2][0] loc=loc2_0 room=syn_10 tip=null
+[RR:v13-dv] verifyEntry: locs[2][1] loc=loc2_1 room=syn_11 tip=null
+[RR:v13-dv] verifyEntry: locs[2][2] loc=loc2_2 room=syn_12 tip=null
+[RR:v13-dv] verifyEntry: locs[2][3] loc=loc2_3 room=syn_13 tip=null
+[RR:v13-dv] verifyEntry: locs[2][4] loc=loc2_4 room=syn_14 tip=null
+[RR:v13-dv] verifyEntry: locs[3][0] loc=loc3_0 room=syn_15 tip=null
+[RR:v13-dv] verifyEntry: locs[3][1] loc=loc3_1 room=syn_16 tip=null
+[RR:v13-dv] verifyEntry: locs[3][2] loc=loc3_2 room=syn_17 tip=null
+[RR:v13-dv] verifyEntry: locs[3][3] loc=loc3_3 room=syn_18 tip=null
+[RR:v13-dv] verifyEntry: locs[3][4] loc=loc3_4 room=syn_19 tip=null
+[RR:v13-dv] verifyEntry: locs[4][0] loc=loc4_0 room=syn_20 tip=null
+[RR:v13-dv] verifyEntry: locs[4][1] loc=loc4_1 room=syn_21 tip=null
+[RR:v13-dv] verifyEntry: locs[4][2] loc=loc4_2 room=syn_22 tip=null
+[RR:v13-dv] verifyEntry: locs[4][3] loc=loc4_3 room=syn_23 tip=null
+[RR:v13-dv] verifyEntry: locs[4][4] loc=loc4_4 room=rr_exit tip=null
+[RR:v13-dv] verifyEntry: 进入 random_rooms 成功！网格=5x5,5,5,5,5 采集 25 个 loc，房间 id 集合(25)=rr_begin,rr_exit,syn_1,syn_10,syn_11,syn_12,syn_13,syn_14,syn_15,syn_16,syn_17,syn_18,syn_19,syn_2,syn_20,syn_21,syn_22,syn_23,syn_3,syn_4,syn_5,syn_6,syn_7,syn_8,syn_9
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=2/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] C-GROW 5x5 -> 6x5 rooms=5 player=3,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 6x5 -> 7x5 rooms=5 player=4,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 7x5 -> 8x5 rooms=5 player=5,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x5 -> 8x6 rooms=8 player=4,3 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] C-GROW 8x6 -> 8x7 rooms=8 player=4,4 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x7 -> 8x8 rooms=8 player=4,5 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] isolated-test -> gotoLand(rbl), preflight=OK, lands[rbl]=true, 当前土地=random_rooms
+[RR:v13-dv] refreshLandPool: rooms_rbl 无原始池快照（非 tip=rnd 土地？），跳过
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=room_0_0 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=room_1_0 tip=null
+[RR:v13-dv] verifyEntry: 进入 rbl 成功！网格=2x1,1 采集 2 个 loc，房间 id 集合(2)=room_0_0,room_1_0
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=0/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] isolated-test -> gotoLand(random_rooms), preflight=OK, lands[random_rooms]=true, 当前土地=rbl
+[RR:v13-dv] C-BUILD random_rooms grid=5x5 coordinated=1 version=13 seed=20260818
+[RR:v13-dv] C-POOL random_rooms total=25 theme=sewer ports=coordinated version=13 seed=20260818
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=rr_begin tip=null
+[RR:v13-dv] verifyEntry: locs[0][1] loc=loc0_1 room=syn_1 tip=null
+[RR:v13-dv] verifyEntry: locs[0][2] loc=loc0_2 room=syn_2 tip=null
+[RR:v13-dv] verifyEntry: locs[0][3] loc=loc0_3 room=syn_3 tip=null
+[RR:v13-dv] verifyEntry: locs[0][4] loc=loc0_4 room=syn_4 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=syn_5 tip=null
+[RR:v13-dv] verifyEntry: locs[1][1] loc=loc1_1 room=syn_6 tip=null
+[RR:v13-dv] verifyEntry: locs[1][2] loc=loc1_2 room=syn_7 tip=null
+[RR:v13-dv] verifyEntry: locs[1][3] loc=loc1_3 room=syn_8 tip=null
+[RR:v13-dv] verifyEntry: locs[1][4] loc=loc1_4 room=syn_9 tip=null
+[RR:v13-dv] verifyEntry: locs[2][0] loc=loc2_0 room=syn_10 tip=null
+[RR:v13-dv] verifyEntry: locs[2][1] loc=loc2_1 room=syn_11 tip=null
+[RR:v13-dv] verifyEntry: locs[2][2] loc=loc2_2 room=syn_12 tip=null
+[RR:v13-dv] verifyEntry: locs[2][3] loc=loc2_3 room=syn_13 tip=null
+[RR:v13-dv] verifyEntry: locs[2][4] loc=loc2_4 room=syn_14 tip=null
+[RR:v13-dv] verifyEntry: locs[3][0] loc=loc3_0 room=syn_15 tip=null
+[RR:v13-dv] verifyEntry: locs[3][1] loc=loc3_1 room=syn_16 tip=null
+[RR:v13-dv] verifyEntry: locs[3][2] loc=loc3_2 room=syn_17 tip=null
+[RR:v13-dv] verifyEntry: locs[3][3] loc=loc3_3 room=syn_18 tip=null
+[RR:v13-dv] verifyEntry: locs[3][4] loc=loc3_4 room=syn_19 tip=null
+[RR:v13-dv] verifyEntry: locs[4][0] loc=loc4_0 room=syn_20 tip=null
+[RR:v13-dv] verifyEntry: locs[4][1] loc=loc4_1 room=syn_21 tip=null
+[RR:v13-dv] verifyEntry: locs[4][2] loc=loc4_2 room=syn_22 tip=null
+[RR:v13-dv] verifyEntry: locs[4][3] loc=loc4_3 room=syn_23 tip=null
+[RR:v13-dv] verifyEntry: locs[4][4] loc=loc4_4 room=rr_exit tip=null
+[RR:v13-dv] verifyEntry: 进入 random_rooms 成功！网格=5x5,5,5,5,5 采集 25 个 loc，房间 id 集合(25)=rr_begin,rr_exit,syn_1,syn_10,syn_11,syn_12,syn_13,syn_14,syn_15,syn_16,syn_17,syn_18,syn_19,syn_2,syn_20,syn_21,syn_22,syn_23,syn_3,syn_4,syn_5,syn_6,syn_7,syn_8,syn_9
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=2/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] C-GROW 5x5 -> 6x5 rooms=5 player=3,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 6x5 -> 7x5 rooms=5 player=4,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 7x5 -> 8x5 rooms=5 player=5,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x5 -> 8x6 rooms=8 player=5,3 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x6 -> 8x7 rooms=8 player=5,4 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] C-GROW 8x7 -> 8x8 rooms=8 player=4,5 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] isolated-test -> gotoLand(rbl), preflight=OK, lands[rbl]=true, 当前土地=random_rooms
+[RR:v13-dv] refreshLandPool: rooms_rbl 无原始池快照（非 tip=rnd 土地？），跳过
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=random_rooms (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=room_0_0 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=room_1_0 tip=null
+[RR:v13-dv] verifyEntry: 进入 rbl 成功！网格=2x1,1 采集 2 个 loc，房间 id 集合(2)=room_0_0,room_1_0
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=0/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] isolated-test -> gotoLand(random_rooms), preflight=OK, lands[random_rooms]=true, 当前土地=rbl
+[RR:v13-dv] C-BUILD random_rooms grid=5x5 coordinated=1 version=13 seed=20260818
+[RR:v13-dv] C-POOL random_rooms total=25 theme=mane ports=coordinated version=13 seed=20260818
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=30)
+[RR:v13-dv] verifyEntry: 等待 Land 切换, World.land.act.id=rbl (tick=60)
+[RR:v13-dv] verifyEntry: locs[0][0] loc=loc0_0 room=rr_begin tip=null
+[RR:v13-dv] verifyEntry: locs[0][1] loc=loc0_1 room=syn_1 tip=null
+[RR:v13-dv] verifyEntry: locs[0][2] loc=loc0_2 room=syn_2 tip=null
+[RR:v13-dv] verifyEntry: locs[0][3] loc=loc0_3 room=syn_3 tip=null
+[RR:v13-dv] verifyEntry: locs[0][4] loc=loc0_4 room=syn_4 tip=null
+[RR:v13-dv] verifyEntry: locs[1][0] loc=loc1_0 room=syn_5 tip=null
+[RR:v13-dv] verifyEntry: locs[1][1] loc=loc1_1 room=syn_6 tip=null
+[RR:v13-dv] verifyEntry: locs[1][2] loc=loc1_2 room=syn_7 tip=null
+[RR:v13-dv] verifyEntry: locs[1][3] loc=loc1_3 room=syn_8 tip=null
+[RR:v13-dv] verifyEntry: locs[1][4] loc=loc1_4 room=syn_9 tip=null
+[RR:v13-dv] verifyEntry: locs[2][0] loc=loc2_0 room=syn_10 tip=null
+[RR:v13-dv] verifyEntry: locs[2][1] loc=loc2_1 room=syn_11 tip=null
+[RR:v13-dv] verifyEntry: locs[2][2] loc=loc2_2 room=syn_12 tip=null
+[RR:v13-dv] verifyEntry: locs[2][3] loc=loc2_3 room=syn_13 tip=null
+[RR:v13-dv] verifyEntry: locs[2][4] loc=loc2_4 room=syn_14 tip=null
+[RR:v13-dv] verifyEntry: locs[3][0] loc=loc3_0 room=syn_15 tip=null
+[RR:v13-dv] verifyEntry: locs[3][1] loc=loc3_1 room=syn_16 tip=null
+[RR:v13-dv] verifyEntry: locs[3][2] loc=loc3_2 room=syn_17 tip=null
+[RR:v13-dv] verifyEntry: locs[3][3] loc=loc3_3 room=syn_18 tip=null
+[RR:v13-dv] verifyEntry: locs[3][4] loc=loc3_4 room=syn_19 tip=null
+[RR:v13-dv] verifyEntry: locs[4][0] loc=loc4_0 room=syn_20 tip=null
+[RR:v13-dv] verifyEntry: locs[4][1] loc=loc4_1 room=syn_21 tip=null
+[RR:v13-dv] verifyEntry: locs[4][2] loc=loc4_2 room=syn_22 tip=null
+[RR:v13-dv] verifyEntry: locs[4][3] loc=loc4_3 room=syn_23 tip=null
+[RR:v13-dv] verifyEntry: locs[4][4] loc=loc4_4 room=rr_exit tip=null
+[RR:v13-dv] verifyEntry: 进入 random_rooms 成功！网格=5x5,5,5,5,5 采集 25 个 loc，房间 id 集合(25)=rr_begin,rr_exit,syn_1,syn_10,syn_11,syn_12,syn_13,syn_14,syn_15,syn_16,syn_17,syn_18,syn_19,syn_2,syn_20,syn_21,syn_22,syn_23,syn_3,syn_4,syn_5,syn_6,syn_7,syn_8,syn_9
+[RR:v13-dv] verifyEntry: 预期池房间(含P0变异副本前缀): вход(beg0),13,служ. пом.,пещера2 + *_rr* 副本
+[RR:v13-dv] verifyEntry: 边界通行 L=0/25 R=3/25 T=0/48 B=2/48（开放格数；gotoLoc 同高度进入，开放位=可通行）
+[RR:v13-dv] C-GROW 5x5 -> 6x5 rooms=5 player=3,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 6x5 -> 7x5 rooms=5 player=4,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 7x5 -> 8x5 rooms=5 player=5,0 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x5 -> 8x6 rooms=8 player=4,3 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房
+[RR:v13-dv] C-GROW 8x6 -> 8x7 rooms=8 player=4,4 objects=ready links=ready
+[RR:v13-dv] C-GROW 8x7 -> 8x8 rooms=8 player=4,5 objects=ready links=ready
+[RR:v13-dv] rr_exit: 玩家已到达出口房

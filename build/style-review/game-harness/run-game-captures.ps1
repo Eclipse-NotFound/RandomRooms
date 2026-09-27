@@ -24,15 +24,23 @@ param(
     [switch]$WaterProbe,
     [switch]$PopulationProbe,
     [switch]$ContentGallery,
+    [switch]$SingleCase,
+    [switch]$TerminalApproach,
+    [switch]$NativeLoaderSmoke,
     [ValidateRange(0,50)][int]$PopulationDepth = 0,
     [ValidateSet('','plant','stable','sewer','mane')][string]$Scene = '',
     [ValidateSet('both','random_rooms','rr_showroom')][string]$NavigationLand = 'both',
     [ValidateRange(0,16)][int]$PrototypeSampleCount = 0,
-    [ValidateSet('','12.2','12.3')][string]$GeneratorVersion = '',
+    [ValidateSet('','12.2','12.3','13')][string]$GeneratorVersion = '',
     [uint32]$ComparisonSeed = 20260818
 )
 $ErrorActionPreference = 'Stop'
 if ($ComparisonLifecycle) { $SceneLifecycle = $true }
+if ($TerminalApproach) { $NavigationProbe = $true; $ContentGallery = $true; $SingleCase = $true }
+if ($NativeLoaderSmoke -and (-not $DevelopmentSwf -or $StartupDelay -or $PopulationProbe -or $NavigationProbe)) {
+    throw 'NativeLoaderSmoke requires an unchanged SWF and uses normal UI only.'
+}
+if ($NativeLoaderSmoke) { $SceneLifecycle = $true }
 if ($StartupDelay -and -not $DevelopmentSwf) { throw 'StartupDelay requires DevelopmentSwf.' }
 if (($WaterProbe -or ($AllScenes -and $GrowthProbe)) -and -not $NavigationProbe) {
     throw 'Scene water/growth checks require NavigationProbe; the legacy fixed-floor driver cannot follow these rooms.'
@@ -112,6 +120,8 @@ $caseDoc.DocumentElement.SetAttribute('sceneLifecycle', $SceneLifecycle.IsPresen
 $caseDoc.DocumentElement.SetAttribute('waterProbe', $WaterProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('population', $PopulationProbe.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('contentGallery', $ContentGallery.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('terminalApproach', $TerminalApproach.IsPresent.ToString().ToLowerInvariant())
+$caseDoc.DocumentElement.SetAttribute('nativeLoader', $NativeLoaderSmoke.IsPresent.ToString().ToLowerInvariant())
 $caseDoc.DocumentElement.SetAttribute('populationDepth', $PopulationDepth.ToString())
 $sourceHashes = [ordered]@{
     'Rooms/rooms_stable.xml' = (Get-FileHash -LiteralPath (Join-Path $gameRoot 'Rooms/rooms_stable.xml') -Algorithm SHA256).Hash
@@ -184,6 +194,7 @@ if ($DevelopmentSwf) {
     $caseDoc.DocumentElement.SetAttribute('development','true')
     $caseSources = @(@{id='rrstyle-f5';landId='rr_showroom'},@{id='rrstyle-f5-refresh';landId='rr_showroom'},@{id='rrstyle-f1';landId='random_rooms'},@{id='rrstyle-f1-refresh';landId='random_rooms'})
     if ($SmokeOnly) { $caseSources = @(@{id='rrstyle-smoke-f5';landId='rr_showroom'},@{id='rrstyle-smoke-f1';landId='random_rooms'}) }
+    if ($SingleCase) { $caseSources = @(@{id=('rrstyle-single-' + $Scene);landId='random_rooms';scene=$Scene}) }
     if ($DevelopmentShaftProbe) { $caseSources = @(@{id='rrstyle-f5-shaft';landId='rr_showroom'}) }
     if ($GrowthProbe) { $caseSources = @(@{id='rrstyle-growth';landId='random_rooms'}) }
     if ($NavigationProbe -and $NavigationLand -ne 'both') { $caseSources = @($caseSources | Where-Object { $_.landId -eq $NavigationLand }) }
@@ -204,13 +215,20 @@ if ($DevelopmentSwf) {
             $caseSources += @{id=('rrstyle-show-' + $theme);landId='rr_showroom';scene=$theme;action='pick'}
         }
     }
+    if ($NativeLoaderSmoke) {
+        $caseSources=@(
+            @{id='rrstyle-native-f1';landId='random_rooms';scene='plant';action='pick';version='13'},
+            @{id='rrstyle-native-f4';landId='random_rooms';scene='plant';action='deeper';version='13'},
+            @{id='rrstyle-native-f5';landId='rr_showroom';scene='sewer';action='pick';version='13'}
+        )
+    }
     if ($ComparisonLifecycle) {
         $caseSources=@()
-        foreach($v in @('12.2','12.3')) {
+        foreach($v in @('12.2','12.3','13')) {
             $caseSources+=@{id="rrstyle-compare-$v-plant";landId='random_rooms';scene='plant';action='pick';version=$v}
             $caseSources+=@{id="rrstyle-compare-$v-deeper";landId='random_rooms';scene='plant';action='deeper';version=$v}
         }
-        foreach($v in @('12.2','12.3')) {
+        foreach($v in @('12.2','12.3','13')) {
             $caseSources+=@{id="rrstyle-compare-$v-random";landId='random_rooms';scene='random';action='pick';version=$v}
             $caseSources+=@{id="rrstyle-compare-$v-show";landId='rr_showroom';scene='sewer';action='pick';version=$v}
         }
@@ -260,7 +278,10 @@ $entrySource = 'RandomRoomsMod.as'
 $windowContent = 'pfe.swf'
 $driverSlot = Join-Path $appRoot 'mods/TDFC/release/TDFCMod.swf'
 if ($DevelopmentSwf) {
-    if (Test-Path -LiteralPath $testOutput) { Remove-Item -LiteralPath $testOutput }
+    if ($NativeLoaderSmoke) {
+        Copy-Item -LiteralPath $developmentPath -Destination $testOutput
+        $sourceHashes['native-loader/RandomRoomsMod.swf'] = (Get-FileHash -LiteralPath $testOutput -Algorithm SHA256).Hash
+    } elseif (Test-Path -LiteralPath $testOutput) { Remove-Item -LiteralPath $testOutput }
     $testOutput = $driverSlot
     New-Item -ItemType Directory -Path (Split-Path -Parent $testOutput) -Force | Out-Null
     $entrySource = 'TDFCMod.as'
@@ -279,6 +300,7 @@ if ($LASTEXITCODE -ne 0) { throw "Compiler failed: $LASTEXITCODE" }
 # Older embedded-loader hosts simply ignore this additional test-local file.
 $testLoaderManifest = Join-Path $appRoot 'mods/loader-manifest.txt'
 $testLoaderEntry = if ($DevelopmentSwf) { 'TDFC|TDFCMod|1|0|0' } else { 'RandomRooms|RandomRoomsMod|1|0|0' }
+if ($NativeLoaderSmoke) { $testLoaderEntry = @('RandomRooms|RandomRoomsMod|1|0|0','TDFC|TDFCMod|1|0|0') }
 Set-Content -LiteralPath $testLoaderManifest -Value $testLoaderEntry -Encoding utf8
 $sourceHashes['test-local/loader-manifest.txt'] = (Get-FileHash -LiteralPath $testLoaderManifest -Algorithm SHA256).Hash
 
@@ -390,6 +412,7 @@ try {
         hitProtection=($GrowthProbe.IsPresent -or $NavigationProbe.IsPresent)
         physicalPass= if ($NavigationProbe) { $true } elseif ($movementResults.Count -gt 0) { @($movementResults | Where-Object { -not $_.success }).Count -eq 0 } else { $null }
         developmentSwf=$DevelopmentSwf
+        nativeLoaderSmoke=$NativeLoaderSmoke.IsPresent
         runtimeArtifacts=$runtimeArtifacts
         topology=$topologySummaries
         movement=$movementResults

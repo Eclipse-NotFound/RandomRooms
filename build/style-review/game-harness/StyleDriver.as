@@ -19,6 +19,7 @@ package
    import flash.media.SoundMixer;
    import flash.media.SoundTransform;
    import flash.net.URLRequest;
+   import flash.net.SharedObject;
    import flash.system.ApplicationDomain;
    import flash.system.LoaderContext;
    import flash.utils.getTimer;
@@ -48,6 +49,7 @@ package
       private static var developmentMode:Boolean = false;
       private static var developmentClass:*;
       private static var developmentLoader:Loader;
+      private static var nativeLoader:Boolean=false;
       private static var crossingEnabled:Boolean = false;
       private static var crossingLastX:Number = 0;
       private static var crossingStuck:int = 0;
@@ -62,6 +64,7 @@ package
       private static var populationEnabled:Boolean = false;
       private static var populationDepth:int = 0;
       private static var contentGallery:Boolean = false;
+      private static var terminalApproach:Boolean = false;
       private static var chosenScene:String = "";
       private static var scenePool:String = "";
       private static var previousStage:int = 0;
@@ -98,6 +101,7 @@ package
             cases = input.child("case");
             movementEnabled = String(input.@movement) == "true";
             developmentMode = String(input.@development) == "true";
+            nativeLoader = String(input.@nativeLoader) == "true";
             crossingEnabled = String(input.@crossing) == "true";
             shaftEnabled = String(input.@shaft) == "true";
             growthEnabled = String(input.@growth) == "true";
@@ -109,6 +113,7 @@ package
             populationEnabled = String(input.@population) == "true";
             populationDepth = int(input.@populationDepth);
             contentGallery = String(input.@contentGallery) == "true";
+            terminalApproach = String(input.@terminalApproach) == "true";
             startupDelayEnabled = String(input.@startupDelay) == "true";
             stream.close();
             SoundMixer.soundTransform = new SoundTransform(0);
@@ -120,7 +125,27 @@ package
                log("STORAGE path=" + storage.nativePath + " existsBefore=" + storage.exists);
                try { storage.createDirectory(); log("STORAGE existsAfter=" + storage.exists); }
                catch (storageError:Error) { log("STORAGE preparation failed " + storageError.toString()); }
-               loadDevelopmentMod();
+               if(nativeLoader)
+               {
+                  // Native loader owns init. A sibling test driver cannot see
+                  // the production class and must use the real keyboard UI.
+                  developmentClass={debugReady:function():Boolean {
+                     var w:*=W.w,status:Object=SharedObject.getLocal("ModLoader","/").data;
+                     // Coordinated rooms are intentionally generated on travel,
+                     // so there is no startup random_rooms LandLoader to await.
+                     if(status.ok_RandomRoomsMod==null || !w.allLandsLoaded) return false;
+                     var f:File=File.applicationStorageDirectory.resolvePath("RandomRooms_diag.log");
+                     if(!f.exists) return false;
+                     var stream:FileStream=new FileStream(); stream.open(f,FileMode.READ);
+                     var content:String=stream.readUTFBytes(stream.bytesAvailable); stream.close();
+                     return content.indexOf("READY: F1")>=0;
+                  },debugTravel:function(target:String):Boolean {
+                     if(target!="rbl") throw new Error("Native smoke uses picker for exploration");
+                     sceneKey(113); return true;
+                  }};
+                  log("NATIVE-LOADER unchanged release registered by host; driver will not call init");
+               }
+               else loadDevelopmentMod();
             }
          }
          catch (error:Error) { fail(error.toString() + "\n" + error.getStackTrace()); }
@@ -172,6 +197,16 @@ package
             var w:* = W.w;
             if (w == null) return;
             if (w.verror != null && w.verror.visible) { fail("game error: " + w.verror.txt.text); return; }
+            if(state==12)
+            {
+               if(getTimer()-settled<350) return;
+               var overlay:DisplayObject=findNamed(main.stage,"RandomRooms_DebugWorld");
+               if(overlay==null || !overlay.visible) throw new Error("Native Shift+F3 overlay missing");
+               screenshot(w,String(cases[index].@id)+"-debug-stage",false);
+               main.stage.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN,true,true,0,114,0,false,false,true));
+               log("NATIVE-LOADER Shift+F3 visible; land="+w.game.curLandId);
+               index++; state=2; return;
+            }
             var beat:int = int((getTimer() - started) / 10000);
             if (beat != lastBeat)
             {
@@ -283,7 +318,7 @@ package
                      {
                         var score:int=0;
                         for each(var piece:XML in galleryLand.locs[gx][gy][0].room.xml.obj)
-                           if(String(piece.@rrContent).length) score+=piece.@rrContent=="trigger"?12:(piece.@rrContent=="terminal"?5:1);
+                           if(String(piece.@rrContent).length) score+=piece.@id=="term1"?100:(piece.@rrContent=="security"?20:(piece.@rrContent=="trigger"?12:(piece.@rrContent=="terminal"?5:1)));
                         if(score>bestScore) { bestScore=score; w.game.curCoord=gx+":"+gy; }
                      }
                      w.gg.invulner=true;
@@ -323,6 +358,7 @@ package
             {
                var wanted:String = developmentMode ? String(cases[index].@landId) : String(cases[index].@id);
                if (w.game.curLandId != wanted || w.land == null || w.land.act.id != wanted || w.loc == null || w.land!=w.game.lands[wanted].land) return;
+               if(w.t_exit>0) return;
                if (settled < 0) { settled = getTimer(); log("arrived " + wanted + " room=" + w.loc.room.id); }
                if (getTimer() - settled < 2500) return;
                var captureName:String = String(cases[index].@id);
@@ -330,15 +366,33 @@ package
                screenshot(w, captureName + "-room", true);
                if (developmentMode) dumpRuntimePool(w, captureName);
                if (sceneLifecycle) verifySceneCase(w,cases[index]);
+               if(nativeLoader)
+               {
+                  main.stage.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN,true,true,0,114,0,false,false,true));
+                  settled=getTimer(); state=12; return;
+               }
                if (populationEnabled)
                {
+                  var v13:Boolean=developmentMode && String(w.loc.room.xml.@rrVersion)=="13";
+                  if(v13)
+                  {
+                     ContentDebugProbe.before(w,developmentClass,rootDir,captureName);
+                     screenshot(w,captureName+"-debug-before-stage",false);
+                     screenshot(w,captureName+"-debug-before-room",true);
+                  }
                   PopulationProbe.begin(w,rootDir,captureName);
+                  log("POPULATION-UI "+JSON.stringify({allStat:w.allStat,pause:w.onPause,pip:w.pip.active,stand:w.stand.active,sats:w.sats.active,guiPause:w.gui.guiPause,exit:w.t_exit,click:w.clickReq}));
+                  if(v13)
+                  {
+                     ContentDebugProbe.after(w,developmentClass,rootDir,captureName);
+                     screenshot(w,captureName+"-debug-after-room",true);
+                  }
                   log("POPULATION PASS "+captureName);
                   index++; state=2; return;
                }
                if (navigationEnabled)
                {
-                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled,waterProbe);
+                  NavigationProbe.begin(w,rootDir,captureName,log,useNearbyDoor,screenshot,growthEnabled,waterProbe,terminalApproach);
                   state=11; moveFrame=0; return;
                }
                if (fixtureEnabled)
@@ -407,7 +461,12 @@ package
             }
             if (state == 7)
             {
+               // Loot/term3 can open the native "important item" card. It
+               // pauses travel until an ordinary input dismisses it (after its
+               // native 30-frame minimum); do not rewrite GUI or world state.
+               if(populationEnabled && w.gui.guiPause) w.ctr.active=true;
                if (w.game.curLandId != "rbl" || w.land == null || w.land.act.id != "rbl") return;
+               if(w.t_exit>0) return;
                if (settled < 0) settled = getTimer();
                if (getTimer() - settled > 1500) { state = 2; settled = -1; log("returned to base"); }
             }
@@ -702,12 +761,24 @@ package
          var data:Object = {applicationId:NativeApplication.nativeApplication.applicationID};
          try
          {
-            var diag:* = developmentLoader.contentLoaderInfo.applicationDomain.getDefinition("rr.RRDiag");
-            data.runtimeTag = String(diag.TAG);
-            diag.inst.close();
+            if(!nativeLoader)
+            {
+               var diag:* = developmentLoader.contentLoaderInfo.applicationDomain.getDefinition("rr.RRDiag");
+               data.runtimeTag = String(diag.TAG);
+               diag.inst.close();
+            }
             var source:File = File.applicationStorageDirectory.resolvePath("RandomRooms_diag.log");
             data.storageDirectory = File.applicationStorageDirectory.nativePath;
             data.logExists = source.exists;
+            if(nativeLoader)
+            {
+               var input:FileStream=new FileStream(); input.open(source,FileMode.READ);
+               var contents:String=input.readUTFBytes(input.bytesAvailable); input.close();
+               var match:Array=contents.match(/\[RR:v13-dv\]/);
+               if(!match) throw new Error("Native loader version marker missing");
+               data.runtimeTag=String(match[0]); data.loadMode="native-loader";
+               data.loaderStatus=SharedObject.getLocal("ModLoader","/").data;
+            }
             if (source.exists) source.copyTo(rootDir.resolvePath("captures/production-diag.log"), true);
             log("DEVELOPMENT-VERSION runtimeTag=" + data.runtimeTag + " copiedOriginalLog=" + data.logExists);
          }
@@ -716,6 +787,7 @@ package
          stream.open(rootDir.resolvePath("captures/production-version.json"), FileMode.WRITE);
          stream.writeUTFBytes(JSON.stringify(data));
          stream.close();
+         if(nativeLoader && data.error) throw new Error("Native loader log: "+data.error);
       }
 
       private static function stepStartupDelay(w:*):Boolean
@@ -838,7 +910,7 @@ package
          var pool:XML = w.game.lands[String(cases[index].@landId)].allroom as XML;
          if(String(cases[index].@generatorVersion)!="") for each(var checkRoom:XML in pool.room)
          {
-            var expectedRevision:String=String(cases[index].@generatorVersion)=="12.2"?"12-prototype-2":"12-prototype-3";
+            var expectedRevision:String=String(cases[index].@generatorVersion)=="13"?"13":(String(cases[index].@generatorVersion)=="12.2"?"12-prototype-2":"12-prototype-3");
             if(String(checkRoom.@rrRevision)!=expectedRevision || String(checkRoom.@rrVersion)!=String(cases[index].@generatorVersion))
                throw new Error("Runtime used the wrong generator: "+checkRoom.@rrRevision);
          }

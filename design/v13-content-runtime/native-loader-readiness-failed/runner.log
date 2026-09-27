@@ -1,0 +1,21 @@
+appId=pferr-style-b7a92e2a477e4116978e7d30d98cf862
+4175 ready cases=3
+4176 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-b7a92e2a477e4116978e7d30d98cf862\Local Store existsBefore=true
+4177 STORAGE existsAfter=true
+4178 NATIVE-LOADER unchanged release registered by host; driver will not call init
+4252 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+14353 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+24182 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+34186 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+44184 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+54184 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+64182 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+74183 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+84182 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+94182 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+104183 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+114188 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+124184 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+134185 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+144185 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+154207 heartbeat state=0 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false

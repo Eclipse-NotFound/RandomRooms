@@ -1,0 +1,962 @@
+{
+  "after": {
+    "spawns": [
+      {
+        "y": 300,
+        "kind": "security",
+        "uid": "rrp_7_0",
+        "zone": "room-0",
+        "x": 460,
+        "id": "landturret"
+      },
+      {
+        "y": 300,
+        "kind": "security",
+        "uid": "rrp_7_1",
+        "zone": "room-2",
+        "x": 1100,
+        "id": "armturret"
+      },
+      {
+        "y": 380,
+        "kind": "security",
+        "uid": "rrp_7_2",
+        "zone": "room-4",
+        "x": 700,
+        "id": "turret"
+      },
+      {
+        "y": 740,
+        "kind": "terminal",
+        "uid": "rrp_7_3",
+        "zone": "room-8",
+        "x": 1220,
+        "id": "term1"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_4",
+        "zone": "room-0",
+        "x": 160,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_5",
+        "zone": "room-0",
+        "x": 400,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_6",
+        "zone": "room-2",
+        "x": 1560,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_7",
+        "zone": "room-2",
+        "x": 1200,
+        "id": "slaver"
+      },
+      {
+        "y": 540,
+        "kind": "enemy",
+        "uid": "rrp_7_8",
+        "zone": "room-5",
+        "x": 1160,
+        "id": "slaver"
+      },
+      {
+        "y": 540,
+        "kind": "enemy",
+        "uid": "rrp_7_9",
+        "zone": "room-5",
+        "x": 1560,
+        "id": "slaver"
+      },
+      {
+        "y": 740,
+        "kind": "enemy",
+        "uid": "rrp_7_10",
+        "zone": "room-9",
+        "x": 1760,
+        "id": "slaver"
+      },
+      {
+        "y": 740,
+        "kind": "enemy",
+        "uid": "rrp_7_11",
+        "zone": "room-9",
+        "x": 1640,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "reward",
+        "uid": "rrp_7_12",
+        "zone": "room-0",
+        "x": 220,
+        "id": "wallsafe"
+      },
+      {
+        "y": 300,
+        "kind": "reward",
+        "uid": "rrp_7_13",
+        "zone": "room-2",
+        "x": 1640,
+        "id": "safe"
+      },
+      {
+        "y": 740,
+        "kind": "reward",
+        "uid": "rrp_7_14",
+        "zone": "room-9",
+        "x": 1360,
+        "id": "weapbox"
+      },
+      {
+        "y": 940,
+        "kind": "loot",
+        "uid": "rrp_7_15",
+        "zone": "room-11",
+        "x": 620,
+        "id": "case"
+      },
+      {
+        "y": 940,
+        "kind": "reward",
+        "uid": "rrp_7_16",
+        "zone": "room-11",
+        "x": 800,
+        "id": "weapbox"
+      },
+      {
+        "y": 940,
+        "kind": "terminal",
+        "uid": "rrp_7_17",
+        "zone": "room-11",
+        "x": 660,
+        "id": "term3"
+      }
+    ],
+    "units": [
+      {
+        "y": 290,
+        "off": true,
+        "friendly": false,
+        "turret": true,
+        "x": 460,
+        "id": "turret1"
+      },
+      {
+        "y": 285,
+        "off": true,
+        "friendly": false,
+        "turret": true,
+        "x": 1100,
+        "id": "turret3"
+      },
+      {
+        "y": 380,
+        "off": true,
+        "friendly": false,
+        "turret": true,
+        "x": 700,
+        "id": "turret0"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 160,
+        "id": "slaver2"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 400,
+        "id": "slaver4"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1560,
+        "id": "slaver4"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1315.1,
+        "id": "slaver2"
+      },
+      {
+        "y": 525,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1160,
+        "id": "slaver3"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1665,
+        "id": "slaver4"
+      },
+      {
+        "y": 725,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1760,
+        "id": "slaver1"
+      },
+      {
+        "y": 725,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1640,
+        "id": "slaver3"
+      }
+    ],
+    "guns": [
+      {
+        "toY": 312,
+        "fromY": 259,
+        "toX": 780,
+        "uid": "rrp_7_0",
+        "fromX": 460
+      },
+      {
+        "toY": 312,
+        "fromY": 264,
+        "toX": 780,
+        "uid": "rrp_7_1",
+        "fromX": 1100
+      },
+      {
+        "toY": 512,
+        "fromY": 387,
+        "toX": 980,
+        "uid": "rrp_7_2",
+        "fromX": 700
+      }
+    ],
+    "enabled": true,
+    "errors": [],
+    "mirror": false,
+    "room": "syn_7",
+    "spaces": [
+      {
+        "y": 40,
+        "width": 600,
+        "value": 11,
+        "zone": "room-0",
+        "role": "office",
+        "x": 40,
+        "danger": 47,
+        "height": 280
+      },
+      {
+        "y": 40,
+        "width": 720,
+        "value": 28,
+        "zone": "room-2",
+        "role": "office",
+        "x": 680,
+        "danger": 53,
+        "height": 280
+      },
+      {
+        "y": 40,
+        "width": 440,
+        "value": 28,
+        "zone": "room-2",
+        "role": "office",
+        "x": 1440,
+        "danger": 53,
+        "height": 280
+      },
+      {
+        "y": 360,
+        "width": 520,
+        "value": 25,
+        "zone": "room-3",
+        "role": "office",
+        "x": 40,
+        "danger": 27,
+        "height": 200
+      },
+      {
+        "y": 360,
+        "width": 360,
+        "value": 43,
+        "zone": "room-4",
+        "role": "office",
+        "x": 600,
+        "danger": 54,
+        "height": 200
+      },
+      {
+        "y": 360,
+        "width": 880,
+        "value": 40,
+        "zone": "room-5",
+        "role": "office",
+        "x": 1000,
+        "danger": 37,
+        "height": 200
+      },
+      {
+        "y": 600,
+        "width": 240,
+        "value": 36,
+        "zone": "room-6",
+        "role": "office",
+        "x": 40,
+        "danger": 61,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 440,
+        "value": 47,
+        "zone": "room-7",
+        "role": "store",
+        "x": 320,
+        "danger": 35,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 440,
+        "value": 32,
+        "zone": "room-8",
+        "role": "office",
+        "x": 800,
+        "danger": 29,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 600,
+        "value": 24,
+        "zone": "room-9",
+        "role": "service",
+        "x": 1280,
+        "danger": 48,
+        "height": 160
+      },
+      {
+        "y": 800,
+        "width": 200,
+        "value": 49,
+        "zone": "room-10",
+        "role": "office",
+        "x": 40,
+        "danger": 49,
+        "height": 160
+      },
+      {
+        "y": 800,
+        "width": 960,
+        "value": 52,
+        "zone": "room-11",
+        "role": "office",
+        "x": 280,
+        "danger": 66,
+        "height": 160
+      }
+    ],
+    "rays": [
+      {
+        "aiming": true,
+        "toY": 163.03105239669154,
+        "toX": 641.0144823515443,
+        "fromX": 222.3,
+        "rot": -0.2086817586765596,
+        "fromY": 251.7,
+        "turret": false,
+        "id": "slaver2"
+      },
+      {
+        "aiming": true,
+        "toY": 166.55030238869057,
+        "toX": 37.29096764380961,
+        "fromX": 369.45,
+        "rot": -2.838707785214822,
+        "fromY": 270.35,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 199.09304864004503,
+        "toX": 1881.782825866454,
+        "fromX": 1635.25,
+        "rot": -0.2086817623350266,
+        "fromY": 251.3,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 149.58407555897827,
+        "toX": 1881.393275470263,
+        "fromX": 1363.65,
+        "rot": -0.19742763179670397,
+        "fromY": 253.15,
+        "turret": false,
+        "id": "slaver2"
+      },
+      {
+        "aiming": true,
+        "toY": 468.8138758749008,
+        "toX": 999.062528675925,
+        "fromX": 1073.8,
+        "rot": -2.7768578543843687,
+        "fromY": 497.35,
+        "turret": false,
+        "id": "slaver3"
+      },
+      {
+        "aiming": true,
+        "toY": 452.6966476735193,
+        "toX": 1917.1656441902433,
+        "fromX": 1737.25,
+        "rot": -0.21109333322274657,
+        "fromY": 491.25,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 637.4241393372919,
+        "toX": 1883.0486897805577,
+        "fromX": 1726.1,
+        "rot": -0.3647347992054234,
+        "fromY": 697.35,
+        "turret": false,
+        "id": "slaver3"
+      }
+    ],
+    "version": "13"
+  },
+  "terminals": 3,
+  "ceilings": 5,
+  "success": true,
+  "zones": 168,
+  "mirrored": 0,
+  "groundTurrets": 6,
+  "rooms": 25,
+  "points": 368,
+  "errors": [],
+  "specials": 11,
+  "before": {
+    "spawns": [
+      {
+        "y": 300,
+        "kind": "security",
+        "uid": "rrp_7_0",
+        "zone": "room-0",
+        "x": 460,
+        "id": "landturret"
+      },
+      {
+        "y": 300,
+        "kind": "security",
+        "uid": "rrp_7_1",
+        "zone": "room-2",
+        "x": 1100,
+        "id": "armturret"
+      },
+      {
+        "y": 380,
+        "kind": "security",
+        "uid": "rrp_7_2",
+        "zone": "room-4",
+        "x": 700,
+        "id": "turret"
+      },
+      {
+        "y": 740,
+        "kind": "terminal",
+        "uid": "rrp_7_3",
+        "zone": "room-8",
+        "x": 1220,
+        "id": "term1"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_4",
+        "zone": "room-0",
+        "x": 160,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_5",
+        "zone": "room-0",
+        "x": 400,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_6",
+        "zone": "room-2",
+        "x": 1560,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "enemy",
+        "uid": "rrp_7_7",
+        "zone": "room-2",
+        "x": 1200,
+        "id": "slaver"
+      },
+      {
+        "y": 540,
+        "kind": "enemy",
+        "uid": "rrp_7_8",
+        "zone": "room-5",
+        "x": 1160,
+        "id": "slaver"
+      },
+      {
+        "y": 540,
+        "kind": "enemy",
+        "uid": "rrp_7_9",
+        "zone": "room-5",
+        "x": 1560,
+        "id": "slaver"
+      },
+      {
+        "y": 740,
+        "kind": "enemy",
+        "uid": "rrp_7_10",
+        "zone": "room-9",
+        "x": 1760,
+        "id": "slaver"
+      },
+      {
+        "y": 740,
+        "kind": "enemy",
+        "uid": "rrp_7_11",
+        "zone": "room-9",
+        "x": 1640,
+        "id": "slaver"
+      },
+      {
+        "y": 300,
+        "kind": "reward",
+        "uid": "rrp_7_12",
+        "zone": "room-0",
+        "x": 220,
+        "id": "wallsafe"
+      },
+      {
+        "y": 300,
+        "kind": "reward",
+        "uid": "rrp_7_13",
+        "zone": "room-2",
+        "x": 1640,
+        "id": "safe"
+      },
+      {
+        "y": 740,
+        "kind": "reward",
+        "uid": "rrp_7_14",
+        "zone": "room-9",
+        "x": 1360,
+        "id": "weapbox"
+      },
+      {
+        "y": 940,
+        "kind": "loot",
+        "uid": "rrp_7_15",
+        "zone": "room-11",
+        "x": 620,
+        "id": "case"
+      },
+      {
+        "y": 940,
+        "kind": "reward",
+        "uid": "rrp_7_16",
+        "zone": "room-11",
+        "x": 800,
+        "id": "weapbox"
+      },
+      {
+        "y": 940,
+        "kind": "terminal",
+        "uid": "rrp_7_17",
+        "zone": "room-11",
+        "x": 660,
+        "id": "term3"
+      }
+    ],
+    "units": [
+      {
+        "y": 290,
+        "off": false,
+        "friendly": false,
+        "turret": true,
+        "x": 460,
+        "id": "turret1"
+      },
+      {
+        "y": 285,
+        "off": false,
+        "friendly": false,
+        "turret": true,
+        "x": 1100,
+        "id": "turret3"
+      },
+      {
+        "y": 380,
+        "off": false,
+        "friendly": false,
+        "turret": true,
+        "x": 700,
+        "id": "turret0"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 160,
+        "id": "slaver2"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 400,
+        "id": "slaver4"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1560,
+        "id": "slaver4"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1315.1,
+        "id": "slaver2"
+      },
+      {
+        "y": 525,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1160,
+        "id": "slaver3"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1665,
+        "id": "slaver4"
+      },
+      {
+        "y": 725,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1760,
+        "id": "slaver1"
+      },
+      {
+        "y": 725,
+        "off": false,
+        "friendly": false,
+        "turret": false,
+        "x": 1640,
+        "id": "slaver3"
+      }
+    ],
+    "guns": [
+      {
+        "toY": 312,
+        "fromY": 259,
+        "toX": 780,
+        "uid": "rrp_7_0",
+        "fromX": 460
+      },
+      {
+        "toY": 312,
+        "fromY": 264,
+        "toX": 780,
+        "uid": "rrp_7_1",
+        "fromX": 1100
+      },
+      {
+        "toY": 512,
+        "fromY": 387,
+        "toX": 980,
+        "uid": "rrp_7_2",
+        "fromX": 700
+      }
+    ],
+    "enabled": true,
+    "errors": [],
+    "mirror": false,
+    "room": "syn_7",
+    "spaces": [
+      {
+        "y": 40,
+        "width": 600,
+        "value": 11,
+        "zone": "room-0",
+        "role": "office",
+        "x": 40,
+        "danger": 47,
+        "height": 280
+      },
+      {
+        "y": 40,
+        "width": 720,
+        "value": 28,
+        "zone": "room-2",
+        "role": "office",
+        "x": 680,
+        "danger": 53,
+        "height": 280
+      },
+      {
+        "y": 40,
+        "width": 440,
+        "value": 28,
+        "zone": "room-2",
+        "role": "office",
+        "x": 1440,
+        "danger": 53,
+        "height": 280
+      },
+      {
+        "y": 360,
+        "width": 520,
+        "value": 25,
+        "zone": "room-3",
+        "role": "office",
+        "x": 40,
+        "danger": 27,
+        "height": 200
+      },
+      {
+        "y": 360,
+        "width": 360,
+        "value": 43,
+        "zone": "room-4",
+        "role": "office",
+        "x": 600,
+        "danger": 54,
+        "height": 200
+      },
+      {
+        "y": 360,
+        "width": 880,
+        "value": 40,
+        "zone": "room-5",
+        "role": "office",
+        "x": 1000,
+        "danger": 37,
+        "height": 200
+      },
+      {
+        "y": 600,
+        "width": 240,
+        "value": 36,
+        "zone": "room-6",
+        "role": "office",
+        "x": 40,
+        "danger": 61,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 440,
+        "value": 47,
+        "zone": "room-7",
+        "role": "store",
+        "x": 320,
+        "danger": 35,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 440,
+        "value": 32,
+        "zone": "room-8",
+        "role": "office",
+        "x": 800,
+        "danger": 29,
+        "height": 160
+      },
+      {
+        "y": 600,
+        "width": 600,
+        "value": 24,
+        "zone": "room-9",
+        "role": "service",
+        "x": 1280,
+        "danger": 48,
+        "height": 160
+      },
+      {
+        "y": 800,
+        "width": 200,
+        "value": 49,
+        "zone": "room-10",
+        "role": "office",
+        "x": 40,
+        "danger": 49,
+        "height": 160
+      },
+      {
+        "y": 800,
+        "width": 960,
+        "value": 52,
+        "zone": "room-11",
+        "role": "office",
+        "x": 280,
+        "danger": 66,
+        "height": 160
+      }
+    ],
+    "rays": [
+      {
+        "aiming": false,
+        "toY": 211.00950514441683,
+        "toX": 642.8207255959384,
+        "fromX": 496,
+        "rot": -0.2617993877991494,
+        "fromY": 250.35,
+        "turret": true,
+        "id": "turret1"
+      },
+      {
+        "aiming": false,
+        "toY": 151.77238195899162,
+        "toX": 677.6296694843727,
+        "fromX": 1064,
+        "rot": -2.8797932657906435,
+        "fromY": 255.3,
+        "turret": true,
+        "id": "turret3"
+      },
+      {
+        "aiming": false,
+        "toY": 563.7352844163008,
+        "toX": 687.251121548469,
+        "fromX": 697.35,
+        "rot": 1.6429938779914917,
+        "fromY": 424.1,
+        "turret": true,
+        "id": "turret0"
+      },
+      {
+        "aiming": true,
+        "toY": 163.03105239669154,
+        "toX": 641.0144823515443,
+        "fromX": 222.3,
+        "rot": -0.2086817586765596,
+        "fromY": 251.7,
+        "turret": false,
+        "id": "slaver2"
+      },
+      {
+        "aiming": true,
+        "toY": 166.55030238869057,
+        "toX": 37.29096764380961,
+        "fromX": 369.45,
+        "rot": -2.838707785214822,
+        "fromY": 270.35,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 199.09304864004503,
+        "toX": 1881.782825866454,
+        "fromX": 1635.25,
+        "rot": -0.2086817623350266,
+        "fromY": 251.3,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 149.58407555897827,
+        "toX": 1881.393275470263,
+        "fromX": 1363.65,
+        "rot": -0.19742763179670397,
+        "fromY": 253.15,
+        "turret": false,
+        "id": "slaver2"
+      },
+      {
+        "aiming": true,
+        "toY": 468.8138758749008,
+        "toX": 999.062528675925,
+        "fromX": 1073.8,
+        "rot": -2.7768578543843687,
+        "fromY": 497.35,
+        "turret": false,
+        "id": "slaver3"
+      },
+      {
+        "aiming": true,
+        "toY": 452.6966476735193,
+        "toX": 1917.1656441902433,
+        "fromX": 1737.25,
+        "rot": -0.21109333322274657,
+        "fromY": 491.25,
+        "turret": false,
+        "id": "slaver4"
+      },
+      {
+        "aiming": true,
+        "toY": 637.4241393372919,
+        "toX": 1883.0486897805577,
+        "fromX": 1726.1,
+        "rot": -0.3647347992054234,
+        "fromY": 697.35,
+        "turret": false,
+        "id": "slaver3"
+      }
+    ],
+    "version": "13"
+  }
+}

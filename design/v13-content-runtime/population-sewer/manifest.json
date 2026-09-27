@@ -1,0 +1,78 @@
+{
+  "appId": "pferr-style-d8059b99ac0a4d8db5336c00fc2058f4",
+  "status": "complete",
+  "startedUtc": "2026-09-27T14:41:37.0090065Z",
+  "completedUtc": "2026-09-27T14:42:09.1353701Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-single-sewer"
+  ],
+  "roomIds": [
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "DEC17958BE6C654D67679DDC3CC99603A9CE6C55638273C7D7B207183BBCE30E",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "navigationProbe": false,
+  "populationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "mods/RandomRooms/build/RandomRooms-v13-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-single-sewer-pool.xml": "C10E2379D5ED62C0B4AFEACBA5C387E8E55DC600832882473FFD1E81FD6893A7",
+    "rrstyle-single-sewer-layout.xml": "3B409CE7946B770CC4CE358CD14714B58504722566540AF8937AED45C2B6E773",
+    "rrstyle-single-sewer-topology.json": "897F03DB22907C554270510F2177291EDE2D0A6E3871D349B47589687FECCE7D",
+    "production-diag.log": "D95FB30A82C0D7F4F5CF9F0E9FB5316B52E625255A74B84C2987B1F6D45C07A0",
+    "production-version.json": "E309BBA2BF962C2FB6AF978A1BF3EA3AE1CD7ACF84EE6517D73C7F0DBA601C99",
+    "rrstyle-single-sewer-content-debug.json": "D4D4EA6EB12161D3E5BD14CD49D56830F009DC840A2DE65B00CEFE4AA28B16D5",
+    "rrstyle-single-sewer-population.json": "7A5FC9ADE50D2ADFFAB08F8C230F76BBE4FD90375A246327BF0D09D925B5C9C6",
+    "startup-readiness.json": "C80C2F6F35A29243177526980360545DA764DB1659EFA2C1F0DD2EA3FCDBE01D"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-single-sewer",
+      "poolRooms": 36,
+      "generatedPoolRooms": 36,
+      "themeCounts": {
+        "sewer": 36
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "96A0E65AF7C530D7BE265D5F74545E81F4EAD7219F6D484776BB8CA4A67C44BE",
+  "driverSha256": "C1F0A8F35E11A9D5AF7387D559735505BABF695B2248CFA908208EDD9E862048",
+  "runnerLogSha256": "52123F0EA2C53526F6BA5192AC458613A6B2107A812A255A93912D844390FE4E",
+  "captured": {
+    "rrstyle-single-sewer-stage.png": "81155B5EC8D3FF243D38C9CBB21D687DD6F749D51645A09D735F9F45497346B5",
+    "rrstyle-single-sewer-room.png": "82EBF1A442B6A5A6B07F5E8F7DCE4EF5C9DB4F96F5C3161B7A608943C2D0C77B",
+    "rrstyle-single-sewer-debug-after-room.png": "61C408A93EBCAE7F60442D6F6B62705EC5B2192E8FCD2A7B1C51B33A8D34D86E",
+    "rrstyle-single-sewer-debug-before-room.png": "92A3F8E848279644A6A89AE72A3C739FC1334AA2CBD5D169EDA40A746166043F",
+    "rrstyle-single-sewer-debug-before-stage.png": "17F7E2517B0951932773C752FE6F5614285ECB77C9DA63DF68C6FAF459B2DB41"
+  }
+}

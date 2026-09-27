@@ -1,0 +1,557 @@
+{
+  "points": 554,
+  "after": {
+    "spawns": [
+      {
+        "y": 580,
+        "zone": "room-6",
+        "uid": "rrp_18_0",
+        "kind": "security",
+        "x": 180,
+        "id": "turret"
+      },
+      {
+        "y": 580,
+        "zone": "room-3",
+        "uid": "rrp_18_1",
+        "kind": "security",
+        "x": 1540,
+        "id": "turret"
+      },
+      {
+        "y": 580,
+        "zone": "room-4",
+        "uid": "rrp_18_2",
+        "kind": "security",
+        "x": 1740,
+        "id": "turret"
+      },
+      {
+        "y": 500,
+        "zone": "room-0",
+        "uid": "rrp_18_3",
+        "kind": "terminal",
+        "x": 380,
+        "id": "term1"
+      },
+      {
+        "y": 500,
+        "zone": "room-0",
+        "uid": "rrp_18_4",
+        "kind": "service",
+        "x": 920,
+        "id": "work"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_5",
+        "kind": "reward",
+        "x": 800,
+        "id": "safe"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_6",
+        "kind": "switch",
+        "x": 700,
+        "id": "knop3"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_7",
+        "kind": "service",
+        "x": 560,
+        "id": "work"
+      },
+      {
+        "y": 740,
+        "zone": "room-2",
+        "uid": "rrp_18_8",
+        "kind": "service",
+        "x": 1080,
+        "id": "work"
+      },
+      {
+        "y": 940,
+        "zone": "room-7",
+        "uid": "rrp_18_9",
+        "kind": "terminal",
+        "x": 1060,
+        "id": "term3"
+      },
+      {
+        "y": 940,
+        "zone": "room-8",
+        "uid": "rrp_18_10",
+        "kind": "service",
+        "x": 1560,
+        "id": "work"
+      }
+    ],
+    "units": [
+      {
+        "y": 580,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 180,
+        "id": "turret0"
+      },
+      {
+        "y": 580,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 1540,
+        "id": "turret0"
+      },
+      {
+        "y": 580,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 1740,
+        "id": "turret0"
+      }
+    ],
+    "guns": [
+      {
+        "toY": 912,
+        "fromY": 587,
+        "toX": 180,
+        "uid": "rrp_18_0",
+        "fromX": 180
+      },
+      {
+        "toY": 712,
+        "fromY": 587,
+        "toX": 1260,
+        "uid": "rrp_18_1",
+        "fromX": 1540
+      },
+      {
+        "toY": 912,
+        "fromY": 587,
+        "toX": 1780,
+        "uid": "rrp_18_2",
+        "fromX": 1740
+      }
+    ],
+    "mirror": false,
+    "errors": [],
+    "room": "syn_18",
+    "spaces": [
+      {
+        "y": 40,
+        "width": 1840,
+        "x": 40,
+        "value": 9,
+        "labelLines": 2,
+        "height": 480,
+        "role": "workshop",
+        "zone": "room-0",
+        "labelHeight": 60,
+        "danger": 62
+      },
+      {
+        "y": 560,
+        "width": 880,
+        "x": 40,
+        "value": 29,
+        "labelLines": 2,
+        "height": 200,
+        "role": "workshop",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 560,
+        "width": 280,
+        "x": 960,
+        "value": 10,
+        "labelLines": 2,
+        "height": 200,
+        "role": "control",
+        "zone": "room-2",
+        "labelHeight": 60,
+        "danger": 53
+      },
+      {
+        "y": 560,
+        "width": 320,
+        "x": 1280,
+        "value": 13,
+        "labelLines": 2,
+        "height": 200,
+        "role": "control",
+        "zone": "room-3",
+        "labelHeight": 60,
+        "danger": 35
+      },
+      {
+        "y": 560,
+        "width": 240,
+        "x": 1640,
+        "value": 25,
+        "labelLines": 2,
+        "height": 200,
+        "role": "service",
+        "zone": "room-4",
+        "labelHeight": 60,
+        "danger": 59
+      },
+      {
+        "y": 800,
+        "width": 240,
+        "x": 40,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "store",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 800,
+        "width": 600,
+        "x": 320,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "service",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 800,
+        "width": 240,
+        "x": 960,
+        "value": 52,
+        "labelLines": 2,
+        "height": 160,
+        "role": "store",
+        "zone": "room-7",
+        "labelHeight": 60,
+        "danger": 24
+      },
+      {
+        "y": 800,
+        "width": 640,
+        "x": 1240,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "workshop",
+        "zone": "room-8",
+        "labelHeight": 60,
+        "danger": 30
+      }
+    ],
+    "enabled": true,
+    "version": "13",
+    "rays": []
+  },
+  "rooms": 36,
+  "errors": [],
+  "terminals": 2,
+  "success": true,
+  "specials": 38,
+  "ceilings": 6,
+  "zones": 243,
+  "groundTurrets": 1,
+  "before": {
+    "spawns": [
+      {
+        "y": 580,
+        "zone": "room-6",
+        "uid": "rrp_18_0",
+        "kind": "security",
+        "x": 180,
+        "id": "turret"
+      },
+      {
+        "y": 580,
+        "zone": "room-3",
+        "uid": "rrp_18_1",
+        "kind": "security",
+        "x": 1540,
+        "id": "turret"
+      },
+      {
+        "y": 580,
+        "zone": "room-4",
+        "uid": "rrp_18_2",
+        "kind": "security",
+        "x": 1740,
+        "id": "turret"
+      },
+      {
+        "y": 500,
+        "zone": "room-0",
+        "uid": "rrp_18_3",
+        "kind": "terminal",
+        "x": 380,
+        "id": "term1"
+      },
+      {
+        "y": 500,
+        "zone": "room-0",
+        "uid": "rrp_18_4",
+        "kind": "service",
+        "x": 920,
+        "id": "work"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_5",
+        "kind": "reward",
+        "x": 800,
+        "id": "safe"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_6",
+        "kind": "switch",
+        "x": 700,
+        "id": "knop3"
+      },
+      {
+        "y": 940,
+        "zone": "room-6",
+        "uid": "rrp_18_7",
+        "kind": "service",
+        "x": 560,
+        "id": "work"
+      },
+      {
+        "y": 740,
+        "zone": "room-2",
+        "uid": "rrp_18_8",
+        "kind": "service",
+        "x": 1080,
+        "id": "work"
+      },
+      {
+        "y": 940,
+        "zone": "room-7",
+        "uid": "rrp_18_9",
+        "kind": "terminal",
+        "x": 1060,
+        "id": "term3"
+      },
+      {
+        "y": 940,
+        "zone": "room-8",
+        "uid": "rrp_18_10",
+        "kind": "service",
+        "x": 1560,
+        "id": "work"
+      }
+    ],
+    "units": [
+      {
+        "y": 580,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 180,
+        "id": "turret0"
+      },
+      {
+        "y": 580,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 1540,
+        "id": "turret0"
+      },
+      {
+        "y": 580,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 1740,
+        "id": "turret0"
+      }
+    ],
+    "guns": [
+      {
+        "toY": 912,
+        "fromY": 587,
+        "toX": 180,
+        "uid": "rrp_18_0",
+        "fromX": 180
+      },
+      {
+        "toY": 712,
+        "fromY": 587,
+        "toX": 1260,
+        "uid": "rrp_18_1",
+        "fromX": 1540
+      },
+      {
+        "toY": 912,
+        "fromY": 587,
+        "toX": 1780,
+        "uid": "rrp_18_2",
+        "fromX": 1740
+      }
+    ],
+    "mirror": false,
+    "errors": [],
+    "room": "syn_18",
+    "spaces": [
+      {
+        "y": 40,
+        "width": 1840,
+        "x": 40,
+        "value": 9,
+        "labelLines": 2,
+        "height": 480,
+        "role": "workshop",
+        "zone": "room-0",
+        "labelHeight": 60,
+        "danger": 62
+      },
+      {
+        "y": 560,
+        "width": 880,
+        "x": 40,
+        "value": 29,
+        "labelLines": 2,
+        "height": 200,
+        "role": "workshop",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 560,
+        "width": 280,
+        "x": 960,
+        "value": 10,
+        "labelLines": 2,
+        "height": 200,
+        "role": "control",
+        "zone": "room-2",
+        "labelHeight": 60,
+        "danger": 53
+      },
+      {
+        "y": 560,
+        "width": 320,
+        "x": 1280,
+        "value": 13,
+        "labelLines": 2,
+        "height": 200,
+        "role": "control",
+        "zone": "room-3",
+        "labelHeight": 60,
+        "danger": 35
+      },
+      {
+        "y": 560,
+        "width": 240,
+        "x": 1640,
+        "value": 25,
+        "labelLines": 2,
+        "height": 200,
+        "role": "service",
+        "zone": "room-4",
+        "labelHeight": 60,
+        "danger": 59
+      },
+      {
+        "y": 800,
+        "width": 240,
+        "x": 40,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "store",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 800,
+        "width": 600,
+        "x": 320,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "service",
+        "zone": "room-6",
+        "labelHeight": 60,
+        "danger": 70
+      },
+      {
+        "y": 800,
+        "width": 240,
+        "x": 960,
+        "value": 52,
+        "labelLines": 2,
+        "height": 160,
+        "role": "store",
+        "zone": "room-7",
+        "labelHeight": 60,
+        "danger": 24
+      },
+      {
+        "y": 800,
+        "width": 640,
+        "x": 1240,
+        "value": 29,
+        "labelLines": 2,
+        "height": 160,
+        "role": "workshop",
+        "zone": "room-8",
+        "labelHeight": 60,
+        "danger": 30
+      }
+    ],
+    "enabled": true,
+    "version": "13",
+    "rays": [
+      {
+        "aiming": false,
+        "toX": 150.41775029573333,
+        "rot": 1.7385987755982943,
+        "toY": 761.7335843147143,
+        "fromY": 623.7,
+        "turret": true,
+        "id": "turret0",
+        "fromX": 173.8
+      },
+      {
+        "aiming": false,
+        "toX": 1507.8999546278003,
+        "rot": 1.7535987755982942,
+        "toY": 761.2673352344448,
+        "fromY": 623.6,
+        "turret": true,
+        "id": "turret0",
+        "fromX": 1533.35
+      },
+      {
+        "aiming": false,
+        "toX": 1705.2878851127098,
+        "rot": 1.768598775598294,
+        "toY": 760.6701115845271,
+        "fromY": 623.4,
+        "turret": true,
+        "id": "turret0",
+        "fromX": 1732.8
+      }
+    ]
+  },
+  "mirrored": 18
+}

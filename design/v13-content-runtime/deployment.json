@@ -1,0 +1,23 @@
+{
+  "status": "deployed-smoke-passed",
+  "installedUtc": "2026-09-27T23:45:02.8419006Z",
+  "version": "13",
+  "bytes": 88909,
+  "sha256": "A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46",
+  "candidate": "build/RandomRooms-v13-release-candidate.swf",
+  "release": "release/RandomRoomsMod.swf",
+  "backup": "build/release-backups/RandomRoomsMod_before_v13_20260928.swf",
+  "backupSha256": "8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9",
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "loaderManifestSha256": "3FEC194F7DE2ED9325E7D81AE3A0B3BF54F62B8FB04211CBE2492BA674EB3927",
+  "authorization": "User explicitly requested implementation and in-game deployment in this turn",
+  "realSaveModified": false,
+  "hostSwfModified": false,
+  "smokeFirstAttempt": "Native loader initialized v13 successfully; new smoke driver incorrectly expected a pre-generated random_rooms LandLoader before the first trip. Rolled back before correcting the driver.",
+  "reinstalledUtc": "2026-09-27T23:48:37.4936812Z",
+  "smokeCompletedUtc": "2026-09-27T23:51:56.123806+00:00",
+  "smokeManifestSha256": "2b9b5b6d8184329ffe3751b09236669ea3883ced08a5276b6b5d6eff62c6eb55",
+  "smokeApplicationId": "pferr-style-522c12d6a203421c9ab7ed7b03b60e49",
+  "smokeMode": "Original host manifest loader, F1/F4/F2/F5 and Shift+F3; isolated fresh profile.",
+  "runtimeChecksSha256": "d3ebef2dd4fb976c61912b5b38c3f41892b72d44efbf4957e21ce5b9c4b230e2"
+}

@@ -1,0 +1,251 @@
+{
+  "appId": "pferr-style-3f479f4b3a9041cb84ed94697ba62e13",
+  "status": "complete",
+  "startedUtc": "2026-09-27T23:28:26.5691158Z",
+  "completedUtc": "2026-09-27T23:32:46.4194073Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-compare-12.2-plant",
+    "rrstyle-compare-12.2-deeper",
+    "rrstyle-compare-12.3-plant",
+    "rrstyle-compare-12.3-deeper",
+    "rrstyle-compare-13-plant",
+    "rrstyle-compare-13-deeper",
+    "rrstyle-compare-12.2-random",
+    "rrstyle-compare-12.2-show",
+    "rrstyle-compare-12.3-random",
+    "rrstyle-compare-12.3-show",
+    "rrstyle-compare-13-random",
+    "rrstyle-compare-13-show"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "50747C20A59C4BE30C56228FD9930C033EA60432EF333D0B6AB8C1FE476E261B",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "navigationProbe": false,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "mods/RandomRooms/build/RandomRooms-v13-operator-candidate.swf",
+  "runtimeArtifacts": {
+    "rrstyle-compare-12.2-plant-pool.xml": "4BBB670A5D605C8B6FB6A8E875A3F44B767D1D545E4CA3E143C775AB49266E6F",
+    "rrstyle-compare-12.2-plant-layout.xml": "677B9B47ED99C5ADB48B8E7DA8A6A18E60E79217B0AB6EA9F57FD58F870881D0",
+    "rrstyle-compare-12.2-plant-topology.json": "9DB0DC7657EB204713EDA15719B0A96426497A602FE3B06861BA5669FCDB0454",
+    "rrstyle-compare-12.2-deeper-pool.xml": "BC713FAB9D9285C265B5568DECCED321D63D31DB269793DB7F270C5BE3C0ADCB",
+    "rrstyle-compare-12.2-deeper-layout.xml": "DB6BBF3EAA0AD5128B246B00E5AB16BFC49491DDCAA9EC318D5F8AD0BA318E77",
+    "rrstyle-compare-12.2-deeper-topology.json": "2B8A5C12A00AE4E273C58A47675AF0DCF5036A65F60D1C7469C3644B15E590F5",
+    "rrstyle-compare-12.3-plant-pool.xml": "EF9D0F77B39604BD0EDC9FC21677BA230F5591A7A585C5C0F8F1EFF603BE0EFD",
+    "rrstyle-compare-12.3-plant-layout.xml": "38C7F5629A84D05270DDF6539DF23F064818B49084ED2D55B02DF8CA97936D71",
+    "rrstyle-compare-12.3-plant-topology.json": "66A42825FFFB41E23044FD3BE410F458DBFC909FCAD8AD963AC265F2002FFF46",
+    "rrstyle-compare-12.3-deeper-pool.xml": "C9A0D2419E6A63A99251D605AF2996CAC5E864B042ACD939D4185A35C1CAB48C",
+    "rrstyle-compare-12.3-deeper-layout.xml": "1E2DADAF1B77B716CB092AEA4014D2701B9BC3F2B7131DBC9D2F138E4CB0DD79",
+    "rrstyle-compare-12.3-deeper-topology.json": "C829BD0C882B8120888FE6AB92037B52CE3C53BF4069D8289BD1EE1FA3E22728",
+    "rrstyle-compare-13-plant-pool.xml": "F29E67D5FC929C2585C8D725775ADFEF37266B8420BBB855BCA3AF0F6BB05434",
+    "rrstyle-compare-13-plant-layout.xml": "38C7F5629A84D05270DDF6539DF23F064818B49084ED2D55B02DF8CA97936D71",
+    "rrstyle-compare-13-plant-topology.json": "66A42825FFFB41E23044FD3BE410F458DBFC909FCAD8AD963AC265F2002FFF46",
+    "rrstyle-compare-13-deeper-pool.xml": "D63D249DBC97D24A6BDC4D0D70ACC606C0B747A6A3B750DDA7075BA4AA71A20A",
+    "rrstyle-compare-13-deeper-layout.xml": "1E2DADAF1B77B716CB092AEA4014D2701B9BC3F2B7131DBC9D2F138E4CB0DD79",
+    "rrstyle-compare-13-deeper-topology.json": "C829BD0C882B8120888FE6AB92037B52CE3C53BF4069D8289BD1EE1FA3E22728",
+    "rrstyle-compare-12.2-random-pool.xml": "D2D03DE471C67FC9F0E5D89375237BCFAC6AEEC2FE1C85178FB24F69F9ADC86C",
+    "rrstyle-compare-12.2-random-layout.xml": "2137B882B41AF3119C8094E98B91BC92F283918BE15C5E2A3302625DC4F3BF75",
+    "rrstyle-compare-12.2-random-topology.json": "9E6776BE49B951B0344E15F60E4DA657596B6CBC3A4AF211A733E64552E220AD",
+    "rrstyle-compare-12.2-show-pool.xml": "7D05481C1F89B7A9E5026566EEB22F68DD7EED3B4C5C151977EC482B07308F61",
+    "rrstyle-compare-12.2-show-layout.xml": "2AFBED26ABA4DEEA76D191FEF57038CFBD6212A9F03015CC693DE193FE7E7E3B",
+    "rrstyle-compare-12.2-show-topology.json": "631E026FA9CBA2DC39D5151B21A9219D61104B4096E25ED2F59FADA8B2255FF4",
+    "rrstyle-compare-12.3-random-pool.xml": "33B1A7463B1A5C9EFD5F0B65C81C6F743E69C580DFC93A6C492B764D4102395A",
+    "rrstyle-compare-12.3-random-layout.xml": "E56AEC0CC68BA5F716E73CD3893A4EB09C177DCADF6FA33805C5C98765D9F8DA",
+    "rrstyle-compare-12.3-random-topology.json": "C6AF2CC88143FD01EAEFBB119D1F2480E22BA244D317AA059DB422A9B570CE17",
+    "rrstyle-compare-12.3-show-pool.xml": "B91F1A93B04E22FB0A4310CE1205BDF1FDD8E1606459457129B28F835C67FBF8",
+    "rrstyle-compare-12.3-show-layout.xml": "3376F57684048C6FFBCA874ADF1CB894F90B94AFFE393C48174D58203CCEBCD5",
+    "rrstyle-compare-12.3-show-topology.json": "02A7A2ECA2029C97F634A72C295857F9EEB3CA0A5627CCC975D14884D7A7521C",
+    "rrstyle-compare-13-random-pool.xml": "2DBFCF64F73E5F82FE270A270F61FC47F59C903C29A0D14B49463256FA307906",
+    "rrstyle-compare-13-random-layout.xml": "E56AEC0CC68BA5F716E73CD3893A4EB09C177DCADF6FA33805C5C98765D9F8DA",
+    "rrstyle-compare-13-random-topology.json": "C6AF2CC88143FD01EAEFBB119D1F2480E22BA244D317AA059DB422A9B570CE17",
+    "rrstyle-compare-13-show-pool.xml": "556ADCEB39A0E9DD04D74CD57A6D84B3F45B056E4FE2D44608778502D128FC94",
+    "rrstyle-compare-13-show-layout.xml": "3376F57684048C6FFBCA874ADF1CB894F90B94AFFE393C48174D58203CCEBCD5",
+    "rrstyle-compare-13-show-topology.json": "02A7A2ECA2029C97F634A72C295857F9EEB3CA0A5627CCC975D14884D7A7521C",
+    "production-diag.log": "EAA9E4FECB26D42E79C9E8D4044950C1B996CD5C367DD1BA5AE36D78EBFEBF26",
+    "production-version.json": "066494E129A75D1EE0F206D62845C62BBC67D1021B9718EB1618DA7FC49379A9",
+    "startup-readiness.json": "EEBB31069ACEBFA0C0767D657AF58EBC51F384D95817BF3E8620E1ABC5F13ABA"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-compare-12.2-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.2-deeper",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.3-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.3-deeper",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-13-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-13-deeper",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.2-random",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.2-show",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "sewer": 12
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.3-random",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-12.3-show",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "sewer": 12
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-13-random",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-compare-13-show",
+      "poolRooms": 12,
+      "generatedPoolRooms": 12,
+      "themeCounts": {
+        "sewer": 12
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "625523719F9F6084B3FB4287170B6E04D0F1357899AE4B5F3196DC4FDE470AF6",
+  "driverSha256": "D0887FEC692F7BE2DBE40AE13A30EA298DB4CFEE385842D7A7BE4FADCE3D0F67",
+  "runnerLogSha256": "06CB999E17BCD993D12C79D2722662E3C4621E1F374690BD5381309B178ADB62",
+  "captured": {
+    "rrstyle-compare-12.2-plant-stage.png": "BA8B88B50F63736E0EAEF4A379E6EF542C478364701F48638C8F8A524BB299E0",
+    "rrstyle-compare-12.2-plant-room.png": "EDD3E9B7CAA8092D9F71078501C506041EA90DF87EE1862BA72D65127D8200FD",
+    "rrstyle-compare-12.2-deeper-stage.png": "B67B8B1DD8AEF3F7191F2469AE28E6FE5CB2B4DDF48AA39CA0CFB3BB4AB8133E",
+    "rrstyle-compare-12.2-deeper-room.png": "BF02A7D557F8D21F685D61FA743AB9E98ADBC0827076A2EF842A731B57549CE8",
+    "rrstyle-compare-12.3-plant-stage.png": "12C6C80BD3D80B706DF53655EE8C144FE0EF94790EEE32B518B48FFA66F1D031",
+    "rrstyle-compare-12.3-plant-room.png": "4C963945753293019B53300B2F912688B7FDA6B82E9D8B34B1F542811FB16DCA",
+    "rrstyle-compare-12.3-deeper-stage.png": "A1F40ABC466C41D1B8ABBD8C055DE59DCD3C9D4EC4278E45C973C47A2A75276D",
+    "rrstyle-compare-12.3-deeper-room.png": "CFF3C766890C6E03C94DFDA958ABC16FB62F160EDCEC477FD344AD32EA9A4A0C",
+    "rrstyle-compare-13-plant-stage.png": "DBCBF2B1F908CEDCBADBCEB4431CF0D1F20AF1814768C3EB19B80A7D04CD3E29",
+    "rrstyle-compare-13-plant-room.png": "EAEE395D0A1095F19AB27D0BA7024983A62800DBB722BF3E13F047A19B1AB930",
+    "rrstyle-compare-13-deeper-stage.png": "09489283194DB338BDB1762A8116B04EFEF704872E6C29EFB38FE4C8DF0E2302",
+    "rrstyle-compare-13-deeper-room.png": "AEEF530F8BD7E19EB90A76FE52C15BE64AB7032E73AE9D9541448DB75E6265BD",
+    "rrstyle-compare-12.2-random-stage.png": "87CB847E35A3BBA31C7B9F311A527A8799C7332C3A71AF5F37A5686BE53F8BD6",
+    "rrstyle-compare-12.2-random-room.png": "69D661372238214409CB06C10F4519C327AB2887092114D2144910D4936DDC09",
+    "rrstyle-compare-12.2-show-stage.png": "63DC6B5FB224FB6DAD421EB43CC618014D3FA2E050200DE3499611C77BECCA87",
+    "rrstyle-compare-12.2-show-room.png": "F22F0E156581CB1CC8B47624C293AFE6F1AA830E8B28B9A60552FFA11B49D068",
+    "rrstyle-compare-12.3-random-stage.png": "F524F7C93F3F891B00DBBA4AEC22D46221D41C1D15B47A687FF4C0E5197A9CA8",
+    "rrstyle-compare-12.3-random-room.png": "644B6442A1082201E1045A3E6BE740BD9FEC071EE60B74946B123B60F1D3372C",
+    "rrstyle-compare-12.3-show-stage.png": "45FE3AC07496A3559E6CD6EFD2ECF2C0983AF52702B91CA626C3B5F49652F67D",
+    "rrstyle-compare-12.3-show-room.png": "AEE3703B1C2EC391E5E43D7F0D441411148955181A9C07B27CC1E6AFE7C6D504",
+    "rrstyle-compare-13-random-stage.png": "A718ED11B7077566BD50BEBD7AD32DED535BE1AE3A5F8170CEEE7F1D76B3F635",
+    "rrstyle-compare-13-random-room.png": "A5C60BBA0A55E4EE963F89B0598AA363497A7FC75AABF5C27AB36558DF3D84AC",
+    "rrstyle-compare-13-show-stage.png": "4C9118BB2517DED7BB8EB948742C43CD4FD5D1D407B57D5C91F5CEBBB6AC2D13",
+    "rrstyle-compare-13-show-room.png": "C3190976D15416863AC925B52C8972530024B7F3E60F45F93085DF3A5814E519",
+    "comparison-picker.png": "84DD891768B8D129530A9337DA50C3A346C2C52AD95FEDD32F89F9888E72E69B",
+    "scene-picker.png": "E2DE22055E7050FA831113FB0D986B528637F362E89720327B36D4869BDAD4F8"
+  }
+}

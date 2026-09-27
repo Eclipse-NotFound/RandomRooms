@@ -33,7 +33,8 @@ package rr
          label(panel,show?"选择展示场景":"下一次探索，去哪里？",26,20,590,36,24,0xD8E8C9);
          label(panel,"从第 1 层开始；版本和场景在扩张、深入时保持不变。",26,62,590,30,15,0xA5BAA6);
          versionButton("12.2",26,"矩形分区 · 房间较多");
-         versionButton("12.3",326,"厚墙塑形 · 合并房间");
+         versionButton("12.3",226,"厚墙塑形 · 合并房间");
+         versionButton("13",426,"危险 / 价值 · 战术布防");
          label(panel,"对照种子",26,172,85,29,16,0xD8E8C9);
          seedInput=new TextField(); seedInput.name="rrComparisonSeed";
          seedInput.type=TextFieldType.INPUT; seedInput.restrict="0-9"; seedInput.maxChars=10;
@@ -52,7 +53,7 @@ package rr
          for (var i:int=0;i<4;i++) button(i,26+(i%2)*300,236+int(i/2)*81,288,72,RRScene.NAMES[i],hints[i]);
          button(4,26,400,288,61,"随机选择","同一种子会选中同一场景");
          button(-1,326,400,288,61,"返回","Esc 取消，保留当前进度");
-         label(panel,"1–4 选择场景，5 随机；F2 回城后可换版本重进。",26,475,590,22,13,0x8DA08F);
+         label(panel,"1–4 选场景，5 随机；F2 回城；Shift+F3 开关调试图层。",26,475,590,22,13,0x8DA08F);
          host.addChild(this);
          host.addEventListener(KeyboardEvent.KEY_DOWN,key,true,10000);
          host.addEventListener(KeyboardEvent.KEY_UP,keyUp,true,10000);
@@ -63,8 +64,8 @@ package rr
       {
          var b:Sprite=new Sprite(); b.name="rrVersion"+v.replace(".",""); b.x=x; b.y=99;
          b.buttonMode=true; b.mouseChildren=false; panel.addChild(b); versions.push({button:b,version:v});
-         label(b,"v"+v,13,5,260,27,20,0xE0EBCF);
-         label(b,subtitle,13,33,260,23,13,0xADBFAE);
+         label(b,"v"+v,13,5,168,27,20,0xE0EBCF);
+         label(b,subtitle,13,33,168,23,12,0xADBFAE);
          b.addEventListener(MouseEvent.CLICK,function(e:MouseEvent):void { e.stopImmediatePropagation(); version=v; paintVersions(); host.focus=null; });
          paintVersions();
       }
@@ -75,7 +76,7 @@ package rr
             var b:Sprite=item.button;
             b.graphics.clear(); b.graphics.lineStyle(2,item.version==version?0xD1E996:0x586E59);
             b.graphics.beginFill(item.version==version?0x3D5035:0x283A2F);
-            b.graphics.drawRoundRect(0,0,288,61,6); b.graphics.endFill();
+            b.graphics.drawRoundRect(0,0,188,61,6); b.graphics.endFill();
          }
       }
       private function label(parent:Sprite,text:String,x:int,y:int,w:int,h:int,size:int,color:uint):void

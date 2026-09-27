@@ -8,6 +8,8 @@ package rr
       public var mood:String;
       public var stage:int;
       public var ecology:RREcology;
+      public var contentPlan:RRContentPlan;
+      private var context:Object;
       private var p:RRArchitecture;
       private var random:Function;
       private var used:Object={};
@@ -32,7 +34,7 @@ package rr
       };
       public function RRPopulation(plan:RRArchitecture,rnd:Function,n:int,depth:int,peaceful:Boolean,safe:Boolean,context:Object=null)
       {
-         p=plan; random=rnd; prefix="rrp_"+n+"_"; stage=Math.max(0,depth);
+         p=plan; random=rnd; this.context=context; prefix="rrp_"+n+"_"; stage=Math.max(0,depth);
          ecology=new RREcology(p.theme,context && context.hasOwnProperty("difficulty")?Number(context.difficulty):8+2*stage,
             context && context.hasOwnProperty("parity")?int(context.parity):n,rnd);
          // Native setDoor/setNoObj suppresses removable objects farther from
@@ -54,8 +56,8 @@ package rr
       private function shuffle(a:Array):void
       { for(var i:int=a.length-1;i>0;i--) { var j:int=int(random()*(i+1)); var o:*=a[i]; a[i]=a[j]; a[j]=o; } }
       private function dangerous(kind:String):Boolean
-      { return ["enemy","security","hazard","trigger","damager"].indexOf(kind)>=0; }
-      private function fit(id:String,x:int,y:int,mount:String,kind:String):Boolean
+      { return ["enemy","security","hazard","trigger","damager","special","ambient","reinforcement"].indexOf(kind)>=0; }
+      public function fit(id:String,x:int,y:int,mount:String,kind:String):Boolean
       {
          var d:Array=SIZES[id], w:int=d[0], h:int=d[1];
          if(x<3 || x+w>45 || y-h<1 || y>23) return false;
@@ -76,7 +78,7 @@ package rr
          if(mount=="wall" && !p.solid(x-1,y) && !p.solid(x+w,y)) return false;
          return true;
       }
-      private function positions(id:String,mount:String,kind:String,region:Object=null):Array
+      public function positions(id:String,mount:String,kind:String,region:Object=null,randomize:Boolean=true):Array
       {
          var a:Array=[];
          for(var y:int=2;y<=23;y++) for(var x:int=3;x<=44;x++)
@@ -84,9 +86,9 @@ package rr
             if(region && (x<region.x0 || x+SIZES[id][0]-1>region.x1 || y<region.top || y>region.floor)) continue;
             if(fit(id,x,y,mount,kind)) a.push({x:x,y:y});
          }
-         shuffle(a); return a;
+         if(randomize) shuffle(a); return a;
       }
-      private function put(id:String,pos:Object,kind:String,mount:String="floor",attrs:Object=null):XML
+      public function put(id:String,pos:Object,kind:String,mount:String="floor",attrs:Object=null):XML
       {
          var o:XML=<obj id={id} x={pos.x} y={pos.y} rrContent={kind} rrMount={mount} uid={prefix+serial++}/>;
          if(attrs) for(var key:String in attrs) o.@[key]=attrs[key];
@@ -236,6 +238,12 @@ package rr
       }
       public function build():void
       {
+         if(context && context.contentVersion=="13")
+         {
+            contentPlan=new RRContentPlan(p,this,new RRSeed(uint(context.seed)).fork("content-v13"),context);
+            contentPlan.build();
+            return;
+         }
          rewards(); services();
          if(mood=="showroom" || mood=="arrival" || mood=="quiet")
          {

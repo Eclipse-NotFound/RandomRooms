@@ -1,0 +1,133 @@
+appId=pferr-style-3f479f4b3a9041cb84ed94697ba62e13
+3779 ready cases=12
+3780 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-3f479f4b3a9041cb84ed94697ba62e13\Local Store existsBefore=true
+3782 STORAGE existsAfter=true
+63553 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+63564 development init returned
+64186 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=false rrHost=false
+65648 STARTUP-READY all 31 host loaders loaded with nonempty pools
+67405 newGame(-1) issued, intro skipped
+69440 initial world ready land=rbl
+70257 capture scene-picker 1008x729 room=room_0_0 lightOverlay=true
+70691 capture comparison-picker 1008x729 room=room_0_0 lightOverlay=true
+77513 SCENE-PROBE picker pause/cancel/restore/select PASS plant
+77514 development debugTravel random_rooms case=rrstyle-compare-12.2-plant
+77548 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+81241 arrived random_rooms room=rr_begin
+83898 capture rrstyle-compare-12.2-plant-stage 1008x729 room=rr_begin lightOverlay=true
+85256 capture rrstyle-compare-12.2-plant-room 1920x1000 room=rr_begin lightOverlay=false
+85290 development pool rrstyle-compare-12.2-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+85292 SCENE-PROBE PASS rrstyle-compare-12.2-plant theme=plant rooms=25 stage=0 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+85312 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+90288 SCENE-PROBE F4 from=plant stage=0
+90289 development debugTravel random_rooms case=rrstyle-compare-12.2-deeper
+93807 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+93942 arrived random_rooms room=rr_begin
+96568 capture rrstyle-compare-12.2-deeper-stage 1008x729 room=rr_begin lightOverlay=true
+97806 capture rrstyle-compare-12.2-deeper-room 1920x1000 room=rr_begin lightOverlay=false
+97836 development pool rrstyle-compare-12.2-deeper total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+97858 SCENE-PROBE PASS rrstyle-compare-12.2-deeper theme=plant rooms=25 stage=1 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+97877 return to base before refreshing random_rooms
+103143 returned to base
+107305 SCENE-PROBE picker pause/cancel/restore/select PASS plant
+107305 development debugTravel random_rooms case=rrstyle-compare-12.3-plant
+107324 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+111041 arrived random_rooms room=rr_begin
+113669 capture rrstyle-compare-12.3-plant-stage 1008x729 room=rr_begin lightOverlay=true
+115192 capture rrstyle-compare-12.3-plant-room 1920x1000 room=rr_begin lightOverlay=false
+115221 development pool rrstyle-compare-12.3-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+115223 SCENE-PROBE PASS rrstyle-compare-12.3-plant theme=plant rooms=25 stage=0 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+115240 heartbeat state=2 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+118881 SCENE-PROBE F4 from=plant stage=0
+118882 development debugTravel random_rooms case=rrstyle-compare-12.3-deeper
+122709 arrived random_rooms room=rr_begin
+123784 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+125377 capture rrstyle-compare-12.3-deeper-stage 1008x729 room=rr_begin lightOverlay=true
+126576 capture rrstyle-compare-12.3-deeper-room 1920x1000 room=rr_begin lightOverlay=false
+126605 development pool rrstyle-compare-12.3-deeper total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+126625 SCENE-PROBE PASS rrstyle-compare-12.3-deeper theme=plant rooms=25 stage=1 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+126645 return to base before refreshing random_rooms
+131878 returned to base
+136868 SCENE-PROBE picker pause/cancel/restore/select PASS plant
+136868 development debugTravel random_rooms case=rrstyle-compare-13-plant
+136878 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=false rrHost=false
+140942 arrived random_rooms room=rr_begin
+143739 capture rrstyle-compare-13-plant-stage 1008x729 room=rr_begin lightOverlay=true
+144980 capture rrstyle-compare-13-plant-room 1920x1000 room=rr_begin lightOverlay=false
+145018 development pool rrstyle-compare-13-plant total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+145019 SCENE-PROBE PASS rrstyle-compare-13-plant theme=plant rooms=25 stage=0 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+145038 heartbeat state=2 case=5 allLands=true text=true resources=true rrCurrent=false rrHost=false
+150078 SCENE-PROBE F4 from=plant stage=0
+150078 development debugTravel random_rooms case=rrstyle-compare-13-deeper
+153774 arrived random_rooms room=rr_begin
+153808 heartbeat state=3 case=5 allLands=true text=true resources=true rrCurrent=false rrHost=false
+156448 capture rrstyle-compare-13-deeper-stage 1008x729 room=rr_begin lightOverlay=true
+157668 capture rrstyle-compare-13-deeper-room 1920x1000 room=rr_begin lightOverlay=false
+157699 development pool rrstyle-compare-13-deeper total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+157721 SCENE-PROBE PASS rrstyle-compare-13-deeper theme=plant rooms=25 stage=1 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+157754 return to base before refreshing random_rooms
+163009 returned to base
+167508 SCENE-PROBE picker pause/cancel/restore/select PASS mane
+167508 development debugTravel random_rooms case=rrstyle-compare-12.2-random
+167521 heartbeat state=3 case=6 allLands=true text=true resources=true rrCurrent=false rrHost=false
+171241 arrived random_rooms room=rr_begin
+173949 capture rrstyle-compare-12.2-random-stage 1008x729 room=rr_begin lightOverlay=true
+174716 capture rrstyle-compare-12.2-random-room 1920x1000 room=rr_begin lightOverlay=false
+174742 development pool rrstyle-compare-12.2-random total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+174743 SCENE-PROBE PASS rrstyle-compare-12.2-random theme=mane rooms=25 stage=0 music=music_mane_1 waterTiles=0 waterType=0 waterRad=1
+174766 heartbeat state=2 case=7 allLands=true text=true resources=true rrCurrent=false rrHost=false
+174766 return to base before refreshing rr_showroom
+179976 returned to base
+183794 SCENE-PROBE picker pause/cancel/restore/select PASS sewer
+183794 development debugTravel rr_showroom case=rrstyle-compare-12.2-show
+183807 heartbeat state=3 case=7 allLands=true text=true resources=true rrCurrent=false rrHost=false
+187441 arrived rr_showroom room=rr_begin
+190134 capture rrstyle-compare-12.2-show-stage 1008x729 room=rr_begin lightOverlay=true
+191022 capture rrstyle-compare-12.2-show-room 1920x1000 room=rr_begin lightOverlay=false
+191038 development pool rrstyle-compare-12.2-show total=12 generated=12 assembled=12 issues=0 themes={"sewer":12}
+191039 SCENE-PROBE PASS rrstyle-compare-12.2-show theme=sewer rooms=12 stage=0 music=music_sewer_1 waterTiles=36 waterType=1 waterRad=3
+191057 return to base before refreshing random_rooms
+193801 heartbeat state=7 case=8 allLands=true text=true resources=true rrCurrent=false rrHost=false
+196410 returned to base
+201381 SCENE-PROBE picker pause/cancel/restore/select PASS mane
+201382 development debugTravel random_rooms case=rrstyle-compare-12.3-random
+203808 heartbeat state=3 case=8 allLands=true text=true resources=true rrCurrent=false rrHost=false
+205143 arrived random_rooms room=rr_begin
+207807 capture rrstyle-compare-12.3-random-stage 1008x729 room=rr_begin lightOverlay=true
+208667 capture rrstyle-compare-12.3-random-room 1920x1000 room=rr_begin lightOverlay=false
+208697 development pool rrstyle-compare-12.3-random total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+208698 SCENE-PROBE PASS rrstyle-compare-12.3-random theme=mane rooms=25 stage=0 music=music_mane_1 waterTiles=0 waterType=0 waterRad=1
+208716 return to base before refreshing rr_showroom
+213817 heartbeat state=7 case=9 allLands=true text=true resources=true rrCurrent=false rrHost=false
+213975 returned to base
+216309 SCENE-PROBE picker pause/cancel/restore/select PASS sewer
+216310 development debugTravel rr_showroom case=rrstyle-compare-12.3-show
+220142 arrived rr_showroom room=rr_begin
+222940 capture rrstyle-compare-12.3-show-stage 1008x729 room=rr_begin lightOverlay=true
+223519 capture rrstyle-compare-12.3-show-room 1920x1000 room=rr_begin lightOverlay=false
+223537 development pool rrstyle-compare-12.3-show total=12 generated=12 assembled=12 issues=0 themes={"sewer":12}
+223537 SCENE-PROBE PASS rrstyle-compare-12.3-show theme=sewer rooms=12 stage=0 music=music_sewer_1 waterTiles=24 waterType=1 waterRad=3
+223554 return to base before refreshing random_rooms
+223777 heartbeat state=7 case=10 allLands=true text=true resources=true rrCurrent=false rrHost=false
+228778 returned to base
+235245 SCENE-PROBE picker pause/cancel/restore/select PASS mane
+235246 development debugTravel random_rooms case=rrstyle-compare-13-random
+235258 heartbeat state=3 case=10 allLands=true text=true resources=true rrCurrent=false rrHost=false
+238945 arrived random_rooms room=rr_begin
+241571 capture rrstyle-compare-13-random-stage 1008x729 room=rr_begin lightOverlay=true
+242495 capture rrstyle-compare-13-random-room 1920x1000 room=rr_begin lightOverlay=false
+242532 development pool rrstyle-compare-13-random total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+242533 SCENE-PROBE PASS rrstyle-compare-13-random theme=mane rooms=25 stage=0 music=music_mane_1 waterTiles=0 waterType=0 waterRad=1
+242560 return to base before refreshing rr_showroom
+243808 heartbeat state=7 case=11 allLands=true text=true resources=true rrCurrent=false rrHost=false
+247842 returned to base
+250830 SCENE-PROBE picker pause/cancel/restore/select PASS sewer
+250830 development debugTravel rr_showroom case=rrstyle-compare-13-show
+254038 heartbeat state=3 case=11 allLands=true text=true resources=true rrCurrent=false rrHost=false
+254640 arrived rr_showroom room=rr_begin
+257470 capture rrstyle-compare-13-show-stage 1008x729 room=rr_begin lightOverlay=true
+258122 capture rrstyle-compare-13-show-room 1920x1000 room=rr_begin lightOverlay=false
+258139 development pool rrstyle-compare-13-show total=12 generated=12 assembled=12 issues=0 themes={"sewer":12}
+258140 SCENE-PROBE PASS rrstyle-compare-13-show theme=sewer rooms=12 stage=0 music=music_sewer_1 waterTiles=24 waterType=1 waterRad=3
+258344 DEVELOPMENT-VERSION runtimeTag=[RR:v13-dv] copiedOriginalLog=true
+258346 DONE 12 cases

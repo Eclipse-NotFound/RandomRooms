@@ -1,5 +1,21 @@
 # RandomRooms —— 开发日志
 
+## 2026-09-28 — v13 内容规划、游戏内调试与正式部署
+
+- 用户明确授权把游戏内用途/D/V/刷新点/枪线调试和此前未落地机制一起实装。v13 延用真实 v12.3 地形，保留 v12.2/v12.3 对照；不把 HTML 简化地形当正式实现。
+- 新增 RRContentPlan、RRTactics、RRDebugOverlay：最终合并房的 D/V 与预算、用途偏向、独立 V 随机源、特殊威胁、顶/地炮塔统一战术选点、整 Location 安保终端及候选避火接近路；沿用原生物体/AI/掉落/交互。
+- Shift+F3 开关保存状态；显示用途与局部/整体 D/V、计划刷新点、现存单位、炮塔守点、终端路线和当前枪口朝向，支持镜像/相机；停机炮塔不画活动枪线。修复多行文字裁切和顶炮文字覆盖 D/V。
+- 实机发现终端位在梯子上导致角色吸附偏位露出掩体，正式选点排除梯子/连接预留并要求两脚支撑，同种子原生抵达复测通过。F2/F4 添加原生切换状态保护，修复过早请求造成目标/实际土地失配。
+- 192 AS3 房间、32 对 V 独立性通过；1024 旧 XML 重放、512 地图输入、256 对输入一致及 896 邻接口通过；旧历史 SHA 因图片清理失效，改用哈希核对的旧发布 archive 比对七份 v12.2 源。
+- 四场景连续内容/调试 4/4，共 132 Location；三版本 UI 12/12；工厂终端实际操作位通过；四场景普通移动完成新列/新行往返，5×5→8×8，旧房/对象保留、下水道 wetFrames=0。驾驶器斜梯失败原样存档，修正按键选路后通过。
+- 机制候选 50747C20…E261B；最终 A5EB49A0…BE46 仅下移顶炮调试文字，精确源码替换核对并复测工厂显示/交互。正式重启用原清单加载器，不由驾驶器调用 init，F1/F4/F2/F5＋Shift+F3 共 3 案通过。
+- 首次正式启动检查器误等不存在的启动期随机房池，模组已 READY；按门禁先恢复旧 release，修正检查器后重新安装同一 SWF 并通过。terminal-ladder-failed、navigation-flight-failed、ui-clock-gap-failed、native-loader-readiness-failed 均保留，不冒报成功。
+- 正式 release/RandomRoomsMod.swf = 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。旧版备份 build/release-backups/RandomRoomsMod_before_v13_20260928.swf = 8E0E8A83…9BA292E9。根/DLC SWF、真实存档与其他模组未改；registry 登记 Shift+F3/显示层。
+- 详细规则、分层证据、安装/回滚时间见 design/v13-content-runtime/validation.md、runtime-checks.json、deployment.json。实验用独立 pferr-style 应用；依 KB-000061 使用原样候选＋独立驾驶器并补做正式加载验证。
+- 用户需完全退出重启，F2 回城、F1 选 v13 进入新图，Shift+F3 查看。保留容器暗雷/开箱事件；枪线不是命中预测。尚未穷尽种子、联机、全部模组并用或长期扩张；等待实玩反馈。
+
+---
+
 ## 2026-09-27 — 天花板炮塔与安保终端进入 HTML 模拟
 
 - 用户要求增加顶炮与带炮塔合成房中的安保终端，并考虑终端选点；本轮只扩展现有 danger-value-preview，未改 AS3/SWF 或部署。

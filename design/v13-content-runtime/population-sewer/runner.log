@@ -1,0 +1,25 @@
+appId=pferr-style-d8059b99ac0a4d8db5336c00fc2058f4
+3955 ready cases=1
+3957 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-d8059b99ac0a4d8db5336c00fc2058f4\Local Store existsBefore=true
+3958 STORAGE existsAfter=true
+10195 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+10204 development init returned
+10487 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=false rrHost=false
+11303 STARTUP-READY all 31 host loaders loaded with nonempty pools
+13100 newGame(-1) issued, intro skipped
+14031 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+15242 initial world ready land=rbl
+20899 CONTENT-GALLERY native travel spawn=3:3 score=23
+20899 development debugTravel random_rooms case=rrstyle-single-sewer
+23982 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+23983 arrived random_rooms room=syn_18
+26728 capture rrstyle-single-sewer-stage 1008x729 room=syn_18 lightOverlay=true
+27534 capture rrstyle-single-sewer-room 1920x1000 room=syn_18 lightOverlay=false
+27575 development pool rrstyle-single-sewer total=36 generated=36 assembled=36 issues=0 themes={"sewer":36}
+27794 capture rrstyle-single-sewer-debug-before-stage 1008x729 room=syn_18 lightOverlay=true
+28634 capture rrstyle-single-sewer-debug-before-room 1920x1000 room=syn_18 lightOverlay=false
+29721 POPULATION-UI {"click":0,"sats":false,"pause":false,"pip":false,"allStat":1,"stand":false,"guiPause":false,"exit":9}
+30597 capture rrstyle-single-sewer-debug-after-room 1920x1000 room=syn_18 lightOverlay=false
+30598 POPULATION PASS rrstyle-single-sewer
+30778 DEVELOPMENT-VERSION runtimeTag=[RR:v13-dv] copiedOriginalLog=true
+30779 DONE 1 cases

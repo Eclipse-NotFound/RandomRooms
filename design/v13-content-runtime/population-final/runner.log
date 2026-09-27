@@ -1,0 +1,73 @@
+appId=pferr-style-de208325c0904488ba30ab150b4f20ea
+3884 ready cases=4
+3886 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-de208325c0904488ba30ab150b4f20ea\Local Store existsBefore=true
+3887 STORAGE existsAfter=true
+4005 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+4010 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+4021 development init returned
+11071 STARTUP-READY all 31 host loaders loaded with nonempty pools
+12838 newGame(-1) issued, intro skipped
+14968 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+14969 initial world ready land=rbl
+20950 CONTENT-GALLERY native travel spawn=3:3 score=170
+20950 development debugTravel random_rooms case=rrstyle-navigation-plant
+24001 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+26401 arrived random_rooms room=syn_18
+29496 capture rrstyle-navigation-plant-stage 1008x729 room=syn_18 lightOverlay=true
+30889 capture rrstyle-navigation-plant-room 1920x1000 room=syn_18 lightOverlay=false
+30941 development pool rrstyle-navigation-plant total=36 generated=36 assembled=36 issues=0 themes={"plant":36}
+31497 capture rrstyle-navigation-plant-debug-before-stage 1008x729 room=syn_18 lightOverlay=true
+32983 capture rrstyle-navigation-plant-debug-before-room 1920x1000 room=syn_18 lightOverlay=false
+35003 POPULATION-UI {"click":0,"sats":false,"pause":false,"pip":false,"allStat":1,"stand":false,"guiPause":false,"exit":0}
+36564 capture rrstyle-navigation-plant-debug-after-room 1920x1000 room=syn_18 lightOverlay=false
+36564 POPULATION PASS rrstyle-navigation-plant
+36616 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+36617 return to base before refreshing random_rooms
+41837 returned to base
+48332 CONTENT-GALLERY native travel spawn=4:1 score=165
+48332 development debugTravel random_rooms case=rrstyle-navigation-stable
+48355 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+53904 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+54139 arrived random_rooms room=syn_21
+57031 capture rrstyle-navigation-stable-stage 1008x729 room=syn_21 lightOverlay=true
+58964 capture rrstyle-navigation-stable-room 1920x1000 room=syn_21 lightOverlay=false
+59008 development pool rrstyle-navigation-stable total=35 generated=35 assembled=35 issues=0 themes={"stable":35}
+59451 capture rrstyle-navigation-stable-debug-before-stage 1008x729 room=syn_21 lightOverlay=true
+61504 capture rrstyle-navigation-stable-debug-before-room 1920x1000 room=syn_21 lightOverlay=false
+64858 POPULATION-UI {"click":0,"sats":false,"pause":false,"pip":false,"allStat":1,"stand":false,"guiPause":false,"exit":0}
+67474 capture rrstyle-navigation-stable-debug-after-room 1920x1000 room=syn_21 lightOverlay=false
+67474 POPULATION PASS rrstyle-navigation-stable
+67763 heartbeat state=2 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+67764 return to base before refreshing random_rooms
+73132 returned to base
+78433 CONTENT-GALLERY native travel spawn=3:3 score=23
+78433 development debugTravel random_rooms case=rrstyle-navigation-sewer
+78459 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+83910 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+84402 arrived random_rooms room=syn_18
+87083 capture rrstyle-navigation-sewer-stage 1008x729 room=syn_18 lightOverlay=true
+88052 capture rrstyle-navigation-sewer-room 1920x1000 room=syn_18 lightOverlay=false
+88093 development pool rrstyle-navigation-sewer total=36 generated=36 assembled=36 issues=0 themes={"sewer":36}
+88299 capture rrstyle-navigation-sewer-debug-before-stage 1008x729 room=syn_18 lightOverlay=true
+89163 capture rrstyle-navigation-sewer-debug-before-room 1920x1000 room=syn_18 lightOverlay=false
+90654 POPULATION-UI {"click":0,"sats":false,"pause":false,"pip":false,"allStat":1,"stand":false,"guiPause":false,"exit":0}
+91663 capture rrstyle-navigation-sewer-debug-after-room 1920x1000 room=syn_18 lightOverlay=false
+91664 POPULATION PASS rrstyle-navigation-sewer
+91758 return to base before refreshing random_rooms
+93901 heartbeat state=7 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+96969 returned to base
+103577 CONTENT-GALLERY native travel spawn=1:2 score=178
+103577 development debugTravel random_rooms case=rrstyle-navigation-mane
+103907 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+107368 arrived random_rooms room=syn_7
+110057 capture rrstyle-navigation-mane-stage 1008x729 room=syn_7 lightOverlay=true
+110998 capture rrstyle-navigation-mane-room 1920x1000 room=syn_7 lightOverlay=false
+111034 development pool rrstyle-navigation-mane total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+111243 capture rrstyle-navigation-mane-debug-before-stage 1008x729 room=syn_7 lightOverlay=true
+112142 capture rrstyle-navigation-mane-debug-before-room 1920x1000 room=syn_7 lightOverlay=false
+114531 POPULATION-UI {"click":0,"sats":false,"pause":false,"pip":false,"allStat":1,"stand":false,"guiPause":false,"exit":0}
+115620 capture rrstyle-navigation-mane-debug-after-room 1920x1000 room=syn_7 lightOverlay=false
+115621 POPULATION PASS rrstyle-navigation-mane
+115801 heartbeat state=2 case=4 allLands=true text=true resources=true rrCurrent=false rrHost=false
+116001 DEVELOPMENT-VERSION runtimeTag=[RR:v13-dv] copiedOriginalLog=true
+116002 DONE 4 cases

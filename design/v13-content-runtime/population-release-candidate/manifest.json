@@ -1,0 +1,142 @@
+{
+  "appId": "pferr-style-815c32758f9d41b4970fbfdf3585616b",
+  "status": "complete",
+  "startedUtc": "2026-09-27T23:36:30.9989152Z",
+  "completedUtc": "2026-09-27T23:39:33.8465020Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-navigation-plant",
+    "rrstyle-navigation-stable",
+    "rrstyle-navigation-sewer",
+    "rrstyle-navigation-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "50747C20A59C4BE30C56228FD9930C033EA60432EF333D0B6AB8C1FE476E261B",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC",
+  "navigationProbe": false,
+  "populationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "mods/RandomRooms/build/RandomRooms-v13-operator-candidate.swf",
+  "nativeLoaderSmoke": false,
+  "runtimeArtifacts": {
+    "rrstyle-navigation-plant-pool.xml": "0F3FD90E6C01265C0706F755EE246340FB5F9F152D46571D5F404FA8A38E6B5B",
+    "rrstyle-navigation-plant-layout.xml": "3B45BF9903F4ECE4B5FD13782DEB9ACFB77810BD0BBA0318E7CA287236618498",
+    "rrstyle-navigation-plant-topology.json": "128E6C18913D5D39F2E16C8CEEE31D672B628FA0A9235E696F4F9C4356651C5D",
+    "rrstyle-navigation-stable-pool.xml": "F3F2874B64C6DA7C764AAEBBD4082689F531E3893E6CAE0A0064D45CE10E6502",
+    "rrstyle-navigation-stable-layout.xml": "A6F869DC5573A8613B7D8D553AD2DFB12BBA78AF35F1BABDD1A78967A78DF98D",
+    "rrstyle-navigation-stable-topology.json": "6CB0B75A2529AF0BBFE889492D231A9378CDA85BAFE75C2090275EAB2680180C",
+    "rrstyle-navigation-sewer-pool.xml": "ABCB7ED16FBD6C8480C093C6CCDEDC98BCD3B8677A7E018C9B6FFE7EADCD051E",
+    "rrstyle-navigation-sewer-layout.xml": "3B409CE7946B770CC4CE358CD14714B58504722566540AF8937AED45C2B6E773",
+    "rrstyle-navigation-sewer-topology.json": "2B4664E0D2442725BD79464CA989558365412E08CDC638C40E10D7A3E435552D",
+    "rrstyle-navigation-mane-pool.xml": "1BC3EAC41B54233F82098AFCFC9A4B6886A464CB6F0F10EDE0D61F18D2761EF6",
+    "rrstyle-navigation-mane-layout.xml": "E56AEC0CC68BA5F716E73CD3893A4EB09C177DCADF6FA33805C5C98765D9F8DA",
+    "rrstyle-navigation-mane-topology.json": "082DB35686F23F96B3153576F8333C50D296B9306D7D306DA7A9B64671D0D24B",
+    "production-diag.log": "5049375A0198D56CDD27324CDCDFC158A4A21ED8EC3DDD654E10973951274987",
+    "production-version.json": "E723902B2D060C65CC287C5DFC143CCFDDA84B3BD07C6A52A6EDBDB8D1B9CA71",
+    "rrstyle-navigation-mane-content-debug.json": "A66700EA81A015EF436A3E24CC318F43F94B75CB1689CDDCE5BEC275CBFD2F47",
+    "rrstyle-navigation-mane-population.json": "BB2EE07A845DA3315B78B840A5A5EF53783F2B3DE75056AA5ABCF74234836370",
+    "rrstyle-navigation-plant-content-debug.json": "18A90D4ACEB137B181A59536F2952462DAE0113091962722472D1817B310F088",
+    "rrstyle-navigation-plant-population.json": "2E4547525B3A2EEDC1C066649ED8E2A60E57A7D44406422ED9B83306F4BBFC84",
+    "rrstyle-navigation-sewer-content-debug.json": "4D7F2F56C6E01EF2FF6681406358B15A1A88AD1689C9AC70869E226E0F5648BC",
+    "rrstyle-navigation-sewer-population.json": "5EC37EFABFC3D985AB7F865E576346973FED44A7ACD10D19AF5FA9D5A5DDC25D",
+    "rrstyle-navigation-stable-content-debug.json": "D625ABB51A341F078961D83B48442479A6C2109ECA3550D44114F6ABE6BE9F5B",
+    "rrstyle-navigation-stable-population.json": "85EC1CB7EB86176EF0E20B0A4232D9FFD638C4271493331CF73BA5130D8FBAE8",
+    "startup-readiness.json": "2F8F9BBDD7756A64DCCA84594E98B79DF51F900DA0A50BFAF071DAB79E876C89"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-navigation-plant",
+      "poolRooms": 36,
+      "generatedPoolRooms": 36,
+      "themeCounts": {
+        "plant": 36
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-stable",
+      "poolRooms": 35,
+      "generatedPoolRooms": 35,
+      "themeCounts": {
+        "stable": 35
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-sewer",
+      "poolRooms": 36,
+      "generatedPoolRooms": 36,
+      "themeCounts": {
+        "sewer": 36
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "7E97D33CAE389924113A767B757DF78FB6B5C38A442ED2C8A46345EEA6D8C930",
+  "driverSha256": "DA3517C8DFCBEC26A492811DCAF7049E29FF9A9CC8CE919038E2D1C37208A787",
+  "runnerLogSha256": "14D60B7C51747DDE71C5222D63B831289086088A7F35F0F7542BC202F86290A9",
+  "captured": {
+    "rrstyle-navigation-plant-stage.png": "CCDAB8E78E4E73ED6D4732DA226494F3E119F2E10575D0F16269723A8C55FC08",
+    "rrstyle-navigation-plant-room.png": "58CF556B0CB3A4284B93C6932837D1083CDB830CF208A04C0BA1106AA31F180D",
+    "rrstyle-navigation-stable-stage.png": "854775072A3161B8BE6EB834AFF826CF1A0F6278B562DF5B4A4C7AEDCD2BADF6",
+    "rrstyle-navigation-stable-room.png": "116A2DD98EE12FCE171A2A0DF98907E9453E3D0A8881836AD171FB67A8002A90",
+    "rrstyle-navigation-sewer-stage.png": "9C68BB29A31CFBD9D20EB3ECFB353360730A908241451DB9E77C568440FA979D",
+    "rrstyle-navigation-sewer-room.png": "1C705313B1873E683EFB50E90DAFA2BB07B952B0A9C15BDFF6B260CED3B92C94",
+    "rrstyle-navigation-mane-stage.png": "D68CE0665CD4AE9F8C3A414E6E22563EF13839208BCD3F196A2A0E2027A25175",
+    "rrstyle-navigation-mane-room.png": "CF295FD4FF11075AF975B10FB11261D5B695AF76E1FDFAAF3447A8243E28D723",
+    "rrstyle-navigation-mane-debug-after-room.png": "4992AC074566E4F94C78591979A4DFD18280E5C7404D3282D633834B2D69B3DF",
+    "rrstyle-navigation-mane-debug-before-room.png": "06F52E86CE6A6DCDED44F96BCD4EC71E0B11BD8A8168A782E166BA651558BC3E",
+    "rrstyle-navigation-mane-debug-before-stage.png": "C3EE7AE92AF4FBC102732E9EBAD87156EBDF67DD2C61C1F6575A5F9B821EAD80",
+    "rrstyle-navigation-plant-debug-after-room.png": "0ADD1C5E6EEADB67A49B3162C666AFB8C5BA3DD2C7F68B11DCF7B5460A330E7A",
+    "rrstyle-navigation-plant-debug-before-room.png": "6347C2E825FC44C8D62E9763E62FB2D86A21CC9F0F16D1CB1C2B84DFECBA1303",
+    "rrstyle-navigation-plant-debug-before-stage.png": "75A86AAF64DE2488855A4C406A86C32FC9019EE452E5F8F98488658133BBEAE7",
+    "rrstyle-navigation-sewer-debug-after-room.png": "FCB4D40337A3BA96419BB6F057917B5BCF09B61A167D1096256189C5BE47F98E",
+    "rrstyle-navigation-sewer-debug-before-room.png": "75B752F0DF5AD22321B1364928663DC3C9030BDA7008CAE4C3950748AC4643BA",
+    "rrstyle-navigation-sewer-debug-before-stage.png": "116E313D948184EB705EE4570C4C02083E412561201BC74A893DE268FA59901C",
+    "rrstyle-navigation-stable-debug-after-room.png": "A28C062A4467DE686B969DB0EFE0169A464CF9BFB56EDBE10F61A38EB3F17642",
+    "rrstyle-navigation-stable-debug-before-room.png": "22B8C38273D90E0677C72DCFF18BA7DE794398992D5B08A0C3196F71C5CF265D",
+    "rrstyle-navigation-stable-debug-before-stage.png": "D9ADF7E526EE8B7FCB9A36408B2D75627777E36AF9042C7CAAB2525776197151"
+  }
+}

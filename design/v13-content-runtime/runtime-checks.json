@@ -1,0 +1,240 @@
+{
+  "passed": true,
+  "releaseSha256": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+  "mechanicsCandidateSha256": "50747c20a59c4be30c56228fd9930c033ea60432ef333d0b6ab8c1fe476e261b",
+  "finalDifference": "Only ceiling-turret debug label Y offset; verified exact source substitution.",
+  "runs": {
+    "ui-lifecycle-final": {
+      "passed": true,
+      "cases": 12,
+      "sha256": "50747c20a59c4be30c56228fd9930c033ea60432ef333d0b6ab8c1fe476e261b",
+      "manifestSha256": "f3b147d2ac39141e5bcb86e26376c65c8a0354388ca950a40388b1278de57dd6",
+      "applicationId": "pferr-style-3f479f4b3a9041cb84ed94697ba62e13"
+    },
+    "population-release-candidate": {
+      "passed": true,
+      "cases": 4,
+      "sha256": "50747c20a59c4be30c56228fd9930c033ea60432ef333d0b6ab8c1fe476e261b",
+      "manifestSha256": "ee35a0382ab59c4efff1af156a3958979c8f0d0324050b8d0bec2dfadae1bd3c",
+      "applicationId": "pferr-style-815c32758f9d41b4970fbfdf3585616b"
+    },
+    "terminal-approach-plant": {
+      "passed": true,
+      "cases": 1,
+      "sha256": "50747c20a59c4be30c56228fd9930c033ea60432ef333d0b6ab8c1fe476e261b",
+      "manifestSha256": "d7811401d28e4a9654175fabe27524adffc14619f3b64a352120150cbc954f94",
+      "applicationId": "pferr-style-ec37955d93c94e70ac15f726483a052d"
+    },
+    "growth-final": {
+      "passed": true,
+      "cases": 4,
+      "sha256": "50747c20a59c4be30c56228fd9930c033ea60432ef333d0b6ab8c1fe476e261b",
+      "manifestSha256": "14fdc0bb008c54ef52beaf10d69bde73bb6e1d79741d5b72896f29f17140af52",
+      "applicationId": "pferr-style-5d0c58f5d1cc4341a77f92eecd2747a6"
+    },
+    "overlay-final": {
+      "passed": true,
+      "cases": 1,
+      "sha256": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+      "manifestSha256": "0c45d31800b95c9abf9909fce4d1155ce74b64cf45073c150cc94eabbadc7869",
+      "applicationId": "pferr-style-a3096f2ea473459ca2029d34b7b9f754"
+    },
+    "release-smoke": {
+      "passed": true,
+      "cases": 3,
+      "sha256": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+      "manifestSha256": "2b9b5b6d8184329ffe3751b09236669ea3883ced08a5276b6b5d6eff62c6eb55",
+      "applicationId": "pferr-style-522c12d6a203421c9ab7ed7b03b60e49"
+    }
+  },
+  "growth": [
+    {
+      "scene": "plant",
+      "success": true,
+      "frames": 5737,
+      "milestones": 4,
+      "wetFrames": 0,
+      "persistentObjects": 397,
+      "cacheStayedEmpty": true
+    },
+    {
+      "scene": "stable",
+      "success": true,
+      "frames": 4664,
+      "milestones": 4,
+      "wetFrames": 0,
+      "persistentObjects": 380,
+      "cacheStayedEmpty": true
+    },
+    {
+      "scene": "sewer",
+      "success": true,
+      "frames": 4701,
+      "milestones": 4,
+      "wetFrames": 0,
+      "persistentObjects": 269,
+      "cacheStayedEmpty": true
+    },
+    {
+      "scene": "mane",
+      "success": true,
+      "frames": 5079,
+      "milestones": 4,
+      "wetFrames": 0,
+      "persistentObjects": 369,
+      "cacheStayedEmpty": false
+    }
+  ],
+  "population": [
+    {
+      "scene": "plant",
+      "rooms": 36,
+      "objects": 554,
+      "checks": {
+        "npc": 1,
+        "slimeMines": 0,
+        "switches": 15,
+        "terminalLock": 13,
+        "terminalRobot": 2,
+        "circuitsActivated": 4,
+        "ecology": 36,
+        "disarm": 24,
+        "stations": 13,
+        "loot": 260,
+        "lootCreated": 662
+      },
+      "zones": 243,
+      "points": 554,
+      "ceilings": 6,
+      "groundTurrets": 1,
+      "terminals": 2,
+      "specials": 38,
+      "mirrored": 18
+    },
+    {
+      "scene": "stable",
+      "rooms": 35,
+      "objects": 534,
+      "checks": {
+        "npc": 1,
+        "slimeMines": 5,
+        "switches": 9,
+        "terminalLock": 10,
+        "terminalRobot": 3,
+        "circuitsActivated": 6,
+        "ecology": 35,
+        "disarm": 20,
+        "stations": 26,
+        "loot": 261,
+        "lootCreated": 620
+      },
+      "zones": 270,
+      "points": 534,
+      "ceilings": 7,
+      "groundTurrets": 6,
+      "terminals": 3,
+      "specials": 15,
+      "mirrored": 20
+    },
+    {
+      "scene": "sewer",
+      "rooms": 36,
+      "objects": 394,
+      "checks": {
+        "npc": 0,
+        "slimeMines": 11,
+        "switches": 5,
+        "terminalLock": 0,
+        "terminalRobot": 0,
+        "circuitsActivated": 0,
+        "ecology": 36,
+        "disarm": 8,
+        "stations": 17,
+        "loot": 173,
+        "lootCreated": 373
+      },
+      "zones": 213,
+      "points": 394,
+      "ceilings": 0,
+      "groundTurrets": 0,
+      "terminals": 0,
+      "specials": 0,
+      "mirrored": 18
+    },
+    {
+      "scene": "mane",
+      "rooms": 25,
+      "objects": 369,
+      "checks": {
+        "npc": 1,
+        "slimeMines": 0,
+        "switches": 4,
+        "terminalLock": 9,
+        "terminalRobot": 3,
+        "circuitsActivated": 0,
+        "ecology": 25,
+        "disarm": 6,
+        "stations": 7,
+        "loot": 196,
+        "lootCreated": 434
+      },
+      "zones": 168,
+      "points": 369,
+      "ceilings": 5,
+      "groundTurrets": 6,
+      "terminals": 3,
+      "specials": 11,
+      "mirrored": 0
+    }
+  ],
+  "releaseArchiveSha256": "e9f3cbbfc263f430986361008c31e76ef8c141eb906af8dbce420d61790ccd60",
+  "sourceSha256": {
+    "src/RandomRoomsMod.as": "6e873beceebb2f71cb67e901b10ab76d6dc064b5fa92e67a270b0ade763c256b",
+    "src/rr/RRArchitecture.as": "8c21debdd4bb7b35853031e77ed01d1bc732a473fb7ba4e5ac6035595834ab75",
+    "src/rr/RRConfig.as": "6dbd20ca287da461621e097d0abeceb718a88ca19a7a6587514019e821f11e41",
+    "src/rr/RRContentPlan.as": "50cf8ea4f713b86c4246b4a9191f72b014601255d96c1ee37cb569e6ccd5b13f",
+    "src/rr/RRCook.as": "f1896b7fa96240ef741ce95effdaab4ed8d759a5c1a9dc58dabb2a91dcc7fd54",
+    "src/rr/RRDebugOverlay.as": "1c023856d5b3ea4e579aefed6ba02397e63ecf5ba3415b0eee7b44618937f6d4",
+    "src/rr/RRDiag.as": "738ef942cbfb00150a9a9b70482102f3fe6c67636315c1065a56893353eb132b",
+    "src/rr/RREcology.as": "14b560ee32d87aac42866fe51d55d4a1927db10c3e3ab13e5a54f83fd3ec34e0",
+    "src/rr/RRExpedition.as": "cd792f1ab0a6f4ed5f695a37bc5b9723ffe694f3632ccf18fb35532c0742b897",
+    "src/rr/RRFurnish.as": "07c271e38788702237378756e22b29d855bface72a0b2401d7c3dc55da79192b",
+    "src/rr/RRGrammar.as": "876865e035bf06da12012af563df076c30fefd36d9589c135b8464dd4bebffca",
+    "src/rr/RRGrowth.as": "8db996475504140709165b334b50b6843d0706e081749d378b146a86d3a89190",
+    "src/rr/RRMapPlan.as": "1d6004ca72cee5b7bcfe0ecdd18017b962ff00b23ae263d332d9a178f7d3e475",
+    "src/rr/RRMenu.as": "065b0afc863d247ad7272f583af082de5bc6a26699198c1ae2531b6c300172fe",
+    "src/rr/RRPartitionPlan.as": "ab5a4e8642208ef9a9e8decbfad17ac3975b434870a3b146b317a11a07502680",
+    "src/rr/RRPopulation.as": "772ea9a3b67bfb213a524d94c8619be55a7d22f51791e15d6f21ad7b757c9123",
+    "src/rr/RRPorts.as": "1991d5fb15ceda3a64eb0346abde98512fdf2b241e534f8fb45eedb3943b7b97",
+    "src/rr/RRScene.as": "b93b696d3eeb4169f2d57a1903a52d1de088b2bd3edcf2b8a91b0b4d145b7c2d",
+    "src/rr/RRScenePicker.as": "8fa026ddeee5e0848488dd8aa45fa3a7df3dcba3d89e489afd80015c2bc2285d",
+    "src/rr/RRSeed.as": "5a084167ae06dd1c4ed4662d42b8fc2627aaa24137856ff08ea9dbc632ae3966",
+    "src/rr/RRSpaceRules.as": "98dc3d916107d269131693842b66c8f9f3b30a11a81d591fbdf2d934a4b99965",
+    "src/rr/RRStripData.as": "b04ce373f7c382ce92ff4c70f627db56ec2afb37df12a3e2fa098d90ee4c5458",
+    "src/rr/RRSynth.as": "4200cb243c38db53224aeca50bb07c52e8a737cf774260b6774663ed9cfa8918",
+    "src/rr/RRTactics.as": "2169e8d44dcaaf332f7ebc614147f55ae488ef0ec076af3cf53acc1b1dc3eaac",
+    "src/rr/RRTestLand.as": "b54656659145659f415ee9c5a40802fc9e2eafe7dac695489d5053c40b9e8b82",
+    "src/rr/RRTravelBtn.as": "cba6f33cb60846f90b21573454e85d0dab76aae5874b9469f1ecaaab7a9062f0",
+    "src/rr/RRTraversal.as": "a0281538d34cbf0bee494dc5a24f37f35560863ec4074a025ea42da0b80d2580",
+    "src/rr/v122/RRArchitecture.as": "c3827bbfd01a539d78bb893e7e917d9858412bd9850f8d9d53febf432322cc5f",
+    "src/rr/v122/RRFurnish.as": "3b722f8e88d383c2dabd17211806ddd706adf7b7cf3a4401291a2ed1dfa941af",
+    "src/rr/v122/RRPartitionPlan.as": "e4920d82ab76747aea8ce848f731fd6d6f142658ccd619b4a0961c64e2b4add4",
+    "src/rr/v122/RRPopulation.as": "b61655b511828e35f1fb19257392d5ad84dde76c6ed74ef9dab166137bc5e9b7",
+    "src/rr/v122/RRSpaceRules.as": "d856403ea161080e2be05e48a409999a9d9ce4b9bc75232699de6d111cfe5fc5",
+    "src/rr/v122/RRSynth.as": "81bf94a0766dfb8c2ba4db559b62d7ace01388001a46fc31d3629e5829cb1857",
+    "src/rr/v122/RRTraversal.as": "03717377d04f6e721e9d2bd1477ae5ede33fe184243a179c98f905a2f7f3cd3c",
+    "build/style-review/game-harness/ContentDebugProbe.as": "ecb58ef2e8eb5ffdd3d36b175d5743099889431abc42030691fd28b36f4a3898",
+    "build/style-review/game-harness/FixtureProbe.as": "d11323f0f675627f76290d9f138c0744557511c131479cd0abf6183e774faab0",
+    "build/style-review/game-harness/NavigationProbe.as": "e6760724ffc6084c0a21c5a0bcd136382717f9ec1c1d9be83f9148aa958e69ba",
+    "build/style-review/game-harness/PopulationProbe.as": "cbd5b9f0c71bad838c323b6c68a22dfe3d6c2fcec264c3e4d534e45a681b561c",
+    "build/style-review/game-harness/RandomRoomsMod.as": "ac87ebd41e8540b4cb2109b20909ecd63a0a53509b2f4ed03593697728bfbcd9",
+    "build/style-review/game-harness/StyleDriver.as": "9bf9dda538f10fee4ca322ca9a5b9266acd9f5001660f979e265fbbc96d3d899",
+    "build/style-review/game-harness/TDFCMod.as": "962487342cea57bdab7251650e40b809c655f4b038868af5b1dcb906aac9e017",
+    "build/RandomRooms-v13-release-candidate.swf": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+    "build/style-review/game-harness/run-game-captures.ps1": "f65f9fd84abb192217e0713a87199d611830516879c5c597e094a56972ee161e",
+    "build/build-v7.ps1": "de8826169001868d5993d3169f45e73dfb93295176418d125964ea7f9bf950a0",
+    "build/rr-config.xml": "bc67d100c9e468b836db665bec849026693d33d30e33f41c769ebbbea1c794b5",
+    "build/style-review/finalize_v13_evidence.py": "9a665b0db0dd17e2a980cee770a0e89f35c15fa0cf06c410e61e9723899674ed"
+  },
+  "checkedUtc": "2026-09-27T23:51:56.123806+00:00"
+}

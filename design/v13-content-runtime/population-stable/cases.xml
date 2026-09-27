@@ -1,0 +1,3 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="false" waterProbe="false" population="true" contentGallery="true" populationDepth="0" development="true">
+  <case id="rrstyle-single-stable" landId="random_rooms" scene="stable" generatorVersion="13" comparisonSeed="20260818" />
+</cases>

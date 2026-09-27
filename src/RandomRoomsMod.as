@@ -20,6 +20,7 @@ package
    import rr.RRScene;
    import rr.RRScenePicker;
    import rr.RRExpedition;
+   import rr.RRDebugOverlay;
    
    /**
     * RandomRooms v11 development: native scene ecology and architecture.
@@ -58,6 +59,8 @@ package
       private static var menu:RRMenu;
       private static var menuShown:Boolean = false;
       private static var scenePicker:RRScenePicker;
+      private static var debugLayer:RRDebugOverlay;
+      private static var debugError:String="";
       private static var explorationScenes:Object={};
       private static var explorationChoices:Object={};
       private static var targetLand:String = LAND_ID_RR;   // F1 目标土地（verifyEntry 用）
@@ -201,7 +204,8 @@ package
          // capture 阶段监听：先于所有 bubble 阶段监听（其它模组的
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
-         diag.log("[RR] RandomRoomsMod v12.2+12.3 loaded <generator=partition-comparison, growth=right+down> stage bound (KEY_DOWN capture)");
+         debugLayer=new RRDebugOverlay(st); debugLayer.enabled=config.debugDisplay;
+         diag.log("[RR] RandomRoomsMod v13 loaded <content=danger-value-1, legacy=12.2+12.3, growth=right+down, debug=Shift+F3> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -284,6 +288,12 @@ package
             if (growth != null) growth.update(world);
          }
          // 诊断：游戏错误对话框文本（Land 构建异常被游戏 catch 后显示于此）
+         if(debugLayer)
+         {
+            try { debugLayer.update(inMenu || scenePicker?null:world); }
+            catch(overlayError:*)
+            { if(debugError!=String(overlayError)) { debugError=String(overlayError); diag.log("DEBUG-OVERLAY-ERROR "+overlayError); } }
+         }
          var vtxt:String = "";
          try { vtxt = String(world["verror"]["txt"]["text"]); } catch (e:*) {}
          if (vtxt != null && vtxt.length > 0 && vtxt != lastVerr)
@@ -486,6 +496,14 @@ package
       private static function onKeyDown(ev:KeyboardEvent):void
       {
          if (scenePicker) return;
+         if(ev.keyCode==F3_KEY && ev.shiftKey)
+         {
+            ev.stopImmediatePropagation(); ev.preventDefault();
+            config.debugDisplay=!config.debugDisplay; config.save();
+            if(debugLayer) debugLayer.enabled=config.debugDisplay;
+            diag.log("DEBUG-OVERLAY "+config.debugDisplay);
+            return;
+         }
          if (ev.keyCode == F1_KEY)
          {
             ev.stopImmediatePropagation(); ev.preventDefault();
@@ -743,6 +761,15 @@ package
             diag.log("F4: dopusk 不通过（部件伤重），放弃升层");
             return;
          }
+         // Native gotoLand changes curLandId even when exitLand declines a
+         // second transition. Waiting for the current exit animation prevents
+         // an early F2 from leaving the world and game IDs out of sync.
+         if(Number(world["t_exit"])>0 || (world["land"]!=null && String(game["curLandId"])!=String(world["land"]["act"]["id"])))
+         {
+            mess(world,"RandomRooms：正在切换区域，请稍候再操作");
+            diag.log("F4 deferred during native transition");
+            return;
+         }
          try
          {
             game["upLandLevel"]();
@@ -766,6 +793,13 @@ package
       
       /** Test driver entry uses the exact public travel path, only in isolated apps. */
       public static function debugReady():Boolean { return preflightDone; }
+      public static function debugOverlay(enabled:Boolean):Object
+      {
+         if(NativeApplication.nativeApplication.applicationID.indexOf("pferr-style-")!=0) return {error:"test-only"};
+         if(!debugLayer) return {error:"not-ready"};
+         debugLayer.enabled=enabled; debugLayer.update(WCls["w"],true);
+         return debugLayer.snapshot();
+      }
       public static function debugTravel(landId:String,scene:String="",version:String="",seed:uint=20260818):Boolean
       {
          if (NativeApplication.nativeApplication.applicationID.indexOf("pferr-style-") != 0) return false;
@@ -837,6 +871,12 @@ package
          if (game == null)
          {
             diag.log(tag + " 被按，但 game 未创建（需先开始游戏），忽略");
+            return;
+         }
+         if(Number(world["t_exit"])>0 || (world["land"]!=null && String(game["curLandId"])!=String(world["land"]["act"]["id"])))
+         {
+            mess(world,"RandomRooms：正在切换区域，请稍候再操作");
+            diag.log(tag+" deferred during native transition");
             return;
          }
          try

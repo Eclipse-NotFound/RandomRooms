@@ -72,6 +72,11 @@ package rr
             room.@rrDistrict=plan.sceneForm=="street_links"?"street":(plan.sceneForm=="rooftops"?"roof":"building");
             if(context && context.city) { room.@rrBlock=context.city.block; room.@rrRoofRow=context.city.roofRow; }
          }
+         if(population.contentPlan)
+         {
+            room.@rrRevision="13"; room.@rrDanger=population.contentPlan.danger; room.@rrValue=population.contentPlan.value;
+            room.@rrContentModel="danger-value-1";
+         }
          // All three native beams have identical shelf collision; the plan
          // uses '-' internally and the scene chooses the exported material.
          var beam:String=biome=="stable"?"Е":(biome=="mane"?"К":"-");
@@ -105,6 +110,7 @@ package rr
          {
             var space:XML=<space kind={r.hasOwnProperty("id")?"volume":"gallery"} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} role={r.role}/>;
             if(r.hasOwnProperty("room")) space.@room=r.room;
+            if(r.hasOwnProperty("dvZone")) { space.@zone=r.dvZone; space.@danger=r.danger; space.@value=r.value; }
             meta.appendChild(space);
          }
          for each(r in plan.masses) meta.appendChild(<mass x0={r.x0} top={r.top} x1={r.x1} floor={r.floor}/>);
@@ -117,6 +123,7 @@ package rr
             meta.appendChild(<stairs x={l.x} top={l.top} bottom={l.bottom} dir={l.dir}/>);
          for each (var p:Object in plan.pools)
             meta.appendChild(<water x0={p.x0} x1={p.x1} top={p.top} bottom={p.bottom} deck={p.deck}/>);
+         if(population.contentPlan) population.contentPlan.appendMetadata(meta);
          room.appendChild(meta);
          return room;
       }

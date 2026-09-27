@@ -1,0 +1,29 @@
+appId=pferr-style-ec37955d93c94e70ac15f726483a052d
+3805 ready cases=1
+3806 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-ec37955d93c94e70ac15f726483a052d\Local Store existsBefore=true
+3807 STORAGE existsAfter=true
+3912 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+3922 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+3935 development init returned
+11138 STARTUP-READY all 31 host loaders loaded with nonempty pools
+13456 newGame(-1) issued, intro skipped
+14504 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+15859 initial world ready land=rbl
+21675 NAV-SETUP native travel spawn room=1:1 declaredPorts=4
+21677 CONTENT-GALLERY native travel spawn=3:3 score=171
+21679 development debugTravel random_rooms case=rrstyle-single-plant
+23813 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+27012 arrived random_rooms room=syn_18
+30078 capture rrstyle-single-plant-stage 1008x729 room=syn_18 lightOverlay=true
+31324 capture rrstyle-single-plant-room 1920x1000 room=syn_18 lightOverlay=false
+31376 development pool rrstyle-single-plant total=36 generated=36 assembled=36 issues=0 themes={"plant":36}
+31381 NAV-TERMINAL normal movement to modeled operator position; combat protection only, AI and collision unchanged
+31412 NAV-SAMPLE {"y":520,"ladder":0,"task":{"x1":11,"space":9,"floor":12,"x":3,"y":3,"x0":10,"terminal":"rrp_18_3","entry":"terminal-operator","kind":"space"},"stay":true,"target":0,"frame":1,"x":1121.8,"route":[]}
+31413 NAV-CONTROL {"support":true,"ladder":0,"dy":-1,"step":586,"transferUp":false,"tx":440,"leaveSide":false,"ty":519,"climb":false,"dx":-681.8}
+33388 NAV-SAMPLE {"y":520,"ladder":0,"task":{"x1":11,"space":9,"floor":12,"x":3,"y":3,"x0":10,"terminal":"rrp_18_3","entry":"terminal-operator","kind":"space"},"stay":true,"target":0,"frame":61,"x":705.3,"route":[586]}
+33813 heartbeat state=11 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+34615 NAV-TERMINAL operator reached by normal movement; native interaction line clear uid=rrp_18_3
+34616 NAV-TERMINAL all active turret mechanical sweeps blocked at actual operator body
+34651 NAV-END {"completed":1,"success":true,"targets":1,"reason":"Native terminal operator reached and interaction line verified","frames":99}
+34935 DEVELOPMENT-VERSION runtimeTag=[RR:v13-dv] copiedOriginalLog=true
+34937 DONE 1 cases

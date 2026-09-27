@@ -1,79 +1,76 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-27：危险/价值 HTML 已追加天花板炮塔、按射界和逐入口路线选点的安保终端、关闭/恢复模拟。882 次本轮模型检查通过，实际浏览器排版及游戏玩法未验。入口 design/danger-value-preview/index.html，点击“看有终端的样例”。正式仍为 09-24 的 v12.2/v12.3 对照版。
+> 2026-09-28：v13 已实装并通过原游戏清单加载器的独立重启检查。release/RandomRoomsMod.swf = 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。当前工作已完成，等待用户在游戏中体验；下次不要重做本轮或误认仍只有 HTML 原型。
 
-## 1. 模组是什么
+## 1. 模组与运行入口
 
-- 为 Remains 1.02 从零生成建筑空间，不复制原版整房或局部地形；按用途安排原版家具、敌群和通用探索内容。
-- 四类场景：工厂、废弃避难厩、下水道、城市废墟；一次探索固定场景，向右、向下无限扩张。
-- 固定入口 release/RandomRoomsMod.swf，类 RandomRoomsMod，public static init(main)。本目录独立 Git 仓库，main 分支。
+- Remains 1.02，从零生成建筑空间，不复制原版整房/局部模板。四场景：工厂、废弃避难厩、下水道、城市废墟；一次探索固定场景，向右、向下无限扩张。
+- 本目录独立 Git 仓库，main 分支。正式入口 release/RandomRoomsMod.swf，类 RandomRoomsMod，public static init(main)。
+- 本轮仅替换本模组 release；根/DLC SWF、真实存档、其他模组未改。共享 registry 登记 Shift+F3 和调试显示层。
+- root pfe.swf = B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC；启动用 application.xml，不是 app.xml。加载清单 mods/loader-manifest.txt 是权威，RandomRooms|RandomRoomsMod|1|1|0；本轮未写加载清单。
 
 ## 2. 用户决定与边界
 
-- 土地＝整次旅行地图；合成房＝48×25 格；房间＝内部功能空间。采用 C 从零生成；不能改成有限 5×5 加 F4。
-- 普通上下连接错开，少量特殊长井；较强探索、回环为主，少量有内容的尽头。不指定统一穿房路线或首入口；任一实际开放入口均应可进出，不要求四面全开。
-- 保留门、活板门、玻璃、场景生态与用途。允许原版合理共用，禁止专属敌人/设施混入不适用场景。剧情 NPC、任务装置和首领另行设计。
-- 下水道使用真实污水，必经干路、涉水可选；城市按地图坐标组织连续建筑/街巷/屋顶，不能每个合成房都塞全套室内外。
-- 随机用途侧重、房间数量、大小与位置；普通空间降低净高，部分合成房采用对齐的楼层，允许显著大小反差。
-- v12.3 已获准厚实体块、减少房数、矩形规划后横向拆墙为主、少量拆楼板跨层合并；这替代了最初仅矩形的限制。
-- 新增 D/V 方向：合成房有整体基调，内部空间局部变化；D 先控制主要敌群概率、规模、布防，强度遵守原版场景/难度/深度。允许合理耦合，也须允许单独高危或高值。09-27 用户另要求蜘蛛地雷/地雷/无人机可偏向低危高值，地雷类偏向盲区；已授权先 HTML 实时模拟，参数尚待评估。
-- 09-24 的 v12.2/v12.3 已授权并完成部署；09-27 新内容机制本轮范围为 HTML。不要将旧部署许可误读为本轮已接入或已部署新内容。
-- 用户追加天花板炮塔与部分合成房中的安保终端，要求考虑选点。预览采用原版整 Location 控制范围；至少一条近似避火接近路线，不预设从左入口进入。
-- 仅改本模组；正式存档、其他模组、根/DLC SWF 不改。测试用独立 pferr-style-* 应用、newGame(-1)、隐藏 ADL，不用 Ghost，不关闭用户游戏。
-- 每次替换 SWF 后须完全退出重启，再回城 F1 生成新土地；旧地图不会自动更新。已决定事项不重复提问。
+- 土地＝整次旅行地图；合成房＝48×25 格；房间＝内部功能空间。采用 C 从零生成，不能用有限 5×5 加 F4 替代向右/下扩张。
+- 所有实际开放入口均应可进出，不要求四面全开，不指定统一穿房路线或首入口。普通上下连接错开，少量特殊长井；较强探索，回环为主，少量有内容的尽头。
+- 保留原版门、活板门、窗、生态、用途及合理共用；禁止专属敌人/设施不合理越界。剧情 NPC、任务装置与首领不入通用刷新。
+- 下水道真实污水，必经干路、涉水可选。城市按地图坐标延续建筑/街巷/屋顶，不能每房都塞全套。
+- 随机用途侧重、房数/尺度/位置；降低普通净高，部分共层，显著大小反差；厚实体块、横向合并为主、少量跨层合并已获准，替代早先只矩形限制。
+- D/V＝合成房基调＋内部局部变化，部分耦合，允许高危低值及低危高值；D 先控制主要敌群机会、数量、布防，强度仍按原版生态/难度/深度。动物另行抽样；地雷、蜘蛛地雷、无人机偏低危高值及适当盲区。
+- 顶/地炮塔按战术位置生成；部分带炮塔房安排安保终端，控制范围遵循原版整 Location，不限内部子房。至少一条候选避火接近路，不假定左边进入、不承诺每个入口均避火。
+- 用户本轮明确要求“游戏内用途/D/V/生成点/枪线调试＋此前未实现机制＋实装”，已取代此前 HTML-only 限制。v12.2/v12.3 对照须保留。
+- 测试使用独立 pferr-style-* AIR app、新角色和隐藏 ADL，不用 Ghost，不关用户游戏。只结束精确匹配本模组独立实例的进程。
+- 每次换 SWF 须完全退出重启，再 F2 回城、F1 生成新土地；旧地图不自动升级。
 
-## 3. 当前状态
+## 3. 当前实现
 
-- 新预览单 HTML 内嵌模拟算法与 16 份 v12.3 AS3 布局；支持实时生成/实际布局重排内容、D/V 与特殊规则、四组引导、三层图、逐房理由和 3×3 对照。旧两页保留 DATA，只增入口。
-- 顶炮/地面/混合安装对照，终端机会 0–100%，操作空间检查全部炮塔可转向射界；先预留炮塔预算和终端站位，再放敌群/地雷/奖励。关闭模拟作用于全合成房炮塔，重新生成复位。第四组引导/快捷按钮用种子 4345、D70/V65，两座炮塔和一处终端。
-- 正式 release/RandomRoomsMod.swf 已为对照版，76834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9；与 build/RandomRooms-v12-comparison-candidate.swf 一致，日志 [RR:v12-compare]。
-- F1/F5 新增 v12.2/v12.3、种子和四场景/随机选择；取消恢复暂停。每次明确新开从第 1 层开始，F4 与右下扩张保持版本/种子/场景。菜单种子更改用于下次 F1，无须为改种子重启。
-- RRExpedition 将规则分区真正接进地图：场景+深度派生地图随机源，坐标派生房间种子；版本不参与种子派生，镜像/边口/城市条件可公平对照。原版掉落和 AI 仍有运行时随机。
-- v12.2 七类冻结于 src/rr/v122，来源 93e7fef，只改包名/导入；当前 rr 中的 v12.3 规则保留 430d085。不要直接部署原 prototype-2/3 SWF，它们的 F1 仍走旧链。
-- v12.2 以矩形数量/尺度/共层随机为主；v12.3 在此基础上减少分隔房、加入实体块和最多三个矩形合并。家具与内容目前仍按矩形子区布置。
-- 原正式 v11.1 已备份：46044 B，SHA256 16F3D2BD63D19660E039F5F44B4792FD85F3E2119A59F058F8290F5746346C7F；回滚位置见第 6 节。
+- F1/F5：v13、v12.2、v12.3＋种子＋四场景/随机；F4 与扩张保持选择。新探索从第 1 层开始。首次读旧配置迁到 v13，之后尊重版本选择。
+- v13 使用真实 v12.3 地形，未搬入 HTML 简化布局。v12.2 七文件冻结在 src/rr/v122；v12.3 厚块、少房、矩形合并仍在 rr。历史 Git SHA 曾随公开仓库清理图片而变化，核对旧源请用哈希确认的旧发布 archive，别依赖失效的 93e7fef。
+- RRContentPlan：最终合并组共用 D/V 与压力预算，图库交通空间不重复给预算；按用途偏向，局部变化 32、共同因素 30%。先炮塔/终端，再主敌群、零散生态、机关、特殊威胁、奖励与服务。
+- 主要敌人最多 10 / 合成房，特殊威胁最多 3，炮塔最多 3；原版 RREcology.large 抽到炮塔也须归入统一战术安排，不能绕过。
+- V 独立随机来源，改变 V 不重抽地形/生态/主敌群/炮塔。保留原生掉落、黑入、拆除和容器潜伏事件。
+- RRTactics：2×2 身体近似、步行/梯路、机械限角和实体遮挡；门和玻璃不当永久掩体。顶炮支撑及入口保护；62% 机会尝试终端，操作位不能含梯子或结构预留，要求两脚支撑。找不到合格位置不硬塞终端。
+- RRDebugOverlay：Shift+F3，默认关闭、配置记忆；用途/D/V、生成十字、当前单位、炮塔防守虚线、终端候选青线、实际枪口朝向。随镜像/相机更新，只读 native unit/weapon/Tile，停机炮塔无活动枪线。20Hz 更新，关闭不做动态射线。
+- 调试层名称 RandomRooms_DebugWorld / RandomRooms_DebugHUD；标签多行，顶炮文字下移避开 D/V。旧版显示用途和“旧版，无 D/V”。
+- RandomRoomsMod 的 F2/F4 已加原生区域切换保护：t_exit > 0 或目标/实际土地不一致时等待。日志版本 [RR:v13-dv]。
 
-## 4. 正在进行与验证证据
+## 4. 本轮验证与证据
 
-- 本轮新预览验证见 design/danger-value-preview/validation.md 追加节、turret-terminal-checks.json：882 次执行，147 顶炮/505 地面炮塔/323 终端，无所查支撑/射界/操作位置/压力违规；144 对 V 独立性、64 对终端机会不改变炮塔通过。逐入口 410 可绕开、67 经过射界、815 步行/梯路未证实，不能冒充任意入口实机可达。最小 DOM 检查新旧交互与复位，离线 SVG/PNG 查看关闭前后；浏览器 file URL 已拒绝，不绕行。
-- 首版 736 次执行、144 对独立性及遮挡偏好 20/14 的历史证据仍在 simulation-checks.json，属于旧模拟器指纹，不可覆盖或混报为本轮统计。
-- 原版调查 120 普通房及两版各 256 XML，来源指纹和统计在 design/danger-value-2026-09-27/native-evidence.json；不是本轮战斗实测。
-- 发布检查的源代码/候选已一致冻结在 design/v12-runtime-comparison/algorithm-evidence.zip。1024 历史 HTML XML 重放一致；512 实际坐标输入结构、材料、生态均通过；256 对版本输入相同，896 对邻接口一致。
-- 当前候选 UI 生命周期 8/8，174 房：两版 F1→F4、回城切换、随机种子选择、F5 展示馆、取消/暂停；ui-lifecycle 下完整证据与原生界面截图。
-- 同一候选、种子 20260818，两版四场景 8/8 完整扩张往返通过；每案真实按键、5×5→8×8、新列/新行往返、旧 XML/mirror/内容实例保持，下水道 wetFrames=0。每案均核对 64 房接口和版本/主种子。详见 growth-results.json。正式文件的 release-smoke-12.2 / release-smoke-12.3 各 2 案、37 房通过，日志版本和文件哈希均正确。
-- 一些成功单案保存在整体后来失败的运行目录中：driver-descending-flight-failed 的 v12.2 工厂/避难厩；driver-hanging-ladder-failed 的 v12.3 工厂。必须按单案引用，不能将父运行改报全过。
-- 驾驶器失败均原样冻结：梯子 0.25 像素落脚误差、斜梯与下方地面混淆、应下降的边缘反复起跳。仅调整测试按键/选路，不移动角色、不改地图/家具；生成器与候选指纹未变。
-- 六模组全组合、联机、所有种子和长期扩张未覆盖。出生房无奖励箱时 cacheStayedEmpty=false 是该项不适用；存在且领取过的箱子若补货会令整案失败。
+统一入口 design/v13-content-runtime/validation.md、deployment.json、runtime-checks.json。
 
-## 5. 已知问题与机制
+- 192 个 AS3 房间，47 炮塔/17 终端；预算、合并组、支撑、终端选点通过。32 对 V=0/100 保持主敌群/炮塔/地形/生态。
+- 旧版 1024 历史 XML 重放一致；512 地图坐标、256 对版本输入、896 对邻接口通过；v12.2 七源与旧部署 archive 一致。
+- 三版本原生 UI 12/12：F1/F4/回城切换/随机/F5/取消与暂停恢复，ui-lifecycle-final。
+- 四场景连续原生内容及调试 4/4，共 132 Location，population-release-candidate；真实终端/机关/容器效果、镜像、D/V 完整、停机枪线消失均检查。
+- 工厂终端真实移动及操作位置检查通过，terminal-approach-plant。动物/敌人仍正常行动，保护角色伤害用于几何测试，未传送完成路径。
+- 四场景扩张往返 4/4：5×5→8×8，进出新列/新行并返回，旧 XML、镜像和内容实例保留；下水道 wetFrames=0，growth-final。
+- 核心候选 50747C20…E261B 完成上列机制检查；最终 A5EB49A0…BE46 仅下移顶炮调试文字，逐源码精确替换核验，overlay-final 复测原生内容及显示通过。
+- 正式安装文件经原有清单加载器启动，驾驶器不调模组 init；F1/F4/F2/F5 和 Shift+F3 共 3/3 通过，release-smoke。
+- algorithm-evidence.zip、release-evidence.zip 保存实际源码/SWF；图像与 ZIP 按公开仓库既定规则不进 Git，本机保留。文本证据已保存哈希，不能把新结果覆盖旧指纹。
 
-- D/V 接入风险：RREcology 主池也能出炮塔，不能只改 security；合并前矩形不能各分一份预算，家具已有原生 cont。容器 mine=0 不能阻止 cont 自带刷怪。公共机制见 native-container-latent-hazards / native-control-location-scope。
-- 原版 UnitTurret.hack(0) 休眠，1/2 改阵营且不清已有 sleep；term1 控制全 Location 并有破解条件。顶炮 aRot=[30,150] 是待机扫描，非完整转角。HTML 核对机械可转向范围，但不模拟原版追踪、弹道、破坏；步行/梯路图不含跳跃，终端周围留 3 格不代表全路无敌人。
-- 自然度仍待用户实玩：部分狭长空间/空墙，厚块偏矩形，合并房背景接缝与家具仍沿子矩形，城市屋顶顶边框；不是已等同原版的声明。
-- 新分区中 sceneForm 是用途组合家族，非固定坐标；archetype 仅 connector 特例影响主体。旧 partition/profile 参数不可混作新链有效入口。XML 的 generator=space-v11 是沿用的元数据；实际版本看 rrVersion / rrMasterSeed 和日志。
-- RRTraversal 只是地形图；真实通行还受单向梁、门、家具影响。普通长梯错开失败仍可能回退直梯。性能慢尾和分布偏向待进一步优化。
-- 交互要满足 isLine 并持续按住；低门旁落梁只用双下，梯子没有接收平台时不能提前跳出。正常跳跃需长按数帧。
-- 斜梯可读 tile.diagon/getMaxY；斜梯下的地面是独立路径。测试从坡面去下方地面应先到梯脚，再从实际落点规划；不能在半空追坡下节点。
-- 必经干桥下一格脚点可能触水；干路图排除水面上一格。水下池底 stay 可能 false。
-- setDoor/setNoObj 会省略 rem 物体：左右入口向内 6 格、上下 3 行；人口和家具要保留此净空。原版 Land 会改 tipEnemy，RRGrowth 已恢复。
-- 测试归档已修正 PowerShell ISO DateTime 二次解析丢 UTC Kind 的问题；旧重复 PNG/XML 经 SHA256 去重，索引 duplicate-capture-index.json.gz。开始需 1 GiB 空余、每轮/归档上限 512 MiB、保留 256 MiB；不要重建巨大旧归档。
+## 5. 失败、修复与限制
 
-## 6. 下一步与回滚
+- terminal-ladder-failed：原终端位跨梯子，native pony 吸附后出掩体。正式选点排除梯子/结构预留并检查双脚，复测通过。
+- navigation-flight-failed：自动驾驶在斜梯下追错误落点折返。改驾驶器到更远梯脚和绕家具，不改地图或人物位置；四场景通行复测通过。
+- 连续人口测试早先回城失配的根因是区域到达仍 t_exit>0，不是只有重要物品提示暂停；正式保护与驾驶器等待共同修复。
+- ui-clock-gap-failed：最后案发生长心跳空档后超时，原因未证；新实例 12 案通过，失败档保留。
+- native-loader-readiness-failed：新检查器错误等待启动期不存在的 random_rooms LandLoader；原模组已 READY。按门禁先回滚，改检查器后同一 SWF 再安装并通过；不视为模组逻辑改动。
+- 原生 term1 全 Location 控制；hack(0) 停机、hack(1/2) 改阵营。顶炮待机扫描范围不是全部机械转角，原生枪口起点有挂载偏移。
+- 低 D/出生房没有初始敌群不等于绝对安全：容器 mine=0 不能阻止原版开箱潜伏事件。枪线不模拟散布/弧线/穿透或下一帧转向；门开闭/破坏会改变现场。
+- 候选终端路只是地形近似；不保证从每个入口全程避火，移动敌人也会造成干扰。未穷尽种子、联机、全模组组合或长期内存。
+- 自然度仍可改进：部分狭长/空墙、厚块偏矩形、合并背景接缝、家具沿子矩形、城市顶边框；不宣称等同原版。
+- RRTraversal 不包含全部真实家具/跳跃影响；原生 Land 会改 tipEnemy，RRGrowth 保持其修正。生成器元数据 rrGen=space-v11 是沿用字段，正式版本看 rrVersion/rrRevision。
 
-- 新内容先在 design/danger-value-preview/index.html 比较；正式迁移须按最终合并房规划、分离随机来源，并测试真实入口/射界/特殊威胁与开箱事件。当前 JS 模拟不能直接当正式生成器；不得用其连通图检查替代原版通行和战斗。
-- 当前部署里程碑已完成，等待用户实玩 v12.2 与 v12.3 的对照反馈；F2 回城后 F1 切版本，保持相同种子/场景，每次从第 1 层开始。F4 与右下扩张保持此次选择。
-- 已验证备份 build/release-backups/RandomRoomsMod_before_v12_compare_20260924.swf。回滚时完全退出游戏，复制回 release/RandomRoomsMod.swf，核对 v11.1 指纹 16F3D2BD…6346C7F，再重启并进入新地图。部署时间/完整哈希在 design/v12-runtime-comparison/deployment.json。
-- 根 pfe.swf SHA256 B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC，ModLoader v2 读 mods/loader-manifest.txt。本轮读取发现加载名单发生外部更新，RandomRooms|RandomRoomsMod|1|1|0 仍正确，不覆盖它。
-- 待用户实玩比较后继续完善合并房整体装饰/交通及性能；保持两个可比较版本，未经决定不要删掉 v12.2。
+## 6. 接续与回滚
+
+- 本轮实现/部署完成。等待用户实玩，重点看 D/V 与遭遇/奖励关系、终端接近性、调试易读性；不擅自删 v12.2/v12.3。
+- 回滚备份 build/release-backups/RandomRoomsMod_before_v13_20260928.swf = 76,834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9。关游戏→复制回 release/RandomRoomsMod.swf→核对→重启进新图。
+- 更早 v11.1 备份/对照发布记录见 design/v12-runtime-comparison 与 journal，不覆盖现有备份。
 
 ## 7. 深入阅读与复现
 
-- 新预览：design/danger-value-preview/index.html、model-notes.md、validation.md；重新打包 build/style-review/build_danger_preview.py（模板同目录 danger-value-preview.template.html）。设计与原版证据：design/danger-value-2026-09-27/assessment.md、native-evidence.json；静态复现 audit_danger_value.py。
-- 部署证据：design/v12-runtime-comparison/validation.md；两个 HTML 入口 design/partition-preview-v12-2/index.html 与 partition-preview-v12-3/index.html，各自 native-study/validation/evidence 保留对应原版调查和历史失败。
-- 调查：design/native-scene-audit-2026-09-20.md；decisions/DEC-0005-architectural-generation.md、DEC-0006-scene-identity.md。
-- 旧正式版实证：knowledge/experiments/generator-v11-density-validation-2026-09-20.md。教程：design/generator-explained-v11.1/guide.html，仅解释旧链，不能当当前新分区文档。
-- 构建：build/build-v7.ps1 -OutputName RandomRooms-v12-comparison-next.swf。仅写 build；旧 build-m0.sh 直写 release，勿用于验证。
-- 比对：build/style-review/harness/run-comparison.ps1；verify_comparison.py。汇总完整实际扩张：summarize_comparison_growth.py。
-- 实机：build/style-review/game-harness/run-game-captures.ps1 -DevelopmentSwf <SWF> -GeneratorVersion 12.2 或 12.3；-ComparisonLifecycle；-AllScenes -Scenes @('plant','stable','sewer','mane') -NavigationProbe -GrowthProbe；-SmokeOnly -Scene plant。
-- 隔离 SessionDirectory 为 app / visual-app / comparison-app；只通过独立 AIR 存储权限运行，不能借真实存储绕行。freeze_captures.py 只收完整成功且哈希匹配结果；失败用 freeze_failed_run.py 按新鲜时间窗口冻结。
-- 正式 SWF 与运行目录不进 Git，冻结证据保持 Git 字节哈希。回滚历史见 journal 和既有验证报告。
+- 日常构建 build/build-v7.ps1 -OutputName RandomRooms-v13-next.swf 只写 build；旧 build-m0.sh 直写 release，勿用于开发验证。
+- 批量：build/style-review/harness/run-comparison.ps1 -Content；旧版省略 -Content。freeze_v13_algorithm.py / finalize_v13_evidence.py 为本轮固定指纹归档，不可直接覆盖下一轮。
+- 原生：run-game-captures.ps1 -DevelopmentSwf <SWF> -GeneratorVersion 13；可配 PopulationProbe/ContentGallery、NavigationProbe/GrowthProbe、TerminalApproach、ComparisonLifecycle。NativeLoaderSmoke 只走原生 UI。
+- app / visual-app / comparison-app 三个隔离目录；成功用 freeze_captures.py，失败用 freeze_failed_run.py。AIR app: 不可写，使用 new File(File.applicationDirectory.nativePath)；存储权限需独立实例审批，不能借真实 pfe 存储绕行。
+- 设计背景 design/danger-value-2026-09-27；HTML design/danger-value-preview。较早教程 generator-explained-v11.1 只解释旧链。

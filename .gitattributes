@@ -29,3 +29,4 @@ design/partition-preview-v12/** -text -whitespace
 design/partition-preview-v12-2/** -text -whitespace
 design/partition-preview-v12-3/** -text -whitespace
 design/v12-runtime-comparison/** -text -whitespace
+design/v13-content-runtime/** -text -whitespace

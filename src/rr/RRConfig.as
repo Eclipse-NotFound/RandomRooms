@@ -14,7 +14,8 @@ package rr
       public var enabled:Boolean = true;        // 变异总开关
       public var seedEnabled:Boolean = true;    // 种子模式（false=Math.random）
       public var seed:uint = 20260818;          // 主种子（0 显示为默认）
-      public var version:String = "12.3";      // Next exploration only.
+      public var version:String = "13";        // Next exploration only.
+      public var debugDisplay:Boolean = false;
       
       public function load(soData:Object = null):void
       {
@@ -22,7 +23,9 @@ package rr
          if (soData.enabled != null) enabled = Boolean(soData.enabled);
          if (soData.seedEnabled != null) seedEnabled = Boolean(soData.seedEnabled);
          if (soData.seed != null) seed = uint(soData.seed);
-         if (RRExpedition.valid(String(soData.version))) version=String(soData.version);
+         // Migrate the release default once, then preserve deliberate comparisons.
+         if (soData.contentRelease==13 && RRExpedition.valid(String(soData.version))) version=String(soData.version);
+         if (soData.debugDisplay != null) debugDisplay=Boolean(soData.debugDisplay);
       }
       
       public function save():void
@@ -34,6 +37,8 @@ package rr
             so.data.seedEnabled = seedEnabled;
             so.data.seed = seed;
             so.data.version = version;
+            so.data.contentRelease = 13;
+            so.data.debugDisplay = debugDisplay;
             so.flush();
          }
          catch (e:*)

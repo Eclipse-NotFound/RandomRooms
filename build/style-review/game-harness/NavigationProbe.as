@@ -50,10 +50,12 @@ package
       private static var contentBefore:Object;
       private static var consumedCache:*;
       private static var persistentCount:int;
+      private static var terminalOnly:Boolean;
 
-      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false,waterProbe:Boolean=false):void
+      public static function begin(w:*,directory:File,caseName:String,log:Function,doorAction:Function,screen:Function,growth:Boolean=false,waterProbe:Boolean=false,terminalApproach:Boolean=false):void
       {
          root=directory; name=caseName; logger=log; action=doorAction; capture=screen;
+         terminalOnly=terminalApproach;
          done=success=false; reason=""; ticks=legTicks=at=stuck=jumpHold=0;
          flightFoot=-1;
          local=null; records=[]; targets=[]; route=[];
@@ -77,6 +79,14 @@ package
          growing=growth; milestone=0; settlingGoal=false; originals={};
          scene=String(w.loc.room.xml.@rrTheme); dry=scene=="sewer"; wetFrames=0;
          optionalWater=waterProbe;
+         if(terminalOnly)
+         {
+            addSpaces(w,"initial");
+            targets=targets.filter(function(t:Object,...rest):Boolean { return Boolean(t.terminal); });
+            if(!targets.length) throw new Error("No security terminal selected for approach probe");
+            w.gg.invulner=true;
+            logger("NAV-TERMINAL normal movement to modeled operator position; combat protection only, AI and collision unchanged"); return;
+         }
          if (optionalWater)
          {
             if (scene!="sewer" || !w.loc.room.xml.rrPlan.water.length()) throw new Error("No optional sewer basin");
@@ -155,6 +165,12 @@ package
             targets.push({kind:"space",x:originX,y:originY,x0:foot-3,x1:foot+3,floor:bottom,entry:label+"-bottom",space:i++});
             targets.push({kind:"space",x:originX,y:originY,x0:headLo,x1:headHi,floor:top-1,entry:label+"-top",space:i++});
             targets.push({kind:"space",x:originX,y:originY,x0:foot-3,x1:foot+3,floor:bottom,entry:label+"-return",space:i++});
+         }
+         for each(var control:XML in w.loc.room.xml.rrPlan.control)
+         {
+            var node:int=int(control.@operator),column:int=node%48;
+            if(w.loc.mirror) column=46-column;
+            targets.push({kind:"space",x:originX,y:originY,x0:column,x1:column+1,floor:int(node/48),entry:"terminal-operator",space:i++,terminal:String(control.@uid)});
          }
       }
       private static function tileSolid(t:*):Boolean
@@ -394,6 +410,7 @@ package
          try
          {
             ticks++; legTicks++; w.ctr.clearAll(); w.ctr.keyAction=false;
+            if(w.gui.guiPause) w.ctr.active=true;
             // Native jump height depends on holding the key. A one-frame
             // pulse is a short hop and cannot clear an ordinary 40 px crate.
             if(jumpHold>0) { jumpHold--; w.ctr.keyJump=true; }
@@ -407,7 +424,7 @@ package
                if (!growing)
                {
                   if (optionalWater && (wetFrames==0 || w.gg.inWater)) throw new Error("Optional water visit/return not observed");
-                  finish(true,optionalWater?"Native water entered and dry deck regained":"Interior circuit and each actual port left/re-entered to the same anchor"); return;
+                  finish(true,terminalOnly?"Native terminal operator reached and interaction line verified":(optionalWater?"Native water entered and dry deck regained":"Interior circuit and each actual port left/re-entered to the same anchor")); return;
                }
                if (!growTargets(w)) return;
             }
@@ -505,6 +522,22 @@ package
                            {
                               route=[flightFoot];
                               logger("NAV-FLIGHT-FOOT "+JSON.stringify({pose:flightFoot,x:(flightFoot%48+1)*40,y:poseY(flightFoot)}));
+                           }
+                           else
+                           {
+                              // If the foot is occupied, choose a farther free
+                              // point on its landing. Reversing toward a graph
+                              // node under the flight would climb it again.
+                              for(footPose=0;footPose<clear.length;footPose++)
+                                 if(clear[footPose] && support[footPose] && !slope[footPose] &&
+                                    Math.abs(poseY(footPose)-(footY+1)*40)<3 &&
+                                    ((footPose%48+1)*40-footCentre)*down>=-15 &&
+                                    !furnitureAt(w,(footPose%48+1)*40,poseY(footPose)))
+                                 {
+                                    footDistance=Math.abs((footPose%48+1)*40-footCentre);
+                                    if(footDistance<480 && footDistance<footScore) { flightFoot=footPose; footScore=footDistance; }
+                                 }
+                              if(flightFoot>=0) { route=[flightFoot]; logger("NAV-FLIGHT-LANDING farther clear foot "+flightFoot); }
                            }
                         }
                         if(ticks%120==1) logger("NAV-SLOPE "+JSON.stringify({step:route[0],finalY:finalY,diagon:standingTile.diagon,x:w.gg.X,y:w.gg.Y,stuck:stuck,uphill:uphill}));
@@ -613,6 +646,32 @@ package
                if (route.length) return;
                if (t.kind=="space")
                {
+                  if(t.terminal)
+                  {
+                     var terminal:*=w.land.uidObjs[t.terminal];
+                     if(!terminal || Math.abs(w.gg.X-terminal.X)>125 || Math.abs(w.gg.Y-terminal.Y)>60 ||
+                        !w.loc.isLine(w.gg.X,w.gg.Y-w.gg.scY/2,terminal.X,terminal.Y-terminal.scY/2,terminal))
+                        throw new Error("Terminal operator pose cannot interact with native terminal "+t.terminal);
+                     logger("NAV-TERMINAL operator reached by normal movement; native interaction line clear uid="+t.terminal);
+                     for each(var gun:XML in w.loc.room.xml.rrPlan.gun)
+                     {
+                        var turret:*=w.land.uidObjs[String(gun.@uid)];
+                        if(!turret || turret.sost>=3 || turret.save().off) continue;
+                        for each(var bx:Number in [-0.45,0,0.45]) for each(var by:Number in [0.1,0.5,0.9])
+                        {
+                           var px:Number=w.gg.X+bx*w.gg.scX,py:Number=w.gg.Y-by*w.gg.scY;
+                           var angle:Number=Math.atan2(py-turret.weaponY,px-turret.weaponX)*180/Math.PI;
+                           var fix:int=turret.currentWeapon.fixRot;
+                           if(fix==1 && angle>-150 && angle<-30 || fix==2 && Math.abs(angle)>30 || fix==3 && Math.abs(angle)<150) continue;
+                           if(w.loc.isLine(turret.weaponX,turret.weaponY,px,py))
+                           {
+                              logger("NAV-TERMINAL-EXPOSURE "+JSON.stringify({uid:String(gun.@uid),gunX:turret.weaponX,gunY:turret.weaponY,fix:fix,px:px,py:py,angle:angle,playerX:w.gg.X,playerY:w.gg.Y,width:w.gg.scX,height:w.gg.scY,ladder:w.gg.isLaz}));
+                              throw new Error("Native turret sweep exposes terminal operator "+gun.@uid);
+                           }
+                        }
+                     }
+                     logger("NAV-TERMINAL all active turret mechanical sweeps blocked at actual operator body");
+                  }
                   records.push({kind:"space",entry:t.entry,space:t.space,success:true,x:w.gg.X,y:w.gg.Y,frames:legTicks});
                   at++; legTicks=0; return;
                }

@@ -56,3 +56,7 @@ knowledge/**/*.png
 design/**/*.zip
 knowledge/**/*.zip
 build/dump_render.png
+
+build/RandomRooms-v13-*.swf
+build/style-review/content-batch/
+!design/v13-content-runtime/**/*.log

@@ -1,0 +1,26 @@
+appId=pferr-style-dcf9b4e489be4c76a572d659366e5a60
+3994 ready cases=1
+3996 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-dcf9b4e489be4c76a572d659366e5a60\Local Store existsBefore=true
+3997 STORAGE existsAfter=true
+4126 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+4141 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+4164 development init returned
+11733 STARTUP-READY all 31 host loaders loaded with nonempty pools
+13487 newGame(-1) issued, intro skipped
+14491 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+15817 initial world ready land=rbl
+23003 CONTENT-GALLERY native travel spawn=4:1 score=165
+23004 development debugTravel random_rooms case=rrstyle-single-stable
+24004 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+26098 arrived random_rooms room=syn_21
+29002 capture rrstyle-single-stable-stage 1008x729 room=syn_21 lightOverlay=true
+31001 capture rrstyle-single-stable-room 1920x1000 room=syn_21 lightOverlay=false
+31046 development pool rrstyle-single-stable total=35 generated=35 assembled=35 issues=0 themes={"stable":35}
+31504 capture rrstyle-single-stable-debug-before-stage 1008x729 room=syn_21 lightOverlay=true
+33335 capture rrstyle-single-stable-debug-before-room 1920x1000 room=syn_21 lightOverlay=false
+35339 POPULATION-UI {"click":0,"pause":false,"pip":false,"allStat":1,"stand":false,"sats":false,"exit":4,"guiPause":false}
+37330 capture rrstyle-single-stable-debug-after-room 1920x1000 room=syn_21 lightOverlay=false
+37330 POPULATION PASS rrstyle-single-stable
+37405 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+37560 DEVELOPMENT-VERSION runtimeTag=[RR:v13-dv] copiedOriginalLog=true
+37562 DONE 1 cases
