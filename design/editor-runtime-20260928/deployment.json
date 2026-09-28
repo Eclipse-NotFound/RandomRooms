@@ -1,0 +1,44 @@
+{
+  "status": "verified",
+  "authorized": "User explicitly requested implementation and installation on 2026-09-28",
+  "backup": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\release-backups\\editor-v13-1-20260928-143836",
+  "files": [
+    {
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\RandomRooms-v13-1-candidate.swf",
+      "target": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\release\\RandomRoomsMod.swf",
+      "backup": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\release-backups\\editor-v13-1-20260928-143836\\mods\\RandomRooms\\release\\RandomRoomsMod.swf",
+      "before": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+      "after": "356ad62f2340101f0cc0f39803a0af3e33fbb33b3227e7614d076ad6745cf2bf",
+      "bytes": 90918
+    },
+    {
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\editor\\RandomRoomsEditor.swf",
+      "target": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\release\\RandomRoomsEditor.swf",
+      "backup": null,
+      "before": null,
+      "after": "fb1537f54b2c32af02aca771cb09366441fb74ca01ee3a6099e35c4d3a35dfd8",
+      "bytes": 59183
+    },
+    {
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\editor\\EditorTools.swf",
+      "target": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Enhancements\\EditorTools.swf",
+      "backup": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\release-backups\\editor-v13-1-20260928-143836\\Editor\\Enhancements\\EditorTools.swf",
+      "before": "80cfa1baafe8ed966b696e8379239eb12180fa194bcfb36365e1630b3d91b64c",
+      "after": "d7ad493f19867c96b600599151275877349a7dbf2155794be42483656ae0f002",
+      "bytes": 18198
+    },
+    {
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\src\\editor\\bridge\\EditorTools.as",
+      "target": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Enhancements\\src\\EditorTools.as",
+      "backup": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\release-backups\\editor-v13-1-20260928-143836\\Editor\\Enhancements\\src\\EditorTools.as",
+      "before": "704b83d6a7fa1886df627abc5901c0e520b586accb59f9a7e174872babedddd7",
+      "after": "7bb97e00b1bc19a40b764587207e36041cac29c153b9c27b57d0b6fe9f56110f",
+      "bytes": 4456
+    }
+  ],
+  "hostSHA256": "c631cbf3511b6ee303f533d08d51511fe0eb702f43e5db17f5241d8576c64867",
+  "editorSHA256": "e99e231f83128ea24cd13b2ae36b0dd294e5180a16f54ba3c7b3cb8fa24d99fd",
+  "manifestSHA256": "2d4a64a608a6482168fbfe9e8cd7bb53f006ab1f8993fcc737cf9d32f2293592",
+  "installedUTC": "2026-09-28T06:38:36.327060+00:00",
+  "verifiedUTC": "2026-09-28T06:42:57.513378+00:00"
+}

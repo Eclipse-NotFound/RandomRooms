@@ -60,6 +60,11 @@ package
                result.counts[id]=int(result.counts[id])+1;
                if(id.indexOf("turret")>=0) require(point.@kind=="security","turret leaked from native main pool");
                if(id=="msp" || id=="spritebot" || id=="vortex" || id=="mine") require(point.@kind=="special","special threat escaped special placement");
+               if(["term1","term2","term3","knop1","knop3","wallsafe","elpanel"].indexOf(id)>=0)
+               {
+                  require(point.@mount=="fixture" && int(point.@floorY)-int(point.@y)==1,"wall fixture height");
+                  require(int(int(point.@operator)/48)==int(point.@floorY),"fixture operator is airborne");
+               }
             }
             for(key in totals) require(Math.abs(totals[key]-Number(zones[key].@pressure))<0.011,"budget metadata differs");
             for each(var terminal:XML in room.rrPlan.control)

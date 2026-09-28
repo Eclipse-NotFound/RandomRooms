@@ -1,0 +1,52 @@
+appId=pferr-style-a77b4bf1b0214e5aaaac2a695360a838
+4651 ready cases=3
+4657 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-a77b4bf1b0214e5aaaac2a695360a838\Local Store existsBefore=true
+4661 STORAGE existsAfter=true
+4665 NATIVE-LOADER unchanged release registered by host; driver will not call init
+5237 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+13983 STARTUP-READY all 31 host loaders loaded with nonempty pools
+17219 newGame(-1) issued, intro skipped
+18661 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+20690 initial world ready land=rbl
+21990 capture scene-picker 1008x729 room=room_0_0 lightOverlay=true
+22687 capture comparison-picker 1008x729 room=room_0_0 lightOverlay=true
+33365 SCENE-PROBE picker pause/cancel/restore/select PASS plant
+33365 development debugTravel random_rooms case=rrstyle-native-f1
+33401 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+34661 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+37559 arrived random_rooms room=rr_begin
+40277 capture rrstyle-native-f1-stage 1008x729 room=rr_begin lightOverlay=true
+42848 capture rrstyle-native-f1-room 1920x1000 room=rr_begin lightOverlay=false
+42913 development pool rrstyle-native-f1 total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+42915 SCENE-PROBE PASS rrstyle-native-f1 theme=plant rooms=25 stage=0 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+43598 capture rrstyle-native-f1-debug-stage 1008x729 room=rr_begin lightOverlay=true
+43602 NATIVE-LOADER Shift+F3 visible; land=random_rooms
+44681 NATIVE-LOADER Shift+F5 complete export; rooms=25
+44761 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+53175 SCENE-PROBE F4 from=plant stage=0
+53176 development debugTravel random_rooms case=rrstyle-native-f4
+54663 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+57131 arrived random_rooms room=rr_begin
+59911 capture rrstyle-native-f4-stage 1008x729 room=rr_begin lightOverlay=true
+61999 capture rrstyle-native-f4-room 1920x1000 room=rr_begin lightOverlay=false
+62051 development pool rrstyle-native-f4 total=25 generated=25 assembled=25 issues=0 themes={"plant":25}
+62091 SCENE-PROBE PASS rrstyle-native-f4 theme=plant rooms=25 stage=1 music=music_plant_1 waterTiles=0 waterType=0 waterRad=1
+62841 capture rrstyle-native-f4-debug-stage 1008x729 room=rr_begin lightOverlay=true
+62847 NATIVE-LOADER Shift+F3 visible; land=random_rooms
+63513 NATIVE-LOADER Shift+F5 complete export; rooms=25
+63535 return to base before refreshing rr_showroom
+64657 heartbeat state=7 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+69504 returned to base
+73681 SCENE-PROBE picker pause/cancel/restore/select PASS sewer
+73681 development debugTravel rr_showroom case=rrstyle-native-f5
+74662 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+77767 arrived rr_showroom room=rr_begin
+80832 capture rrstyle-native-f5-stage 1008x729 room=rr_begin lightOverlay=true
+82070 capture rrstyle-native-f5-room 1920x1000 room=rr_begin lightOverlay=false
+82092 development pool rrstyle-native-f5 total=12 generated=12 assembled=12 issues=0 themes={"sewer":12}
+82093 SCENE-PROBE PASS rrstyle-native-f5 theme=sewer rooms=12 stage=0 music=music_sewer_1 waterTiles=24 waterType=1 waterRad=3
+83032 capture rrstyle-native-f5-debug-stage 1008x729 room=rr_begin lightOverlay=true
+83035 NATIVE-LOADER Shift+F3 visible; land=rr_showroom
+83438 NATIVE-LOADER Shift+F5 complete export; rooms=12
+83643 DEVELOPMENT-VERSION runtimeTag=[RR:v13.1-editor] copiedOriginalLog=true
+83647 DONE 3 cases

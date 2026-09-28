@@ -1,0 +1,553 @@
+{
+  "checks": [
+    "actual bridge click",
+    "four native scenes",
+    "mirror ecology difficulty",
+    "complete metadata",
+    "fixed image during overlay toggles",
+    "next previous navigation",
+    "source and editor document unchanged",
+    "native draft encode / one changed cell / baseline toggle",
+    "Escape / reopen / return"
+  ],
+  "cases": [
+    {
+      "render": {
+        "examples": 0,
+        "emptyPoints": 0,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "region": "random_plant",
+        "room": "syn_18",
+        "warnings": [],
+        "mirror": false,
+        "objects": 22,
+        "invisibleTriggers": 0,
+        "nativeRenderer": true,
+        "transpFon": false,
+        "difficulty": 8,
+        "enemyLevel": 8,
+        "entityDetails": [
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 180,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 1540,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": 1,
+            "x": 1740,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          }
+        ],
+        "spawnMarkers": 4,
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "milliseconds": 838,
+        "enemyType": 2,
+        "simulationUnits": 0,
+        "regionName": "工厂",
+        "entities": 3,
+        "biome": 0
+      },
+      "draft": false,
+      "open": true,
+      "room": "syn_18",
+      "rooms": 36,
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\probe-app\\samples\\plant.xml",
+      "sourceCRC32": "deb8a438",
+      "overlay": {
+        "ports": 4,
+        "diffCells": 0,
+        "points": 11,
+        "unpaired": 0,
+        "controls": 1,
+        "guns": 3,
+        "spaces": 9
+      }
+    },
+    {
+      "render": {
+        "examples": 0,
+        "emptyPoints": 0,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "region": "random_stable",
+        "room": "syn_21",
+        "warnings": [],
+        "mirror": true,
+        "objects": 11,
+        "invisibleTriggers": 0,
+        "nativeRenderer": true,
+        "transpFon": false,
+        "difficulty": 8,
+        "enemyLevel": 8,
+        "entityDetails": [
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1060,
+            "source": "armturret",
+            "id": "armturret",
+            "variant": null
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 740,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 380,
+            "source": "landturret",
+            "id": "landturret",
+            "variant": null
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": 1,
+            "x": 1160,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": -1,
+            "x": 1080,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": -1,
+            "x": 800,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "2"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 1440,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": -1,
+            "x": 1020,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1220,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1100,
+            "source": "tarakan",
+            "id": "tarakan",
+            "variant": null
+          }
+        ],
+        "spawnMarkers": 11,
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "milliseconds": 1356,
+        "enemyType": 3,
+        "simulationUnits": 0,
+        "regionName": "废弃避难厩",
+        "entities": 10,
+        "biome": 2
+      },
+      "draft": false,
+      "open": true,
+      "room": "syn_21",
+      "rooms": 35,
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\probe-app\\samples\\stable.xml",
+      "sourceCRC32": "2364798f",
+      "overlay": {
+        "ports": 3,
+        "diffCells": 0,
+        "points": 12,
+        "unpaired": 0,
+        "controls": 1,
+        "guns": 3,
+        "spaces": 7
+      }
+    },
+    {
+      "render": {
+        "examples": 0,
+        "emptyPoints": 0,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "region": "random_sewer",
+        "room": "syn_18",
+        "warnings": [],
+        "mirror": true,
+        "objects": 15,
+        "invisibleTriggers": 0,
+        "nativeRenderer": true,
+        "transpFon": false,
+        "difficulty": 8,
+        "enemyLevel": 8,
+        "entityDetails": [
+          {
+            "y": 599,
+            "example": false,
+            "facing": 1,
+            "x": 1720,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "6"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": -1,
+            "x": 320,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "4"
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 200,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "1"
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 640,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "2"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1760,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "0"
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": 1,
+            "x": 1520,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "2"
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 1760,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "1"
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 400,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "3"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 600,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "3"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 520,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "3"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 420,
+            "source": "slime",
+            "id": "slime",
+            "variant": "0"
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 440,
+            "source": "scorp",
+            "id": "scorp",
+            "variant": "scorp1"
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 460,
+            "source": "slime",
+            "id": "slime",
+            "variant": "0"
+          },
+          {
+            "y": 879,
+            "example": false,
+            "facing": 1,
+            "x": 500,
+            "source": "slime",
+            "id": "slime",
+            "variant": "0"
+          }
+        ],
+        "spawnMarkers": 15,
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "milliseconds": 1519,
+        "enemyType": 0,
+        "simulationUnits": 0,
+        "regionName": "下水道",
+        "entities": 14,
+        "biome": 1
+      },
+      "draft": false,
+      "open": true,
+      "room": "syn_18",
+      "rooms": 36,
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\probe-app\\samples\\sewer.xml",
+      "sourceCRC32": "47d34cba",
+      "overlay": {
+        "ports": 4,
+        "diffCells": 0,
+        "points": 23,
+        "unpaired": 0,
+        "controls": 0,
+        "guns": 0,
+        "spaces": 8
+      }
+    },
+    {
+      "render": {
+        "examples": 0,
+        "emptyPoints": 0,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "region": "random_mane",
+        "room": "syn_7",
+        "warnings": [],
+        "mirror": false,
+        "objects": 17,
+        "invisibleTriggers": 0,
+        "nativeRenderer": true,
+        "transpFon": true,
+        "difficulty": 8,
+        "enemyLevel": 8,
+        "entityDetails": [
+          {
+            "y": 319,
+            "example": false,
+            "facing": -1,
+            "x": 460,
+            "source": "landturret",
+            "id": "landturret",
+            "variant": null
+          },
+          {
+            "y": 319,
+            "example": false,
+            "facing": -1,
+            "x": 1100,
+            "source": "armturret",
+            "id": "armturret",
+            "variant": null
+          },
+          {
+            "y": 399,
+            "example": false,
+            "facing": -1,
+            "x": 700,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 319,
+            "example": false,
+            "facing": -1,
+            "x": 160,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 319,
+            "example": false,
+            "facing": -1,
+            "x": 400,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 319,
+            "example": false,
+            "facing": -1,
+            "x": 1560,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 319,
+            "example": false,
+            "facing": 1,
+            "x": 1200,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "2"
+          },
+          {
+            "y": 559,
+            "example": false,
+            "facing": 1,
+            "x": 1160,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 559,
+            "example": false,
+            "facing": 1,
+            "x": 1560,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 759,
+            "example": false,
+            "facing": -1,
+            "x": 1200,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 759,
+            "example": false,
+            "facing": -1,
+            "x": 1760,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "4"
+          },
+          {
+            "y": 759,
+            "example": false,
+            "facing": 1,
+            "x": 1640,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          }
+        ],
+        "spawnMarkers": 13,
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "milliseconds": 1362,
+        "enemyType": 3,
+        "simulationUnits": 0,
+        "regionName": "马哈顿废墟",
+        "entities": 12,
+        "biome": 3
+      },
+      "draft": false,
+      "open": true,
+      "room": "syn_7",
+      "rooms": 25,
+      "source": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\probe-app\\samples\\mane.xml",
+      "sourceCRC32": "b058037a",
+      "overlay": {
+        "ports": 3,
+        "diffCells": 0,
+        "points": 19,
+        "unpaired": 0,
+        "controls": 1,
+        "guns": 3,
+        "spaces": 12
+      }
+    }
+  ],
+  "status": "passed",
+  "entryBounds": {
+    "y": 908.3,
+    "width": 127,
+    "x": 733.1,
+    "height": 34.5
+  }
+}

@@ -1,0 +1,1651 @@
+{
+  "errors": [],
+  "points": 363,
+  "after": {
+    "errors": [],
+    "guns": [
+      {
+        "toY": 312,
+        "toX": 780,
+        "uid": "rrp_7_0",
+        "fromX": 460,
+        "fromY": 259
+      },
+      {
+        "toY": 312,
+        "toX": 780,
+        "uid": "rrp_7_1",
+        "fromX": 1100,
+        "fromY": 264
+      },
+      {
+        "toY": 512,
+        "toX": 980,
+        "uid": "rrp_7_2",
+        "fromX": 700,
+        "fromY": 387
+      }
+    ],
+    "mirror": false,
+    "version": "13",
+    "room": "syn_7",
+    "spaces": [
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 600,
+        "danger": 47,
+        "labelLines": 2,
+        "value": 11,
+        "height": 280,
+        "zone": "room-0",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 720,
+        "danger": 53,
+        "labelLines": 2,
+        "value": 28,
+        "height": 280,
+        "zone": "room-2",
+        "x": 680,
+        "role": "office"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 53,
+        "labelLines": 2,
+        "value": 28,
+        "height": 280,
+        "zone": "room-2",
+        "x": 1440,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 520,
+        "danger": 27,
+        "labelLines": 2,
+        "value": 25,
+        "height": 200,
+        "zone": "room-3",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 360,
+        "danger": 54,
+        "labelLines": 2,
+        "value": 43,
+        "height": 200,
+        "zone": "room-4",
+        "x": 600,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 37,
+        "labelLines": 2,
+        "value": 40,
+        "height": 200,
+        "zone": "room-5",
+        "x": 1000,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 240,
+        "danger": 61,
+        "labelLines": 2,
+        "value": 36,
+        "height": 160,
+        "zone": "room-6",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 35,
+        "labelLines": 2,
+        "value": 47,
+        "height": 160,
+        "zone": "room-7",
+        "x": 320,
+        "role": "store"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 29,
+        "labelLines": 2,
+        "value": 32,
+        "height": 160,
+        "zone": "room-8",
+        "x": 800,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 600,
+        "danger": 48,
+        "labelLines": 2,
+        "value": 24,
+        "height": 160,
+        "zone": "room-9",
+        "x": 1280,
+        "role": "service"
+      },
+      {
+        "y": 800,
+        "labelHeight": 64.75,
+        "width": 200,
+        "danger": 49,
+        "labelLines": 2,
+        "value": 49,
+        "height": 160,
+        "zone": "room-10",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 800,
+        "labelHeight": 64.75,
+        "width": 960,
+        "danger": 66,
+        "labelLines": 2,
+        "value": 52,
+        "height": 160,
+        "zone": "room-11",
+        "x": 280,
+        "role": "office"
+      }
+    ],
+    "units": [
+      {
+        "y": 290,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 460,
+        "id": "turret1"
+      },
+      {
+        "y": 285,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 1100,
+        "id": "turret3"
+      },
+      {
+        "y": 380,
+        "off": true,
+        "turret": true,
+        "friendly": false,
+        "x": 700,
+        "id": "turret0"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 253.3000000000001,
+        "id": "slaver2"
+      },
+      {
+        "y": 285,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 401.33333333333326,
+        "id": "slaver3"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1409.5,
+        "id": "slaver2"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1392.2,
+        "id": "slaver2"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1160,
+        "id": "slaver4"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1644.1999999999998,
+        "id": "slaver4"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1099.4,
+        "id": "slaver2"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1603.8,
+        "id": "slaver2"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1366.3333333333333,
+        "id": "slaver4"
+      }
+    ],
+    "enabled": true,
+    "rays": [
+      {
+        "rot": -2.93290190019802,
+        "toX": 38.33473171472616,
+        "fromX": 190.95,
+        "toY": 219.38003888904112,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 251.7
+      },
+      {
+        "rot": -0.363893987166574,
+        "toX": 641.6228768391442,
+        "fromX": 492.1,
+        "toY": 202.1034522403146,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver3",
+        "fromY": 259.05
+      },
+      {
+        "rot": -2.941923716414065,
+        "toX": 678.6279218720342,
+        "fromX": 1360.8,
+        "toY": 115.20198001212589,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 253.25
+      },
+      {
+        "rot": -0.19345355690559995,
+        "toX": 1880.6676884995657,
+        "fromX": 1444.95,
+        "toY": 163.59136875162795,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 248.95
+      },
+      {
+        "rot": -0.2086817623350266,
+        "toX": 1857.451893853431,
+        "fromX": 1235.25,
+        "toY": 359.58959894868514,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 491.35
+      },
+      {
+        "rot": -0.23374318086890145,
+        "toX": 1918.1936926545563,
+        "fromX": 1715.85,
+        "toY": 444.12293032034376,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 492.3
+      },
+      {
+        "rot": -2.9450533243410795,
+        "toX": 799.7784513639056,
+        "fromX": 1050.85,
+        "toY": 642.9592261964941,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 692.95
+      },
+      {
+        "rot": -2.9454620779473566,
+        "toX": 1276.144855133123,
+        "fromX": 1554.7,
+        "toY": 637.7053411050971,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 693.05
+      },
+      {
+        "rot": -2.907849472720892,
+        "toX": 1278.9438757062928,
+        "fromX": 1298.4,
+        "toY": 691.0675894538792,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 695.7
+      }
+    ],
+    "spawns": [
+      {
+        "y": 300,
+        "uid": "rrp_7_0",
+        "zone": "room-0",
+        "x": 460,
+        "id": "landturret",
+        "kind": "security"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_1",
+        "zone": "room-2",
+        "x": 1100,
+        "id": "armturret",
+        "kind": "security"
+      },
+      {
+        "y": 380,
+        "uid": "rrp_7_2",
+        "zone": "room-4",
+        "x": 700,
+        "id": "turret",
+        "kind": "security"
+      },
+      {
+        "y": 700,
+        "uid": "rrp_7_3",
+        "zone": "room-8",
+        "x": 820,
+        "id": "term1",
+        "kind": "terminal"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_4",
+        "zone": "room-0",
+        "x": 160,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_5",
+        "zone": "room-0",
+        "x": 400,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_6",
+        "zone": "room-2",
+        "x": 1560,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_7",
+        "zone": "room-2",
+        "x": 1200,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 540,
+        "uid": "rrp_7_8",
+        "zone": "room-5",
+        "x": 1160,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 540,
+        "uid": "rrp_7_9",
+        "zone": "room-5",
+        "x": 1560,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_10",
+        "zone": "room-8",
+        "x": 1200,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_11",
+        "zone": "room-9",
+        "x": 1760,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_12",
+        "zone": "room-9",
+        "x": 1640,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 260,
+        "uid": "rrp_7_13",
+        "zone": "room-0",
+        "x": 220,
+        "id": "wallsafe",
+        "kind": "reward"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_14",
+        "zone": "room-2",
+        "x": 1640,
+        "id": "safe",
+        "kind": "reward"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_15",
+        "zone": "room-9",
+        "x": 1360,
+        "id": "weapbox",
+        "kind": "reward"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_7_16",
+        "zone": "room-11",
+        "x": 620,
+        "id": "case",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_7_17",
+        "zone": "room-11",
+        "x": 800,
+        "id": "weapbox",
+        "kind": "reward"
+      },
+      {
+        "y": 900,
+        "uid": "rrp_7_18",
+        "zone": "room-11",
+        "x": 660,
+        "id": "term3",
+        "kind": "terminal"
+      }
+    ]
+  },
+  "ceilings": 5,
+  "rooms": 25,
+  "success": true,
+  "groundTurrets": 6,
+  "zones": 168,
+  "terminals": 3,
+  "mirrored": 0,
+  "before": {
+    "errors": [],
+    "guns": [
+      {
+        "toY": 312,
+        "toX": 780,
+        "uid": "rrp_7_0",
+        "fromX": 460,
+        "fromY": 259
+      },
+      {
+        "toY": 312,
+        "toX": 780,
+        "uid": "rrp_7_1",
+        "fromX": 1100,
+        "fromY": 264
+      },
+      {
+        "toY": 512,
+        "toX": 980,
+        "uid": "rrp_7_2",
+        "fromX": 700,
+        "fromY": 387
+      }
+    ],
+    "mirror": false,
+    "version": "13",
+    "room": "syn_7",
+    "spaces": [
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 600,
+        "danger": 47,
+        "labelLines": 2,
+        "value": 11,
+        "height": 280,
+        "zone": "room-0",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 720,
+        "danger": 53,
+        "labelLines": 2,
+        "value": 28,
+        "height": 280,
+        "zone": "room-2",
+        "x": 680,
+        "role": "office"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 53,
+        "labelLines": 2,
+        "value": 28,
+        "height": 280,
+        "zone": "room-2",
+        "x": 1440,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 520,
+        "danger": 27,
+        "labelLines": 2,
+        "value": 25,
+        "height": 200,
+        "zone": "room-3",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 360,
+        "danger": 54,
+        "labelLines": 2,
+        "value": 43,
+        "height": 200,
+        "zone": "room-4",
+        "x": 600,
+        "role": "office"
+      },
+      {
+        "y": 360,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 37,
+        "labelLines": 2,
+        "value": 40,
+        "height": 200,
+        "zone": "room-5",
+        "x": 1000,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 240,
+        "danger": 61,
+        "labelLines": 2,
+        "value": 36,
+        "height": 160,
+        "zone": "room-6",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 35,
+        "labelLines": 2,
+        "value": 47,
+        "height": 160,
+        "zone": "room-7",
+        "x": 320,
+        "role": "store"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 29,
+        "labelLines": 2,
+        "value": 32,
+        "height": 160,
+        "zone": "room-8",
+        "x": 800,
+        "role": "office"
+      },
+      {
+        "y": 600,
+        "labelHeight": 64.75,
+        "width": 600,
+        "danger": 48,
+        "labelLines": 2,
+        "value": 24,
+        "height": 160,
+        "zone": "room-9",
+        "x": 1280,
+        "role": "service"
+      },
+      {
+        "y": 800,
+        "labelHeight": 64.75,
+        "width": 200,
+        "danger": 49,
+        "labelLines": 2,
+        "value": 49,
+        "height": 160,
+        "zone": "room-10",
+        "x": 40,
+        "role": "office"
+      },
+      {
+        "y": 800,
+        "labelHeight": 64.75,
+        "width": 960,
+        "danger": 66,
+        "labelLines": 2,
+        "value": 52,
+        "height": 160,
+        "zone": "room-11",
+        "x": 280,
+        "role": "office"
+      }
+    ],
+    "units": [
+      {
+        "y": 290,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 460,
+        "id": "turret1"
+      },
+      {
+        "y": 285,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 1100,
+        "id": "turret3"
+      },
+      {
+        "y": 380,
+        "off": false,
+        "turret": true,
+        "friendly": false,
+        "x": 700,
+        "id": "turret0"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 253.3000000000001,
+        "id": "slaver2"
+      },
+      {
+        "y": 285,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 401.33333333333326,
+        "id": "slaver3"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1409.5,
+        "id": "slaver2"
+      },
+      {
+        "y": 282.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1392.2,
+        "id": "slaver2"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1160,
+        "id": "slaver4"
+      },
+      {
+        "y": 522.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1644.1999999999998,
+        "id": "slaver4"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1099.4,
+        "id": "slaver2"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1603.8,
+        "id": "slaver2"
+      },
+      {
+        "y": 722.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1366.3333333333333,
+        "id": "slaver4"
+      }
+    ],
+    "enabled": true,
+    "rays": [
+      {
+        "rot": -0.2617993877991494,
+        "toX": 642.8207255959384,
+        "fromX": 496,
+        "toY": 211.00950514441683,
+        "turret": true,
+        "aiming": false,
+        "id": "turret1",
+        "fromY": 250.35
+      },
+      {
+        "rot": -2.8797932657906435,
+        "toX": 677.6296694843727,
+        "fromX": 1064,
+        "toY": 151.77238195899162,
+        "turret": true,
+        "aiming": false,
+        "id": "turret3",
+        "fromY": 255.3
+      },
+      {
+        "rot": 1.8435987755982937,
+        "toX": 651.2018921761206,
+        "fromX": 690,
+        "toY": 561.4248240643795,
+        "turret": true,
+        "aiming": false,
+        "id": "turret0",
+        "fromY": 422.75
+      },
+      {
+        "rot": -2.93290190019802,
+        "toX": 38.33473171472616,
+        "fromX": 190.95,
+        "toY": 219.38003888904112,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 251.7
+      },
+      {
+        "rot": -0.363893987166574,
+        "toX": 641.6228768391442,
+        "fromX": 492.1,
+        "toY": 202.1034522403146,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver3",
+        "fromY": 259.05
+      },
+      {
+        "rot": -2.941923716414065,
+        "toX": 678.6279218720342,
+        "fromX": 1360.8,
+        "toY": 115.20198001212589,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 253.25
+      },
+      {
+        "rot": -0.19345355690559995,
+        "toX": 1880.6676884995657,
+        "fromX": 1444.95,
+        "toY": 163.59136875162795,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 248.95
+      },
+      {
+        "rot": -0.2086817623350266,
+        "toX": 1857.451893853431,
+        "fromX": 1235.25,
+        "toY": 359.58959894868514,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 491.35
+      },
+      {
+        "rot": -0.23374318086890145,
+        "toX": 1918.1936926545563,
+        "fromX": 1715.85,
+        "toY": 444.12293032034376,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 492.3
+      },
+      {
+        "rot": -2.9450533243410795,
+        "toX": 799.7784513639056,
+        "fromX": 1050.85,
+        "toY": 642.9592261964941,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 692.95
+      },
+      {
+        "rot": -2.9454620779473566,
+        "toX": 1276.144855133123,
+        "fromX": 1554.7,
+        "toY": 637.7053411050971,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver2",
+        "fromY": 693.05
+      },
+      {
+        "rot": -2.907849472720892,
+        "toX": 1278.9438757062928,
+        "fromX": 1298.4,
+        "toY": 691.0675894538792,
+        "turret": false,
+        "aiming": true,
+        "id": "slaver4",
+        "fromY": 695.7
+      }
+    ],
+    "spawns": [
+      {
+        "y": 300,
+        "uid": "rrp_7_0",
+        "zone": "room-0",
+        "x": 460,
+        "id": "landturret",
+        "kind": "security"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_1",
+        "zone": "room-2",
+        "x": 1100,
+        "id": "armturret",
+        "kind": "security"
+      },
+      {
+        "y": 380,
+        "uid": "rrp_7_2",
+        "zone": "room-4",
+        "x": 700,
+        "id": "turret",
+        "kind": "security"
+      },
+      {
+        "y": 700,
+        "uid": "rrp_7_3",
+        "zone": "room-8",
+        "x": 820,
+        "id": "term1",
+        "kind": "terminal"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_4",
+        "zone": "room-0",
+        "x": 160,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_5",
+        "zone": "room-0",
+        "x": 400,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_6",
+        "zone": "room-2",
+        "x": 1560,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_7",
+        "zone": "room-2",
+        "x": 1200,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 540,
+        "uid": "rrp_7_8",
+        "zone": "room-5",
+        "x": 1160,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 540,
+        "uid": "rrp_7_9",
+        "zone": "room-5",
+        "x": 1560,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_10",
+        "zone": "room-8",
+        "x": 1200,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_11",
+        "zone": "room-9",
+        "x": 1760,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_12",
+        "zone": "room-9",
+        "x": 1640,
+        "id": "slaver",
+        "kind": "enemy"
+      },
+      {
+        "y": 260,
+        "uid": "rrp_7_13",
+        "zone": "room-0",
+        "x": 220,
+        "id": "wallsafe",
+        "kind": "reward"
+      },
+      {
+        "y": 300,
+        "uid": "rrp_7_14",
+        "zone": "room-2",
+        "x": 1640,
+        "id": "safe",
+        "kind": "reward"
+      },
+      {
+        "y": 740,
+        "uid": "rrp_7_15",
+        "zone": "room-9",
+        "x": 1360,
+        "id": "weapbox",
+        "kind": "reward"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_7_16",
+        "zone": "room-11",
+        "x": 620,
+        "id": "case",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_7_17",
+        "zone": "room-11",
+        "x": 800,
+        "id": "weapbox",
+        "kind": "reward"
+      },
+      {
+        "y": 900,
+        "uid": "rrp_7_18",
+        "zone": "room-11",
+        "x": 660,
+        "id": "term3",
+        "kind": "terminal"
+      }
+    ]
+  },
+  "wallFixtures": [
+    {
+      "operatorY": 319,
+      "room": "syn_1",
+      "uid": "rrp_1_3",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 240,
+      "x": 220,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 319,
+      "room": "syn_1",
+      "uid": "rrp_1_4",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 600,
+      "x": 580,
+      "id": "term2"
+    },
+    {
+      "operatorY": 639,
+      "room": "syn_1",
+      "uid": "rrp_1_12",
+      "mirror": false,
+      "lift": 40,
+      "y": 599,
+      "operatorX": 1400,
+      "x": 1460,
+      "id": "term3"
+    },
+    {
+      "operatorY": 799,
+      "room": "syn_1",
+      "uid": "rrp_1_16",
+      "mirror": false,
+      "lift": 40,
+      "y": 759,
+      "operatorX": 1600,
+      "x": 1580,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 319,
+      "room": "syn_3",
+      "uid": "rrp_3_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 560,
+      "x": 580,
+      "id": "term3"
+    },
+    {
+      "operatorY": 559,
+      "room": "syn_3",
+      "uid": "rrp_3_10",
+      "mirror": false,
+      "lift": 40,
+      "y": 519,
+      "operatorX": 120,
+      "x": 140,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 239,
+      "room": "syn_4",
+      "uid": "rrp_4_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 199,
+      "operatorX": 1560,
+      "x": 1540,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 799,
+      "room": "syn_4",
+      "uid": "rrp_4_8",
+      "mirror": false,
+      "lift": 40,
+      "y": 759,
+      "operatorX": 920,
+      "x": 900,
+      "id": "term3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_5",
+      "uid": "rrp_5_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 400,
+      "x": 380,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_5",
+      "uid": "rrp_5_7",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 640,
+      "x": 660,
+      "id": "knop3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_5",
+      "uid": "rrp_5_8",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 480,
+      "x": 460,
+      "id": "term3"
+    },
+    {
+      "operatorY": 279,
+      "room": "syn_5",
+      "uid": "rrp_5_9",
+      "mirror": false,
+      "lift": 40,
+      "y": 239,
+      "operatorX": 1640,
+      "x": 1580,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 319,
+      "room": "syn_6",
+      "uid": "rrp_6_13",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 840,
+      "x": 820,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 319,
+      "room": "syn_6",
+      "uid": "rrp_6_14",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 1040,
+      "x": 1060,
+      "id": "term2"
+    },
+    {
+      "operatorY": 759,
+      "room": "syn_7",
+      "uid": "rrp_7_3",
+      "mirror": false,
+      "lift": 40,
+      "y": 719,
+      "operatorX": 880,
+      "x": 820,
+      "id": "term1"
+    },
+    {
+      "operatorY": 319,
+      "room": "syn_7",
+      "uid": "rrp_7_13",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 240,
+      "x": 220,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_7",
+      "uid": "rrp_7_18",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 680,
+      "x": 660,
+      "id": "term3"
+    },
+    {
+      "operatorY": 159,
+      "room": "syn_8",
+      "uid": "rrp_8_5",
+      "mirror": false,
+      "lift": 40,
+      "y": 119,
+      "operatorX": 480,
+      "x": 460,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 159,
+      "room": "syn_8",
+      "uid": "rrp_8_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 119,
+      "operatorX": 640,
+      "x": 580,
+      "id": "term3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_9",
+      "uid": "rrp_9_18",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 880,
+      "x": 900,
+      "id": "term3"
+    },
+    {
+      "operatorY": 639,
+      "room": "syn_10",
+      "uid": "rrp_10_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 599,
+      "operatorX": 1320,
+      "x": 1340,
+      "id": "term3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_10",
+      "uid": "rrp_10_8",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 960,
+      "x": 940,
+      "id": "knop3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_12",
+      "uid": "rrp_12_11",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 120,
+      "x": 140,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_12",
+      "uid": "rrp_12_12",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1000,
+      "x": 980,
+      "id": "term2"
+    },
+    {
+      "operatorY": 639,
+      "room": "syn_13",
+      "uid": "rrp_13_11",
+      "mirror": false,
+      "lift": 40,
+      "y": 599,
+      "operatorX": 960,
+      "x": 900,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_15",
+      "uid": "rrp_15_1",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1080,
+      "x": 1020,
+      "id": "term1"
+    },
+    {
+      "operatorY": 479,
+      "room": "syn_15",
+      "uid": "rrp_15_17",
+      "mirror": false,
+      "lift": 40,
+      "y": 439,
+      "operatorX": 440,
+      "x": 380,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 479,
+      "room": "syn_15",
+      "uid": "rrp_15_18",
+      "mirror": false,
+      "lift": 40,
+      "y": 439,
+      "operatorX": 680,
+      "x": 660,
+      "id": "term2"
+    },
+    {
+      "operatorY": 719,
+      "room": "syn_15",
+      "uid": "rrp_15_21",
+      "mirror": false,
+      "lift": 40,
+      "y": 679,
+      "operatorX": 640,
+      "x": 620,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 719,
+      "room": "syn_15",
+      "uid": "rrp_15_22",
+      "mirror": false,
+      "lift": 40,
+      "y": 679,
+      "operatorX": 800,
+      "x": 740,
+      "id": "term2"
+    },
+    {
+      "operatorY": 639,
+      "room": "syn_16",
+      "uid": "rrp_16_7",
+      "mirror": false,
+      "lift": 40,
+      "y": 599,
+      "operatorX": 1640,
+      "x": 1660,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 159,
+      "room": "syn_17",
+      "uid": "rrp_17_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 119,
+      "operatorX": 760,
+      "x": 740,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 159,
+      "room": "syn_17",
+      "uid": "rrp_17_7",
+      "mirror": false,
+      "lift": 40,
+      "y": 119,
+      "operatorX": 400,
+      "x": 380,
+      "id": "term3"
+    },
+    {
+      "operatorY": 359,
+      "room": "syn_17",
+      "uid": "rrp_17_10",
+      "mirror": false,
+      "lift": 40,
+      "y": 319,
+      "operatorX": 760,
+      "x": 740,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_17",
+      "uid": "rrp_17_13",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 320,
+      "x": 300,
+      "id": "term3"
+    },
+    {
+      "operatorY": 759,
+      "room": "syn_19",
+      "uid": "rrp_19_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 719,
+      "operatorX": 640,
+      "x": 620,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 639,
+      "room": "syn_20",
+      "uid": "rrp_20_2",
+      "mirror": false,
+      "lift": 40,
+      "y": 599,
+      "operatorX": 1360,
+      "x": 1300,
+      "id": "term1"
+    },
+    {
+      "operatorY": 239,
+      "room": "syn_21",
+      "uid": "rrp_21_2",
+      "mirror": false,
+      "lift": 40,
+      "y": 199,
+      "operatorX": 1160,
+      "x": 1140,
+      "id": "term3"
+    },
+    {
+      "operatorY": 679,
+      "room": "syn_21",
+      "uid": "rrp_21_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 639,
+      "operatorX": 400,
+      "x": 380,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 559,
+      "room": "syn_22",
+      "uid": "rrp_22_6",
+      "mirror": false,
+      "lift": 40,
+      "y": 519,
+      "operatorX": 200,
+      "x": 180,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 399,
+      "room": "syn_22",
+      "uid": "rrp_22_9",
+      "mirror": false,
+      "lift": 40,
+      "y": 359,
+      "operatorX": 1240,
+      "x": 1220,
+      "id": "term3"
+    },
+    {
+      "operatorY": 759,
+      "room": "syn_22",
+      "uid": "rrp_22_10",
+      "mirror": false,
+      "lift": 40,
+      "y": 719,
+      "operatorX": 1680,
+      "x": 1660,
+      "id": "term3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_22",
+      "uid": "rrp_22_11",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1760,
+      "x": 1740,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_22",
+      "uid": "rrp_22_12",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1640,
+      "x": 1620,
+      "id": "term2"
+    },
+    {
+      "operatorY": 799,
+      "room": "syn_23",
+      "uid": "rrp_23_16",
+      "mirror": false,
+      "lift": 40,
+      "y": 759,
+      "operatorX": 1640,
+      "x": 1620,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 799,
+      "room": "syn_23",
+      "uid": "rrp_23_17",
+      "mirror": false,
+      "lift": 40,
+      "y": 759,
+      "operatorX": 1560,
+      "x": 1580,
+      "id": "term2"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_23",
+      "uid": "rrp_23_21",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1160,
+      "x": 1140,
+      "id": "wallsafe"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_23",
+      "uid": "rrp_23_22",
+      "mirror": false,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1600,
+      "x": 1580,
+      "id": "term2"
+    },
+    {
+      "operatorY": 319,
+      "room": "rr_exit",
+      "uid": "rrp_24_5",
+      "mirror": false,
+      "lift": 40,
+      "y": 279,
+      "operatorX": 600,
+      "x": 580,
+      "id": "term3"
+    },
+    {
+      "operatorY": 519,
+      "room": "rr_exit",
+      "uid": "rrp_24_9",
+      "mirror": false,
+      "lift": 40,
+      "y": 479,
+      "operatorX": 480,
+      "x": 460,
+      "id": "knop3"
+    },
+    {
+      "operatorY": 759,
+      "room": "rr_exit",
+      "uid": "rrp_24_13",
+      "mirror": false,
+      "lift": 40,
+      "y": 719,
+      "operatorX": 320,
+      "x": 300,
+      "id": "wallsafe"
+    }
+  ],
+  "export": {
+    "selectedY": 2,
+    "rooms": 25,
+    "selectedX": 1,
+    "sourceCRC32": "b058037a"
+  },
+  "specials": 11
+}

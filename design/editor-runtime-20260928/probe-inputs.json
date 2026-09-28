@@ -1,0 +1,122 @@
+{
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor.swf": {
+    "sha256": "e99e231f83128ea24cd13b2ae36b0dd294e5180a16f54ba3c7b3cb8fa24d99fd",
+    "destination": "Editor.swf",
+    "bytes": 496700
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Enhancements\\NativeScene.swf": {
+    "sha256": "fcb620b9f4dc25eb3b4b54d420dfdf2549894472e8d0a331f06cdc321fc7cba7",
+    "destination": "Editor\\Enhancements\\NativeScene.swf",
+    "bytes": 9619837
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\texture.swf": {
+    "sha256": "ef4842a1e78f8f8661e84590c82701c3ea54efb71245116bb7a712fed8985ed8",
+    "destination": "texture.swf",
+    "bytes": 15166051
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\texture1.swf": {
+    "sha256": "6646ccf91f912a7384875a5ed40a33c907041645f558a79277fc5f2dc8164678",
+    "destination": "texture1.swf",
+    "bytes": 8367667
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\sprite.swf": {
+    "sha256": "49b459d129a16daa065d471cee5ebf9d59914d682a9f07e5a28caf2e52050246",
+    "destination": "sprite.swf",
+    "bytes": 13220252
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\sprite1.swf": {
+    "sha256": "de792cbda95f06e55a91e0ca7604770f1ced6387a42026951a4bf0a70ec11e4a",
+    "destination": "sprite1.swf",
+    "bytes": 8378700
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\text_zh.xml": {
+    "sha256": "66da212793683b19e65e3973b726a94a2885d5032395af8a2e5a0fd20a17f895",
+    "destination": "text_zh.xml",
+    "bytes": 689243
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\text_en.xml": {
+    "sha256": "f4adf9ae845f08877e25e0d5e46ee9df04d614b2f402cc68ed954e01d02e9ccc",
+    "destination": "text_en.xml",
+    "bytes": 814368
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\text_ru.xml": {
+    "sha256": "acd503ab8ec20428c2d625865d10684a26a3c20e0a056ea2ee2be46d9fd9a6ad",
+    "destination": "text_ru.xml",
+    "bytes": 1253676
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Resources\\langs.xml": {
+    "sha256": "1742932af549887aa8711b8f6633525094ddd45446da44d488e25ac9aeebf9cb",
+    "destination": "Editor\\Resources\\langs.xml",
+    "bytes": 803
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Resources\\text_zh.xml": {
+    "sha256": "8c2a66f273762fe17954c2fde5d39bca36f4a4df563d57cd8d42567501d3789c",
+    "destination": "Editor\\Resources\\text_zh.xml",
+    "bytes": 26890
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Resources\\text_en.xml": {
+    "sha256": "4ed4516f7fe33c15df5292ae31186b5dd247dcd3fe07d0028bbcfda5fc4afb2e",
+    "destination": "Editor\\Resources\\text_en.xml",
+    "bytes": 21437
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Resources\\text_ru.xml": {
+    "sha256": "16bd57f5d3904664c841e415198b1cc750b84900bf677c9ad8fe46c2d2630ccf",
+    "destination": "Editor\\Resources\\text_ru.xml",
+    "bytes": 26768
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Rooms\\rooms_plant.xml": {
+    "sha256": "7466ded79a7438ee3de776bb1b7e00c97f1c6a8776a7f0b2ed28bf0b1e69fb68",
+    "destination": "Rooms\\rooms_plant.xml",
+    "bytes": 383525
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\population\\rrstyle-navigation-plant-review.xml": {
+    "sha256": "d78a495321fc6482d635ae2943459109d96730f04b6bffe81198393914dd1160",
+    "destination": "samples\\plant.xml",
+    "bytes": 532915
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Rooms\\rooms_stable.xml": {
+    "sha256": "6119717f2ff5de034f6c7b148b01c0d2e28d1f2076cc1be878f55b40b7e26109",
+    "destination": "Rooms\\rooms_stable.xml",
+    "bytes": 351749
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\population\\rrstyle-navigation-stable-review.xml": {
+    "sha256": "d5b1eba430205a6b4aed5f18a1a25a6a3efa6805d2fd578bc4603891f9816487",
+    "destination": "samples\\stable.xml",
+    "bytes": 511104
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Rooms\\rooms_sewer.xml": {
+    "sha256": "e7e178f48826de4982b64e85bb380a85f891bf421cb5e93d07ff15d3202b2dd4",
+    "destination": "Rooms\\rooms_sewer.xml",
+    "bytes": 211619
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\population\\rrstyle-navigation-sewer-review.xml": {
+    "sha256": "804dd8cbd3fa7a29580f48a4458fa8b5f4fb20954e7966e52b43aa9bb01b5500",
+    "destination": "samples\\sewer.xml",
+    "bytes": 503457
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Rooms\\rooms_mane.xml": {
+    "sha256": "d743dea9fa1eab3b5d09144ad4975e56bfdd4359fabbd73d43963a5ac5b6708e",
+    "destination": "Rooms\\rooms_mane.xml",
+    "bytes": 433832
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\population\\rrstyle-navigation-mane-review.xml": {
+    "sha256": "f249598052ecbab0ee0c6c55ee891dfe35b46d5e2ec2bc560d601c96c822a77f",
+    "destination": "samples\\mane.xml",
+    "bytes": 389198
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-runtime-20260928\\probe-app\\samples\\plant.xml": {
+    "sha256": "d78a495321fc6482d635ae2943459109d96730f04b6bffe81198393914dd1160",
+    "destination": "mods\\RandomRooms\\exports\\review\\latest.xml",
+    "bytes": 532915
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\Editor\\Enhancements\\EditorTools.swf": {
+    "sha256": "d7ad493f19867c96b600599151275877349a7dbf2155794be42483656ae0f002",
+    "destination": "Editor\\Enhancements\\EditorTools.swf",
+    "bytes": 18198
+  },
+  "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\release\\RandomRoomsEditor.swf": {
+    "sha256": "fb1537f54b2c32af02aca771cb09366441fb74ca01ee3a6099e35c4d3a35dfd8",
+    "destination": "mods\\RandomRooms\\release\\RandomRoomsEditor.swf",
+    "bytes": 59183
+  }
+}

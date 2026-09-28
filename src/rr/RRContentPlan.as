@@ -73,10 +73,22 @@ package rr
       }
       private function choices(z:Object,id:String,mount:String,kind:String,label:String):Array
       {
+         if(RRPopulation.wallFixture(id)) mount="fixture";
          var out:Array=[],r:RRSeed=rng(label,z);
          for each(var a:Object in pop.positions(id,mount,kind,null,false)) if(belongs(z,a.x,a.y))
          {
             if(mount=="floor" && !(tactics.stand[a.y*48+a.x] || tactics.stand[a.y*48+a.x-1])) continue;
+            if(mount=="fixture")
+            {
+               var operator:int=-1;
+               for each(var dx:int in [0,-1,-2,1])
+               {
+                  var n:int=a.floorY*48+a.x+dx;
+                  if(tactics.stand[n] && tactics.clear[n] && operatorFloor(n)) { operator=n; break; }
+               }
+               if(operator<0 || !belongs(z,a.x,a.floorY)) continue;
+               a.operator=operator;
+            }
             if(terminal && ["enemy","special","ambient","hazard","trigger","damager"].indexOf(kind)>=0 &&
                Math.abs(a.x-terminal.x)+Math.abs(a.y-terminal.y)<4) continue;
             a.score=r.fork(a.x+","+a.y).next(); out.push(a);
@@ -86,10 +98,17 @@ package rr
       private function put(z:Object,id:String,a:Object,kind:String,mount:String="floor",cost:Number=0,attrs:Object=null,reason:String=""):XML
       {
          if(cost>0 && z.pressure+cost>z.limit+0.0001) return null;
+         if(RRPopulation.wallFixture(id)) mount="fixture";
          var o:XML=pop.put(id,a,kind,mount,attrs);
          o.@rrZone=z.id; o.@rrD=z.d; o.@rrV=z.v;
          z.pressure+=cost;
-         points.push({uid:String(o.@uid),id:id,zone:z.id,x:a.x,y:a.y,mount:mount,kind:kind,cost:cost,reason:reason});
+         var point:Object={uid:String(o.@uid),id:id,zone:z.id,x:a.x,y:a.y,mount:mount,kind:kind,cost:cost,reason:reason};
+         if(mount=="fixture")
+         {
+            point.floorY=a.floorY; point.operator=a.operator;
+            p.reserve(a.operator%48,int(a.operator/48)-1,a.operator%48+1,int(a.operator/48));
+         }
+         points.push(point);
          return o;
       }
       private function add(z:Object,id:String,kind:String,mount:String="floor",cost:Number=0,attrs:Object=null,label:String="",reason:String=""):XML
@@ -173,7 +192,7 @@ package rr
          {
             for each(var dx:int in [-2,1])
             {
-               var node:int=a.y*48+a.x+dx;
+               var node:int=a.floorY*48+a.x+dx;
                if(!tactics.stand[node] || !tactics.clear[node] || blocked[node] || !operatorFloor(node)) continue;
                var path:Array=[],from:int=-1,dist:Number=1e9,access:Array=[];
                for(var i:int=0;i<reaches.length;i++)
@@ -186,7 +205,7 @@ package rr
                if(from<0) continue;
                var score:Number=(z.role=="control"?6:(["service","office"].indexOf(z.role)>=0?4:0))+
                   (p.solid(a.x-1,a.y) || p.solid(a.x+1,a.y)?3:0)-dist*0.025+a.score;
-               if(score>bestScore) { bestScore=score; best={z:z,x:a.x,y:a.y,node:node,path:path,entries:access,from:tactics.entries[from].slot}; }
+               if(score>bestScore) { bestScore=score; best={z:z,x:a.x,y:a.y,floorY:a.floorY,operator:node,node:node,path:path,entries:access,from:tactics.entries[from].slot}; }
             }
          }
          if(!best) return;

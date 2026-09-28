@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "mapRooms": 512,
+  "pairedInputs": 256,
+  "adjacentPairs": 896,
+  "sourceSHA256": "6b0342e7e651f6da1e446a20c0ad88922233dd9004ee2ef955740d35832f91cd"
+}

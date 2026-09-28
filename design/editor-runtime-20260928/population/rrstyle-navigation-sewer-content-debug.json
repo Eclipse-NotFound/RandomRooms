@@ -1,0 +1,998 @@
+{
+  "errors": [],
+  "points": 391,
+  "after": {
+    "errors": [],
+    "guns": [],
+    "mirror": true,
+    "version": "13",
+    "room": "syn_18",
+    "spaces": [
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 920,
+        "danger": 73,
+        "labelLines": 2,
+        "value": 3,
+        "height": 560,
+        "zone": "room-0",
+        "x": 960,
+        "role": "canal"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 33,
+        "labelLines": 2,
+        "value": 17,
+        "height": 200,
+        "zone": "room-1",
+        "x": 40,
+        "role": "service"
+      },
+      {
+        "y": 480,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 81,
+        "labelLines": 2,
+        "value": 17,
+        "height": 120,
+        "zone": "room-2",
+        "x": 40,
+        "role": "control"
+      },
+      {
+        "y": 840,
+        "labelHeight": 64.75,
+        "width": 920,
+        "danger": 54,
+        "labelLines": 2,
+        "value": 14,
+        "height": 120,
+        "zone": "room-3",
+        "x": 960,
+        "role": "control"
+      },
+      {
+        "y": 640,
+        "labelHeight": 64.75,
+        "width": 400,
+        "danger": 38,
+        "labelLines": 2,
+        "value": 48,
+        "height": 160,
+        "zone": "room-4",
+        "x": 1480,
+        "role": "store"
+      },
+      {
+        "y": 640,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 19,
+        "labelLines": 2,
+        "value": 45,
+        "height": 160,
+        "zone": "room-5",
+        "x": 40,
+        "role": "store"
+      },
+      {
+        "y": 840,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 46,
+        "labelLines": 2,
+        "value": 53,
+        "height": 120,
+        "zone": "room-6",
+        "x": 40,
+        "role": "store"
+      },
+      {
+        "y": 40,
+        "labelHeight": 0,
+        "width": 440,
+        "danger": 73,
+        "labelLines": 0,
+        "value": 3,
+        "height": 440,
+        "zone": "room-0",
+        "x": 1120,
+        "role": "canal_walk"
+      }
+    ],
+    "units": [
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1720,
+        "id": "zombie1"
+      },
+      {
+        "y": 205,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 320,
+        "id": "zombie0"
+      },
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 200,
+        "id": "zombie5"
+      },
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 640,
+        "id": "zombie6"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1760,
+        "id": "zombie3"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1520,
+        "id": "zombie6"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1760,
+        "id": "zombie0"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 400,
+        "id": "zombie1"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 600,
+        "id": "zombie2"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 520,
+        "id": "zombie2"
+      },
+      {
+        "y": 225,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 567.7044246041398,
+        "id": "slime"
+      },
+      {
+        "y": 580.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 351.6,
+        "id": "scorp2"
+      },
+      {
+        "y": 785,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 320.9089786115186,
+        "id": "slime"
+      },
+      {
+        "y": 864,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 500,
+        "id": "slime"
+      }
+    ],
+    "enabled": true,
+    "rays": [
+      {
+        "rot": 3.141592653589793,
+        "toX": 38,
+        "fromX": 610,
+        "toY": 599.0000000000001,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie6",
+        "fromY": 599
+      },
+      {
+        "rot": 3.141592653589793,
+        "toX": 38,
+        "fromX": 1730,
+        "toY": 959.0000000000002,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie3",
+        "fromY": 959
+      },
+      {
+        "rot": 0,
+        "toX": 1882,
+        "fromX": 1550,
+        "toY": 799,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie6",
+        "fromY": 799
+      },
+      {
+        "rot": -0.006841760174550104,
+        "toX": 1918.1272941293907,
+        "fromX": 566.1589373511817,
+        "toY": 215.7500124092324,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 225
+      },
+      {
+        "rot": 3.141592653589793,
+        "toX": 37.26666666666671,
+        "fromX": 333.2666666666667,
+        "toY": 570.75,
+        "turret": false,
+        "aiming": true,
+        "id": "scorp2",
+        "fromY": 570.75
+      },
+      {
+        "rot": -3.134327222461135,
+        "toX": 2.37278637041112,
+        "fromX": 322.3643405692456,
+        "toY": 782.6750824929943,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 785
+      },
+      {
+        "rot": 1.5707963267948966,
+        "toX": 500,
+        "fromX": 500,
+        "toY": 960,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 864
+      }
+    ],
+    "spawns": [
+      {
+        "y": 580,
+        "uid": "rrp_18_0",
+        "zone": "room-0",
+        "x": 1720,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_1",
+        "zone": "room-1",
+        "x": 320,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_2",
+        "zone": "room-2",
+        "x": 200,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_3",
+        "zone": "room-2",
+        "x": 640,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_4",
+        "zone": "room-3",
+        "x": 1760,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_5",
+        "zone": "room-4",
+        "x": 1520,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_6",
+        "zone": "room-4",
+        "x": 1760,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_7",
+        "zone": "room-5",
+        "x": 400,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_8",
+        "zone": "room-6",
+        "x": 600,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_9",
+        "zone": "room-6",
+        "x": 520,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_10",
+        "zone": "room-1",
+        "x": 420,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_11",
+        "zone": "room-2",
+        "x": 440,
+        "id": "scorp",
+        "kind": "ambient"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_12",
+        "zone": "room-5",
+        "x": 460,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 860,
+        "uid": "rrp_18_13",
+        "zone": "room-6",
+        "x": 500,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_14",
+        "zone": "room-1",
+        "x": 820,
+        "id": "case",
+        "kind": "loot"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_15",
+        "zone": "room-1",
+        "x": 480,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_16",
+        "zone": "room-2",
+        "x": 320,
+        "id": "instr2",
+        "kind": "loot"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_17",
+        "zone": "room-2",
+        "x": 520,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_18",
+        "zone": "room-3",
+        "x": 1080,
+        "id": "chest",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_19",
+        "zone": "room-3",
+        "x": 1360,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_20",
+        "zone": "room-5",
+        "x": 320,
+        "id": "instr1",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_21",
+        "zone": "room-6",
+        "x": 800,
+        "id": "chest",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_22",
+        "zone": "room-6",
+        "x": 720,
+        "id": "chest",
+        "kind": "reward"
+      }
+    ]
+  },
+  "ceilings": 0,
+  "rooms": 36,
+  "success": true,
+  "groundTurrets": 0,
+  "zones": 213,
+  "terminals": 0,
+  "mirrored": 18,
+  "before": {
+    "errors": [],
+    "guns": [],
+    "mirror": true,
+    "version": "13",
+    "room": "syn_18",
+    "spaces": [
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 920,
+        "danger": 73,
+        "labelLines": 2,
+        "value": 3,
+        "height": 560,
+        "zone": "room-0",
+        "x": 960,
+        "role": "canal"
+      },
+      {
+        "y": 40,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 33,
+        "labelLines": 2,
+        "value": 17,
+        "height": 200,
+        "zone": "room-1",
+        "x": 40,
+        "role": "service"
+      },
+      {
+        "y": 480,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 81,
+        "labelLines": 2,
+        "value": 17,
+        "height": 120,
+        "zone": "room-2",
+        "x": 40,
+        "role": "control"
+      },
+      {
+        "y": 840,
+        "labelHeight": 64.75,
+        "width": 920,
+        "danger": 54,
+        "labelLines": 2,
+        "value": 14,
+        "height": 120,
+        "zone": "room-3",
+        "x": 960,
+        "role": "control"
+      },
+      {
+        "y": 640,
+        "labelHeight": 64.75,
+        "width": 400,
+        "danger": 38,
+        "labelLines": 2,
+        "value": 48,
+        "height": 160,
+        "zone": "room-4",
+        "x": 1480,
+        "role": "store"
+      },
+      {
+        "y": 640,
+        "labelHeight": 64.75,
+        "width": 440,
+        "danger": 19,
+        "labelLines": 2,
+        "value": 45,
+        "height": 160,
+        "zone": "room-5",
+        "x": 40,
+        "role": "store"
+      },
+      {
+        "y": 840,
+        "labelHeight": 64.75,
+        "width": 880,
+        "danger": 46,
+        "labelLines": 2,
+        "value": 53,
+        "height": 120,
+        "zone": "room-6",
+        "x": 40,
+        "role": "store"
+      },
+      {
+        "y": 40,
+        "labelHeight": 0,
+        "width": 440,
+        "danger": 73,
+        "labelLines": 0,
+        "value": 3,
+        "height": 440,
+        "zone": "room-0",
+        "x": 1120,
+        "role": "canal_walk"
+      }
+    ],
+    "units": [
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1720,
+        "id": "zombie1"
+      },
+      {
+        "y": 205,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 320,
+        "id": "zombie0"
+      },
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 200,
+        "id": "zombie5"
+      },
+      {
+        "y": 599,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 640,
+        "id": "zombie6"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1760,
+        "id": "zombie3"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1520,
+        "id": "zombie6"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 1760,
+        "id": "zombie0"
+      },
+      {
+        "y": 799,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 400,
+        "id": "zombie1"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 600,
+        "id": "zombie2"
+      },
+      {
+        "y": 959,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 520,
+        "id": "zombie2"
+      },
+      {
+        "y": 225,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 567.7044246041398,
+        "id": "slime"
+      },
+      {
+        "y": 580.5,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 351.6,
+        "id": "scorp2"
+      },
+      {
+        "y": 785,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 320.9089786115186,
+        "id": "slime"
+      },
+      {
+        "y": 864,
+        "off": false,
+        "turret": false,
+        "friendly": false,
+        "x": 500,
+        "id": "slime"
+      }
+    ],
+    "enabled": true,
+    "rays": [
+      {
+        "rot": 3.141592653589793,
+        "toX": 38,
+        "fromX": 610,
+        "toY": 599.0000000000001,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie6",
+        "fromY": 599
+      },
+      {
+        "rot": 3.141592653589793,
+        "toX": 38,
+        "fromX": 1730,
+        "toY": 959.0000000000002,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie3",
+        "fromY": 959
+      },
+      {
+        "rot": 0,
+        "toX": 1882,
+        "fromX": 1550,
+        "toY": 799,
+        "turret": false,
+        "aiming": true,
+        "id": "zombie6",
+        "fromY": 799
+      },
+      {
+        "rot": -0.006841760174550104,
+        "toX": 1918.1272941293907,
+        "fromX": 566.1589373511817,
+        "toY": 215.7500124092324,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 225
+      },
+      {
+        "rot": 3.141592653589793,
+        "toX": 37.26666666666671,
+        "fromX": 333.2666666666667,
+        "toY": 570.75,
+        "turret": false,
+        "aiming": true,
+        "id": "scorp2",
+        "fromY": 570.75
+      },
+      {
+        "rot": -3.134327222461135,
+        "toX": 2.37278637041112,
+        "fromX": 322.3643405692456,
+        "toY": 782.6750824929943,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 785
+      },
+      {
+        "rot": 1.5707963267948966,
+        "toX": 500,
+        "fromX": 500,
+        "toY": 960,
+        "turret": false,
+        "aiming": true,
+        "id": "slime",
+        "fromY": 864
+      }
+    ],
+    "spawns": [
+      {
+        "y": 580,
+        "uid": "rrp_18_0",
+        "zone": "room-0",
+        "x": 1720,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_1",
+        "zone": "room-1",
+        "x": 320,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_2",
+        "zone": "room-2",
+        "x": 200,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_3",
+        "zone": "room-2",
+        "x": 640,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_4",
+        "zone": "room-3",
+        "x": 1760,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_5",
+        "zone": "room-4",
+        "x": 1520,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_6",
+        "zone": "room-4",
+        "x": 1760,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_7",
+        "zone": "room-5",
+        "x": 400,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_8",
+        "zone": "room-6",
+        "x": 600,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_9",
+        "zone": "room-6",
+        "x": 520,
+        "id": "zombie",
+        "kind": "enemy"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_10",
+        "zone": "room-1",
+        "x": 420,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_11",
+        "zone": "room-2",
+        "x": 440,
+        "id": "scorp",
+        "kind": "ambient"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_12",
+        "zone": "room-5",
+        "x": 460,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 860,
+        "uid": "rrp_18_13",
+        "zone": "room-6",
+        "x": 500,
+        "id": "slime",
+        "kind": "ambient"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_14",
+        "zone": "room-1",
+        "x": 820,
+        "id": "case",
+        "kind": "loot"
+      },
+      {
+        "y": 220,
+        "uid": "rrp_18_15",
+        "zone": "room-1",
+        "x": 480,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_16",
+        "zone": "room-2",
+        "x": 320,
+        "id": "instr2",
+        "kind": "loot"
+      },
+      {
+        "y": 580,
+        "uid": "rrp_18_17",
+        "zone": "room-2",
+        "x": 520,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_18",
+        "zone": "room-3",
+        "x": 1080,
+        "id": "chest",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_19",
+        "zone": "room-3",
+        "x": 1360,
+        "id": "work",
+        "kind": "service"
+      },
+      {
+        "y": 780,
+        "uid": "rrp_18_20",
+        "zone": "room-5",
+        "x": 320,
+        "id": "instr1",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_21",
+        "zone": "room-6",
+        "x": 800,
+        "id": "chest",
+        "kind": "loot"
+      },
+      {
+        "y": 940,
+        "uid": "rrp_18_22",
+        "zone": "room-6",
+        "x": 720,
+        "id": "chest",
+        "kind": "reward"
+      }
+    ]
+  },
+  "wallFixtures": [
+    {
+      "operatorY": 519,
+      "room": "syn_12",
+      "uid": "rrp_12_12",
+      "mirror": false,
+      "lift": 40,
+      "y": 479,
+      "operatorX": 1760,
+      "x": 1740,
+      "id": "knop3"
+    },
+    {
+      "operatorY": 959,
+      "room": "syn_28",
+      "uid": "rrp_28_27",
+      "mirror": true,
+      "lift": 40,
+      "y": 919,
+      "operatorX": 1520,
+      "x": 1540,
+      "id": "knop3"
+    }
+  ],
+  "export": {
+    "selectedY": 3,
+    "rooms": 36,
+    "selectedX": 3,
+    "sourceCRC32": "47d34cba"
+  },
+  "specials": 0
+}

@@ -1,0 +1,24 @@
+appId=pferr-style-2f7e383e5a2241199fe11a86cb38277a
+4983 ready cases=4
+4984 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-2f7e383e5a2241199fe11a86cb38277a\Local Store existsBefore=true
+4987 STORAGE existsAfter=true
+5191 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+5198 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+5211 development init returned
+13919 STARTUP-READY all 31 host loaders loaded with nonempty pools
+17396 newGame(-1) issued, intro skipped
+18962 heartbeat state=1 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+21096 initial world ready land=rbl
+31270 CONTENT-GALLERY native travel spawn=3:3 score=171
+31270 development debugTravel random_rooms case=rrstyle-navigation-plant
+31315 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+35107 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+38683 arrived random_rooms room=syn_18
+42223 capture rrstyle-navigation-plant-stage 1008x729 room=syn_18 lightOverlay=true
+44920 capture rrstyle-navigation-plant-room 1920x1000 room=syn_18 lightOverlay=false
+45044 development pool rrstyle-navigation-plant total=36 generated=36 assembled=36 issues=0 themes={"plant":36}
+45050 FAIL Error: CONTENT-DEBUG fixture interaction line blocked rrp_4_11
+Error: CONTENT-DEBUG fixture interaction line blocked rrp_4_11
+	at ContentDebugProbe$/require()
+	at ContentDebugProbe$/before()
+	at StyleDriver$/tick()

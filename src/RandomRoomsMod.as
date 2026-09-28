@@ -21,6 +21,7 @@ package
    import rr.RRScenePicker;
    import rr.RRExpedition;
    import rr.RRDebugOverlay;
+   import rr.RRReviewExport;
    
    /**
     * RandomRooms v11 development: native scene ecology and architecture.
@@ -205,7 +206,7 @@ package
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
          debugLayer=new RRDebugOverlay(st); debugLayer.enabled=config.debugDisplay;
-         diag.log("[RR] RandomRoomsMod v13 loaded <content=danger-value-1, legacy=12.2+12.3, growth=right+down, debug=Shift+F3> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v13.1 loaded <content=danger-value-1, legacy=12.2+12.3, growth=right+down, debug=Shift+F3, review=Shift+F5, fixtures=wall-height-1> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void
@@ -496,6 +497,11 @@ package
       private static function onKeyDown(ev:KeyboardEvent):void
       {
          if (scenePicker) return;
+         if(ev.keyCode==F5_KEY && ev.shiftKey)
+         {
+            ev.stopImmediatePropagation(); ev.preventDefault();
+            exportReview(); return;
+         }
          if(ev.keyCode==F3_KEY && ev.shiftKey)
          {
             ev.stopImmediatePropagation(); ev.preventDefault();
@@ -533,6 +539,26 @@ package
          }
       }
       
+      /** Same entry used by Shift+F5 and the isolated production-SWF driver. */
+      public static function exportReview():Object
+      {
+         var w:*=WCls?WCls["w"]:null;
+         try
+         {
+            var result:Object=RRReviewExport.save(w);
+            diag.log("REVIEW-EXPORT "+JSON.stringify(result));
+            mess(w,"RandomRooms：已导出 "+result.rooms+" 间合成房，在地图编辑器点“随机房审查”查看");
+            return result;
+         }
+         catch(error:*)
+         {
+            if(diag) diag.log("REVIEW-EXPORT-FAIL "+error);
+            if(w) mess(w,"RandomRooms："+error.message);
+            return {error:String(error)};
+         }
+         return null;
+      }
+
       /** 随机生物群系主题（种子确定性） */
       private static function randBiome():String
       {

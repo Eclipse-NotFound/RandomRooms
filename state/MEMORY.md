@@ -1,12 +1,12 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-28：v13 已实装，正式 release 仍为 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。编辑器调查、破碎感调查之后，完成编辑器实际编解码与四场景规划叠层探索（§10）；生产生成器及已装编辑器未改。最新入口 design/editor-exploration-20260928/index.html。
+> 2026-09-28：v13.1 已实装，主 SWF 90,918 B / SHA256 356AD62F2340101F0CC0F39803A0AF3E33FBB33B3227E7614D076AD6745CF2BF。新增 Shift+F5 完整快照、正式地图编辑器“随机房审查”入口与叠层/草稿对照；修正挂墙物品高于操作地面40px。详情§11，使用入口 design/editor-runtime-20260928/使用说明.md，验证 validation.md。
 
 ## 1. 模组与运行入口
 
 - Remains 1.02，从零生成建筑空间，不复制原版整房/局部模板。四场景：工厂、废弃避难厩、下水道、城市废墟；一次探索固定场景，向右、向下无限扩张。
 - 本目录独立 Git 仓库，main 分支。正式入口 release/RandomRoomsMod.swf，类 RandomRoomsMod，public static init(main)。
-- v13 部署轮仅替换本模组 release；根/DLC SWF、真实存档、其他模组未改。共享 registry 登记 Shift+F3 和调试显示层。
+- v13.1 更新本模组 release/RandomRoomsMod.swf，新增 release/RandomRoomsEditor.swf，并安装 Editor/Enhancements/EditorTools.swf 与对应源码桥接；根/DLC SWF、Editor.swf、NativeScene、清单、真实存档、其他模组未改。registry 登记 Shift+F3/Shift+F5 和显示层。
 - v13 部署时 root pfe.swf = B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC；后续编辑器调查只读核对的当前宿主 = C631CBF3511B6EE303F533D08D51511FE0EB702F43E5DB17F5241D8576C64867，本次未修改宿主，不覆盖旧部署证据。启动用 application.xml，不是 app.xml。加载清单 mods/loader-manifest.txt 是权威，RandomRooms|RandomRoomsMod|1|1|0；本次未写加载清单。
 
 ## 2. 用户决定与边界
@@ -32,7 +32,7 @@
 - RRTactics：2×2 身体近似、步行/梯路、机械限角和实体遮挡；门和玻璃不当永久掩体。顶炮支撑及入口保护；62% 机会尝试终端，操作位不能含梯子或结构预留，要求两脚支撑。找不到合格位置不硬塞终端。
 - RRDebugOverlay：Shift+F3，默认关闭、配置记忆；用途/D/V、生成十字、当前单位、炮塔防守虚线、终端候选青线、实际枪口朝向。随镜像/相机更新，只读 native unit/weapon/Tile，停机炮塔无活动枪线。20Hz 更新，关闭不做动态射线。
 - 调试层名称 RandomRooms_DebugWorld / RandomRooms_DebugHUD；标签多行，顶炮文字下移避开 D/V。旧版显示用途和“旧版，无 D/V”。
-- RandomRoomsMod 的 F2/F4 已加原生区域切换保护：t_exit > 0 或目标/实际土地不一致时等待。日志版本 [RR:v13-dv]。
+- RandomRoomsMod 的 F2/F4 已加原生区域切换保护：t_exit > 0 或目标/实际土地不一致时等待。当前日志版本 [RR:v13.1-editor]，生成器选择仍为13，保留12.2/12.3。
 
 ## 4. v13 部署验证与证据
 
@@ -63,7 +63,8 @@
 
 ## 6. 接续与回滚
 
-- v13 实现/部署、破碎感调查、编辑器接入探索均已完成。推荐完整快照/只读审查＋固定底图的表面/结构分层对照；正式编辑器入口、编辑回放及破碎算法仍未接入，不将本轮探索当作生产部署授权；保留 v12.2/v12.3。
+- 用户后续明确授权实施与实装，v13.1 正式编辑器入口、完整快照、规划叠层及只读草稿对照已完成。未实现草稿回灌和新破碎算法；保留 v12.2/v12.3。后续工作按新请求决定，不自动把调查建议变成全部待办。
+- 本次回退入口 build/deploy-editor-review.py --rollback；备份 build/release-backups/editor-v13-1-20260928-143836，恢复上一版主SWF和EditorTools增强/源码、移除本次新审查模块；发现后续修改则拒绝覆盖。退出游戏/编辑器后操作。下行是更早v13部署的历史备份。
 - 回滚备份 build/release-backups/RandomRoomsMod_before_v13_20260928.swf = 76,834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9。关游戏→复制回 release/RandomRoomsMod.swf→核对→重启进新图。
 - 更早 v11.1 备份/对照发布记录见 design/v12-runtime-comparison 与 journal，不覆盖现有备份。
 
@@ -103,3 +104,14 @@
 - 两次同XML预览4/4图哈希不同、4/4实体外观记录不同；原生未指定装饰帧/单位变体仍随机。下水道8尸鬼模型隐藏，不以可见身体判断生成数量；必须保留计划点。不能把静态意图线当运行枪线。
 - validation/manifest/results/execution 及 first-run/diagnostic-failure 留证。22输入哈希不变、PNG/语义/最小DOM逻辑核对通过；已看原生图，浏览器仍受file限制，本轮未实点页面，不绕行。失败为探针读炮塔不存在aiState，已守卫读取并重跑通过。
 - 推荐正式完整快照＋规划叠层，再做外观/结构草稿差异与摆设规则；完整编辑回放须重新校验派生规划。建议尚未批准实施。公共新增 world-objects/discoveries/editor-reencoding-boundaries.md；经验检索部分来源不可读，不视作没有经验。
+
+## 11. v13.1 编辑器正式接入与挂装（2026-09-28，已部署）
+
+- 后续用户明确授权“具体实现并实装”，取代§8/§10调查阶段的未授权状态。主模组356AD62F…CF2BF；独立RandomRoomsEditor.swf FB1537F5…35DFD8；已装EditorTools D7AD493F…E0F002。EditorTools源桥接正本在src/editor/bridge，原生渲染支持源冻结在src/editor/vendor，原版来源指纹baseline.json；根Editor/NativeScene和宿主不变。
+- RRReviewExport：Shift+F5，仅稳定到达的random_rooms/rr_showroom可导出；复制act.allroom，保留全部字段，追加rrReview schema1/选中坐标/邻房上下文/原池CRC32。保存到exports/review独立文件及latest.xml，后者临时写入再替换。生成记录不是实时存档，不记录破坏/移动/消耗。
+- RRReviewPanel：原生编辑器底部入口、完整快照直读、坐标图和邻房切换、场景/镜像/生态/难度/城市背景正确、用途/DV/生成点/意图线/候选路/接口叠层、PNG导出。切换叠层不重抽底图，重新渲染仍有原版外观随机。静态单位不跑AI。对照从ToolsSnapshot取同名草稿，格差可见，旧规划警示未重验；只核对房名，不认证跨种子来源，不回灌游戏，也没有逐对象差异清单。
+- v13墙控物体使用mount=fixture：term1/2/3、knop1/3、wallsafe（预留elpanel），obj.y=floorY-1；rrFloorY/rrLift/rrOperator与rrPlan.point对应。背墙/实体/两脚支撑/身体空位/梯子排除；term1仍按避火接近路选操作位。knop2为受击按钮、knop4密码按钮，不能称地面压力板；当前生成器不生成这两项，未确定其通用高度。
+- 验证记录design/editor-runtime-20260928：192算法房、32V对照；1024旧XML+512地图；四场景132Location、183挂墙物品、8安保终端/28箱锁终端/27按钮效果；一处终端正常移动99帧到位且遮挡；编辑器候选/安装后各4例；正式loader3例/Shift+F3和Shift+F5通过。对源XML无写入、导出不旅行，安装文件指纹一致。
+- 首轮fixture视线误报已留档：Location.isLine跨房调用仍查World.w.loc；测试器改为逐目标房取物理格、仅当前房额外原生isLine，同一候选通过。公共知识已补此边界和挂装高度。主SWF实测后只改正一条注释，无执行代码变化；压缩证据保存实际安装字节。
+- 复现：build/build-v7.ps1 -OutputName RandomRooms-v13-1-candidate.swf；build/build-editor.ps1；原生PopulationProbe/ContentGallery会顺带验导出；design/editor-runtime-20260928/prepare-probe.py [--installed] 与run-probe.ps1 -Run。prepare-editor-source.py为一次性原始冻结，不应重新覆盖现有正本。日期版deploy/finalize脚本拒绝覆盖旧记录，后续发布须建新证据目录。
+- 操作：完整重启游戏/编辑器，F2→F1新图，Shift+F5，然后地图编辑器.vbs中点“随机房审查”。旧图不自动抬高设备。未穷尽种子/长期内存/联机/DLC；本轮未改扩张算法，不重跑此前完整扩张行走。正式加载和编辑器均用独立实例，没有关闭用户窗口。

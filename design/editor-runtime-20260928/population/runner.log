@@ -1,0 +1,77 @@
+appId=pferr-style-832ce72468024c0dbf12b03bcdff0ca4
+5008 ready cases=4
+5012 STORAGE path=C:\Users\hello\AppData\Roaming\pferr-style-832ce72468024c0dbf12b03bcdff0ca4\Local Store existsBefore=true
+5013 STORAGE existsAfter=true
+5716 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=false rrHost=false
+5719 development class loaded from unchanged SWF in driver's child domain; init caller is harness
+5794 development init returned
+15066 heartbeat state=0 case=0 allLands=false text=true resources=true rrCurrent=false rrHost=false
+16105 STARTUP-READY all 31 host loaders loaded with nonempty pools
+20698 newGame(-1) issued, intro skipped
+24816 initial world ready land=rbl
+25017 heartbeat state=2 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+35196 CONTENT-GALLERY native travel spawn=3:3 score=171
+35196 development debugTravel random_rooms case=rrstyle-navigation-plant
+35247 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+43219 arrived random_rooms room=syn_18
+45019 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=false rrHost=false
+46607 capture rrstyle-navigation-plant-stage 1008x729 room=syn_18 lightOverlay=true
+49236 capture rrstyle-navigation-plant-room 1920x1000 room=syn_18 lightOverlay=false
+49324 development pool rrstyle-navigation-plant total=36 generated=36 assembled=36 issues=0 themes={"plant":36}
+51530 capture rrstyle-navigation-plant-debug-before-stage 1008x729 room=syn_18 lightOverlay=true
+54502 capture rrstyle-navigation-plant-debug-before-room 1920x1000 room=syn_18 lightOverlay=false
+58261 POPULATION-UI {"pip":false,"click":0,"pause":false,"allStat":1,"guiPause":false,"sats":false,"exit":0,"stand":false}
+61901 capture rrstyle-navigation-plant-debug-after-room 1920x1000 room=syn_18 lightOverlay=false
+61902 POPULATION PASS rrstyle-navigation-plant
+62216 heartbeat state=2 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+62219 return to base before refreshing random_rooms
+65529 heartbeat state=7 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+67660 returned to base
+80000 CONTENT-GALLERY native travel spawn=4:1 score=168
+80001 development debugTravel random_rooms case=rrstyle-navigation-stable
+80023 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+85235 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=false rrHost=false
+87456 arrived random_rooms room=syn_21
+90691 capture rrstyle-navigation-stable-stage 1008x729 room=syn_21 lightOverlay=true
+94221 capture rrstyle-navigation-stable-room 1920x1000 room=syn_21 lightOverlay=false
+94292 development pool rrstyle-navigation-stable total=35 generated=35 assembled=35 issues=0 themes={"stable":35}
+95869 capture rrstyle-navigation-stable-debug-before-stage 1008x729 room=syn_21 lightOverlay=true
+99965 capture rrstyle-navigation-stable-debug-before-room 1920x1000 room=syn_21 lightOverlay=false
+103154 POPULATION-UI {"pip":false,"click":0,"pause":false,"allStat":1,"guiPause":false,"sats":false,"exit":0,"stand":false}
+106758 capture rrstyle-navigation-stable-debug-after-room 1920x1000 room=syn_21 lightOverlay=false
+106759 POPULATION PASS rrstyle-navigation-stable
+106825 heartbeat state=2 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+106825 return to base before refreshing random_rooms
+112317 returned to base
+120458 CONTENT-GALLERY native travel spawn=3:3 score=23
+120458 development debugTravel random_rooms case=rrstyle-navigation-sewer
+120475 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+127579 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=false rrHost=false
+128118 arrived random_rooms room=syn_18
+130964 capture rrstyle-navigation-sewer-stage 1008x729 room=syn_18 lightOverlay=true
+132881 capture rrstyle-navigation-sewer-room 1920x1000 room=syn_18 lightOverlay=false
+132969 development pool rrstyle-navigation-sewer total=36 generated=36 assembled=36 issues=0 themes={"sewer":36}
+134129 capture rrstyle-navigation-sewer-debug-before-stage 1008x729 room=syn_18 lightOverlay=true
+135812 capture rrstyle-navigation-sewer-debug-before-room 1920x1000 room=syn_18 lightOverlay=false
+137910 POPULATION-UI {"pip":false,"click":0,"pause":false,"allStat":1,"guiPause":false,"sats":false,"exit":0,"stand":false}
+139597 capture rrstyle-navigation-sewer-debug-after-room 1920x1000 room=syn_18 lightOverlay=false
+139597 POPULATION PASS rrstyle-navigation-sewer
+139632 heartbeat state=2 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+139633 return to base before refreshing random_rooms
+145021 heartbeat state=7 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+145085 returned to base
+155038 CONTENT-GALLERY native travel spawn=1:2 score=179
+155039 development debugTravel random_rooms case=rrstyle-navigation-mane
+155063 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=false rrHost=false
+159160 arrived random_rooms room=syn_7
+161957 capture rrstyle-navigation-mane-stage 1008x729 room=syn_7 lightOverlay=true
+163442 capture rrstyle-navigation-mane-room 1920x1000 room=syn_7 lightOverlay=false
+163524 development pool rrstyle-navigation-mane total=25 generated=25 assembled=25 issues=0 themes={"mane":25}
+164419 capture rrstyle-navigation-mane-debug-before-stage 1008x729 room=syn_7 lightOverlay=true
+165825 capture rrstyle-navigation-mane-debug-before-room 1920x1000 room=syn_7 lightOverlay=false
+168780 POPULATION-UI {"pip":false,"click":0,"pause":false,"allStat":1,"guiPause":false,"sats":false,"exit":0,"stand":false}
+170481 capture rrstyle-navigation-mane-debug-after-room 1920x1000 room=syn_7 lightOverlay=false
+170482 POPULATION PASS rrstyle-navigation-mane
+170586 heartbeat state=2 case=4 allLands=true text=true resources=true rrCurrent=false rrHost=false
+170779 DEVELOPMENT-VERSION runtimeTag=[RR:v13.1-editor] copiedOriginalLog=true
+170780 DONE 4 cases

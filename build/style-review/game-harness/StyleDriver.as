@@ -205,6 +205,14 @@ package
                screenshot(w,String(cases[index].@id)+"-debug-stage",false);
                main.stage.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN,true,true,0,114,0,false,false,true));
                log("NATIVE-LOADER Shift+F3 visible; land="+w.game.curLandId);
+               var exportedBefore:String=w.land.act.allroom.toXMLString(),exportLand:*=w.land;
+               main.stage.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_DOWN,true,true,0,116,0,false,false,true));
+               var exportedFile:File=rootDir.resolvePath("mods/RandomRooms/exports/review/latest.xml"),exportStream:FileStream=new FileStream();
+               if(!exportedFile.exists) throw new Error("Native Shift+F5 export missing");
+               exportStream.open(exportedFile,FileMode.READ);var exportedXML:XML=new XML(exportStream.readUTFBytes(exportStream.bytesAvailable));exportStream.close();
+               if(exportedXML.rrReview.@schema!="1" || exportedXML.room.length()!=w.land.act.allroom.room.length() || w.land!==exportLand || exportedBefore!=w.land.act.allroom.toXMLString()) throw new Error("Native export changed room or lost records");
+               exportedFile.copyTo(rootDir.resolvePath("captures/"+cases[index].@id+"-review.xml"),true);
+               log("NATIVE-LOADER Shift+F5 complete export; rooms="+exportedXML.room.length());
                index++; state=2; return;
             }
             var beat:int = int((getTimer() - started) / 10000);
@@ -774,7 +782,7 @@ package
             {
                var input:FileStream=new FileStream(); input.open(source,FileMode.READ);
                var contents:String=input.readUTFBytes(input.bytesAvailable); input.close();
-               var match:Array=contents.match(/\[RR:v13-dv\]/);
+               var match:Array=contents.match(/\[RR:v13\.1-editor\]/);
                if(!match) throw new Error("Native loader version marker missing");
                data.runtimeTag=String(match[0]); data.loadMode="native-loader";
                data.loaderStatus=SharedObject.getLocal("ModLoader","/").data;

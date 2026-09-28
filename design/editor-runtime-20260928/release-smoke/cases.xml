@@ -1,0 +1,5 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="true" waterProbe="false" population="false" contentGallery="false" terminalApproach="false" nativeLoader="true" populationDepth="0" development="true">
+  <case id="rrstyle-native-f1" landId="random_rooms" scene="plant" generatorVersion="13" comparisonSeed="20260818" action="pick" />
+  <case id="rrstyle-native-f4" landId="random_rooms" scene="plant" generatorVersion="13" comparisonSeed="20260818" action="deeper" />
+  <case id="rrstyle-native-f5" landId="rr_showroom" scene="sewer" generatorVersion="13" comparisonSeed="20260818" action="pick" />
+</cases>

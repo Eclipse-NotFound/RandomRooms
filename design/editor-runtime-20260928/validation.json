@@ -1,0 +1,128 @@
+{
+  "status": "passed",
+  "version": "13.1-editor",
+  "rooms": 132,
+  "fixtures": {
+    "wallsafe": 78,
+    "term2": 28,
+    "knop3": 18,
+    "term3": 42,
+    "term1": 8,
+    "knop1": 9
+  },
+  "scenes": [
+    {
+      "scene": "plant",
+      "rooms": 36,
+      "fixtures": 71,
+      "export": {
+        "selectedY": 3,
+        "rooms": 36,
+        "selectedX": 3,
+        "sourceCRC32": "deb8a438"
+      },
+      "checks": {
+        "slimeMines": 0,
+        "loot": 253,
+        "lootCreated": 586,
+        "terminalRobot": 2,
+        "switches": 13,
+        "disarm": 24,
+        "stations": 11,
+        "ecology": 36,
+        "circuitsActivated": 4,
+        "terminalLock": 11,
+        "npc": 1
+      }
+    },
+    {
+      "scene": "stable",
+      "rooms": 35,
+      "fixtures": 59,
+      "export": {
+        "selectedY": 1,
+        "rooms": 35,
+        "selectedX": 4,
+        "sourceCRC32": "2364798f"
+      },
+      "checks": {
+        "slimeMines": 5,
+        "loot": 251,
+        "lootCreated": 594,
+        "terminalRobot": 3,
+        "switches": 9,
+        "disarm": 20,
+        "stations": 26,
+        "ecology": 35,
+        "circuitsActivated": 6,
+        "terminalLock": 9,
+        "npc": 1
+      }
+    },
+    {
+      "scene": "sewer",
+      "rooms": 36,
+      "fixtures": 2,
+      "export": {
+        "selectedY": 3,
+        "rooms": 36,
+        "selectedX": 3,
+        "sourceCRC32": "47d34cba"
+      },
+      "checks": {
+        "slimeMines": 11,
+        "loot": 173,
+        "lootCreated": 387,
+        "terminalRobot": 0,
+        "switches": 2,
+        "disarm": 8,
+        "stations": 17,
+        "ecology": 36,
+        "circuitsActivated": 0,
+        "terminalLock": 0,
+        "npc": 0
+      }
+    },
+    {
+      "scene": "mane",
+      "rooms": 25,
+      "fixtures": 51,
+      "export": {
+        "selectedY": 2,
+        "rooms": 25,
+        "selectedX": 1,
+        "sourceCRC32": "b058037a"
+      },
+      "checks": {
+        "slimeMines": 0,
+        "loot": 192,
+        "lootCreated": 449,
+        "terminalRobot": 3,
+        "switches": 3,
+        "disarm": 6,
+        "stations": 7,
+        "ecology": 25,
+        "circuitsActivated": 0,
+        "terminalLock": 8,
+        "npc": 1
+      }
+    }
+  ],
+  "editorChecks": [
+    "actual bridge click",
+    "four native scenes",
+    "mirror ecology difficulty",
+    "complete metadata",
+    "fixed image during overlay toggles",
+    "next previous navigation",
+    "source and editor document unchanged",
+    "native draft encode / one changed cell / baseline toggle",
+    "Escape / reopen / return"
+  ],
+  "nativeLoaderCases": [
+    "rrstyle-native-f1",
+    "rrstyle-native-f4",
+    "rrstyle-native-f5"
+  ],
+  "dateUTC": "2026-09-28T06:42:57.513378+00:00"
+}

@@ -1,0 +1,146 @@
+{
+  "appId": "pferr-style-832ce72468024c0dbf12b03bcdff0ca4",
+  "status": "complete",
+  "startedUtc": "2026-09-28T06:24:21.7479627Z",
+  "completedUtc": "2026-09-28T06:27:15.2903733Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-navigation-plant",
+    "rrstyle-navigation-stable",
+    "rrstyle-navigation-sewer",
+    "rrstyle-navigation-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "356AD62F2340101F0CC0F39803A0AF3E33FBB33B3227E7614D076AD6745CF2BF",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "C631CBF3511B6EE303F533D08D51511FE0EB702F43E5DB17F5241D8576C64867",
+  "navigationProbe": false,
+  "populationProbe": true,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "build/RandomRooms-v13-1-candidate.swf",
+  "nativeLoaderSmoke": false,
+  "runtimeArtifacts": {
+    "rrstyle-navigation-plant-pool.xml": "8D7E62F80B1D80D4252D8FD110495F7FE62374E0C260185990ADFC1007B13130",
+    "rrstyle-navigation-plant-layout.xml": "3B45BF9903F4ECE4B5FD13782DEB9ACFB77810BD0BBA0318E7CA287236618498",
+    "rrstyle-navigation-plant-topology.json": "6A45AE2BA462B896923627E23BD0DD2C404BDE154550EB4F5767D41FD587F0C1",
+    "rrstyle-navigation-stable-pool.xml": "C48B7B2F4147323795326BFF0EABE3FBD8D26344B4A417565BE2A365AAE911E5",
+    "rrstyle-navigation-stable-layout.xml": "A6F869DC5573A8613B7D8D553AD2DFB12BBA78AF35F1BABDD1A78967A78DF98D",
+    "rrstyle-navigation-stable-topology.json": "5FAE8A9ADBC2625641A0AF8354460D821796D550ED3DA0F877EB9BFEE3CE8F3D",
+    "rrstyle-navigation-sewer-pool.xml": "1789F52967369BAE6F315301AD71668112701C6CAEAEE6DFFBCDD47714C1B169",
+    "rrstyle-navigation-sewer-layout.xml": "3B409CE7946B770CC4CE358CD14714B58504722566540AF8937AED45C2B6E773",
+    "rrstyle-navigation-sewer-topology.json": "278258BD8D822645D2684B42BFE5057FE192DB1CFA90BA75C430CCC31707D010",
+    "rrstyle-navigation-mane-pool.xml": "D8939825963C2DC437BDE81E1471993ED644FDFB7AB56E6949015CDB6D635E1C",
+    "rrstyle-navigation-mane-layout.xml": "E56AEC0CC68BA5F716E73CD3893A4EB09C177DCADF6FA33805C5C98765D9F8DA",
+    "rrstyle-navigation-mane-topology.json": "B31322AE7BD8B86998D3C5DFC1ED8291D916E6B7202D70BE41E108AE1F47B5F5",
+    "production-diag.log": "A786AE08E3AFC30635E6EBFA0426CED86E574ED40CF2896751411D321D69ECC0",
+    "production-version.json": "7158B44555B2686A15ACFF3B41E486ABED8D61C76A3DA1749FA701CF8363B15E",
+    "rrstyle-navigation-mane-content-debug.json": "EA69EB65DFF2BBB18F49FA966A8E4EAF69C452A138FC78C958181A28326CF575",
+    "rrstyle-navigation-mane-population.json": "90228D2E1B3C3D5C39BBCCC70EC3FC213C8165E62E34C8FAB83BD050E4C5284F",
+    "rrstyle-navigation-mane-review.xml": "F249598052ECBAB0EE0C6C55EE891DFE35B46D5E2EC2BC560D601C96C822A77F",
+    "rrstyle-navigation-plant-content-debug.json": "CD3A289FD0C0DD7D0E3B9B5676C651806F331BF35CA30AA38236619DB9CD328E",
+    "rrstyle-navigation-plant-population.json": "DD5C5771BB560B267FFBE9C1195C87D5CE7B8B50F3B9028D85DFA8D3FE726573",
+    "rrstyle-navigation-plant-review.xml": "D78A495321FC6482D635AE2943459109D96730F04B6BFFE81198393914DD1160",
+    "rrstyle-navigation-sewer-content-debug.json": "AA760A0243998B1D74E95910D7C4F31B74F72D115979CDC6B0B1378DF1F44261",
+    "rrstyle-navigation-sewer-population.json": "B89936DEB02C33BA59467DFBC86B2042B357397C4FEC25E099E35B8358DB5FD5",
+    "rrstyle-navigation-sewer-review.xml": "804DD8CBD3FA7A29580F48A4458FA8B5F4FB20954E7966E52B43AA9BB01B5500",
+    "rrstyle-navigation-stable-content-debug.json": "88248235987F307298872C60AC1A7807F84FE6034EB987930C4EF854BAE51748",
+    "rrstyle-navigation-stable-population.json": "E417F3F4AA04CF8CF717281AFDA947621E81881AC957845D460BD026DCD1EBBC",
+    "rrstyle-navigation-stable-review.xml": "D5B1EBA430205A6B4AED5F18A1A25A6A3EFA6805D2FD578BC4603891F9816487",
+    "startup-readiness.json": "A05C3E8D79D6231CEFD3241A7EE44E2CB962949B959978FE37F0E30717915D38"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-navigation-plant",
+      "poolRooms": 36,
+      "generatedPoolRooms": 36,
+      "themeCounts": {
+        "plant": 36
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-stable",
+      "poolRooms": 35,
+      "generatedPoolRooms": 35,
+      "themeCounts": {
+        "stable": 35
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-sewer",
+      "poolRooms": 36,
+      "generatedPoolRooms": 36,
+      "themeCounts": {
+        "sewer": 36
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-navigation-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "7E97D33CAE389924113A767B757DF78FB6B5C38A442ED2C8A46345EEA6D8C930",
+  "driverSha256": "25D9AA8629167D20C97B4044B5E755E2298DD4EE82FB3A614F0960FC6A0B2E7F",
+  "runnerLogSha256": "D774E3D586698A4D4279EE5779F083BCBD848D194AD974566E318CA38E873F3C",
+  "captured": {
+    "rrstyle-navigation-plant-stage.png": "EA77D7429399B88AD2DD7A4776C70FC4391474676ED2BEFC1554A330F94923F4",
+    "rrstyle-navigation-plant-room.png": "CDC89427D331478F9E8C84C53A5FF0260BD7489E0B79A8F14C8C34DE6184A34C",
+    "rrstyle-navigation-stable-stage.png": "16D8DC2F78C89FEDE8E4230EDFDBB809141C2F91526CD5F64D373C6597CEDFFB",
+    "rrstyle-navigation-stable-room.png": "EB036770320C51D2D105B561241EC2056DBA4014B9043C81944E3E4EDF91B15A",
+    "rrstyle-navigation-sewer-stage.png": "CDC32AC08A4D5A8E824FD3B43D41E431D5E90DFC8585456A0DCB59C710294EB5",
+    "rrstyle-navigation-sewer-room.png": "E687699BAFB0307E940E23A630EDF7104A6A09ED32980E616BA9C73876CC9F4B",
+    "rrstyle-navigation-mane-stage.png": "634D6EB99BA2EC065326503E7C531263DA58684379D491A0CF595EE89CB838A2",
+    "rrstyle-navigation-mane-room.png": "67259A19681BFF1A9D8C690DBD6B76EB7C66DA3B7BDB6AC3956A86A3ED12AF70",
+    "rrstyle-navigation-mane-debug-after-room.png": "3D5994C54BA948D52432846316099F04B22BB91D7A8B0CE227A93155BE6057DF",
+    "rrstyle-navigation-mane-debug-before-room.png": "F2913D60CE3012AB8802657ADFBAF5D8738D1DD21B1D37AC1F785D63B28D2EE9",
+    "rrstyle-navigation-mane-debug-before-stage.png": "49BD7200AFAB318812A04669FD41F2891B96CF9C9964808DA39216BE17F3133F",
+    "rrstyle-navigation-plant-debug-after-room.png": "96C83780B5E9493A71ACA8A72B86F86C90C6D44C07CD98B83816B28F9A00A8CA",
+    "rrstyle-navigation-plant-debug-before-room.png": "FC0D51DB19BDEA58EB30F3C29578B9ABABD40531F09996199005514DB6F30E44",
+    "rrstyle-navigation-plant-debug-before-stage.png": "F6387932D0BC87219030F79DE871CC2A7FCCCFF868D6F7D9B51401AC27E804A8",
+    "rrstyle-navigation-sewer-debug-after-room.png": "7FB69F1A4C870D89F8935C4D64728920322901F54CA70C527BA9A9C9EB91273C",
+    "rrstyle-navigation-sewer-debug-before-room.png": "4C32732D22B04A4718E2D6B4497863FB49D8C165001FCE320263F47E1337194C",
+    "rrstyle-navigation-sewer-debug-before-stage.png": "7E8D374E178FEEF338E9F961236620B4B6000A2896DEA9DDA1EACD9FAF76E579",
+    "rrstyle-navigation-stable-debug-after-room.png": "DCFD4BDD79964FE0816E79D537AE6707FEB133E3959F65328BBB30AF4C19BEFC",
+    "rrstyle-navigation-stable-debug-before-room.png": "ABA2D52824DBA033739042975A93F6EEB53F22312F82F7127535D1AFD577ABCA",
+    "rrstyle-navigation-stable-debug-before-stage.png": "DB799DF89C4C3941CD07A1BE2AC7741BF40C2ECDC449F0CC54E0A71D4E371A02"
+  }
+}
