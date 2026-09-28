@@ -1,0 +1,4 @@
+# Raw XML is measured evidence; preserve byte line endings on checkout.
+samples/*.xml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+roundtrip/*.xml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+first-run/roundtrip/*.xml -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

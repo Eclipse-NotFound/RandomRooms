@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RandomRooms · 编辑器接入探索</title>
+<link rel="stylesheet" href="review.css">
+<header>
+  <p class="eyebrow">RANDOMROOMS / 开发研究 / 2026.09.28</p>
+  <h1>把生成计划，放回真实画面里</h1>
+  <p>四份已归档 v13 房间，使用编辑器的原生绘图能力。这里可以核对用途、D/V、布防和相邻接口；画面为固定快照。</p>
+  <nav><a href="exploration.md">探索结论与接入建议</a><a href="../editor-integration-20260928/assessment.md">原调查报告</a><a href="../fracture-study-2026-09-28/index.html">原版破碎感调查</a></nav>
+</header>
+<main>
+  <div class="toolbar"><label>查看场景 <select id="scene"><option value="plant">工厂 · 顶炮与终端</option><option value="stable">废弃避难厩 · 镜像房间</option><option value="sewer">下水道 · 扩张房间</option><option value="mane">城市废墟 · 两种炮塔</option></select></label>
+    <label><input id="spaces" type="checkbox" checked>用途与 D/V</label>
+    <label><input id="points" type="checkbox" checked>生成点</label>
+    <label><input id="tactics" type="checkbox" checked>防守目标与终端路</label>
+    <label><input id="ports" type="checkbox">边界接口</label>
+    <button id="plain">仅看原画</button>
+  </div>
+  <div id="context" class="context"></div>
+  <div class="viewport"><div class="picture"><img id="native" width="1920" height="1000" alt="原生静态房间预览"><svg id="overlay" viewBox="0 0 1920 1000" aria-label="生成计划叠层"></svg></div></div>
+  <p class="legend"><span class="pink">紫虚线：炮塔的防守目标</span><span class="cyan">青虚线：终端候选接近路</span><span class="red">红点：主要敌群</span><span class="gold">金点：物资／设施</span></p>
+  <p class="boundary">虚线来自生成计划，不代表运行中的枪口或射击轨迹。静态模型可能保留潜伏状态；生成点仍会标出它的位置。安保终端控制范围为整间合成房。</p>
+  <div class="details">
+    <section><h2>检查一个设计点</h2><label>生成点 <select id="pointSelect"></select></label><p id="selection" class="selection">可点图中的圆点，查看生成依据。</p><p>用途线框是规划子矩形；合并空间可以共用一组 D/V。点的位置按生成器预留占地标注，可能与模型身体中心略有差别。</p></section>
+    <section><h2>相邻房间</h2><div id="neighbours"></div><p>对照的是原始地图池中、换算镜像后的接口。接口吻合不能代替跨房行走测试。</p></section>
+    <section><h2>普通保存会发生什么</h2><div id="roundtrip"></div><p>本次调用了已安装编辑器的真实编解码和选房事件；仅在独立实例内重编码并导出研究副本，未操作正式地图的保存对话框。</p></section>
+  </div>
+  <section class="next"><h2>这怎样帮助“破碎感”改进</h2><p>先锁定原始房间，比较背景破洞、材质老化等外观草稿；再试改变真实墙体和楼板的结构草稿。结构改变后，应重新检查房间分组、可走路线、炮塔支撑和终端接近路，旧叠层要标为失效。这一页展示审查方式，尚未生成新的破碎算法。</p></section>
+</main>
+<footer>4 个固定样本 · 原生绘图＋规划叠层 · 已核对文件、数据与图片；本轮未在浏览器中实点页面控件</footer>
+<script src="review-data.js"></script><script src="review.js"></script>
+</html>

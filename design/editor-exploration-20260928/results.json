@@ -1,0 +1,1026 @@
+{
+  "render": [
+    {
+      "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+      "spawnMarkers": 4,
+      "invisibleTriggers": 0,
+      "difficulty": 8,
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "transpFon": false,
+      "sourceUnchanged": true,
+      "nativeRenderer": true,
+      "room": "syn_18",
+      "mirror": false,
+      "examples": 0,
+      "entityDetails": [
+        {
+          "y": 599,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 180,
+          "source": "turret",
+          "id": "turret"
+        },
+        {
+          "y": 599,
+          "facing": -1,
+          "example": false,
+          "variant": null,
+          "x": 1540,
+          "source": "turret",
+          "id": "turret"
+        },
+        {
+          "y": 599,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 1740,
+          "source": "turret",
+          "id": "turret"
+        }
+      ],
+      "region": "random_plant",
+      "expectedEcology": 2,
+      "enemyType": 2,
+      "enemyLevel": 8,
+      "examplePointsEnabled": false,
+      "simulationUnits": 0,
+      "entities": 3,
+      "warnings": [],
+      "biome": 0,
+      "emptyPoints": 0,
+      "staticBodies": [
+        {
+          "y": 599,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 180,
+          "id": "turret",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 1540,
+          "id": "turret",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 1740,
+          "id": "turret",
+          "initialAI": null
+        }
+      ],
+      "milliseconds": 787,
+      "regionName": "工厂",
+      "objects": 21
+    },
+    {
+      "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+      "spawnMarkers": 8,
+      "invisibleTriggers": 0,
+      "difficulty": 8,
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "transpFon": false,
+      "sourceUnchanged": true,
+      "nativeRenderer": true,
+      "room": "syn_16",
+      "mirror": true,
+      "examples": 0,
+      "entityDetails": [
+        {
+          "y": 439,
+          "facing": -1,
+          "example": false,
+          "variant": null,
+          "x": 980,
+          "source": "turret",
+          "id": "turret"
+        },
+        {
+          "y": 639,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 420,
+          "source": "turret",
+          "id": "turret"
+        },
+        {
+          "y": 159,
+          "facing": -1,
+          "example": false,
+          "variant": "0",
+          "x": 1160,
+          "source": "protect",
+          "id": "protect"
+        },
+        {
+          "y": 559,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 160,
+          "source": "robot",
+          "id": "robot"
+        },
+        {
+          "y": 759,
+          "facing": 1,
+          "example": false,
+          "variant": "0",
+          "x": 240,
+          "source": "protect",
+          "id": "protect"
+        },
+        {
+          "y": 959,
+          "facing": -1,
+          "example": false,
+          "variant": "0",
+          "x": 720,
+          "source": "protect",
+          "id": "protect"
+        },
+        {
+          "y": 759,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 1080,
+          "source": "vendor",
+          "id": "vendor"
+        }
+      ],
+      "region": "random_stable",
+      "expectedEcology": 2,
+      "enemyType": 2,
+      "enemyLevel": 8,
+      "examplePointsEnabled": false,
+      "simulationUnits": 0,
+      "entities": 7,
+      "warnings": [],
+      "biome": 2,
+      "emptyPoints": 0,
+      "staticBodies": [
+        {
+          "y": 439,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 980,
+          "id": "turret",
+          "initialAI": null
+        },
+        {
+          "y": 639,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 420,
+          "id": "turret",
+          "initialAI": null
+        },
+        {
+          "y": 159,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 1160,
+          "id": "protect",
+          "initialAI": null
+        },
+        {
+          "y": 559,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 160,
+          "id": "robot",
+          "initialAI": null
+        },
+        {
+          "y": 759,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 240,
+          "id": "protect",
+          "initialAI": null
+        },
+        {
+          "y": 959,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 720,
+          "id": "protect",
+          "initialAI": null
+        },
+        {
+          "y": 759,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 1080,
+          "id": "vendor",
+          "initialAI": null
+        }
+      ],
+      "milliseconds": 637,
+      "regionName": "废弃避难厩",
+      "objects": 29
+    },
+    {
+      "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+      "spawnMarkers": 14,
+      "invisibleTriggers": 0,
+      "difficulty": 8,
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "transpFon": false,
+      "sourceUnchanged": true,
+      "nativeRenderer": true,
+      "room": "syn_28",
+      "mirror": true,
+      "examples": 0,
+      "entityDetails": [
+        {
+          "y": 199,
+          "facing": -1,
+          "example": false,
+          "variant": "0",
+          "x": 1480,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 199,
+          "facing": -1,
+          "example": false,
+          "variant": "2",
+          "x": 1560,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 199,
+          "facing": 1,
+          "example": false,
+          "variant": "0",
+          "x": 520,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 199,
+          "facing": 1,
+          "example": false,
+          "variant": "3",
+          "x": 600,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 399,
+          "facing": 1,
+          "example": false,
+          "variant": "5",
+          "x": 200,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 399,
+          "facing": 1,
+          "example": false,
+          "variant": "1",
+          "x": 480,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 599,
+          "facing": 1,
+          "example": false,
+          "variant": "6",
+          "x": 1760,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 599,
+          "facing": -1,
+          "example": false,
+          "variant": "3",
+          "x": 1440,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 599,
+          "facing": 1,
+          "example": false,
+          "variant": "1",
+          "x": 1160,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 599,
+          "facing": 1,
+          "example": false,
+          "variant": "2",
+          "x": 800,
+          "source": "zombie",
+          "id": "zombie"
+        },
+        {
+          "y": 199,
+          "facing": 1,
+          "example": false,
+          "variant": "0",
+          "x": 460,
+          "source": "slime",
+          "id": "slime"
+        },
+        {
+          "y": 279,
+          "facing": -1,
+          "example": false,
+          "variant": "0",
+          "x": 340,
+          "source": "slime",
+          "id": "slime"
+        },
+        {
+          "y": 599,
+          "facing": -1,
+          "example": false,
+          "variant": "0",
+          "x": 1380,
+          "source": "slime",
+          "id": "slime"
+        }
+      ],
+      "region": "random_sewer",
+      "expectedEcology": 0,
+      "enemyType": 0,
+      "enemyLevel": 8,
+      "examplePointsEnabled": false,
+      "simulationUnits": 0,
+      "entities": 13,
+      "warnings": [],
+      "biome": 1,
+      "emptyPoints": 0,
+      "staticBodies": [
+        {
+          "y": 199,
+          "visible": false,
+          "variant": "0",
+          "alpha": 1,
+          "x": 1480,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 199,
+          "visible": true,
+          "variant": "2",
+          "alpha": 1,
+          "x": 1560,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 199,
+          "visible": false,
+          "variant": "0",
+          "alpha": 1,
+          "x": 520,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 199,
+          "visible": false,
+          "variant": "3",
+          "alpha": 1,
+          "x": 600,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 399,
+          "visible": true,
+          "variant": "5",
+          "alpha": 1,
+          "x": 200,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 399,
+          "visible": false,
+          "variant": "1",
+          "alpha": 1,
+          "x": 480,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": false,
+          "variant": "6",
+          "alpha": 1,
+          "x": 1760,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": false,
+          "variant": "3",
+          "alpha": 1,
+          "x": 1440,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": false,
+          "variant": "1",
+          "alpha": 1,
+          "x": 1160,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": false,
+          "variant": "2",
+          "alpha": 1,
+          "x": 800,
+          "id": "zombie",
+          "initialAI": null
+        },
+        {
+          "y": 199,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 460,
+          "id": "slime",
+          "initialAI": null
+        },
+        {
+          "y": 279,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 340,
+          "id": "slime",
+          "initialAI": null
+        },
+        {
+          "y": 599,
+          "visible": true,
+          "variant": "0",
+          "alpha": 1,
+          "x": 1380,
+          "id": "slime",
+          "initialAI": null
+        }
+      ],
+      "milliseconds": 1155,
+      "regionName": "下水道",
+      "objects": 31
+    },
+    {
+      "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+      "spawnMarkers": 13,
+      "invisibleTriggers": 0,
+      "difficulty": 8,
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "transpFon": true,
+      "sourceUnchanged": true,
+      "nativeRenderer": true,
+      "room": "syn_7",
+      "mirror": false,
+      "examples": 0,
+      "entityDetails": [
+        {
+          "y": 319,
+          "facing": -1,
+          "example": false,
+          "variant": null,
+          "x": 460,
+          "source": "landturret",
+          "id": "landturret"
+        },
+        {
+          "y": 319,
+          "facing": -1,
+          "example": false,
+          "variant": null,
+          "x": 1100,
+          "source": "armturret",
+          "id": "armturret"
+        },
+        {
+          "y": 399,
+          "facing": 1,
+          "example": false,
+          "variant": null,
+          "x": 700,
+          "source": "turret",
+          "id": "turret"
+        },
+        {
+          "y": 319,
+          "facing": -1,
+          "example": false,
+          "variant": "4",
+          "x": 160,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 319,
+          "facing": -1,
+          "example": false,
+          "variant": "3",
+          "x": 400,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 319,
+          "facing": -1,
+          "example": false,
+          "variant": "2",
+          "x": 1560,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 319,
+          "facing": 1,
+          "example": false,
+          "variant": "1",
+          "x": 1200,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 559,
+          "facing": -1,
+          "example": false,
+          "variant": "1",
+          "x": 1160,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 559,
+          "facing": -1,
+          "example": false,
+          "variant": "4",
+          "x": 1560,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 759,
+          "facing": -1,
+          "example": false,
+          "variant": "3",
+          "x": 1200,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 759,
+          "facing": 1,
+          "example": false,
+          "variant": "4",
+          "x": 1760,
+          "source": "slaver",
+          "id": "slaver"
+        },
+        {
+          "y": 759,
+          "facing": -1,
+          "example": false,
+          "variant": "2",
+          "x": 1640,
+          "source": "slaver",
+          "id": "slaver"
+        }
+      ],
+      "region": "random_mane",
+      "expectedEcology": 3,
+      "enemyType": 3,
+      "enemyLevel": 8,
+      "examplePointsEnabled": false,
+      "simulationUnits": 0,
+      "entities": 12,
+      "warnings": [],
+      "biome": 3,
+      "emptyPoints": 0,
+      "staticBodies": [
+        {
+          "y": 319,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 460,
+          "id": "landturret",
+          "initialAI": null
+        },
+        {
+          "y": 319,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 1100,
+          "id": "armturret",
+          "initialAI": null
+        },
+        {
+          "y": 399,
+          "visible": true,
+          "variant": null,
+          "alpha": 1,
+          "x": 700,
+          "id": "turret",
+          "initialAI": null
+        },
+        {
+          "y": 319,
+          "visible": true,
+          "variant": "4",
+          "alpha": 1,
+          "x": 160,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 319,
+          "visible": true,
+          "variant": "3",
+          "alpha": 1,
+          "x": 400,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 319,
+          "visible": true,
+          "variant": "2",
+          "alpha": 1,
+          "x": 1560,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 319,
+          "visible": true,
+          "variant": "1",
+          "alpha": 1,
+          "x": 1200,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 559,
+          "visible": true,
+          "variant": "1",
+          "alpha": 1,
+          "x": 1160,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 559,
+          "visible": true,
+          "variant": "4",
+          "alpha": 1,
+          "x": 1560,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 759,
+          "visible": true,
+          "variant": "3",
+          "alpha": 1,
+          "x": 1200,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 759,
+          "visible": true,
+          "variant": "4",
+          "alpha": 1,
+          "x": 1760,
+          "id": "slaver",
+          "initialAI": null
+        },
+        {
+          "y": 759,
+          "visible": true,
+          "variant": "2",
+          "alpha": 1,
+          "x": 1640,
+          "id": "slaver",
+          "initialAI": null
+        }
+      ],
+      "milliseconds": 1165,
+      "regionName": "马哈顿废墟",
+      "objects": 17
+    }
+  ],
+  "status": "passed",
+  "scope": "actual editor public API roundtrip in memory; static native rendering; no GUI Save, AI or gameplay",
+  "roundtrip": [
+    {
+      "planBefore": 1,
+      "objectsAfter": 25,
+      "planAfter": 0,
+      "backsAfter": 55,
+      "doorsBefore": 1,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "doorsAfter": 0,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "room": "syn_18",
+      "objectsBefore": 25,
+      "coordinates": {
+        "original": [
+          "3",
+          "3"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "3"
+        ]
+      },
+      "sourceUnchanged": true,
+      "theme": "plant",
+      "backsBefore": 55
+    },
+    {
+      "planBefore": 1,
+      "objectsAfter": 37,
+      "planAfter": 0,
+      "backsAfter": 21,
+      "doorsBefore": 1,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "doorsAfter": 0,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "room": "syn_16",
+      "objectsBefore": 37,
+      "coordinates": {
+        "original": [
+          "3",
+          "1"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "1"
+        ]
+      },
+      "sourceUnchanged": true,
+      "theme": "stable",
+      "backsBefore": 21
+    },
+    {
+      "planBefore": 1,
+      "objectsAfter": 45,
+      "planAfter": 0,
+      "backsAfter": 65,
+      "doorsBefore": 1,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror",
+        "rrGrowth"
+      ],
+      "doorsAfter": 0,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "room": "syn_28",
+      "objectsBefore": 45,
+      "coordinates": {
+        "original": [
+          "3",
+          "5"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "5"
+        ]
+      },
+      "sourceUnchanged": true,
+      "theme": "sewer",
+      "backsBefore": 65
+    },
+    {
+      "planBefore": 1,
+      "objectsAfter": 30,
+      "planAfter": 0,
+      "backsAfter": 58,
+      "doorsBefore": 1,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDistrict",
+        "rrBlock",
+        "rrRoofRow",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "doorsAfter": 0,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "room": "syn_7",
+      "objectsBefore": 30,
+      "coordinates": {
+        "original": [
+          "1",
+          "2"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "1",
+          "2"
+        ]
+      },
+      "sourceUnchanged": true,
+      "theme": "mane",
+      "backsBefore": 58
+    }
+  ]
+}

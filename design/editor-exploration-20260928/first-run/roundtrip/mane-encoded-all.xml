@@ -1,0 +1,119 @@
+<all>
+  <land serial="1"/>
+  <room name="syn_7" x="0" y="0">
+    <a>N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._C._CА.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D.N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._D._D._D._D._D._D.N</a>
+    <a>N.N.N.N.N.N.N._C._CА.N.N.N.N.N.N.N.D.D.D._C._CА.D.D.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.D.D.D._C._CА.D.D.N</a>
+    <a>N._C._C._C._C._C._C._C._CА._C._C._C._C._C.N._C._C._C._C._C._CА._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C</a>
+    <a>N._C._C._C._C._C._C._C._CА._C._C._C._C._C.N._C._C._C._C._C._CА._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C</a>
+    <a>N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C</a>
+    <a>N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CК._C._CА._CК._CК.N</a>
+    <a>N._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C.N</a>
+    <a>N.N.N._C._CА.N.N.N.D.D.D._H._HА.D.D.D.N.N.N.N.N.N.N.N.N.N._D._DА.N.N.N.N.D.D.D.D._H._HА.D.D.N.N.N.N.N.N.N.N</a>
+    <a>N._C._C._C._CА._C._C.N._H._H._H._H._HА._H._H._H._H._H._H.N._D._D._D._D._D._D._D._DА._D._D._D.N._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N</a>
+    <a>N._C._C._C._CА._C._C.N._H._H._H._H._HА._H._H._H._H._H._H.N._D._D._D._D._D._D._D._DА._D._D._D.N._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N</a>
+    <a>N._C._C._C._CА._C._C.N._H._H._H._H._HА._H._H._H._H._H._H.N._D._D._D._D._D._D._D._DА._D._D._D.N._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N</a>
+    <a>N._C._C._C._CА._C._C.D._H._H._H._H._HА._H._H._H._H._H._H.N._D._D._D._D._D._D._D._DА._D._D._D.D._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H.N</a>
+    <a>N.D.D._D._DА.D.D.D.N.N.N._C._CА.N.N.N.N.N.N.N.N.N.N._C._CА.D.D.D.D.D.D.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N._D._D._D._DА._D.D._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N._D._D._D._DА._D._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N._D._D._D._DА._D._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N._D._D._D._DА._D._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C.D.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <a>N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._C._CА.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N</a>
+    <back id="swindow" x="38" y="3"/>
+    <obj id="door1" code="syn_7_o1" x="16" y="7" rrFixture="door" lock="0" mine="0"/>
+    <obj id="door1" code="syn_7_o2" x="24" y="13" rrFixture="door" lock="0" mine="0"/>
+    <obj id="hatch1" code="syn_7_o3" x="11" y="14" rrFixture="hatch" lock="0" mine="0"/>
+    <obj id="table" code="syn_7_o4" x="31" y="13"/>
+    <obj id="filecab" code="syn_7_o5" x="34" y="13"/>
+    <obj id="filecab" code="syn_7_o6" x="35" y="13"/>
+    <obj id="mcrate2" code="syn_7_o7" x="17" y="18"/>
+    <obj id="instr1" code="syn_7_o8" x="45" y="18"/>
+    <obj id="table" code="syn_7_o9" x="26" y="23"/>
+    <obj id="filecab" code="syn_7_o10" x="28" y="23"/>
+    <obj id="landturret" x="11" y="7" rrContent="security" rrMount="floor" uid="rrp_7_0" rrZone="room-0" rrD="47" rrV="11" code="syn_7_p11"/>
+    <obj id="armturret" x="27" y="7" rrContent="security" rrMount="floor" uid="rrp_7_1" turn="-1" rrZone="room-2" rrD="53" rrV="28" code="syn_7_p12"/>
+    <obj id="turret" x="17" y="9" rrContent="security" rrMount="ceiling" uid="rrp_7_2" rrZone="room-4" rrD="54" rrV="43" code="syn_7_p13"/>
+    <obj id="term1" x="20" y="18" rrContent="terminal" rrMount="floor" uid="rrp_7_3" rrZone="room-8" rrD="29" rrV="32" code="syn_7_p14"/>
+    <obj id="slaver" x="3" y="7" rrContent="enemy" rrMount="floor" uid="rrp_7_4" rrZone="room-0" rrD="47" rrV="11" code="syn_7_p15"/>
+    <obj id="slaver" x="9" y="7" rrContent="enemy" rrMount="floor" uid="rrp_7_5" rrZone="room-0" rrD="47" rrV="11" code="syn_7_p16"/>
+    <obj id="slaver" x="38" y="7" rrContent="enemy" rrMount="floor" uid="rrp_7_6" rrZone="room-2" rrD="53" rrV="28" code="syn_7_p17"/>
+    <obj id="slaver" x="29" y="7" rrContent="enemy" rrMount="floor" uid="rrp_7_7" rrZone="room-2" rrD="53" rrV="28" code="syn_7_p18"/>
+    <obj id="slaver" x="28" y="13" rrContent="enemy" rrMount="floor" uid="rrp_7_8" rrZone="room-5" rrD="37" rrV="40" code="syn_7_p19"/>
+    <obj id="slaver" x="38" y="13" rrContent="enemy" rrMount="floor" uid="rrp_7_9" rrZone="room-5" rrD="37" rrV="40" code="syn_7_p20"/>
+    <obj id="slaver" x="29" y="18" rrContent="enemy" rrMount="floor" uid="rrp_7_10" rrZone="room-8" rrD="29" rrV="32" code="syn_7_p21"/>
+    <obj id="slaver" x="43" y="18" rrContent="enemy" rrMount="floor" uid="rrp_7_11" rrZone="room-9" rrD="48" rrV="24" code="syn_7_p22"/>
+    <obj id="slaver" x="40" y="18" rrContent="enemy" rrMount="floor" uid="rrp_7_12" rrZone="room-9" rrD="48" rrV="24" code="syn_7_p23"/>
+    <obj id="wallsafe" x="5" y="7" rrContent="reward" rrMount="floor" uid="rrp_7_13" rrZone="room-0" rrD="47" rrV="11" code="syn_7_p24"/>
+    <obj id="safe" x="40" y="7" rrContent="reward" rrMount="floor" uid="rrp_7_14" rrZone="room-2" rrD="53" rrV="28" code="syn_7_p25"/>
+    <obj id="weapbox" x="33" y="18" rrContent="reward" rrMount="floor" uid="rrp_7_15" rrZone="room-9" rrD="48" rrV="24" code="syn_7_p26"/>
+    <obj id="case" x="15" y="23" rrContent="loot" rrMount="floor" uid="rrp_7_16" rrZone="room-11" rrD="66" rrV="52" code="syn_7_p27"/>
+    <obj id="weapbox" x="19" y="23" rrContent="reward" rrMount="floor" uid="rrp_7_17" rrZone="room-11" rrD="66" rrV="52" code="syn_7_p28"/>
+    <obj id="term3" x="16" y="23" rrContent="terminal" rrMount="floor" uid="rrp_7_18" rrZone="room-11" rrD="66" rrV="52" code="syn_7_p29"/>
+    <back id="bwindow" x="30" y="10"/>
+    <back id="clock" x="35" y="10"/>
+    <back id="light3" x="32" y="9"/>
+    <back id="clock" x="26" y="21"/>
+    <back id="swindow" x="3" y="3"/>
+    <back id="swindow" x="8" y="3"/>
+    <back id="swindow" x="13" y="3"/>
+    <back id="heap3" x="13" y="7"/>
+    <back id="light3" x="7" y="1"/>
+    <back id="swindow" x="19" y="3"/>
+    <back id="swindow" x="24" y="3"/>
+    <back id="swindow" x="29" y="3"/>
+    <back id="heap3" x="32" y="7"/>
+    <back id="light3" x="25" y="1"/>
+    <obj id="player" code="syn_7_o0" x="14" y="18"/>
+    <back id="swindow" x="43" y="3"/>
+    <back id="heap3" x="44" y="7"/>
+    <back id="light3" x="40" y="1"/>
+    <back id="swindow" x="3" y="11"/>
+    <back id="swindow" x="8" y="11"/>
+    <back id="heap3" x="11" y="13"/>
+    <back id="light3" x="6" y="9"/>
+    <back id="swindow" x="17" y="11"/>
+    <back id="swindow" x="22" y="11"/>
+    <back id="heap3" x="21" y="13"/>
+    <back id="light3" x="18" y="9"/>
+    <back id="swindow" x="27" y="11"/>
+    <back id="swindow" x="32" y="11"/>
+    <back id="swindow" x="37" y="11"/>
+    <back id="swindow" x="42" y="11"/>
+    <back id="heap3" x="44" y="13"/>
+    <back id="light3" x="35" y="9"/>
+    <back id="swindow" x="3" y="17"/>
+    <back id="heap3" x="4" y="18"/>
+    <back id="light3" x="3" y="15"/>
+    <back id="swindow" x="10" y="17"/>
+    <back id="swindow" x="15" y="17"/>
+    <back id="heap3" x="16" y="18"/>
+    <back id="light3" x="12" y="15"/>
+    <back id="swindow" x="22" y="17"/>
+    <back id="swindow" x="27" y="17"/>
+    <back id="heap3" x="28" y="18"/>
+    <back id="light3" x="24" y="15"/>
+    <back id="swindow" x="34" y="17"/>
+    <back id="swindow" x="39" y="17"/>
+    <back id="swindow" x="44" y="17"/>
+    <back id="heap3" x="44" y="18"/>
+    <back id="light3" x="38" y="15"/>
+    <back id="swindow" x="3" y="22"/>
+    <back id="heap3" x="3" y="23"/>
+    <back id="light3" x="2" y="20"/>
+    <back id="swindow" x="9" y="22"/>
+    <back id="swindow" x="14" y="22"/>
+    <back id="swindow" x="19" y="22"/>
+    <back id="swindow" x="24" y="22"/>
+    <back id="swindow" x="29" y="22"/>
+    <back id="heap3" x="28" y="23"/>
+    <back id="light3" x="18" y="20"/>
+    <options backwall="tWindows" music="music_mane_1" vis="2" darkness="-20" entip="3" kolspawn="0"/>
+  </room>
+</all>

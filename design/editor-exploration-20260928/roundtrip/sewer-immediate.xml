@@ -1,0 +1,140 @@
+<room name="syn_28" x="0" y="0">
+  <a>L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L</a>
+  <a>L._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H.L._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L.L.L.I.I.I.I.L</a>
+  <a>L._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L.L.L.I.I.I.I.L</a>
+  <a>L._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L.L.L.I.I.I.I.L</a>
+  <a>L._H._H._H._H._H._HА._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._E._E._E._E._E._E._E._E._E._E._E._E._E.L.L.L.L.L.I.I.I.I.L</a>
+  <a>L.M.M.M.M.M.M.M.M.M.M.M.M.M.M._S._SА.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.L.L.L.L.L.L.L.L.L.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L._S._SА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L._S._SА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L._S._SА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L._S._SА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._E._E._E._E._E._E._E._E._E.L</a>
+  <a>L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._S._SА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.M.M.M._S._SА.M.M.M.M.M.M.M.M.L</a>
+  <a>L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E.L._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E.L</a>
+  <a>L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E.L._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E.L</a>
+  <a>L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E.L</a>
+  <a>L._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E._E._E._E._E._E._E.L</a>
+  <a>L.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M._H._HА.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M._S._SА.M.M.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._EА._E._E.L</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._EА._E._E._S</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._EА._E._E._S</a>
+  <a>L.I.I.I.I.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._E._E._E._E._EА._E._E._S</a>
+  <a>L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L._H._HА.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.L.M.M.M._S._SА.M.M.M</a>
+  <a>_H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._S._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E.L</a>
+  <a>_H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._S._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E.L</a>
+  <a>_H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._S._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._E._EА._E._E.L</a>
+  <a>M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.M.L</a>
+  <back id="vent" x="31" y="21"/>
+  <obj id="door3" code="syn_28_o1" x="26" y="23" rrFixture="door" lock="0" mine="0"/>
+  <obj id="hatch2" code="syn_28_o2" x="43" y="20" rrFixture="hatch" lock="0" mine="0"/>
+  <obj id="window1" code="syn_28_o3" x="24" y="14" rrFixture="window"/>
+  <obj id="instr1" code="syn_28_o4" x="1" y="4"/>
+  <obj id="instr1" code="syn_28_o5" x="40" y="9"/>
+  <obj id="instr1" code="syn_28_o6" x="45" y="9"/>
+  <obj id="instr1" code="syn_28_o7" x="1" y="14"/>
+  <obj id="instr1" code="syn_28_o8" x="5" y="14"/>
+  <obj id="instr1" code="syn_28_o9" x="45" y="14"/>
+  <obj id="instr1" code="syn_28_o10" x="30" y="14"/>
+  <obj id="instr1" code="syn_28_o11" x="6" y="23"/>
+  <obj id="instr1" code="syn_28_o12" x="11" y="23"/>
+  <obj id="instr1" code="syn_28_o13" x="29" y="23"/>
+  <obj id="instr1" code="syn_28_o14" x="31" y="23"/>
+  <obj id="zombie" x="10" y="4" rrContent="enemy" rrMount="floor" uid="rrp_28_0" rrZone="room-0" rrD="76" rrV="100" code="syn_28_p15"/>
+  <obj id="zombie" x="8" y="4" rrContent="enemy" rrMount="floor" uid="rrp_28_1" rrZone="room-0" rrD="76" rrV="100" code="syn_28_p16"/>
+  <obj id="zombie" x="34" y="4" rrContent="enemy" rrMount="floor" uid="rrp_28_2" rrZone="room-1" rrD="74" rrV="100" code="syn_28_p17"/>
+  <obj id="zombie" x="32" y="4" rrContent="enemy" rrMount="floor" uid="rrp_28_3" rrZone="room-1" rrD="74" rrV="100" code="syn_28_p18"/>
+  <obj id="zombie" x="42" y="9" rrContent="enemy" rrMount="floor" uid="rrp_28_4" rrZone="room-2" rrD="64" rrV="72" code="syn_28_p19"/>
+  <obj id="zombie" x="35" y="9" rrContent="enemy" rrMount="floor" uid="rrp_28_5" rrZone="room-2" rrD="64" rrV="72" code="syn_28_p20"/>
+  <obj id="zombie" x="3" y="14" rrContent="enemy" rrMount="floor" uid="rrp_28_6" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p21"/>
+  <obj id="zombie" x="11" y="14" rrContent="enemy" rrMount="floor" uid="rrp_28_7" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p22"/>
+  <obj id="zombie" x="18" y="14" rrContent="enemy" rrMount="floor" uid="rrp_28_8" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p23"/>
+  <obj id="zombie" x="27" y="14" rrContent="enemy" rrMount="floor" uid="rrp_28_9" rrZone="room-4" rrD="70" rrV="58" code="syn_28_p24"/>
+  <obj id="slime" x="36" y="4" rrContent="ambient" rrMount="floor" uid="rrp_28_10" rrZone="room-1" rrD="74" rrV="100" code="syn_28_p25"/>
+  <obj id="slime" x="39" y="6" rrContent="ambient" rrMount="ceiling" uid="rrp_28_11" rrZone="room-2" rrD="64" rrV="72" code="syn_28_p26"/>
+  <obj id="slime" x="13" y="14" rrContent="ambient" rrMount="floor" uid="rrp_28_12" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p27"/>
+  <obj id="spikes" x="3" y="4" rrContent="hazard" rrMount="floor" uid="rrp_28_13" rrZone="room-0" rrD="76" rrV="100" code="syn_28_p28"/>
+  <obj id="radbarrel" x="29" y="4" rrContent="hazard" rrMount="floor" uid="rrp_28_14" rrZone="room-1" rrD="74" rrV="100" code="syn_28_p29"/>
+  <obj id="spikes" x="44" y="9" rrContent="hazard" rrMount="floor" uid="rrp_28_15" rrZone="room-2" rrD="64" rrV="72" code="syn_28_p30"/>
+  <obj id="radbarrel" x="10" y="14" rrContent="hazard" rrMount="floor" uid="rrp_28_16" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p31"/>
+  <obj id="radbigbarrel" x="40" y="19" rrContent="hazard" rrMount="floor" uid="rrp_28_17" rrZone="room-5" rrD="92" rrV="55" code="syn_28_p32"/>
+  <obj id="chest" x="12" y="4" rrContent="loot" rrMount="floor" uid="rrp_28_18" rrZone="room-0" rrD="76" rrV="100" code="syn_28_p33"/>
+  <obj id="chest" x="21" y="4" rrContent="reward" rrMount="floor" uid="rrp_28_19" rrZone="room-0" rrD="76" rrV="100" code="syn_28_p34"/>
+  <obj id="instr1" x="30" y="4" rrContent="loot" rrMount="floor" uid="rrp_28_20" rrZone="room-1" rrD="74" rrV="100" code="syn_28_p35"/>
+  <obj id="case" x="39" y="9" rrContent="loot" rrMount="floor" uid="rrp_28_21" rrZone="room-2" rrD="64" rrV="72" code="syn_28_p36"/>
+  <obj id="instr1" x="8" y="14" rrContent="loot" rrMount="floor" uid="rrp_28_22" rrZone="room-3" rrD="84" rrV="69" code="syn_28_p37"/>
+  <obj id="case" x="41" y="14" rrContent="loot" rrMount="floor" uid="rrp_28_23" rrZone="room-4" rrD="70" rrV="58" code="syn_28_p38"/>
+  <obj id="safe" x="33" y="14" rrContent="reward" rrMount="floor" uid="rrp_28_24" rrZone="room-4" rrD="70" rrV="58" code="syn_28_p39"/>
+  <obj id="case" x="19" y="23" rrContent="loot" rrMount="floor" uid="rrp_28_25" rrZone="room-6" rrD="89" rrV="77" code="syn_28_p40"/>
+  <obj id="instr2" x="16" y="23" rrContent="reward" rrMount="floor" uid="rrp_28_26" rrZone="room-6" rrD="89" rrV="77" code="syn_28_p41"/>
+  <obj id="knop3" x="9" y="23" rrContent="switch" rrMount="floor" uid="rrp_28_27" rrZone="room-6" rrD="89" rrV="77" code="syn_28_p42">
+    <scr act="unlock" targ="rrp_28_26"/>
+  </obj>
+  <obj id="chest" x="39" y="23" rrContent="loot" rrMount="floor" uid="rrp_28_28" rrZone="room-7" rrD="99" rrV="60" code="syn_28_p43"/>
+  <obj id="safe" x="36" y="23" rrContent="reward" rrMount="floor" uid="rrp_28_29" rrZone="room-7" rrD="99" rrV="60" code="syn_28_p44"/>
+  <back id="vent" x="1" y="2"/>
+  <back id="vent" x="40" y="7"/>
+  <back id="vent" x="45" y="7"/>
+  <back id="vent" x="1" y="12"/>
+  <back id="vent" x="5" y="12"/>
+  <back id="vent" x="45" y="12"/>
+  <back id="vent" x="30" y="12"/>
+  <back id="vent" x="6" y="21"/>
+  <back id="vent" x="11" y="21"/>
+  <back id="vent" x="29" y="21"/>
+  <obj id="player" code="syn_28_o0" x="18" y="4"/>
+  <back id="light1" x="13" y="1"/>
+  <back id="light1" x="32" y="1"/>
+  <back id="pipe3" x="34" y="7"/>
+  <back id="pipe3" x="36" y="7"/>
+  <back id="pipe3" x="38" y="7"/>
+  <back id="pipe3" x="40" y="7"/>
+  <back id="pipe3" x="42" y="7"/>
+  <back id="pipe3" x="44" y="7"/>
+  <back id="plesen" x="34" y="6"/>
+  <back id="light1" x="40" y="6"/>
+  <back id="pipe3" x="1" y="12"/>
+  <back id="pipe3" x="3" y="12"/>
+  <back id="pipe3" x="5" y="12"/>
+  <back id="pipe3" x="7" y="12"/>
+  <back id="pipe3" x="9" y="12"/>
+  <back id="pipe3" x="11" y="12"/>
+  <back id="pipe3" x="13" y="12"/>
+  <back id="pipe3" x="15" y="12"/>
+  <back id="pipe3" x="17" y="12"/>
+  <back id="pipe3" x="19" y="12"/>
+  <back id="pipe3" x="21" y="12"/>
+  <back id="potek" x="1" y="11"/>
+  <back id="potek" x="11" y="11"/>
+  <back id="light1" x="12" y="11"/>
+  <back id="pipe3" x="25" y="12"/>
+  <back id="pipe3" x="27" y="12"/>
+  <back id="pipe3" x="29" y="12"/>
+  <back id="pipe3" x="31" y="12"/>
+  <back id="pipe3" x="33" y="12"/>
+  <back id="pipe3" x="35" y="12"/>
+  <back id="pipe3" x="37" y="12"/>
+  <back id="pipe3" x="39" y="12"/>
+  <back id="pipe3" x="41" y="12"/>
+  <back id="pipe3" x="43" y="12"/>
+  <back id="pipe3" x="45" y="12"/>
+  <back id="potek" x="25" y="11"/>
+  <back id="plesen" x="35" y="11"/>
+  <back id="light1" x="36" y="11"/>
+  <back id="pipe3" x="40" y="17"/>
+  <back id="pipe3" x="42" y="17"/>
+  <back id="pipe3" x="44" y="17"/>
+  <back id="light1" x="43" y="16"/>
+  <back id="light1" x="13" y="21"/>
+  <back id="pipe3" x="27" y="22"/>
+  <back id="pipe3" x="29" y="22"/>
+  <back id="pipe3" x="31" y="22"/>
+  <back id="pipe3" x="33" y="22"/>
+  <back id="pipe3" x="35" y="22"/>
+  <back id="pipe3" x="37" y="22"/>
+  <back id="pipe3" x="39" y="22"/>
+  <back id="pipe3" x="41" y="22"/>
+  <back id="pipe3" x="43" y="22"/>
+  <back id="pipe3" x="45" y="22"/>
+  <back id="light1" x="37" y="21"/>
+  <options backwall="tMossy" music="music_sewer_1" color="green" wtip="1" wrad="3" entip="0" kolspawn="0"/>
+</room>

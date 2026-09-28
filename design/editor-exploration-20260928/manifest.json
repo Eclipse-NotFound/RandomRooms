@@ -1,0 +1,641 @@
+{
+  "purpose": "isolated review adapter and actual editor in-memory roundtrip",
+  "inputs": [
+    {
+      "path": "Editor.swf",
+      "sha256": "e99e231f83128ea24cd13b2ae36b0dd294e5180a16f54ba3c7b3cb8fa24d99fd",
+      "bytes": 496700
+    },
+    {
+      "path": "Editor/Enhancements/EditorTools.swf",
+      "sha256": "80cfa1baafe8ed966b696e8379239eb12180fa194bcfb36365e1630b3d91b64c",
+      "bytes": 17854
+    },
+    {
+      "path": "Editor/Enhancements/NativeScene.swf",
+      "sha256": "fcb620b9f4dc25eb3b4b54d420dfdf2549894472e8d0a331f06cdc321fc7cba7",
+      "bytes": 9619837
+    },
+    {
+      "path": "texture.swf",
+      "sha256": "ef4842a1e78f8f8661e84590c82701c3ea54efb71245116bb7a712fed8985ed8",
+      "bytes": 15166051
+    },
+    {
+      "path": "texture1.swf",
+      "sha256": "6646ccf91f912a7384875a5ed40a33c907041645f558a79277fc5f2dc8164678",
+      "bytes": 8367667
+    },
+    {
+      "path": "sprite.swf",
+      "sha256": "49b459d129a16daa065d471cee5ebf9d59914d682a9f07e5a28caf2e52050246",
+      "bytes": 13220252
+    },
+    {
+      "path": "sprite1.swf",
+      "sha256": "de792cbda95f06e55a91e0ca7604770f1ced6387a42026951a4bf0a70ec11e4a",
+      "bytes": 8378700
+    },
+    {
+      "path": "text_zh.xml",
+      "sha256": "66da212793683b19e65e3973b726a94a2885d5032395af8a2e5a0fd20a17f895",
+      "bytes": 689243
+    },
+    {
+      "path": "text_en.xml",
+      "sha256": "f4adf9ae845f08877e25e0d5e46ee9df04d614b2f402cc68ed954e01d02e9ccc",
+      "bytes": 814368
+    },
+    {
+      "path": "text_ru.xml",
+      "sha256": "acd503ab8ec20428c2d625865d10684a26a3c20e0a056ea2ee2be46d9fd9a6ad",
+      "bytes": 1253676
+    },
+    {
+      "path": "Editor/Resources/langs.xml",
+      "sha256": "1742932af549887aa8711b8f6633525094ddd45446da44d488e25ac9aeebf9cb",
+      "bytes": 803
+    },
+    {
+      "path": "Editor/Resources/text_zh.xml",
+      "sha256": "8c2a66f273762fe17954c2fde5d39bca36f4a4df563d57cd8d42567501d3789c",
+      "bytes": 26890
+    },
+    {
+      "path": "Editor/Resources/text_en.xml",
+      "sha256": "4ed4516f7fe33c15df5292ae31186b5dd247dcd3fe07d0028bbcfda5fc4afb2e",
+      "bytes": 21437
+    },
+    {
+      "path": "Editor/Resources/text_ru.xml",
+      "sha256": "16bd57f5d3904664c841e415198b1cc750b84900bf677c9ad8fe46c2d2630ccf",
+      "bytes": 26768
+    },
+    {
+      "path": "mods/RandomRooms/design/v13-content-runtime/population-release-candidate/rrstyle-navigation-plant-pool.xml",
+      "sha256": "0f3fd90e6c01265c0706f755ee246340fb5f9f152d46571d5f404fa8a38e6b5b",
+      "bytes": 520797
+    },
+    {
+      "path": "mods/RandomRooms/design/v13-content-runtime/population-release-candidate/rrstyle-navigation-stable-pool.xml",
+      "sha256": "f3f2874b64c6da7c764aaebbd4082689f531e3893e6cae0a0064d45ce10e6502",
+      "bytes": 499648
+    },
+    {
+      "path": "mods/RandomRooms/design/v13-content-runtime/population-release-candidate/rrstyle-navigation-sewer-pool.xml",
+      "sha256": "abcb7ed16fbd6c8480c093c6ccdedc98bcd3b8677a7e018c9b6ffe7eadcd051e",
+      "bytes": 492025
+    },
+    {
+      "path": "mods/RandomRooms/design/v13-content-runtime/population-release-candidate/rrstyle-navigation-mane-pool.xml",
+      "sha256": "1bc3eac41b54233f82098afcfc9a4b6886a464cb6f0f10ede0d61f18d2761ef6",
+      "bytes": 380836
+    },
+    {
+      "path": "pfe.swf",
+      "sha256": "c631cbf3511b6ee303f533d08d51511fe0eb702f43e5db17f5241d8576c64867",
+      "bytes": 15085172
+    },
+    {
+      "path": "DLC/pfe.swf",
+      "sha256": "90dec445e60e352dcad06b3171a3ae7b588dbf1fe6c8fb452fceec392aa9db02",
+      "bytes": 15079361
+    },
+    {
+      "path": "DLC/pfeUI.swf",
+      "sha256": "0bd5d24381b5aaea50e40b2f95a9e54dfe4a7911aafba27aff06961c82f350c7",
+      "bytes": 16803228
+    },
+    {
+      "path": "mods/RandomRooms/release/RandomRoomsMod.swf",
+      "sha256": "a5eb49a089835bbc7b670411bbdf32865f5110aeae79f8bc182af3bb4c9cbe46",
+      "bytes": 88909
+    }
+  ],
+  "cases": [
+    {
+      "theme": "plant",
+      "name": "syn_18",
+      "sample": "samples/rooms_plant_review.xml",
+      "mirror": false,
+      "region": "random_plant",
+      "difficulty": 8,
+      "ecology": 2,
+      "context": {
+        "name": "syn_18",
+        "rrGen": "space-v11",
+        "rrRevision": "13",
+        "rrTheme": "plant",
+        "rrKind": "connector",
+        "rrForm": "production",
+        "rrAttempts": "1",
+        "rrPopulation": "planned",
+        "rrDepth": "0",
+        "rrEcology": "2",
+        "rrDifficulty": "8",
+        "rrPartition": "rules",
+        "rrSeed": "1471807454",
+        "rrP_retiled": "0",
+        "rrP_extra": "0.5124578491551801",
+        "rrP_rooms": "7",
+        "rrP_masses": "0",
+        "rrP_visits": "38",
+        "rrP_count": "9",
+        "rrP_merges": "2",
+        "rrP_density": "standard",
+        "rrP_variant": "large-and-small",
+        "rrP_main": "workshop",
+        "rrP_layout": "storeys",
+        "rrP_requested": "9",
+        "rrDanger": "41",
+        "rrValue": "11",
+        "rrContentModel": "danger-value-1",
+        "rrVersion": "13",
+        "rrMasterSeed": "20260818",
+        "x": "3",
+        "y": "3",
+        "rrMirror": "0"
+      },
+      "worldPorts": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "neighbours": [
+        {
+          "direction": "left",
+          "room": "syn_13",
+          "x": 2,
+          "y": 3,
+          "interfaces": [
+            {
+              "slot": 12,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "right",
+          "room": "syn_23",
+          "x": 4,
+          "y": 3,
+          "interfaces": [
+            {
+              "slot": 2,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "up",
+          "room": "syn_17",
+          "x": 3,
+          "y": 2,
+          "interfaces": [
+            {
+              "slot": 21,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "down",
+          "room": "syn_19",
+          "x": 3,
+          "y": 4,
+          "interfaces": [
+            {
+              "slot": 10,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        }
+      ],
+      "source": "design/v13-content-runtime/population-release-candidate/rrstyle-navigation-plant-pool.xml",
+      "sourceSha256": "0f3fd90e6c01265c0706f755ee246340fb5f9f152d46571d5f404fa8a38e6b5b",
+      "sampleSha256": "48d1473ce303f6f43f6da1d7ddbd319c88d88b844744aca64b6aa34ec9d2f7e5"
+    },
+    {
+      "theme": "stable",
+      "name": "syn_16",
+      "sample": "samples/rooms_stable_review.xml",
+      "mirror": true,
+      "region": "random_stable",
+      "difficulty": 8,
+      "ecology": 2,
+      "context": {
+        "name": "syn_16",
+        "rrGen": "space-v11",
+        "rrRevision": "13",
+        "rrTheme": "stable",
+        "rrKind": "atrium",
+        "rrForm": "quarters",
+        "rrAttempts": "1",
+        "rrPopulation": "planned",
+        "rrDepth": "0",
+        "rrEcology": "2",
+        "rrDifficulty": "8",
+        "rrPartition": "rules",
+        "rrSeed": "1457631697",
+        "rrP_retiled": "0",
+        "rrP_extra": "0.22947510965168477",
+        "rrP_rooms": "10",
+        "rrP_masses": "2",
+        "rrP_visits": "34",
+        "rrP_count": "10",
+        "rrP_merges": "0",
+        "rrP_density": "dense",
+        "rrP_variant": "compact-cluster",
+        "rrP_main": "living",
+        "rrP_layout": "storeys",
+        "rrP_requested": "10",
+        "rrDanger": "23",
+        "rrValue": "65",
+        "rrContentModel": "danger-value-1",
+        "rrVersion": "13",
+        "rrMasterSeed": "20260818",
+        "x": "3",
+        "y": "1",
+        "rrMirror": "1"
+      },
+      "worldPorts": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "neighbours": [
+        {
+          "direction": "left",
+          "room": "syn_11",
+          "x": 2,
+          "y": 1,
+          "interfaces": []
+        },
+        {
+          "direction": "right",
+          "room": "syn_21",
+          "x": 4,
+          "y": 1,
+          "interfaces": [
+            {
+              "slot": 1,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "up",
+          "room": "syn_15",
+          "x": 3,
+          "y": 0,
+          "interfaces": [
+            {
+              "slot": 19,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "down",
+          "room": "syn_17",
+          "x": 3,
+          "y": 2,
+          "interfaces": [
+            {
+              "slot": 7,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        }
+      ],
+      "source": "design/v13-content-runtime/population-release-candidate/rrstyle-navigation-stable-pool.xml",
+      "sourceSha256": "f3f2874b64c6da7c764aaebbd4082689f531e3893e6cae0a0064d45ce10e6502",
+      "sampleSha256": "6ea4ba267ba8db7e05c4fc584b7e3dd46fedbc1bcdb469f166779681a9acacb1"
+    },
+    {
+      "theme": "sewer",
+      "name": "syn_28",
+      "sample": "samples/rooms_sewer_review.xml",
+      "mirror": true,
+      "region": "random_sewer",
+      "difficulty": 8,
+      "ecology": 0,
+      "context": {
+        "name": "syn_28",
+        "rrGen": "space-v11",
+        "rrRevision": "13",
+        "rrTheme": "sewer",
+        "rrKind": "service",
+        "rrForm": "dry_tunnels",
+        "rrAttempts": "1",
+        "rrPopulation": "planned",
+        "rrDepth": "0",
+        "rrEcology": "0",
+        "rrDifficulty": "8",
+        "rrPartition": "rules",
+        "rrSeed": "2132166615",
+        "rrP_retiled": "0",
+        "rrP_extra": "0.2204268834087998",
+        "rrP_rooms": "8",
+        "rrP_masses": "3",
+        "rrP_visits": "21",
+        "rrP_count": "8",
+        "rrP_merges": "0",
+        "rrP_density": "standard",
+        "rrP_variant": "large-and-small",
+        "rrP_main": "service",
+        "rrP_layout": "storeys",
+        "rrP_requested": "8",
+        "rrDanger": "77",
+        "rrValue": "58",
+        "rrContentModel": "danger-value-1",
+        "rrVersion": "13",
+        "rrMasterSeed": "20260818",
+        "x": "3",
+        "y": "5",
+        "rrMirror": "1",
+        "rrGrowth": "1"
+      },
+      "worldPorts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "neighbours": [
+        {
+          "direction": "left",
+          "room": "syn_27",
+          "x": 2,
+          "y": 5,
+          "interfaces": [
+            {
+              "slot": 15,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "right",
+          "room": "syn_29",
+          "x": 4,
+          "y": 5,
+          "interfaces": [
+            {
+              "slot": 5,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "up",
+          "room": "syn_19",
+          "x": 3,
+          "y": 4,
+          "interfaces": [
+            {
+              "slot": 21,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "down",
+          "room": null,
+          "x": 3,
+          "y": 6,
+          "interfaces": []
+        }
+      ],
+      "source": "design/v13-content-runtime/population-release-candidate/rrstyle-navigation-sewer-pool.xml",
+      "sourceSha256": "abcb7ed16fbd6c8480c093c6ccdedc98bcd3b8677a7e018c9b6ffe7eadcd051e",
+      "sampleSha256": "a5bc19b8048a88f7dffe750bcb9d44b194cb37607832251cf9ad9de4c56f0ab6"
+    },
+    {
+      "theme": "mane",
+      "name": "syn_7",
+      "sample": "samples/rooms_mane_review.xml",
+      "mirror": false,
+      "region": "random_mane",
+      "difficulty": 8,
+      "ecology": 3,
+      "context": {
+        "name": "syn_7",
+        "rrGen": "space-v11",
+        "rrRevision": "13",
+        "rrTheme": "mane",
+        "rrKind": "connector",
+        "rrForm": "offices",
+        "rrAttempts": "2",
+        "rrPopulation": "planned",
+        "rrDepth": "0",
+        "rrEcology": "3",
+        "rrDifficulty": "8",
+        "rrPartition": "rules",
+        "rrSeed": "3049569923",
+        "rrP_retiled": "0",
+        "rrP_extra": "0.3706698483321816",
+        "rrP_rooms": "11",
+        "rrP_masses": "1",
+        "rrP_visits": "89",
+        "rrP_count": "12",
+        "rrP_merges": "1",
+        "rrP_density": "dense",
+        "rrP_variant": "compact-cluster",
+        "rrP_main": "office",
+        "rrP_layout": "storeys",
+        "rrP_requested": "12",
+        "rrDistrict": "building",
+        "rrBlock": "0",
+        "rrRoofRow": "0",
+        "rrDanger": "56",
+        "rrValue": "28",
+        "rrContentModel": "danger-value-1",
+        "rrVersion": "13",
+        "rrMasterSeed": "20260818",
+        "x": "1",
+        "y": "2",
+        "rrMirror": "0"
+      },
+      "worldPorts": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "neighbours": [
+        {
+          "direction": "left",
+          "room": "syn_2",
+          "x": 0,
+          "y": 2,
+          "interfaces": []
+        },
+        {
+          "direction": "right",
+          "room": "syn_12",
+          "x": 2,
+          "y": 2,
+          "interfaces": [
+            {
+              "slot": 2,
+              "local": 3,
+              "neighbour": 3,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "up",
+          "room": "syn_6",
+          "x": 1,
+          "y": 1,
+          "interfaces": [
+            {
+              "slot": 19,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        },
+        {
+          "direction": "down",
+          "room": "syn_8",
+          "x": 1,
+          "y": 3,
+          "interfaces": [
+            {
+              "slot": 8,
+              "local": 2,
+              "neighbour": 2,
+              "match": true
+            }
+          ]
+        }
+      ],
+      "source": "design/v13-content-runtime/population-release-candidate/rrstyle-navigation-mane-pool.xml",
+      "sourceSha256": "1bc3eac41b54233f82098afcfc9a4b6886a464cb6f0f10ede0d61f18d2761ef6",
+      "sampleSha256": "7acc408d45da94934e6933908023467f6b66addde20fdd3e610c9d8ffcfdd280"
+    }
+  ],
+  "selection": "Fixed explicit fixtures: terminal plus ceiling turrets, mirrored terminal, sewer growth, mixed city mounts. Not a representative frequency sample.",
+  "rendererAdapter": {
+    "base": "Editor/Enhancements/src/NativeRenderer.as",
+    "baseSha256": "712c3b8d102e319b168bd001f7f312139b42402a7609112b7177bcdb2b6c0ff4",
+    "generatedSha256": "151571090c909d09adddf1c026972b07a4f20c9a168b8aac8c0abbbd75ef794e",
+    "substitutions": {
+      "class NativeRenderer": "class RRReviewRenderer",
+      "function NativeRenderer()": "function RRReviewRenderer()",
+      "new Location(land,roomXML,false,{mirror:mirror});": "new Location(land,roomXML,false,{mirror:mirror,water:null,ramka:null,backform:0,transpFon:String(roomXML.@rrTheme)==\"mane\"});",
+      "EditorPreviewProfile.apply(land,loc,difficulty);": "EditorPreviewProfile.apply(land,loc,difficulty);\n            if(roomXML.@rrEcology.length()) loc.tipEnemy=int(roomXML.@rrEcology);",
+      "biome:loc.biom,enemyType:loc.tipEnemy,": "biome:loc.biom,enemyType:loc.tipEnemy,transpFon:loc.transpFon,simulationUnits:loc.units.length,"
+    }
+  },
+  "supportSources": {
+    "Editor/Enhancements/src/EditorTools.as": "704b83d6a7fa1886df627abc5901c0e520b586accb59f9a7e174872babedddd7",
+    "Editor/Enhancements/src/EntityHarness.as": "a5bd9169cf191dfa7226f98d6681d4bd8a6ecdaceb2ea43738c4e9821a4b7c68",
+    "Editor/Enhancements/src/MapLabels.as": "c07da98b31052eb9ef86f1f0e0f226672611b5ff131eef982e1b36669f38e1b6",
+    "Editor/Enhancements/src/NativeEntities.as": "07faff9fcaa1258d6afb1bbdeaab5bbfcc4132024dccd012677e6f4f7ad01a5b",
+    "Editor/Enhancements/src/NativeRenderer.as": "712c3b8d102e319b168bd001f7f312139b42402a7609112b7177bcdb2b6c0ff4",
+    "Editor/Enhancements/src/PngWriter.as": "3a926b0e22597af8762fbdb777ccbed97a1fd584875a92311b17e975cb90d087",
+    "Editor/Enhancements/src/PreviewHarness.as": "b87bfcd4cc6dc032f458882ba95419ae2b0fc8af5a5655d86cee3b60cddfff11",
+    "Editor/Enhancements/src/PreviewPanel.as": "fd96f15c631dd26f95003893391e93d5b164dbb61f986a1af381a1ebc5f35b5d",
+    "Editor/Enhancements/src/ToolButton.as": "8bb10662921c572fee75a0d19d59380e43d62f42d17183a47d6c34a5607402f6",
+    "Editor/Enhancements/src/fe/loc/EditorPreviewProfile.as": "9e35227cfdda81570f289d27661214bbd2761b108fd01b03600dddb4f60cc7a8"
+  }
+}

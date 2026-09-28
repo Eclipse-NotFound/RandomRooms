@@ -1,6 +1,6 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-28：v13 已实装，正式 release 仍为 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。随后完成编辑器接入调查（§8）与本次原版破碎感/噪声算法调查（§9），均尚未实施生成器适配。最新图文入口 design/fracture-study-2026-09-28/index.html。
+> 2026-09-28：v13 已实装，正式 release 仍为 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。编辑器调查、破碎感调查之后，完成编辑器实际编解码与四场景规划叠层探索（§10）；生产生成器及已装编辑器未改。最新入口 design/editor-exploration-20260928/index.html。
 
 ## 1. 模组与运行入口
 
@@ -63,7 +63,7 @@
 
 ## 6. 接续与回滚
 
-- v13 实现/部署完成；本次破碎感调查也已完成。后续按用户方向继续，推荐固定底图的表面/结构分层对照，尚未实现或授权本轮直接替换生成器；不擅自删 v12.2/v12.3。
+- v13 实现/部署、破碎感调查、编辑器接入探索均已完成。推荐完整快照/只读审查＋固定底图的表面/结构分层对照；正式编辑器入口、编辑回放及破碎算法仍未接入，不将本轮探索当作生产部署授权；保留 v12.2/v12.3。
 - 回滚备份 build/release-backups/RandomRoomsMod_before_v13_20260928.swf = 76,834 B，SHA256 8E0E8A83E0DE96D0CA6F5162DD81F226B53CF8F0634F0AD073E9E3829BA292E9。关游戏→复制回 release/RandomRoomsMod.swf→核对→重启进新图。
 - 更早 v11.1 备份/对照发布记录见 design/v12-runtime-comparison 与 journal，不覆盖现有备份。
 
@@ -81,7 +81,7 @@
 - 主 v13 走 RRExpedition/RRSynth/RRGrowth 动态生成、内存池与持续扩张；没有读取编辑器文件替换生成房的入口。优先建议只读固定种子审查、用途/D/V/规划叠层，再把编辑器摆设组合转为 RRFurnish 规则；保留从零生成方案。建议尚未获用户实施选择。
 - 现有编辑器保存会丢 all 根版本/种子；重编码房间丢 rr* 属性和 rrPlan，serial=1 还丢 doors。物体自定义 XML/options 大体可保留，但修改后旧规划会过时，不能仅保留字段就直接回灌。
 - 132 历史房/158400 格、55 种格码独立静态核对通过；不是 GUI 保存往返。原样已装 EditorTools/NativeScene 的隔离副本实画四房，4/4 输出 1920×1000 PNG，0 警告、输入与正式文件哈希不变；不是本次重新运行 v13 游戏验收。
-- 原始池文件均误推工厂，rrMirror 不自动应用；城市预览还缺 transpFon。当前预览跳过炮塔、地雷、部分机关/商贩，不验 AI/枪线/相邻接口/涉水；运行验证仍用原生游戏。
+- 原始池文件均误推工厂，rrMirror 不自动应用；城市预览还缺 transpFon。调查当时的预览跳过炮塔、地雷、部分机关/商贩；随后编辑器已升级实体支持，最新验证见§10。不验 AI/实时枪线/相邻通行/涉水，运行验证仍用原生游戏。
 - 同目录 samples/ 为四份单房工作副本，previews/ 为本机图像，audit.py/run-probe.ps1 可复现隔离预览。首次驱动器写图前超时，改驱动器输出路径后同一组件通过，未确证初次原因；记录保留在 verification.json。
 
 ## 9. 原版破碎感调查（2026-09-28）
@@ -94,3 +94,12 @@
 - 新结构需同步用途/可站立面、门梯、全入口往返、污水干路、炮塔支撑/枪线、终端接近与开墙后敌群支援预算，不能只删grid；不能为修复通行重新加统一底层横路。
 - 9+1捕获及全部哈希/原网格/back比对通过。页面JS语法/静态资源核对通过，浏览器工具拒绝file协议，本轮未实点HTML或截图，也未绕行。城市屋顶需Land的backform=2条件，首轮屋顶图不用于背景结论，已单独复拍。
 - 公共知识：新增 rendering/discoveries/native-fracture-layers.md；显式纠正 tile-code-table.md 的ed=2/斜梯/F/部分高度解释。KB-000045 r2仅用于冻结底图对照提醒。完整边界与复现见 validation.md。
+
+## 10. 编辑器接入探索的实际验证（2026-09-28）
+
+- 用户要求阅读另一开发者 assessment 并继续探索。本轮只在 design/editor-exploration-20260928 建独立探针/只读审查页；exploration.md 为结论，index.html 为四场景画面。未改 src、release、已装 Editor、游戏地图或真实存档。
+- 当前 EditorTools 已升级 17,854 B / 80CFA1BA…1B64C，支持静态实体。审查适配器从其当前源码派生，只补镜像/场景/强度/rrEcology/城市transpFon；35静态实体、8炮塔、3终端、75生成点，4图0警告，13邻接口契约匹配，loc.units为空。
+- 原样已装 Editor.swf 的真实 decodeAll/ToolsSnapshot/选房事件/encode 链复现：4房丢30/30/31/33个room扩展属性、rrPlan、doors及all根版本种子。选房后全部1200格及137obj/199back/options语义一致；不是GUI另存实测。无(0,0)的单房文件刚载入时快照坐标误为(0,0)，再选房恢复。
+- 两次同XML预览4/4图哈希不同、4/4实体外观记录不同；原生未指定装饰帧/单位变体仍随机。下水道8尸鬼模型隐藏，不以可见身体判断生成数量；必须保留计划点。不能把静态意图线当运行枪线。
+- validation/manifest/results/execution 及 first-run/diagnostic-failure 留证。22输入哈希不变、PNG/语义/最小DOM逻辑核对通过；已看原生图，浏览器仍受file限制，本轮未实点页面，不绕行。失败为探针读炮塔不存在aiState，已守卫读取并重跑通过。
+- 推荐正式完整快照＋规划叠层，再做外观/结构草稿差异与摆设规则；完整编辑回放须重新校验派生规划。建议尚未批准实施。公共新增 world-objects/discoveries/editor-reencoding-boundaries.md；经验检索部分来源不可读，不视作没有经验。

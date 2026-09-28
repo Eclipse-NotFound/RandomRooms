@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='utf-8'?>
+<all rrVersion="13" rrSeed="20260818">
+  <land serial="1" />
+  <room name="syn_18" rrGen="space-v11" rrRevision="13" rrTheme="plant" rrKind="connector" rrForm="production" rrAttempts="1" rrPopulation="planned" rrDepth="0" rrEcology="2" rrDifficulty="8" rrPartition="rules" rrSeed="1471807454" rrP_retiled="0" rrP_extra="0.5124578491551801" rrP_rooms="7" rrP_masses="0" rrP_visits="38" rrP_count="9" rrP_merges="2" rrP_density="standard" rrP_variant="large-and-small" rrP_main="workshop" rrP_layout="storeys" rrP_requested="9" rrDanger="41" rrValue="11" rrContentModel="danger-value-1" rrVersion="13" rrMasterSeed="20260818" x="3" y="3" rrMirror="0">
+    <a>C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._C._CА.C.C.C.C.C</a>
+    <a>C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>C._C-._C-._C-._C-._C-._C._CА._C-._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C.C</a>
+    <a>C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._C</a>
+    <a>C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._C</a>
+    <a>C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._C</a>
+    <a>C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D-._D._DА._D-.C</a>
+    <a>C.C.C.C.C.C.C.C.C.C.C.C.C._C._CА.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._H._HА.C.C.C.C.C.C.C.C.C.C.C</a>
+    <a>C._C._C._C._C._C._C._C._C._C._C._C._C._C._CА._C._C._C._C._C._C._C._C.C._H._H._H._H._H._H._H.C._H._H._H._H._HА._H._H._H.C._C._C._C._C._C._C.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D.C._H._H._H._H._H._H._H.C._H._H._H._H._HА._H._H._H.C._C._C._C._C._C._C.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D.C._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H.C._C._C._C._C._C._C.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._H._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._C._C._C._C._C._C._C.C</a>
+    <a>C._D._D._D._D._D._D._D._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._H._H._H._H._H._H._H._H._H._H._H._H._H._HА._H._H._H._C._C._C._C._C._C._C.C</a>
+    <a>C.D.D.D._D._DА.C.C.C.C._C._CА.C.C._C._C._C._C._C._C._C._C._C.C.C.C.C.C.C.C.C.C.C.C.C._D._DА.C.C.C.C.C.C.C._D._DА.D.C</a>
+    <a>C._D._D._D._D._DА._D._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C.C._C._C._C._C._C._C.C._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._DА._D.C</a>
+    <a>C._D._D._D._D._DА._D._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C.C._C._C._C._C._C._C.C._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._DА._D.C</a>
+    <a>C._D._D._D._D._DА._D._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._DА._D.C</a>
+    <a>C._D._D._D._D._DА._D._C._C._C._C._CА._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._D._D._D._D._D._D._DА._D._D._D._D._D._D._D._D._DА._D.C</a>
+    <a>C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C.C._D._DА.C.C.C.C.C</a>
+    <obj id="player" code="syn_18_o0" x="27" y="12" />
+    <obj id="door1" code="syn_18_o1" x="23" y="23" rrFixture="door" lock="0" mine="0" />
+    <obj id="door2" code="syn_18_o2" x="23" y="18" rrFixture="door" lock="0" mine="0" />
+    <obj id="door2" code="syn_18_o3" x="40" y="18" rrFixture="door" lock="0" mine="0" />
+    <obj id="door1" code="syn_18_o4" x="30" y="23" rrFixture="door" lock="0" mine="0" />
+    <obj id="instr1" code="syn_18_o5" x="31" y="12" />
+    <obj id="box" code="syn_18_o6" x="33" y="12" />
+    <obj id="instr1" code="syn_18_o7" x="16" y="12" />
+    <obj id="box" code="syn_18_o8" x="18" y="12" />
+    <obj id="instr1" code="syn_18_o9" x="1" y="12" />
+    <obj id="instr1" code="syn_18_o10" x="1" y="18" />
+    <obj id="instr1" code="syn_18_o11" x="6" y="18" />
+    <obj id="woodbox" code="syn_18_o12" x="1" y="23" />
+    <obj id="instr1" code="syn_18_o13" x="15" y="23" />
+    <obj id="turret" x="4" y="14" rrContent="security" rrMount="ceiling" uid="rrp_18_0" rrZone="room-6" rrD="70" rrV="29" code="syn_18_p14" />
+    <obj id="turret" x="38" y="14" rrContent="security" rrMount="ceiling" uid="rrp_18_1" rrZone="room-3" rrD="35" rrV="13" code="syn_18_p15" />
+    <obj id="turret" x="43" y="14" rrContent="security" rrMount="ceiling" uid="rrp_18_2" rrZone="room-4" rrD="59" rrV="25" code="syn_18_p16" />
+    <obj id="term1" x="9" y="12" rrContent="terminal" rrMount="floor" uid="rrp_18_3" rrZone="room-0" rrD="62" rrV="9" code="syn_18_p17" />
+    <obj id="work" x="22" y="12" rrContent="service" rrMount="floor" uid="rrp_18_4" rrZone="room-0" rrD="62" rrV="9" code="syn_18_p18" />
+    <obj id="safe" x="19" y="23" rrContent="reward" rrMount="floor" uid="rrp_18_5" rrZone="room-6" rrD="70" rrV="29" code="syn_18_p19" />
+    <obj id="knop3" x="17" y="23" rrContent="switch" rrMount="floor" uid="rrp_18_6" rrZone="room-6" rrD="70" rrV="29" code="syn_18_p20">
+      <scr act="unlock" targ="rrp_18_5" />
+    </obj>
+    <obj id="work" x="13" y="23" rrContent="service" rrMount="floor" uid="rrp_18_7" rrZone="room-6" rrD="70" rrV="29" code="syn_18_p21" />
+    <obj id="work" x="26" y="18" rrContent="service" rrMount="floor" uid="rrp_18_8" rrZone="room-2" rrD="53" rrV="10" code="syn_18_p22" />
+    <obj id="term3" x="26" y="23" rrContent="terminal" rrMount="floor" uid="rrp_18_9" rrZone="room-7" rrD="24" rrV="52" code="syn_18_p23" />
+    <obj id="work" x="38" y="23" rrContent="service" rrMount="floor" uid="rrp_18_10" rrZone="room-8" rrD="30" rrV="29" code="syn_18_p24" />
+    <back id="zavod1" x="26" y="10" />
+    <back id="pult" x="31" y="10" />
+    <back id="light4" x="29" y="7" />
+    <back id="konstr" x="34" y="8" />
+    <back id="zavod1" x="11" y="10" />
+    <back id="pult" x="16" y="10" />
+    <back id="light4" x="14" y="7" />
+    <back id="konstr" x="19" y="8" />
+    <back id="fwindow" x="3" y="2" />
+    <back id="fwindow" x="12" y="2" />
+    <back id="fwindow" x="21" y="2" />
+    <back id="fwindow" x="30" y="2" />
+    <back id="fwindow" x="39" y="2" />
+    <back id="konstr" x="1" y="1" />
+    <back id="konstr" x="1" y="5" />
+    <back id="konstr" x="1" y="9" />
+    <back id="konstr" x="46" y="1" />
+    <back id="konstr" x="46" y="5" />
+    <back id="konstr" x="46" y="9" />
+    <back id="hkonstr" x="1" y="1" />
+    <back id="hkonstr" x="7" y="1" />
+    <back id="hkonstr" x="13" y="1" />
+    <back id="hkonstr" x="19" y="1" />
+    <back id="hkonstr" x="25" y="1" />
+    <back id="hkonstr" x="31" y="1" />
+    <back id="hkonstr" x="37" y="1" />
+    <back id="zavod1" x="3" y="10" />
+    <back id="zavod1" x="10" y="10" />
+    <back id="zavod1" x="17" y="10" />
+    <back id="zavod1" x="24" y="10" />
+    <back id="zavod1" x="31" y="10" />
+    <back id="zavod1" x="38" y="10" />
+    <back id="light4" x="23" y="1" />
+    <back id="konstr" x="1" y="14" />
+    <back id="konstr" x="22" y="14" />
+    <back id="hkonstr" x="1" y="14" />
+    <back id="hkonstr" x="7" y="14" />
+    <back id="hkonstr" x="13" y="14" />
+    <back id="zavod1" x="3" y="16" />
+    <back id="zavod1" x="10" y="16" />
+    <back id="zavod1" x="17" y="16" />
+    <back id="light4" x="11" y="14" />
+    <back id="light4" x="26" y="14" />
+    <back id="light4" x="35" y="14" />
+    <back id="light4" x="43" y="14" />
+    <back id="light4" x="3" y="20" />
+    <back id="light4" x="14" y="20" />
+    <back id="light4" x="26" y="20" />
+    <back id="konstr" x="31" y="20" />
+    <back id="konstr" x="46" y="20" />
+    <back id="hkonstr" x="31" y="20" />
+    <back id="hkonstr" x="37" y="20" />
+    <back id="zavod1" x="33" y="21" />
+    <back id="zavod1" x="40" y="21" />
+    <back id="light4" x="38" y="20" />
+    <doors>0.0.3.0.0.0.0.0.0.0.2.0.3.0.0.0.0.0.0.0.0.2</doors>
+    <options backwall="tBackWall" music="music_plant_1" entip="2" kolspawn="0" />
+    <rrPlan>
+      <furnish region="0" role="workshop" groups="3" target="3" />
+      <furnish region="1" role="workshop" groups="2" target="2" />
+      <furnish region="2" role="control" groups="0" target="1" />
+      <furnish region="3" role="control" groups="0" target="1" />
+      <furnish region="4" role="service" groups="0" target="1" />
+      <furnish region="5" role="store" groups="1" target="1" />
+      <furnish region="6" role="service" groups="1" target="2" />
+      <furnish region="7" role="store" groups="0" target="1" />
+      <furnish region="8" role="workshop" groups="0" target="2" />
+      <space kind="volume" x0="1" top="1" x1="46" floor="12" role="workshop" room="0" zone="room-0" danger="62" value="9" />
+      <space kind="volume" x0="1" top="14" x1="22" floor="18" role="workshop" room="6" zone="room-6" danger="70" value="29" />
+      <space kind="volume" x0="24" top="14" x1="30" floor="18" role="control" room="2" zone="room-2" danger="53" value="10" />
+      <space kind="volume" x0="32" top="14" x1="39" floor="18" role="control" room="3" zone="room-3" danger="35" value="13" />
+      <space kind="volume" x0="41" top="14" x1="46" floor="18" role="service" room="4" zone="room-4" danger="59" value="25" />
+      <space kind="volume" x0="1" top="20" x1="6" floor="23" role="store" room="6" zone="room-6" danger="70" value="29" />
+      <space kind="volume" x0="8" top="20" x1="22" floor="23" role="service" room="6" zone="room-6" danger="70" value="29" />
+      <space kind="volume" x0="24" top="20" x1="29" floor="23" role="store" room="7" zone="room-7" danger="24" value="52" />
+      <space kind="volume" x0="31" top="20" x1="46" floor="23" role="workshop" room="8" zone="room-8" danger="30" value="29" />
+      <merge a="6" b="1" x0="14" top="19" x1="22" floor="19" axis="floor" />
+      <merge a="6" b="5" x0="7" top="20" x1="7" floor="23" axis="side" />
+      <link a="3" b="2" kind="opening" x="31" y="18" />
+      <link a="6" b="1" kind="merge" x="10" y="19" />
+      <link a="3" b="0" kind="ladder" x="35" y="13" />
+      <link a="1" b="0" kind="ladder" x="13" y="13" />
+      <link a="8" b="3" kind="ladder" x="35" y="19" />
+      <link a="6" b="5" kind="merge" x="7" y="23" />
+      <link a="7" b="6" kind="door" x="23" y="23" />
+      <link a="8" b="4" kind="ladder" x="44" y="19" />
+      <link a="2" b="1" kind="door" x="23" y="18" />
+      <link a="5" b="1" kind="ladder" x="4" y="19" />
+      <link a="4" b="3" kind="door" x="40" y="18" />
+      <link a="8" b="7" kind="door" x="30" y="23" />
+      <ladder x="44" top="12" bottom="12" />
+      <ladder x="41" top="24" bottom="24" />
+      <ladder x="6" top="8" bottom="12" />
+      <ladder x="41" top="0" bottom="12" />
+      <ladder x="10" top="19" bottom="23" />
+      <ladder x="35" top="13" bottom="18" />
+      <ladder x="13" top="13" bottom="18" />
+      <ladder x="35" top="19" bottom="23" />
+      <ladder x="44" top="19" bottom="23" />
+      <ladder x="4" top="19" bottom="23" />
+      <zone id="room-0" role="workshop" danger="62" value="9" pressure="0.00" limit="4.90" />
+      <zone id="room-6" role="workshop" danger="70" value="29" pressure="2.00" limit="5.30" />
+      <zone id="room-2" role="control" danger="53" value="10" pressure="0.00" limit="4.45" />
+      <zone id="room-3" role="control" danger="35" value="13" pressure="2.00" limit="3.55" />
+      <zone id="room-4" role="service" danger="59" value="25" pressure="2.00" limit="4.75" />
+      <zone id="room-7" role="store" danger="24" value="52" pressure="0.00" limit="3.00" />
+      <zone id="room-8" role="workshop" danger="30" value="29" pressure="0.00" limit="3.30" />
+      <point y="14" zone="room-6" cost="2" uid="rrp_18_0" mount="ceiling" x="4" id="turret" reason="guard-link" kind="security" />
+      <point y="14" zone="room-3" cost="2" uid="rrp_18_1" mount="ceiling" x="38" id="turret" reason="guard-link" kind="security" />
+      <point y="14" zone="room-4" cost="2" uid="rrp_18_2" mount="ceiling" x="43" id="turret" reason="guard-link" kind="security" />
+      <point y="12" zone="room-0" cost="0" uid="rrp_18_3" mount="floor" x="9" id="term1" reason="location-turret-control" kind="terminal" />
+      <point y="12" zone="room-0" cost="0" uid="rrp_18_4" mount="floor" x="22" id="work" reason="room-purpose" kind="service" />
+      <point y="23" zone="room-6" cost="0" uid="rrp_18_5" mount="floor" x="19" id="safe" reason="high-value-opportunity" kind="reward" />
+      <point y="23" zone="room-6" cost="0" uid="rrp_18_6" mount="floor" x="17" id="knop3" reason="optional-cache-control" kind="switch" />
+      <point y="23" zone="room-6" cost="0" uid="rrp_18_7" mount="floor" x="13" id="work" reason="room-purpose" kind="service" />
+      <point y="18" zone="room-2" cost="0" uid="rrp_18_8" mount="floor" x="26" id="work" reason="room-purpose" kind="service" />
+      <point y="23" zone="room-7" cost="0" uid="rrp_18_9" mount="floor" x="26" id="term3" reason="native-data-loot" kind="terminal" />
+      <point y="23" zone="room-8" cost="0" uid="rrp_18_10" mount="floor" x="38" id="work" reason="room-purpose" kind="service" />
+      <gun uid="rrp_18_0" zone="room-6" mount="ceiling" x="4.5" y="14.675" targetX="4.5" targetY="22.8" purpose="ladder" />
+      <gun uid="rrp_18_1" zone="room-3" mount="ceiling" x="38.5" y="14.675" targetX="31.5" targetY="17.8" purpose="opening" />
+      <gun uid="rrp_18_2" zone="room-4" mount="ceiling" x="43.5" y="14.675" targetX="44.5" targetY="22.8" purpose="ladder" />
+      <control uid="rrp_18_3" scope="location" operator="586" from="12" path="336,337,338,339,340,341,342,343,344,345,393,441,489,537,585,586" model="terrain-walk-climb-cover">
+        <entry slot="2" state="exposed-route" />
+        <entry slot="10" state="exposed-route" />
+        <entry slot="12" state="covered-route" />
+        <entry slot="21" state="exposed-route" />
+      </control>
+    </rrPlan>
+  </room>
+</all>

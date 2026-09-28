@@ -1,0 +1,264 @@
+{
+  "stack": "Error: ReferenceError: Error #1069: Property aiState not found on fe.unit.UnitTurret and there is no default value.\n\tat ReviewProbe/fail()[D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-exploration-20260928\\ReviewProbe.as:129]\n\tat ReviewProbe/renderNext()[D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-exploration-20260928\\ReviewProbe.as:119]\n\tat RRReviewRenderer/poll()[D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\design\\editor-exploration-20260928\\generated-src\\RRReviewRenderer.as:99]\n\tat flash.utils::Timer/_timerDispatch()\n\tat flash.utils::Timer/tick()",
+  "render": [],
+  "error": "ReferenceError: Error #1069: Property aiState not found on fe.unit.UnitTurret and there is no default value.",
+  "status": "failed",
+  "roundtrip": [
+    {
+      "objectsBefore": 25,
+      "objectsAfter": 25,
+      "theme": "plant",
+      "backsBefore": 55,
+      "planBefore": 1,
+      "backsAfter": 55,
+      "sourceUnchanged": true,
+      "planAfter": 0,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "room": "syn_18",
+      "doorsBefore": 1,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "doorsAfter": 0,
+      "coordinates": {
+        "original": [
+          "3",
+          "3"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "3"
+        ]
+      }
+    },
+    {
+      "objectsBefore": 37,
+      "objectsAfter": 37,
+      "theme": "stable",
+      "backsBefore": 21,
+      "planBefore": 1,
+      "backsAfter": 21,
+      "sourceUnchanged": true,
+      "planAfter": 0,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "room": "syn_16",
+      "doorsBefore": 1,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "doorsAfter": 0,
+      "coordinates": {
+        "original": [
+          "3",
+          "1"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "1"
+        ]
+      }
+    },
+    {
+      "objectsBefore": 45,
+      "objectsAfter": 45,
+      "theme": "sewer",
+      "backsBefore": 65,
+      "planBefore": 1,
+      "backsAfter": 65,
+      "sourceUnchanged": true,
+      "planAfter": 0,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror",
+        "rrGrowth"
+      ],
+      "room": "syn_28",
+      "doorsBefore": 1,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "doorsAfter": 0,
+      "coordinates": {
+        "original": [
+          "3",
+          "5"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "3",
+          "5"
+        ]
+      }
+    },
+    {
+      "objectsBefore": 30,
+      "objectsAfter": 30,
+      "theme": "mane",
+      "backsBefore": 58,
+      "planBefore": 1,
+      "backsAfter": 58,
+      "sourceUnchanged": true,
+      "planAfter": 0,
+      "lostRoomAttributes": [
+        "rrGen",
+        "rrRevision",
+        "rrTheme",
+        "rrKind",
+        "rrForm",
+        "rrAttempts",
+        "rrPopulation",
+        "rrDepth",
+        "rrEcology",
+        "rrDifficulty",
+        "rrPartition",
+        "rrSeed",
+        "rrP_retiled",
+        "rrP_extra",
+        "rrP_rooms",
+        "rrP_masses",
+        "rrP_visits",
+        "rrP_count",
+        "rrP_merges",
+        "rrP_density",
+        "rrP_variant",
+        "rrP_main",
+        "rrP_layout",
+        "rrP_requested",
+        "rrDistrict",
+        "rrBlock",
+        "rrRoofRow",
+        "rrDanger",
+        "rrValue",
+        "rrContentModel",
+        "rrVersion",
+        "rrMasterSeed",
+        "rrMirror"
+      ],
+      "room": "syn_7",
+      "doorsBefore": 1,
+      "lostRootAttributes": [
+        "rrVersion",
+        "rrSeed"
+      ],
+      "doorsAfter": 0,
+      "coordinates": {
+        "original": [
+          "1",
+          "2"
+        ],
+        "immediate": [
+          "0",
+          "0"
+        ],
+        "selected": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  ]
+}

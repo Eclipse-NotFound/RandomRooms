@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "scope": "JavaScript with a minimal DOM stand-in; not browser or layout verification",
+  "terminalTypesKeptDistinct": true,
+  "sourceSha256": "75ad9037c4e92a25fde82c266c0e9646e50e8c223a3957c14e88bcb5b7de888b",
+  "cases": [
+    {
+      "theme": "plant",
+      "points": 11,
+      "svgCharacters": 6135
+    },
+    {
+      "theme": "stable",
+      "points": 15,
+      "svgCharacters": 7049
+    },
+    {
+      "theme": "sewer",
+      "points": 30,
+      "svgCharacters": 10084
+    },
+    {
+      "theme": "mane",
+      "points": 19,
+      "svgCharacters": 8772
+    }
+  ]
+}
