@@ -21,17 +21,18 @@ package rr
       private function area(r:Object):int { return width(r)*height(r); }
       public function RRPartitionPlan(random:Function) { rnd=random; }
 
-      public function build(theme:String,form:String,boundary:Array):Array
+      public function build(theme:String,form:String,boundary:Array,modern:Boolean=false):Array
       {
          ports=boundary; visits=0; masses=[];
-         program=new RRSpaceRules(rnd).create(theme,form);
+         program=new RRSpaceRules(rnd).create(theme,form,modern);
          var whole:Object=rect(1,1,46,23),out:Array;
          var layout:String=rnd()<program.levels?"storeys":
             (rnd()<0.28 && form!="cistern" && form!="street_links" && form!="rooftops"?"staggered":"sliced");
-         out=layout=="storeys"?storeys(whole,program.rooms):(layout=="staggered"?staggered(whole,program.rooms):split(whole,program.rooms));
+         if(modern && rnd()<0.48 && form!="street_links" && form!="rooftops") layout="wings";
+         out=layout=="wings"?wings(whole,program.rooms):(layout=="storeys"?storeys(whole,program.rooms):(layout=="staggered"?staggered(whole,program.rooms):split(whole,program.rooms)));
          if(out==null) throw new Error("Partition demand search exhausted: "+layout);
          // The explicit common-floor operation must survive local editing.
-         var shifted:int=layout=="storeys"?0:retile(out);
+         var shifted:int=layout=="storeys" || layout=="wings"?0:retile(out);
          var usable:Array=[];
          for each(var cell:Object in out)
             if(cell.role=="mass") masses.push(cell); else usable.push(cell);
@@ -48,13 +49,14 @@ package rr
          for each(var p:Object in items)
          {
             if(p.minW>width(r) || p.minH>height(r) || (p.edge=="top" && r.top!=1)) return false;
-            need+=p.minW*p.minH; capacity+=p.maxW*p.maxH;
+            need+=p.minW*p.minH; capacity+=p.hasOwnProperty("maxArea")?Math.min(p.maxArea,p.maxW*p.maxH):p.maxW*p.maxH;
          }
          if(need+(items.length-1)*4>area(r) || capacity<area(r)) return false;
          if(items.length==1)
          {
             p=items[0];
             if(width(r)>p.maxW || height(r)>p.maxH) return false;
+            if(p.hasOwnProperty("maxArea") && area(r)>p.maxArea) return false;
             if(p.role=="mass")
                for(var port:int=0;port<22;port++) if(ports[port]>=2)
                {
@@ -195,6 +197,28 @@ package rr
                }
                if(good) return result;
             }
+         }
+         return null;
+      }
+      /** Independently aligned wings. The dividing axis, position, use demands
+       * and local floor bands are solved together, not chosen from coordinates. */
+      private function wings(r:Object,items:Array):Array
+      {
+         for(var trial:int=0;trial<36 && visits<maxVisits;trial++)
+         {
+            visits++;
+            var order:Array=items.concat(); shuffle(order);
+            var k:int=n(2,Math.max(2,items.length-2)),aa:Array=order.slice(0,k),bb:Array=order.slice(k);
+            if(!bb.length) continue;
+            var vertical:Boolean=rnd()<0.8,c:int=vertical?n(r.x0+12,r.x1-12):n(r.top+7,r.floor-7);
+            if(!cutOK(r,vertical,c)) continue;
+            var a:Object=rect(r.x0,r.top,vertical?c-1:r.x1,vertical?r.floor:c-1);
+            var b:Object=rect(vertical?c+1:r.x0,vertical?r.top:c+1,r.x1,r.floor);
+            if(!feasible(a,aa) || !feasible(b,bb)) continue;
+            var first:Array=rnd()<0.7?storeys(a,aa):split(a,aa);
+            if(first==null) continue;
+            var second:Array=rnd()<0.5?storeys(b,bb):split(b,bb);
+            if(second!=null) return first.concat(second);
          }
          return null;
       }

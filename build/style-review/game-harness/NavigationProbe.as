@@ -626,7 +626,7 @@ package
             // floor waypoint. Continue from its actual top rather than trying
             // to press down through the cabinet to the empty-tile graph.
             if(route.length>1 && support[step] && !slope[step] && w.gg.stay &&
-               Math.abs(dx)<35 && dy>10 && dy<100 && furnitureAt(w,tx,ty))
+               Math.abs(dx)<35 && dy>4 && dy<100 && furnitureAt(w,tx,ty))
             {
                logger("NAV-FURNITURE-LANDING "+JSON.stringify({x:w.gg.X,y:w.gg.Y,waypoint:step}));
                route.shift(); return;

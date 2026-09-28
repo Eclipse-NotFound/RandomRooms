@@ -1,0 +1,890 @@
+{
+  "status": "passed",
+  "renders": [
+    {
+      "id": "plant-before",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 560,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 640,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 840,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 1640,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 1280,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": -1,
+            "x": 640,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": -1,
+            "x": 560,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": -1,
+            "x": 800,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1240,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 160,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          }
+        ],
+        "regionName": "工厂",
+        "simulationUnits": 0,
+        "region": "random_plant",
+        "transpFon": false,
+        "entities": 10,
+        "difficulty": 12,
+        "enemyType": 2,
+        "emptyPoints": 0,
+        "spawnMarkers": 11,
+        "biome": 0,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 12,
+        "room": "syn_33",
+        "objects": 25,
+        "examples": 0,
+        "milliseconds": 648
+      }
+    },
+    {
+      "id": "plant-after",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 1160,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1760,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 679,
+            "example": false,
+            "facing": -1,
+            "x": 1360,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 679,
+            "example": false,
+            "facing": 1,
+            "x": 1200,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 440,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 640,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 199,
+            "example": false,
+            "facing": 1,
+            "x": 1400,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 199,
+            "example": false,
+            "facing": 1,
+            "x": 1600,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          }
+        ],
+        "regionName": "工厂",
+        "simulationUnits": 0,
+        "region": "random_plant",
+        "transpFon": false,
+        "entities": 8,
+        "difficulty": 12,
+        "enemyType": 2,
+        "emptyPoints": 0,
+        "spawnMarkers": 9,
+        "biome": 0,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 12,
+        "room": "syn_33",
+        "objects": 25,
+        "examples": 0,
+        "milliseconds": 482
+      }
+    },
+    {
+      "id": "stable-before",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1780,
+            "source": "armturret",
+            "id": "armturret",
+            "variant": null
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": 1,
+            "x": 360,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 439,
+            "example": false,
+            "facing": 1,
+            "x": 160,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 280,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 920,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 1320,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 1720,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": -1,
+            "x": 1400,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": -1,
+            "x": 1320,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          }
+        ],
+        "regionName": "废弃避难厩",
+        "simulationUnits": 0,
+        "region": "random_stable",
+        "transpFon": false,
+        "entities": 9,
+        "difficulty": 8,
+        "enemyType": 2,
+        "emptyPoints": 0,
+        "spawnMarkers": 10,
+        "biome": 2,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 8,
+        "room": "syn_49",
+        "objects": 34,
+        "examples": 0,
+        "milliseconds": 473
+      }
+    },
+    {
+      "id": "stable-after",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 1400,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 599,
+            "example": false,
+            "facing": -1,
+            "x": 600,
+            "source": "robot",
+            "id": "robot",
+            "variant": null
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": 1,
+            "x": 520,
+            "source": "protect",
+            "id": "protect",
+            "variant": "0"
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": -1,
+            "x": 1760,
+            "source": "gutsy",
+            "id": "gutsy",
+            "variant": "0"
+          },
+          {
+            "y": 799,
+            "example": false,
+            "facing": -1,
+            "x": 600,
+            "source": "vendor",
+            "id": "vendor",
+            "variant": null
+          }
+        ],
+        "regionName": "废弃避难厩",
+        "simulationUnits": 0,
+        "region": "random_stable",
+        "transpFon": false,
+        "entities": 5,
+        "difficulty": 8,
+        "enemyType": 2,
+        "emptyPoints": 0,
+        "spawnMarkers": 6,
+        "biome": 2,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 8,
+        "room": "syn_49",
+        "objects": 32,
+        "examples": 0,
+        "milliseconds": 397
+      }
+    },
+    {
+      "id": "sewer-before",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1680,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "3"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1320,
+            "source": "zombie",
+            "id": "zombie",
+            "variant": "4"
+          }
+        ],
+        "regionName": "下水道",
+        "simulationUnits": 0,
+        "region": "random_sewer",
+        "transpFon": false,
+        "entities": 2,
+        "difficulty": 12,
+        "enemyType": 0,
+        "emptyPoints": 0,
+        "spawnMarkers": 3,
+        "biome": 1,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 12,
+        "room": "syn_131",
+        "objects": 16,
+        "examples": 0,
+        "milliseconds": 715
+      }
+    },
+    {
+      "id": "sewer-after",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 1460,
+            "source": "bloodwing",
+            "id": "bloodwing",
+            "variant": "1"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1500,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          }
+        ],
+        "regionName": "下水道",
+        "simulationUnits": 0,
+        "region": "random_sewer",
+        "transpFon": false,
+        "entities": 2,
+        "difficulty": 12,
+        "enemyType": 0,
+        "emptyPoints": 0,
+        "spawnMarkers": 3,
+        "biome": 1,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 12,
+        "room": "syn_131",
+        "objects": 26,
+        "examples": 0,
+        "milliseconds": 578
+      }
+    },
+    {
+      "id": "mane-before",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 399,
+            "example": false,
+            "facing": -1,
+            "x": 1680,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "2"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 720,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "4"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 480,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 640,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 1040,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 320,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 240,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 1400,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "2"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 1320,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 399,
+            "example": false,
+            "facing": -1,
+            "x": 740,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 420,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 1300,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": 1,
+            "x": 140,
+            "source": "rat",
+            "id": "rat",
+            "variant": null
+          },
+          {
+            "y": 879,
+            "example": false,
+            "facing": 1,
+            "x": 1380,
+            "source": "vortex",
+            "id": "vortex",
+            "variant": null
+          }
+        ],
+        "regionName": "马哈顿废墟",
+        "simulationUnits": 0,
+        "region": "random_mane",
+        "transpFon": true,
+        "entities": 14,
+        "difficulty": 10,
+        "enemyType": 3,
+        "emptyPoints": 0,
+        "spawnMarkers": 15,
+        "biome": 3,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 10,
+        "room": "syn_173",
+        "objects": 17,
+        "examples": 0,
+        "milliseconds": 827
+      }
+    },
+    {
+      "id": "mane-after",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 479,
+            "example": false,
+            "facing": 1,
+            "x": 960,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": -1,
+            "x": 360,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 719,
+            "example": false,
+            "facing": 1,
+            "x": 640,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "4"
+          },
+          {
+            "y": 279,
+            "example": false,
+            "facing": -1,
+            "x": 400,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "4"
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": -1,
+            "x": 280,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          },
+          {
+            "y": 479,
+            "example": false,
+            "facing": 1,
+            "x": 440,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "1"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 1040,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "4"
+          },
+          {
+            "y": 959,
+            "example": false,
+            "facing": -1,
+            "x": 760,
+            "source": "slaver",
+            "id": "slaver",
+            "variant": "3"
+          }
+        ],
+        "regionName": "马哈顿废墟",
+        "simulationUnits": 0,
+        "region": "random_mane",
+        "transpFon": true,
+        "entities": 8,
+        "difficulty": 10,
+        "enemyType": 3,
+        "emptyPoints": 0,
+        "spawnMarkers": 9,
+        "biome": 3,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 10,
+        "room": "syn_173",
+        "objects": 23,
+        "examples": 0,
+        "milliseconds": 493
+      }
+    },
+    {
+      "id": "native-plant-6",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [
+          {
+            "y": 159,
+            "example": false,
+            "facing": -1,
+            "x": 1300,
+            "source": "tarakan",
+            "id": "tarakan",
+            "variant": null
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": -1,
+            "x": 740,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": 1,
+            "x": 540,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 239,
+            "example": false,
+            "facing": -1,
+            "x": 1540,
+            "source": "turret",
+            "id": "turret",
+            "variant": null
+          },
+          {
+            "y": 639,
+            "example": false,
+            "facing": 1,
+            "x": 1180,
+            "source": "trap",
+            "id": "trap",
+            "variant": null
+          },
+          {
+            "y": 639,
+            "example": false,
+            "facing": 1,
+            "x": 980,
+            "source": "trap",
+            "id": "trap",
+            "variant": null
+          }
+        ],
+        "regionName": "工厂",
+        "simulationUnits": 0,
+        "region": "random_plant",
+        "transpFon": false,
+        "entities": 6,
+        "difficulty": 8,
+        "enemyType": 0,
+        "emptyPoints": 0,
+        "spawnMarkers": 14,
+        "biome": 0,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 1,
+        "enemyLevel": 8,
+        "room": "архив",
+        "objects": 34,
+        "examples": 0,
+        "milliseconds": 912
+      }
+    },
+    {
+      "id": "native-sewer-4",
+      "report": {
+        "nativeRenderer": true,
+        "mode": "static native entities; random points are examples; no simulation, scripts or discovery fog",
+        "renderSize": [
+          1920,
+          1000
+        ],
+        "entityDetails": [],
+        "regionName": "下水道",
+        "simulationUnits": 0,
+        "region": "random_sewer",
+        "transpFon": false,
+        "entities": 0,
+        "difficulty": 8,
+        "enemyType": 0,
+        "emptyPoints": 0,
+        "spawnMarkers": 15,
+        "biome": 1,
+        "warnings": [],
+        "mirror": false,
+        "invisibleTriggers": 0,
+        "enemyLevel": 8,
+        "room": "двери2",
+        "objects": 27,
+        "examples": 0,
+        "milliseconds": 865
+      }
+    }
+  ]
+}

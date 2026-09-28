@@ -23,7 +23,7 @@ package rr
          if(role=="street") { p.minW=10; p.minH=14; p.maxW=23; p.maxH=23; p.weight=3.5; }
          return p;
       }
-      public function create(theme:String,form:String):Object
+      public function create(theme:String,form:String,modern:Boolean=false):Object
       {
          sceneId=theme;
          var rooms:Array=[],bag:Array,count:int,main:String;
@@ -88,6 +88,18 @@ package rr
          for(i=0;i<masses;i++) rooms.push({role:"mass",minW:5,minH:3,
             maxW:theme=="mane"?18:(theme=="plant"?28:38),maxH:theme=="mane"?6:(theme=="sewer"?17:11),
             weight:theme=="mane"?0.8+rnd():1.6+rnd()*1.8});
+         if(modern)
+         {
+            // Area is bounded in addition to width/height: a long slab and a
+            // short footing cannot both silently become a giant rectangle.
+            var massBudget:int=theme=="mane"?40:(theme=="plant"?65:(theme=="stable"?95:125));
+            for each(var item:Object in rooms) if(item.role=="mass")
+            {
+               item.maxArea=Math.max(18,int(massBudget/Math.max(1,masses)));
+               item.maxW=theme=="mane"?13:(theme=="plant"?20:24);
+               item.maxH=theme=="sewer"?9:7; item.weight*=0.55;
+            }
+         }
          for(var i:int=0;i<rooms.length;i++) rooms[i].uid=i;
          return {theme:theme,form:form,main:main,rooms:rooms,vertical:vertical,extra:extra,levels:levels,density:density,
             requested:count,variant:wide?"large-and-small":"compact-cluster"};

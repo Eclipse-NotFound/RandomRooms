@@ -1,0 +1,187 @@
+{
+  "appId": "pferr-style-0a20e9fc04de4535a2d0f309720e8205",
+  "status": "complete",
+  "startedUtc": "2026-09-28T13:41:12.2697373Z",
+  "completedUtc": "2026-09-28T13:57:13.8669417Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-growth-plant",
+    "rrstyle-growth-stable",
+    "rrstyle-growth-sewer",
+    "rrstyle-growth-mane"
+  ],
+  "roomIds": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "prototype-a.xml": "DCB949F52E4344803BDBE3C826B392FBD8084D9F7084F8277FB066E9A5ED41B3",
+    "prototype-c.xml": "B3924528DB2DC26461394414DC8F9327472D20727560A937A1D4AED72AA03CA4",
+    "development/RandomRoomsMod.swf": "2FE250215885C6B4023357F7948E8A92928EC62B8AE8970A675B936D1103D976",
+    "test-local/loader-manifest.txt": "0C4CD26ED5D4FAC3C51DE8996521619F22BF61B4D7396CC66848A29F043659A2"
+  },
+  "hostSha256": "C631CBF3511B6EE303F533D08D51511FE0EB702F43E5DB17F5241D8576C64867",
+  "navigationProbe": true,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": true,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": true,
+  "physicalPass": true,
+  "developmentSwf": "build/RandomRooms-v13-2-final.swf",
+  "nativeLoaderSmoke": false,
+  "runtimeArtifacts": {
+    "rrstyle-growth-plant-pool.xml": "16723B8C354338F5AB4973FA6351844CD59D8C4AE822E4DCD4A5B5D1292C3F9D",
+    "rrstyle-growth-plant-layout.xml": "1B599884DCD02F1874E1753A4799A0E1D3472C26F056158E9CC1B8C1C6555EA5",
+    "rrstyle-growth-plant-topology.json": "5C50FF6ACDA38F112B9C3AC81BE29C7DEE76391F2D507C8285A83941DE9C55D3",
+    "rrstyle-growth-stable-pool.xml": "0C9CBECBB28CD04ACF0C6104C0AF57FDDC5DEA21EE9D664CAC1058C06A8CC2CF",
+    "rrstyle-growth-stable-layout.xml": "6C3E11B4797C991E448A4FEF85246FFEEA60BFCAB77258D8CCD1113B768A96E3",
+    "rrstyle-growth-stable-topology.json": "A46EC1D473ADF948A31B18FA4506DD89D81717384242B71949DB18DA61C42032",
+    "rrstyle-growth-sewer-pool.xml": "E0054F37003135DA7F1618598E2DC305657C8DF235EFF19896E775D348989346",
+    "rrstyle-growth-sewer-layout.xml": "140F3DC47EAC9C9B2796D4963FE83F31AA5E5D1C5C7F37C2898DA8A2AD8B55A3",
+    "rrstyle-growth-sewer-topology.json": "2A73DBC3B9F402D984445A63674E0BD333669427DF9BFAFF33ED7EF42CD08C7F",
+    "rrstyle-growth-mane-pool.xml": "3951262C703DB2037F805BD9CF8858706DB7C30B8C12436B92257A2474AF8161",
+    "rrstyle-growth-mane-layout.xml": "2B4C3A8B1DC0563369AB5221ECA2A6E0C8A34B0F80FAE14DE8DD977121717880",
+    "rrstyle-growth-mane-topology.json": "76C87762428263145674204635639ACA34F9C1C665D10454C7F769B516BDEF4F",
+    "production-diag.log": "FEB211A0279FE4236B5151577F299F9D27577851ABDB1653B6F418DADE4938DE",
+    "production-version.json": "92EF89A391C2D569B85BEDF5A4557C27912D3F278EB406092ACA8179DD9450EA",
+    "rrstyle-growth-mane-after-growth-layout.xml": "7459B6E13BEFB5B538986F5706A2AE909629AE5DA8C26AC837E8A954D2E5A740",
+    "rrstyle-growth-mane-after-growth-pool.xml": "1B98E9372F06EA12B5BAA24DAC72682F01327515BED0E5E03A93208A88C43869",
+    "rrstyle-growth-mane-after-growth-topology.json": "BAFE2A75A33F3B836E6186622020F503C5E21A99058EEBB06FC0E38FB84F53F0",
+    "rrstyle-growth-mane-navigation.json": "415F5AA0345EEAD441D658CEF88974F84909A23064FB4EBED7E9357F0FD0989D",
+    "rrstyle-growth-plant-after-growth-layout.xml": "A68D4FBA275948830F38FDA6E1A4A7FCC23A3E242248A4524D38CF6E82F6A810",
+    "rrstyle-growth-plant-after-growth-pool.xml": "F35D21396F4D4CC6FCCDD779B4E541AE41A432F1D95FB4A59C9505A2622FDAF9",
+    "rrstyle-growth-plant-after-growth-topology.json": "2B0A0CA2343388846D07D2884D9C0716A2C55106EC0DCCB46D80FF855BB8A27B",
+    "rrstyle-growth-plant-navigation.json": "841507C3539247FE6E098B5120F1CDA75EA6E43100C2D1AD6722D12F6BBEC4C4",
+    "rrstyle-growth-sewer-after-growth-layout.xml": "89CC8A3ED1DE8347D64856E50DB6194FC1C61467020CB2F40C439A425A380FDB",
+    "rrstyle-growth-sewer-after-growth-pool.xml": "C8B0D5805A70C6045C4758566D869A10BC9E65AFC894D8923EACE47A8D06AF59",
+    "rrstyle-growth-sewer-after-growth-topology.json": "2512937484BB5AEBF843B246D8B491E493719D04E765E5378D3A838F25260562",
+    "rrstyle-growth-sewer-navigation.json": "B538BA012129386923C3E555A9322BE862AD925C3ACCF5FA8C81CB813C5DBDD0",
+    "rrstyle-growth-stable-after-growth-layout.xml": "CA1FD1CE871C879299F16115C38937CD9D8506B6C752170E5DFB49251918F724",
+    "rrstyle-growth-stable-after-growth-pool.xml": "53A00AABEB3AE9E03D307B448EFE9086213643363BBFA8EA5B63857057575CC8",
+    "rrstyle-growth-stable-after-growth-topology.json": "92365F3A6F06E6D77D260FB4B3DAE508BAF9837E2913D4FFF5384FDDCB52F613",
+    "rrstyle-growth-stable-navigation.json": "2F6CDA5B38727DB225AC12574EF0D97760376BCA0C326B652F8EB0D424A430EF",
+    "startup-readiness.json": "F495FF068C93EC92F2577C780DA40ECFFE5DF7B00CC795BADBAA1CBFBAA63778"
+  },
+  "topology": [
+    {
+      "case": "rrstyle-growth-plant",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "plant": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-growth-stable",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "stable": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-growth-sewer",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "sewer": 25
+      },
+      "issues": []
+    },
+    {
+      "case": "rrstyle-growth-mane",
+      "poolRooms": 25,
+      "generatedPoolRooms": 25,
+      "themeCounts": {
+        "mane": 25
+      },
+      "issues": []
+    }
+  ],
+  "movement": [],
+  "navigation": [
+    {
+      "case": "rrstyle-growth-plant",
+      "success": true,
+      "completed": 0,
+      "targets": 0,
+      "frames": 5458,
+      "milestones": 4
+    },
+    {
+      "case": "rrstyle-growth-stable",
+      "success": true,
+      "completed": 0,
+      "targets": 0,
+      "frames": 5371,
+      "milestones": 4
+    },
+    {
+      "case": "rrstyle-growth-sewer",
+      "success": true,
+      "completed": 0,
+      "targets": 0,
+      "frames": 6837,
+      "milestones": 4
+    },
+    {
+      "case": "rrstyle-growth-mane",
+      "success": true,
+      "completed": 0,
+      "targets": 0,
+      "frames": 5400,
+      "milestones": 4
+    }
+  ],
+  "casesSha256": "23BFE69D5E2DC5EBA955013862470A46668EEE8F8FD8976C6F5846B7762F3062",
+  "driverSha256": "5AA66B6ACCD9DA3EC5DD8C1794D249AA747CFAB770F4D6704C131E2FE0A8E618",
+  "runnerLogSha256": "F199D17B852105C810DC42357414D81177C3B7A53A55FEA853E26F7E04799D69",
+  "captured": {
+    "rrstyle-growth-plant-stage.png": "5E302207F2A999AD48A0FF75B4454B6637DA791BB4D61AD0CBBF0D140285A5F6",
+    "rrstyle-growth-plant-room.png": "BEC06EE3C4E8CA5BE4E7C4F503C33FD78676E9D2C142FABE4EA335C89D360E38",
+    "rrstyle-growth-stable-stage.png": "0AF680624E06D10F92711F31383EA014AC997853B66BA20B32153254015964D2",
+    "rrstyle-growth-stable-room.png": "676A45D962C6AE45A342210B7356F13227ECF67AE3D686DDDD7D739918453D3D",
+    "rrstyle-growth-sewer-stage.png": "06A7F1C543F1F842796D31A09DCA9995BFCD43D707D206C8F7810EBB87A2CF37",
+    "rrstyle-growth-sewer-room.png": "D669C1B20C73303D6F360A1A9777DD53F39330E9AB02FC18131F8E9FE48764E7",
+    "rrstyle-growth-mane-stage.png": "3C3ED242CE44EF14333C00F659CE03A964A78F4AAE54F7598CC9D67D8AD9F197",
+    "rrstyle-growth-mane-room.png": "5632D3335CA0A65837CAD2FBE28BB72E0004EBF43D1200C3784D4E6934770FA4",
+    "rrstyle-growth-mane-new-column.png": "097624D6613A74020AE9CED59EFFF6EB19BB9CBAFB6046544828126BCBAB9055",
+    "rrstyle-growth-mane-new-row.png": "B2ED61E40E594A09C57C031F9BD2166E626CCFAAC2A0DC570C6769CC62978346",
+    "rrstyle-growth-mane-return-column.png": "024A2BAECB1AC48F7B3D242B51AF360FF44104A72BB3081DA967ACC951FBACF6",
+    "rrstyle-growth-mane-return-row.png": "1F0F0F2A2CB12208ACE6E74CF456FFE680B78FEA3B011EFEDF62CCCBBFBF099D",
+    "rrstyle-growth-plant-new-column.png": "5EBAA1D55AA5BED32D7D1A9B1C570D871951EC007916FC56435D740316EBEF5F",
+    "rrstyle-growth-plant-new-row.png": "61FA15FB395B22FC8675133EE13130C844005C665BFF0C8EA4EA7D4366EABB67",
+    "rrstyle-growth-plant-return-column.png": "6FFB6F88FEFD4166039557696908247B8A209EE5A4BE179893656EAEA8C37C51",
+    "rrstyle-growth-plant-return-row.png": "DD95FD21EEB19ECD5DFBACBF7A6339093F07C0F940E4469826C88C6273F7BBAA",
+    "rrstyle-growth-sewer-new-column.png": "9C3D79A12C54363C0F836F828E66D252CEA048D55CE5394B53C04CBC83B9310F",
+    "rrstyle-growth-sewer-new-row.png": "B44BDD67941CBEF1F4DAD12638A2A544FCD3FBC19F8091EB6D6C73918FBFE3EA",
+    "rrstyle-growth-sewer-return-column.png": "89F139DC997B7D39C96EDCB9FC88D46CFC9607964F8119E342F117C3464DF6E4",
+    "rrstyle-growth-sewer-return-row.png": "83F60419C2725CF0397DDCD2ED2D9E70039123C732A879117BD54ADFA98830D2",
+    "rrstyle-growth-stable-new-column.png": "754DE297D5337E228E84210A0B324E63D55C6C8F86BE1A48B433D17B8EAE573C",
+    "rrstyle-growth-stable-new-row.png": "9647EB4D562FEA5774FCE099028BC89214F92E5703681D26F3BE870526D31243",
+    "rrstyle-growth-stable-return-column.png": "1D49E7EEC245E966406364D90D8A32111BA9D6675990A10A4A01BD47C7E2349C",
+    "rrstyle-growth-stable-return-row.png": "1B2CB54E0A630B27464E6C8B97828927DC6E9B51A72079D99FE23DE8472A80F5"
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "candidateSHA256": "2fe250215885c6b4023357f7948e8a92928ec62b8ae8970a675b936d1103d976",
+  "releaseEvidenceSHA256": "6263ce03e471f6600d90ffe47e8787513c3f8fe688f444b5c5a4850019bb6476",
+  "algorithmEvidenceSHA256": "5c3506c571929ce74302bc1a112b7149eb9a6743fde82537128ca16435862f12",
+  "native": {
+    "population-final": {
+      "appId": "pferr-style-7042ac6206584d4a8ade7d15daa569bf",
+      "cases": [
+        "rrstyle-navigation-plant",
+        "rrstyle-navigation-stable",
+        "rrstyle-navigation-sewer",
+        "rrstyle-navigation-mane"
+      ],
+      "manifestSHA256": "54fbf9c47b40368d3a030d28f950a170be1b4472ef6f297c41a1d4975eb1c6ba"
+    },
+    "terminal-final": {
+      "appId": "pferr-style-f199a3f76a9b4a39a7c9a95e4de1b41b",
+      "cases": [
+        "rrstyle-single-plant"
+      ],
+      "manifestSHA256": "6408041f72b6933be2b541d36d1775d31a194b10c0abffcfa09bcedc439e401e"
+    },
+    "growth-final": {
+      "appId": "pferr-style-0a20e9fc04de4535a2d0f309720e8205",
+      "cases": [
+        "rrstyle-growth-plant",
+        "rrstyle-growth-stable",
+        "rrstyle-growth-sewer",
+        "rrstyle-growth-mane"
+      ],
+      "manifestSHA256": "c1af0a6b63889af33bf7a14d14ff311355be25c3075bc4a920733b9702dce45d"
+    },
+    "release-smoke": {
+      "appId": "pferr-style-ec8d3f575bca48dd92c2ff6ce80b9add",
+      "cases": [
+        "rrstyle-native-f1",
+        "rrstyle-native-f4",
+        "rrstyle-native-f5"
+      ],
+      "manifestSHA256": "fcd89c662d2fe8a9d593bfa78831bdea9ed690e912cd86479e3457d4f718246d"
+    }
+  },
+  "population": [
+    {
+      "caseId": "rrstyle-navigation-mane",
+      "rooms": 25,
+      "checks": {
+        "cacheTilesBroken": 3,
+        "ecology": 25,
+        "switches": 5,
+        "circuitsActivated": 0,
+        "terminalRobot": 2,
+        "stations": 8,
+        "lootCreated": 402,
+        "loot": 187,
+        "closedDoorTiles": 49,
+        "slimeMines": 0,
+        "terminalLock": 5,
+        "disarm": 4,
+        "hiddenCaches": 1,
+        "npc": 0
+      }
+    },
+    {
+      "caseId": "rrstyle-navigation-plant",
+      "rooms": 42,
+      "checks": {
+        "cacheTilesBroken": 9,
+        "ecology": 42,
+        "switches": 20,
+        "circuitsActivated": 1,
+        "terminalRobot": 5,
+        "stations": 24,
+        "lootCreated": 785,
+        "loot": 311,
+        "closedDoorTiles": 90,
+        "slimeMines": 0,
+        "terminalLock": 11,
+        "disarm": 9,
+        "hiddenCaches": 3,
+        "npc": 1
+      }
+    },
+    {
+      "caseId": "rrstyle-navigation-sewer",
+      "rooms": 30,
+      "checks": {
+        "cacheTilesBroken": 15,
+        "ecology": 30,
+        "switches": 7,
+        "circuitsActivated": 0,
+        "terminalRobot": 0,
+        "stations": 16,
+        "lootCreated": 421,
+        "loot": 168,
+        "closedDoorTiles": 37,
+        "slimeMines": 1,
+        "terminalLock": 0,
+        "disarm": 3,
+        "hiddenCaches": 5,
+        "npc": 0
+      }
+    },
+    {
+      "caseId": "rrstyle-navigation-stable",
+      "rooms": 25,
+      "checks": {
+        "cacheTilesBroken": 3,
+        "ecology": 25,
+        "switches": 8,
+        "circuitsActivated": 2,
+        "terminalRobot": 4,
+        "stations": 21,
+        "lootCreated": 555,
+        "loot": 215,
+        "closedDoorTiles": 67,
+        "slimeMines": 2,
+        "terminalLock": 10,
+        "disarm": 6,
+        "hiddenCaches": 1,
+        "npc": 2
+      }
+    }
+  ],
+  "growth": [
+    {
+      "caseId": "rrstyle-growth-mane",
+      "scene": "mane",
+      "frames": 5400,
+      "milestones": 4,
+      "success": true,
+      "wetFrames": 0,
+      "reason": "Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged",
+      "persistentObjects": 304,
+      "cacheStayedEmpty": false
+    },
+    {
+      "caseId": "rrstyle-growth-plant",
+      "scene": "plant",
+      "frames": 5458,
+      "milestones": 4,
+      "success": true,
+      "wetFrames": 0,
+      "reason": "Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged",
+      "persistentObjects": 330,
+      "cacheStayedEmpty": true
+    },
+    {
+      "caseId": "rrstyle-growth-sewer",
+      "scene": "sewer",
+      "frames": 6837,
+      "milestones": 4,
+      "success": true,
+      "wetFrames": 0,
+      "reason": "Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged",
+      "persistentObjects": 261,
+      "cacheStayedEmpty": true
+    },
+    {
+      "caseId": "rrstyle-growth-stable",
+      "scene": "stable",
+      "frames": 5371,
+      "milestones": 4,
+      "success": true,
+      "wetFrames": 0,
+      "reason": "Normal movement entered and returned from both new column and new row; original XML and mirrors unchanged",
+      "persistentObjects": 363,
+      "cacheStayedEmpty": true
+    }
+  ],
+  "scope": "Exact main module bytes; separate isolated native content, movement and normal-loader UI tests. No real save access; no long combat balance test."
+}

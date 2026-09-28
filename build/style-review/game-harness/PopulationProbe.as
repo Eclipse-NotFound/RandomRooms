@@ -20,10 +20,32 @@ package
       public static function begin(w:*,directory:File,caseId:String):void
       {
          var records:Array=[],ecologies:Array=[],objects:Array=[],circuits:Array=[],counts:Object={},checks:Object={loot:0,lootCreated:0,terminalRobot:0,terminalLock:0,disarm:0,switches:0,stations:0,npc:0,circuitsActivated:0,ecology:0,slimeMines:0};
+         checks.hiddenCaches=0; checks.cacheTilesBroken=0; checks.closedDoorTiles=0;
          var blueprint:String=w.land.act.allroom.toXMLString();
          for(var x:int=0;x<w.land.maxLocX;x++) for(var y:int=0;y<w.land.maxLocY;y++)
          {
             var loc:*=w.land.locs[x][y][0];
+            for each(var doorXML:XML in loc.room.xml.obj) if(doorXML.@rrFixture=="door")
+            {
+               var doorX:int=loc.mirror?47-int(doorXML.@x):int(doorXML.@x);
+               var doorTile:*=loc.getTile(doorX,int(doorXML.@y));
+               require(doorTile.door!=null,"planned door did not become native collision");
+               if(doorTile.phis==1) checks.closedDoorTiles++;
+            }
+            for each(var cacheXML:XML in loc.room.xml.rrPlan.cache)
+            {
+               var face:int=loc.mirror?47-int(cacheXML.@face):int(cacheXML.@face);
+               for(var cy:int=int(cacheXML.@top);cy<=int(cacheXML.@floor);cy++)
+               {
+                  var tile:*=loc.getTile(face,cy);
+                  require(tile.phis==1 && tile.hp==40 && !tile.indestruct,"cache face not native breakable F");
+                  loc.hitTile(tile,100,(face+0.5)*40,(cy+0.5)*40,4);
+                  require(tile.phis==0,"native damage failed to open cache"); checks.cacheTilesBroken++;
+               }
+               var cacheObj:*=w.land.uidObjs[String(cacheXML.@uid)];
+               require(cacheObj!=null && cacheObj.inter!=null,"cache reward missing after wall break");
+               checks.hiddenCaches++;
+            }
             if(String(loc.room.xml.@rrGen)=="space-v11")
             {
                require(int(loc.room.xml.@rrEcology)==loc.tipEnemy,"host rerolled ecology at "+x+","+y);
@@ -47,7 +69,7 @@ package
                   require(String(xml.@tr)=="10" && getQualifiedClassName(obj)=="fe.unit::UnitSlime" && obj.levitPoss==false,"slime mine subtype not applied");
                   checks.slimeMines++;
                }
-               if(kind=="loot" || kind=="reward") require(obj.inter!=null && String(obj.inter.cont)!="", "container "+id);
+               if(kind=="loot" || kind=="reward" || kind=="cache") require(obj.inter!=null && String(obj.inter.cont)!="", "container "+id);
                if(kind=="trigger")
                {
                   var paired:Boolean=false;
@@ -93,7 +115,7 @@ package
          for each(entry in objects)
          {
             obj=entry.obj; xml=entry.xml; loc=entry.loc; id=String(xml.@id); kind=String(xml.@rrContent);
-            if(kind=="loot" || kind=="reward" || id=="term3")
+            if(kind=="loot" || kind=="reward" || kind=="cache" || id=="term3")
             {
                var before:int=lootCount(loc);
                obj.inter.command("unlock"); obj.inter.actOsn();

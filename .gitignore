@@ -66,3 +66,5 @@ build/editor/
 exports/
 design/editor-runtime-20260928/probe-app/
 !design/editor-runtime-20260928/**/*.log
+build/spatial-v132/
+__pycache__/

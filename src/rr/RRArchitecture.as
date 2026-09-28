@@ -27,6 +27,9 @@ package rr
       public var partitionInfo:Object;
       public var masses:Array;
       public var merges:Array;
+      public var modern:Boolean;
+      public var caches:Array=[];
+      public var hiddenCells:Object={};
       private var rnd:Function;
       private var volumes:Array;
       private var tallBias:Number;
@@ -41,6 +44,7 @@ package rr
       public function build(biome:String,requested:String="", boundary:Array=null,context:Object=null):void
       {
          theme=biome;
+         modern=context && context.contentVersion=="13";
          scene=RRScene.profile(theme);
          sceneForm=scene.forms[pick(0,scene.forms.length-1)];
          if(context && context.form && scene.forms.indexOf(String(context.form))>=0) sceneForm=String(context.form);
@@ -57,6 +61,7 @@ package rr
          ports=boundary!=null?boundary.concat():RRPorts.sample(rnd);
          grid=[]; regions=[]; ladders=[]; stairs=[]; doors=[]; hatches=[]; windows=[]; pools=[];
          reserved={}; links=[]; partitionInfo=null; masses=[]; merges=[];
+         caches=[]; hiddenCells={};
          for (var y:int=0;y<25;y++)
          {
             grid[y]=[];
@@ -67,7 +72,7 @@ package rr
          if(context && context.partition=="rules")
          {
             var partition:RRPartitionPlan=new RRPartitionPlan(rnd);
-            volumes=partition.build(theme,sceneForm,ports);
+            volumes=partition.build(theme,sceneForm,ports,modern);
             partitionInfo=partition.info;
             masses=partition.masses;
          }
@@ -103,6 +108,7 @@ package rr
          for (y=1;y<25;y++) for (x=0;x<48;x++)
             if (solid(x,y) && !solid(x,y-1)) grid[y][x]=trim;
          dressMaterials();
+         if(modern) new RRMassDetail(this,rnd).build();
       }
       private function purpose(r:Object):String
       {
@@ -486,6 +492,7 @@ package rr
                landingToFloor(e.b,e.x1,f);
                var outdoors:Boolean=e.a.role=="street" || e.b.role=="street" || e.a.role=="roof" || e.b.role=="roof";
                var chance:Number=theme=="sewer"?0.28:(theme=="stable"?0.88:0.7);
+               if(modern) chance=theme=="sewer"?0.55:0.92;
                if(merged) e.kind="merge";
                else if (rnd()<chance && !outdoors && support(e.x,f)) { door(e.x,f,e.a.bg,e.a.role,e.b.role); e.kind="door"; }
                else e.kind="opening";
@@ -507,6 +514,18 @@ package rr
                if(!distinct[roomGroups[i]]) { distinct[roomGroups[i]]=true; rooms++; }
             }
             partitionInfo.rooms=rooms; partitionInfo.merges=merges.length;
+            if(modern)
+            {
+               var finish:Object={};
+               for each(var volume:Object in volumes)
+               {
+                  var area:int=(volume.x1-volume.x0+1)*(volume.floor-volume.top+1),group:String=String(volume.room);
+                  if(!finish[group]) finish[group]={top:volume.top,floor:volume.floor,area:0};
+                  var material:Object=finish[group]; material.top=Math.min(material.top,volume.top); material.floor=Math.max(material.floor,volume.floor);
+                  if(area>material.area) { material.area=area; material.bg=volume.bg; material.role=volume.role; }
+               }
+               for each(volume in volumes) { volume.finish=finish[String(volume.room)]; volume.bg=volume.finish.bg; }
+            }
          }
       }
       private function volumeAt(x:int,y:int):Object
@@ -653,6 +672,7 @@ package rr
       {
          for each(var r:Object in volumes)
          {
+            var ref:Object=modern && r.hasOwnProperty("finish")?r.finish:r;
             for(var y:int=r.top;y<=r.floor;y++) for(var x:int=r.x0;x<=r.x1;x++)
             {
                var code:String=String(grid[y][x]);
@@ -660,14 +680,14 @@ package rr
                var bg:String=r.bg;
                if(theme=="stable")
                {
-                  if(y<=r.top+1) bg="R";
-                  else if(y>=r.floor-1) bg="P";
+                  if(y<=ref.top+1) bg="R";
+                  else if(y>=ref.floor-1) bg="P";
                   else if(r.role=="control" && x>=r.x0+2 && x<=r.x1-2) bg="O";
                }
                else if(theme=="sewer" && (r.role=="canal" || r.role=="service"))
-                  bg=y>=r.floor-3?"E":(x<r.x0+3 || x>r.x1-3?"S":r.bg);
+                  bg=y>=ref.floor-3?"E":(x<r.x0+3 || x>r.x1-3?"S":r.bg);
                else if(theme=="plant" && (r.role=="workshop" || r.role=="warehouse"))
-                  bg=y>=r.floor-3?"D":r.bg;
+                  bg=y>=ref.floor-3?"D":r.bg;
                // Replace only the background symbol. Water, stairs and shelves
                // retain exactly the geometry audited immediately above.
                var extra:String=code.substr(1);

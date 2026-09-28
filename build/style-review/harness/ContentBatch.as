@@ -57,6 +57,7 @@ package
             {
                var id:String=String(point.@id),key:String=String(point.@zone);
                totals[key]=Number(totals[key] || 0)+Number(point.@cost);
+               if(Number(point.@cost)>0) require(int(point.@sector)>=0,"unbudgeted ceiling or flying threat");
                result.counts[id]=int(result.counts[id])+1;
                if(id.indexOf("turret")>=0) require(point.@kind=="security","turret leaked from native main pool");
                if(id=="msp" || id=="spritebot" || id=="vortex" || id=="mine") require(point.@kind=="special","special threat escaped special placement");
@@ -78,6 +79,26 @@ package
                   require(String(room.a[yy]).split(".")[xx].indexOf("А")<0,"terminal operator is on a ladder snap line");
             }
             result.turrets+=room.rrPlan.gun.length();
+            var defenders:Array=[];
+            for each(point in room.rrPlan.point) if(point.@kind=="enemy" || point.@kind=="security") defenders.push(point);
+            for(var di:int=0;di<defenders.length;di++) for(var dj:int=0;dj<di;dj++)
+            {
+               var dx:Number=Number(defenders[di].@x)-Number(defenders[dj].@x),dy:Number=Number(defenders[di].@y)-Number(defenders[dj].@y);
+               require(dx*dx+dy*dy>=16,"defenders clustered inside 160px");
+            }
+            for each(var encounter:XML in room.rrPlan.encounter)
+            {
+               var sum:Number=0;
+               for each(point in room.rrPlan.point) if(point.@sector==encounter.@id) sum+=Number(point.@cost);
+               require(Math.abs(sum-Number(encounter.@pressure))<0.011 && sum<=Number(encounter.@limit)+0.011,"open-bypass encounter budget overflow");
+            }
+            for each(var cache:XML in room.rrPlan.cache)
+            {
+               for(var cy:int=int(cache.@top);cy<=int(cache.@floor);cy++) require(String(room.a[cy]).split('.')[int(cache.@face)].charAt(0)=="F","cache face lost native weak material");
+               var matched:int=0;
+               for each(var cached:XML in room.obj) if(String(cached.@uid)==String(cache.@uid)) matched++;
+               require(matched==1,"cache has no native reward");
+            }
             if(job.independence)
             {
                var ctx:Object={partition:"rules",seed:uint(room.@rrSeed),difficulty:8+2*run.depth,parity:job.x+job.y,city:map.city(job.x,job.y),contentVersion:"13",danger:45,value:0};

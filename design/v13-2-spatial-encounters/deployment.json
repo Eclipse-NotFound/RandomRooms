@@ -1,0 +1,22 @@
+{
+  "status": "installed-and-smoke-passed",
+  "before": "356ad62f2340101f0cc0f39803a0af3e33fbb33b3227e7614d076ad6745cf2bf",
+  "after": "2fe250215885c6b4023357f7948e8a92928ec62b8ae8970a675b936d1103d976",
+  "bytes": 94959,
+  "backup": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\build\\release-backups\\spaces-v13-2-20260928-215805\\RandomRoomsMod.swf",
+  "target": "D:\\Program Files\\Steam\\steamapps\\common\\Remains\\mods\\RandomRooms\\release\\RandomRoomsMod.swf",
+  "unchangedFiles": {
+    "pfe.swf": "c631cbf3511b6ee303f533d08d51511fe0eb702f43e5db17f5241d8576c64867",
+    "application.xml": "70dd3b085e5f6c66c03693cf68ce5e93a4e4136dd745d40d1a5b2a49863ba236",
+    "mods/loader-manifest.txt": "2d4a64a608a6482168fbfe9e8cd7bb53f006ab1f8993fcc737cf9d32f2293592",
+    "Editor.swf": "e99e231f83128ea24cd13b2ae36b0dd294e5180a16f54ba3c7b3cb8fa24d99fd",
+    "Editor/Enhancements/EditorTools.swf": "d7ad493f19867c96b600599151275877349a7dbf2155794be42483656ae0f002",
+    "Editor/Enhancements/NativeScene.swf": "fcb620b9f4dc25eb3b4b54d420dfdf2549894472e8d0a331f06cdc321fc7cba7",
+    "mods/RandomRooms/release/RandomRoomsEditor.swf": "fb1537f54b2c32af02aca771cb09366441fb74ca01ee3a6099e35c4d3a35dfd8"
+  },
+  "authorization": "Continued user-authorized RandomRooms implementation and installation; latest requested encounter/layout/mass improvements.",
+  "algorithmEvidenceSHA256": "5c3506c571929ce74302bc1a112b7149eb9a6743fde82537128ca16435862f12",
+  "installedUTC": "2026-09-28T13:58:05.492520+00:00",
+  "smokeAppId": "pferr-style-ec8d3f575bca48dd92c2ff6ce80b9add",
+  "verifiedUTC": "2026-09-28T14:00:48.479124+00:00"
+}

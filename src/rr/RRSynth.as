@@ -74,7 +74,7 @@ package rr
          }
          if(population.contentPlan)
          {
-            room.@rrRevision="13"; room.@rrDanger=population.contentPlan.danger; room.@rrValue=population.contentPlan.value;
+            room.@rrRevision="13.2"; room.@rrDanger=population.contentPlan.danger; room.@rrValue=population.contentPlan.value;
             room.@rrContentModel="danger-value-1";
          }
          // All three native beams have identical shelf collision; the plan
@@ -114,6 +114,7 @@ package rr
             meta.appendChild(space);
          }
          for each(r in plan.masses) meta.appendChild(<mass x0={r.x0} top={r.top} x1={r.x1} floor={r.floor}/>);
+         for each(r in plan.caches) meta.appendChild(<cache x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} face={r.face} direction={r.dir} uid={r.uid} material="F" optional="true"/>);
          for each(r in plan.merges) meta.appendChild(<merge a={r.a} b={r.b} x0={r.x0} top={r.top} x1={r.x1} floor={r.floor} axis={r.axis}/>);
          for each (var e:Object in plan.links)
             meta.appendChild(<link a={e.a} b={e.b} kind={e.kind} x={e.x} y={e.y}/>);

@@ -209,7 +209,7 @@ package rr
                   for (x=r.x0;x+5<=r.x1;x+=6) facility("hkonstr",x,r.top,r);
                   // Fixed equipment belongs behind the accessible work floor;
                   // traffic clearance must not erase the whole machine line.
-                  for (x=r.x0+2;x+3<=r.x1;x+=7)
+                  for (x=r.x0+2;x+3<=r.x1;x+=plan.modern?6+int(rnd()*5):7)
                      facility(r.role=="warehouse"?"storage":"zavod1",x,r.floor-2,r);
                }
                facility("light4",r.x0+int(w/2)-1,r.top,r);
@@ -246,6 +246,13 @@ package rr
       {
          var extra:Object={};
          var a:Array;
+         if(plan.modern && rnd()<0.5)
+         {
+            // Reverse a semantic arrangement, including its back-layer props.
+            // Keep the native sprites and scene identity, vary their relation.
+            for each(a in g.obj) a[1]=g.w-OBJECTS[a[0]][0]-a[1];
+            for each(a in g.back) a[1]=g.w-BACKS[a[0]][0]-a[1];
+         }
          for each (a in g.obj)
          {
             if (!fitsObject(a[0],x+a[1],f+a[2],extra)) return false;
@@ -277,6 +284,7 @@ package rr
             if (r.role=="shaft") continue;
             var width:int=r.x1-r.x0+1;
             var groups:int=width>26 ? 3 : (width>11?2:1);
+            if(plan.modern && width>11) groups=Math.max(1,groups+(rnd()<0.4?-1:0));
             var placedGroups:int=0;
             for (var n:int=0;n<groups;n++)
             {

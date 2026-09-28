@@ -782,7 +782,7 @@ package
             {
                var input:FileStream=new FileStream(); input.open(source,FileMode.READ);
                var contents:String=input.readUTFBytes(input.bytesAvailable); input.close();
-               var match:Array=contents.match(/\[RR:v13\.1-editor\]/);
+               var match:Array=contents.match(/\[RR:v13\.2-spaces\]/);
                if(!match) throw new Error("Native loader version marker missing");
                data.runtimeTag=String(match[0]); data.loadMode="native-loader";
                data.loaderStatus=SharedObject.getLocal("ModLoader","/").data;
@@ -918,7 +918,7 @@ package
          var pool:XML = w.game.lands[String(cases[index].@landId)].allroom as XML;
          if(String(cases[index].@generatorVersion)!="") for each(var checkRoom:XML in pool.room)
          {
-            var expectedRevision:String=String(cases[index].@generatorVersion)=="13"?"13":(String(cases[index].@generatorVersion)=="12.2"?"12-prototype-2":"12-prototype-3");
+            var expectedRevision:String=String(cases[index].@generatorVersion)=="13"?"13.2":(String(cases[index].@generatorVersion)=="12.2"?"12-prototype-2":"12-prototype-3");
             if(String(checkRoom.@rrRevision)!=expectedRevision || String(checkRoom.@rrVersion)!=String(cases[index].@generatorVersion))
                throw new Error("Runtime used the wrong generator: "+checkRoom.@rrRevision);
          }

@@ -1,0 +1,150 @@
+{
+  "before": {
+    "source": "build\\spatial-v132\\baseline.xml",
+    "sha256": "6904908bbaa2d30d7b32bb39b2422feb64e72e9aad255191e254d83809abcc1f",
+    "scenes": {
+      "plant": {
+        "samples": 48,
+        "meanSolid": 0.18939035916824196,
+        "meanThick": 0.09837744171392565,
+        "meanDefenders": 4.020833333333333,
+        "closePairs": 37,
+        "minSpacing": 2.0,
+        "layouts": {
+          "sliced": 31,
+          "staggered": 3,
+          "storeys": 14
+        },
+        "meanRooms": 6.5,
+        "maxAttempts": 13,
+        "recesses": 0,
+        "caches": 0
+      },
+      "stable": {
+        "samples": 48,
+        "meanSolid": 0.28965816005040956,
+        "meanThick": 0.1894100504095778,
+        "meanDefenders": 2.75,
+        "closePairs": 22,
+        "minSpacing": 2.0,
+        "layouts": {
+          "sliced": 25,
+          "storeys": 23
+        },
+        "meanRooms": 8.1875,
+        "maxAttempts": 17,
+        "recesses": 0,
+        "caches": 0
+      },
+      "sewer": {
+        "samples": 48,
+        "meanSolid": 0.31334672337744174,
+        "meanThick": 0.25279615626969126,
+        "meanDefenders": 1.9375,
+        "closePairs": 23,
+        "minSpacing": 2.0,
+        "layouts": {
+          "sliced": 36,
+          "storeys": 9,
+          "staggered": 3
+        },
+        "meanRooms": 5.583333333333333,
+        "maxAttempts": 10,
+        "recesses": 0,
+        "caches": 0
+      },
+      "mane": {
+        "samples": 48,
+        "meanSolid": 0.11674936988027726,
+        "meanThick": 0.022802457466918714,
+        "meanDefenders": 3.25,
+        "closePairs": 31,
+        "minSpacing": 2.0,
+        "layouts": {
+          "sliced": 29,
+          "storeys": 19
+        },
+        "meanRooms": 6.166666666666667,
+        "maxAttempts": 20,
+        "recesses": 0,
+        "caches": 0
+      }
+    }
+  },
+  "after": {
+    "source": "build\\style-review\\content-batch\\rooms.xml",
+    "sha256": "3fa57b2b372975219c8f20cf17439b17ef66453081786bc2a9b5294f190b32f4",
+    "scenes": {
+      "plant": {
+        "samples": 48,
+        "meanSolid": 0.15609247006931318,
+        "meanThick": 0.043635790800252046,
+        "meanDefenders": 2.6458333333333335,
+        "closePairs": 0,
+        "minSpacing": 4.0,
+        "layouts": {
+          "staggered": 2,
+          "sliced": 15,
+          "wings": 23,
+          "storeys": 8
+        },
+        "meanRooms": 6.770833333333333,
+        "maxAttempts": 6,
+        "recesses": 10,
+        "caches": 3
+      },
+      "stable": {
+        "samples": 48,
+        "meanSolid": 0.19728654694391934,
+        "meanThick": 0.06992359798361689,
+        "meanDefenders": 2.0625,
+        "closePairs": 0,
+        "minSpacing": 4.0,
+        "layouts": {
+          "sliced": 10,
+          "wings": 24,
+          "storeys": 14
+        },
+        "meanRooms": 8.166666666666666,
+        "maxAttempts": 17,
+        "recesses": 12,
+        "caches": 6
+      },
+      "sewer": {
+        "samples": 48,
+        "meanSolid": 0.1950811279143037,
+        "meanThick": 0.10554505356017643,
+        "meanDefenders": 1.75,
+        "closePairs": 0,
+        "minSpacing": 4.0,
+        "layouts": {
+          "sliced": 26,
+          "wings": 15,
+          "staggered": 2,
+          "storeys": 5
+        },
+        "meanRooms": 6.3125,
+        "maxAttempts": 15,
+        "recesses": 15,
+        "caches": 7
+      },
+      "mane": {
+        "samples": 48,
+        "meanSolid": 0.09853497164461247,
+        "meanThick": 0.008034026465028356,
+        "meanDefenders": 1.7708333333333333,
+        "closePairs": 0,
+        "minSpacing": 4.0,
+        "layouts": {
+          "storeys": 13,
+          "sliced": 26,
+          "wings": 9
+        },
+        "meanRooms": 5.791666666666667,
+        "maxAttempts": 7,
+        "recesses": 1,
+        "caches": 1
+      }
+    }
+  }
+}

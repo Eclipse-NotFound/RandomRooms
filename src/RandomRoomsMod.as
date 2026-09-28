@@ -206,7 +206,7 @@ package
          // stopImmediatePropagation 无法阻止已先执行的捕获监听）
          st.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown, true);
          debugLayer=new RRDebugOverlay(st); debugLayer.enabled=config.debugDisplay;
-         diag.log("[RR] RandomRoomsMod v13.1 loaded <content=danger-value-1, legacy=12.2+12.3, growth=right+down, debug=Shift+F3, review=Shift+F5, fixtures=wall-height-1> stage bound (KEY_DOWN capture)");
+         diag.log("[RR] RandomRoomsMod v13.2 loaded <content=danger-value-1, encounters=sectors+spacing, layout=partial-storeys, masses=area-budget+recesses, legacy=12.2+12.3, growth=right+down, debug=Shift+F3, review=Shift+F5, fixtures=wall-height-1> stage bound (KEY_DOWN capture)");
       }
       
       private static function onUncaught(ev:*):void

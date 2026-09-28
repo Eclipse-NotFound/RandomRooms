@@ -17,6 +17,7 @@ package rr
       private var seed:RRSeed;
       private var context:Object;
       private var tactics:RRTactics;
+      private var encounters:RREncounters;
       private var enemies:int=0;
       private var specials:int=0;
       private var ambient:int=0;
@@ -34,6 +35,7 @@ package rr
          if(context.hasOwnProperty("danger")) danger=clamp(context.danger);
          if(context.hasOwnProperty("value")) value=clamp(context.value);
          if(peaceful) danger=0;
+         encounters=new RREncounters(p,tactics,danger);
          var byId:Object={},r:Object,z:Object,i:int=0;
          for each(r in p.regions) if(r.hasOwnProperty("id"))
          {
@@ -91,18 +93,23 @@ package rr
             }
             if(terminal && ["enemy","special","ambient","hazard","trigger","damager"].indexOf(kind)>=0 &&
                Math.abs(a.x-terminal.x)+Math.abs(a.y-terminal.y)<4) continue;
-            a.score=r.fork(a.x+","+a.y).next(); out.push(a);
+            a.score=r.fork(a.x+","+a.y).next();
+            if(kind=="enemy") a.score-=Math.min(12,encounters.separation(a))*0.07;
+            out.push(a);
          }
          out.sortOn("score",Array.NUMERIC); return out;
       }
       private function put(z:Object,id:String,a:Object,kind:String,mount:String="floor",cost:Number=0,attrs:Object=null,reason:String=""):XML
       {
          if(cost>0 && z.pressure+cost>z.limit+0.0001) return null;
+         if(!encounters.allows(a,kind,cost)) return null;
          if(RRPopulation.wallFixture(id)) mount="fixture";
          var o:XML=pop.put(id,a,kind,mount,attrs);
          o.@rrZone=z.id; o.@rrD=z.d; o.@rrV=z.v;
          z.pressure+=cost;
          var point:Object={uid:String(o.@uid),id:id,zone:z.id,x:a.x,y:a.y,mount:mount,kind:kind,cost:cost,reason:reason};
+         point.sector=encounters.record(a,kind,cost);
+         o.@rrSector=point.sector;
          if(mount=="fixture")
          {
             point.floorY=a.floorY; point.operator=a.operator;
@@ -115,7 +122,9 @@ package rr
       {
          if(cost>0 && z.pressure+cost>z.limit+0.0001) return null;
          var a:Array=choices(z,id,mount,kind,label || kind+":"+id);
-         return a.length?put(z,id,a[0],kind,mount,cost,attrs,reason):null;
+         for each(var pos:Object in a)
+         { var o:XML=put(z,id,pos,kind,mount,cost,attrs,reason); if(o) return o; }
+         return null;
       }
       public function build():void
       {
@@ -123,7 +132,9 @@ package rr
          var z:Object;
          if(!peaceful)
          {
-            for each(z in zones) major(z);
+            var order:Array=zones.concat();
+            order.sort(function(a:Object,b:Object):Number { return rng("encounter-order",a).next()-rng("encounter-order",b).next(); });
+            for each(z in order) major(z);
             for each(z in zones) wildlife(z);
             for each(z in zones) hazards(z);
             for each(z in zones) fixtures(z);
@@ -131,6 +142,7 @@ package rr
          }
          // Value rolls are deliberately last and never consume encounter RNG.
          for each(z in zones) { rewards(z); services(z); }
+         hiddenRewards();
          if(peaceful) for each(var o:XML in pop.objects) { o.@mine=0; if(pop.mood=="showroom") o.@lock=0; }
       }
       private function security():void
@@ -229,11 +241,11 @@ package rr
       {
          var r:RRSeed=rng("main",z);
          if(r.next()>=0.04+0.82*z.d/100) return;
-         var count:int=Math.min(5,1+int(z.d/42)+(r.next()<0.35?1:0));
+         var count:int=Math.min(3,1+int(z.d/48)+(r.next()<0.2?1:0));
          var ecologySeed:RRSeed=rng("main-model",z);
          var eco:RREcology=new RREcology(p.theme,pop.ecology.difficulty,0,function():Number { return ecologySeed.next(); });
          eco.type=pop.ecology.type;
-         for(var i:int=0;i<count && enemies<10;i++)
+         for(var i:int=0;i<count && enemies<8;i++)
          {
             var id:String=eco.large();
             // Native large() can itself return a turret. All turrets must pass
@@ -280,7 +292,7 @@ package rr
             else pos.score-=blind(pos)*1.5;
          }
          a.sortOn("score",Array.NUMERIC);
-         if(a.length && put(z,id,a[0],"special",mount,1.5,null,mount=="air"?"cache-patrol":"cache-blindspot")) specials++;
+         for each(pos in a) if(put(z,id,pos,"special",mount,1.5,null,mount=="air"?"cache-patrol":"cache-blindspot")) { specials++; break; }
       }
       private function hazards(z:Object):void
       {
@@ -299,7 +311,7 @@ package rr
                if(Math.abs(a.x-b.x)>=4 && Math.abs(a.x-b.x)<=8 && (weapon!="damshot" || Math.abs(a.y-b.y)<=1) && tactics.line(a.x+0.5,a.y+0.5,b.x+0.5,b.y+0.5))
                {
                   var group:String="rrc_"+seed.seed+"_"+z.id;
-                  put(z,weapon,b,"damager",mount,1,{allid:group,turn:b.x<a.x?1:-1},"paired-trap");
+                  if(!put(z,weapon,b,"damager",mount,1,{allid:group,turn:b.x<a.x?1:-1},"paired-trap")) continue;
                   put(z,id,a,"trigger","floor",0,{allid:group,res:""},"paired-trap"); return;
                }
          }
@@ -336,7 +348,7 @@ package rr
       private function fixtures(z:Object):void
       {
          var r:RRSeed=rng("fixtures",z),id:String="";
-         if(!reinforcement && z.d>=40 && rng("reinforcement",z).next()<0.08 && ["workshop","control","service","warehouse"].indexOf(z.role)>=0)
+         if(!reinforcement && z.d>=40 && rng("reinforcement",z).next()<0.035 && ["workshop","control","service","warehouse"].indexOf(z.role)>=0)
          {
             id=pop.ecology.hidden();
             if(id && add(z,id,"reinforcement","floor",2,null,"reinforcement","native-response-device")) reinforcement=true;
@@ -367,6 +379,7 @@ package rr
       }
       public function appendMetadata(meta:XML):void
       {
+         encounters.append(meta);
          for each(var z:Object in zones) meta.appendChild(<zone id={z.id} role={z.role} danger={z.d} value={z.v} pressure={z.pressure.toFixed(2)} limit={z.limit.toFixed(2)}/>);
          for each(var point:Object in points)
          {
@@ -380,6 +393,23 @@ package rr
             var control:XML=<control uid={terminal.uid} scope="location" operator={terminal.node} from={terminal.from} path={terminal.path.join(",")} model="terrain-walk-climb-cover"/>;
             for each(var entry:Object in terminal.entries) control.appendChild(<entry slot={entry.slot} state={entry.state}/>);
             meta.appendChild(control);
+         }
+      }
+      private function hiddenRewards():void
+      {
+         for each(var c:Object in p.caches)
+         {
+            var z:Object=null;
+            for each(var candidate:Object in zones)
+               if(candidate.regions.indexOf(c.parent)>=0) { z=candidate; break; }
+            if(!z) continue;
+            var r:RRSeed=rng("hidden-reward",z);
+            // The cavity and weak face belong to the geometry stream. V only
+            // chooses ordinary supplies versus a valuable native container.
+            var valuable:Boolean=r.next()<0.12+0.75*z.v/100;
+            var id:String=valuable?(r.next()<0.65?"safe":"weapbox"):"chest";
+            var o:XML=put(z,id,{x:c.x,y:c.y},"cache","floor",0,{mine:0},"breakable-wall-cache");
+            if(o) { o.@rrCacheFace=c.face; c.uid=String(o.@uid); }
          }
       }
    }

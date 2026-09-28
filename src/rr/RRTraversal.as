@@ -61,7 +61,7 @@ package rr
          var start:int=plan.spawn.y*48+plan.spawn.x;
          var reached:Object=flood(forward,start), returned:Object=flood(reverse,start);
          for (i=0;i<clear.length;i++)
-            if (clear[i] && stand[i] && (!reached[i] || !returned[i]))
+            if (clear[i] && stand[i] && !plan.hiddenCells[i] && (!reached[i] || !returned[i]))
                throw new Error((dry?"Dry ":"")+"floor lacks a walking/climbing return "+(i%48)+","+int(i/48));
          for (var p:int=0;p<22;p++) if (plan.ports[p]>=2)
          {

@@ -1,0 +1,96 @@
+{
+  "assets": {
+    "Editor/Enhancements/NativeScene.swf": "fcb620b9f4dc25eb3b4b54d420dfdf2549894472e8d0a331f06cdc321fc7cba7",
+    "texture.swf": "ef4842a1e78f8f8661e84590c82701c3ea54efb71245116bb7a712fed8985ed8",
+    "texture1.swf": "6646ccf91f912a7384875a5ed40a33c907041645f558a79277fc5f2dc8164678",
+    "sprite.swf": "49b459d129a16daa065d471cee5ebf9d59914d682a9f07e5a28caf2e52050246",
+    "sprite1.swf": "de792cbda95f06e55a91e0ca7604770f1ced6387a42026951a4bf0a70ec11e4a",
+    "text_zh.xml": "66da212793683b19e65e3973b726a94a2885d5032395af8a2e5a0fd20a17f895"
+  },
+  "cases": [
+    {
+      "id": "plant-before",
+      "sample": "plant-before.xml",
+      "region": "random_plant",
+      "difficulty": 12,
+      "scene": "plant"
+    },
+    {
+      "id": "plant-after",
+      "sample": "plant-after.xml",
+      "region": "random_plant",
+      "difficulty": 12,
+      "scene": "plant"
+    },
+    {
+      "id": "stable-before",
+      "sample": "stable-before.xml",
+      "region": "random_stable",
+      "difficulty": 8,
+      "scene": "stable"
+    },
+    {
+      "id": "stable-after",
+      "sample": "stable-after.xml",
+      "region": "random_stable",
+      "difficulty": 8,
+      "scene": "stable"
+    },
+    {
+      "id": "sewer-before",
+      "sample": "sewer-before.xml",
+      "region": "random_sewer",
+      "difficulty": 12,
+      "scene": "sewer"
+    },
+    {
+      "id": "sewer-after",
+      "sample": "sewer-after.xml",
+      "region": "random_sewer",
+      "difficulty": 12,
+      "scene": "sewer"
+    },
+    {
+      "id": "mane-before",
+      "sample": "mane-before.xml",
+      "region": "random_mane",
+      "difficulty": 10,
+      "scene": "mane"
+    },
+    {
+      "id": "mane-after",
+      "sample": "mane-after.xml",
+      "region": "random_mane",
+      "difficulty": 10,
+      "scene": "mane"
+    },
+    {
+      "id": "native-plant-6",
+      "sample": "native-plant-6.xml",
+      "region": "random_plant",
+      "difficulty": 8,
+      "scene": "plant"
+    },
+    {
+      "id": "native-sewer-4",
+      "sample": "native-sewer-4.xml",
+      "region": "random_sewer",
+      "difficulty": 8,
+      "scene": "sewer"
+    }
+  ],
+  "samples": {
+    "mane-after.xml": "8a55b3d6ea7e2c84fdbefdbb8a162290f1c6a5466c943fd934d9baa96e0a998c",
+    "mane-before.xml": "d7a6a269f828e1263c77a436e5f24368b912d0c03de4dba86e49ec92d6871095",
+    "native-plant-6.xml": "fb4ecd5995ebfbb38165d3e547419fbd6152d2f1a038702a361cde93e837d074",
+    "native-sewer-4.xml": "8da431551a83c79888eee6e69e054efa32303cb7572f8e178d76db7e8487f077",
+    "plant-after.xml": "3d7e5096c1ac9ebb66d9084b40616e1a5f50594fbf936241c0d8fe4e076506ea",
+    "plant-before.xml": "3b77643d67a1dcf65b5d3e967c9ac0aed398bb3a48c2858c254914c27adcf73c",
+    "render-config.xml": "ebb3192412bc8cde07bb95f5d396856f0a93f65a44d69138728708056e814232",
+    "sewer-after.xml": "dc93501b152acfd000fe7774b0de1ccfd7110653db734efa4b6466827806740b",
+    "sewer-before.xml": "b0748bc55320186af54dd49b314d99ccc3be9826bd63b0ca2a1f743fb24a710e",
+    "stable-after.xml": "40b7d5ab615cf207650e51b5cdfbdada6ada6c4c04ade1080cdffa7c59c8684f",
+    "stable-before.xml": "7fc28a51e90909ae5f049c2e7ea4f07844da9d8b89fbbe049280b4d9f6d57b79",
+    "text_zh.xml": "66da212793683b19e65e3973b726a94a2885d5032395af8a2e5a0fd20a17f895"
+  }
+}
