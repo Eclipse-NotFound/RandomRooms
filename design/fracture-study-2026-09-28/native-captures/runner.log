@@ -1,0 +1,50 @@
+appId=pferr-style-99af88f001e140d7a42a00eaeceec124
+3456 ready cases=9
+3541 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+11339 newGame(-1) issued, intro skipped
+13282 initial world ready land=rbl
+13389 beginMission rrstyle-fracture-native-reference-0
+13463 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+17343 arrived rrstyle-fracture-native-reference-0 room=обвал
+20047 capture rrstyle-fracture-native-reference-0-stage 1008x729 room=обвал lightOverlay=true
+21206 capture rrstyle-fracture-native-reference-0-room 1920x1000 room=обвал lightOverlay=false
+21223 beginMission rrstyle-fracture-native-reference-1
+23485 heartbeat state=3 case=1 allLands=true text=true resources=true rrCurrent=true rrHost=false
+25178 arrived rrstyle-fracture-native-reference-1 room=пещера2
+27763 capture rrstyle-fracture-native-reference-1-stage 1008x729 room=пещера2 lightOverlay=true
+30109 capture rrstyle-fracture-native-reference-1-room 1920x1000 room=пещера2 lightOverlay=false
+30137 beginMission rrstyle-fracture-native-reference-2
+33482 heartbeat state=3 case=2 allLands=true text=true resources=true rrCurrent=true rrHost=false
+33808 arrived rrstyle-fracture-native-reference-2 room=пещера
+36434 capture rrstyle-fracture-native-reference-2-stage 1008x729 room=пещера lightOverlay=true
+38539 capture rrstyle-fracture-native-reference-2-room 1920x1000 room=пещера lightOverlay=false
+38563 beginMission rrstyle-fracture-native-reference-3
+42280 arrived rrstyle-fracture-native-reference-3 room=пещера3
+43476 heartbeat state=3 case=3 allLands=true text=true resources=true rrCurrent=true rrHost=false
+44883 capture rrstyle-fracture-native-reference-3-stage 1008x729 room=пещера3 lightOverlay=true
+47971 capture rrstyle-fracture-native-reference-3-room 1920x1000 room=пещера3 lightOverlay=false
+47985 beginMission rrstyle-fracture-native-reference-4
+51575 arrived rrstyle-fracture-native-reference-4 room=пещера4
+53478 heartbeat state=3 case=4 allLands=true text=true resources=true rrCurrent=true rrHost=false
+54144 capture rrstyle-fracture-native-reference-4-stage 1008x729 room=пещера4 lightOverlay=true
+55997 capture rrstyle-fracture-native-reference-4-room 1920x1000 room=пещера4 lightOverlay=false
+56012 beginMission rrstyle-fracture-native-reference-5
+59745 arrived rrstyle-fracture-native-reference-5 room=туннели
+62307 capture rrstyle-fracture-native-reference-5-stage 1008x729 room=туннели lightOverlay=true
+62793 capture rrstyle-fracture-native-reference-5-room 1920x1000 room=туннели lightOverlay=false
+62807 beginMission rrstyle-fracture-native-reference-6
+63478 heartbeat state=3 case=6 allLands=true text=true resources=true rrCurrent=true rrHost=false
+66778 arrived rrstyle-fracture-native-reference-6 room=ко.развалено
+69742 capture rrstyle-fracture-native-reference-6-stage 1008x729 room=ко.развалено lightOverlay=true
+70743 capture rrstyle-fracture-native-reference-6-room 1920x1000 room=ко.развалено lightOverlay=false
+70757 beginMission rrstyle-fracture-native-reference-7
+73915 heartbeat state=3 case=7 allLands=true text=true resources=true rrCurrent=true rrHost=false
+74511 arrived rrstyle-fracture-native-reference-7 room=ко.развалено2
+77326 capture rrstyle-fracture-native-reference-7-stage 1008x729 room=ко.развалено2 lightOverlay=true
+78160 capture rrstyle-fracture-native-reference-7-room 1920x1000 room=ко.развалено2 lightOverlay=false
+78182 beginMission rrstyle-fracture-native-reference-8
+81745 arrived rrstyle-fracture-native-reference-8 room=кр.развалено
+83481 heartbeat state=3 case=8 allLands=true text=true resources=true rrCurrent=true rrHost=false
+84745 capture rrstyle-fracture-native-reference-8-stage 1008x729 room=кр.развалено lightOverlay=true
+85671 capture rrstyle-fracture-native-reference-8-room 1920x1000 room=кр.развалено lightOverlay=false
+85688 DONE 9 cases

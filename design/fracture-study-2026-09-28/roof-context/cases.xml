@@ -1,0 +1,59 @@
+<cases movement="false" crossing="false" shaft="false" growth="false" startupDelay="false" fixtures="false" fixtureCyclesOnly="false" navigation="false" sceneLifecycle="false" waterProbe="false" population="false" contentGallery="false" terminalApproach="false" nativeLoader="false" populationDepth="0">
+  <case id="rrstyle-fracture-roof-context">
+    <room name="кр.развалено" rrTheme="mane" sourceIndex="46" sourceFile="Rooms/rooms_mane.xml">
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._</a>
+      <a>N.N.N.N.D.D.D.D.D.E.E.E.EA._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A._A.DA.D.D.D.N</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._A._C._C._C._C._C._C._C._C._C._C._C._C._C._C._A._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.DA._C._C._C._C._C._C._C._C._C._C._C._C._C._C._A._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.NA._C._C._C._C._C._C._C._C._C._C._C._C._C._C.EA._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>N.N.N.N.N.DA._A._A._C._C._A._A._A._A-._A-.NA._C._C._C._C._C._C._C._C._C._C._C._C._C._C.E._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.N</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C.D._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>_C._C._C._C._C._C._C._C._C._C._C._C._C._C._C.N._C._C._C._C._C._C._C._C._C._C._C._C._C._C._._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C._C</a>
+      <a>N.N.N.N._CК._CК._CК._CК.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N._CК._CК._CК._CК.N.N.N.N.N._CК._CК._CК._CК.N.N.N.N</a>
+      <obj id="mcrate2" code="zKxuZb6ZNYvNNazN" x="32" y="23" />
+      <obj id="case" code="h7vIlWFa31i22Wta" x="11" y="15" />
+      <obj id="case" code="gBsdTcTHFEa4Mk38" x="23" y="23" />
+      <obj id="case" code="zuW9jULZK9RAuOmK" x="20" y="23" />
+      <obj id="ammobox" code="kCBZM3gnv3cRVcAC" x="45" y="23" />
+      <obj id="door1" code="FHfm1TvrUBwWhQPt" x="30" y="23" />
+      <obj id="locker" code="ShhL8PDfDtWpecGu" x="16" y="23" />
+      <obj id="tumba1" code="XUvXTJxnKsiWFUtX" x="46" y="23" />
+      <obj id="explbox" code="bd0zaJTmkorawC5r" x="2" y="23" />
+      <obj id="mcrate2" code="hy7rwple8xPZ8P8R" x="35" y="23" />
+      <obj id="box" code="EhCyrVPkudLlCVBY" x="13" y="23" />
+      <obj id="player" code="LEyj9HlxN79O2FGe" x="2" y="19" />
+      <obj id="player" code="VcirYFYN6g5ZmTIP" x="37" y="23" />
+      <obj id="spikes" code="uogZ6c0uLPq9PaPU" x="15" y="17" />
+      <obj id="spikes" code="w2XatUJc68B9CxQo" x="30" y="18" />
+      <obj id="spikes" code="Z5mV4uoDRxJN0JSq" x="13" y="23" />
+      <obj id="spikes" code="YdQgQE7QFpo7DQdf" x="14" y="23" />
+      <back id="door" x="44" y="21" />
+      <back id="door" x="2" y="21" />
+      <back id="swindow" x="44" y="19" />
+      <back id="pipe4" x="27" y="22" />
+      <back id="pipe4" x="27" y="20" />
+      <back id="pipe4" x="26" y="22" />
+      <back id="hole" x="17" y="13" />
+      <back id="hole" x="30" y="10" />
+      <back id="hole" x="6" y="22" />
+      <doors>3.3.3.3.3.3.4.0.0.4.4.3.3.3.3.3.3.4.4.4.4.4</doors>
+      <options tip="beg0" backform="2" transpfon="1" entip="0" kolspawn="0" />
+    </room>
+  </case>
+</cases>

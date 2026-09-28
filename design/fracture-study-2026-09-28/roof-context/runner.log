@@ -1,0 +1,11 @@
+appId=pferr-style-a2dee021d1c848e9aab9a81567190ed3
+3865 ready cases=1
+3920 heartbeat state=0 case=0 allLands=false text=true resources=false rrCurrent=true rrHost=false
+10330 newGame(-1) issued, intro skipped
+12220 initial world ready land=rbl
+12314 beginMission rrstyle-fracture-roof-context
+13876 heartbeat state=3 case=0 allLands=true text=true resources=true rrCurrent=true rrHost=false
+15917 arrived rrstyle-fracture-roof-context room=кр.развалено
+19307 capture rrstyle-fracture-roof-context-stage 1008x729 room=кр.развалено lightOverlay=true
+19597 capture rrstyle-fracture-roof-context-room 1920x1000 room=кр.развалено lightOverlay=false
+19610 DONE 1 cases

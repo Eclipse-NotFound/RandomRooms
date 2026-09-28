@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>原版房间的破碎感 · RandomRooms 调查</title>
+<link rel="stylesheet" href="study.css">
+</head>
+<body>
+<main>
+<header><div class="eyebrow">RandomRooms · 原版设计调查 · 2026.09.28</div>
+<h1>破碎之后，仍看得出原来的空间</h1>
+<p class="lead">原版将<strong>断裂地形、易碎材料、后墙破洞和残留物</strong>叠在一起。增加随机性时，应分别控制这些层，而不是对每格独立挖洞。</p>
+<p class="scope">扫描四场景 192 个房间记录，精读并查看 16 间实景。本页展示原版证据和方案建议；新算法尚未实现，游戏仍为已部署的 v13。</p>
+<nav><a href="#viewer">逐房看证据</a><a href="#scenes">四种场景</a><a href="#algorithm">算法比较</a><a href="native-study.md">完整调查记录</a><a href="algorithm-sources.md">算法资料与参数</a></nav>
+</header>
+
+<section id="viewer" aria-labelledby="viewerTitle">
+<div class="section-label">01 / 原版实例</div><h2 id="viewerTitle">黑色破洞，不一定是能走过去的缺口</h2>
+<p>先看实景，再切换地形图。后墙的大洞不会删除碰撞；裂纹实体虽然看着碎，仍然挡路。地形图不含门、家具等运行时碰撞。</p>
+<div class="toolbar"><label>场景 <select id="scene" aria-label="场景"></select></label><label class="grow">原版房间 <select id="room" aria-label="原版房间"></select></label>
+<a id="fullImage" target="_blank" rel="noopener">打开原图 ↗</a></div>
+<div class="modes" role="group" aria-label="查看方式">
+<button type="button" data-mode="native" aria-pressed="true">原版实景</button><button type="button" data-mode="terrain" aria-pressed="false">地形图</button><button type="button" data-mode="overlay" aria-pressed="false">叠加地形</button>
+<label><input type="checkbox" id="holes"> 标出后墙洞范围</label></div>
+<div class="canvas" id="canvas"><img id="nativeImage" alt="原版房间实景"><svg id="terrain" viewBox="0 0 48 25" role="img" aria-label="原版 XML 地形示意"></svg></div>
+<div id="tileInfo" class="tile-info" aria-live="polite">将鼠标移到图上，可查看该格的真实地形编码。</div>
+<div class="legend"><span style="--key:#bfc8d0">一般实体</span><span style="--key:#bd8c6a">破损混凝土 D</span><span style="--key:#f09e51">易碎裂纹 E</span><span style="--key:#879fc3">岩石 G</span><span style="--key:#977b54">土/杂木 H/F</span><span style="--key:#6c9b72">苔墙 L</span><span style="--key:#77d5d0">薄梁 / 斜梯</span><span style="--key:#efd68d">直梯</span></div>
+<div class="case-details"><div><h3 id="caseTitle"></h3><p id="caseNote"></p><p class="caption" id="caseSource"></p></div><div id="caseMetrics" class="metrics"></div></div>
+<p class="caption">图像由原游戏隔离实例渲染，关闭玩家视野遮罩并封闭外部接口；深色区可能是透明背景。几何图取原 XML，因此外边框可能与展示图不同。紫框只是后墙洞资源的包围范围，形状随机帧不等于矩形。屋顶已单独恢复背景裁切条件。</p>
+</section>
+
+<section id="scenes"><div class="section-label">02 / 场所差异</div><h2>四个场景，用四套破碎逻辑</h2>
+<div class="scene-grid">
+<article><span class="tag">城市废墟</span><h3>楼板断了，层仍然可辨</h3><p>上下错开的断口、残墙和梁连接成跨层废墟；较完整的带门侧室仍保留。背景条带提示旧楼层，瓦砾集中在下部。</p><button data-example="mane/45">看重度毁损房 →</button></article>
+<article><span class="tag">工厂</span><h3>正常车间旁，发生局部塌方</h3><p>规整机械设施与混凝土、裂纹块、岩体相接。裂纹 E 比普通混凝土易碎，但仍是实体；有些塌方房完全不用城市的后墙洞或瓦砾堆。</p><button data-example="plant/54">看塌方房 →</button></article>
+<article><span class="tag">废弃避难厩</span><h3>岩洞与金属设施相接</h3><p>自然岩体可包围设施，也可占据大部分空间。四个洞穴样本从“下半部岩洞”到“几乎全是岩洞”差别很大，不能只是同一房型换贴图。</p><button data-example="stable/9">看设施与岩洞 →</button></article>
+<article><span class="tag">下水道</span><h3>厚墙、管渠与粗糙边缘</h3><p>苔墙让边缘很粗糙，但地形经常仍是长直边和厚构造。局部退缩、宽窄变化与湿痕更合适，池底和必经干路需要保留。</p><button data-example="sewer/18">看分支隧道 →</button></article>
+</div>
+<div class="table-wrap"><table><caption>普通房间库中的使用记录；不是遭遇概率，也不是破坏率</caption><thead><tr><th>场景</th><th>普通房数</th><th>使用 hole / chole 后墙洞</th><th>使用 heap 瓦砾</th></tr></thead><tbody id="counts"></tbody></table></div>
+<p class="caption">城市主要用 hole 系列，工厂用 chole 系列。避难厩与下水道的 0 表示没有使用这两组资源，不表示它们没有破损或杂物。</p>
+</section>
+
+<section id="algorithm"><div class="section-label">03 / 生成建议</div><h2>让随机性先改变“大事件”，再改变小边缘</h2>
+<div class="process"><span>生成建筑 / 地下构造</span><b>→</b><span>随机选破损类型与范围</span><b>→</b><span>连片改变结构</span><b>→</b><span>噪声修边 + 背景残留</span><b>→</b><span>按最终地形安排玩法</span></div>
+<p>例如一次跨层塌方可以留下错开的楼板端头、局部裂纹、背后的旧层线和下方碎屑；另一次只剥落墙面，不改变路线。损伤中心不固定在中央，也不让每间房平均受损。</p>
+<div class="table-wrap"><table><thead><tr><th>方法</th><th>适合做什么</th><th>主要代价 / 风险</th><th>建议</th></tr></thead><tbody>
+<tr><td>独立随机删格</td><td>很细的表面颗粒、对照组</td><td>像撒盐；碎点多，却缺少成片事件</td><td>不用作主体</td></tr>
+<tr><td><a href="https://mrl.cs.nyu.edu/~perlin/paper445.pdf">连续、多尺度噪声</a></td><td>让相邻位置一起受损，叠加大小不同的变化</td><td>单独使用易成圆洞或融化轮廓，不认识楼层</td><td>作为损伤场和修边工具</td></tr>
+<tr class="recommended"><td>事件 + 连片侵蚀</td><td>从少量位置有方向地扩大破口，控制面积与残留</td><td>需要维护门梯、房间用途和最终支撑</td><td>优先做原型</td></tr>
+<tr><td><a href="https://pcgworkshop.com/archive/johnson2010cellular.pdf">元胞自动机</a></td><td>按相邻格状态聚成自然岩洞或局部粗边</td><td>可能磨掉建筑直角；空地连通不等于横版可返回</td><td>局部岩体适用</td></tr>
+<tr><td><a href="https://github.com/mxgmn/WaveFunctionCollapse">WFC / 邻接约束</a></td><td>为断墙边、梁头和材料过渡选相容细节</td><td>整理规则成本较高；局部相容不保证全图通行</td><td>后续考虑</td></tr>
+</tbody></table></div>
+<p class="caption">这些是本项目的适配判断。外部来源解释算法能力，没有证明 Remains 原版使用这些算法。更多一手资料见 <a href="algorithm-sources.md">算法调查</a>。</p>
+
+<h3>不要把“破得多”和“边缘碎”塞进同一个参数</h3>
+<div class="parameter-grid"><p><strong>受损程度</strong><br>整间有多少结构变化</p><p><strong>事件尺度</strong><br>几处大塌方，还是较多小缺口</p><p><strong>边缘粗细</strong><br>大轮廓上叠加多少小起伏</p><p><strong>残留比例</strong><br>留下多少楼板、梁架和旧层线</p><p><strong>易碎材料比例</strong><br>多少仍挡路的结构能被打穿</p><p><strong>表面破损</strong><br>后墙洞、斑驳和无碰撞碎屑</p></div>
+<p>这些参数应服从场景，并与危险度 D、价值度 V 分开。开墙可能使几间房的敌人相互支援，所以地形变化之后仍要重算遭遇压力、炮塔枪线和终端接近路径。</p>
+</section>
+
+<section><div class="section-label">04 / 现有生成器的差距</div><h2>当前限制不只在随机算法</h2>
+<ul><li>城市只做少量 2–4 格宽的楼板替换，并为每个缺口留整段薄梁，难以形成跨层成片破坏。</li><li>城市后墙洞必须塞进宽、高均至少 10 格的单个子矩形；低层高房间大多放不下，合并后也不能跨子房摆放。</li><li>材质旧损按固定坐标分块，没有围绕破口形成过渡；避难厩还缺少原版洞穴这一类明显不同的空间。</li></ul>
+<p>建议下一步冻结同一底图，分别比较“只加表面”“只改结构”“两者结合”；在相同允许区域和删改预算下再比较噪声方法。所有开放入口往返、门梯支撑、下水道干路、顶炮挂载和终端操作位都要按最终地形重新检查。</p>
+<p class="caption">下一步为建议，尚未生成或验证新算法样本。本轮原生捕获完成；它证明参考图片可正常渲染，不代表候选生成算法已通过游戏内测试。</p>
+</section>
+<footer><a href="native-study.md">原版调查全文</a> · <a href="algorithm-sources.md">算法来源与工程评估</a> · <a href="native-evidence.json">逐房数据</a> · <a href="validation.md">证据与边界</a></footer>
+</main>
+<script src="evidence-data.js"></script><script src="study.js"></script>
+</body></html>

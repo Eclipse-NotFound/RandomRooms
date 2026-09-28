@@ -1,0 +1,55 @@
+{
+  "appId": "pferr-style-a2dee021d1c848e9aab9a81567190ed3",
+  "status": "complete",
+  "startedUtc": "2026-09-28T01:53:29.3707684Z",
+  "completedUtc": "2026-09-28T01:53:50.0489176Z",
+  "exitCode": 0,
+  "failed": false,
+  "done": true,
+  "cases": [
+    "rrstyle-fracture-roof-context"
+  ],
+  "roomIds": [
+    "кр.развалено"
+  ],
+  "stageSize": [
+    1008,
+    729
+  ],
+  "roomSize": [
+    1920,
+    1000
+  ],
+  "fullRoomLightOverlay": false,
+  "sourceSha256": {
+    "Rooms/rooms_stable.xml": "6119717F2FF5DE034F6C7B148B01C0D2E28D1F2076CC1BE878F55B40B7E26109",
+    "baseline-v66.xml": "9292C75A9F0D8053AAE61DDCA080812927F55C36F8152712DA79EFDC222679E9",
+    "fracture-roof-context.xml": "F8F00BD6F3A26DB9D72A4A818DC8B44DCC78E781A289AEA7E5CBE2DA8128DDEA",
+    "test-local/loader-manifest.txt": "D331070528BE567D7D061ABEDD26E4F0480DD117066340BC7CE98D2E6F0DB954"
+  },
+  "hostSha256": "C631CBF3511B6EE303F533D08D51511FE0EB702F43E5DB17F5241D8576C64867",
+  "navigationProbe": false,
+  "populationProbe": false,
+  "movementProbe": false,
+  "crossingProbe": false,
+  "verticalProbe": false,
+  "growthProbe": false,
+  "fixtureProbe": false,
+  "fixtureCyclesOnly": false,
+  "startupDelay": false,
+  "hitProtection": false,
+  "physicalPass": null,
+  "developmentSwf": "",
+  "nativeLoaderSmoke": false,
+  "runtimeArtifacts": {},
+  "topology": [],
+  "movement": [],
+  "navigation": [],
+  "casesSha256": "835107BCF3765E6BF5E662CCB1CECF75688BA9DC9282C6197DFEE32581360968",
+  "driverSha256": "3FD41638E3A5B42D997B82B097198619F6A7E0198156920F14A375BE109DD3F1",
+  "runnerLogSha256": "E815414F6DB7EFEEA87EE0672758A5F64B2346DB71762A2893668C6D84F72F49",
+  "captured": {
+    "rrstyle-fracture-roof-context-stage.png": "0A71C3162EEF31AB03458FCACB92030321C3795E7122594B8051A1E48A9203AE",
+    "rrstyle-fracture-roof-context-room.png": "B44D4755469B842E75E0BD013C0D98039A67292467E838D8FEAEAE229D2ACE95"
+  }
+}
