@@ -1,0 +1,90 @@
+{
+  "results": [
+    {
+      "sample": "samples/rooms_plant_rr_v13.xml",
+      "mode": "static environment; no simulation, discovery fog or procedural enemies",
+      "inferredFromNamedSample": "random_plant",
+      "spawnMarkers": 17,
+      "warnings": [],
+      "invisibleTriggers": 0,
+      "objects": 30,
+      "room": "syn_2",
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "nativeRenderer": true,
+      "mirror": true,
+      "milliseconds": 408,
+      "regionName": "工厂",
+      "inputUnchanged": true,
+      "inferredFromOriginalName": "random_plant",
+      "region": "random_plant"
+    },
+    {
+      "sample": "samples/rooms_stable_rr_v13.xml",
+      "mode": "static environment; no simulation, discovery fog or procedural enemies",
+      "inferredFromNamedSample": "random_stable",
+      "spawnMarkers": 18,
+      "warnings": [],
+      "invisibleTriggers": 0,
+      "objects": 42,
+      "room": "syn_2",
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "nativeRenderer": true,
+      "mirror": false,
+      "milliseconds": 343,
+      "regionName": "废弃避难厩",
+      "inputUnchanged": true,
+      "inferredFromOriginalName": "random_plant",
+      "region": "random_stable"
+    },
+    {
+      "sample": "samples/rooms_sewer_rr_v13.xml",
+      "mode": "static environment; no simulation, discovery fog or procedural enemies",
+      "inferredFromNamedSample": "random_sewer",
+      "spawnMarkers": 14,
+      "warnings": [],
+      "invisibleTriggers": 0,
+      "objects": 31,
+      "room": "syn_28",
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "nativeRenderer": true,
+      "mirror": true,
+      "milliseconds": 368,
+      "regionName": "下水道",
+      "inputUnchanged": true,
+      "inferredFromOriginalName": "random_plant",
+      "region": "random_sewer"
+    },
+    {
+      "sample": "samples/rooms_mane_rr_v13.xml",
+      "mode": "static environment; no simulation, discovery fog or procedural enemies",
+      "inferredFromNamedSample": "random_mane",
+      "spawnMarkers": 4,
+      "warnings": [],
+      "invisibleTriggers": 0,
+      "objects": 58,
+      "room": "syn_19",
+      "renderSize": [
+        1920,
+        1000
+      ],
+      "nativeRenderer": true,
+      "mirror": false,
+      "milliseconds": 360,
+      "regionName": "马哈顿废墟",
+      "inputUnchanged": true,
+      "inferredFromOriginalName": "random_plant",
+      "region": "random_mane"
+    }
+  ],
+  "status": "passed",
+  "scope": "unchanged installed renderer; archived XML; isolated hidden AIR; no editor save, AI or gameplay"
+}

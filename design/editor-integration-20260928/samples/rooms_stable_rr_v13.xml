@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='utf-8'?>
+<all rrVersion="13" rrSeed="20260818">
+  <land serial="1" />
+  <room name="syn_2" rrGen="space-v11" rrRevision="13" rrTheme="stable" rrKind="service" rrForm="quarters" rrAttempts="1" rrPopulation="planned" rrDepth="0" rrEcology="2" rrDifficulty="8" rrPartition="rules" rrSeed="3803816437" rrP_retiled="0" rrP_extra="0.6122352874837815" rrP_rooms="10" rrP_masses="1" rrP_visits="19" rrP_count="10" rrP_merges="0" rrP_density="sparse" rrP_variant="large-and-small" rrP_main="living" rrP_layout="storeys" rrP_requested="10" rrDanger="45" rrValue="56" rrContentModel="danger-value-1" rrVersion="13" rrMasterSeed="20260818" x="0" y="2" rrMirror="0">
+    <a>J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J._P._PА.J.J.J.J.J</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._P._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._P._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R.J</a>
+    <a>J._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P.J</a>
+    <a>J.K.K.K.K.K.K.K.K.K._N._NА.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K._N._NА.K.K.K.K.K.K.K.K.K.K.J</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._N._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._N</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._N._R._R._R._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._N</a>
+    <a>J._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P.K._P._P._P._P._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P._P._N</a>
+    <a>J._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P.J._P._P._P._P._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._PЕ._P._PА.K</a>
+    <a>J.K._P._PА.K.K.K.K.K.K._N._NА.K.K.K.K.K.K.K.K.K.J.K.K.K.K.K.K.K.K.K.K._N._NА.K.K.K.K.K.K.K.K.K.K.K.K.K.J</a>
+    <a>J._R._R._RА._R._R.J._R._R._R._R._RА._R._R._R.J.J.J.K.K.J.J.J.J.J.J.J.K.K.J.J.J._N._NА.J.J.K.K.J.J.J.J.J.J.J.K.K.J</a>
+    <a>J._R._R._RА._R._R._N._R._R._R._R._RА._R._R._R.J.J.J.K.K.J.J.J.J.J.J.J.K.K.J.J.J._N._NА.J.J.K.K.J.J.J.J.J.J.J.K.K.J</a>
+    <a>J._P._P._PА._P._P._N._P._P._P._P._PА._P._P._P.J.J.J.K.K.J.J.J.J.J.J.J.K.K.J.J.J._N._NА.J.J.K.K.J.J.J.J.J.J.J.K.K.J</a>
+    <a>J._P._P._PА._P._P._N._P._P._P._P._PА._P._P._P.J.J.J.K.K.J.J.J.J.J.J.J.K.K.J.J.J._N._NА.J.J.K.K.J.J.J.J.J.J.J.K.K.J</a>
+    <a>J.K._N._NА.K.K.K.K.K.K.K.K.K.K.K.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J.J._N._NА.J.J.J.J.J.J.J.J.J.J.J.J.J.J</a>
+    <a>J._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.J._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R.J</a>
+    <a>J._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._N._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._R._R._R.J</a>
+    <a>J._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._N._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P.J</a>
+    <a>J._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._N._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P.J</a>
+    <a>J.K.K.K.K.K.K.K.K.K.K._P._PА.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.J</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R.J._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.J</a>
+    <a>J._R._R._R._R._R._R._R._R._R._R._R._RА._R._R._R._R._R._R._R._R._R._R._P._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R._R.J</a>
+    <a>J._P._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P.J</a>
+    <a>J._P._P._P._P._P._P._P._P._P._P._P._PА._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P._P.J</a>
+    <a>J.K.K.K.K.K.K.K.K.K.K.K.K.K._P._PА.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.K.J</a>
+    <obj id="player" code="syn_2_o0" x="33" y="23" />
+    <obj id="stdoor" code="syn_2_o1" x="23" y="23" rrFixture="door" lock="0" mine="0" />
+    <obj id="stdoor" code="syn_2_o2" x="17" y="3" rrFixture="door" lock="0" mine="0" />
+    <obj id="stdoor" code="syn_2_o3" x="26" y="18" rrFixture="door" lock="0" mine="0" />
+    <obj id="stdoor" code="syn_2_o4" x="6" y="13" rrFixture="door" lock="0" mine="0" />
+    <obj id="window2" code="syn_2_o5" x="21" y="6" rrFixture="window" />
+    <obj id="couch" code="syn_2_o6" x="44" y="3" />
+    <obj id="couch" code="syn_2_o7" x="21" y="3" />
+    <obj id="couch" code="syn_2_o8" x="25" y="3" />
+    <obj id="couch" code="syn_2_o9" x="16" y="8" />
+    <obj id="tumba2" code="syn_2_o10" x="18" y="8" />
+    <obj id="bed" code="syn_2_o11" x="28" y="8" />
+    <obj id="couch" code="syn_2_o12" x="5" y="18" />
+    <obj id="tumba2" code="syn_2_o13" x="7" y="18" />
+    <obj id="ccup" code="syn_2_o14" x="38" y="18" />
+    <obj id="tap" code="syn_2_o15" x="39" y="18" />
+    <obj id="fridge" code="syn_2_o16" x="40" y="18" />
+    <obj id="ccup" code="syn_2_o17" x="42" y="18" />
+    <obj id="tap" code="syn_2_o18" x="43" y="18" />
+    <obj id="fridge" code="syn_2_o19" x="44" y="18" />
+    <obj id="table2" code="syn_2_o20" x="5" y="23" />
+    <obj id="filecab" code="syn_2_o21" x="7" y="23" />
+    <obj id="table2" code="syn_2_o22" x="1" y="23" />
+    <obj id="filecab" code="syn_2_o23" x="3" y="23" />
+    <obj id="table2" code="syn_2_o24" x="38" y="23" />
+    <obj id="filecab" code="syn_2_o25" x="40" y="23" />
+    <obj id="table2" code="syn_2_o26" x="41" y="23" />
+    <obj id="filecab" code="syn_2_o27" x="43" y="23" />
+    <obj id="gutsy" x="12" y="3" rrContent="enemy" rrMount="floor" uid="rrp_2_0" rrZone="room-0" rrD="39" rrV="77" code="syn_2_p28" />
+    <obj id="gutsy" x="38" y="3" rrContent="enemy" rrMount="floor" uid="rrp_2_1" rrZone="room-1" rrD="64" rrV="46" code="syn_2_p29" />
+    <obj id="protect" x="27" y="3" rrContent="enemy" rrMount="floor" uid="rrp_2_2" rrZone="room-1" rrD="64" rrV="46" code="syn_2_p30" />
+    <obj id="robot" x="4" y="8" rrContent="enemy" rrMount="floor" uid="rrp_2_3" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p31" />
+    <obj id="robot" x="7" y="8" rrContent="enemy" rrMount="floor" uid="rrp_2_4" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p32" />
+    <obj id="protect" x="39" y="8" rrContent="enemy" rrMount="floor" uid="rrp_2_5" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p33" />
+    <obj id="robot" x="26" y="8" rrContent="enemy" rrMount="floor" uid="rrp_2_6" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p34" />
+    <obj id="protect" x="13" y="13" rrContent="enemy" rrMount="floor" uid="rrp_2_7" rrZone="room-5" rrD="45" rrV="52" code="syn_2_p35" />
+    <obj id="protect" x="16" y="18" rrContent="enemy" rrMount="floor" uid="rrp_2_8" rrZone="room-6" rrD="26" rrV="49" code="syn_2_p36" />
+    <obj id="robot" x="18" y="18" rrContent="enemy" rrMount="floor" uid="rrp_2_9" rrZone="room-6" rrD="26" rrV="49" code="syn_2_p37" />
+    <obj id="damgren" x="19" y="5" rrContent="damager" rrMount="ceiling" uid="rrp_2_10" allid="rrc_1972047055_room-2" turn="-1" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p38" />
+    <obj id="trlaser" x="15" y="8" rrContent="trigger" rrMount="floor" uid="rrp_2_11" res="" allid="rrc_1972047055_room-2" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p39" />
+    <obj id="damshot" x="14" y="18" rrContent="damager" rrMount="floor" uid="rrp_2_12" allid="rrc_1972047055_room-6" turn="1" rrZone="room-6" rrD="26" rrV="49" code="syn_2_p40" />
+    <obj id="trlaser" x="21" y="18" rrContent="trigger" rrMount="floor" uid="rrp_2_13" res="" allid="rrc_1972047055_room-6" rrZone="room-6" rrD="26" rrV="49" code="syn_2_p41" />
+    <obj id="mine" x="9" y="3" rrContent="special" rrMount="floor" uid="rrp_2_14" rrZone="room-0" rrD="39" rrV="77" code="syn_2_p42" />
+    <obj id="roller" x="20" y="3" rrContent="special" rrMount="floor" uid="rrp_2_15" rrZone="room-1" rrD="64" rrV="46" code="syn_2_p43" />
+    <obj id="roller" x="38" y="8" rrContent="special" rrMount="floor" uid="rrp_2_16" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p44" />
+    <obj id="case" x="3" y="3" rrContent="loot" rrMount="floor" uid="rrp_2_17" rrZone="room-0" rrD="39" rrV="77" code="syn_2_p45" />
+    <obj id="weapbox" x="5" y="3" rrContent="reward" rrMount="floor" uid="rrp_2_18" rrZone="room-0" rrD="39" rrV="77" code="syn_2_p46" />
+    <obj id="knop1" x="7" y="3" rrContent="switch" rrMount="floor" uid="rrp_2_19" rrZone="room-0" rrD="39" rrV="77" code="syn_2_p47">
+      <scr act="unlock" targ="rrp_2_18" />
+    </obj>
+    <obj id="chest" x="23" y="3" rrContent="loot" rrMount="floor" uid="rrp_2_20" rrZone="room-1" rrD="64" rrV="46" code="syn_2_p48" />
+    <obj id="wallsafe" x="37" y="3" rrContent="reward" rrMount="floor" uid="rrp_2_21" rrZone="room-1" rrD="64" rrV="46" hack="1" code="syn_2_p49" />
+    <obj id="term2" x="32" y="3" rrContent="terminal" rrMount="floor" uid="rrp_2_22" rrZone="room-1" rrD="64" rrV="46" code="syn_2_p50" />
+    <obj id="case" x="6" y="8" rrContent="loot" rrMount="floor" uid="rrp_2_23" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p51" />
+    <obj id="safe" x="13" y="8" rrContent="reward" rrMount="floor" uid="rrp_2_24" rrZone="room-2" rrD="38" rrV="81" code="syn_2_p52" />
+    <obj id="bookcase" x="23" y="8" rrContent="loot" rrMount="floor" uid="rrp_2_25" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p53" />
+    <obj id="weapcase" x="41" y="8" rrContent="reward" rrMount="floor" uid="rrp_2_26" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p54" />
+    <obj id="knop1" x="22" y="8" rrContent="switch" rrMount="floor" uid="rrp_2_27" rrZone="room-3" rrD="55" rrV="79" code="syn_2_p55">
+      <scr act="unlock" targ="rrp_2_26" />
+    </obj>
+    <obj id="medbox" x="8" y="18" rrContent="loot" rrMount="floor" uid="rrp_2_28" rrZone="room-6" rrD="26" rrV="49" code="syn_2_p56" />
+    <obj id="ammobox" x="41" y="18" rrContent="loot" rrMount="floor" uid="rrp_2_29" rrZone="room-7" rrD="53" rrV="52" code="syn_2_p57" />
+    <obj id="bookcase" x="19" y="23" rrContent="loot" rrMount="floor" uid="rrp_2_30" rrZone="room-8" rrD="64" rrV="50" code="syn_2_p58" />
+    <obj id="medbox" x="31" y="23" rrContent="loot" rrMount="floor" uid="rrp_2_31" rrZone="room-9" rrD="41" rrV="47" code="syn_2_p59" />
+    <back id="vent" x="39" y="16" />
+    <back id="vent" x="43" y="16" />
+    <back id="clock" x="5" y="21" />
+    <back id="clock" x="1" y="21" />
+    <back id="clock" x="38" y="21" />
+    <back id="clock" x="41" y="21" />
+    <back id="stlight4" x="8" y="1" />
+    <back id="stlight4" x="31" y="1" />
+    <back id="konstr" x="1" y="5" />
+    <back id="stlight4" x="10" y="5" />
+    <back id="konstr" x="22" y="5" />
+    <back id="stlight4" x="33" y="5" />
+    <back id="konstr" x="1" y="10" />
+    <back id="stlight4" x="2" y="10" />
+    <back id="konstr" x="7" y="10" />
+    <back id="stlight4" x="10" y="10" />
+    <back id="konstr" x="1" y="15" />
+    <back id="stlight4" x="12" y="15" />
+    <back id="konstr" x="27" y="15" />
+    <back id="stlight4" x="36" y="15" />
+    <back id="konstr" x="1" y="20" />
+    <back id="stlight4" x="11" y="20" />
+    <back id="konstr" x="24" y="20" />
+    <back id="stlight4" x="34" y="20" />
+    <doors>0.3.0.0.0.0.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.2</doors>
+    <options backwall="tStConcrete" music="music_stable_1" entip="2" kolspawn="0" />
+    <rrPlan>
+      <furnish region="0" role="office" groups="0" target="2" />
+      <furnish region="1" role="corridor" groups="3" target="3" />
+      <furnish region="2" role="living" groups="1" target="2" />
+      <furnish region="3" role="living" groups="1" target="2" />
+      <furnish region="4" role="office" groups="0" target="1" />
+      <furnish region="5" role="living" groups="0" target="1" />
+      <furnish region="6" role="living" groups="1" target="2" />
+      <furnish region="7" role="kitchen" groups="2" target="2" />
+      <furnish region="8" role="office" groups="2" target="2" />
+      <furnish region="9" role="office" groups="2" target="2" />
+      <space kind="volume" x0="1" top="1" x1="16" floor="3" role="office" room="0" zone="room-0" danger="39" value="77" />
+      <space kind="volume" x0="18" top="1" x1="46" floor="3" role="corridor" room="1" zone="room-1" danger="64" value="46" />
+      <space kind="volume" x0="1" top="5" x1="20" floor="8" role="living" room="2" zone="room-2" danger="38" value="81" />
+      <space kind="volume" x0="22" top="5" x1="46" floor="8" role="living" room="3" zone="room-3" danger="55" value="79" />
+      <space kind="volume" x0="1" top="10" x1="5" floor="13" role="office" room="4" zone="room-4" danger="27" value="66" />
+      <space kind="volume" x0="7" top="10" x1="14" floor="13" role="living" room="5" zone="room-5" danger="45" value="52" />
+      <space kind="volume" x0="1" top="15" x1="25" floor="18" role="living" room="6" zone="room-6" danger="26" value="49" />
+      <space kind="volume" x0="27" top="15" x1="46" floor="18" role="kitchen" room="7" zone="room-7" danger="53" value="52" />
+      <space kind="volume" x0="1" top="20" x1="22" floor="23" role="office" room="8" zone="room-8" danger="64" value="50" />
+      <space kind="volume" x0="24" top="20" x1="46" floor="23" role="office" room="9" zone="room-9" danger="41" value="47" />
+      <mass x0="16" top="10" x1="46" floor="13" />
+      <link a="2" b="0" kind="ladder" x="10" y="4" />
+      <link a="6" b="4" kind="ladder" x="2" y="14" />
+      <link a="9" b="8" kind="door" x="23" y="23" />
+      <link a="1" b="0" kind="door" x="17" y="3" />
+      <link a="8" b="6" kind="ladder" x="11" y="19" />
+      <link a="7" b="6" kind="door" x="26" y="18" />
+      <link a="5" b="4" kind="door" x="6" y="13" />
+      <link a="3" b="1" kind="ladder" x="35" y="4" />
+      <link a="7" b="3" kind="ladder" x="32" y="9" />
+      <link a="4" b="2" kind="ladder" x="2" y="9" />
+      <link a="5" b="2" kind="ladder" x="10" y="9" />
+      <ladder x="45" top="8" bottom="8" />
+      <ladder x="14" top="24" bottom="24" />
+      <ladder x="41" top="0" bottom="3" />
+      <ladder x="10" top="4" bottom="8" />
+      <ladder x="2" top="14" bottom="18" />
+      <ladder x="11" top="19" bottom="23" />
+      <ladder x="35" top="4" bottom="8" />
+      <ladder x="32" top="9" bottom="18" />
+      <ladder x="2" top="9" bottom="13" />
+      <ladder x="10" top="9" bottom="13" />
+      <zone id="room-0" role="office" danger="39" value="77" pressure="2.50" limit="3.75" />
+      <zone id="room-1" role="corridor" danger="64" value="46" pressure="3.50" limit="5.00" />
+      <zone id="room-2" role="living" danger="38" value="81" pressure="3.00" limit="3.70" />
+      <zone id="room-3" role="living" danger="55" value="79" pressure="3.50" limit="4.55" />
+      <zone id="room-4" role="office" danger="27" value="66" pressure="0.00" limit="3.15" />
+      <zone id="room-5" role="living" danger="45" value="52" pressure="1.00" limit="4.05" />
+      <zone id="room-6" role="living" danger="26" value="49" pressure="3.00" limit="3.10" />
+      <zone id="room-7" role="kitchen" danger="53" value="52" pressure="0.00" limit="4.45" />
+      <zone id="room-8" role="office" danger="64" value="50" pressure="0.00" limit="5.00" />
+      <zone id="room-9" role="office" danger="41" value="47" pressure="0.00" limit="3.85" />
+      <point y="3" zone="room-0" cost="1" uid="rrp_2_0" mount="floor" x="12" id="gutsy" reason="major-group" kind="enemy" />
+      <point y="3" zone="room-1" cost="1" uid="rrp_2_1" mount="floor" x="38" id="gutsy" reason="major-group" kind="enemy" />
+      <point y="3" zone="room-1" cost="1" uid="rrp_2_2" mount="floor" x="27" id="protect" reason="major-group" kind="enemy" />
+      <point y="8" zone="room-2" cost="1" uid="rrp_2_3" mount="floor" x="4" id="robot" reason="major-group" kind="enemy" />
+      <point y="8" zone="room-2" cost="1" uid="rrp_2_4" mount="floor" x="7" id="robot" reason="major-group" kind="enemy" />
+      <point y="8" zone="room-3" cost="1" uid="rrp_2_5" mount="floor" x="39" id="protect" reason="major-group" kind="enemy" />
+      <point y="8" zone="room-3" cost="1" uid="rrp_2_6" mount="floor" x="26" id="robot" reason="major-group" kind="enemy" />
+      <point y="13" zone="room-5" cost="1" uid="rrp_2_7" mount="floor" x="13" id="protect" reason="major-group" kind="enemy" />
+      <point y="18" zone="room-6" cost="1" uid="rrp_2_8" mount="floor" x="16" id="protect" reason="major-group" kind="enemy" />
+      <point y="18" zone="room-6" cost="1" uid="rrp_2_9" mount="floor" x="18" id="robot" reason="major-group" kind="enemy" />
+      <point y="5" zone="room-2" cost="1" uid="rrp_2_10" mount="ceiling" x="19" id="damgren" reason="paired-trap" kind="damager" />
+      <point y="8" zone="room-2" cost="0" uid="rrp_2_11" mount="floor" x="15" id="trlaser" reason="paired-trap" kind="trigger" />
+      <point y="18" zone="room-6" cost="1" uid="rrp_2_12" mount="floor" x="14" id="damshot" reason="paired-trap" kind="damager" />
+      <point y="18" zone="room-6" cost="0" uid="rrp_2_13" mount="floor" x="21" id="trlaser" reason="paired-trap" kind="trigger" />
+      <point y="3" zone="room-0" cost="1.5" uid="rrp_2_14" mount="floor" x="9" id="mine" reason="cache-blindspot" kind="special" />
+      <point y="3" zone="room-1" cost="1.5" uid="rrp_2_15" mount="floor" x="20" id="roller" reason="cache-blindspot" kind="special" />
+      <point y="8" zone="room-3" cost="1.5" uid="rrp_2_16" mount="floor" x="38" id="roller" reason="cache-blindspot" kind="special" />
+      <point y="3" zone="room-0" cost="0" uid="rrp_2_17" mount="floor" x="3" id="case" reason="ordinary-supplies" kind="loot" />
+      <point y="3" zone="room-0" cost="0" uid="rrp_2_18" mount="floor" x="5" id="weapbox" reason="high-value-opportunity" kind="reward" />
+      <point y="3" zone="room-0" cost="0" uid="rrp_2_19" mount="floor" x="7" id="knop1" reason="optional-cache-control" kind="switch" />
+      <point y="3" zone="room-1" cost="0" uid="rrp_2_20" mount="floor" x="23" id="chest" reason="ordinary-supplies" kind="loot" />
+      <point y="3" zone="room-1" cost="0" uid="rrp_2_21" mount="floor" x="37" id="wallsafe" reason="high-value-opportunity" kind="reward" />
+      <point y="3" zone="room-1" cost="0" uid="rrp_2_22" mount="floor" x="32" id="term2" reason="optional-cache-control" kind="terminal" />
+      <point y="8" zone="room-2" cost="0" uid="rrp_2_23" mount="floor" x="6" id="case" reason="ordinary-supplies" kind="loot" />
+      <point y="8" zone="room-2" cost="0" uid="rrp_2_24" mount="floor" x="13" id="safe" reason="high-value-opportunity" kind="reward" />
+      <point y="8" zone="room-3" cost="0" uid="rrp_2_25" mount="floor" x="23" id="bookcase" reason="ordinary-supplies" kind="loot" />
+      <point y="8" zone="room-3" cost="0" uid="rrp_2_26" mount="floor" x="41" id="weapcase" reason="high-value-opportunity" kind="reward" />
+      <point y="8" zone="room-3" cost="0" uid="rrp_2_27" mount="floor" x="22" id="knop1" reason="optional-cache-control" kind="switch" />
+      <point y="18" zone="room-6" cost="0" uid="rrp_2_28" mount="floor" x="8" id="medbox" reason="ordinary-supplies" kind="loot" />
+      <point y="18" zone="room-7" cost="0" uid="rrp_2_29" mount="floor" x="41" id="ammobox" reason="ordinary-supplies" kind="loot" />
+      <point y="23" zone="room-8" cost="0" uid="rrp_2_30" mount="floor" x="19" id="bookcase" reason="ordinary-supplies" kind="loot" />
+      <point y="23" zone="room-9" cost="0" uid="rrp_2_31" mount="floor" x="31" id="medbox" reason="ordinary-supplies" kind="loot" />
+    </rrPlan>
+  </room>
+</all>

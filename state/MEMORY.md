@@ -1,13 +1,13 @@
 # RandomRooms —— 开发记忆入口
 
-> 2026-09-28：v13 已实装并通过原游戏清单加载器的独立重启检查。release/RandomRoomsMod.swf = 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。当前工作已完成，等待用户在游戏中体验；下次不要重做本轮或误认仍只有 HTML 原型。
+> 2026-09-28：v13 已实装，正式 release 仍为 88,909 B，SHA256 A5EB49A089835BBC7B670411BBDF32865F5110AEAE79F8BC182AF3BB4C9CBE46。随后完成地图编辑器接入调查（见 §8），仅文档与隔离预览，尚未实施适配；不要误认 v13 仍只有 HTML 原型，也不要把接入建议当成已开发功能。
 
 ## 1. 模组与运行入口
 
 - Remains 1.02，从零生成建筑空间，不复制原版整房/局部模板。四场景：工厂、废弃避难厩、下水道、城市废墟；一次探索固定场景，向右、向下无限扩张。
 - 本目录独立 Git 仓库，main 分支。正式入口 release/RandomRoomsMod.swf，类 RandomRoomsMod，public static init(main)。
-- 本轮仅替换本模组 release；根/DLC SWF、真实存档、其他模组未改。共享 registry 登记 Shift+F3 和调试显示层。
-- root pfe.swf = B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC；启动用 application.xml，不是 app.xml。加载清单 mods/loader-manifest.txt 是权威，RandomRooms|RandomRoomsMod|1|1|0；本轮未写加载清单。
+- v13 部署轮仅替换本模组 release；根/DLC SWF、真实存档、其他模组未改。共享 registry 登记 Shift+F3 和调试显示层。
+- v13 部署时 root pfe.swf = B78244657ED407D03808C90E97325509DB35F802122835F58933FFF8003305AC；后续编辑器调查只读核对的当前宿主 = C631CBF3511B6EE303F533D08D51511FE0EB702F43E5DB17F5241D8576C64867，本次未修改宿主，不覆盖旧部署证据。启动用 application.xml，不是 app.xml。加载清单 mods/loader-manifest.txt 是权威，RandomRooms|RandomRoomsMod|1|1|0；本次未写加载清单。
 
 ## 2. 用户决定与边界
 
@@ -34,7 +34,7 @@
 - 调试层名称 RandomRooms_DebugWorld / RandomRooms_DebugHUD；标签多行，顶炮文字下移避开 D/V。旧版显示用途和“旧版，无 D/V”。
 - RandomRoomsMod 的 F2/F4 已加原生区域切换保护：t_exit > 0 或目标/实际土地不一致时等待。日志版本 [RR:v13-dv]。
 
-## 4. 本轮验证与证据
+## 4. v13 部署验证与证据
 
 统一入口 design/v13-content-runtime/validation.md、deployment.json、runtime-checks.json。
 
@@ -74,3 +74,12 @@
 - 原生：run-game-captures.ps1 -DevelopmentSwf <SWF> -GeneratorVersion 13；可配 PopulationProbe/ContentGallery、NavigationProbe/GrowthProbe、TerminalApproach、ComparisonLifecycle。NativeLoaderSmoke 只走原生 UI。
 - app / visual-app / comparison-app 三个隔离目录；成功用 freeze_captures.py，失败用 freeze_failed_run.py。AIR app: 不可写，使用 new File(File.applicationDirectory.nativePath)；存储权限需独立实例审批，不能借真实 pfe 存储绕行。
 - 设计背景 design/danger-value-2026-09-27；HTML design/danger-value-preview。较早教程 generator-explained-v11.1 只解释旧链。
+
+## 8. 编辑器接入调查（2026-09-28）
+
+- 用户本次只要求探查能否借现有编辑器改善模组。结论与建议见 `design/editor-integration-20260928/assessment.md`，逐字段兼容性见同目录 `editor-compatibility.md`；未改正式源码、release、编辑器、地图或存档。
+- 主 v13 走 RRExpedition/RRSynth/RRGrowth 动态生成、内存池与持续扩张；没有读取编辑器文件替换生成房的入口。优先建议只读固定种子审查、用途/D/V/规划叠层，再把编辑器摆设组合转为 RRFurnish 规则；保留从零生成方案。建议尚未获用户实施选择。
+- 现有编辑器保存会丢 all 根版本/种子；重编码房间丢 rr* 属性和 rrPlan，serial=1 还丢 doors。物体自定义 XML/options 大体可保留，但修改后旧规划会过时，不能仅保留字段就直接回灌。
+- 132 历史房/158400 格、55 种格码独立静态核对通过；不是 GUI 保存往返。原样已装 EditorTools/NativeScene 的隔离副本实画四房，4/4 输出 1920×1000 PNG，0 警告、输入与正式文件哈希不变；不是本次重新运行 v13 游戏验收。
+- 原始池文件均误推工厂，rrMirror 不自动应用；城市预览还缺 transpFon。当前预览跳过炮塔、地雷、部分机关/商贩，不验 AI/枪线/相邻接口/涉水；运行验证仍用原生游戏。
+- 同目录 samples/ 为四份单房工作副本，previews/ 为本机图像，audit.py/run-probe.ps1 可复现隔离预览。首次驱动器写图前超时，改驱动器输出路径后同一组件通过，未确证初次原因；记录保留在 verification.json。

@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "installed_files_unchanged": {
+    "Editor/Enhancements/EditorTools.swf": true,
+    "Editor/Enhancements/NativeScene.swf": true,
+    "texture.swf": true,
+    "texture1.swf": true,
+    "sprite.swf": true,
+    "sprite1.swf": true,
+    "text_zh.xml": true,
+    "pfe.swf": true,
+    "Editor.swf": true,
+    "mods/RandomRooms/release/RandomRoomsMod.swf": true
+  },
+  "archived_pools_unchanged": {
+    "plant": true,
+    "stable": true,
+    "sewer": true,
+    "mane": true
+  },
+  "pngs": {
+    "mane.png": {
+      "size": [
+        1920,
+        1000
+      ],
+      "bytes": 2624919,
+      "sha256": "9E74839436A66624BB2946B8006B1A2A1BB832E4B6D96C914A6575A3CF5CB538"
+    },
+    "plant.png": {
+      "size": [
+        1920,
+        1000
+      ],
+      "bytes": 2190031,
+      "sha256": "88682811861F61454F0DD039FD15B6EEBFF75285E85B2ECB5C4021CAFFED0D19"
+    },
+    "sewer.png": {
+      "size": [
+        1920,
+        1000
+      ],
+      "bytes": 2642168,
+      "sha256": "6A10A74DC653BD420F8806C8C3B7D5F66F9CA5C64444A86C033422E0810F0B2D"
+    },
+    "stable.png": {
+      "size": [
+        1920,
+        1000
+      ],
+      "bytes": 1949976,
+      "sha256": "113292E6983D224CE6BBD760F81F4F50563B097261E7003976388E5EC272070B"
+    }
+  },
+  "scope": "Static preview of four historical v13 rooms through unchanged installed helper/native-scene copies, not Editor UI roundtrip or gameplay.",
+  "first_attempt": "Isolated driver timed out after first render, before any PNG. Driver output-path construction changed from app URL parent traversal to file-native parent; same installed helpers then passed. No renderer change. Exact first failure cause was not captured."
+}
